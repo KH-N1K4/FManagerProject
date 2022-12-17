@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헤더</title>
+
+
+    <style>
+        /* *{
+            border:1px solid black;
+        } */
+
+        #logo{
+            width: 200px;
+            height: 100px;  
+
+           
+            position: absolute;
+
+            left: 60px;
+            top:40px;
+
+            /* border:1px solid black; */
+        }
+
+        #logo>img{
+            width: 100%;
+        }
+
+      
+
+        #header1{
+            width: 1200px;
+            height: 160px;
+            margin:auto;
+            
+            position: relative;
+
+            
+        }
+
+       
+
+        #search{
+            width: 500px;
+            /* margin: auto; */
+
+
+
+            position: absolute;
+
+            left: 300px;
+            top:70px;
+
+        }
+
+        #search-input{
+            padding:10px;
+            width: 100%;
+            border:none;
+            border-bottom:2px solid #538126;
+        }
+
+        #search>span{
+
+            position: absolute;
+
+            right: 0;
+            top:10px;
+
+            color:#538126;
+
+        }
+
+        .header-top{
+            position: absolute;
+
+            right: 20px;
+            top:20px;
+        }
+        
+        .header-top>span{
+            margin:0 20px;
+
+            cursor: pointer;
+            color:#538126;
+        }
+        #nav{
+            height: 40px;
+            background-color: #538126;
+        }
+
+        #nav>ul{
+            width: 1200px;
+            margin:auto;
+        }
+
+        #nav>ul>li{
+            list-style: none;
+            float: left;
+            margin:12px 30px;
+            color:white;
+        }
+
+        #test-img{
+            display: block;
+            width: 1200px;
+            margin:auto;
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div id="header">
+        <div id="header1">
+
+            <div id="logo"><img src="../resources/images/final_logo_color.png" alt=""></div>
+
+            <div id="search">
+                <input type="text" placeholder="검색어를 입력하세요" id="search-input">
+
+                <span>▾</span>
+            </div>
+
+            <div class="header-top">
+                <span>회원가입</span>
+                <span>로그인</span>
+
+            </div>
+
+
+        </div>
+
+        
+    </div>
+    <div id="nav">
+        <ul>
+            <li>디자인</li>
+            <li>IT 프로그래밍</li>
+            <li>영상</li>
+            <li>사진</li>
+            <li>음향</li>
+        </ul>
+
+    </div>
+
+    <!-- <img src="/스크린샷 2022-12-16 오후 3.36.59.png" alt="" id="test-img"> -->
+
+</body>
+</html>
