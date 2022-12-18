@@ -1,0 +1,164 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.mainInBody{
+  width: 1200px;
+  margin:auto;
+  min-height: 100vh;
+
+  display: flex;
+}
+/* 사이드메뉴 */
+.sideMenu{
+  display: flex;
+  margin: 20px 0;
+  width: 300px;
+  min-height: 100vh;
+  align-self: flex-start;
+}
+.aside{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.aside a:hover{
+  color: #538126;
+}
+
+.myProject_User_side{
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 20px;
+  font-weight: bold;
+  color: black;
+  font-size: 20px;
+}
+/* 사이드메뉴 */
+
+/* 메인내용 */
+.mainContent{
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+}
+.container{
+  position: relative;
+}
+
+.container_header{
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 5px;
+  padding-bottom: 10px;
+}
+
+.container_header_left{
+  display: flex;
+  align-items: flex-end;
+  
+}
+
+/* 내프로젝트 */
+.container_title > span{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.container_title{
+  padding-right: 20px;
+}
+
+.srchOption{
+  width:150px;
+  height:30px;
+  border-radius: 3%;
+  border: 1px solid #c6c6c9;
+}
+/* 내프로젝트 */
+
+
+/* 데이터 출력 테이블 */
+
+table, th, td {
+  border: none; 
+}
+
+caption {
+  display: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+table {
+  border-style: none; 
+  text-indent: initial;
+  /* border-collapse:collapse; */ 
+  width:100%;
+}
+
+.tbl_lst_type {
+  width: 930px;
+  font-size: 16px;
+  line-height: 16px;
+  table-layout: fixed;
+}
+
+tbody{
+  padding-top: 10px;
+  border: 0px;
+  vertical-align: middle;
+  width:930px;
+}
+
+tbody tr{
+  display: table;
+  width:930px;
+}
+tbody td:nth-of-type(1){
+  width: 40px;
+}
+tbody td:nth-of-type(2){
+  padding-left: 15px;
+}
+tbody td:nth-of-type(3){
+  width: 100px;
+}
+tbody td:nth-of-type(4){
+  width: 81px;
+}
+tbody td:nth-of-type(5){
+  width: 81px;
+}
+tbody td:nth-of-type(6){
+  width: 86px;
+}
+tbody td:nth-of-type(7){
+  width: 86px;
+}
+tbody td:nth-of-type(8){
+  width: 85px;
+}
+
+.tc {
+  text-align: center;
+}
+
+.tr {
+  text-align: right;
+}
+
+.td_link > a{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tbl_lst_type th strong{
+  font-size: 20px;
+}
