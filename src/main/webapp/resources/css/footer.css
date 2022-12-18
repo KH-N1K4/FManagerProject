@@ -1,0 +1,62 @@
+body{
+  margin:0;
+}
+
+/* *{
+  border:1px solid black;
+} */
+
+#footer{
+
+  background-color: rgb(190, 190, 190);
+  height: 250px;
+}
+
+#footer-in a{
+  text-decoration: none;
+  color:rgb(88, 88, 88);
+}
+
+#footer-in{
+
+  
+
+  width: 1200px;
+  height: 180px; 
+  margin:auto;
+  padding:30px;
+
+  position: relative;
+  
+}
+#footer-in>div{
+  box-sizing: border-box;
+  display: inline-block;
+}
+#footer-left{
+  margin:10px 20px;
+  width: 60%;
+  height: 100%;
+}
+
+#footer-left>a{
+  margin:0 20px;
+}
+
+#footer-right{
+
+  text-align: right;
+  width: 35%;
+  /* height: 100%; *//* 지윤 변경 */
+  
+  position: absolute;
+  right: 0;
+  margin:10px;
+}
+
+#footer-right>span{
+  font-size: 30px;
+}
+#footer-right>a{
+  font-size: 20px;
+}

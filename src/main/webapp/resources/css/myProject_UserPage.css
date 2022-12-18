@@ -1,0 +1,159 @@
+.mainInBody{
+  width: 1200px;
+  margin:auto;
+  min-height: 100vh;
+
+  display: flex;
+}
+/* 사이드메뉴 */
+.sideMenu{
+  display: flex;
+  margin: 20px 0;
+  width: 300px;
+  min-height: 100vh;
+  align-self: flex-start;
+}
+.aside{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.aside a:hover{
+  color: #538126;
+}
+
+.myProject_User_side{
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 20px;
+  font-weight: bold;
+  color: black;
+  font-size: 20px;
+}
+/* 사이드메뉴 */
+
+/* 메인내용 */
+.mainContent{
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+}
+.container{
+  position: relative;
+}
+
+.container_header{
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f2f3f7;
+}
+
+.container_header_left{
+  display: flex;
+  align-items: flex-end;
+  
+}
+
+/* 내프로젝트 */
+.container_title > span{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.container_title{
+  padding-right: 20px;
+}
+
+.srchOption{
+  width:150px;
+  height:30px;
+  border-radius: 3%;
+  border: 1px solid #c6c6c9;
+}
+/* 내프로젝트 */
+
+/* 등록하기 버튼 */
+.myProject_register {/* > span */
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: black;
+  font-size: 20px;
+}
+
+.container_header_right{
+  display: flex;
+  align-items: center;
+}
+/* 등록하기 버튼 */
+
+.myProject_content{
+  padding: 34px 0;
+  border-bottom: 1px solid #f2f3f7;
+}
+
+.myProject_link{
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+.projuctContent_image{
+  margin-right: 30px;
+}
+
+.projuctContent_image > img{
+  width: 200px;
+  height: 200px;
+}
+
+/* 내프로젝트 의뢰별 div */
+.projuctContent_info{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.info_title{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.info_content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 30px;
+}
+
+.info_content_left{
+  display: flex;
+  flex-direction: column;
+}
+
+.info_content_list, .list_content{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.list_title{
+  margin-right: 20px;
+  width: 100px;
+}
+/* .list_content{
+  width: 70%;
+} */
+.info_content_right span{
+  font-weight: bold;
+  font-size: 20px;
+}
+/* 내프로젝트 의뢰별 div */
+
