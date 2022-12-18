@@ -1,0 +1,61 @@
+/* 사이드바 */
+
+.main{
+    display: flex;
+}
+
+.side-part{
+    width: 250px;
+    height: 100%;
+    background-color: #538126;
+    display: inline-block;
+}
+
+.side-part ul{
+    padding:20px;
+}
+
+.side-part li {
+    list-style: none;
+    margin:20px 0;
+}
+
+.side-part li a{
+    text-decoration: none;
+    color:white
+}
+
+
+.content-part{
+    display: inline-block;
+    width: 930px;
+}
+
+.servicePhoto{
+    width: 206px;
+    height: 210px;
+    display: inline-block;
+    
+    margin-left:20px;
+    margin-bottom: 20px;
+
+    border:1px solid black;
+    position:relative;
+}
+
+.servicePhoto>span{
+    position: absolute;
+    font-size: 30px;
+    right:5px;
+}
+
+#selectSection{
+    padding:10px 20px;
+    position: relative;
+}
+
+#selectSection>select:last-child{
+    position: absolute;
+    right: 0;
+    
+}

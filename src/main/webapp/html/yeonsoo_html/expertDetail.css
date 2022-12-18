@@ -1,0 +1,54 @@
+#expertDetailTitle{
+    font-size: 25px;
+    font-weight: bold;
+    margin:20px 0;
+}
+
+.expertSummary{
+    width: 100%;
+    height: 190px;
+    border-radius: 10px;
+    background-color: #d9d9d933;
+    
+
+    position: relative;
+}
+
+.expertPhoto{
+    width: 180px;
+    height: 180px;
+    border-radius: 100%;
+    background-color: aquamarine;
+   
+}
+
+.expertName{
+    position: absolute;
+    left:230px;
+    top:30px;
+    font-size: 20px;
+}
+
+.expertOther{
+    width:250px;
+    height: 150px;
+    position: absolute;
+    right:0;
+    top:30px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.expertIntroduceTitle{
+    font-size: 20px;
+    margin:20px 0;
+}
+
+.expertIntroduce{
+    width: 100%;
+    height: 270px;
+    background-color: #d9d9d933;
+}
+

@@ -1,0 +1,21 @@
+
+
+.servicePhoto{
+    /* width: 170px;
+    height: 210px;
+    display: inline-block;
+    
+    margin:20px;
+
+    border:1px solid black; */
+
+    width: 206px;
+    height: 210px;
+    display: inline-block;
+    
+    margin-left:20px;
+    margin-bottom: 20px;
+
+    border:1px solid black;
+    position:relative;
+}
