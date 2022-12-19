@@ -5,18 +5,19 @@
 }
 
 .expertSummary{
+    box-sizing: border-box;
     width: 100%;
     height: 190px;
     border-radius: 10px;
     background-color: #d9d9d933;
     
-
+    padding:20px;
     position: relative;
 }
 
 .expertPhoto{
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     border-radius: 100%;
     background-color: aquamarine;
    
@@ -52,3 +53,73 @@
     background-color: #d9d9d933;
 }
 
+
+
+/* 포트폴리오 */
+.portfolioTitle{
+    font-size: 20px;
+    margin:20px 0;
+}
+
+.portfolioSection{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.portfolioPhoto{
+    width: 200px;
+    height: 200px;
+    border:1px solid black;
+    margin-bottom: 30px;
+}
+
+
+/* 서비스 */
+.serviceTitle{
+    font-size: 20px;
+    margin:20px 0;
+}
+
+.serviceOne{
+    width: 100%;
+    height: 200px;
+    border:1px solid black;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.servicePhoto{
+    width: 200px;
+    height: 200px;
+    background-color: aliceblue;
+}
+
+.serviceOneTitle{
+    position: absolute;
+    left:220px;
+    top:20px;
+    font-size: 20px;
+}
+
+.serviceSubTitle{
+    position: absolute;
+    left:220px;
+    top:70px;
+}
+
+.serviceOther{
+    position: absolute;
+    right: 0;
+    top:30px;
+}
+
+.serviceOther>div{
+    margin:20px 0;
+}
+
+.serviceOther span{
+    display: inline-block;
+    width: 50px;
+}
