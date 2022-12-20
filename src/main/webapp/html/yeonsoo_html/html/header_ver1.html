@@ -7,15 +7,15 @@
     <title>헤더</title>
 
 
-    <link rel="stylesheet" href="/header_ver1.css">
-    <link rel="stylesheet" href="/main_before.css">
+    <link rel="stylesheet" href="/src/main/webapp/html/yeonsoo_html/css/header_ver1.css">
+    <link rel="stylesheet" href="/src/main/webapp/html/yeonsoo_html/css/main_before.css">
 </head>
 <body>
     
     <div id="header">
         <div id="header1">
 
-            <div id="logo"><img src="../../resources/images/final_logo_color.png" alt=""></div>
+            <div id="logo"><img src="/bin/src/main/webapp/resources/images/final_logo_color.png" alt=""></div>
 
             <div id="search">
                 <input type="text" placeholder="검색어를 입력하세요" id="search-input">
@@ -24,8 +24,8 @@
             </div>
 
             <div class="header-top">
-                <span>회원가입</span>
-                <span>로그인</span>
+                <span><a href="">회원가입</a></span>
+                <span><a href="">로그인</a></span>
 
             </div>
 
@@ -45,27 +45,18 @@
 
             <div class="nav-project"><a href="">프로젝트 의뢰</a></div>
         </ul>
-        
+
+          
     </div>
 
-    <div class="main">
-
-
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        <div class="servicePhoto"></div>
-        
-    </div>
+     
 
 </body>
+
+<script>
+    document.getElementsByClassName("nav-project")[0].addEventListener("click",function(){
+        alert("클릭");
+    })
+
+</script>
 </html>
