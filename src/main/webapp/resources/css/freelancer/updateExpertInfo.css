@@ -1,0 +1,129 @@
+.main{
+    width: 1200px;
+    margin:auto;
+    min-height: 100vh;
+  
+    display: flex;
+  }
+
+/* 사이드메뉴 */
+.sideMenu{
+display: flex;
+margin: 20px 0;
+width: 300px;
+min-height: 100vh;
+align-self: flex-start;
+}
+.aside{
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+
+.aside a:hover{
+color: #538126;
+}
+.myProject_User_side{
+text-decoration: none;
+cursor: pointer;
+padding: 8px 20px;
+font-weight: bold;
+color: black;
+font-size: 20px;
+}
+
+.mainMenu{
+    width: 900px;
+}
+
+
+#title{
+    color:#538126;
+    font-weight: bolder;
+    font-size: 30px;
+    margin:30px 0;
+    display: block;
+}
+
+.itemTitle{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+    font-size: 18px;
+}
+.item {
+    width: 200px;
+    height: 50px;
+    font-size: 18px;
+    color: gray;
+}
+
+input{
+    height: 25px;
+}
+
+
+
+
+/* 자기 소개 */
+textarea{
+    margin-bottom: 30px;
+}
+
+
+/* 지역 */
+#area{
+    width: 150px;
+    height: 30px;
+    position: relative;
+    top: -3px;
+}
+
+/* 전문 분야 */
+input[type="checkbox"]{
+    position: relative;
+    top: -6px;
+}
+.checkbox{
+    position: relative;
+    top: -12px;
+    margin-right: 20px;
+}
+
+/* 기간 */
+.number{
+    width: 70px;
+}
+
+/* 은행 */
+#bankName{
+    width: 150px;
+    height: 30px;
+    position: relative;
+    top: 0px;
+}
+#account{
+    width: 400px;
+    margin-bottom: 100px;
+}
+
+
+
+
+
+/* 버튼 */
+#btnArea{
+    display: flex;
+    justify-content: center;
+}
+
+#updateBtn{
+    width: 150px;
+    padding:8px 0;
+    font-size: 16px;
+    background-color: #538126;
+    border:1px solid white;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+}

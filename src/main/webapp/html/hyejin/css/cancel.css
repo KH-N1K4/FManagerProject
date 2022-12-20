@@ -1,0 +1,60 @@
+body{
+    margin: 20px;
+}
+
+#title{
+    font-size: 30px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+#content{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+#image>*{
+    background-color: pink;
+    width: 500px;
+    height: 800px;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+.itemArea{
+    display: flex;
+    flex-direction: row;
+}
+.itemArea input{
+    width:365px;
+    margin-bottom: 30px;
+}
+#item{
+    font-size: 15px;
+    width: 130px;
+}
+textarea{
+    margin-bottom: 30px;
+}
+
+
+
+
+button{
+    width: 200px;
+    padding:8px 0;
+    font-size: 20px;
+    background-color: #538126;
+    border:3px solid #538126;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 170px;
+    cursor: pointer;
+}

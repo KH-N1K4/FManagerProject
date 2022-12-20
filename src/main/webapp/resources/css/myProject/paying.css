@@ -1,0 +1,104 @@
+#payingMain{
+    width: 1100px;
+    margin:auto;
+}
+
+/* 결제중... */
+#payingTitle{
+    color:#538126;
+    font-weight: bold;
+    font-size: 30px;
+    margin:20px 0;
+}
+
+#serviceSection{
+    position: relative;
+}
+
+#serviceSection>div{
+
+    display: inline-block;
+}
+
+#servicePhoto{
+    width: 170px;
+    height: 170px;
+    background-color: pink;
+}
+#serviceContent{
+    position: absolute;
+    top:0;
+}
+
+#serviceContent>span:first-child{
+    padding-left: 10px;
+    font-size: 25px;
+}
+#serviceContent>span:last-child{
+    display: block;
+    margin:10px;
+    font-size: 16px;
+}
+
+#serviceCost{
+    position: absolute;
+    right:0;
+    bottom: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    color:#538126;
+}
+
+
+/* 요청사항 부분 */
+#payingMain>form>textarea{
+    width: 1100px;
+    height: 300px;
+
+    border:2px solid #538126;
+    border-radius: 5px;
+    margin:20px 0;
+}
+
+#payingMain>form>textarea::placeholder{
+    color:#538126;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+
+
+/* 버튼 부분 */
+#btnSection{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+
+/* 결제 버튼 */
+#paymentBtn{
+    width: 520px;
+    padding:10px 0;
+    font-size: 16px;
+    background-color: #538126;
+    border:1px solid #538126;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+
+}
+
+/* 취소 버튼 */
+#paymentCancel{
+    box-sizing: border-box;
+    width: 520px;
+    padding:10px 0;
+    font-size: 16px;
+    border:1px solid #538126;
+    border-radius: 5px;
+    background-color: white;
+    color:#538126;
+    font-weight: bold;
+}

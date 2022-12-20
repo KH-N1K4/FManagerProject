@@ -1,0 +1,68 @@
+.main{
+    width: 1200px;
+    margin:auto;
+    min-height: 100vh;
+  
+    display: flex;
+  }
+/* 사이드메뉴 */
+.sideMenu{
+display: flex;
+margin: 20px 0;
+width: 300px;
+min-height: 100vh;
+align-self: flex-start;
+}
+.aside{
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+
+.aside a:hover{
+color: #538126;
+}
+.myProject_User_side{
+text-decoration: none;
+cursor: pointer;
+padding: 8px 20px;
+font-weight: bold;
+color: black;
+font-size: 20px;
+}
+
+/* 메인 */
+.mainMenu{
+    width: 900px;
+}
+#contentSection{
+    width: 900px;
+    height: 225px;
+}
+
+
+/* 타이틀 부분 */
+#title{
+    color:#538126;
+    font-weight: bolder;
+    font-size: 30px;
+    margin:30px 0;
+    display: block;
+}
+#announce{
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+#announce>*{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+/* 내용 */
+#contentSection{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}

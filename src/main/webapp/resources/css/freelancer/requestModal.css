@@ -1,0 +1,66 @@
+.main{
+    width: 470px;
+    height: 500px;
+    display: inline-block;
+    border:  1px solid #538126;
+    
+}
+
+/* 프로필 영역 */
+.profile{
+    width: 440px;
+    height: 220px;
+    margin: 15px;
+    background-color: gainsboro;
+}
+#serviceTitle{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#infoBox{
+    margin-top: 10px;
+    display: flex;
+}
+#info{
+    margin-left: 30px;
+    position: relative;
+}
+
+img{
+    width: 150px;
+    height: 150px;
+    margin-left: 30px;
+    border-radius: 50%;
+}
+a{
+    position: absolute;
+    right: -80px;
+}
+.inputInfo div{
+    width: 80px;
+    margin: 20px 0 20px 20px;
+    display: inline-block;
+}
+.inputInfo input{
+    margin-bottom: 20px;
+    width: 240px;
+    height: 20px;
+}
+#inputBox{
+    width: 230px;
+}
+.inputInfo{
+    width: 470px;
+    height: 150px;
+    margin: 0 15px;
+}
+.button button{
+    width: 440px;
+    height: 60px;
+    margin: 0 15px;
+    background-color: #538126; 
+    border:2px solid #538126;
+    color: white;
+    font-size: 25px;
+}

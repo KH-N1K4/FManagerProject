@@ -1,0 +1,109 @@
+
+
+/* mainArea /sideMenu영역  */
+.mainArea{
+    width: 1200px;
+    height: auto;
+    display: flex;
+    margin:auto;
+}
+
+/* 사이드 메뉴 영역*/
+.sideMenu{
+    width: 200px;
+    height: 800px;
+}
+
+
+/* 메인 영역 */
+.mainContent{
+    width: 1000px;
+    /* margin-left: 20px; */
+}
+
+/*  --------------사이드 메뉴  --------------*/
+#design{
+    width: 150px;
+    text-align: center;
+    margin: 50px 20px 0px 0px;
+    font-size: 23px;
+    font-weight: bold;
+    border-bottom: 2px solid #538126; 
+}
+#subCategori{
+    width: 150px;
+    margin: 20px 0;
+    position: relative;
+}
+.sideMenu a{
+    text-decoration: none;
+    font-size: 15px;
+    color: gray;
+    width: 120px;
+}
+.sideMenu a:hover{
+    text-decoration: none;
+    font-size: 15px;
+    color: #538126;
+    width: 120px;
+}
+.sideMenu button{
+    /* margin-left: 49px; */
+    background-color: white;
+    border: none;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    padding: 0;
+    font-size: 8px;
+    color: #538126;
+    position: absolute;
+    right: 0;
+}
+
+
+
+/* 서비스 이미지 영역 */
+#imageContent{
+    display: flex;
+    flex-wrap: wrap;
+}
+/* ///////////////////////////////////////// */
+.mainContent img{
+    margin-top: 70px;
+    width: 225px;
+    height: 225px;
+}
+#image{
+    margin-right: 25px;
+}
+#image:nth-child(4n){
+    margin-right: 0;
+}
+#imageContent span{
+    font-size: 13px;
+    color: grey;
+}
+
+
+
+/* 셀렉박스 폼태그 */
+#inquirySubmit{
+    margin-top: 50px;
+    position:relative;
+}
+#budget{
+    margin-right: 40px;
+    margin-left: 10px;
+    width: 150px;
+}
+#grade{
+    margin-right: 410px;
+    margin-left: 10px;
+    width: 150px;
+    
+}
+ #listOrder{
+ 	position: relative;
+ 	left:645px;
+ }
