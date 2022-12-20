@@ -1,4 +1,11 @@
 
+.serviceSection{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
 
 .servicePhoto{
     /* width: 170px;
@@ -9,9 +16,9 @@
 
     border:1px solid black; */
 
-    width: 206px;
+    width: 218px;
     height: 210px;
-    display: inline-block;
+   
     
     margin-left:20px;
     margin-bottom: 20px;
