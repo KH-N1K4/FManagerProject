@@ -1,0 +1,97 @@
+.main{
+    width: 1100px;
+    height: 1200px;
+    margin: 0 auto;
+    background-color: rgba(221, 217, 217, 0.801);
+}
+
+#manager-buy-title-area{
+    /* border-bottom: 1px solid red; */
+}
+
+#manager-buy-title {
+
+    display: inline-block;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 20px 20px;
+}
+
+
+
+#manager-buy-table > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+.search{
+}
+
+.buy-search-input{
+height: 30px;
+vertical-align: middle;
+
+}
+
+.manager-buy-table-column{
+    border-bottom: 1px solid black;
+}
+
+/* 컬럼명들 */
+.manager-num{
+    width: 100px;
+}
+.manager-trade-num{
+    width: 100px;
+}
+
+.manager-service-name{
+    width: 300px;
+    text-align: left;
+    margin-left: 50px;
+}
+
+.manager-expert{
+    width: 100px;
+}
+
+.manager-customer{
+    width: 100px;
+}
+
+.manager-work-status{
+    width: 100px;
+}
+
+.manager-division{
+    width: 100px;
+}
+
+.manager-option{
+    width: 300px;
+    text-align: left;
+    margin-left: 50px;
+}
+
+.manager-option > span{
+    display: inline-block;
+    width: 110px;
+    text-align: center;
+    color: white;
+    background-color: rgb(33, 138, 33);
+    border-radius: 15%;
+}
+
+
+/* 테이블 값 부분 */
+.manager-buy-table-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    height: 25px;
+}
