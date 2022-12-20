@@ -1,0 +1,147 @@
+.main{
+    width: 1200px;
+    margin:auto;
+    min-height: 100vh;
+  
+    display: flex;
+  }
+/* 사이드메뉴 */
+.sideMenu{
+display: flex;
+margin: 20px 0;
+width: 300px;
+min-height: 100vh;
+align-self: flex-start;
+}
+.aside{
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+
+.aside a:hover{
+color: #538126;
+}
+.myProject_User_side{
+text-decoration: none;
+cursor: pointer;
+padding: 8px 20px;
+font-weight: bold;
+color: black;
+font-size: 20px;
+}
+
+/* 메인 */
+.mainMenu{
+    width: 900px;
+}
+#contentSection{
+    width: 900px;
+    height: 225px;
+}
+
+
+/* 타이틀 부분 */
+#titleSection{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+#title{
+    color:#538126;
+    font-weight: bolder;
+    font-size: 30px;
+    margin:30px 0;
+    display: block;
+}
+
+#select{
+    margin: 30px;
+    width: 200px;
+    border: 1px solid #538126;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 10px 10px 10px 15px;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 16px;
+}
+#select:focus{
+    border: 1px solid #538126;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 1px solid #538126;
+}
+
+#serviceInsert{
+    margin-left: 400px;
+    display: flex;
+    align-items: center;
+}
+#serviceInsert>a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+
+
+/* 내용 */
+#contentSection{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+
+/* 이미지 */
+#serviceImage>img{
+    width: 225px;
+    height: 225px;
+}
+
+/* 서비스 설명 */
+#serviceContent{
+    width: 500px;
+    height: 225px;
+}
+#serviceTitle{
+    font-size: 26px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+#serviceSummary{
+    font-size: 18px;
+    height: 100px;
+    margin-left: 20px;
+}
+.detail{
+    margin-left: 20px;
+}
+.detail *{
+    font-size: 14px;
+}
+.detail>div{
+    display: flex;
+    flex-direction: row;
+}
+.detail>div>div:first-child{
+    width: 100px;
+}
+
+
+
+/* 서비스 상태 */
+#serviceStatus{
+    display: flex;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+#serviceStatus>div{
+    font-weight: bold;
+    font-size: 20px;
+}

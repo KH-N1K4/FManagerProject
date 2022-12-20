@@ -1,0 +1,78 @@
+body{
+    margin: 20px;
+}
+
+#title{
+    font-size: 30px;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+#content{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+#image>*{
+    background-color: pink;
+    width: 500px;
+    height: 800px;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+.itemArea{
+    display: flex;
+    flex-direction: row;
+}
+.itemArea input{
+    width:365px;
+    margin-bottom: 30px;
+}
+#item{
+    font-size: 15px;
+    width: 100px;
+}
+textarea{
+    margin-bottom: 30px;
+}
+
+#image-input {
+    display: none;
+}
+label{
+    width: 140px;
+    height: 33px;
+    padding: 5px 10px;
+    border: 1px solid #538126;
+    color:  #538126;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 35px;
+    font-weight: bold;
+    border-radius: 5px;
+    position: relative;
+    top: -5px;
+}
+
+
+
+button{
+    width: 200px;
+    padding:8px 0;
+    font-size: 20px;
+    background-color: #538126;
+    border:3px solid #538126;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 170px;
+    cursor: pointer;
+}
