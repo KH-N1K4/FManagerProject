@@ -34,9 +34,9 @@
 
 
                 <br><br><br>
-                <a href="">고객센터</a>
+                <a href="/userInquiry">문의하기</a>
                 <br>
-                <a href="">자주묻는질문</a>
+                <a href="/userInquiryList">고객센터</a>
 
             </div>
 

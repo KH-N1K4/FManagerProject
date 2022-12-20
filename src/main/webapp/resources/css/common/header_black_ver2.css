@@ -1,0 +1,52 @@
+  body{
+            margin:0;
+        }
+
+        #logo{
+            width: 200px;
+            height: 100px;  
+
+           
+            position: absolute;
+
+            left: 60px;
+            top:40px;
+
+            /* border:1px solid black; */
+        }
+
+        #header{
+            background-color: black;
+        }
+
+        #logo>img{
+            width: 100%;
+        }
+
+      
+
+        #header1{
+            width: 1200px;
+            height: 160px;
+            margin:auto;
+            
+            position: relative;
+
+            
+        }
+
+      
+
+        .header-top{
+            position: absolute;
+
+            right:0;
+            top:20px;
+        }
+        
+        .header-top>span{
+            margin:0 20px;
+
+            cursor: pointer;
+            color:white;
+        }
