@@ -1,33 +1,10 @@
 .main{
-    width: 1200px;
+    width: 800px;
     margin:auto;
-    min-height: 100vh;
+    min-height: 800px;
     display: flex;
-}
-/* 사이드메뉴 */
-.sideMenu{
-display: flex;
-margin: 20px 0;
-width: 300px;
-min-height: 100vh;
-align-self: flex-start;
-}
-.aside{
-display: flex;
-flex-direction: column;
-width: 100%;
-}
-
-.aside a:hover{
-color: #538126;
-}
-.myProject_User_side{
-text-decoration: none;
-cursor: pointer;
-padding: 8px 20px;
-font-weight: bold;
-color: black;
-font-size: 20px;
+    justify-content: center;
+    padding: 50px 0;
 }
 
 
@@ -38,7 +15,6 @@ font-size: 20px;
     margin:30px 0 40px 0;
     display: block;
 }
-
 
 /* 프로필 */
 .profile-image-area {
@@ -190,13 +166,8 @@ button:hover{
     border: 3px solid #497021;
     background-color: #497021;
 }
-button[type="reset"]{
-    background-color:white;
-    color: #538126;
-}
-button[type="reset"]:hover{
-    transition: all 0.2s;
-    border: 3px solid #497021;
-    background-color: #497021;
-    color: white;
+#cancleBtn{
+    width: 400px;
+    display: flex;
+    justify-content: center;
 }
