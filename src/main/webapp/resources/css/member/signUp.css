@@ -1,9 +1,9 @@
-.main{
+.signUp{
     width: 500px;
     margin:auto;
 }
 
-.main *{
+.signUp *{
     box-sizing: border-box;
 }
 
@@ -24,18 +24,18 @@
 
 /* 회원가입 input */
 
-.main input{
+.signUp input{
     padding:10px;
     font-size: 16px;
     margin:5px 0;
 }
 
-.main input::placeholder{
+.signUp input::placeholder{
     color:#538126;
     font-weight: bold;
 }
 
-.main input:not(.exception,.checkbox), #job{
+.signUp input:not(.exception,.checkbox), #job{
     width: 500px;
     color:#538126;
     border:2px solid #538126;
