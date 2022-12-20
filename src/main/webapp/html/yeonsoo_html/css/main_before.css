@@ -1,4 +1,7 @@
-
+.main{
+    width: 1200px;
+    margin:auto;
+}
 .serviceSection{
     display: flex;
     flex-direction: row;
@@ -8,13 +11,6 @@
 }
 
 .servicePhoto{
-    /* width: 170px;
-    height: 210px;
-    display: inline-block;
-    
-    margin:20px;
-
-    border:1px solid black; */
 
     width: 218px;
     height: 210px;

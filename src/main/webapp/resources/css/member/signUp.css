@@ -1,0 +1,154 @@
+.signUp{
+    width: 500px;
+    margin:auto;
+}
+
+.signUp *{
+    box-sizing: border-box;
+}
+
+
+
+/* 회원가입 글자 */
+
+
+#textSignUp{
+    color:#538126;
+    font-weight: bolder;
+    font-size: 30px;
+    margin:30px 0;
+    display: block;
+}
+
+
+
+/* 회원가입 input */
+
+.signUp input{
+    padding:10px;
+    font-size: 16px;
+    margin:5px 0;
+}
+
+.signUp input::placeholder{
+    color:#538126;
+    font-weight: bold;
+}
+
+.signUp input:not(.exception,.checkbox), #job{
+    width: 500px;
+    color:#538126;
+    border:2px solid #538126;
+    border-radius: 5px;
+   
+    
+}
+
+#job{
+    padding:10px;
+    font-size: 16px;
+    font-weight: bold;
+    margin:5px 0;
+}
+
+.exception{
+    width: 370px;
+    border:2px solid #538126;
+    border-radius: 5px;
+}
+
+#bank{
+    width: 124px;
+    padding:8px 0;
+    font-size: 16px;
+    border:2px solid #538126;
+    border-radius: 5px;
+    color:#538126;
+    font-weight: bold;
+   
+}
+
+#emailCheck{ 
+    width: 124px;
+    padding:10px 0;
+    font-size: 16px;
+    background-color: #538126;
+    border:1px solid white;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+}
+
+.checkbox{
+    display: inline-block;
+    color: lightgray;
+}
+
+/* 회원가입 버튼 */
+#signUpBtn{
+    width: 500px;
+    padding:8px 0;
+    font-size: 16px;
+    background-color: #538126;
+    border:1px solid white;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+}
+
+
+/* 관심분야 */
+#signUpInterest{
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+    margin:10px 0;
+    padding:20px 0;
+   
+}
+
+
+#textSignUpInterest{
+    display: block;
+    margin-bottom:8px;
+    color:#538126;
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+
+input[id="agree"],input[id="design"],input[id="programming"],input[id="video"],input[id="photo"],input[id="sound"]{
+    display: none;
+}
+
+input[id="agree"] + label, input[id="design"] + label,input[id="programming"] + label,input[id="video"] + label,input[id="photo"] + label,input[id="sound"] + label {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: 2px solid #bcbcbc;
+	cursor: pointer;
+    position: relative;
+}
+
+
+input[id="design"]:checked + label::after,
+input[id="programming"]:checked + label::after,
+input[id="photo"]:checked + label::after,
+input[id="video"]:checked + label::after,
+input[id="sound"]:checked + label::after,input[id="agree"]:checked + label::after{
+    color:#538126;
+    content:'✔';
+    font-size: 25px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    position: absolute;
+    left: -1px;
+    top:-5px;
+  }
+
+  #signUpInterest span,.agreeText{
+    font-size: 16px;
+    display: inline-block;
+    font-weight: bold;
+    padding:6px;
+  }

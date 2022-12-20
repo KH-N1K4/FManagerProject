@@ -1,0 +1,55 @@
+body{
+    margin: 20px;
+}
+
+#title{
+    margin-left:140px;
+    margin-bottom: 20px;
+    font-size: 25px;
+    color: gray;
+    font-weight: bold;
+}
+
+
+
+/* input */
+#inputArea >*{
+    margin-bottom: 20px;
+}
+.item{
+    font-size: 20px;
+    color: #538126;
+    font-weight: bold;
+}
+.input{
+    width: 400px;
+    height: 30px;
+    color:#538126;
+    border:2px solid #538126;
+    border-radius: 5px;
+}
+.select{
+    width: 407px;
+    height: 40px;
+    color:#538126;
+    border:2px solid #538126;
+    border-radius: 5px;
+}
+.date{
+    width: 200px;
+}
+
+
+
+button{
+    width: 200px;
+    padding:8px 0;
+    font-size: 20px;
+    background-color: #538126;
+    border:3px solid #538126;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+}
