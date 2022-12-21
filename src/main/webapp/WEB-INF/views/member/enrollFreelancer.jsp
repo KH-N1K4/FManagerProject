@@ -72,7 +72,7 @@
             <div>
                 <div class="item">기간</div>
                 <div>
-                    <input type="text" name="" id="" class="number"> 년
+                    <input type="text" name="freelancerCont" id="" class="number"> 년
                 </div>
             </div>
             <div>
