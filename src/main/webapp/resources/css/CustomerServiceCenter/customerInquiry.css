@@ -1,32 +1,22 @@
-/* -------------헤더 풋터------------ */
-.header{
-    width: 1400px;
-    height: 200px;
-    background-color: black
-}
-.footer{
-    width: 1400px;
-    height: 200px;
-    background-color: black
-}
-/* ------------------------------------ */
+
 
 
 /* 헤더, 풋터를 제외한 각 페이지 영역 */
-.content{
+/* .content{
     width: 1400px;
     height: 800px;
     display: flex;
     justify-content: center;
 }
-
+ */
 /* mainArea /sideMenu영역  */
 .mainArea{
-    width: 1100px;
+    width: 1200px;
     height: 800px;
     /* border-right: 1px solid black;  */
     /* border-left: 1px solid black;  */
     display: flex;
+    margin:auto;
 }
 
 /* 사이드 메뉴 영역*/

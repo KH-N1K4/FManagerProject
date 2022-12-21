@@ -1,0 +1,95 @@
+.mainInBody{
+  width: 1200px;
+  margin:auto;
+  min-height: 100vh;
+
+  display: flex;
+}
+/* 사이드메뉴 */
+.sideMenu{
+  display: flex; 
+  margin: 20px 0;
+  width: 300px;
+  min-height: 100vh;
+  align-self: flex-start;
+  background-color:cornflowerblue;
+}
+.aside{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.aside a:hover{
+  color: #538126;
+}
+
+.myProject_User_side{
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 20px;
+  font-weight: bold;
+  color: black;
+  font-size: 20px;
+}
+/* 사이드메뉴 */
+
+/* 메인내용 */
+.mainContent{
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+}
+.container{
+  position: relative;
+}
+
+.container_header{
+  display: flex;
+  margin: 0px 5px;
+  padding-bottom: 10px;
+}
+
+/* 내프로젝트 */
+.container_title > span{
+  font-size: 25px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.container_title  input{
+  height: 30px;
+  vertical-align: middle;
+}
+.container_title select{
+  height: 30px;
+  vertical-align: middle;
+}
+
+.container_title{
+  padding-right: 20px;
+}
+/* 내프로젝트 */
+table{
+  border-collapse: collapse;
+}
+
+
+table th{
+  border-bottom: 1px solid black;
+  height: 50px;
+}
+table th:nth-child(3){
+  text-align: left;
+}
+
+table td{
+  text-align: center;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+table td:nth-child(3){
+  text-align: left;
+}

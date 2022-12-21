@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fmanager - 고객센터 문의하기</title>
-    <link rel="stylesheet" href="/resources/css/member/customerInquiry.css">
-    <link rel="stylesheet" href="/resources/css/member/serviceCenter.css">
+    <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/customerInquiry.css">
+    <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/serviceCenter.css">
 </head>
 <body>
     <!-- 헤더 -->
@@ -23,7 +23,7 @@
         </div>
     </section> --%>
 
-    <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header_black_ver2.jsp"/>
 
 
     <!-- 메인 -->
