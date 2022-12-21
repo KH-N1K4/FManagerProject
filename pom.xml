@@ -137,7 +137,13 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 		
-	
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -190,7 +196,7 @@
 			<scope>runtime</scope>
 		</dependency>
 		
-		<!-- 유dptj 수행되는 SQL,  -->
+		<!-- DB에서 수행되는 SQL, 조회 결과 , DML 결과를 로그로 출력 -->
 		 <dependency>  
          <groupId>org.lazyluke</groupId>  
          <artifactId>log4jdbc-remix</artifactId>  
