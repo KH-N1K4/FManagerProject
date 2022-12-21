@@ -97,7 +97,7 @@
             <div class="review-manage-table-column">
                 <div class="review-num">댓글번호</div>
                 <div class="review-content">리뷰 내용</div>
-                <div class="review-writer">구분</div>
+                <div class="review-writer">작성자</div>
                 <div class="review-delete">삭제
                 </div>
             </div>
@@ -106,7 +106,7 @@
             <div class="review-manage-table-content">
                 <div class="review-num">1</div>
                 <div class="review-content">리뷰 내용</div>
-                <div class="review-writer">구분</div>
+                <div class="review-writer">김이박</div>
                 <div class="review-delete">
                     <span>삭제</span>
                 </div>
@@ -114,7 +114,7 @@
             <div class="review-manage-table-content">
                 <div class="review-num">1</div>
                 <div class="review-content">리뷰 내용</div>
-                <div class="review-writer">구분</div>
+                <div class="review-writer">김박이</div>
                 <div class="review-delete">
                     <span>삭제</span>
                 </div>
@@ -122,7 +122,7 @@
             <div class="review-manage-table-content">
                 <div class="review-num">1</div>
                 <div class="review-content">리뷰 내용</div>
-                <div class="review-writer">구분</div>
+                <div class="review-writer">김김박</div>
                 <div class="review-delete">
                     <span>삭제</span>
                 </div>

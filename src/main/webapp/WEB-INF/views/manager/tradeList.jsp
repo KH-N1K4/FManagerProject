@@ -86,11 +86,11 @@
 
     <div class="main">
         <div id="manager-buy-title-area">
-            <div id="manager-buy-title">구매 내역 관리
-            <span class="search">
+
+            <span id="manager-buy-title">구매 내역 관리</span>
+            <span class="search-area">
                 <input type="text" class="buy-search-input" name="buy-search-input" id ="search-input">
             </span>
-            </div>
         </div>
 
         <div id="manager-buy-table">

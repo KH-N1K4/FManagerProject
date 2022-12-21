@@ -2,43 +2,50 @@
     width: 1100px;
     height: 1200px;
     margin: 0 auto;
-    background-color: #e9eee388;
 }
 
-#service-list-title-area{
-    /* border-bottom: 1px solid red; */
-    display: inline-block;
-    
-}
 
+
+#service-list-title-area {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 #service-list-title {
 
-    /* display: inline-block; */
+    display: inline-block;
     font-weight: bold;
     font-size: 30px;
     margin: 20px 20px;
-    vertical-align: middle;
- 
+
 }
+
 
 .select-area{
-    display: inline-block;
     width: 150px;
     height: 30px;
-    margin-bottom: 40px;
-    
-
-    
+    vertical-align: middle;
+    position: absolute;
+    top: 20px;
+    right: 0;
 }
+
 .select-area-input{
-    display: inline-block;
     width: 150px;
-    height: 30px;
-    margin-top: 15px;
-    
+    height: 35px;    
+}
+
+.search-area > select{
+    width: 150px;
+    height: 35px;
+    vertical-align: middle;
 }
 
 
+
+
+
+/* 테이블 컬럼 / 데이터값 */
 
 #service-list-table > div{
     display: flex;
@@ -46,47 +53,41 @@
     align-items: center;
     text-align: center;
     padding-bottom: 20px;
+        padding-left: 20px;
+
 }
-
-/* 테이블 컬럼 / 데이터값 */
-
 .service-list-table-column{
     border-bottom: 1px solid black;
-    justify-content: center;
+    /* justify-content: center; */
 
 
 }
 
 /* 컬럼명들 */
 .service-num{
-    width: 200px;
+    width: 100px;
 }
 .service-title{
-    width: 550px;
+    width: 700px;
 }
 .service-status{
-    width: 150px;
-    text-align: left;
+    width: 250px;
 }
 .service-button{
-    width: 90px;
+    width: 100px;
+    text-align: center;
 }
 
 /* 테이블 값 부분 */
 .service-list-table-content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 10px 0;
-    height: 25px;
-    margin-top: 5px;
+    height: 15px;
 }
 
 .service-button-value{
     display: inline-block;
     width: 90px;
-    height: 25px;
-    border-radius: 15%;
+    border-radius: 15px;
     text-align: center;
     color: white;
     background-color: rgb(33, 138, 33);

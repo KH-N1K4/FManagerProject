@@ -2,12 +2,13 @@
     width: 1100px;
     height: 1200px;
     margin: 0 auto;
-    background-color: rgba(221, 217, 217, 0.801);
 }
 
 #manager-buy-title-area{
-    /* border-bottom: 1px solid red; */
-}
+    position: relative;
+
+    margin-top: 20px;
+    margin-bottom: 20px; }
 
 #manager-buy-title {
 
@@ -16,9 +17,23 @@
     font-size: 30px;
     margin: 20px 20px;
 }
+.search-area{
+    position: absolute;
+    right: 0;
+    top: 20px;
+}
+
+.buy-search-input{
+    width: 150px;
+    height: 30px;
+
+}
 
 
-
+/* 컬럼명들 */
+.manager-buy-table-column{
+    border-bottom: 1px solid black;
+}
 #manager-buy-table > div{
     display: flex;
     flex-direction: row;
@@ -28,20 +43,6 @@
     padding-left: 20px;
 }
 
-.search{
-}
-
-.buy-search-input{
-height: 30px;
-vertical-align: middle;
-
-}
-
-.manager-buy-table-column{
-    border-bottom: 1px solid black;
-}
-
-/* 컬럼명들 */
 .manager-num{
     width: 100px;
 }
@@ -50,9 +51,8 @@ vertical-align: middle;
 }
 
 .manager-service-name{
-    width: 300px;
-    text-align: left;
-    margin-left: 50px;
+    width: 450px;
+    
 }
 
 .manager-expert{
@@ -72,26 +72,25 @@ vertical-align: middle;
 }
 
 .manager-option{
-    width: 300px;
-    text-align: left;
-    margin-left: 50px;
+    width: 250px;
+    text-align: center;
 }
 
 .manager-option > span{
     display: inline-block;
-    width: 110px;
+    width: 100px;
     text-align: center;
     color: white;
     background-color: rgb(33, 138, 33);
-    border-radius: 15%;
+    border-radius: 15px;
 }
 
 
 /* 테이블 값 부분 */
 .manager-buy-table-content{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* display: flex; */
+    /* align-items: center;
+    justify-content: center; */
     padding: 10px 0;
-    height: 25px;
+    height: 15px;
 }
