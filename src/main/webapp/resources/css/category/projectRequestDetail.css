@@ -1,106 +1,141 @@
+.main>div:first-child{
+    padding:40px 0;
+}
+
+.detailHeader{
+    height: 435px;
+    position: relative;
+}
 
 
+.detailHeader>div{
+    display: inline-block;
+}
 
-/* 헤더, 풋터를 제외한 각 페이지 영역 */
-.content{
-    width: 1400px;
-    height: 800px;
+.servicePhoto{
+    width: 480px;
+    height: 420px;
+    border:1px solid black;
+}
+
+.serviceContent{
+    position: absolute;
+    left:500px;
+   
+}
+
+.serviceTitle{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.serviceInfo{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    width: 695px;
+    margin:20px 0;
 }
 
-/* mainArea /sideMenu영역  */
-.mainArea{
-    width: 1100px;
-    height: auto;
-    border-right: 1px solid #538126; 
-    border-left: 1px solid #538126; 
+/* 전문가 정보 */
+
+.expertPage{
+    width: 695px;
+    height: 210px;
+    border:1px solid black;
+ 
 }
 
-/* 메인 영역 */
-.mainContent{
-    width: 1200px;
-    height: auto;
-   /*  margin-left: 20px; */
-   margin:auto;
 
+.expertPhoto{
+    width: 200px;
+    height: 100%;
+    background-color: aliceblue;
 }
 
-#inquirySubmit{
-    margin-top: 20px;
-    height: 340px;
-    display: flex;
+.expertContent{
+    position: relative;
 }
 
-/* 상단 페이지 리스트 */
-#pageList{
-    margin-top: 50px;
-}
-#pageList a{
-    text-decoration: none;
-    color: black;
-    font-size: 15px;
-}
-
-/* 서비스 사진 영역 */
-#serviceImage{
-    width: 300px;
-    height: 300px;
-}
-#serviceImage img{
-    width: 300px;
-    height: 300px;
-}
-
-/* 서비스명 */
-#serviceText{
-    margin-left: 20px;
-    padding-left: 20px;
-    border: 1px solid #538126; 
-    height: 300px;
-    width: 715px;
-    
-}
-/* 예산 */
-#budget{
-    margin-right: 200px;
-}
-
-/* 제안하기 버튼 */
-#proposal{
-    width: 693px;
-    height: 50px;
-    border: none;
-    background-color: #538126; 
+.expertName{
+    position: absolute;
+    left:220px;
+    top:-190px;
     font-size: 20px;
-    cursor: pointer;
 }
-
-
-
-
-/* 서비스 하단 설명 부분 */
-#serviceInfo{
-    width: 1055px;
-    height: 300px;
+.responseInfo{
+    position: absolute;
     display: flex;
-}
-#serviceInfo div{
-    width: 263px;
-    height: 50px;
-    font-size: 18px;
-    color: black;
-}
-#serviceInfo button{
-    width: 263px;
-    height: 50px;
-    border: 1px solid rgba(185, 181, 181, 0.926);
-    background-color: rgb(225, 220, 220);
-}
-#serviceInfo button:hover{
-    background-color: white;
-    /* border: 1px solid rgba(185, 181, 181, 0.926); */
-    border: 1px solid #538126; 
-    border-bottom: none;
+    justify-content: space-between;
+    width: 300px;
+
+    left:220px;
+    top:-120px;
 }
 
+
+/* 문의하기 버튼 */
+.expertContent>a{
+    position: absolute;
+    right:10px;
+    bottom:10px;
+}
+
+
+
+/* 구매하기 버튼 */
+
+#buyBtn, #requestBtn{
+	display:inline-block;
+	text-align:center;
+    width: 695px;
+    
+    padding:15px 0;
+    
+    font-size: 20px;
+    background-color: #538126;
+    border:1px solid #538126;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    margin:8px 0;
+    margin-top:230px;
+}
+
+/*  */
+.detailContent>ul{
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+.detailContent>ul>li{
+    box-sizing: border-box;
+    list-style: none;
+    display: block;
+    float:left;
+    /* padding:20px 108px; */
+    border:1px solid black;
+    background-color: aliceblue;
+    width: 300px;
+    height: 60px;
+    text-align: center;
+
+
+}
+
+.detailInner{
+    width: 1200px;
+    height: 700px;
+    border:1px solid black;
+}
+
+
+.modal{
+	position:absolute;
+	width:100%;
+	height:100%;
+	
+	background:rgba(0,0,0,0.8);
+	top:0;left:0;
+	display:none;
+	
+}

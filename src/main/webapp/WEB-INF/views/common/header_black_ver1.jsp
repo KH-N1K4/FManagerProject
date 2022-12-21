@@ -7,7 +7,7 @@
     <div id="header">
         <div id="header1">
 
-            <div id="logo"><img src="../resources/images/final_logo_black.png" alt=""></div>
+            <a id="logo" href="/"><img src="../resources/images/final_logo_black.png" alt=""></a>
 
          
             <div class="header-top">
@@ -23,11 +23,11 @@
     </div>
     <div id="nav">
         <ul>
-            <li>서비스 관리</li>
-            <li>회원 관리</li>
-            <li>1:1문의 관리</li>
-            <li>구매내역 관리</li>
-            <li>리뷰 관리</li>
+            <li><a href="/manager/serviceList">서비스 관리</a></li>
+            <li><a href="/manager/memberList">회원 관리</a></li>
+            <li><a href="/manager/userInquiry">1:1문의 관리</a></li>
+            <li><a href="/manager/tradeList">구매내역 관리</a></li>
+            <li><a href="/manager/reviewList">리뷰 관리</a></li>
         </ul>
 
     </div>

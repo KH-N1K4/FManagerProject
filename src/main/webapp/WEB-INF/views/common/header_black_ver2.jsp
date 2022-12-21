@@ -6,7 +6,7 @@
 <div id="header">
         <div id="header1">
 
-            <div id="logo"><img src="../resources/images/final_logo.png" alt=""></div>
+            <a id="logo" href="/"><img src="../resources/images/final_logo.png" alt=""></a>
 
             <div class="header-top">
                 <span>회원가입</span>

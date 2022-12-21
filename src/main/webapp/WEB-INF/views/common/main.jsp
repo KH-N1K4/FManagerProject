@@ -8,7 +8,7 @@
     <title>메인페이지</title>
     
     
-     <link rel="stylesheet" href="/resources/css/sungchan/mainPage.css">
+     <link rel="stylesheet" href="/resources/css/common/mainPage.css">
     
     
 </head>

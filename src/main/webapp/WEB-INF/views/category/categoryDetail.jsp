@@ -35,7 +35,9 @@
                             <span>응답시간<span>00</span></span>
                             <span>응답률<span>00</span></span>
                         </div>
-                        <a href="">서비스 문의 남기기></a>
+                        <a href="" id="askService">서비스 문의 남기기></a>
+                        
+                      
                     </div>
                 </div>
                 <a id="buyBtn" href="/category/1/1/1/1/payment">구매하기</a>
@@ -51,15 +53,32 @@
                 <li>서비스 평가</li>
             </ul>
 
-        </div>
+        </div>  
+       <%--  <div class="modal">
+                    	<jsp:include page="/WEB-INF/views/myProject/askService.jsp" />
+                    </div> --%>
+        
 
         <div class="detailInner"></div>
     </div>
 
-   
-
+  
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    
+    
+     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    
+    <script>
+
+    /* $(function(){
+    	$("#askService").click(function(){
+    		$(".modal").style.display="block";
+    	});
+    	
+    });
+     */
+    </script>
     
 </body>
 </html>

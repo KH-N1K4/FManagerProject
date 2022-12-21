@@ -1,0 +1,78 @@
+.main{
+    width: 1100px;
+    height: 1200px;
+    margin: 0 auto;
+    /* background-color: #54812688; */
+}
+
+#manager-buy-title-area{
+    /* border-bottom: 1px solid red; */
+}
+
+#member-manage-title {
+
+    display: inline-block;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 20px 20px;
+}
+
+
+
+#member-manage-table > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+.member-search-input{
+    
+    width: 200px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid black;
+}
+
+.member-manage-table-column{
+    border-bottom: 1px solid black;
+}
+
+/* 컬럼명들 */
+.member-num{
+    width: 100px;
+}
+.member-name{
+    width: 500px;
+}
+
+
+.member-division{
+    width: 100px;
+}
+.member-grade{
+    width: 100px;
+}
+
+.member-delete{
+    width: 300px;
+}
+
+/* 테이블 값 부분 */
+.member-manage-table-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    height: 25px;
+}
+
+.member-delete > span{
+    display: inline-block;
+    width: 110px;
+    text-align: center;
+    color: white;
+    background-color: rgb(33, 138, 33);
+}
