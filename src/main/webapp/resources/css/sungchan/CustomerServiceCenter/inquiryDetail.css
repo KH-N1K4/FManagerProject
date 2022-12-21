@@ -1,0 +1,170 @@
+/* -------------헤더 풋터------------ */
+.header{
+    width: 1400px;
+    height: 200px;
+    background-color: black
+}
+.footer{
+    width: 1400px;
+    height: 200px;
+    background-color: black
+}
+/* ------------------------------------ */
+
+
+/* 헤더, 풋터를 제외한 각 페이지 영역 */
+.content{
+    width: 1400px;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+}
+
+/* mainArea /sideMenu영역  */
+.mainArea{
+    width: 1100px;
+    height: 800px;
+    border-right: 1px solid black; 
+    border-left: 1px solid black; 
+    display: flex;
+}
+
+/* 사이드 메뉴 영역*/
+.sideMenu{
+    width: 200px;
+    height: 800px;
+    background-color:#538126;
+}
+
+/* 메인 영역 */
+.mainContent{
+    width: 900px;
+    margin-left: 20px;
+}
+
+/*  --------------사이드 메뉴  --------------*/
+#inquiry{
+    margin: 50px 50px 0px 50px;
+}
+#inquiryList{
+    margin: 20px 50px;
+}
+#inquiry a, #inquiryList a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* ///////////////// ////////////////////////////*/
+
+/* ---------문의하기폼--------- */
+#inquirySubmit{
+    margin: 50px
+}
+
+/* 문의하기 페이지 제목 */
+#title{
+    font-size: 30px;
+}
+#tltleInfo{
+    font-size: 15px;
+    color: #538126;
+}
+
+/* hover 했을 경우*/
+#inquirySubmit select:hover{
+    border: 2px solid #538126;
+}
+
+/* 문의 유형 */
+#division{
+    width: 200px;
+    height: 30px;
+    margin-left: 20px;
+}
+
+/* ----------------------테이블 폼---------------------- */
+table{
+    border-collapse: collapse;
+}
+
+table th{
+    height: 30px;
+    text-align: center;
+}
+table td{
+    height: 50px;
+    padding-left: 20px;
+}
+table button{
+    width: 80px;
+    height: 30px;
+    background-color: #538126;
+    border: 1px solid #538126;
+    border-radius: 10%;
+    color: #fff;
+    font-weight: 200;
+    margin-left: 10px;
+}
+/* ------------------------------------------------------ */
+
+/* ----------------------파일업로드 */
+.upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 74%;
+    color: #999999;
+    border-radius: 5px;
+}
+.container label {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #538126;
+    cursor: pointer;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.container input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+/* 댓글 남기기 */
+#comment{
+    display: flex;
+}
+#commentInput{
+    width: 580px;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 15px;
+}
+#commentInput:hover{
+    border: 1px solid #538126;
+}
+
+.myProfile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+#commentSumit{
+    margin-top: 20px;
+    width: 62px;
+    height: 56px;
+    background-color: #538126;
+    border-radius: 15%;
+    border: 1px solid  #538126;
+    color: #fff;
+    cursor: pointer;
+}
