@@ -102,11 +102,23 @@ textarea:focus{
 
 
 /* 吏��뿭 */
-#area{
+#area, #bankName{
     width: 150px;
-    height: 30px;
+    border: 1px solid #538126;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 16px;
     position: relative;
-    top: -3px;
+    top: -1px;
+}
+#area:focus, #bankName:focus{
+    border: 1px solid #538126;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 1px solid #538126;
 }
 
 /* �쟾臾� 遺꾩빞 */
