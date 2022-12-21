@@ -6,7 +6,7 @@
     display: flex;
   }
 
-/* 사이드메뉴 */
+/* �궗�씠�뱶硫붾돱 */
 .sideMenu{
 display: flex;
 margin: 20px 0;
@@ -45,6 +45,11 @@ font-size: 20px;
     display: block;
 }
 
+
+#title + div{
+	margin-left: 10px;
+}
+
 .itemTitle{
     display: flex;
     flex-direction: row;
@@ -56,12 +61,13 @@ font-size: 20px;
     height: 50px;
     font-size: 18px;
     color: gray;
+    font-weight: bold;
 }
 
 input{
     height: 25px;
 }
-/* 수정하기 */
+/* �닔�젙�븯湲� */
 #updateArea{
     display: flex;
     justify-content: right;
@@ -77,13 +83,25 @@ input{
 
 
 
-/* 자기 소개 */
+/* �옄湲� �냼媛� */
 textarea{
+    border: none;
+    font-size: 15px;
+    padding: 5px 20px 20px 5px;
+    position: relative;
+    top: 5px;
+    border-radius: 5px;
     margin-bottom: 10px;
+    margin-top:-3px;
+    resize:none;
+}
+textarea:focus{
+    border: none;
+    outline: none;
 }
 
 
-/* 지역 */
+/* 吏��뿭 */
 #area{
     width: 150px;
     height: 30px;
@@ -91,7 +109,7 @@ textarea{
     top: -3px;
 }
 
-/* 전문 분야 */
+/* �쟾臾� 遺꾩빞 */
 input[type="checkbox"]{
     position: relative;
     top: -6px;
@@ -102,12 +120,12 @@ input[type="checkbox"]{
     margin-right: 20px;
 }
 
-/* 기간 */
+/* 湲곌컙 */
 .number{
     width: 70px;
 }
 
-/* 은행 */
+/* ���뻾 */
 #bankName{
     width: 150px;
     height: 30px;
@@ -119,7 +137,7 @@ input[type="checkbox"]{
     margin-bottom: 100px;
 }
 
-/* 포트폴리오 */
+/* �룷�듃�뤃由ъ삤 */
 #addArea{
     display: flex;
     flex-direction: row;
