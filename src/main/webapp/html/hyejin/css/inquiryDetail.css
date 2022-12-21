@@ -1,0 +1,176 @@
+
+
+
+/* �뿤�뜑, �뭼�꽣瑜� �젣�쇅�븳 媛� �럹�씠吏� �쁺�뿭 */
+/* .content{
+    width: 1400px;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+}
+ */
+/* mainArea /sideMenu�쁺�뿭  */
+.mainArea{
+    width: 1200px;
+    height: 800px;
+    border-right: 1px solid black; 
+    border-left: 1px solid black; 
+    display: flex;
+    margin:auto;
+}
+
+/* �궗�씠�뱶 硫붾돱 �쁺�뿭*/
+.sideMenu{
+    width: 200px;
+    height: 800px;
+    background-color:#538126;
+}
+
+/* 硫붿씤 �쁺�뿭 */
+.mainContent{
+    width: 900px;
+    margin-left: 20px;
+}
+
+/*  --------------�궗�씠�뱶 硫붾돱  --------------*/
+#inquiry{
+    margin: 50px 50px 0px 50px;
+}
+#inquiryList{
+    margin: 20px 50px;
+}
+#inquiry a, #inquiryList a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* ///////////////// ////////////////////////////*/
+
+/* ---------臾몄쓽�븯湲고뤌--------- */
+#inquirySubmit{
+    margin: 50px
+}
+
+/* 臾몄쓽�븯湲� �럹�씠吏� �젣紐� */
+#title{
+    font-size: 30px;
+}
+#tltleInfo{
+    font-size: 15px;
+    color: #538126;
+}
+
+/* hover �뻽�쓣 寃쎌슦*/
+#inquirySubmit select:hover{
+    border: 2px solid #538126;
+}
+
+/* 臾몄쓽 �쑀�삎 */
+#division{
+    width: 200px;
+    height: 30px;
+    margin-left: 20px;
+}
+
+/* ----------------------�뀒�씠釉� �뤌---------------------- */
+table{
+    border-collapse: collapse;
+}
+
+table th{
+    height: 30px;
+    text-align: center;
+}
+table td{
+    height: 50px;
+    padding-left: 20px;
+}
+table button{
+    width: 80px;
+    height: 30px;
+    background-color: #538126;
+    border: 1px solid #538126;
+    border-radius: 10%;
+    color: #fff;
+    font-weight: 200;
+    margin-left: 10px;
+}
+/* ------------------------------------------------------ */
+
+/* ----------------------�뙆�씪�뾽濡쒕뱶 */
+.upload-name {
+    display: inline-block;
+    height: 40px;
+    padding: 0 10px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 74%;
+    color: #999999;
+    border-radius: 5px;
+}
+.container label {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #538126;
+    cursor: pointer;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.container input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+/* �뙎湲� �궓湲곌린 */
+#comment{
+    display: flex;
+}
+#commentInput{
+    width: 580px;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 15px;
+}
+#commentInput:hover{
+    border: 1px solid #538126;
+}
+
+.myProfile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+#commentSumit{
+    margin-top: 20px;
+    width: 62px;
+    height: 56px;
+    background-color: #538126;
+    border-radius: 15%;
+    border: 1px solid  #538126;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+#returnList{
+    display: block;
+    text-align: center;
+    line-height: 40px;
+    margin-left: 350px;
+    width: 200px;
+    height: 40px;
+    border: 1px solid  #538126;
+    background-color: #538126;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-size: 17px;
+}
