@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카테고리</title>
     
-     <link rel="stylesheet" href="/resources/css/category/projectRequest.css">
+    <link rel="stylesheet" href="/resources/css/category/projectRequest.css">
 </head>
 <body>
 
     <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
 
-      <section class="content">
+    <section class="content">
         <div class="mainArea">
             <!-- 사이드 메뉴 -->
             <div class="sideMenu">
@@ -48,7 +48,7 @@
                         <option value="">Master</option>
                     </select>
 
-                    <select name="" id="">
+                    <select name="" id="index">
                         <option value="">최신순</option>
                         <option value="">마감 임박순</option>
                     </select>
@@ -56,18 +56,17 @@
 
                 <div id="imageContent">
                 
-                <c:forEach var="i" begin="0" end="20" step="1">
+                <c:forEach var="i" begin="0" end="19" step="1">
                 	<a href="/category/1/1">
 	                    <div id="image">
-	                        <div><img src="/정채연.jfif"></div>
+	                        <div><img src="/resources/images/샘플1.jpg"></div>
 	                        <!-- 하트버튼 추가 예정 -->
-	                        <span>프로스튜디오</span><br>
-	                        <span>개인 프로필 사진 촬영하기</span><br>
+	                        <span>프로스튜디오</span>
+	                        <span>개인 프로필 사진 촬영하기</span>
 	                        <span>가격: 140,000원</span>
 	                    </div>
                     </a>
-                    
-              </c:forEach>
+                </c:forEach>
                 </div>    
             </div>
 
