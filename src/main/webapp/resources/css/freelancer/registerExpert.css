@@ -12,7 +12,7 @@
     color:#538126;
     font-weight: bolder;
     font-size: 30px;
-    margin:30px 0;
+    margin:60px 0;
     display: block;
 }
 
@@ -37,11 +37,11 @@
 
 
 input[type="text"]{
-    border: 2px solid #538126;
+    border: 1px solid #538126;
     box-sizing: border-box;
     padding: 12px 13px;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 17px;
     border-radius: 5px;
     padding: 10px 20px;
     position: relative;
@@ -49,31 +49,31 @@ input[type="text"]{
 }
 
 input[type="text"]:focus{
-    border: 2px solid #538126;
-    outline: 2px solid #538126;
+    border: 1px solid #538126;
+    outline: 1px solid #538126;
 }
 
-/* 지역 */
+/* 吏��뿭 */
 #area, #bankName{
     width: 150px;
-    border: 2px solid #538126;
+    border: 1px solid #538126;
     box-sizing: border-box;
     border-radius: 5px;
     padding: 10px;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 16px;
     position: relative;
     top: -1px;
 }
-/* #area:focus, #bankName:focus{
-    border: 2px solid #538126;
+#area:focus, #bankName:focus{
+    border: 1px solid #538126;
     box-sizing: border-box;
     border-radius: 10px;
-    outline: 2px solid #538126;
-} */
+    outline: 1px solid #538126;
+}
 
-/* 전문 분야 */
+/* �쟾臾� 遺꾩빞 */
 input[type="checkbox"]{
     position: relative;
     top: -6px;
@@ -100,7 +100,7 @@ input[type="checkbox"]+label span{
     vertical-align: middle;
 	border-radius: 5px;
     cursor: pointer;
-    border: 2px solid #538126;
+    border: 1px solid #538126;
     position: relative;
     top: 0px;
 }
@@ -112,12 +112,12 @@ input[type="checkbox"]:checked + label span::after {
     left: 1px
 }
 
-/* 기간 */
+/* 湲곌컙 */
 .number{
     width: 70px;
 }
 
-/* 은행 */
+/* ���뻾 */
 #bankName{
     position: relative;
     top: -3px;
@@ -129,7 +129,7 @@ input[type="checkbox"]:checked + label span::after {
 
 
 textarea{
-    border: 2px solid #538126;
+    border: 1px solid #538126;
     font-size: 15px;
     padding: 20px 20px;
     position: relative;
@@ -137,8 +137,8 @@ textarea{
     border-radius: 5px;
 }
 textarea:focus{
-    border: 2px solid #538126;
-    outline: 2px solid #538126;
+    border: 1px solid #538126;
+    outline: 1px solid #538126;
 }
 
 
