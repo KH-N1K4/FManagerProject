@@ -1,0 +1,113 @@
+.main{
+    width: 1100px;
+    height: 1200px;
+    margin: 0 auto;
+    background-color: #e9eee388;
+}
+
+#question-list-title-area{
+    /* border-bottom: 1px solid red; */
+    display: inline-block;
+    
+}
+
+#question-list-title {
+
+    /* display: inline-block; */
+    font-weight: bold;
+    font-size: 30px;
+    margin: 20px 20px;
+    vertical-align: middle;
+
+}
+
+.select-area{
+        display: inline-block;
+
+    width: 150px;
+    height: 30px;
+    margin-left: 100px;
+    margin-bottom: 20px;
+
+    
+}
+.select-area-input{
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    
+}
+
+
+
+#question-list-table > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-left: 20px;
+}
+
+
+
+.question-list-table-column{
+    border-bottom: 1px solid black;
+}
+
+/* 컬럼명들 */
+.question-num{
+    width: 200px;
+}
+.question-type{
+    width: 100px;
+}
+
+.question-title{
+    width: 500px;
+}
+
+
+
+
+.question-status{
+    width: 300px;
+}
+
+/* 테이블 값 부분 */
+.question-list-table-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    height: 25px;
+    margin-top: 5px;
+}
+
+.question-answer{
+    display: inline-block;
+    width: 110px;
+    text-align: center;
+    color: white;
+    border-radius: 25%;
+    height: 30px;
+    background-color: rgb(33, 138, 33);
+}
+.question-tempo{
+    display: inline-block;
+    width: 110px;
+    text-align: center;
+    color: white;
+    border-radius: 25%;
+    height: 30px;
+    background-color: rgba(138, 50, 33, 0.751);
+}
+.question-wating{
+    display: inline-block;
+    width: 110px;
+    text-align: center;
+    color: white;
+    border-radius: 25%;
+    height: 30px;
+    background-color: rgb(165, 173, 165);
+}

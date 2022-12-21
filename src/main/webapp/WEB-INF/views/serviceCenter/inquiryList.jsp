@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header_black_ver2.jsp"/>
 
 
 

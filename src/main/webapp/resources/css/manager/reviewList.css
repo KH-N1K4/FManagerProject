@@ -1,0 +1,75 @@
+.main{
+    width: 1100px;
+    height: 1200px;
+    margin: 0 auto;
+    /* background-color: #54812688; */
+}
+
+#review-manage-title-area{
+    /* border-bottom: 1px solid red; */
+}
+
+#review-manage-title {
+
+    /* display: inline-block; */
+    font-weight: bold;
+    font-size: 30px;
+    margin: 20px 20px;
+
+}
+
+
+
+#review-manage-table > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    
+}
+
+
+
+.review-manage-table-column{
+    border-bottom: 1px solid black;
+}
+.review-manage-table-content  div{
+    
+}
+
+/* 컬럼명들 */
+.review-num{
+    width: 200px;
+}
+.review-content{
+    width: 500px;
+}
+
+
+.review-writer{
+    width: 100px;
+}
+
+
+.review-delete{
+    width: 300px;
+}
+
+/* 테이블 값 부분 */
+.review-manage-table-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    height: 25px;
+}
+
+.review-delete > span{
+    display: inline-block;
+    width: 110px;
+    text-align: center;
+    color: white;
+    background-color: rgb(33, 138, 33);
+}
