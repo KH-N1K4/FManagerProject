@@ -76,12 +76,22 @@
                 </div>
             </div>
             <div>
+                <div class="item">학력/전공</div>
+                <div>
+                	<input type="text" name="" id="" class="modal">
+                </div>
+            </div>
+            <div>
                 <div class="item">경력 사항</div>
-                <div></div>
+                <div>
+                	<input type="text" name="" id="" class="modal">
+                </div>
             </div>
             <div>
                 <div class="item">자격증</div>
-                <div></div>
+                <div>
+                	<input type="text" name="" id="" class="modal">
+                </div>
             </div>
             <div>
                 <div class="item">연락 가능 시간</div>
@@ -90,7 +100,7 @@
                 </div>
             </div>
             <div>
-                <div class="item">수익금 출금 은행</div>
+                <div class="item">수익금 입금 계좌</div>
                 <div>
                     <select name="" id="bankName" class="select">
                         <option value="">전체</option>
@@ -105,7 +115,7 @@
             <div>
                 <div class="item">자기소개</div>
                 <div>
-                    <textarea name="" id="" cols="70" rows="10"></textarea>
+                    <textarea name="" id="" cols="66" rows="10"></textarea>
                 </div>
             </div>
             
