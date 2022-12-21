@@ -85,14 +85,14 @@
 
     <div class="main">
         <div id="member-manage-title-area">
-            <div id="member-manage-title">회원 관리
-            <span class="search">
-                <select class="member-search-input" >
+        
+            <span id="member-manage-title">회원 관리 </span>
+            <span class="search-area">
+                <select class="member-select-input" name="" id="">
                     <option value="whole">전체</option>
                 </select>
-                <input type="text" class="member-search-input" name="member-search-input" id ="search-input">
+                <input type="text" class="member-text-input" name="member-search-input" id ="search-input">
             </span>
-            </div>
         </div>
 
         <div id="member-manage-table">

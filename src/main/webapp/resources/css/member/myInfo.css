@@ -5,7 +5,7 @@
   
     display: flex;
   }
-/* 사이드메뉴 */
+/* �궗�씠�뱶硫붾돱 */
 .sideMenu{
 display: flex;
 margin: 20px 0;
@@ -41,7 +41,7 @@ font-size: 20px;
 }
 
 
-/* 프로필 */
+/* �봽濡쒗븘 */
 .profile-image-area {
     width: 150px;
     height: 150px;
@@ -53,7 +53,7 @@ font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* 이미지 넘치는 거 안보이게 하는데 x도 안 보임 */
+    overflow: hidden; /* �씠誘몄� �꽆移섎뒗 嫄� �븞蹂댁씠寃� �븯�뒗�뜲 x�룄 �븞 蹂댁엫 */
     margin-left: 20px;
 }
 
@@ -66,18 +66,18 @@ form[name='myPage-frm'] {
     display: flex;
     flex-direction: row;
 }
-/* 삭제버튼 */
+/* �궘�젣踰꾪듉 */
 #delete-image {
     position: absolute;
     top: -20px;
     right: 10px;
     cursor: pointer;
-    color: black; /* 글씨가 안 보여어 */
+    color: black; /* 湲��뵪媛� �븞 蹂댁뿬�뼱 */
     font-size: 30px;
     visibility: visible;
 }
 
-/* 이미지 버튼 영역 */
+/* �씠誘몄� 踰꾪듉 �쁺�뿭 */
 .profile-btn-area {
     width: 230px;
     margin: 20px 0;
@@ -129,7 +129,7 @@ form[name='myPage-frm'] {
     width: 400px;
     height: 30px;
     color:#538126;
-    border:2px solid #538126;
+    border:1px solid #538126;
     border-radius: 10px;
 }
 
@@ -162,7 +162,7 @@ input[type="checkbox"]+label span{
     border: 2px solid #538126;
 }
 input[type="checkbox"]:checked + label span::after {
-    content: "✔";
+    content: "�쐱";
     color: #538126;
     position: relative;
     top: -3px;
@@ -173,13 +173,13 @@ input[type="checkbox"]:checked + label span::after {
 
 
 
-/* 버튼 */
+/* 踰꾪듉 */
 button{
     width: 200px;
     padding:8px 0;
     font-size: 20px;
     background-color: #538126;
-    border:3px solid #538126;
+    border:1px solid #538126;
     border-radius: 5px;
     color:white;
     font-weight: bold;
@@ -188,7 +188,7 @@ button{
 }
 button:hover{
     transition: all 0.2s;
-    border: 3px solid #497021;
+    border: 21px solid #497021;
     background-color: #497021;
 }
 button[type="reset"]{
@@ -197,7 +197,7 @@ button[type="reset"]{
 }
 button[type="reset"]:hover{
     transition: all 0.2s;
-    border: 3px solid #497021;
+    border: 1px solid #497021;
     background-color: #497021;
     color: white;
 }

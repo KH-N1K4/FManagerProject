@@ -96,7 +96,6 @@
                         <option value="반려">반려</option>
                     </select>
                 </span>
-            
         </div>
 
         <div id="service-list-table">
@@ -106,7 +105,7 @@
                 <div class="service-num">번호</div>
                 <div class="service-title">제목</div>
                 <div class="service-status">상태</div>
-                <div class="service-button">
+                <div class="service-button">삭제
                 
 
                 </div>
@@ -137,9 +136,7 @@
                     <span class="service-button-value">삭제</span>
                 </div>
             </div>
-           
-          
-                
+ 
             
         
             
