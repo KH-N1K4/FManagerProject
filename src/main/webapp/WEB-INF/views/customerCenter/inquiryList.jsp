@@ -14,7 +14,6 @@
     <jsp:include page="/WEB-INF/views/common/header_black_ver2.jsp"/>
 
 
-
     <section class="content">
         <div class="mainArea">
             <!-- 사이드 메뉴 -->
