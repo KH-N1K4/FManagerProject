@@ -19,8 +19,8 @@
         <div class="mainArea">
             <!-- 사이드 메뉴 -->
             <div class="sideMenu">
-                <div id="inquiry"><a href="">문의하기</a></div>
-                <div id="inquiryList"><a href="">내 문의 내역</a></div>
+                <div id="inquiry"><a href="/userInquiry">문의하기</a></div>
+                <div id="inquiryList"><a href="/userInquiryList">내 문의 내역</a></div>
             </div>
 
             <!-- 메인 콘텐츠 영역 -->

@@ -41,9 +41,8 @@ public class MemberController {
 		
 		System.out.println(inputMember);
 		
-		int result=0;
 		
-//		int result=service.signUp(inputMember);
+		int result=service.signUp(inputMember);
 		
 		if(result>0){ // 성공시 
 			path="/";

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ajaxMapper">
+
+	<resultMap type="Member" id="member_rm">
+ 
+ 		<!-- DB에서 PK에 해당하는 필드, 컬럼을 작성하는 태그 -->
+ 		<id property="memberNo" column="MEMBER_NO"/>
+ 		
+ 		<!-- 나머지 일반 컬럼 -->
+ 		<result property="memberEmail" column="MEMBER_EMAIL"/>
+ 		<result property="memberPw" column="MEMBER_PW"/>
+ 		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+ 		<result property="memberTel" column="MEMBER_TEL"/>
+ 		<result property="memberAddress" column="MEMBER_ADDRESS"/>
+ 		<result property="memberDeleteFlag" column="MEMBER_DELETE_FL"/>
+ 		<result property="profileImg" column="PROFILE_IMG"/>
+ 		<result property="authority" column="AUTHORITY"/>
+ 		<result property="enrollDate" column="ENROLL_DATE"/>
+	 		
+	 </resultMap>
+	
+ 
+	 <!-- 이메일 중복 검사 -->
+	 	<select id="emailDupCheck" parameterType="string" resultType="_int">
+	 		SELECT COUNT(*)
+	 		FROM "MEMBER"
+	 		WHERE MEMBER_EMAIL=#{memberEmail}
+	 		AND MEMBER_DELETE_FL='N'
+	 	</select>
+	 		
+	 <!-- 닉네임 중복 검사 -->
+	 	<select id="nicknameDupCheck" parameterType="string" resultType="_int">
+	 		SELECT COUNT(*)
+	 		FROM "MEMBER"
+	 		WHERE MEMBER_NICKNAME=#{memberNickname}
+	 		AND MEMBER_DELETE_FL='N'
+	 	</select>
+ 	
+ 	
+
+
+	
+  
+</mapper>

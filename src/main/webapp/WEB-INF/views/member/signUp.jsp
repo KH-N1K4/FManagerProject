@@ -15,34 +15,59 @@
 
         <div class="signUp">
 
-        <form action="/member/signUp" method="POST">
+         <form action="#" method="post" name="signUp-frm" id="signUp-frm">
             <span id="textSignUp">회원가입</span>
             
-            <input type="text" placeholder="이메일" class="exception" id="memberEmail"><button id="emailCheck">인증</button><br>
-            <input type="text" placeholder="비밀번호" id="memberPw"><br>
-            <input type="text" placeholder="비밀번호 확인" id="memberPwCheck"><br>
-            <input type="text" placeholder="휴대폰번호" id="memberTel"><br>
-            <input type="text" placeholder="닉네임" id="memberNickname"><br>
-            <input type="text" placeholder="이름" id="memberName"><br>
-            <select name="" id="job">
-                <option value="">무직</option>
-            </select>
-
+            <input type="text" placeholder="이메일" class="exception" name="memberEmail" id="memberEmail"><button id="sendAuthKeyBtn">인증</button><br>
+            <span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
+            <input type="text" placeholder="인증번호 입력" class="exception" name="authKey" id="authKey"><button id="checkAuthKeyBtn">확인</button><br>
+            <span class="signUp-message" id="authKeyMessage"></span>
             
-            <div id="signUpInterest"> <span id="textSignUpInterest">관심분야</span><br>
-                <div>
-                    <input type="checkbox" name="design" id="design" class="checkbox"><label for="design"></label><span>디자인</span> 
-                    <input type="checkbox" name="programming" id="programming" class="checkbox"><label for="programming"></label><span>IT 프로그래밍</span><br>
-                </div>
-                <div>
-                    <input type="checkbox" name="video" id="video" class="checkbox"><label for="video"></label><span>영상</span>
-                    <input type="checkbox" name="photo" id="photo" class="checkbox"><label for="photo"></label><span>사진</span>
-                    <input type="checkbox" name="sound" id="sound" class="checkbox"><label for="sound"></label><span>음향</span>
+            <input type="password" placeholder="비밀번호" name="memberPw" id="memberPw"><br>
+            <input type="password" placeholder="비밀번호 확인" name="memberPwConfirm" id="memberPwConfirm"><br>
+            <span class="signUp-message" id="pwMessage">영어, 숫자, 특수문자(!,@,#,-,_) 6~20글자 사이로 입력해주세요.</span>
+            
+            <input type="text" placeholder="(- 없이 숫자만 입력)" name="memberTel" id="memberTel" maxlength="11" value="${tempMember.memberTel}"><br>
+            <span class="signUp-message" id="telMessage">전화번호를 입력해주세요(- 제외)</span>
+            
 
+            <input type="text" placeholder="닉네임" name="memberNickname" id="memberNickname"><br>
+            <span class="signUp-message" id="nickMessage">한글, 영어, 숫자로만 2~10글자</span>
+            <input type="text" placeholder="이름" name="memberName" id="memberName"><br>
+            <input type="text" placeholder="직업" name="memberJob" id="memberJob"><br>
+            <!-- <select name="" id="job">
+                <option value="">무직</option>
+            </select> -->
+  
+            
+           <div id="signUpInterest"> <span id="textSignUpInterest">관심분야</span><br>
+                    <input type="checkbox" name="memberInterest" id="design" value="1">
+                    <label for="design" class="checkbox">
+                        <span></span>디자인
+                    </label>
+                    <input type="checkbox" name="memberInterest" id="it" value="2">
+                    <label for="it" class="checkbox">
+                        <span></span>IT.프로그래밍
+                    </label>
+                    <input type="checkbox" name="memberInterest" id="video" value="3">
+                    <label for="video" class="checkbox">
+                        <span></span>영상
+                    </label><br>
+                    <input type="checkbox" name="memberInterest" id="photo" value="4">
+                    <label for="photo" class="checkbox">
+                        <span></span>사진
+                    </label>
+                    <input type="checkbox" name="memberInterest" id="sound" value="5">
+                    <label for="sound" class="checkbox">
+                        <span></span>음향
+                    </label>
                 </div>
-            </div>
+           <!--  <input type="checkbox" name="signUpagree" id="agree"><label for="agree"></label><span class="agreeText">개인정보 제공 동의</span> -->
 
-            <input type="checkbox" name="agree" id="agree"><label for="agree"></label><span class="agreeText">개인정보 제공 동의</span>
+			<input type="checkbox" name="signUpagree" id="agree" value="5">
+			<label for="agree" class="checkbox">
+                        <span></span>개인정보 제공 동의
+                    </label>
 
             <button id="signUpBtn">가입</button>
 
@@ -50,6 +75,11 @@
         </form>
 
     </div>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script src="/resources/js/member/signUp.js"></script>
    
 </body>
 </html>
