@@ -1,4 +1,4 @@
-package com.manager.freelancer.serviceCenter.controller;
+package com.manager.freelancer.ServiceCenter.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
