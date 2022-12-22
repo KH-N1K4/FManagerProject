@@ -18,6 +18,7 @@
             
             <!-- 로그인한 경우/ 하지 않은 경우 나누기 -->
                <!--  <span><a href="/member/enrollFreelancer">관리자</a></span> -->
+                <span><a href="/member/enrollFreelancer">전문가 등록</a></span>
                 <span><a href="/manager/memberList">관리자</a></span>
                 <span><a href="/member/signUp">회원가입</a></span>
                 <span><a href="/member/login">로그인</a></span>

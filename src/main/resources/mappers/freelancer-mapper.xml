@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mainMapper">
+<mapper namespace="freelancerMapper">
 	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름 (반드시 지정!) -->
   <!-- <cache-ref namespace=""/> 무조건 삭제-->
   
@@ -15,51 +15,26 @@
     	
     	- 속성
     	type : 연결힐 VO 객체의 타입(패키지 + 클래스명 or 별칭) 
-    																					myBatis-confing.xml 에서 지정
+ 		myBatis-confing.xml 에서 지정
     																					
     	id : resultMap을 식별할 이름
     	
-    	
     	-->
-    	<!-- <resultMap type="edu.kh.project.member.model.vo.Member" id="member_rm"> -->
-    <!-- 	<resultMap type="MainProduct" id="product_rm">
+    	<!-- mybatis-config 수정 -->
     	
-    		DB에서 PK에 해당하는 필드, 컬럼을 작성하는 태그 
-    		<id property="memberNo" column="MEMBER_NO"/>
-    		
-    		나머지 일반 컬럼
-    		<result property="memberEmail" column="MEMBER_EMAIL" />
-	      <result property="memberPw" column="MEMBER_PW" />
-	      <result property="memberNickname" column="MEMBER_NICKNAME" />
-	      <result property="memberResidence" column="MEMBER_RESIDENCE" />
-	      <result property="profileImage" column="PROFILE_IMG" />
-	      <result property="enrollDate" column="ENROLL_DATE" />
-	      <result property="memberDeleteFlag" column="MEMBER_DEL_FL" />
-	      <result property="authorityNo" column="AUTHORITY_NO" />
-	      <result property="authorityName" column="AUTHORITY_NAME" />
-	      <result property="memberLevelNo" column="MEMBER_LEVEL_NO" />
+    	<resultMap type="com.manager.freelancer.freelancer.model.vo.FreeLancer" id="freelancer_rm">
+   
+    		<id property="freelancerNo" column="FREELANCER_NO"/>
+
+   		  <result property="freelancerPeriod" column="FREELANCER_PERIOD" />
+   		  <result property="contactTime1" column="FREE_CONTACT_TIME1" />
+	      <result property="contactTime2" column="FREE_CONTACT_TIME2" />
 	      
-	      <result property="memberLevelName" column="MEMBER_LEVEL_NAME" />
-	      <result property="memberLevelImg" column="MEMBER_LEVEL_IMG" />
-	      <result property="authorityImg" column="AUTHORITY_IMG" />
-	      <result property="logHistoryNo" column="LOG_HISTORY_NO" />
-	      <result property="loginDate" column="LOGIN_DATE" />
-	      <result property="logHistoryCount" column="LOGHISTORY_COUNT" />
-	      <result property="commentCount" column="BOARD_COUNT" />
-	      <result property="boardCount" column="COMMENT_COUNT" />
-	      
-	      <result property="holdNo" column="HOLD_NO" /> 활동정지
-	      <result property="holdDate" column="HOLD_DATE" />
-	      <result property="holdReason" column="HOLD_REASON" />
-	      <result property="HManagerEmail" column="H_MEMBER_EMAIL" />
-	      <result property="HManagerNickname" column="H_MEMBER_NICKNAME" />
-	      
-	      <result property="secessionReasonInFo" column="SECESSION_REASON_INFO" /> 강제탈퇴
-	      <result property="secessionDate" column="SECESSION_DATE" />
-	      <result property="SManagerEmail" column="S_MEMBER_EMAIL" />
-	      <result property="SManagerNickname" column="S_MEMBER_NICKNAME" />
-	      <result property="secessionFL" column="SECESSION_FL" />  다시 가입 여부
-    	</resultMap> -->
+	      <result property="freelancerIntroduction" column="FREELACER_INTRODUCTION" />
+	      <result property="regionNo" column="REGION_NO" />
+	      <result property="gradeNo" column="GRADE_NO" />
+	     
+    	</resultMap>
     	
     	
 <!--     	private int holdNo; // 활동정지 번호
