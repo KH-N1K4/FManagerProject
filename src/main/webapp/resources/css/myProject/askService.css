@@ -1,7 +1,9 @@
 #askServiceMain{
+	position: relative;
     width: 450px;
     height: 450px;
 }
+
 
 #serviceSection{
     position: relative;
