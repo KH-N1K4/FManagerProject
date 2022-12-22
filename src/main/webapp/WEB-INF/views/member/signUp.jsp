@@ -15,21 +15,15 @@
 
         <div class="signUp">
 
-        <form action="">
+        <form action="/member/signUp" method="POST">
             <span id="textSignUp">회원가입</span>
             
-            <input type="text" placeholder="이메일" class="exception"><button id="emailCheck">인증</button><br>
-            <input type="text" placeholder="비밀번호"><br>
-            <input type="text" placeholder="비밀번호 확인"><br>
-            <select name="" id="bank">
-                <option value="">농협</option>
-                <option value="">신한</option>
-                <option value="">우리</option>
-            </select>
-            <input type="text" placeholder="계좌번호" class="exception"><br>
-            <input type="text" placeholder="휴대폰번호"><br>
-            <input type="text" placeholder="닉네임"><br>
-            <input type="text" placeholder="이름"><br>
+            <input type="text" placeholder="이메일" class="exception" id="memberEmail"><button id="emailCheck">인증</button><br>
+            <input type="text" placeholder="비밀번호" id="memberPw"><br>
+            <input type="text" placeholder="비밀번호 확인" id="memberPwCheck"><br>
+            <input type="text" placeholder="휴대폰번호" id="memberTel"><br>
+            <input type="text" placeholder="닉네임" id="memberNickname"><br>
+            <input type="text" placeholder="이름" id="memberName"><br>
             <select name="" id="job">
                 <option value="">무직</option>
             </select>

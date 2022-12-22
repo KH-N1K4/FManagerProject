@@ -16,14 +16,7 @@
     <section class="content">
         <div class="mainArea">
             <!-- 사이드 메뉴 -->
-            <div class="sideMenu">
-                <div id="design">IT·프로그래밍</div>
-                <div id="subCategori"><a href="">UX기획</a><button>▼</button></div>
-                <div id="subCategori"><a href="">웹</a><button>▼</button></div>
-                <div id="subCategori"><a href="">커머스</a><button>▼</button></div>
-                <div id="subCategori"><a href="">모바일</a><button>▼</button></div>
-            </div>
-
+            <jsp:include page="/WEB-INF/views/category/categorySide.jsp"/>
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
                 <form action="" id="inquirySubmit">
