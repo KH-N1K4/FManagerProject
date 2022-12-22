@@ -11,10 +11,6 @@ import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 @Repository
 public class UserInquiryDAO {
 	
-	/*
-	 * @Autowired private UserInquiry userInquiry;
-	 */
-	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
