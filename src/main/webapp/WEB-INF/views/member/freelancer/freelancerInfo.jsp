@@ -22,7 +22,8 @@
                 <div>
                     <div class="item">자기소개</div>
                     <div>
-                        <textarea name="" id="" cols="100" rows="8"></textarea>
+                        <textarea name="" id="" cols="90" rows="4" readonly>미국인과 결혼하신 이모 덕에 어려서부터 영어에 대한 관심이 많았고 영어공부도 좋아했습니다. 관련해서 더 깊이있게 공부하고 대학진학을 통한 공부의 꿈을 미루고 바로 취직을 하게 됐습니다. 이후 전업주부가 되
+                        </textarea>
                     </div>
                 </div>
                 <div class="itemTitle">

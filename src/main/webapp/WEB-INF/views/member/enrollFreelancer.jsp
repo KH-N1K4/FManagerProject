@@ -22,48 +22,48 @@
             <div>
                 <div class="item">지역</div>
                 <div>
-                    <select name="" id="area" class="select">
+                    <select name="freelancerRegionNo" id="area" class="select">
                         <option value="">전체</option>
-                        <option value="">서울</option>
-                        <option value="">경기</option>
-                        <option value="">부산</option>
-                        <option value="">대구</option>
-                        <option value="">인천</option>
-                        <option value="">광주</option>
-                        <option value="">대전</option>
-                        <option value="">울산</option>
-                        <option value="">강원</option>
-                        <option value="">충북</option>
-                        <option value="">충남</option>
-                        <option value="">전북</option>
-                        <option value="">전남</option>
-                        <option value="">경북</option>
-                        <option value="">경남</option>
-                        <option value="">제주</option>
-                        <option value="">해외</option>
+                        <option value="1">서울</option>
+                        <option value="2">경기</option>
+                        <option value="3">부산</option>
+                        <option value="4">대구</option>
+                        <option value="5">인천</option>
+                        <option value="6">광주</option>
+                        <option value="7">대전</option>
+                        <option value="8">울산</option>
+                        <option value="9">강원</option>
+                        <option value="10">충북</option>
+                        <option value="11">충남</option>
+                        <option value="12">전북</option>
+                        <option value="13">전남</option>
+                        <option value="14">경북</option>
+                        <option value="15">경남</option>
+                        <option value="16">제주</option>
+                        <option value="17">해외</option>
                     </select>
                 </div>
             </div>
             <div>
                 <div class="item">전문 분야</div>
                 <div>
-                    <input type="checkbox" name="" id="design">
+                    <input type="checkbox" name="freelancerField" id="design">
                     <label for="design" class="checkbox">
                         <span></span>디자인
                     </label>
-                    <input type="checkbox" name="" id="it">
+                    <input type="checkbox" name="freelancerField" id="it">
                     <label for="it" class="checkbox">
                         <span></span>IT.프로그래밍
                     </label>
-                    <input type="checkbox" name="" id="video">
+                    <input type="checkbox" name="freelancerField" id="video">
                     <label for="video" class="checkbox">
                         <span></span>영상
                     </label>
-                    <input type="checkbox" name="" id="photo">
+                    <input type="checkbox" name="freelancerField" id="photo">
                     <label for="photo" class="checkbox">
                         <span></span>사진
                     </label>
-                    <input type="checkbox" name="" id="sound">
+                    <input type="checkbox" name="freelancerField" id="sound">
                     <label for="sound" class="checkbox">
                         <span></span>음향
                     </label>
@@ -72,7 +72,7 @@
             <div>
                 <div class="item">기간</div>
                 <div>
-                    <input type="text" name="" id="" class="number"> 년
+                    <input type="text" name="freelancerCont" id="" class="number"> 년
                 </div>
             </div>
             <div>
