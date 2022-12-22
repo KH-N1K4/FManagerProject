@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.manager.freelancer.manager.model.service.ManagerService;
@@ -20,10 +21,14 @@ public class ManagerController {
 		return "";
 	}
 	
+	// 회원 관리 - 회원 목록 조회
 	@GetMapping("/manager/memberList")
-	public String managerMemberList() {
+	public String managerMemberList(Model model) {
 		
 		List<Member> memberList = service.selectMemberList();
+		if(memberList!=null) {
+			model.addAttribute("memberList", memberList);
+		}
 		
 		return "/manager/memberList";
 	}

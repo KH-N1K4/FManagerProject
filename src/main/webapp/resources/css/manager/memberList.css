@@ -30,8 +30,8 @@
     width: 150px;
     height: 30px;
     position: absolute;
-    right: 160px;
-    top: 20px;
+    right: 30px;
+    top: 30px;
 }
 
 .member-text-input{
@@ -74,12 +74,10 @@
     width: 300px;
 }
 .member-grade{
-    width: 300px;
+    width: 200px;
 }
-
-.member-delete{
-    width: 100px;
-    text-align: center;
+.member-enrollDate{
+		width: 400px;
 }
 
 /* 테이블 값 부분 */
@@ -88,12 +86,46 @@
     height: 15px;
 }
 
-.member-delete > span{
-    display: inline-block;
-    width: 90px;
-    text-align: center;
-    color: white;
-    background-color: rgb(33, 138, 33);
-    border-radius: 15px;
 
+
+/* 검색 */
+#memberSearch{
+    text-align: center;
+    width: 500px;
+    height: 30px;
+    margin: 30px auto;
+
+    display: flex;
+    justify-content: space-between;
 }
+
+
+#memberSearch * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#memberSearch select{
+    width: 150px;
+    height: 30px;
+}
+
+#memberSearch input{
+    flex-grow: 1;
+    margin: 0 10px;
+    padding-left: 10px;
+    height: 30px;
+}  
+
+#memberSearch button{
+    width: 100px;
+		font-size:15px;
+    font-weight: bold;
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+

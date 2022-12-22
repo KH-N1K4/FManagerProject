@@ -8,12 +8,20 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Member {
+	
 	private int memberNo;
 	private String memberEmail;
 	private String memberPw;
+	private String memberPwCheck;
 	private String memberTel;
 	private String memberNickname;
 	private String memberName;
 	private String memberJob;
-	private int authority;
+	private int memberAuthority;
+	private String memberEnrollDate;
+	private String memberDeleteFlag;
+	private String freelancerFlag;
+	private String freelancerGrade;
+	
+	private String memberType;
 }

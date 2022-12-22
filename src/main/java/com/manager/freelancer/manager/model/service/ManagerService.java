@@ -6,7 +6,7 @@ import com.manager.freelancer.manager.model.vo.Member;
 
 public interface ManagerService {
 
-	/** 회원 리스트 조회
+	/** 회원 목록 조회
 	 * @return
 	 */
 	List<Member> selectMemberList();
