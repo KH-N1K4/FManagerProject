@@ -10,18 +10,6 @@
     <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/serviceCenter.css">
 </head>
 <body>
-    <!-- 헤더 -->
-    <%-- <section class="header">
-        <div id="header">
-            <div id="header1">
-                <div id="logo"><img src="/final_logo.png" alt=""></div>
-                <div class="header-top">
-                    <span>회원가입</span>
-                    <span>로그인</span>
-                </div>
-            </div>
-        </div>
-    </section> --%>
 
     <jsp:include page="/WEB-INF/views/common/header_black_ver2.jsp"/>
 
@@ -31,13 +19,13 @@
         <div class="mainArea">
             <!-- 사이드 메뉴 -->
             <div class="sideMenu">
-                <div id="inquiry"><a href="">문의하기</a></div>
-                <div id="inquiryList"><a href="">내 문의 내역</a></div>
+                <div id="inquiry"><a href="/userInquiry">문의하기</a></div>
+                <div id="inquiryList"><a href="/userInquiryList">내 문의 내역</a></div>
             </div>
 
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
-                <form action="" id="inquirySubmit">
+                <form action="userInquiryInsert" id="inquirySubmit" method="POST">
                     <h3 id="title">문의하기</h3>
                     <span id="tltleInfo">[중요] 작업 문의는 해당 전문가에게 직접 남겨주세요.</span>
                     <br><br>
@@ -45,7 +33,7 @@
                     <div>문의 유형</div>
                     <select name="" id="division">
                         <option value="">문의</option> 
-                        <option value="">신고</option> 
+                        <option value="">환불</option> 
                     </select>
 
                     <br><br>
@@ -63,14 +51,14 @@
                     <div>첨부파일</div>
                     <div class="container">
                         <input type="text" class="upload-name" 
-                        value="파일을 업로드 하세요" placeholder="파일을 업로드 하세요" disabled>
+                        value="${선택된 파일 명 넣기}" placeholder="파일을 업로드 하세요" disabled>
                         <label for="upload-file">파일선택</label>
                         <input type="file" id="upload-file">
                     </div>
 
 
                     <button id="inquiryInsert"><a href="">제출</a></button>
-                    <button id="goToMain"><a href="">메인으로</a></button>
+                    <button id="goToMain"><a href="/">메인으로</a></button>
 
                 </form>
             </div>
