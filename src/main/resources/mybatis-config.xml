@@ -20,13 +20,18 @@
 	<typeAliases>
 
 		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
+		<typeAlias type="com.manager.freelancer.member.model.vo.Member" alias="Member"/>
 
 	</typeAliases>
 	
 	<!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
 	<mappers>
 <!--<mapper resource="/mappers/member-mapper.xml"/> -->
-		<mapper resource="/mappers/product-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/manager-mapper.xml"/>
+		<mapper resource="/mappers/freelancer-mapper.xml"/>
+		<mapper resource="/mappers/myProjectFreelancer-mapper.xml"/>
+		<mapper resource="/mappers/userInquiry-mapper.xml"/>
 
 	</mappers>
 	

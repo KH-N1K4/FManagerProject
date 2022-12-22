@@ -1,10 +1,19 @@
 package com.manager.freelancer.manager.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.manager.freelancer.manager.model.service.ManagerService;
+import com.manager.freelancer.manager.model.vo.Member;
+
 @Controller
 public class ManagerController {
+	
+	@Autowired
+	private ManagerService service;
 
 	@GetMapping("/manager/main")
 	public String managerMain() {
@@ -13,6 +22,9 @@ public class ManagerController {
 	
 	@GetMapping("/manager/memberList")
 	public String managerMemberList() {
+		
+		List<Member> memberList = service.selectMemberList();
+		
 		return "/manager/memberList";
 	}
 	
