@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -61,12 +64,12 @@
     <!-- hearder -->
     <%-- <div id="header">
       <div id="header1">
-          <div id="logo"><img src="../resources/images/final_logo.png" alt=""></div>
+          <div id="logo"><img src="/resources/images/final_logo.png" alt=""></div>
           <div class="header-top">
             <a><span>전문가 전환</span></a>
             <a><span>메세지</span></a>
             <a><span>홈으로</span></a>
-            <a><img style="width: 32px; height: 32px;" src="../resources/images/프로필.PNG"></a>
+            <a><img style="width: 32px; height: 32px;" src="/resources/images/프로필.PNG"></a>
           </div>
       </div>
     </div> --%>
@@ -79,10 +82,10 @@
         <!-- sideMenu -->
         <section class="sideMenu">
           <div class="aside">
-            <a class="myProject_User_side" href="../html/myProject_UserPage.html">내 프로젝트</a>
-            <a class="myProject_User_side" href="../html/myProject_suggestion.html">받은 제안</a>
-            <a class="myProject_User_side" href="">구매 관리</a>
-            <a class="myProject_User_side" href="">결제 내역</a>
+            <a class="myProject_User_side" href="/member/myProject/myRequestList">내 프로젝트</a>
+            <a class="myProject_User_side" href="/member/myProject/myReceiveList">받은 제안</a>
+            <a class="myProject_User_side" href="/member/myProject/myPurchaseList">구매 관리</a>
+            <a class="myProject_User_side" href="/member/myProject/paymentList">결제 내역</a>
           </div>
         </section>
         <!-- sideMenu -->
@@ -165,19 +168,9 @@
                   <div class="list_content">
                     <select  id = "dateOption" class="dateOption box" name="dateOption" >
                       <option value="1" selected="">1일</option><!-- 나중에 for문 돌리자 -->
-                      <option value="2">2일</option>
-                      <option value="3">3일</option>
-                      <option value="4">4일</option>
-                      <option value="5">5일</option>
-                      <option value="6">6일</option>
-                      <option value="7">7일</option>
-                      <option value="8">8일</option>
-                      <option value="9">9일</option>
-                      <option value="10">10일</option>
-                      <option value="11">11일</option>
-                      <option value="12">12일</option>
-                      <option value="13">13일</option>
-                      <option value="14">14일</option>
+                      <c:forEach var="i" begin="2" end="99" step="1">
+                        <option value="${i}">${i}일</option>
+                      </c:forEach>
                     </select>
                   </div>
                 </div>
