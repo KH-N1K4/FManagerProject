@@ -20,22 +20,55 @@
     
     
     
-    
-    <select id="selectMemberList" resultMap="manager_member_rm">
-    	SELECT MEMBER_NO, MEMBER_NAME, MEMBER_EMAIL, MEMBER_DELETE_FL, MEMBER_NICKNAME, MEMBER_JOB,
-    	TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일"') MEMBER_ENROLL_DATE, FREELANCER_FL
-    	FROM MEMBER
-    	WHERE MEMBER_DELETE_FL='N'
-    	AND AUTHORITY=1
-    	ORDER BY 1
-    </select>
-    
+    <!-- 프리랜서 등급 조회 -->
     <select id="selectFreelancerGrade" resultType="string">
     	SELECT GRADE_NAME
     	FROM FREELANCER
     	JOIN GRADE USING(GRADE_NO)
     	WHERE FREELANCER_NO=#{memberNo}
     </select>
+    
+    <!-- 전체 회원 수 조회 -->
+    <select id="getMemberListCount" resultType="_int">
+    	SELECT COUNT(*) FROM MEMBER
+			WHERE MEMBER_DELETE_FL = 'N'
+    </select>
     	
+    
+    <!-- 회원 목록 조회 + 페이징-->
+    <select id="selectMemberList" resultMap="manager_member_rm">
+    	SELECT MEMBER_NO, MEMBER_NAME, MEMBER_EMAIL, MEMBER_DELETE_FL, MEMBER_NICKNAME, MEMBER_JOB,
+    	TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일"') MEMBER_ENROLL_DATE, FREELANCER_FL
+    	FROM MEMBER
+    	WHERE MEMBER_DELETE_FL='N'
+    	AND AUTHORITY=1
+    	ORDER BY 1 DESC
+    </select>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

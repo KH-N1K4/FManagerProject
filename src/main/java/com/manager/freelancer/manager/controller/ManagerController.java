@@ -1,11 +1,13 @@
 package com.manager.freelancer.manager.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.manager.freelancer.manager.model.service.ManagerService;
 import com.manager.freelancer.manager.model.vo.Member;
@@ -23,12 +25,14 @@ public class ManagerController {
 	
 	// 회원 관리 - 회원 목록 조회
 	@GetMapping("/manager/memberList")
-	public String managerMemberList(Model model) {
+	public String managerMemberList(Model model, @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+									@RequestParam Map<String, Object> pm) {
 		
-		List<Member> memberList = service.selectMemberList();
-		if(memberList!=null) {
-			model.addAttribute("memberList", memberList);
+		if(pm.get("key")==null) {
+			Map<String, Object> map=service.selectMemberList(cp);
+			model.addAttribute("map", map);
 		}
+		
 		
 		return "/manager/memberList";
 	}
