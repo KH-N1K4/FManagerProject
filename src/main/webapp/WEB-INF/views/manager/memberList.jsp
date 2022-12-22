@@ -28,7 +28,7 @@
 
 			<span id="member-manage-title">회원 관리 </span> 
 			<span class="search-area"> 
-				<select class="member-select-input" name="selectFreelancer" id="" onchange> <!-- ajax로 해 -->
+				<select class="member-select-input" name="selectFreelancer" id="selectFreelancer" onchange="selectChange()">
 					<option value="">구분</option>
 					<option value="N">일반 회원</option>
 					<option value="Y">프리랜서</option>
@@ -135,5 +135,6 @@
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
+	<script src="/resources/js/memberList.js"></script>
 </body>
 </html>
