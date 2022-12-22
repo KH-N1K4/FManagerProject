@@ -1,10 +1,18 @@
 package com.manager.freelancer.myProject.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.manager.freelancer.myProject.model.service.MyProjectSerive;
+
+
+
 @Controller
 public class MyProjectContorller {
+	
+	@Autowired
+	private MyProjectSerive service;
 	
 	// 내 프로젝트 이동
 	@GetMapping("/member/myProject/myRequestList")
