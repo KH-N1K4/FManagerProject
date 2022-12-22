@@ -3,7 +3,7 @@
 <mapper namespace="inquiryMapper">
   
   
-	<resultMap type="UserInquiry" id="userInquiry_rm">
+	<resultMap type="com.manager.freelancer.customerCenter.model.vo.UserInquiry" id="userInquiry_rm">
 	  	
 	  	<id property="userInquiryNo" column="USER_INQUIRY_NO"/>
 	  
@@ -19,8 +19,8 @@
   	
   	</resultMap>
   
-  	<!-- 이용문의 등록하기 -->" 
-  	<insert id="userInquiryInsert" parameterType="UserInquiry" useGeneratedKeys="true">
+  	<!-- 이용문의 등록하기 -->
+  	<insert id="userInquiryInsert" parameterType="com.manager.freelancer.customerCenter.model.vo.UserInquiry" useGeneratedKeys="true">
   		<selectKey keyProperty="userInquiryNo" resultType="_int" order="BEFORE">
 			SELECT SEQ_USER_INQUIRY_NO.NEXTVAL.NEXTVAL FROM DUAL
 		</selectKey>
@@ -29,7 +29,7 @@
   	</insert>
   	
   	<!-- 이용문의 첨부파일 등록하기-->
-  	<insert id="addImage" parameterType="UserInquiry">
+  	<insert id="addImage" parameterType="com.manager.freelancer.customerCenter.model.vo.UserInquiry">
   		INSERT INTO "INQUIRY_FILE"
 		VALUES(SEQ_INQUIRY_FILE_NO.NEXTVAL, #{inquiryFilePath}, #{inquiryFileOrder}, #{userInquiryNo})
   	</insert>
