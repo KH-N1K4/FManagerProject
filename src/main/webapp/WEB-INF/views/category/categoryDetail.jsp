@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카테고리</title>
     
+    <link rel="stylesheet" href="/resources/css/myProject/askService.css">
      <link rel="stylesheet" href="/resources/css/category/serviceDetail.css">
 </head>
 <body>
@@ -35,7 +36,7 @@
                             <span>응답시간<span>00</span></span>
                             <span>응답률<span>00</span></span>
                         </div>
-                        <a href="" id="askService">서비스 문의 남기기></a>
+                        <a id="askService">서비스 문의 남기기></a>
                         
                       
                     </div>
@@ -44,7 +45,7 @@
                <!--  <button id="buyBtn">구매하기</button> -->
             </div>
         </div>
-        <div class="detailContent">
+        <!-- <div class="detailContent">
 
             <ul>
                 <li>서비스 설명</li>
@@ -53,13 +54,23 @@
                 <li>서비스 평가</li>
             </ul>
 
-        </div>  
-       <%--  <div class="modal">
-                    	<jsp:include page="/WEB-INF/views/myProject/askService.jsp" />
-                    </div> --%>
+        </div>   -->
+        
+        <!-- 서비스 설명 부분 -->
+        <div id="serviceInfo">
+            <div><button>서비스 설명</button></div>
+            <div><button>포트폴리오</button></div>
+            <div><button>취소/환불</button></div>
+            <div><button>서비스 평가</button></div>
+        </div>
+        
+        <div class="detailInner"></div>
+        
+       <div class="modal">
+            <jsp:include page="/WEB-INF/views/myProject/askService.jsp" /> 
+       </div>
         
 
-        <div class="detailInner"></div>
     </div>
 
   
@@ -69,16 +80,8 @@
     
      <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     
-    <script>
-
-    /* $(function(){
-    	$("#askService").click(function(){
-    		$(".modal").style.display="block";
-    	});
-    	
-    });
-     */
-    </script>
+    
+     <script src="/resources/js/category/modal.js"></script>
     
 </body>
 </html>

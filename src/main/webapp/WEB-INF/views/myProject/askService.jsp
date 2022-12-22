@@ -4,6 +4,8 @@
 
     
 
+<div class="modal_body">
+    	<span class="modal_close">x</span>
     <div id="askServiceMain">
         <form action="">
     
@@ -22,5 +24,6 @@
         <textarea name="" id="" cols="30" rows="10"></textarea>
         <button>문의보내기</button>
         </form>
+    </div>
     </div>
 
