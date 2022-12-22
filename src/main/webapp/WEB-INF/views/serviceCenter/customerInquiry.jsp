@@ -19,13 +19,13 @@
         <div class="mainArea">
             <!-- 사이드 메뉴 -->
             <div class="sideMenu">
-                <div id="inquiry"><a href="customerInquiry">문의하기</a></div>
-                <div id="inquiryList"><a href="customerInquiryList">내 문의 내역</a></div>
+                <div id="inquiry"><a href="/userInquiry">문의하기</a></div>
+                <div id="inquiryList"><a href="/userInquiryList">내 문의 내역</a></div>
             </div>
 
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
-                <form action="customerInquiryInsert" id="inquirySubmit" method="POST">
+                <form action="userInquiryInsert" id="inquirySubmit" method="POST">
                     <h3 id="title">문의하기</h3>
                     <span id="tltleInfo">[중요] 작업 문의는 해당 전문가에게 직접 남겨주세요.</span>
                     <br><br>

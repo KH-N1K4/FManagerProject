@@ -1,5 +1,7 @@
 package com.manager.freelancer.customerCenter.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,5 +38,13 @@ public class UserInquiryDAO {
 		} 
 		
 		return result;
+	}
+
+	/** 이용문의 내역 조회하기 
+	 * @param memberNo
+	 * @return userInquiry
+	 */
+	public List<UserInquiry> selectInquiryList(int memberNo) {
+		return sqlSession.selectList("inquiryMapper.selectInquiryList",memberNo);
 	} 
 }

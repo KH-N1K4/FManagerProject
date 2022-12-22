@@ -1,11 +1,16 @@
 package com.manager.freelancer.customerCenter.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,14 +25,14 @@ public class UserInquiryController {
 	private UserInquiryService service;
 	
 	// 문의하기 페이지로 이동 
-	@GetMapping("/customerInquiry")
+	@GetMapping("/userInquiry")
 	public String userInquiry() {
 
 		return "customerCenter/customerInquiry";
 	}
 	
 	// 문의하기 등록
-	@PostMapping("/customerInquiryInsert")
+	@PostMapping("/userInquiryInsert")
 	public String userInquiryInsert(UserInquiry inputInquiry, 
 			                        @RequestHeader("referer") String referer, 
 			                        @SessionAttribute("loginMember") Member loginMember, 
@@ -44,7 +49,7 @@ public class UserInquiryController {
 			if(result > 0){ 
 				
 				// 성공 시 
-				path = "serviceCenter/customerInquiry";
+				path = "customerCenter/customerInquiry";
 				message = "이용 문의가 성공적으로 등록되었습니다.";
 				
 			} else {
@@ -61,14 +66,20 @@ public class UserInquiryController {
 	}
 	
 	
-	// 이용문의 내역으로 이동 
-	@GetMapping("/customerInquiryList")
-	public String viewInquiryList() {
+	// 이용문의 내역으로 이동 및 조회
+	@GetMapping("/userInquiryList")
+	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model) {
+		
+		List<UserInquiry> userInquiry = service.selectInquiryList(loginMember.getMemberNo());
+		
+		model.addAttribute("userInquiry",userInquiry);
 		
 		return "customerCenter/inquiryList";
 	}
 	
-	@GetMapping("/customerInquiryDetail")
+	
+	// 이용문의 상세 보기로 이동 
+	@GetMapping("/userInquiryDetail")
 	public String viewInquiryDetail() {
 		
 		return "customerCenter/inquiryDetail";

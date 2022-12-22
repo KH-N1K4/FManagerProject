@@ -31,7 +31,7 @@
   	<!-- 이용문의 첨부파일 등록하기-->
   	<insert id="addImage" parameterType="UserInquiry">
   		INSERT INTO "INQUIRY_FILE"
-		VALUES(SEQ_INQUIRY_FILE_NO.NEXTVAL, #{inquiryFilePath}, #{inquiryFileOrder},#{userInquiryNo})
+		VALUES(SEQ_INQUIRY_FILE_NO.NEXTVAL, #{inquiryFilePath}, #{inquiryFileOrder}, #{userInquiryNo})
   	</insert>
   
 </mapper>
