@@ -27,54 +27,82 @@
 
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
-                <form action="userInquiryInsert" id="inquirySubmit" method="POST">
+                <form action="userInquiryInsert" id="inquirySubmit" method="POST" enctype="multipart/form-data">
                     <h3 id="title">문의하기</h3>
                     <span id="tltleInfo">[중요] 작업 문의는 해당 전문가에게 직접 남겨주세요.</span>
                     <br><br>
 
                     <div>문의 유형</div>
-                    <select name="" id="division">
-                        <option value="">문의</option> 
-                        <option value="">환불</option> 
+                    <select name="inquiryTypeNo" id="division">
+                        <option value="1">문의</option> 
+                        <option value="2">환불</option> 
                     </select>
 
                     <br><br>
 
                     <div>제목</div>
-                    <input type="text" id="titleInput" maxlength="20">
+                    <input type="text" name="userInquiryTitle" id="titleInput" maxlength="20">
                     
                     <br><br>
 
                     <div>문의 내용</div>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea name="userInquiryContent" id="" cols="30" rows="10"></textarea>
 
-                    <br><br>
-<%-- 
-                    <div>첨부파일</div>
-                    <div class="container">
-                        <input type="text" class="upload-name" 
-                        value="" placeholder="파일을 업로드 하세요" disabled>
-                        <label for="upload-file">파일선택</label>
-                        <input type="file" id="upload-file">
-                    </div> --%>
+                    <br>
 
-                    <div>첨부파일</div>
-
-                    <div class="insert">
-                        <form action="./boardInsert" method="POST">
-                            <input class="title" type="text" name="title" placeholder="Title"/>
-                            <textarea class="content" name="content" placeholder="Content"></textarea>
-                            <div class="file-hidden-list"></div>
-                        </form>
-                        <button id="addFile" class="add-button">Add File</button>
-                        <div class="file-list"></div>
-                    </div>
+                    <%-- imageList에 존재하는 이미지 순서에 따라 변수 선언 --%>
+                    <c:forEach items="${userInquiry.imageList}" var="img">
+                        <c:choose>
+                            <c:when test="${img.imageOrder == 0}">
+                                <c:set var="thumbNail" value="${img.imagePath}"/>
+                            </c:when>
+                            <c:when test="${img.imageOrder == 1}">
+                                <c:set var="img1" value="${img.imagePath}"/>
+                            </c:when>
+                            <c:when test="${img.imageOrder == 2}">
+                                <c:set var="img2" value="${img.imagePath}"/>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
 
 
-                   <br>
+                    <h5>업로드 이미지</h5>
+                    <div class="img-box">
+
+                        <div class="boardImg">
+                            <label for="img1">
+                                <img class="preview" src="">
+                            </label>
+                            <input type="file" name="images" class="inputImage" id="img1" accept="image/*">
+                            <span class="delete-image">&times;</span>
+                        </div>
+
+                        <div class="boardImg">
+                            <label for="img2">
+                                <img class="preview" src="">
+                            </label>
+                            <input type="file" name="images" class="inputImage" id="img2" accept="image/*">
+                            <span class="delete-image">&times;</span>
+                        </div>
+
+                        <div class="boardImg">
+                            <label for="img3">
+                                <img class="preview" src="">
+                            </label>
+                            <input type="file" name="images" class="inputImage" id="img3" accept="image/*">
+                            <span class="delete-image">&times;</span>
+                        </div>
+                    </div>    
 
                     <button id="inquiryInsert"><a href="">제출</a></button>
                     <button id="goToMain"><a href="/">메인으로</a></button>
+
+
+                    <%-- 삭제될 이미지 순서를 저장한 input 태그 --%>
+                    <input type="hidden" name="deleteList" id="deleteList" value="">
+                    <%-- 수정 완료 후 리다이렉트 시 사용 예정 --%>
+                    <input type="hidden" name="cp" value="${param.cp}">
+
 
                 </form>
             </div>

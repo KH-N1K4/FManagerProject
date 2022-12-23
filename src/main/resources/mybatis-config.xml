@@ -26,6 +26,7 @@
 		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
 		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Freelancer" alias="Freelancer"/>
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiry" alias="UserInquiry"/>
+		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiryImage" alias="UserInquiryImage"/>
 
 	</typeAliases>
 	

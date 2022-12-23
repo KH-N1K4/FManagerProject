@@ -7,41 +7,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
+import com.manager.freelancer.customerCenter.model.vo.UserInquiryImage;
 
 @Repository
 public class UserInquiryDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
-	/** 이용문의 등록하기
+	
+	
+	/** 이용문의 삽입
 	 * @param inputInquiry
-	 * @return result
+	 * @return userInquiryNo
 	 */
-	public int userInquiryInsert(UserInquiry inputInquiry) {
+	public int Inquiryinsert(UserInquiry userInquiry) {
 		
-		int result = 0; 
+		int result = sqlSession.insert("inquiryMapper.userInquiryInsert", userInquiry);
 		
-		result = sqlSession.insert("inquiryMapper.userInquiryInsert",inputInquiry);
-		
-		if(result > 0) {
-			
-			if(inputInquiry.getInquiryFileNo() != 0) {
-				
-				result = sqlSession.insert("inquiryMapper.addImage",inputInquiry);
-				
-			} 
-			
-		} 
+		if(result > 0) result = userInquiry.getUserInquiryNo();
 		
 		return result;
+	} 
+	
+	
+	/** 이용문의에 이미지 삽입
+	 * @param inquiryImageList
+	 * @return
+	 */
+	public int insertInquiryImageList(List<UserInquiryImage> inquiryImageList) {
+		return sqlSession.insert("inquiryMapper.insertInquiryImageList",inquiryImageList);
 	}
-
+	
+	
 	/** 이용문의 내역 조회하기 
 	 * @param memberNo
 	 * @return userInquiry
 	 */
 	public List<UserInquiry> selectInquiryList(int memberNo) {
 		return sqlSession.selectList("inquiryMapper.selectInquiryList",memberNo);
-	} 
+	}
+
+	
+
+	
 }

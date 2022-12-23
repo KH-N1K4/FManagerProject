@@ -1,63 +1,65 @@
-function hiddenFile(o){
-    let file = '';
-    file += '<input type="file" name="file" id="'+o.id+'"/>';
-    return file;
-  }
-  
-  function file(o){
-    let type = '';
-    if(o.ext === 'pptx' || o.ext === 'ppt'){
-      type = 'powerpoint';
-    }else if(o.ext === 'png' || o.ext === 'jpg'){
-      type = 'image';
-    }else if(o.ext === 'xlsx'){
-      type = 'excel';
-    }else if(o.ext === 'pdf'){
-      type = 'pdf';
-    }else {
-      type = 'alt';
-    }
-  
-    let fileThumbnail = '';
-    fileThumbnail += '<div class="thumbnail">';
-    fileThumbnail += '  <i class="far fa-file-'+type+'"></i>';
-    fileThumbnail += '  <p class="name">'+o.name+'</p>';
-    fileThumbnail += '  <a href="#'+o.id+'" class="delete"><i class="far fa-minus-square"></i></a>';
-    fileThumbnail += '</div>';
-    return fileThumbnail;
-  }
-  
-  function addFile(o){
-    $('.file-hidden-list').append(hiddenFile(o));
-    $('#' + o.id).click();
-    $('#' + o.id).on('change', function(e){
-        const arr1 = e.target.value.split('\\');
-        const name = arr1[arr1.length-1];
-        o.name = name;
+// [이미지 미리보기]
+const inputImage = document.getElementsByClassName("inputImage");
+const preview = document.getElementsByClassName("preview");
+const deleteImage = document.getElementsByClassName("delete-image");
 
-        const arr2 = e.target.value.split('.');
-        const ext = arr2[arr2.length-1];
-        o.ext = ext;
+// [게시글 수정 - 기존에 존재하다가 삭제된 이미지의 순서를 기록]
+const deleteSet = new Set(); // 순서 X, 중복 X (로또번호 박스로 생각)
 
-        $('.file-list').append(file(o));
+
+// 미리보기와 관련된 모든 요소의 개수는 동일 (5개로)
+// == 인덱스번호를 통해서 하나의 그룹을 지정할 수 있음
+// inputImage[0]  preview[0]  deleteImage[0]
+
+for (let i = 0; i < inputImage.length; i++) {
+
+    // inputImage[i] 요소의 값이 변했을 때
+    inputImage[i].addEventListener("change", event => {
+
+        // event.target.files : 선택된 파일의 정보가 배열 형태로 반환
+        if (event.target.files[0] != undefined) { // 선택된 파일이 있을 경우
+
+            const reader = new FileReader(); // 파일 읽는 객체
+            reader.readAsDataURL(event.target.files[0]);
+            // 지정된 input type="file"의 파일 정보를 읽어와 URL 형태로 저장
+
+            reader.onload = e => { // 파일을 다 읽어 온 후
+                // e.target == reader
+                // e.target.result == 읽어 온 파일 URL
+
+                preview[i].setAttribute("src", e.target.result);
+
+                // 미리보기가 추가됨 == 파일이 추가되었다.
+                // == 삭제하면 안된다. == deleteSet에서 해당 순번을 제거
+                deleteSet.delete(i);
+            };
+
+
+        } else { // 취소를 누를 경우
+            // 미리보기 지우기
+            preview[i].removeAttribute("src"); // src 속성 제거
+        }
     });
-}
 
-function makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
+    // 미리보기 삭제 버튼 클릭 시 동작 
+    deleteImage[i].addEventListener("click", () => {
 
-$(document).on('click', '#addFile', function(){
-    addFile({id:makeid(10)});
-});
-$(document).on('click', '.delete', function(){
-    const id = $(this).attr('href');
-    $(id).remove();
-    $(this).parent().remove();
-});
+        // 미리보기 이미지가 존재할 때만 삭제 
+        if (preview[i].getAttribute("src") != "") {
+
+            // 미리보기 삭제 
+            preview[i].removeAttribute("src");
+
+            // input의 값을 ""으로 만들어서 삭제
+            inputImage[i].value = "";
+
+            // deleteSet에 삭제된 이미지의 순서(i)를 추가
+            deleteSet.add(i);
+
+
+        }
+
+
+
+    })
+}
