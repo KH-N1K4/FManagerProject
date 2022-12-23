@@ -251,7 +251,7 @@ tbody a{
   display: none;
 
   background-color: rgba(0, 0, 0, 0.4);
-  z-index:2;
+  z-index:100;
 }
 
 .modal.show {
@@ -263,12 +263,7 @@ tbody a{
   top: 50%;
   left: 50%;
 
-/*   width: 400px;
-  height: 600px; */
-
   padding: 40px;
-
- /*  text-align: center; */
 
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
