@@ -19,6 +19,11 @@
  		<result property="profileImage" column="PROFILE_IMG"/>
  		<result property="authority" column="AUTHORITY"/>
  		<result property="enrollDate" column="ENROLL_DATE"/>
+ 		<result property="freelancerFL" column="FREELANCER_FL"/>
+ 		<result property="memberInterest" column="MEMBER_INTEREST"/>
+ 		
+ 		
+ 		<result property="memberProfile" column="MEMBER_PROFILE"/>
  		
  </resultMap>
  
@@ -31,7 +36,7 @@
 		INSERT INTO "MEMBER"
 		VALUES(#{memberNo}, #{memberEmail}, #{memberPw}, 
 		#{memberTel}, #{memberNickname} , #{memberName} , #{memberJob} , 
-		DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
 	<insert id="insertInterest" parameterType="Map" >
@@ -39,7 +44,38 @@
 		INSERT INTO INTEREST VALUES(#{memberInterest},#{memberNo})
 	
 	</insert>
+	
+	
+	
+	<!-- 로그인 -->											
+	<select id="login" parameterType="string" resultMap="member_rm"> 
+	  SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME,MEMBER_JOB
+   	  MEMBER_TEL, MEMBER_PROFILE, AUTHORITY, (SELECT LISTAGG(MAIN_CATEGORY_NO, ',')
+    WITHIN GROUP (ORDER BY MAIN_CATEGORY_NO)
+    FROM (SELECT DISTINCT MAIN_CATEGORY_NO
+    FROM INTEREST I WHERE I.MEMBER_NO = M.MEMBER_NO)) MEMBER_INTEREST
+	 FROM "MEMBER" M
+	 WHERE MEMBER_DELETE_FL = 'N'
+	 AND MEMBER_EMAIL = #{memberEmail} 
+	</select>
+	
+	
 
+   <update id="updateMyInfo" parameterType="Member">
+ 		UPDATE "MEMBER" SET
+ 		MEMBER_NICKNAME=#{memberNickname},
+ 		MEMBER_TEL=#{memberTel},
+ 		MEMBER_JOB=#{memberJob},
+ 		MEMBER_PROFILE=#{memberProfile}
+ 		WHERE MEMBER_NO=#{memberNo}
+   </update>
+   
+ <!-- 프로필 이미지 수정 -->
+   <update id="updateProfile" parameterType="Member">
+   		UPDATE "MEMBER" SET
+	 	MEMBER_PROFILE=#{memberProfile}
+ 		WHERE MEMBER_NO=#{memberNo}
+   </update>
 
 	
   

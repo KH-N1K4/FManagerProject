@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,69 +18,102 @@
     <div class="main">
 
         <jsp:include page="/WEB-INF/views/member/memberSide.jsp"/>
-
+     
         <section>
             <div id="title">프로필</div>
-            <form action="#" name="myPage-frm">
+            
+            
+           
+            
+            <form action="/member/updateMyInfo" enctype="multipart/form-data" method="POST" name="myPage-frm"  onsubmit="return profileValidate();">
                 <div>
                     <div id="content">
                         <div class="profile-image-area">
-                            <img id="profile-image" src="" alt="">
-                            <span id="delete-image">&times;</span>
+                           <c:if test="${empty loginMember.memberProfile}">
+		                        <img id="profile-image" src="/resources/images/루피.jpg">
+		                    </c:if>
+		                    <c:if test="${not empty loginMember.memberProfile}">
+		                        <img id="profile-image" src="${loginMember.memberProfile}">
+		                    </c:if>
                         </div>
+                            <span id="delete-image">&times;</span>
                         <div class="profile-btn-area">
                             <label for="image-input">프로필 변경</label>
                             <!-- accept 속성 : 업로드 가능한 파일의 타입을 제한하는 속성 -->
-                            <input type="file" name="profile-image" id="image-input" accept="image/*">
-
+                            <input type="file" name="memberProfile" id="image-input" accept="image/*">
                         </div>
+                        
+                        
+                        
                     </div>
                 </div>
                 <div id="inputArea">
-                    <div>
-                        <div class="item">닉네임</div>
+                	<div>
+                        <div class="item">이메일</div>
                         <div>
-                            <input type="text" name="" id="" class="input">
+                            <input type="text" name="" id="" class="input"  value="${loginMember.memberEmail}" readonly>
                         </div>
                     </div>
                     <div>
-                        <div class="item">이메일</div>
+                        <div class="item">닉네임</div>
                         <div>
-                            <input type="text" name="" id="" class="input">
+                            <input type="text" name="memberNickname" id="" class="input" value="${loginMember.memberNickname}">
                         </div>
                     </div>
                     <div>
                         <div class="item">휴대폰</div>
                         <div>
-                            <input type="text" name="" id="" class="input">
+                            <input type="text" name="memberTel" id="" class="input" value="${loginMember.memberTel}">
                         </div>
                     </div>
                     <div>
                         <div class="item">직업</div>
                         <div>
-                            <input type="text" name="" id="" class="input">
+                            <input type="text" name="memberJob" id="" class="input"  value="${loginMember.memberJob}">
                         </div>
                     </div>
                     <div>
                         <div class="item">관심사 선택</div>
-                        <div id="checkbox">
-                            <input type="checkbox" name="" id="design">
+                        
+                        
+                        <div id="checkbox"> 
+                        	<c:forEach var="interest" items="${fn:split(loginMember.memberInterest,',') }" >
+				            	<c:choose>
+									<c:when test="${interest == 1}">
+										<c:set var="interest1" value="checked" />
+									</c:when>
+									<c:when test="${interest == 2}">
+										<c:set var="interest2" value="checked" />
+									</c:when>
+									<c:when test="${interest == 3}">
+										<c:set var="interest3" value="checked" />
+									</c:when>
+									<c:when test="${interest == 4}">
+										<c:set var="interest4" value="checked" />
+									</c:when>
+									<c:when test="${interest == 5}">
+										<c:set var="interest5" value="checked" />
+									</c:when>
+								</c:choose>
+				            </c:forEach>
+				            
+                            <input type="checkbox" name="memberInterest" id="design" value="1" ${interest1}>
                             <label for="design" class="checkbox">
                                 <span></span>디자인
                             </label>
-                            <input type="checkbox" name="" id="it">
+                            <input type="checkbox" name="memberInterest" id="it" value="2" ${interest2}>
                             <label for="it" class="checkbox">
                                 <span></span>IT.프로그래밍
                             </label> <br>
-                            <input type="checkbox" name="" id="video">
+                            <input type="checkbox" name="memberInterest" id="video" value="3" ${interest3}>
                             <label for="video" class="checkbox">
                                 <span></span>영상
                             </label>
-                            <input type="checkbox" name="" id="photo">
+                            <input type="checkbox" name="memberInterest" id="photo" value="4" ${interest4}>
                             <label for="photo" class="checkbox">
                                 <span></span>사진
                             </label>
-                            <input type="checkbox" name="" id="sound">
+                            <input type="checkbox" name="memberInterest" id="sound" value="5" ${interest5}>
                             <label for="sound" class="checkbox">
                                 <span></span>음향
                             </label>
@@ -95,5 +130,8 @@
 
         
     </div>
+    
+    <script src="/resources/js/member/myInfo.js"></script>
+    
 </body>
 </html>

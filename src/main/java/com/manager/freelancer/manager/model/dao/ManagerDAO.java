@@ -1,6 +1,7 @@
 package com.manager.freelancer.manager.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -43,6 +44,38 @@ public class ManagerDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		return sqlSession.selectList("managerMapper.selectMemberList",null,rowBounds);
+	}
+
+	/** 회원 관심분야 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public String selectMemberInterest(int memberNo) {
+		return sqlSession.selectOne("managerMapper.selectMemberInterest",memberNo);
+	}
+
+	/** 회원 상세 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public Member selectMemberDetail(int memberNo) {
+		return sqlSession.selectOne("managerMapper.selectMemberDetail",memberNo);
+	}
+
+	/** 프리랜서 상세 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public Member selectFreelancerDetail(int memberNo) {
+		return sqlSession.selectOne("managerMapper.selectFreelancerDetail",memberNo);
+	}
+
+	/** 유형별 회원 수 조회
+	 * @param value
+	 * @return
+	 */
+	public int getMemberListCount2(String value) {
+		return sqlSession.selectOne("managerMapper.getMemberListCount2",value);
 	}
 
 }

@@ -13,12 +13,12 @@
 <body>
 
 
-    <div class="main">
+    <div class="freelancer-info">
 
 
         <section>
             <div id="title">전문가 정보</div>
-            <form action="#" name="myPage-frm">
+            <div class="modal_close2">&times;</div>
                 <div>
                     <div id="content">
                         <div class="profile-image-area">
@@ -75,7 +75,7 @@
                         </div>
                         <div class="itemTitle">
                             <div class="item">전문 분야</div>
-                            <div id="checkbox">
+                            <div>
                                 <input type="checkbox" name="" id="design">
                                 <label for="design" class="checkbox">
                                     <span></span>디자인
@@ -148,7 +148,6 @@
                         <div class="service">g</div>
                     </div>
                 </div>
-            </form>
         
         </section>
 

@@ -8,11 +8,17 @@ const checkObj={"memberEmail":false,
                 "memberPwConfirm":false,
                 "memberNickname":false,
                 "memberTel":false,
-                "authKey":true
+                "authKey":true,
+                "signUpCheck":false
+                // 인증번호 풀어둠
             };
+
+
 
 // 회원가입 양식이 제출 되었을 때 
 document.getElementById("signUp-frm").addEventListener("submit",function(event){
+
+    
    
     for(key in checkObj){
         let str;
@@ -25,6 +31,7 @@ document.getElementById("signUp-frm").addEventListener("submit",function(event){
                 case "memberNickname": str="닉네임이 유효하지 않습니다."; break;
                 case "memberTel": str="전화번호 유효하지 않습니다."; break;
                 case "authKey": str="인증이 완료되지 않았습니다."; break;
+                case "signUpCheck": str="개인정보 제공 동의가 되지 않았습니다."; break;
             }
 
             alert(str); // 대화상자 출력 
@@ -37,6 +44,18 @@ document.getElementById("signUp-frm").addEventListener("submit",function(event){
     }
 
 })
+
+const signUpCheck=document.getElementById("signUpCheck");
+
+signUpCheck.addEventListener("change",()=>{
+
+    if(signUpCheck.checked){
+        checkObj.signUpCheck=true;
+    }else{
+        checkObj.signUpCheck=false;
+    }
+})
+
 
 
 
