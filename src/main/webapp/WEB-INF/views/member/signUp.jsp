@@ -33,8 +33,8 @@
 
             <input type="text" placeholder="닉네임" name="memberNickname" id="memberNickname"><br>
             <span class="signUp-message" id="nickMessage">한글, 영어, 숫자로만 2~10글자</span>
-            <input type="text" placeholder="이름" name="memberName" id="memberName"><br>
-            <input type="text" placeholder="직업" name="memberJob" id="memberJob"><br>
+            <input type="text" placeholder="이름" name="memberName" id="memberName" required><br>
+            <input type="text" placeholder="직업" name="memberJob" id="memberJob" required><br>
             <!-- <select name="" id="job">
                 <option value="">무직</option>
             </select> -->
@@ -43,31 +43,33 @@
            <div id="signUpInterest"> <span id="textSignUpInterest">관심분야</span><br>
                     <input type="checkbox" name="memberInterest" id="design" value="1">
                     <label for="design" class="checkbox">
-                        <span></span>디자인
+                        <span></span> <span class="checkboxText">디자인</span>
                     </label>
                     <input type="checkbox" name="memberInterest" id="it" value="2">
                     <label for="it" class="checkbox">
-                        <span></span>IT.프로그래밍
+                        <span></span> <span class="checkboxText">IT.프로그래밍</span>
                     </label>
                     <input type="checkbox" name="memberInterest" id="video" value="3">
                     <label for="video" class="checkbox">
-                        <span></span>영상
+                        <span></span> <span class="checkboxText">영상</span>
                     </label><br>
                     <input type="checkbox" name="memberInterest" id="photo" value="4">
                     <label for="photo" class="checkbox">
-                        <span></span>사진
+                        <span></span> <span class="checkboxText">사진</span>
                     </label>
                     <input type="checkbox" name="memberInterest" id="sound" value="5">
                     <label for="sound" class="checkbox">
-                        <span></span>음향
+                        <span></span> <span class="checkboxText">음향</span>
                     </label>
                 </div>
            <!--  <input type="checkbox" name="signUpagree" id="agree"><label for="agree"></label><span class="agreeText">개인정보 제공 동의</span> -->
 
-			<input type="checkbox" name="signUpagree" id="agree" value="5">
-			<label for="agree" class="checkbox">
-                        <span></span>개인정보 제공 동의
+			<input type="checkbox" name="signUpCheck" id="signUpCheck" value="5">
+			<label for="signUpCheck" class="checkbox">
+                        <span></span> <span class="checkboxText">개인정보 제공 동의</span>
                     </label>
+                    
+                    
 
             <button id="signUpBtn">가입</button>
 

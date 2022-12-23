@@ -43,3 +43,13 @@
         </div>
 
     </div>
+    
+    
+    <c:if test="${not empty message}">
+        <script>
+         alert("${message}");
+        </script>
+
+        <%-- message 1회 출력 후 모든 scope 삭제 --%>
+        <c:remove var="message"/>
+     </c:if>
