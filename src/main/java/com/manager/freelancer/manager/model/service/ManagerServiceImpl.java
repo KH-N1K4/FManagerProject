@@ -65,27 +65,54 @@ public class ManagerServiceImpl implements ManagerService{
 	// 유형별 회원 목록 조회
 	@Override
 	public Map<String, Object> selectMemberTypeList(String value, int cp) {
-		int listCount = dao.getMemberListCount2(value);
-		Pagination pagination = new Pagination(listCount, cp);
 		
-		List<Member> memberList = dao.selectMemberList(pagination);
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		if(memberList!=null) {
-			for(Member m : memberList) {
-				if(m.getFreelancerFlag().equals("N")) {
-					m.setMemberType("일반 회원");
-					m.setFreelancerGrade("");
-				} else {
-					m.setMemberType("프리랜서");
-					String gradeName = dao.selectFreelancerGrade(m.getMemberNo());
-					m.setFreelancerGrade(gradeName);
+		if(!value.equals("")) {
+			int listCount = dao.getMemberListCount2(value);
+			Pagination pagination = new Pagination(listCount, cp);
+			
+			List<Member> memberList = dao.selectMemberList2(value, pagination);
+			
+			if(memberList!=null) {
+				for(Member m : memberList) {
+					if(m.getFreelancerFlag().equals("N")) {
+						m.setMemberType("일반 회원");
+						m.setFreelancerGrade("");
+					} else {
+						m.setMemberType("프리랜서");
+						String gradeName = dao.selectFreelancerGrade(m.getMemberNo());
+						m.setFreelancerGrade(gradeName);
+					}
 				}
+				
 			}
 			
+			map.put("pagination", pagination);
+			map.put("memberList", memberList);
+			
+		} else {
+			int listCount = dao.getMemberListCount();
+			Pagination pagination = new Pagination(listCount, cp);
+			List<Member> memberList = dao.selectMemberList(pagination);
+			
+			if(memberList!=null) {
+				for(Member m : memberList) {
+					if(m.getFreelancerFlag().equals("N")) {
+						m.setMemberType("일반 회원");
+						m.setFreelancerGrade("");
+					} else {
+						m.setMemberType("프리랜서");
+						String gradeName = dao.selectFreelancerGrade(m.getMemberNo());
+						m.setFreelancerGrade(gradeName);
+					}
+				}
+				
+			}
+			map.put("pagination", pagination);
+			map.put("memberList", memberList);
 		}
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("memberList", memberList);
+		
 
 		return map;
 	}
