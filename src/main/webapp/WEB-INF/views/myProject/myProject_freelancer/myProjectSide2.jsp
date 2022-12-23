@@ -4,7 +4,7 @@
     
     <section class="sideMenu">
           <div class="aside">
-            <a class="myProject_User_side" href="">나의 서비스</a>
+            <a class="myProject_User_side" href="/member/myProject/freelancer/myService">나의 서비스</a>
             <a class="myProject_User_side" href="">판매 관리</a>
             <a class="myProject_User_side" href="">보낸 제안</a>
             <a class="myProject_User_side" href="">서비스 문의 내역</a>

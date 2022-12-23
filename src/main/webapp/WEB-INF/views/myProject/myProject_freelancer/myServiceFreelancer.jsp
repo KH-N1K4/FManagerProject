@@ -35,7 +35,7 @@
                         <option>음향</option>
                     </select>
                 </div>
-                <div id="serviceInsert"><a href="">등록하기</a></div>
+                <div id="serviceInsert"><a href="/member/myProject/freelancer/myServiceInsert">등록하기</a></div>
             </div>
             <div id="contentSection">
                 <div id="serviceImage">

@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,84 +10,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>나의 서비스 등록</title>
-
-  <link rel="stylesheet" href="../resources/css/header.css">
-  <link rel="stylesheet" href="../resources/css/footer.css">
-  <link rel="stylesheet" href="/css/myServiceInsert.css">
-  <style>
-    body{
-        margin:0;
-    }
-
-    #logo{
-        width: 200px;
-        height: 100px; 
-        position: absolute;
-        left: 60px;
-        top:40px;
-        /* border:1px solid black; */
-    }
-
-    #header{
-        background-color: #538126;
-    }
-
-    #logo>img{
-        width: 100%;
-    }
-
-    #header1{
-        width: 1200px;
-        height: 160px;
-        margin:auto;
-        position: relative;    
-    }
-
-    .header-top{
-        position: absolute;
-        right:0;
-        top:20px;
-        align-items: center;
-        display: flex;
-    }
-    
-    .header-top span{
-        margin:0 12px;
-        cursor: pointer;
-        color:white !important;
-    }
-    .header-top img{
-        border-radius: 45%;
-    }
-
-</style>
+  <link rel="stylesheet" href="/resources/css/myProject/myProject_freelancer/myServiceInsert.css">
 </head>
 <body>
   <main>
-    <!-- hearder -->
-    <div id="header">
-      <div id="header1">
-          <div id="logo"><img src="../resources/images/final_logo.png" alt=""></div>
-          <div class="header-top">
-            <a><span>전문가 전환</span></a>
-            <a><span>메세지</span></a>
-            <a><span>홈으로</span></a>
-            <a><img style="width: 32px; height: 32px;" src="../resources/images/프로필.PNG"></a>
-          </div>
-      </div>
-    </div>
-    <!-- hearder -->
+     <!-- hearder -->
+     <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
+     <!-- hearder -->
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
         <!-- sideMenu -->
-        <section class="sideMenu">
-          <div class="aside">
-            <a class="myProject_User_side" href="../html/myProject_UserPage.html">내 프로젝트</a>
-            <a class="myProject_User_side" href="../html/myProject_suggestion.html">받은 제안</a>
-            <a class="myProject_User_side" href="">구매 관리</a>
-            <a class="myProject_User_side" href="">결제 내역</a>
-          </div>
-        </section>
+        <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProjectSide2.jsp"/>
         <!-- sideMenu -->
 
         <!-- sideMenu를 제외한 메인 내용 -->
@@ -151,14 +89,9 @@
                   <div class="list_content">
                     <select  id = "dateOption" class="dateOption box" name="dateOption" >
                       <option value="1" selected="">1일</option><!-- 나중에 for문 돌리자 -->
-                      <option value="2">2일</option>
-                      <option value="3">3일</option>
-                      <option value="4">4일</option>
-                      <option value="5">5일</option>
-                      <option value="6">6일</option>
-                      <option value="7">7일</option>
-                      <option value="8">8일</option>
-                      <option value="9">9일</option>
+                      <c:forEach var="i" begin="2" end="99" step="1">
+                        <option value="${i}">${i}일</option>
+                      </c:forEach>
                     </select>
                   
                   </div>
@@ -168,14 +101,9 @@
                   <div class="list_content">
                     <select  id = "dateOption" class="dateOption box" name="dateOption" >
                       <option value="1" selected="">1일</option><!-- 나중에 for문 돌리자 -->
-                      <option value="2">2일</option>
-                      <option value="3">3일</option>
-                      <option value="4">4일</option>
-                      <option value="5">5일</option>
-                      <option value="6">6일</option>
-                      <option value="7">7일</option>
-                      <option value="8">8일</option>
-                      <option value="9">9일</option>
+                      <c:forEach var="i" begin="2" end="99" step="1">
+                        <option value="${i}">${i}일</option>
+                      </c:forEach>
                     </select>
                     
                   </div>
@@ -202,44 +130,8 @@
   </main>
 
   <!-- **************************************footer*************************************-->
-  <div id="footer">
-    <div id="footer-in">
-
-        <div id="footer-left">
-            <a href="">이용약관</a>
-            <a href="">개인정보처리방침</a>
-            <a href="">사업자 정보 확인</a>
-            <br><br>
-            <div>
-                (주)브레이브모바일은 통신판매중개자로서 통신판매의 당사자가 아니며 개별 판매자가 제공하는 서비스에 대한 이행, 계약사항 등과 관련한 의무와 책임은 거래당사자에게 있습니다. <br>
-                상호명:(주)브레이브모바일 · 대표이사:KIM ROBIN H · 개인정보책임관리자:김태우 · 주소:서울특별시 강남구 테헤란로 415, L7 강남타워 5층
-                사업자등록번호:120-88-22325 · 통신판매업신고증:제 2021-서울강남-00551 호 · 직업정보제공사업 신고번호:서울청 제 2019-21호 <br>
-                고객센터:1599-5319 · 이메일:support@soomgo.com
-                Copyright ©Brave Mobile Inc. All Rights Reserved.
-
-            </div>
-
-
-        </div>
-        <div id="footer-right">
-
-            <span>1234-1234</span>    
-            <br>
-            평일 10:00 - 18:00
-            <br>
-            점심시간 13:00 - 14:00
-
-
-
-            <br><br><br>
-            <a href="">고객센터</a>
-            <br>
-            <a href="">자주묻는질문</a>
-
-        </div>
-
-    </div>
-  </div>
+  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <!-- **************************************footer*************************************-->
 </body>
 </html>
+
