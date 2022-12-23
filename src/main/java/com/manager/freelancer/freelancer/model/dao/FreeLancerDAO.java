@@ -12,10 +12,15 @@ public class FreeLancerDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public int enrollFreelancer(Freelancer inputFreeLancer) {
+	public int enrollFreelancerSignup(Freelancer inputFreelancer) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("freelancerMapper.enrollFreelancer", inputFreeLancer);
+		return sqlSession.insert("freelancerMapper.enrollFreelancer", inputFreelancer);
 	}
+
+//	public int insertGrade(Freelancer inputFreelancer) {
+//		return sqlSession.insert("freelancerMapper.insertGrade",inputFreelancer);
+//		
+//	}
 	
 	
 }
