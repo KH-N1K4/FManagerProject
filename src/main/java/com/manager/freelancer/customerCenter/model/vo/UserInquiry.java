@@ -1,5 +1,7 @@
 package com.manager.freelancer.customerCenter.model.vo;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,4 +23,6 @@ public class UserInquiry {
 	private int inquiryTypeNo;                      // 이용문의 유형 번호
 	
 	
+	// 이미지 목록
+	private List<UserInquiryImage> imageList;                   
 }

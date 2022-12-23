@@ -13,10 +13,13 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 	private FreeLancerDAO dao;
 
 	@Override
-	public int enrollFreelancer(Freelancer inputFreeLancer) {
+	public int enrollFreelancerSignup(Freelancer inputFreelancer) {
 
-		int result = dao.enrollFreelancer(inputFreeLancer);
+		int result = dao.enrollFreelancerSignup(inputFreelancer);
 		
+//		if(result > 0) {
+//			result = dao.insertGrade(inputFreelancer);
+//		}
 		return result;
 	}
 }

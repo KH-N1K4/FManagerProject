@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="memberList" value="${map.memberList}" />
 <c:set var="pagination" value="${map.pagination}" />
+<c:set var="member" value="${member}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
 <link rel="stylesheet" href="/resources/css/manager/memberList.css">
 
 </head>
-<body>
+<body id="mainBody">
 
 	<jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp" />
 	
@@ -28,7 +29,7 @@
 
 			<span id="member-manage-title">회원 관리 </span> 
 			<span class="search-area"> 
-				<select class="member-select-input" name="selectFreelancer" id="selectFreelancer" onchange="selectChange()">
+				<select class="member-select-input" name="selectmemberType" id="selectmemberType" onchange="selectChange()">
 					<option value="">구분</option>
 					<option value="N">일반 회원</option>
 					<option value="Y">프리랜서</option>
@@ -52,7 +53,7 @@
 				<c:forEach var="member" items="${memberList}">
 					<div class="member-manage-table-content">
 						<div class="member-num">${member.memberNo}</div>
-						<div class="member-name">${member.memberName}</div>
+						<div class="member-name"><a class="infoBtn">${member.memberName}</a></div>
 						<div class="member-division">${member.memberType}</div>
 						<div class="member-grade">${member.freelancerGrade}</div>
 						<div class="member-enrollDate">${member.memberEnrollDate}</div>
@@ -65,13 +66,12 @@
 				</div>
 			</c:if>
 
-
-
-
-
 		</div>
 		<!-- buy-table -->
 		
+		<div class="member-modal">
+            <jsp:include page="/WEB-INF/views/manager/userProfilePopup.jsp" /> 
+       </div>
 		
 		
 		
@@ -135,6 +135,11 @@
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-	<script src="/resources/js/memberList.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	
+	<script>
+		/* const memberList = ${memberList}; */
+	</script>
+	<script src="/resources/js/manager/memberList.js"></script>
 </body>
 </html>

@@ -4,9 +4,7 @@
   
   
 	<resultMap type="UserInquiry" id="userInquiry_rm">
-	  	
 	  	<id property="userInquiryNo" column="USER_INQUIRY_NO"/>
-	  
 	  	<result property="userInquiryTitle" column="USER_INQUIRY_TITLE" />
 	  	<result property="userInquiryContent" column="USER_INQUIRY_CONTENT" />
 	  	<result property="inquiryRequest" column="USER_INQUIRY_REQUEST" />
@@ -16,22 +14,47 @@
 	  	<result property="inquiryFilePath" column="INQUIRY_FILE_PATH" />
 	  	<result property="inquiryFileOrder" column="INQUIRY_FILE_ORDER" />
 	  	<result property="inquiryTypeNo" column="INQUIRY_TYPE_NO" />
-  	
   	</resultMap>
+  	
+  	<!-- 이용 문의 첨부 파일 -->
+	<resultMap type="UserInquiryImage" id="userInquiryImage_rm">
+      <id property="inquiryFileNo" column="INQUIRY_FILE_NO"/>
+      <result property="inquiryFileTitle" column="INQUIRY_FILE_TITLE"/>
+      <result property="inquiryFilePath" column="INQUIRY_FILE_PATH"/>
+      <result property="inquiryFileOrder" column="INQUIRY_FILE_ORDER"/>
+      <result property="userInquiryNo" column="USER_INQUIRY_NO"/>
+   </resultMap>
+   
   
-  	<!-- 이용문의 등록하기 -->
-  	<insert id="userInquiryInsert" parameterType="com.manager.freelancer.customerCenter.model.vo.UserInquiry" useGeneratedKeys="true">
+  	<!-- 이용문의 삽입하기 -->
+  	<insert id="userInquiryInsert" parameterType="UserInquiry" useGeneratedKeys="true">
   		<selectKey keyProperty="userInquiryNo" resultType="_int" order="BEFORE">
-			SELECT SEQ_USER_INQUIRY_NO.NEXTVAL.NEXTVAL FROM DUAL
+			SELECT SEQ_USER_INQUIRY_NO.NEXTVAL FROM DUAL
 		</selectKey>
   		INSERT INTO "USER_INQUIRY"
-		VALUES(SEQ_USER_INQUIRY_NO.NEXTVAL, #{userInquiryTitle}, #{userInquiryContent}, NULL, DEFAULT, #{memberNo}, #{inquiryTypeNo})
+		VALUES(#{userInquiryNo}, #{userInquiryTitle}, #{userInquiryContent}, NULL, DEFAULT, #{memberNo} , #{inquiryTypeNo})
   	</insert>
   	
-  	<!-- 이용문의 첨부파일 등록하기-->
-  	<insert id="addImage" parameterType="com.manager.freelancer.customerCenter.model.vo.UserInquiry">
-  		INSERT INTO "INQUIRY_FILE"
-		VALUES(SEQ_INQUIRY_FILE_NO.NEXTVAL, #{inquiryFilePath}, #{inquiryFileOrder}, #{userInquiryNo})
+  	<!-- 이용문의 첨부 이미지 삽입(여러 행 동시 삽입) -->
+  	<!-- 동적 SQL <foreach> - 특정 SQL 구문을 반복할 때 사용 
+  	                        - collection : 반복할 객체의 타입 (list,set,map,array....)
+  	                        - item : collection 객체에서 하나씩 순서대로 꺼낸 요소 
+  	                        - index : 현재 인덱스를 나타내는 변수 
+  	-->
+  	<insert id="insertInquiryImageList" parameterType="list">
+  		INSERT INTO USER_INQUIRY_FILE 
+		SELECT SEQ_INQUIRY_FILE_NO.NEXTVAL INQUIRY_FILE_NO, A. * FROM
+		<foreach collection="list" item="img" open="(" close=") A" separator="UNION ALL">
+		SELECT #{img.inquiryFilePath} INQUIRY_FILE_PATH, 
+			   #{img.inquiryFileOrder} INQUIRY_FILE_ORDER,
+			   #{img.userInquiryNo} USER_INQUIRY_NO 
+		FROM DUAL
+		</foreach>
   	</insert>
+  	
+  	<!-- 이용문의 내역 조회 -->
+  	<select id="selectInquiryList" resultType="list" resultMap="userInquiry_rm"> 
+  		SELECT * FROM USER_INQUIRY WHERE MEMBER_NO = #{memberNo}
+  	</select>
   
 </mapper>

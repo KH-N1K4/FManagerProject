@@ -5,6 +5,6 @@ import com.manager.freelancer.freelancer.model.vo.Freelancer;
 public interface FreeLancerService {
 
 	// 전문가 등록
-	int enrollFreelancer(Freelancer inputFreeLancer);
+	int enrollFreelancerSignup(Freelancer inputFreelancer);
 
 }

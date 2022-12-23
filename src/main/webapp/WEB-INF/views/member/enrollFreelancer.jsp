@@ -17,7 +17,7 @@
 
     <div class="main">
 
-        <form action="" id="registerFrm">
+        <form method ="post" action="/member/freelancer/enrollFreelancerSignUp" id="registerFrm">
             <span id="title">전문가 등록</span>
             <div>
                 <div class="item">지역</div>
@@ -90,13 +90,14 @@
             <div>
                 <div class="item">자격증</div>
                 <div>
-                	<input type="text" name="" id="" class="modal">
+                	<input type="text" name="" id="licensePopup" class="modal">
                 </div>
             </div>
             <div>
                 <div class="item">연락 가능 시간</div>
                 <div>
-                    <input type="text" name="" id="" class="number"> 시 ~ <input type="text" name="" id="" class="number"> 시
+                    <input type="text" name="contactTime1" id="contactTime1" class="number"> 시 ~
+                     <input type="text" name="contactTime2" id="contactTime2" class="number"> 시
                 </div>
             </div>
             <div>
@@ -115,7 +116,7 @@
             <div>
                 <div class="item">자기소개</div>
                 <div>
-                    <textarea name="" id="" cols="66" rows="10"></textarea>
+                    <textarea name="freelancerIntro" id="freelancerIntro" cols="66" rows="10"></textarea>
                 </div>
             </div>
             
@@ -126,7 +127,12 @@
 
         </form>
 
+              <div class="modal_license">
+                    <jsp:include page="/WEB-INF/views/member/freelancer/modal/license.jsp" /> 
+                </div>
+
     </div>
+    <script src="/resources/js/member/freelancer/enrollFreelancerPopup.js"></script>
 
 </body>
 </html>

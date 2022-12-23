@@ -26,7 +26,6 @@
 		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
 		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Freelancer" alias="Freelancer"/>
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiry" alias="UserInquiry"/>
-		
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.FreelancerService" alias="myProjectFreelancerService"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectFreelancer" alias="myProjectFreelancer"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit" alias="myProjectFreelancerProfit"/>
@@ -34,6 +33,7 @@
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectGrade" alias="myProjectGrade"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry" alias="myProjectServiceInquiry"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectTrade" alias="myProjectTrade"/>
+		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiryImage" alias="UserInquiryImage"/>
 
 	</typeAliases>
 	

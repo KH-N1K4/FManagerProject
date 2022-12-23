@@ -21,7 +21,16 @@ public class Member {
 	private String memberEnrollDate;
 	private String memberDeleteFlag;
 	private String freelancerFlag;
+	private String memberProfile;
 	private String freelancerGrade;
 	
 	private String memberType;
+	private String memberInterest;
+	
+	private String regionName;
+	private String freelancerIntroduction;
+	private int freelancerPeriod;
+	private int freeContactTime1;
+	private int freeContactTime2;
+	
 }

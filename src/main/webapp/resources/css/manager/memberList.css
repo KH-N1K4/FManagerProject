@@ -1,169 +1,195 @@
-.main{
-    width: 1100px;
-    min-height: 500px;
-    max-height: 1200px;
-    margin: 0 auto;
+.main {
+	width: 1100px;
+	min-height: 500px;
+	max-height: 1200px;
+	margin: 0 auto;
 }
 
-#member-manage-title-area{
-    position: relative;
-
-    margin-top: 20px;
-    margin-bottom: 20px; 
+#member-manage-title-area {
+	position: relative;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 #member-manage-title {
-
-    display: inline-block;
-    font-weight: bold;
-    font-size: 30px;
-    margin: 20px 20px;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 30px;
+	margin: 20px 20px;
 }
 
 /* input태그, select태그 */
-.search-area{
-    width: 150px;
-    height: 30px;
-    vertical-align: middle;
-    
-}
-.member-select-input{
-    width: 150px;
-    height: 30px;
-    position: absolute;
-    right: 30px;
-    top: 30px;
+.search-area {
+	width: 150px;
+	height: 30px;
+	vertical-align: middle;
 }
 
-.member-text-input{
-    width: 150px;
-    height: 25px;
-    vertical-align: middle;
-    position: absolute;
-    right: 0;
-    top: 20px;
+.member-select-input {
+	width: 150px;
+	height: 30px;
+	position: absolute;
+	right: 30px;
+	top: 30px;
+	padding-left: 10px;
+}
+
+.member-text-input {
+	width: 150px;
+	height: 25px;
+	vertical-align: middle;
+	position: absolute;
+	right: 0;
+	top: 20px;
 }
 /* --------------------------------- */
 
-
-
 /* 테이블 컬럼 / 데이터값 */
-#member-manage-table{
+#member-manage-table {
 	margin-bottom: 50px;
-	
+	padding-bottom: 10px;
+	border-bottom: 1px solid black;
 }
 
-#member-manage-table > div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    padding-bottom: 20px;
-    padding-left: 20px;
+#member-manage-table>div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+	padding-bottom: 20px;
+	padding-left: 20px;
 }
 
-
-.member-manage-table-column{
-    border-bottom: 1px solid black;
+.member-manage-table-column {
+	border-bottom: 1px solid black;
+	margin-bottom: 10px;
 }
 
 /* 컬럼명들 */
-.member-num{
-    width: 100px;
-}
-.member-name{
-    width: 350px;
+.member-num {
+	width: 100px;
 }
 
+.member-name {
+	width: 350px;
+}
 
-.member-division{
-    width: 300px;
+.member-division {
+	width: 300px;
 }
-.member-grade{
-    width: 200px;
+
+.member-grade {
+	width: 200px;
 }
-.member-enrollDate{
-		width: 400px;
+
+.member-enrollDate {
+	width: 400px;
 }
 
 /* 테이블 값 부분 */
-.member-manage-table-content{
-    padding: 10px 0;
-    height: 15px;
+.member-manage-table-content {
+	padding: 10px 0;
+	height: 15px;
 }
-
 
 /* pagination */
-.pagination{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 0;
-    margin-bottom: 50px;
+.pagination {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+	margin-bottom: 50px;
 }
 
-.pagination li{
-    width: 20px;
-    margin: 0 5px;
-    text-align: center;
+.pagination li {
+	width: 20px;
+	margin: 0 5px;
+	text-align: center;
 }
 
-.pagination a{
-    display: block;
-    text-decoration:none;
-    color: black;
-    width: 100%;
-    height: 100%;
+.pagination a {
+	display: block;
+	text-decoration: none;
+	color: black;
+	width: 100%;
+	height: 100%;
 }
 
-.current{
-    font-weight: bold;
-    background-color: black;
-    border-radius: 50%;
-    color: white !important;
-    letter-spacing: 0 !important;
+.current {
+	font-weight: bold;
+	background-color: black;
+	border-radius: 50%;
+	color: white !important;
+	letter-spacing: 0 !important;
 }
-
-
 
 /* 검색 */
-#memberSearch{
-    text-align: center;
-    width: 500px;
-    height: 30px;
-    margin: 50px auto;
-
-    display: flex;
-    justify-content: space-between;
+#memberSearch {
+	text-align: center;
+	width: 500px;
+	height: 30px;
+	margin: 50px auto;
+	display: flex;
+	justify-content: space-between;
 }
-
 
 #memberSearch * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
-#memberSearch select{
-    width: 150px;
-    height: 30px;
+#memberSearch select {
+	width: 150px;
+	height: 30px;
 }
 
-#memberSearch input{
-    flex-grow: 1;
-    margin: 0 10px;
-    padding-left: 10px;
-    height: 30px;
-}  
+#memberSearch input {
+	flex-grow: 1;
+	margin: 0 10px;
+	padding-left: 10px;
+	height: 30px;
+}
 
-#memberSearch button{
-    width: 100px;
-		font-size:15px;
-    font-weight: bold;
-    background-color: black;
-    border: none;
-    color: white;
-    cursor: pointer;
+#memberSearch button {
+	width: 100px;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: black;
+	border: none;
+	color: white;
+	cursor: pointer;
+}
+
+/* 모달 */
+.member-modal, .freelancer-modal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 2;
+}
+
+.member-modal.show, .freelancer-modal.show {
+	display: block;
+}
+
+.member-info, .freelancer-info {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	padding: 40px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	transform: translateX(-50%) translateY(-50%);
+	z-index: 100;
 }
 
 
+.infoBtn {
+	cursor: pointer;
+}
