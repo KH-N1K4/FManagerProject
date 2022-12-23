@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
     <title>Fmanager - 고객센터 문의하기</title>
     <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/customerInquiry.css">
     <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/serviceCenter.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -47,15 +49,29 @@
                     <textarea name="" id="" cols="30" rows="10"></textarea>
 
                     <br><br>
-
+<%-- 
                     <div>첨부파일</div>
                     <div class="container">
                         <input type="text" class="upload-name" 
-                        value="${선택된 파일 명 넣기}" placeholder="파일을 업로드 하세요" disabled>
+                        value="" placeholder="파일을 업로드 하세요" disabled>
                         <label for="upload-file">파일선택</label>
                         <input type="file" id="upload-file">
+                    </div> --%>
+
+                    <div>첨부파일</div>
+
+                    <div class="insert">
+                        <form action="./boardInsert" method="POST">
+                            <input class="title" type="text" name="title" placeholder="Title"/>
+                            <textarea class="content" name="content" placeholder="Content"></textarea>
+                            <div class="file-hidden-list"></div>
+                        </form>
+                        <button id="addFile" class="add-button">Add File</button>
+                        <div class="file-list"></div>
                     </div>
 
+
+                   <br>
 
                     <button id="inquiryInsert"><a href="">제출</a></button>
                     <button id="goToMain"><a href="/">메인으로</a></button>
@@ -67,6 +83,7 @@
     </section>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
+    <script src="/resources/js/customerCenter/customerCenter.js"></script>
+    
 </body>
 </html>

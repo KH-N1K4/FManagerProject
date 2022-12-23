@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.manager.freelancer.freelancer.model.service.FreeLancerService;
-import com.manager.freelancer.freelancer.model.vo.FreeLancer;
+import com.manager.freelancer.freelancer.model.vo.Freelancer;
 
 
 
@@ -40,7 +40,7 @@ public class FreeLancerController {
 //		}
 		
 		@PostMapping("/member/enrollFreelancer")
-		public String enrollFreelancer(FreeLancer inputFreeLancer,
+		public String enrollFreelancer(Freelancer inputFreeLancer,
 				String[] freelancerField  ) {
 		int result = service.enrollFreelancer(inputFreeLancer);
 		

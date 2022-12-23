@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FreeLancer {
+public class Freelancer {
 
 	private int freelancerNo; 				// 프리랜서 번호
 	
