@@ -32,8 +32,7 @@
 			SELECT SEQ_USER_INQUIRY_NO.NEXTVAL FROM DUAL
 		</selectKey>
   		INSERT INTO "USER_INQUIRY"
-		VALUES(#{userInquiryNo}, #{userInquiryTitle}, #{userInquiryContent}, NULL, DEFAULT, 33 , #{inquiryTypeNo})
-		<!-- VALUES(#{userInquiryNo}, #{userInquiryTitle}, #{userInquiryContent}, NULL, DEFAULT, #{memberNo}, #{inquiryTypeNo}) -->
+		VALUES(#{userInquiryNo}, #{userInquiryTitle}, #{userInquiryContent}, NULL, DEFAULT, #{memberNo} , #{inquiryTypeNo})
   	</insert>
   	
   	<!-- 이용문의 첨부 이미지 삽입(여러 행 동시 삽입) -->
@@ -53,6 +52,9 @@
 		</foreach>
   	</insert>
   	
-  	
+  	<!-- 이용문의 내역 조회 -->
+  	<select id="selectInquiryList" resultType="list" resultMap="userInquiry_rm"> 
+  		SELECT * FROM USER_INQUIRY WHERE MEMBER_NO = #{memberNo}
+  	</select>
   
 </mapper>

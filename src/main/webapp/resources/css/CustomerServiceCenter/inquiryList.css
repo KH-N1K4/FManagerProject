@@ -1,19 +1,9 @@
 
 
-/* 헤더, 풋터를 제외한 각 페이지 영역 */
-/* .content{
-    width: 1400px;
-    height: 800px;
-    display: flex;
-    justify-content: center;
-} */
-
 /* mainArea /sideMenu영역  */
 .mainArea{
     width: 1200px;
     height: 800px;
-    /* border-right: 1px solid black;  */
-    /* border-left: 1px solid black;  */
     display: flex;
     margin:auto;
 }
@@ -47,7 +37,8 @@
 
 /* ---------문의하기폼--------- */
 #inquirySubmit{
-  /*   margin: 50px */
+    margin: 50px;
+
 }
 
 /* 문의하기 페이지 제목 */
@@ -75,6 +66,7 @@
 /* ----------------------테이블 폼---------------------- */
 table{
     border-collapse: collapse;
+    margin: 0 auto;
 }
 table th{
     border-bottom: 1px solid black;

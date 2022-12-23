@@ -18,6 +18,8 @@ public interface UserInquiryService {
 	 * @return userInquiryNo
 	 */
 	int userInquiryInsert(UserInquiry userInquiry, List<MultipartFile> imageList, String webPath, String folderPath)throws IOException;
+
+	
 	/** 이용문의 내역 조회하기 
 	 * @param memberNo
 	 * @return userInquiry

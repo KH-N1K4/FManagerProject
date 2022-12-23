@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="userInquiry" value="${userInquiry}"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,29 +42,19 @@
 
                     <table>
                         <tr>
-                            <th style="width:100px ">번호</th>
+                            <th style="width:100px">번호</th>
                             <th style="width:200px">구분</th>
                             <th style="width:370px">제목</th>
                             <th style="width:100px">상태</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>문의</td>
-                            <td><a href="/userInquiryDetail">제목 1</a></td>
-                            <td><button>해결</button></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>신고</td>
-                            <td><a href="">제목 2</a></td>
-                            <td><button>해결</button></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>신고</td>
-                            <td><a href="">제목 3</a></td>
-                            <td><button>대기중</button></td>
-                        </tr>
+                        <c:forEach var="inquiry" begin="0" end="9" step="1" items="${userInquiry}">
+                            <tr>
+                                <td>${inquiry.userInquiryNo}</td>
+                                <td>${inquiry.inquiryTypeNo}</td>
+                                <td><a href="/userInquiryDetail">${inquiry.userInquiryTitle}</a></td>
+                                <td><button>해결</button></td>
+                            </tr>
+                        </c:forEach>
                     </table>
                     <hr>
                 </form>
