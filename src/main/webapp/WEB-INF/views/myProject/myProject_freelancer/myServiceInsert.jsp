@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 
+<c:set var="maincategory" value="${maincategoryList}"/>
+<c:set var="category" value="${categoryList}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -32,62 +34,55 @@
                 <!-- 상단 내프로젝트 페이지 제목 -->
             </div>
             <!--  -->
-            <form action ="" class="projectRequestfrm" method="get" name="projectRequestfrm" id="projectRequestfrm">
+            <form action ="/myProject/freelancer/serviceInsert" class="projectRequestfrm" method="get" name="projectRequestfrm" id="projectRequestfrm">
               <div class="container_myProjectadd">
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>카테고리</span></div>
                   <div class="list_content">
                     <div class="selectbox">
-                      <select  id = "srchOption1" class="srchOption box" name="srchOption1" >
-                        <option value="0" selected="">전체</option>
-                        <option value="1">디자인</option>
-                        <option value="2">IT·프로그래밍</option>
-                        <option value="3">영상</option>
-                        <option value="4">사진</option>
-                        <option value="5">음향</option>
+                      <select  id = "srchOption1" class="srchOption box" name="srchOption1">
+                        <option value="" selected="">전체</option>
+                        <c:if test="${not empty maincategory}">
+                          <c:forEach items="${maincategory}" var="mainVar">
+                            <option value="${mainVar.mainCategoryNo}">${mainVar.mainCategoryName}</option>
+                          </c:forEach> 
+                        </c:if>
                       </select>
                     </div>
                     <div class="selectbox"> 
                       <select  id = "srchOption3" class="srchOption box" name="srchOption3" >
-                        <option value="0" selected="">전체</option>
-                        <option value="1">로고 디자인</option>
-                        <option value="2">브랜드 디자인·가이드</option>
-                        <option value="3">진단지·포스터·인쇄물</option>
-                        <option value="4">현수막·X배너</option>
-                        <option value="5">메뉴판</option>
-                        <option value="6">홍보물 인쇄·출력</option>
-                        <option value="7">스티커·봉투·초대장</option>
-                        <option value="8">웹 디자인</option>
-                        <option value="9">앱·모바일 디자인</option>
-                        <option value="10">템플릿형 홈페이지</option>
-                        <option value="11">아이콘·버튼</option>
-                        <option value="12">블로그·카페 디자인</option>
-                        <option value="13">SNS·썸네일 디자인</option>
-                        <option value="14">배너·배달어플</option>
+                        <option value="" selected="" disabled>전체</option>
+                        <c:if test="${not empty category}">
+                          <c:forEach items="${category}" var="cateVar">
+                            <option value="${cateVar.thirdCategoryNo}" mainNo="${cateVar.mainCategoryNo}">${cateVar.thirdCategoryName}</option>
+                          </c:forEach> 
+                        </c:if>
                       </select>
                     </div>
                   </div>
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>제목</span></div>
-                  <div class="list_content"><input type="text" class="inputBoxSize box"></div>
+                  <div class="list_content"><input type="text" class="inputBoxSize box" name="serviceTitle" maxlength="30" autocomplete="off"></div>
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>한줄요약</span></div>
-                  <div class="list_content"><textarea class="projectRequestOnecontent projectRequestContent box"></textarea></div>
+                  <div class="list_content"><textarea class="projectRequestOnecontent projectRequestContent box" id="projectRequestOnecontent" maxlength="100"  name="serviceSummary" ></textarea>
+                  </div>
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>상세 설명</span></div>
-                  <div class="list_content"><textarea class="projectRequestTotalContent projectRequestContent box"></textarea></div>
+                  <div class="list_content"><textarea class="projectRequestTotalContent projectRequestContent box" id="projectRequestTotalContent" maxlength="1300" name="serviceContent"></textarea>
+                  </div>
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>가격 정보</span></div>
-                  <div class="list_content"><textarea class="projectRequestTotalContent projectRequestContent box"></textarea></div>
+                  <div class="list_content"><input type="number" id="budget" class="budget box" name="servicePrice" placeholder="서비스 금액" value=""><span>원</span></div>
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>작업일 수</span></div>
                   <div class="list_content">
-                    <select  id = "dateOption" class="dateOption box" name="dateOption" >
+                    <select  id = "dateOption" class="dateOption box" name="serviceWorkPeriod" >
                       <option value="1" selected="">1일</option><!-- 나중에 for문 돌리자 -->
                       <c:forEach var="i" begin="2" end="99" step="1">
                         <option value="${i}">${i}일</option>
@@ -99,7 +94,7 @@
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>수정 횟수</span></div>
                   <div class="list_content">
-                    <select  id = "dateOption" class="dateOption box" name="dateOption" >
+                    <select  id = "dateOption" class="dateOption box" name="serviceEditNum" >
                       <option value="1" selected="">1일</option><!-- 나중에 for문 돌리자 -->
                       <c:forEach var="i" begin="2" end="99" step="1">
                         <option value="${i}">${i}일</option>
@@ -111,11 +106,9 @@
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>첨부파일</span></div>
                   <div class="list_content">
-                    <input type = "file" >
+                    <input type = "file" name="serviceFilePath">
                   </div>
                 </div>
-                
-               
                 
               </div>
               <div class="buttonArea">
@@ -132,6 +125,17 @@
   <!-- **************************************footer*************************************-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <!-- **************************************footer*************************************-->
+  <script>
+    var maincategoryList1 = "${maincategoryList}";
+    var categoryList1 = "${categoryList}";
+    var list = JSON.parse('${GsoncategoryList}');
+    const listSize = "${categoryList.size()}";
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+  <script src="/resources/js/myProject/myProject_freelancer/myServiceInsert.js"></script>
+
 </body>
 </html>
 

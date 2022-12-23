@@ -41,7 +41,10 @@ public class FreelancerService {
 	private int freelancerFL;				//FREELANCER_DONE_FL 1:진행 중, 2: 작업 완료
 	//private int serviceNo;				//SERVICE_NO 서비스 번호(FK)
 	private int memberNo;					//MEMBER_NO 회원 번호-의뢰인(FK)
+	private String memberName;					//MEMBER_NO 회원 번호-의뢰인(FK)
+	private String memberNickName;					//MEMBER_NO 회원 번호-의뢰인(FK)
 	private int freelancerNo;
+	private String freelancerNickName;
 	
 	//거래 작업물 발송
 	private int workNo;						//WORK_NO 작업물 번호 SEQUENCE: SEQ_WORK_NO
