@@ -98,18 +98,7 @@ public class MemberController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	// 전문가등록 이동
-	@GetMapping("/member/enrollFreelancer")
-	public String enrollFreelancer() {
-		return "member/enrollFreelancer";
-	}
+
 	
 	
 }
