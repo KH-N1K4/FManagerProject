@@ -16,7 +16,12 @@ public class Member {
 	private String memberNickname;
 	private String memberName;
 	private String memberJob;
-	private int memberAuthority;
+	private int authority;
+	private String memberProfile;
+	private int freelancerFL;
 	
+	
+	// 관심사 삽입용 
 	private String memberInterest;
+
 }

@@ -117,7 +117,7 @@
   
   
   
-  input[type="checkbox"]{
+/*   input[type="checkbox"]{
     position: relative;
     margin-top:10px;
 }
@@ -127,7 +127,7 @@
     top: -4px;
     margin-right: 20px;
     cursor: pointer;
-}
+} */
 input[type="checkbox"]{
     display: none;
 }
@@ -135,7 +135,7 @@ input[type="checkbox"]+label{
     position: relative;
     top: 6px;
 }
-input[type="checkbox"]+label span{
+input[type="checkbox"]+label>span:first-child{
     display: inline-block;
     width: 22px;
     height: 22px;
@@ -147,7 +147,7 @@ input[type="checkbox"]+label span{
     position: relative;
     top: 0px;
 }
-input[type="checkbox"]:checked + label span::after {
+input[type="checkbox"]:checked + label>span:first-child::after {
     content: "✔";
     color: #538126;
     position: relative;
@@ -155,7 +155,15 @@ input[type="checkbox"]:checked + label span::after {
     left: 1px
 }
 
+.checkboxText{
+	color:black;
+}
+
 
 /* 메시지 색상 지정 */
 .confirm{color:green;}
 .error{color:red;}
+
+#text{
+	color:black;
+}
