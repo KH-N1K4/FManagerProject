@@ -9,4 +9,4 @@
             <a class="myProject_User_side" href="/member/myProject/myPurchaseList">구매 관리</a>
             <a class="myProject_User_side" href="/member/myProject/paymentList">결제 내역</a>
           </div>
-        </section>
+    </section>
