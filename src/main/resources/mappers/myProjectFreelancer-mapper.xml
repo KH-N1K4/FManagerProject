@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="mainMapper">
+<mapper namespace="myProjectFreelancer">
 	<!-- namespace 속성 : 현재 공간(영역)에 대한 이름 (반드시 지정!) -->
   <!-- <cache-ref namespace=""/> 무조건 삭제-->
   

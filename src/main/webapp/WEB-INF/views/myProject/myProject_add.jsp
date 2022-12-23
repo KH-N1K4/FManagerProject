@@ -62,32 +62,13 @@
 <body>
   <main>
     <!-- hearder -->
-    <%-- <div id="header">
-      <div id="header1">
-          <div id="logo"><img src="/resources/images/final_logo.png" alt=""></div>
-          <div class="header-top">
-            <a><span>전문가 전환</span></a>
-            <a><span>메세지</span></a>
-            <a><span>홈으로</span></a>
-            <a><img style="width: 32px; height: 32px;" src="/resources/images/프로필.PNG"></a>
-          </div>
-      </div>
-    </div> --%>
-
-	  <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
+    <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
 
     <!-- hearder -->
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
         <!-- sideMenu -->
-        <section class="sideMenu">
-          <div class="aside">
-            <a class="myProject_User_side" href="/member/myProject/myRequestList">내 프로젝트</a>
-            <a class="myProject_User_side" href="/member/myProject/myReceiveList">받은 제안</a>
-            <a class="myProject_User_side" href="/member/myProject/myPurchaseList">구매 관리</a>
-            <a class="myProject_User_side" href="/member/myProject/paymentList">결제 내역</a>
-          </div>
-        </section>
+        <jsp:include page="/WEB-INF/views/myProject/myProjectSide.jsp"/>
         <!-- sideMenu -->
 
         <!-- sideMenu를 제외한 메인 내용 -->

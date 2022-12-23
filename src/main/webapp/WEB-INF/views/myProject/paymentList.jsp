@@ -58,7 +58,7 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
+  <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
 
   <main>
     <!-- hearder -->

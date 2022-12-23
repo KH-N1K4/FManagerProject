@@ -22,9 +22,9 @@
     	-->
     	<!-- mybatis-config 수정 -->
     	
-    	<resultMap type="FreeLancer" id="freelancer_rm">
+    	<resultMap type="Freelancer" id="freelancer_rm">
    
-    		<id property="freelancerNo" column="FREELANCER_NO"/>
+   	      <id property="freelancerNo" column="FREELANCER_NO"/>
 
    		  <result property="freelancerPeriod" column="FREELANCER_PERIOD" />
    		  <result property="contactTime1" column="FREE_CONTACT_TIME1" />
@@ -34,8 +34,15 @@
 	      <result property="regionNo" column="REGION_NO" />
 	      <result property="gradeNo" column="GRADE_NO" />
 	     
+	     
     	</resultMap>
     	
+    	<insert id="enrollFreelancer" parameterType = "Freelancer">
+    		INSERT INTO "FREELANCER"
+    		VALUES(5, #{freelancerCont}, #{contactTime1}, #{contactTime2}, #{freelancerIntro}, #{freelancerRegionNo},1 )
+    		
+    		
+    	</insert>
     	
 <!--     	private int holdNo; // 활동정지 번호
 	   private String holdDate; // 활동정지일

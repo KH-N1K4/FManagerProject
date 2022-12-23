@@ -13,4 +13,17 @@ public interface ManagerService {
 	 */
 	Map<String, Object> selectMemberList(int cp);
 
+	/** 회원 상세 조회
+	 * @param memberNo
+	 * @return
+	 */
+	Member selectMemberDetail(int memberNo);
+
+	/** 회원 구분 
+	 * @param value
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectMemberTypeList(String value, int cp);
+
 }

@@ -1,0 +1,181 @@
+.mainInBody{
+  width: 1200px;
+  margin:auto;
+  min-height: 100vh;
+
+  display: flex;
+}
+/* 사이드메뉴 */
+.sideMenu{
+  display: flex; 
+  margin: 20px 0;
+  width: 300px;
+  min-height: 100vh;
+  align-self: flex-start;
+}
+.aside{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.aside a:hover{
+  color: #538126;
+}
+
+.myProject_User_side{
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 20px;
+  font-weight: bold;
+  color: black;
+  font-size: 20px;
+}
+/* 사이드메뉴 */
+
+/* 메인내용 */
+.mainContent{
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+}
+.container{
+  position: relative;
+}
+
+.container_header{
+  display: flex;
+  margin: 0px 5px;
+  padding-bottom: 10px;
+}
+
+/* 내프로젝트 */
+.container_title > span{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.container_title{
+  padding-right: 20px;
+}
+/* 내프로젝트 */
+
+.container_myProjectadd{
+  margin-top: 10px;
+  margin-left: 5px;
+}
+.myProjectadd_info_list{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.myProjectadd_info_list, .list_content{
+  display: flex;
+  flex-direction: row;
+  /* width: 100%; */
+}
+
+.list_title{
+  margin-right: 20px;
+  width: 150px;
+}
+
+.list_title > span{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.list_content > select{
+  width: 170px;
+  height: 40px;
+}
+
+
+
+
+
+/*  */
+.srchOption{
+  width: 150px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.inputBoxSize{
+  width: 505px;
+  height: 28px;
+}
+
+.budget{
+  width: 482px;
+  height: 28px;
+  margin-right: 5px;
+}
+.box{
+  border: 1px solid #c6c6c9;
+}
+.budget > span{
+  font-weight: bold;
+  align-self: center;
+  font-size: 18px;
+}
+
+.projectRequestContent{
+  width: 505px;
+  height: 28px;
+  resize: none;
+}
+
+.projectRequestTotalContent{
+  min-height: 80px;
+  overflow-y: auto;
+  overflow-x:hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 3.5px;
+  background-color: #ced4da;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #adb5bd;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.Date{
+  width: 510px;
+  height: 28px;
+}
+
+.dateOption{
+  width: 515px;
+  height: 30px;
+}
+/*  */
+
+.buttonArea{
+  margin-top: 20px;
+  margin-right: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submitButton{
+  width: 130px;
+  height: 40px;
+  background-color: #5b8d2a;
+  border: #538126;
+  border-radius: 8%;
+  font-size: 20px;
+  color: aliceblue;
+  font-weight: bold;
+}
