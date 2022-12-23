@@ -1,6 +1,6 @@
 package com.manager.freelancer.manager.controller;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.manager.freelancer.manager.model.service.ManagerService;
 import com.manager.freelancer.manager.model.vo.Member;
@@ -35,6 +36,34 @@ public class ManagerController {
 		
 		
 		return "/manager/memberList";
+	}
+	
+	// 회원 상세조회
+	@GetMapping("/manager/memberDetail")
+	@ResponseBody
+	public Member managerMemberDetail(@RequestParam int memberNo ) {
+		
+		Member member = service.selectMemberDetail(memberNo);
+		
+		return member;
+	}
+	
+	//회원 유형별 목록 조회
+	@GetMapping("/manager/memberType")
+	@ResponseBody
+	public Map<String, Object> managerMemberType(Model model, 
+									@RequestParam String value,
+									@RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+									@RequestParam Map<String, Object> pm) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(pm.get("key")==null) {
+			map=service.selectMemberTypeList(value,cp);
+			model.addAttribute("map", map);
+		}
+		
+		return map;
 	}
 	
 	@GetMapping("/manager/tradeList")
