@@ -3,7 +3,7 @@
 <mapper namespace="inquiryMapper">
   
   
-	<resultMap type="com.manager.freelancer.customerCenter.model.vo.UserInquiry" id="userInquiry_rm">
+	<resultMap type="UserInquiry" id="userInquiry_rm">
 	  	
 	  	<id property="userInquiryNo" column="USER_INQUIRY_NO"/>
 	  

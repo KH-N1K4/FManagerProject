@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="managerMapper">
 	
-    <resultMap type="com.manager.freelancer.manager.model.vo.Member" id="manager_member_rm">
+    <resultMap type="Member2" id="manager_member_rm">
     		<id property="memberNo" column="MEMBER_NO"/>
     		<result property="memberEmail" column="MEMBER_EMAIL" />
 	      <result property="memberPw" column="MEMBER_PW" />

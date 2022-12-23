@@ -22,7 +22,7 @@
     	-->
     	<!-- mybatis-config 수정 -->
     	
-    	<resultMap type="com.manager.freelancer.freelancer.model.vo.FreeLancer" id="freelancer_rm">
+    	<resultMap type="FreeLancer" id="freelancer_rm">
    
     		<id property="freelancerNo" column="FREELANCER_NO"/>
 
