@@ -49,23 +49,26 @@
                 <div>
                     <div class="item">자격증명</div>
                     <div>
-                        <input type="text" name="" id="" class="input">
+                        <input type="text" name="licenseContent" id="licenseContent1" class="input">
                     </div>
                 </div>
                 <div>
                     <div class="item">발급일</div>
                     <div>
-                        <input type="text" name="" id="" class="input">
+                        <input type="text" name="licenseContent" id="licenseContent2" class="input">
                     </div>
                 </div>
                 <div>
                     <div class="item">발급 기관</div>
                     <div>
-                        <input type="text" name="" id="" class="input">
+                        <input type="text" name="licenseContent" id="licenseContent3" class="input">
                     </div>
                 </div>
                 <div>
-                    <button>적용</button>
+                    <button id="sendContent">적용</button>
                 </div>
         </div><%-- licenseInputMain --%>
     </div>
+
+     <script src="/resources/js/member/freelancer/enrollFreelancerPopup.js"></script>
+

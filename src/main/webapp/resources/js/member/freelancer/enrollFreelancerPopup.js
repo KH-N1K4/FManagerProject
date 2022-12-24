@@ -55,3 +55,16 @@ modalClose.addEventListener('click', () => {
     body.style.overflow = 'hidden';
   }
 });
+
+// const result = document.querySelector(".input"); // 모달창의 input들
+const result = document.querySelectorAll(".input"); // 모달창의 input들
+const licenseInput = document.getElementById("licensePopup"); // 전문가등록의 자격증input칸
+const sendContent = document.getElementById("sendContent"); // 모달창 제출 버튼
+
+sendContent.addEventListener("click", function(){
+    for(var i =0; i<result.length; i++){
+    document.getElementById("licensePopup").value +=   result[i].value 
+    }
+    // document.getElementById("licensePopup").value = result.value;
+    modal.style.display="none"
+})
