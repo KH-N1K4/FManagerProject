@@ -3,21 +3,25 @@
 <mapper namespace="myProjectFreelancerSerive">
 	
   	<resultMap type="myProjectFreelancerService" id="fService_rm">
-    	
+    	<!-- SELECT SERVICE_NO,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE, SERVICE_EDIT_NUM,
+		SERVICE_WORK_PERIOD,SERVICE_STATUS,SERVICE_CREATE_DATE,THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH -->
     		<id property="serviceNo" column="SERVICE_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
     		   		
 	      <result property="serviceTitle" column="SERVICE_TITLE" />								<!-- 서비스 제목 -->							
 	      <result property="serviceSummary" column="SERVICE_SUMMARY" />						<!-- 서비스 한 줄 요약 -->
 	      <result property="serviceContent" column="SERNICE_CONTENT" />						<!-- 서비스 내용 -->
 	      <result property="servicePrice" column="SERVICE_PRICE"/>								<!-- 서비스 가격 -->
+	      <result property="servicePriceString" column="SERVICE_PRICE_STRING"/>		<!-- 서비스 가격 문자 형태 1,000-->
 	      <result property="serviceEditNum" column="SERVICE_EDIT_NUM"/>						<!-- 서비스 수정 횟수 -->
 	      <result property="serviceWorkPeriod" column="SERVICE_WORK_PERIOD" />		<!-- 서비스 작업 일수 -->
 	      <result property="serviceStatus" column="SERVICE_STATUS" />							<!-- 1:승인 대기 중, 2:판매 중, 3:미승인, 4:판매 중지,5: 의뢰용일회성서비스 -->
+	      <result property="serviceStatusString" column="SERVICE_STATUS_STRING" /><!-- 1:승인 대기 중, 2:판매 중, 3:미승인, 4:판매 중지,5: 의뢰용일회성서비스 -->
+	      																																				<!-- 문자형태 홈페이지에 문자 그대로 출력 예정으로 필요 -->
 	      <result property="serviceCreateDate" column="SERVICE_CREATE_DATE" />		<!-- 서비스 등록일 -->
 	      
 	      <!-- 서비스 첨부파일 -->
 	      <result property="serviceFileNo" column="REQUEST_FILE_NO"/> 						<!-- 서비스 첨부파일 번호 SEQUENCE: SEQ_SERVICE_FILE_NO -->
-	      <result property="serviceFilePath" column="REQUEST_FILE_PATH"/>					<!-- 서비스 첨부파일 경로 -->
+	      <result property="serviceFilePath2" column="REQUEST_FILE_PATH"/>					<!-- 서비스 첨부파일 경로 -->
 	      
 	      <!-- 거래내역 -->
 	      <result property="tradeNo" column="TRADE_NO"/>													<!-- 거래 번호 SEQUENCE: SEQ_TRADE_NO -->
@@ -45,8 +49,18 @@
 	      <result property="subCategoryName" column="SUB_CATEGORY_NAME" />							<!-- 메인 2카테고리 이름  -->
 	      <result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />							<!-- 메인 3카테고리 -->	
 	      <result property="thirdCategoryName" column="THIRD_CATEGORY_NAME" />					<!-- 메인 3카테고리 이름-->
-
+				
+				<!-- <collection property="inquiryList" 
+      	javaType="java.util.ArrayList" ofType="myProjectServiceInquiry"
+        select="selectfileList" 
+        column="REQUEST_FILE_NO"/> -->
     </resultMap>
+    
+    <resultMap type="myProjectServiceInquiry" id="inquiry_rm">
+			<id property="serviceFileNo" column="REQUEST_FILE_NO"/>
+			<result property="serviceFilePath" column="REQUEST_FILE_PATH"/>
+			<result property="serviceNo" column="SERVICE_NO"/>
+		</resultMap>
     
     
     <select id="selectmaincategoryList" resultMap="fService_rm">
@@ -59,5 +73,46 @@
 		JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		ORDER BY 1
     </select>
+    
+    <insert id="insertService" parameterType="java.util.HashMap" useGeneratedKeys="true">
+    <selectKey keyProperty="serviceNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_SERVICE_NO.NEXTVAL FROM DUAL
+		</selectKey>
+    INSERT INTO "SERVICE"
+		VALUES(#{serviceNo},#{freelancerVo.serviceTitle},#{freelancerVo.serviceSummary},
+		#{freelancerVo.serviceContent},#{freelancerVo.servicePrice},#{freelancerVo.serviceEditNum},#{freelancerVo.serviceWorkPeriod},
+		DEFAULT,DEFAULT,#{freelancerVo.thirdCategoryNo},#{loginMember})
+    </insert>
+    
+    <insert id="insertFileImageList" parameterType="list">
+		INSERT INTO SERVICE_FILE
+		SELECT SEQ_SERVICE_FILE_NO.NEXTVAL REQUEST_FILE_NO, A.* FROM
+		
+			<foreach collection="list" item="file" 
+				open="(" close=") A" separator="UNION ALL">
+				SELECT #{file.serviceFilePath} REQUEST_FILE_PATH,
+					     #{file.serviceNo} SERVICE_NO
+				FROM DUAL
+			</foreach>
+		</insert>
+		
+		<select id="selectMyService" resultMap="fService_rm">
+		SELECT SERVICE_NO,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,TO_CHAR(SERVICE_PRICE, 'FM999,999,999,999') SERVICE_PRICE_STRING, 
+			SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,
+			SERVICE_STATUS,
+			CASE WHEN SERVICE_STATUS = 1 THEN '승인대기 중'
+			     WHEN SERVICE_STATUS = 2 THEN '판매 중'
+			     WHEN SERVICE_STATUS = 3 THEN '미승인'
+			     WHEN SERVICE_STATUS = 3 THEN '판매 중지'
+			END AS SERVICE_STATUS_STRING
+			,SERVICE_CREATE_DATE,THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH
+		FROM SERVICE
+		LEFT JOIN (SELECT s.*,
+		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
+		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		WHERE RUM = 1
+		AND SERVICE_STATUS NOT IN (5)
+		AND FREELANCER_NO = #{memberNo}
+		</select>
   
 </mapper>

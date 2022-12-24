@@ -24,13 +24,15 @@ public class FreelancerService {
 	private String serviceSummary;		//SERVICE_SUMMARY 서비스 한 줄 요약
 	private String serviceContent;		//SERNICE_CONTENT 서비스 내용
 	private int servicePrice;			//SERVICE_PRICE 서비스 가격
+	private String servicePriceString;	//SERVICE_PRICE_STRING 서비스 가격
 	private int serviceEditNum;			//SERVICE_EDIT_NUM 서비스 수정 횟수
 	private int serviceWorkPeriod;		//SERVICE_WORK_PERIOD 서비스 작업 일수
 	private int serviceStatus;			//SERVICE_STATUS 1:승인 대기 중, 2:판매 중, 3:미승인, 4:판매 중지,5: 의뢰용일회성서비스
+	private String serviceStatusString;	//SERVICE_STATUS_STRING 1:승인 대기 중, 2:판매 중, 3:미승인, 4:판매 중지,5: 의뢰용일회성서비스
 	private String serviceCreateDate;	//SERVICE_CREATE_DATE 서비스 등록일
 
 	private int serviceFileNo;			//REQUEST_FILE_NO 서비스 첨부파일 번호 SEQUENCE: SEQ_SERVICE_FILE_NO
-	private String serviceFilePath;		//REQUEST_FILE_PATH 서비스 첨부파일 경로
+	private String serviceFilePath2;	//REQUEST_FILE_PATH 서비스 첨부파일 경로
 	
 	private List<myProjectServiceInquiry> inquiryList; 		//서비스 문의 리스트
 	private List<myProjectTrade> tradeList; 				//서비스 거래번호

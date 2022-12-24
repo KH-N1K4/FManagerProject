@@ -1,7 +1,7 @@
 /* 카테고리 */
 $(function(){
-  $('select[name="srchOption1"] ').on('change', function()  {
-      let optionType = $("select[name='srchOption3']");
+  $('select[name="mainCategoryNo"] ').on('change', function()  {
+      let optionType = $("select[name='thirdCategoryNo']");
       optionType.empty();
 
 

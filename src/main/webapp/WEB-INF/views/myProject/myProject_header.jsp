@@ -20,4 +20,3 @@
   </div>
 </div>
 
-${loginMember.memberNickname}
