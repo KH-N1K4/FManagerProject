@@ -29,15 +29,18 @@ public class MyProjectFreelancerController {
 	@Autowired
 	private MyProjectFreelancerService service;
 	
-	// 내 프로젝트 전문가페이지 나의 서비스 이동
+	// 내 프로젝트 전문가페이지 나의 서비스 이동 --정렬 완료
 	@GetMapping("/member/myProject/freelancer/myService")
-	public String myService(Model model, HttpSession session) {
+	public String myService(Model model, HttpSession session,
+			@RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo
+					) {
 		
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		List<FreelancerService> maincategoryList = service.selectmaincategoryList();
-		List<FreelancerService> myService = service.selectMyService(loginMember.getMemberNo());
+		List<FreelancerService> myService = service.selectMyService(loginMember.getMemberNo(),mainCategoryNo);
 		model.addAttribute("maincategoryList",maincategoryList);
 		model.addAttribute("myService",myService);
+		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
 		
 		return "myProject/myProject_freelancer/myServiceFreelancer";
 	}
@@ -56,7 +59,7 @@ public class MyProjectFreelancerController {
 		return "myProject/myProject_freelancer/myServiceInsert";
 	}
 	
-	//나의 서비스 등록--서비스 번호 맞게 등록되는 지 확인하기
+	//나의 서비스 등록--서비스 번호 맞게 등록되는 지 확인하기 --완료
 	@PostMapping("/myProject/freelancer/serviceInsert")
 	public String serviceInsert(@RequestParam(value="serviceFilePath") List<MultipartFile> serviceFile,
 								@SessionAttribute("loginMember") Member loginMember,
@@ -78,6 +81,21 @@ public class MyProjectFreelancerController {
 		ra.addFlashAttribute("message", message);
 			
 		return "redirect:/member/myProject/freelancer/myServiceInsert";
+	}
+	
+	// 내 프로젝트 전문가페이지 서비스 판매ㄴ 관리
+	@GetMapping("/member/myProject/freelancer/myServiceSales")
+	public String myServiceSales(Model model, HttpSession session,
+				@RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo
+						) {
+			
+		//Member loginMember = (Member) session.getAttribute("loginMember");
+		List<FreelancerService> maincategoryList = service.selectmaincategoryList();
+		
+		model.addAttribute("maincategoryList",maincategoryList);
+		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
+	
+		return "myProject/myProject_freelancer/myServicerSalesManagement";
 	}
 
 }

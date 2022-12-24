@@ -34,8 +34,9 @@ public interface MyProjectFreelancerService {
 
 	/**나의 서비스 들고오기
 	 * @param memberNo
+	 * @param mainCategoryNo 
 	 * @return
 	 */
-	List<FreelancerService> selectMyService(int memberNo);
+	List<FreelancerService> selectMyService(int memberNo, int mainCategoryNo);
 
 }

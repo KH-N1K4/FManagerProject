@@ -121,7 +121,7 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 	 * 나의 서비스 들고오기
 	 */
 	@Override
-	public List<FreelancerService> selectMyService(int memberNo) {
-		return dao.selectMyService(memberNo);
+	public List<FreelancerService> selectMyService(int memberNo,int mainCategoryNo) {
+		return dao.selectMyService(memberNo, mainCategoryNo);
 	}
 }

@@ -59,10 +59,13 @@ public class MyProjectFreelancerDAO {
 
 	/**나의 서비스 들고오기
 	 * @param memberNo
+	 * @param mainCategoryNo 
 	 * @return
 	 */
-	public List<FreelancerService> selectMyService(int memberNo) {
-
-		return sqlSession.selectList("myProjectFreelancerSerive.selectMyService", memberNo);
+	public List<FreelancerService> selectMyService(int memberNo, int mainCategoryNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); //게시판 메인 카테고리
+		map.put("mainCategoryNo", mainCategoryNo);
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyService", map);
 	}
 }

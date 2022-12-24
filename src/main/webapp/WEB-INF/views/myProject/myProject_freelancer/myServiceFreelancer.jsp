@@ -28,14 +28,16 @@
             <div id="titleSection">
                 <div id="title">나의 서비스</div>
                 <div id="titleSelect">
-                    <select  id = "srchOption1" class="srchOption box" name="mainCategoryNo">
-                        <option value="0" selected="">전체</option>
-                        <c:if test="${not empty maincategory}">
-                            <c:forEach items="${maincategory}" var="mainVar">
-                                <option value="${mainVar.mainCategoryNo}">${mainVar.mainCategoryName}</option>
-                            </c:forEach> 
-                        </c:if>
-                    </select>
+                    <form action ="/member/myProject/freelancer/myService" class="OptionfrmSearch" method="get" name="OptionfrmSearch" id="OptionfrmSearch">
+                        <select  id = "srchOption1" class="srchOption box" name="mainCategoryNo" title="${mainCategoryNoInput}">
+                            <option value="0" selected="">전체</option>
+                            <c:if test="${not empty maincategory}">
+                                <c:forEach items="${maincategory}" var="mainVar">
+                                    <option value="${mainVar.mainCategoryNo}">${mainVar.mainCategoryName}</option>
+                                </c:forEach> 
+                            </c:if>
+                        </select>
+                    </form>
                 </div>
                 <div id="serviceInsert"><a href="/member/myProject/freelancer/myServiceInsert">등록하기</a></div>
             </div>
