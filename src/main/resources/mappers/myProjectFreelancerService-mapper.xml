@@ -27,11 +27,13 @@
 	      <result property="tradeNo" column="TRADE_NO"/>													<!-- 거래 번호 SEQUENCE: SEQ_TRADE_NO -->
 	      <result property="memberDoneFL" column="MEMBER_DONE_FL"/>								<!-- 1:진행 중, 2: 작업 완료 -->
 	      <result property="freelancerFL" column="FREELANCER_DONE_FL"/>						<!-- 1:진행 중, 2: 작업 완료 -->
+	      <result property="freelancerFLString" column="FREELANCER_DONE_FL_STRING"/><!-- 1:진행 중, 2: 작업 완료 -->
 	      <result property="memberNo" column="MEMBER_NO"/>												<!-- 회원 번호-의뢰인(FK) -->
 	      <result property="memberName" column="MEMBER_NAME"/>
 	      <result property="memberNickName" column="MEMBER_NICKNAME"/>
 	      <result property="freelancerNo" column="FREELANCER_NO"/>
 	      <result property="freelancerNickName" column="FREELANCER_NICKNAME"/>
+	      <result property="workCount" column="WORK_COUNT"/>											<!-- 발송물 발송 횟수 -->
      	  
      	  <!-- 거래 작업물 발송 -->
      	  <result property="workNo" column="WORK_NO" />														<!-- 작업물 번호 SEQUENCE: SEQ_WORK_NO -->
@@ -119,6 +121,37 @@
 			<if test="mainCategoryNo != 0">
 				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
 			</if>
+		</select>
+		
+		<select id="selectSalesList" parameterType="java.util.HashMap" resultMap="fService_rm">
+		SELECT t.*,
+			CASE WHEN FREELANCER_DONE_FL = 1 THEN '진행 중'
+			     WHEN FREELANCER_DONE_FL = 2 THEN '작업 완료'
+			     WHEN FREELANCER_DONE_FL = 3 THEN '주문 취소'
+			END AS FREELANCER_DONE_FL_STRING
+		FROM (SELECT * FROM TRADE
+			JOIN (SELECT * 
+				FROM SERVICE
+				LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+				LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)) USING(SERVICE_NO)
+			LEFT JOIN (SELECT TRADE_NO, NVL(WORK_COUNT,0) WORK_COUNT
+				FROM TRADE 
+				LEFT JOIN (SELECT COUNT(*) WORK_COUNT,TRADE_NO 
+					FROM TRADE
+					JOIN "WORK" USING(TRADE_NO)
+					GROUP BY TRADE_NO) USING (TRADE_NO)) USING (TRADE_NO) 
+			JOIN (SELECT MEMBER_NO,MEMBER_NICKNAME,MEMBER_NAME FROM "MEMBER") USING(MEMBER_NO)) t
+		WHERE FREELANCER_NO = #{memberNo}
+		<if test="mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+		</if>
+		<if test="freelancerFL != 0">
+				 AND FREELANCER_DONE_FL = #{freelancerFL}
+		</if>
+		<if test='searchInput neq null and searchInput neq ""'>
+				 AND SERVICE_TITLE LIKE '%${searchInput}%' 
+		</if>
+		ORDER BY TRADE_NO
 		</select>
   
 </mapper>

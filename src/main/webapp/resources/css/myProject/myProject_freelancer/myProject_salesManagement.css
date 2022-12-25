@@ -56,6 +56,7 @@ main{
 
 .container_header{
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin: 0px 5px;
   padding-bottom: 10px;
@@ -74,7 +75,7 @@ main{
 }
 
 .container_title{
-  padding-right: 20px;
+  padding-right: 210px;
 }
 
 .box{
@@ -85,12 +86,22 @@ main{
   margin-right: 10px;
 }
 
+#searchboxRelative{/* 자동완성 div 포함 */
+  position: relative;
+}
+
+#searchboxInclude{/* 자동완성 div 포함 */
+  position:absolute;
+  z-index: 3;
+  background-color: white;
+}
+
 .searchInput{
   width:200px;
   height:30px;
   border-radius: 3%;
   border: 1px solid #c6c6c9;
-  margin-left: 30px;
+  /* margin-left: 10px; */
   margin-right: 10px;
 }
 
@@ -241,10 +252,7 @@ tbody a{
 }
 
 /* 모달 */
-.reviewBtn{
-  cursor:pointer;
-}
-.modal {
+.reportModal {
   position: absolute;
   top: 0;
   left: 0;
@@ -258,11 +266,11 @@ tbody a{
   z-index:100;
 }
 
-.modal.show {
+.reportModal.show {
   display: block;
 }
 
-.modal_body {
+.reportModal_body {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -278,7 +286,7 @@ tbody a{
   z-index:100;
 }
 
-.modal_body>span{
+.reportModal_body>span{
 	position:absolute;
 	right:20px;
 	top:20px;

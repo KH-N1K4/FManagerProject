@@ -83,17 +83,26 @@ public class MyProjectFreelancerController {
 		return "redirect:/member/myProject/freelancer/myServiceInsert";
 	}
 	
-	// 내 프로젝트 전문가페이지 서비스 판매ㄴ 관리
+	// 내 프로젝트 전문가페이지 서비스 판매 관리
 	@GetMapping("/member/myProject/freelancer/myServiceSales")
 	public String myServiceSales(Model model, HttpSession session,
-				@RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo
+				@RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
+				@RequestParam(value="freelancerFL",required=false, defaultValue="0") int freelancerFL,
+				@RequestParam(value="searchInput",required=false) String searchInput
 						) {
 			
-		//Member loginMember = (Member) session.getAttribute("loginMember");
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		List<FreelancerService> maincategoryList = service.selectmaincategoryList();
+		List<FreelancerService> salesList = service.selectSalesList(loginMember.getMemberNo(),mainCategoryNo,searchInput,freelancerFL);
+		List<FreelancerService> inpurMyService = service.selectMyService(loginMember.getMemberNo(),0); //나의 서비스 들고와서 자동완성
 		
 		model.addAttribute("maincategoryList",maincategoryList);
 		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
+		model.addAttribute("salesList",salesList);
+		model.addAttribute("GsonsalesList",new Gson().toJson(salesList));
+		model.addAttribute("freelancerFL",freelancerFL);
+		model.addAttribute("searchInput",searchInput);
+		model.addAttribute("inpurMyService",new Gson().toJson(inpurMyService));
 	
 		return "myProject/myProject_freelancer/myServicerSalesManagement";
 	}

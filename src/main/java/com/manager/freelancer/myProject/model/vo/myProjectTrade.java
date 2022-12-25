@@ -20,4 +20,6 @@ public class myProjectTrade {
 	
 	private int workNo;				//WORK_NO 작업물 번호 SEQUENCE: SEQ_WORK_NO
 	private String workSendDate;	//WORK_SEND_DATE 작업물 발송 날짜
+	
+	
 }

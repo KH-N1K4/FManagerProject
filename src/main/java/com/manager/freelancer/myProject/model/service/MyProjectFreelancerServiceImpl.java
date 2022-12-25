@@ -124,4 +124,13 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 	public List<FreelancerService> selectMyService(int memberNo,int mainCategoryNo) {
 		return dao.selectMyService(memberNo, mainCategoryNo);
 	}
+
+	/**
+	 *판매내역 들고오기loginMember.getMemberNo(),mainCategoryNo,searchInput,freelancerFL
+	 */
+	@Override
+	public List<FreelancerService> selectSalesList(int memberNo, int mainCategoryNo, String searchInput,
+			int freelancerFL) {
+		return dao.selectSalesList(memberNo,freelancerFL,searchInput, mainCategoryNo);
+	}
 }

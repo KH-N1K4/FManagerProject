@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 
 <c:set var="maincategory" value="${maincategoryList}"/>
+<c:set var="i" value="0"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,7 +18,7 @@
 </head>
 <body>
   <main>
-    <!-- hearder -->
+    <!-- hearder salesList-->
     <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
     <!-- hearder -->
     <!-- 화면 크기 width: 1200px로 고정 -->
@@ -30,7 +31,7 @@
         <section class="mainContent">
           <div class="container">
             <div class="container_header">
-              <form action ="" class="mySerivceSalesfrm" method="get" name="mySerivceSalesfrm" id="mySerivceSalesfrm">
+              <form action ="/member/myProject/freelancer/myServiceSales" class="mySerivceSalesfrm" method="get" name="mySerivceSalesfrm" id="mySerivceSalesfrm">
                 <section class="container_header">
                   <!-- 상단 내프로젝트 페이지 제목 -->
                   <div class="container_title"><span>판매 관리</span></div>
@@ -47,13 +48,21 @@
                     </select>
                   </div>
                   <div class="selectbox">
+                    <select  id = "srchOption2" class="srchOption box" name="freelancerFL" title="${freelancerFL}">
+                      <option value="0" selected="">전체</option>
+                      <option value="1">진행 중</option>
+                      <option value="2">작업 완료</option>
+                    </select>
+                  </div><!-- 1:진행 중, 2: 작업 완료 -->
+                  <!-- <div class="selectbox">
                     <input type="date" class="startDate box" name="startDate" id="startDate">
-                  </div>
-                  <div class="selectbox">
+                  </div> -->
+                  <!-- <div class="selectbox">
                     <input type="date" class="endtDate box" name="endtDate" id="endtDate">
-                  </div>
-                  <div class="searchbox">
-                    <input type="text" class="searchInput" name="searchInput" id="searchInput" placeholder="상품명" maxlength="50" autocomplete="off" value="">
+                  </div> -->
+                  <div class="searchbox" id="searchboxRelative">
+                    <input type="text" class="searchInput" name="searchInput" id="searchInput" placeholder="상품명" maxlength="50" autocomplete="off" <c:if test="${not empty searchInput}">value="${searchInput}"</c:if>>
+                    <div id="searchboxInclude"></div>
                   </div>
                   <!-- 상단 selectbox -->
                   <div class="buttonArea">
@@ -83,35 +92,41 @@
                     </tr>
                   </thead>
                   <tbody id = "selecttbody">
-                    <tr class="suggestionTable" suggestionNumeber="">
-                      <td class="tc">
-                        <span class="num">1</span>
-                      </td>
-                      <td class="tc">
-                        <span class="num">1</span>
-                      </td>
-                      <td class="tl">
-                        <div class="suggestion_name_area td_link">
-                          <a href="#" id="suggestionName" class="suggestionName" suggestionName="">로고 디자인 제작</a>
-                        </div>
-                      </td>
-                      <td  class="tc">
-                        <div class="expert_name_area td_link">
-                          <a href="#" id="expertName" class="expertName" expertName="">홍길동</a>
-                        </div>
-                      </td>
-                      <td class="tc">
-                        <span class="num">1/3</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">진행중</span>
-                      </td>
-                      <td class="tc">
-                        <a href="#" id="finishBtn" title="" class="finishBtn btn_type"><span>완료</span></a>
-                        <a href="#" id="sendBtn" title="" class="sendBtn btn_type"><span>발송</span></a>
-                        <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
-                      </td>                
-                    </tr>
+                    <c:if test="${not empty salesList}">
+                      <c:forEach items="${salesList}" var="sales">
+                        <tr class="suggestionTable" suggestionNumeber="">
+                          <td class="tc">
+                            <span class="num">${i=i+1}</span>
+                          </td>
+                          <td class="tc">
+                            <span class="num">${sales.tradeNo}</span>
+                          </td>
+                          <td class="tl">
+                            <div class="suggestion_name_area td_link">
+                              <a href="#" id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</a>
+                            </div>
+                          </td>
+                          <td  class="tc">
+                            <div class="client_name_area td_link">
+                              <a href="#" id="clientName" class="clientName" expertName="">${sales.memberName}</a>
+                            </div>
+                          </td>
+                          <td class="tc">
+                            <span class="num">${sales.workCount}/${sales.serviceEditNum}</span>
+                          </td>
+                          <td class="tc">
+                            <span class="text">${sales.freelancerFLString}</span>
+                          </td>
+                          <td class="tc">
+                            <c:if test="${sales.freelancerFL == 1}">
+                              <a href="#" id="finishBtn" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
+                              <a href="#" id="sendBtn" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>
+                              <a href="#" id="reportBtn${sales.tradeNo}" title="${sales.tradeNo}" class="reportBtn btn_type"><span>신고</span></a>
+                            </c:if>
+                          </td>                
+                        </tr>
+                      </c:forEach>
+                    </c:if> 
                     <tr class="suggestionTable" suggestionNumeber="">
                       <td class="tc">
                         <span class="num">2</span>
@@ -171,8 +186,8 @@
           </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
-        <div class="modal">
-          <jsp:include page="/WEB-INF/views/myProject/modal/myproject_review.jsp" /> 
+        <div class="reportModal">
+          <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myprojectSales_reportModal.jsp" /> 
         </div>
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
@@ -181,6 +196,11 @@
   <!-- **************************************footer*************************************-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <!-- **************************************footer*************************************-->
+  <script>
+    var list = JSON.parse('${inpurMyService}');
+    var saleslist = JSON.parse('${GsonsalesList}');
+    var loginMemberName = '${loginMember.memberName}';
+  </script>
   <!-- jQuery  -->
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 

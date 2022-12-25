@@ -39,4 +39,13 @@ public interface MyProjectFreelancerService {
 	 */
 	List<FreelancerService> selectMyService(int memberNo, int mainCategoryNo);
 
+	/**판매 내역 들고오기,loginMember.getMemberNo(),mainCategoryNo,searchInput,freelancerFL
+	 * @param memberNo
+	 * @param freelancerFL
+	 * @param searchInput
+	 * @param mainCategoryNo 
+	 * @return
+	 */
+	List<FreelancerService> selectSalesList(int memberNo, int mainCategoryNo, String searchInput, int freelancerFL);
+
 }

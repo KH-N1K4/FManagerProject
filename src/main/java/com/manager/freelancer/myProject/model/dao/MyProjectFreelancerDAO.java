@@ -41,7 +41,7 @@ public class MyProjectFreelancerDAO {
 	 */
 	public int insertService(FreelancerService freelancerVo, Member loginMember) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("freelancerVo", freelancerVo); //게시판 메인 카테고리
+		map.put("freelancerVo", freelancerVo); //입력한 서비스 값
 		map.put("loginMember", loginMember.getMemberNo());
 		sqlSession.insert("myProjectFreelancerSerive.insertService", map);
 		int serviceNum = (int)map.get("serviceNo");
@@ -64,8 +64,25 @@ public class MyProjectFreelancerDAO {
 	 */
 	public List<FreelancerService> selectMyService(int memberNo, int mainCategoryNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberNo", memberNo); //게시판 메인 카테고리
-		map.put("mainCategoryNo", mainCategoryNo);
+		map.put("memberNo", memberNo); //로그인 세션 회원 번호
+		map.put("mainCategoryNo", mainCategoryNo); //카테고리별 서비스 들고오기
 		return sqlSession.selectList("myProjectFreelancerSerive.selectMyService", map);
+	}
+
+	/**판매내역 들고 오기-정렬포함memberNo,freelancerFL,searchInput, mainCategoryNo
+	 * @param memberNo
+	 * @param freelancerFL
+	 * @param searchInput
+	 * @param mainCategoryNo
+	 * @return
+	 */
+	public List<FreelancerService> selectSalesList(int memberNo, int freelancerFL, String searchInput,
+			int mainCategoryNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); //로그인 세션 회원 번호
+		map.put("mainCategoryNo", mainCategoryNo); //카테고리별 판매내역
+		map.put("freelancerFL", freelancerFL); //판매 진행상태별 판매내역
+		map.put("searchInput", searchInput); //상품명 입력시 상품명으로 판매내역 검색하기
+		return sqlSession.selectList("myProjectFreelancerSerive.selectSalesList", map);
 	}
 }
