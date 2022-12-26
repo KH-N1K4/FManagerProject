@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="categoryMapper">
+
+	<resultMap type="MainCategory" id="mainCategory_rm">
+ 
+ 		<!-- DB에서 PK에 해당하는 필드, 컬럼을 작성하는 태그 -->
+ 		<id property="mainCategoryNo" column="MAIN_CATEGORY_NO"/>
+ 		
+ 		<!-- 나머지 일반 컬럼 -->
+ 		<result property="mainCategoryName" column="MAIN_CATEGORY_NAME"/>
+	 		
+	 </resultMap>
+	
+  <select id="selectBoardType" resultType="map">
+ 
+ 	SELECT * FROM MAIN_CATEGORY
+ 	ORDER BY 1
+ 
+ </select>
+ 	
+ 	
+
+
+	
+  
+</mapper>

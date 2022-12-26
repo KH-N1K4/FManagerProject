@@ -9,13 +9,13 @@
  		
  		<!-- 나머지 일반 컬럼 -->
  		<result property="memberNo" column="MEMBER_NO"/>
+ 		<result property="memberName" column="MEMBER_NAME"/>
  		<result property="memberEmail" column="MEMBER_EMAIL"/>
  		<result property="memberPw" column="MEMBER_PW"/>
  		<result property="memberNickname" column="MEMBER_NICKNAME"/>
  		<result property="memberTel" column="MEMBER_TEL"/>
  		<result property="memberJob" column="MEMBER_JOB"/>
  		<result property="memberDeleteFlag" column="MEMBER_DELETE_FL"/>
- 		<result property="freelancerFlag" column="FREELANCER_FL"/>
  		<result property="profileImage" column="PROFILE_IMG"/>
  		<result property="authority" column="AUTHORITY"/>
  		<result property="enrollDate" column="ENROLL_DATE"/>
@@ -25,8 +25,10 @@
  		
  		<result property="memberProfile" column="MEMBER_PROFILE"/>
  		
+ 		
  </resultMap>
  
+ 	<!-- 회원가입 -->
  	<insert id="signUp" parameterType="Member" >
  		<selectKey keyProperty="memberNo" resultType="_int" order="BEFORE">
   			SELECT SEQ_MEMBER_NO.NEXTVAL FROM DUAL
@@ -39,6 +41,8 @@
 		DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
+	
+	<!-- 회원가입시 관심사 삽입 -->
 	<insert id="insertInterest" parameterType="Map" >
 	
 		INSERT INTO INTEREST VALUES(#{memberInterest},#{memberNo})
@@ -49,7 +53,7 @@
 	
 	<!-- 로그인 -->											
 	<select id="login" parameterType="string" resultMap="member_rm"> 
-	  SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME,MEMBER_JOB
+	  SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME, MEMBER_JOB,FREELANCER_FL,MEMBER_NAME, 
    	  MEMBER_TEL, MEMBER_PROFILE, AUTHORITY, (SELECT LISTAGG(MAIN_CATEGORY_NO, ',')
     WITHIN GROUP (ORDER BY MAIN_CATEGORY_NO)
     FROM (SELECT DISTINCT MAIN_CATEGORY_NO
@@ -70,10 +74,44 @@
  		WHERE MEMBER_NO=#{memberNo}
    </update>
    
- <!-- 프로필 이미지 수정 -->
+   
+   <update id="updateMyInfoNonPhoto" parameterType="Member">
+ 		UPDATE "MEMBER" SET
+ 		MEMBER_NICKNAME=#{memberNickname},
+ 		MEMBER_TEL=#{memberTel},
+ 		MEMBER_JOB=#{memberJob}
+ 		WHERE MEMBER_NO=#{memberNo}
+   </update>
+   
+ 	<!-- 프로필 이미지 수정 -->
    <update id="updateProfile" parameterType="Member">
    		UPDATE "MEMBER" SET
 	 	MEMBER_PROFILE=#{memberProfile}
+ 		WHERE MEMBER_NO=#{memberNo}
+   </update>
+   
+   <!-- 회원정보 수정 시 흥미가 변하면 기존의 흥미 삭제 -->
+   <delete id="updateInterest">
+   		DELETE FROM INTEREST WHERE MEMBER_NO=#{memberNo}
+   </delete>
+   
+   
+   	<select id="selectEncPw" parameterType="_int" resultType="String">
+	 		SELECT MEMBER_PW FROM "MEMBER"
+	 		WHERE MEMBER_NO=#{memberNo}
+	 </select>
+   
+   	<!-- 회원 탈퇴 -->
+     <update id="changeDelFl">
+  		UPDATE "MEMBER" SET
+ 		MEMBER_DELETE_FL='Y'
+ 		WHERE MEMBER_NO=#{memberNo}
+   	</update>
+   	
+   	<!-- 비밀번호 변경 -->
+   	<update id="changePw" >
+   		UPDATE "MEMBER" SET
+ 		MEMBER_PW=#{newPw}
  		WHERE MEMBER_NO=#{memberNo}
    </update>
 
