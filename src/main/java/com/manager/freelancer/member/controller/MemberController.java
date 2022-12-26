@@ -3,6 +3,7 @@ package com.manager.freelancer.member.controller;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -89,7 +90,7 @@ public class MemberController {
 		
 		// 서비스 호출 후 결과 반환 받기 
 		Member loginMember=service.login(inputMember);
-		
+	
 		// 로그인 성공 시 세션에 아이디 추가
 		// 로그인 실패시 "아이디 또는 비밀번호가 일치하지 않습니다." 세션에 추가 
 		
@@ -163,51 +164,149 @@ public class MemberController {
 		return "member/myInfo";
 	}
 	
-	// 프로필 이미지 수정
+	
+	
 	@PostMapping("/member/updateMyInfo")
-	public String updateProfile(Member inputMember,
-			@RequestParam(value="memberProfile") MultipartFile memberProfile, // 업로드된 파
+	public String updateProfile(Member inputMember, // input값 
+			@RequestParam(value="profileImage") MultipartFile profileImage, // 업로드된 파일 
 			@SessionAttribute("loginMember") Member loginMember, // 회원번호 필요
 			RedirectAttributes ra, // 메세지 전달용
 			HttpServletRequest req // 저장할 서버 경로 
 			) throws Exception {
 		
-		
-		// 인터넷 주소로 접근할 수 있는 경로 
-		String webPath="/resources/images/memberProfile/";
-		
-		// 실제 파일이 저장된 컴퓨터 상의 절대 경로 
-		String filePath=req.getSession().getServletContext().getRealPath(webPath);
-		
-		
-		System.out.println(filePath);
-		
+
+		int result=0;
 		inputMember.setMemberNo(loginMember.getMemberNo());
 		
-		int result=service.updateProfile(webPath, filePath, memberProfile, inputMember);
-		//int result=service.updateMyInfo(webPath, filePath, memberProfile, inputMember);
+		if(!inputMember.getMemberInterest().equals(loginMember.getMemberInterest())){ // 관심사가 변경된 경우 
+			result=service.updateInterest(inputMember);
+		}
+		
+		if(profileImage.getSize()>0) { // 변경된 사진이 있는 경우
+			
+			// 업로드된 이미지를 프로젝트 폴더 내부에 저장하는 방법 
+			// 1) server -> 지정된 서버 설정 -> Server modules without publishing 체크
+			// 2) 파일을 저장할 폴더 생성 
+			// 3) HttpServletResponse를 이용해서 저장 폴더 절대 경로 얻어오기 
+			// 4) MultipartFile.transferTo()를 이용해서 지정도니 경로에 파일 저장 
+			
+			// 인터넷 주소로 접근할 수 있는 경로 
+			String webPath="/resources/images/memberProfile/";
+			
+			// 실제 파일이 저장된 컴퓨터 상의 절대 경로 
+			String filePath=req.getSession().getServletContext().getRealPath(webPath);
+			
+			
+			
+			
+			//int result=service.updateProfile(webPath, filePath, memberProfile, loginMember);
+			result=service.updateMyInfo(webPath, filePath, profileImage, inputMember);
+			
+		}else { // 프로필 사진 변경 안한 경우
+			
+			result=service.updateMyInfoNonPhoto(inputMember);
+		}
+		
 		
 		String message=null;
-		if(result>0) message="프로필 이미지가 변경되었습니다. ";
-		else		 message="프로필 이미지 변경 실패 ";
+		if(result>0) {
+			message="내 정보가 수정되었습니다. ";
+			
+			// DB - session 동기화 
+			loginMember.setMemberProfile(inputMember.getMemberProfile());
+			loginMember.setMemberNickname(inputMember.getMemberNickname());
+			loginMember.setMemberTel(inputMember.getMemberTel());
+			loginMember.setMemberJob(inputMember.getMemberJob());
+			loginMember.setMemberInterest(inputMember.getMemberInterest());
+		}
+		else		 {
+			message="내 정보 수정 실패 ";
+		}
 		
 		ra.addFlashAttribute("message",message);
 		
-		return "redirect:member/myInfo";
+		return "redirect:/member/myInfo";
 	}
 	
 	
 	
+	
+	
 	// 비밀번호 변경  이동
-	@GetMapping("/member/updatePw")
-	public String updatePw() {
-		return "member/updatePw";
+	@GetMapping("/member/changePw")
+	public String changePw() {
+		return "member/changePw";
+	}
+	
+	
+	@PostMapping("/member/changePw")
+	public String changePw(
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam Map<String, Object> paramMap,
+			RedirectAttributes ra
+			) {
+		// @RequestParam Map<String, Object> paramMap
+		// - 모든 파라미터를 맵 형식으로 얻어와 저장 
+		
+		// 1. loginMember에서 회원번호를 얻어와 paramMap에 추가 
+		paramMap.put("memberNo", loginMember.getMemberNo());
+		
+		// 2. 서비스 호출 후 결과 반환 받기 
+		int result=service.changePw(paramMap);
+		
+		String path=null;
+		String message=null;
+		
+		if(result>0) {
+			path="myInfo";
+			message="비밀번호가 변경되었습니다.";
+		}else {
+			path="changePw";
+			message="현재 비밀번호가 일치하지 않습니다. ";
+		}
+		
+		ra.addFlashAttribute("message",message);
+		
+		return "redirect:"+path;
 	}
 	
 	// 회원 탈퇴 이동
 	@GetMapping("/member/deleteMember")
 	public String deleteMember() {
 		return "member/deleteMember";
+	}
+	
+	// 회원 탈퇴
+	@PostMapping("/member/deleteMember")
+	public String deleteMember(String memberEmail, String memberPw,@SessionAttribute("loginMember") Member loginMember,RedirectAttributes ra, SessionStatus status) {
+		
+		int result=0;
+		String message;
+		String path;
+		
+		if(loginMember.getMemberEmail().equals(memberEmail)) {
+			result=service.deleteMember(loginMember.getMemberNo(),memberPw);
+			
+			if(result>0) {
+				message="탈퇴 되었습니다..";
+				status.setComplete(); // 로그아웃 코드 추가 
+				
+			}else {
+				message="탈퇴 실패";
+			}
+		}else {
+			message="이메일이 일치하지 않습니다. ";
+		}
+		
+		
+		path="/";
+		
+		
+		
+		ra.addFlashAttribute("message",message);
+		
+		
+		return "redirect:"+path;
 	}
 	
 	// 찜목록 이동
