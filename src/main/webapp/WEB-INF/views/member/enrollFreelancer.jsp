@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="/resources/css/freelancer/registerExpert.css">
 
-  
+
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
@@ -22,7 +22,7 @@
             <div>
                 <div class="item">지역</div>
                 <div>
-                    <select name="freelancerRegionNo" id="area" class="select">
+                    <select name="regionNo" id="area" class="select">
                         <option value="">전체</option>
                         <option value="1">서울</option>
                         <option value="2">경기</option>
@@ -78,26 +78,26 @@
             <div>
                 <div class="item">학력/전공</div>
                 <div>
-                	<input type="text" name="" id="" class="modal">
+                    <input type="text" name="major" id="majorPopup" class="modal">
                 </div>
             </div>
             <div>
                 <div class="item">경력 사항</div>
                 <div>
-                	<input type="text" name="" id="" class="modal">
+                    <input type="text" name="career" id="careerPopup" class="modal">
                 </div>
             </div>
             <div>
                 <div class="item">자격증</div>
                 <div>
-                	<input type="text" name="" id="licensePopup" class="modal">
+                    <input type="text" name="license" id="licensePopup" class="modal">
                 </div>
             </div>
             <div>
                 <div class="item">연락 가능 시간</div>
                 <div>
                     <input type="text" name="contactTime1" id="contactTime1" class="number"> 시 ~
-                     <input type="text" name="contactTime2" id="contactTime2" class="number"> 시
+                    <input type="text" name="contactTime2" id="contactTime2" class="number"> 시
                 </div>
             </div>
             <div>
@@ -127,12 +127,20 @@
 
         </form>
 
-              <div class="modal_license">
+            <div class="modal_major">
+                    <jsp:include page="/WEB-INF/views/member/freelancer/modal/major.jsp" /> 
+            </div>
+            <div class="modal_license">
                     <jsp:include page="/WEB-INF/views/member/freelancer/modal/license.jsp" /> 
-                </div>
+            </div>
+            <div class="modal_career">
+                    <jsp:include page="/WEB-INF/views/member/freelancer/modal/career.jsp" /> 
+            </div>
+
+          
 
     </div>
-    <script src="/resources/js/member/freelancer/enrollFreelancerPopup.js"></script>
+    <script src="/resources/js/member/freelancer/enrollFreelancerPopup.js"></script> 
 
 </body>
 </html>

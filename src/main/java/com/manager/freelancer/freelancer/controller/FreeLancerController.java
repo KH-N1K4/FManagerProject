@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.manager.freelancer.freelancer.model.service.FreeLancerService;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
+import com.manager.freelancer.member.model.vo.Member;
 
 
 @Controller
@@ -48,8 +50,16 @@ public class FreeLancerController {
 //		}
 		
 		@PostMapping("/member/freelancer/enrollFreelancerSignUp")
-		public String enrollFreelancerSignup(Freelancer inputFreelancer,
+		public String enrollFreelancerSignup(@SessionAttribute("loginMember") Member loginMember,//회원번호 == 프리랜서번호
+				String major, // major input태그에 적힌 값들
+				Freelancer inputFreelancer,
 				String[] freelancerField  ) {
+		
+		// major > 학교명,전공,1
+			
+		inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 로그인한 회원번호를 inputFreelancer에 세팅
+		inputFreelancer.setMajor(major);
+		
 		int result = service.enrollFreelancerSignup(inputFreelancer);
 		
 //		String path = null;

@@ -1,41 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학력·전공</title>
-    <link rel="stylesheet" href="/resources/css/freelancer/expert.css">
-</head>
-<body>
-    <div id="title">학력·전공</div>
-    <div id="inputArea">
-        <div>
-            <div class="item">학교명</div>
-            <div>
-                <input type="text" name="" id="" class="input">
+
+
+    <div class="modal_body">
+    	<span class="modal_close1">x</span>
+        <div id="majorInputMain">
+                <div>
+                    <div class="item">학교명</div>
+                    <div>
+                        <input type="text" name="AcademyName" id="AcademyName" class="input1">
+                    </div>
+                </div>
+                <div>
+                    <div class="item">전공</div>
+                    <div>
+                        <input type="text" name="majorName" id="majorName" class="input1">
+                    </div>
+                </div>
+                <div>
+                    <div class="item">상태</div>
+                    <div>
+                        <select name="graduateStatus" id="graduateStatus" class="input1">
+                            <option value="0">선택해주세요</option>
+                            <option value="1">재학</option>
+                            <option value="2">휴학</option>
+                            <option value="3">이수</option>
+                            <option value="4">졸업</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <button id="sendContent1">적용</button>
+                  
+                </div>
             </div>
-        </div>
-        <div>
-            <div class="item">전공</div>
-            <div>
-                <input type="text" name="" id="" class="input">
-            </div>
-        </div>
-        <div>
-            <div class="item">상태</div>
-            <div>
-                <select name="" id="" class="select">
-                    <option value="">선택해주세요</option>
-                    <option value=""></option>
-                    <option value=""></option>
-                </select>
-            </div>
-        </div>
-        <div>
-            <button>적용</button>
-        </div>
     </div>
-</body>
-</html>
+    <%-- <script src="/resources/js/member/freelancer/enrollFreelancerPopup.js"></script> --%>
+
