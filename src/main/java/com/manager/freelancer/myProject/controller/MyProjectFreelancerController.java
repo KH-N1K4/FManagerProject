@@ -112,22 +112,11 @@ public class MyProjectFreelancerController {
 		return "myProject/myProject_freelancer/myServicerSalesManagement";
 	}
 	
-	//팝업창(활동 정지)
+	//신고하기 Ajax
 	@PostMapping("/reportSubmit")
 	@ResponseBody
 	public String insertreportSubmit(
 			FreelancerService freelancerReport,
-			/*
-			 * @RequestParam(value="tradeNo") int tradeNo,
-			 * 
-			 * @RequestParam(value="reportPersonNo") int reportPersonNo,
-			 * 
-			 * @RequestParam(value="reportedPersonNo") int reportedPersonNo,
-			 * 
-			 * @RequestParam(value="reportContent") String reportContent,
-			 * 
-			 * @RequestParam(value="formData",required=false) MultipartFile reportFile,
-			 */
 			MultipartHttpServletRequest formData,
 			HttpServletRequest req, /* 저장할 서버 경로 */
 			HttpSession session) throws Exception {
@@ -150,9 +139,9 @@ public class MyProjectFreelancerController {
 
 
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("message",resurt.get("message"));
+			map.put("messageIN",resurt.get("messageIN"));
 			map.put("tradeReportNo",resurt.get("tradeReportNo"));
-			map.put("reportContent",resurt.get("reportContent"));
+			map.put("reportContent",reportContent);
 		
 			return new Gson().toJson(map);
 	}

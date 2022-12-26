@@ -105,6 +105,7 @@ const modalClose = document.querySelector('.reportModal_close');
 $('.reportBtn').click(function(){
   document.querySelector('#ajaxReview').style.backgroundColor = '#538126';
   document.querySelector('#reportContent').value = "";
+  $(".fileaddDiv").remove();
   const tradeNoValue = this.title;
   $('#memberName').val(loginMemberName);
   document.querySelector('#tradeNo').value = this.title;

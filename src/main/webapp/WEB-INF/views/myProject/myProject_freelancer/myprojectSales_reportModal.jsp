@@ -9,7 +9,6 @@
     <div class="reportModal_body">
       <span class="reportModal_close">x</span>
       <div class="myprojectReport">
-        <form action ="" class="myprojectReportfrm" method="get" name="myprojectReportfrm" id="myprojectReportfrm">
           <div class="title"><span>신고하기</span></div>
           <div class="myprojectReport_list">
             <div class="list_title"><span>서비스명</span></div>
@@ -32,6 +31,5 @@
             <div class="list_content"><input type = "file" multiple="multiple" name="reportFilePath" id="reportFilePath"></div>
           </div>
           <div class="btnDiv" ><button id="ajaxReview">신고하기</button></div>
-        </form>
     </div>
   </div>

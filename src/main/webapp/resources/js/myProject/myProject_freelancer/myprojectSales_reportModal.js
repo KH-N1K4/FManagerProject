@@ -28,24 +28,20 @@ Submit.addEventListener("click", (e) => {
     $.ajax({
         
         url: "/reportSubmit",
-        data : formData
-        /* data: { "tradeNo"     : tradeNo,
-                "reportPersonNo"  : reportPersonNo,
-                "reportedPersonNo"  : reportedPersonNo,
-                "reportContent"  : reportContent,
-                "formData"      : formData
-        } */,
+        data : formData,
         type: "POST", 
         processData : false,
         contentType: false,
+        cache: false,
         dataType: "JSON", // 응답 데이터의 형식이 JSON이다. -> 자동으로 JS 객체로 변환
         success: (result) => {
-            if(result.message === "신고가 접수되었습니다."){
-              alert(result.message);
+            console.log(result.messageIN);
+            if(result.messageIN == "신고가 접수되었습니다."){
+              alert(result.messageIN);
               modal.classList.toggle('show');
               saleslist.forEach(function(arg,i){
                 if(arg.tradeNo == tradeNo){
-                  arg['tradeReportNo'] = result.tradeReportNo;
+                  arg.tradeReportNo = result.tradeReportNo;
                   arg.reportContent = result.reportContent;
                   document.querySelector('#ajaxReview').disabled = true;
                   //수정본이 이상하다며 욕설
