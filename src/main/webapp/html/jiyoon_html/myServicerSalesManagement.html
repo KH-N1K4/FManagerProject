@@ -8,68 +8,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>myPurchaseList</title>
+  <title>salesManagement</title>
 
-  <link rel="stylesheet" href="/resources/css/header.css">
-  <link rel="stylesheet" href="/resources/css/footer.css">
-  <link rel="stylesheet" href="/resources/css/myProject/myProject_myPurchaseList.css">
-  <style>
-    body{
-        margin:0;
-    }
+  <link rel="stylesheet" href="/resources/css/myProject/myProject_freelancer/myProject_salesManagement.css">
 
-    #logo{
-        width: 200px;
-        height: 100px; 
-        position: absolute;
-        left: 60px;
-        top:40px;
-        /* border:1px solid black; */
-    }
-
-    #header{
-        background-color: #538126;
-    }
-
-    #logo>img{
-        width: 100%;
-    }
-
-    #header1{
-        width: 1200px;
-        height: 160px;
-        margin:auto;
-        position: relative;    
-    }
-
-    .header-top{
-        position: absolute;
-        right:0;
-        top:20px;
-        align-items: center;
-        display: flex;
-    }
-    
-    .header-top span{
-        margin:0 12px;
-        cursor: pointer;
-        color:white !important;
-    }
-    .header-top img{
-        border-radius: 45%;
-    }
-
-</style>
 </head>
 <body>
   <main>
     <!-- hearder -->
-    <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
+    <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
     <!-- hearder -->
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
         <!-- sideMenu -->
-        <jsp:include page="/WEB-INF/views/myProject/myProjectSide.jsp"/>
+        <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProjectSide2.jsp"/>
         <!-- sideMenu -->
 
         <!-- sideMenu를 제외한 메인 내용 -->
@@ -79,7 +31,7 @@
               <form action ="" class="myPurchaseListfrm" method="get" name="myPurchaseListfrm" id="myPurchaseListfrm">
                 <section class="container_header">
                   <!-- 상단 내프로젝트 페이지 제목 -->
-                  <div class="container_title"><span>구매 관리</span></div>
+                  <div class="container_title"><span>판매 관리</span></div>
                   <!-- 상단 내프로젝트 페이지 제목 -->
                   <!-- 상단 selectbox -->
                   <div class="selectbox">
@@ -112,7 +64,7 @@
             <div class="tableArea">
               <div id="tableContent">
                 <table cellspacing="0" class="tbl_lst_type">	
-                  <caption><span class="blind">받은 제안 정보</span></caption>				
+                  <caption><span class="blind">판매 서비스 관리</span></caption>				
                   <colgroup>
                     <col width="40"><col width="*"><col width="100"><col width="95"><col width="95"><col width="180">
                   </colgroup>
@@ -120,7 +72,7 @@
                     <tr>
                       <th scope="col" class="frst"><strong class="line_n">번호</strong></th>
                       <th scope="col" class=""><strong class="line_r">서비스명</strong></th>   
-                      <th scope="col" class=""><strong class="line_r">전문가</strong></th>  
+                      <th scope="col" class=""><strong class="line_r">의뢰인</strong></th>  
                       <th scope="col" class=""><strong class="line_n">수정횟수</strong></th>
                       <th scope="col" class=""><strong class="line_n">작업상태</strong></th>
                       <!-- 작업 상태가 진행중일때 버튼으로 쓰일 컬럼들 -->
@@ -150,7 +102,7 @@
                       </td>
                       <td class="tc">
                         <a href="#" id="finishBtn" title="" class="finishBtn btn_type"><span>완료</span></a>
-                        <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type"><span>최소</span></a>
+                        <a href="#" id="sendBtn" title="" class="sendBtn btn_type"><span>발송</span></a>
                         <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
                       </td>                
                     </tr>
@@ -175,7 +127,6 @@
                         <span class="text">완료</span>
                       </td>
                       <td class="tc">
-                        <a id="reviewBtn" title="" class="reviewBtn oneBtn_type"><span>리뷰하기</span></a>
                       </td>                
                     </tr>
                     <tr class="suggestionTable" suggestionNumeber="">

@@ -8,10 +8,15 @@
   <div id="header1">
       <div id="logo"><img src="/resources/images/final_logo.png" alt=""></div>
       <div class="header-top">
-        <a href="/member/myProject/freelancer/myService"><span>전문가 전환</span></a>
+        <c:choose>
+          <c:when test="${loginMember.freelancerFL eq 'Y'}">
+            <a href="/member/myProject/freelancer/myService"><span>전문가 전환</span></a>
+          </c:when>
+        </c:choose>
         <a><span>메세지</span></a>
         <a href="/"><span>홈으로</span></a>
-        <a><img style="width: 32px; height: 32px;" src="/resources/images/프로필.PNG"></a>
+        <a><img style="width: 32px; height: 32px;" src="${loginMember.memberProfile}"></a>
       </div>
   </div>
 </div>
+

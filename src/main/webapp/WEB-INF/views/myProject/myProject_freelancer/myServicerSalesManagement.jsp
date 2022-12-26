@@ -2,104 +2,67 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 
+<c:set var="maincategory" value="${maincategoryList}"/>
+<c:set var="i" value="0"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>myPurchaseList</title>
+  <title>salesManagement</title>
 
-  <link rel="stylesheet" href="/resources/css/header.css">
-  <link rel="stylesheet" href="/resources/css/footer.css">
-  <link rel="stylesheet" href="/resources/css/myProject/myProject_myPurchaseList.css">
-  <style>
-    body{
-        margin:0;
-    }
+  <link rel="stylesheet" href="/resources/css/myProject/myProject_freelancer/myProject_salesManagement.css">
 
-    #logo{
-        width: 200px;
-        height: 100px; 
-        position: absolute;
-        left: 60px;
-        top:40px;
-        /* border:1px solid black; */
-    }
-
-    #header{
-        background-color: #538126;
-    }
-
-    #logo>img{
-        width: 100%;
-    }
-
-    #header1{
-        width: 1200px;
-        height: 160px;
-        margin:auto;
-        position: relative;    
-    }
-
-    .header-top{
-        position: absolute;
-        right:0;
-        top:20px;
-        align-items: center;
-        display: flex;
-    }
-    
-    .header-top span{
-        margin:0 12px;
-        cursor: pointer;
-        color:white !important;
-    }
-    .header-top img{
-        border-radius: 45%;
-    }
-
-</style>
 </head>
 <body>
   <main>
-    <!-- hearder -->
-    <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
+    <!-- hearder salesList-->
+    <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
     <!-- hearder -->
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
         <!-- sideMenu -->
-        <jsp:include page="/WEB-INF/views/myProject/myProjectSide.jsp"/>
+        <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProjectSide2.jsp"/>
         <!-- sideMenu -->
 
         <!-- sideMenu를 제외한 메인 내용 -->
         <section class="mainContent">
           <div class="container">
             <div class="container_header">
-              <form action ="" class="myPurchaseListfrm" method="get" name="myPurchaseListfrm" id="myPurchaseListfrm">
+              <form action ="/member/myProject/freelancer/myServiceSales" class="mySerivceSalesfrm" method="get" name="mySerivceSalesfrm" id="mySerivceSalesfrm">
                 <section class="container_header">
                   <!-- 상단 내프로젝트 페이지 제목 -->
-                  <div class="container_title"><span>구매 관리</span></div>
+                  <div class="container_title"><span>판매 관리</span></div>
                   <!-- 상단 내프로젝트 페이지 제목 -->
                   <!-- 상단 selectbox -->
                   <div class="selectbox">
-                    <select  id = "srchOption" class="srchOption box" name="srchOption" >
+                    <select  id = "srchOption1" class="srchOption box" name="mainCategoryNo" title="${mainCategoryNoInput}">
                       <option value="0" selected="">전체</option>
-                      <option value="1">디자인</option>
-                      <option value="2">IT·프로그래밍</option>
-                      <option value="3">영상</option>
-                      <option value="4">사진</option>
-                      <option value="5">음향</option>
+                      <c:if test="${not empty maincategory}">
+                          <c:forEach items="${maincategory}" var="mainVar">
+                              <option value="${mainVar.mainCategoryNo}">${mainVar.mainCategoryName}</option>
+                          </c:forEach> 
+                      </c:if>
                     </select>
                   </div>
                   <div class="selectbox">
+                    <select  id = "srchOption2" class="srchOption box" name="freelancerFL" title="${freelancerFL}">
+                      <option value="0" selected="">전체</option>
+                      <option value="1">진행 중</option>
+                      <option value="2">작업 완료</option>
+                    </select>
+                  </div><!-- 1:진행 중, 2: 작업 완료 -->
+                  <!-- <div class="selectbox">
                     <input type="date" class="startDate box" name="startDate" id="startDate">
-                  </div>
-                  <div class="selectbox">
+                  </div> -->
+                  <!-- <div class="selectbox">
                     <input type="date" class="endtDate box" name="endtDate" id="endtDate">
-                  </div>
-                  <div class="searchbox">
-                    <input type="text" class="searchInput" name="searchInput" id="searchInput" placeholder="상품명" maxlength="50" autocomplete="off" value="">
+                  </div> -->
+                  <div class="searchbox" id="searchboxRelative">
+                    <input type="text" class="searchInput" name="searchInput" id="searchInput" placeholder="상품명" maxlength="50" autocomplete="off" <c:if test="${not empty searchInput}">value="${searchInput}"</c:if>>
+                    <div id="searchboxInclude"></div>
                   </div>
                   <!-- 상단 selectbox -->
                   <div class="buttonArea">
@@ -112,15 +75,16 @@
             <div class="tableArea">
               <div id="tableContent">
                 <table cellspacing="0" class="tbl_lst_type">	
-                  <caption><span class="blind">받은 제안 정보</span></caption>				
+                  <caption><span class="blind">판매 서비스 관리</span></caption>				
                   <colgroup>
-                    <col width="40"><col width="*"><col width="100"><col width="95"><col width="95"><col width="180">
+                    <col width="40"><col width="100"><col width="*"><col width="100"><col width="95"><col width="95"><col width="180">
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" class="frst"><strong class="line_n">번호</strong></th>
+                      <th scope="col" class=""><strong class="line_n">거래번호</strong></th>
                       <th scope="col" class=""><strong class="line_r">서비스명</strong></th>   
-                      <th scope="col" class=""><strong class="line_r">전문가</strong></th>  
+                      <th scope="col" class=""><strong class="line_r">의뢰인</strong></th>  
                       <th scope="col" class=""><strong class="line_n">수정횟수</strong></th>
                       <th scope="col" class=""><strong class="line_n">작업상태</strong></th>
                       <!-- 작업 상태가 진행중일때 버튼으로 쓰일 컬럼들 -->
@@ -128,33 +92,45 @@
                     </tr>
                   </thead>
                   <tbody id = "selecttbody">
+                    <c:if test="${not empty salesList}">
+                      <c:forEach items="${salesList}" var="sales">
+                        <tr class="suggestionTable" suggestionNumeber="">
+                          <td class="tc">
+                            <span class="num">${i=i+1}</span>
+                          </td>
+                          <td class="tc">
+                            <span class="num">${sales.tradeNo}</span>
+                          </td>
+                          <td class="tl">
+                            <div class="suggestion_name_area td_link">
+                              <a href="#" id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</a>
+                            </div>
+                          </td>
+                          <td  class="tc">
+                            <div class="client_name_area td_link">
+                              <a href="#" id="clientName" class="clientName" expertName="">${sales.memberName}</a>
+                            </div>
+                          </td>
+                          <td class="tc">
+                            <span class="num">${sales.workCount}/${sales.serviceEditNum}</span>
+                          </td>
+                          <td class="tc">
+                            <span class="text">${sales.freelancerFLString}</span>
+                          </td>
+                          <td class="tc">
+                            <c:if test="${sales.freelancerFL == 1}">
+                              <a href="#" id="finishBtn" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
+                              <a href="#" id="sendBtn" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>
+                              <a href="#" id="reportBtn${sales.tradeNo}" title="${sales.tradeNo}" class="reportBtn btn_type"><span>신고</span></a>
+                            </c:if>
+                          </td>                
+                        </tr>
+                      </c:forEach>
+                    </c:if> 
                     <tr class="suggestionTable" suggestionNumeber="">
                       <td class="tc">
-                        <span class="num">1</span>
+                        <span class="num">2</span>
                       </td>
-                      <td class="tl">
-                        <div class="suggestion_name_area td_link">
-                          <a href="#" id="suggestionName" class="suggestionName" suggestionName="">로고 디자인 제작</a>
-                        </div>
-                      </td>
-                      <td  class="tc">
-                        <div class="expert_name_area td_link">
-                          <a href="#" id="expertName" class="expertName" expertName="">홍길동</a>
-                        </div>
-                      </td>
-                      <td class="tc">
-                        <span class="num">1/3</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">진행중</span>
-                      </td>
-                      <td class="tc">
-                        <a href="#" id="finishBtn" title="" class="finishBtn btn_type"><span>완료</span></a>
-                        <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type"><span>최소</span></a>
-                        <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
-                      </td>                
-                    </tr>
-                    <tr class="suggestionTable" suggestionNumeber="">
                       <td class="tc">
                         <span class="num">2</span>
                       </td>
@@ -175,10 +151,12 @@
                         <span class="text">완료</span>
                       </td>
                       <td class="tc">
-                        <a id="reviewBtn" title="" class="reviewBtn oneBtn_type"><span>리뷰하기</span></a>
                       </td>                
                     </tr>
                     <tr class="suggestionTable" suggestionNumeber="">
+                      <td class="tc">
+                        <span class="num">3</span>
+                      </td>
                       <td class="tc">
                         <span class="num">3</span>
                       </td>
@@ -208,8 +186,8 @@
           </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
-        <div class="modal">
-          <jsp:include page="/WEB-INF/views/myProject/modal/myproject_review.jsp" /> 
+        <div class="reportModal">
+          <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myprojectSales_reportModal.jsp" /> 
         </div>
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
@@ -218,9 +196,16 @@
   <!-- **************************************footer*************************************-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <!-- **************************************footer*************************************-->
+  <script>
+    var list = JSON.parse('${inpurMyService}');
+    var saleslist = JSON.parse('${GsonsalesList}');
+    var loginMemberName = '${loginMember.memberName}';
+    var loginMemberNo = '${loginMember.memberNo}';
+  </script>
   <!-- jQuery  -->
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-  <script src="/resources/js/myProject/myPurchaseList.js"></script>
+  <script src="/resources/js/myProject/myProject_freelancer/myServicerSalesManagement.js"></script>
+  <script src="/resources/js/myProject/myProject_freelancer/myprojectSales_reportModal.js"></script>
 </body>
 </html>
