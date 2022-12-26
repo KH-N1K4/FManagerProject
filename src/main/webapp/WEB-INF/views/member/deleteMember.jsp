@@ -21,18 +21,18 @@
        
         <section>
             <div id="title">회원 탈퇴</div>
-            <form action="#" name="myPage-frm">
+            <form action="/member/deleteMember" name="myPage-frm" method="POST" id="memberDeleteForm">
                 <div id="inputArea">
                     <div>
                         <div class="item">이메일</div>
                         <div>
-                            <input type="text" name="" id="" class="input">
+                            <input type="text" name="memberEmail" id="memberEmail" class="input">
                         </div>
                     </div>
                     <div>
                         <div class="item">비밀번호</div>
                         <div>
-                            <input type="text" name="" id="" class="input">
+                            <input type="text" name="memberPw" id="memberPw" class="input">
                         </div>
                     </div>
                     <div class="agree-content">
@@ -56,6 +56,6 @@
 
         
     </div>
-    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

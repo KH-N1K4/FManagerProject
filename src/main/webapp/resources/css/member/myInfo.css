@@ -201,3 +201,7 @@ button[type="reset"]:hover{
     background-color: #497021;
     color: white;
 }
+
+/* 메시지 색상 지정 */
+.confirm{color:green;}
+.error{color:red;}

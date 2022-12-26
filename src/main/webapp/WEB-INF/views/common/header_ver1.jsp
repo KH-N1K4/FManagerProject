@@ -23,6 +23,7 @@
             <div class="header-top">
             
             
+            
             	<c:choose>
                     <%-- 로그인 X인 경우 --%>
                     <c:when test="${empty sessionScope.loginMember}">
@@ -65,18 +66,17 @@
         
     </div>
     <div id="nav">
-        <ul>
-            <li><a href="/category/1">카테고리</a></li>
-            <li><a href="/category/1">프리랜</a></li>
-            <li><a href="/category/1">멤버 </a></li>
-            <li><a href="/category/1">마이프로젝트</a></li>
-            <li><a href="/category/1">서비스센터</a></li>
-            <!-- <li><a href="#">IT 프로그래밍</a></li>
-            <li><a href="#">영상</a></li>
-            <li><a href="#">사진</a></li>
-            <li><a href="#">음향</a></li> -->
-
-            <div class="nav-project"><a href="/projectRequest/requestList">프로젝트 의뢰</a></div>
-        </ul>
-        
+    	 <ul>
+                <c:forEach var="boardType" items="${boardTypeList}">
+                    <li>
+                        <a href="/board/${boardType.BOARD_CODE}">${boardType.BOARD_NAME}</a>
+                    </li>
+                </c:forEach>
+                
+                
+                
+                 <div class="nav-project"><a href="/projectRequest/requestList">프로젝트 의뢰</a></div>
+            </ul>
+    
+      
     </div>

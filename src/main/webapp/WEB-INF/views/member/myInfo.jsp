@@ -23,7 +23,6 @@
             <div id="title">프로필</div>
             
             
-           
             
             <form action="/member/updateMyInfo" enctype="multipart/form-data" method="POST" name="myPage-frm"  onsubmit="return profileValidate();">
                 <div>
@@ -40,11 +39,9 @@
                         <div class="profile-btn-area">
                             <label for="image-input">프로필 변경</label>
                             <!-- accept 속성 : 업로드 가능한 파일의 타입을 제한하는 속성 -->
-                            <input type="file" name="memberProfile" id="image-input" accept="image/*">
+                            <input type="file" name="profileImage" id="image-input" accept="image/*">
                         </div>
-                        
-                        
-                        
+         
                     </div>
                 </div>
                 <div id="inputArea">
@@ -57,19 +54,22 @@
                     <div>
                         <div class="item">닉네임</div>
                         <div>
-                            <input type="text" name="memberNickname" id="" class="input" value="${loginMember.memberNickname}">
+                            <input type="text" name="memberNickname" id="memberNickname" class="input" value="${loginMember.memberNickname}"><br>
+                        	 <span class="signUp-message" id="nickMessage">한글, 영어, 숫자로만 2~10글자</span>
                         </div>
                     </div>
                     <div>
                         <div class="item">휴대폰</div>
                         <div>
-                            <input type="text" name="memberTel" id="" class="input" value="${loginMember.memberTel}">
+                            <input type="text" name="memberTel" id="memberTel" class="input" value="${loginMember.memberTel}"><br>
+                        	<span class="signUp-message" id="telMessage">전화번호를 입력해주세요(- 제외)</span>
                         </div>
                     </div>
                     <div>
                         <div class="item">직업</div>
                         <div>
-                            <input type="text" name="memberJob" id="" class="input"  value="${loginMember.memberJob}">
+                            <input type="text" name="memberJob" id="" class="input"  value="${loginMember.memberJob}" required>
+                            
                         </div>
                     </div>
                     <div>
@@ -130,6 +130,7 @@
 
         
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     
     <script src="/resources/js/member/myInfo.js"></script>
     
