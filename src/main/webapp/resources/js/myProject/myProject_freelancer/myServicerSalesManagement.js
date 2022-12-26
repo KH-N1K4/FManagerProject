@@ -158,3 +158,51 @@ modalClose.addEventListener('click', () => {
     body.style.overflow = 'hidden';
   }
 });
+
+/* 발송하기 */
+$('.sendBtn').click(function(){
+  const tradeNoValue = this.title;
+  $.ajax({
+        
+    url: "/sendworkSubmit",
+    data: { 
+      "tradeNo"  : tradeNoValue,
+    },
+    type: "POST", 
+    dataType: "JSON", // 응답 데이터의 형식이 JSON이다. -> 자동으로 JS 객체로 변환
+    success: (result) => {
+        console.log(result);
+        console.log(tradeNoValue);
+        if(result == "작업물 발송이 완료되었습니다."){
+          alert(result);
+          saleslist.forEach(function(arg){
+            if(arg.tradeNo == tradeNoValue){
+              console.log("더하기 전:"+arg.workCount);
+              arg.workCount = arg.workCount+1;
+              console.log("더하기 후:"+arg.workCount);
+              if(arg.workCount == arg.serviceEditNum+1){
+                document.getElementById('serviceEditNum'+arg.tradeNo).innerText = (arg.workCount-1)+"/"+arg.serviceEditNum;
+              }else{
+                document.getElementById('serviceEditNum'+arg.tradeNo).innerText = arg.workCount+"/"+arg.serviceEditNum;
+              }
+
+              if(arg.workCount > arg.serviceEditNum){
+                $('#sendBtn'+arg.tradeNo).remove();
+              }
+              
+            } 
+          });
+          
+        }
+    },
+    error: () => {
+        console.log("발송 실패")
+    }
+
+
+  });
+
+});
+
+
+

@@ -194,4 +194,23 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		
 		return map;
 	}
+
+	/**
+	 *작업물 발송하기
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public String insertsendworkSubmit(int tradeNo) throws Exception{
+		
+		String message ="";
+		int result = dao.insertsendworkSubmit(tradeNo);
+		if(result > 0) {
+			message = "작업물 발송이 완료되었습니다.";
+					
+		}else {
+			message = "작업물 발송 실패했습니다.";
+			throw new Exception("작업물 발송 실패");
+		}
+		return message;
+	}
 }

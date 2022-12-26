@@ -106,4 +106,12 @@ public class MyProjectFreelancerDAO {
 		int tradeReportNo = (int)map.get("tradeReportNo");
 		return tradeReportNo;
 	}
+
+	/**작업물 발송하기
+	 * @param tradeNo
+	 * @return
+	 */
+	public int insertsendworkSubmit(int tradeNo) {
+		return sqlSession.insert("myProjectFreelancerSerive.insertsendworkSubmit",tradeNo);
+	}
 }

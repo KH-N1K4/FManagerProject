@@ -63,4 +63,10 @@ public interface MyProjectFreelancerService {
 	Map<String, Object> insertreportSubmit(String webPath, String filePath, int tradeNo, int reportPersonNo, int reportedPersonNo, String reportContent,
 			MultipartFile reportFile)  throws Exception;
 
+	/** 작업물 발송하기
+	 * @param tradeNo
+	 * @return
+	 */
+	String insertsendworkSubmit(int tradeNo) throws Exception;
+
 }

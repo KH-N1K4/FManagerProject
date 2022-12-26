@@ -179,5 +179,10 @@
 		</if>
     
     </insert>
+    
+    <insert id="insertsendworkSubmit" parameterType="_int">
+    	INSERT INTO "WORK"
+    	VALUES(SEQ_WORK_NO.NEXTVAL,DEFAULT,#{tradeNo})
+    </insert>
   
 </mapper>

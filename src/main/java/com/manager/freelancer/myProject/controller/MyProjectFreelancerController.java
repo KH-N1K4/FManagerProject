@@ -145,5 +145,17 @@ public class MyProjectFreelancerController {
 		
 			return new Gson().toJson(map);
 	}
+	
+	
+	//발송하기 Ajax
+	@PostMapping("/sendworkSubmit")
+	@ResponseBody
+	public String insertsendworkSubmit(
+			@RequestParam(value="tradeNo") int tradeNo) throws Exception{
+		
+		String message = service.insertsendworkSubmit(tradeNo);
+		
+		return new Gson().toJson(message);
+	}
 
 }

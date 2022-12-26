@@ -112,7 +112,7 @@
                             </div>
                           </td>
                           <td class="tc">
-                            <span class="num">${sales.workCount}/${sales.serviceEditNum}</span>
+                            <span class="num" id="serviceEditNum${sales.tradeNo}"><c:choose><c:when test="${sales.workCount == sales.serviceEditNum+1}">${sales.workCount-1}/${sales.serviceEditNum}</c:when><c:otherwise>${sales.workCount}/${sales.serviceEditNum}</c:otherwise></c:choose></span>
                           </td>
                           <td class="tc">
                             <span class="text">${sales.freelancerFLString}</span>
@@ -120,7 +120,9 @@
                           <td class="tc">
                             <c:if test="${sales.freelancerFL == 1}">
                               <a href="#" id="finishBtn" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
-                              <a href="#" id="sendBtn" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>
+                              <c:if test="${sales.workCount le sales.serviceEditNum}">
+                                <a href="#" id="sendBtn${sales.tradeNo}" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>
+                              </c:if>
                               <a href="#" id="reportBtn${sales.tradeNo}" title="${sales.tradeNo}" class="reportBtn btn_type"><span>신고</span></a>
                             </c:if>
                           </td>                
