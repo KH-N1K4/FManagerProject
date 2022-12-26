@@ -189,7 +189,7 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("message",message);
+		map.put("messageIN",message);
 		map.put("tradeReportNo",tradeReportNo);
 		
 		return map;
