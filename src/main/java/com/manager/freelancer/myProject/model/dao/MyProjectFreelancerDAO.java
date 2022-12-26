@@ -85,4 +85,25 @@ public class MyProjectFreelancerDAO {
 		map.put("searchInput", searchInput); //상품명 입력시 상품명으로 판매내역 검색하기
 		return sqlSession.selectList("myProjectFreelancerSerive.selectSalesList", map);
 	}
+
+	/**신고하기
+	 * @param reportFilePath
+	 * @param tradeNo
+	 * @param reportPersonNo
+	 * @param reportedPersonNo
+	 * @param reportContent
+	 * @return
+	 */
+	public int insertreportSubmit(String reportFilePath, int tradeNo, int reportPersonNo, int reportedPersonNo,
+			String reportContent) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("reportFilePath", reportFilePath); 
+		map.put("tradeNo", tradeNo); 
+		map.put("reportPersonNo", reportPersonNo); 
+		map.put("reportedPersonNo", reportedPersonNo); 
+		map.put("reportContent", reportContent); 
+		sqlSession.insert("myProjectFreelancerSerive.insertreportSubmit", map);
+		int tradeReportNo = (int)map.get("tradeReportNo");
+		return tradeReportNo;
+	}
 }

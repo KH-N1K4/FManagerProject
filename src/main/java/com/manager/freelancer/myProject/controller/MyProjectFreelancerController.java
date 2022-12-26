@@ -1,7 +1,10 @@
 package com.manager.freelancer.myProject.controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,9 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
@@ -105,6 +110,51 @@ public class MyProjectFreelancerController {
 		model.addAttribute("inpurMyService",new Gson().toJson(inpurMyService));
 	
 		return "myProject/myProject_freelancer/myServicerSalesManagement";
+	}
+	
+	//팝업창(활동 정지)
+	@PostMapping("/reportSubmit")
+	@ResponseBody
+	public String insertreportSubmit(
+			FreelancerService freelancerReport,
+			/*
+			 * @RequestParam(value="tradeNo") int tradeNo,
+			 * 
+			 * @RequestParam(value="reportPersonNo") int reportPersonNo,
+			 * 
+			 * @RequestParam(value="reportedPersonNo") int reportedPersonNo,
+			 * 
+			 * @RequestParam(value="reportContent") String reportContent,
+			 * 
+			 * @RequestParam(value="formData",required=false) MultipartFile reportFile,
+			 */
+			MultipartHttpServletRequest formData,
+			HttpServletRequest req, /* 저장할 서버 경로 */
+			HttpSession session) throws Exception {
+			
+			// 인터넷 주소로 접근할 수 있는 경로
+			String webPath = "/resources/files/myProjectService/";
+					
+			// 실제 파일이 저장된 컴퓨터 상의 절대 경로
+			String filePath = req.getSession().getServletContext().getRealPath(webPath);
+			
+			String tradeNo = new String(formData.getParameterValues("tradeNoIN")[0].getBytes("8859_1"),"utf-8");
+			String reportPersonNo = new String(formData.getParameterValues("reportPersonNoIN")[0].getBytes("8859_1"),"utf-8");
+			String reportedPersonNo = new String(formData.getParameterValues("reportedPersonNoIN")[0].getBytes("8859_1"),"utf-8");
+			String reportContent = URLDecoder.decode( formData.getParameterValues("reportContentIN")[0], "UTF-8");
+			
+			
+			Map<String, Object> resurt = new HashMap<String, Object>();						
+			resurt = service.insertreportSubmit(webPath, filePath,Integer.parseInt(tradeNo),Integer.parseInt(reportPersonNo),Integer.parseInt(reportedPersonNo)
+					,reportContent,formData.getFile("reportFile"));
+
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("message",resurt.get("message"));
+			map.put("tradeReportNo",resurt.get("tradeReportNo"));
+			map.put("reportContent",resurt.get("reportContent"));
+		
+			return new Gson().toJson(map);
 	}
 
 }

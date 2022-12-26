@@ -3,7 +3,9 @@ package com.manager.freelancer.myProject.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,10 @@ import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 
 
+/**
+ * @author USER
+ *
+ */
 @Service
 public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerService{
 	
@@ -132,5 +138,60 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 	public List<FreelancerService> selectSalesList(int memberNo, int mainCategoryNo, String searchInput,
 			int freelancerFL) {
 		return dao.selectSalesList(memberNo,freelancerFL,searchInput, mainCategoryNo);
+	}
+
+	/**
+	 *신고하기
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public Map<String, Object> insertreportSubmit(String webPath, String filePath,int tradeNo, int reportPersonNo, int reportedPersonNo,
+			String reportContent, MultipartFile reportFile) throws Exception {
+		
+
+		reportContent = ( Util.newLineHandling(reportContent));
+		
+		// 실패를 대비해서 이전 이미지 경로 저장
+		//String temp = reportFile;
+		
+		// 중복 파일명 업로드를 대비하기 위해서 파일명 변경
+		String rename = null;
+		String reportFilePath = null;
+		
+		if(reportFile == null) { // 업로드된 파일이 없는 경우
+			reportFilePath = null;
+		}else { // 업로드된 파일이 있을 경우
+			
+			// 원본파일명을 이용해서 새로운 파일명 생성
+			rename = Util.fileRename( reportFile.getOriginalFilename() );
+			
+			reportFilePath = (webPath + rename);
+			// /resources/images/memberProfile/변경된파일명
+		}
+		
+		int tradeReportNo = dao.insertreportSubmit(reportFilePath,tradeNo,reportPersonNo,reportedPersonNo,reportContent);
+		String message = null;
+		if( tradeReportNo > 0 ) { // DB 수정 성공 시 -> 실제로 서버에 파일 저장
+			
+			if(rename != null) { 
+				// 변경된 이미지명이 있다 == 새로운 파일이 업로드 되었다
+				
+				reportFile.transferTo(new File(filePath +  rename));
+				// 메모리에 임시 저장된 파일을 지정된 경로에 파일 형태로 변환 
+				// == 서버 파일 업로드
+			}
+			
+			message = "신고가 접수되었습니다.";
+			
+		}else {
+			message = "신고 접수를 실패하셨습니다.";
+			throw new Exception("파일 업로드 실패"); // 예외 강제 발생
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("message",message);
+		map.put("tradeReportNo",tradeReportNo);
+		
+		return map;
 	}
 }

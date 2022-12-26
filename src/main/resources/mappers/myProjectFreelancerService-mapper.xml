@@ -35,6 +35,14 @@
 	      <result property="freelancerNickName" column="FREELANCER_NICKNAME"/>
 	      <result property="workCount" column="WORK_COUNT"/>											<!-- 발송물 발송 횟수 -->
      	  
+     	  <!-- 거래신고 테이블 -->
+     	  <result property="tradeReportNo" column="TRADE_REPORT_NO"/>							<!-- 거래 신고 번호 SEQUENCE: SEQ_TRADE_REPORT_NO -->
+     	  <result property="reportPersonNo" column="REPORT_PERSON"/>							<!-- 거래 신고자 회원 번호 -->
+     	  <result property="reportedPersonNo" column="REPORTED_PERSON"/>					<!-- 거래 피신고자 회원 번호 -->
+     	  <result property="reportContent" column="TRADE_REPORT_CONTENT"/>				<!-- 거래 신고 내용 -->
+     	  <result property="reportRefundFL" column="REFUND_FL"/>									<!-- 환불 여부 환불:Y 미환불:N -->
+     	  <result property="reportFilePath" column="TRADE_REPORT_FILE_PATH"/>			<!-- 거래 신고 첨부파일 -->
+     	  
      	  <!-- 거래 작업물 발송 -->
      	  <result property="workNo" column="WORK_NO" />														<!-- 작업물 번호 SEQUENCE: SEQ_WORK_NO -->
 	      <result property="workSendDate" column="WORK_SEND_DATE" />							<!-- 작업물 발송 날짜 -->
@@ -140,7 +148,8 @@
 					FROM TRADE
 					JOIN "WORK" USING(TRADE_NO)
 					GROUP BY TRADE_NO) USING (TRADE_NO)) USING (TRADE_NO) 
-			JOIN (SELECT MEMBER_NO,MEMBER_NICKNAME,MEMBER_NAME FROM "MEMBER") USING(MEMBER_NO)) t
+			JOIN (SELECT MEMBER_NO,MEMBER_NICKNAME,MEMBER_NAME FROM "MEMBER") USING(MEMBER_NO)
+			LEFT JOIN TRADE_REPORT USING(TRADE_NO) HAVING REPORT_PERSON = FREELANCER_NO) t
 		WHERE FREELANCER_NO = #{memberNo}
 		<if test="mainCategoryNo != 0">
 				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
@@ -153,5 +162,22 @@
 		</if>
 		ORDER BY TRADE_NO
 		</select>
+		
+		<insert id="insertreportSubmit" parameterType="java.util.HashMap" useGeneratedKeys="true">
+    <selectKey keyProperty="tradeReportNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_TRADE_REPORT_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		<if test='reportFilePath neq null'>
+				 INSERT INTO "TRADE_REPORT"
+				 VALUES(#{tradeReportNo},#{reportPersonNo},#{reportedPersonNo},#{reportContent},DEFAULT,#{reportFilePath},#{tradeNo})
+		</if>
+		<if test='reportFilePath eq null'>
+				 INSERT INTO "TRADE_REPORT" 
+				(TRADE_REPORT_NO, REPORT_PERSON, REPORTED_PERSON,TRADE_REPORT_CONTENT,REFUND_FL,TRADE_NO) 
+				VALUES 
+				(#{tradeReportNo},#{reportPersonNo},#{reportedPersonNo},#{reportContent},DEFAULT,#{tradeNo})
+		</if>
+    
+    </insert>
   
 </mapper>

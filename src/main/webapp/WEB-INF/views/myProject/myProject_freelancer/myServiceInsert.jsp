@@ -106,7 +106,7 @@
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>첨부파일</span></div>
                   <div class="list_content">
-                    <input type = "file" name="serviceFilePath" accept="image/*">
+                    <input type = "file" name="serviceFilePath" accept="image/*" required>
                   </div>
                   <div class="list_content">
                     <input type = "file" name="serviceFilePath" accept="image/*">

@@ -200,10 +200,12 @@
     var list = JSON.parse('${inpurMyService}');
     var saleslist = JSON.parse('${GsonsalesList}');
     var loginMemberName = '${loginMember.memberName}';
+    var loginMemberNo = '${loginMember.memberNo}';
   </script>
   <!-- jQuery  -->
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
   <script src="/resources/js/myProject/myProject_freelancer/myServicerSalesManagement.js"></script>
+  <script src="/resources/js/myProject/myProject_freelancer/myprojectSales_reportModal.js"></script>
 </body>
 </html>

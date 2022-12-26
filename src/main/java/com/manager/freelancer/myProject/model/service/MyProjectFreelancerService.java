@@ -2,6 +2,7 @@ package com.manager.freelancer.myProject.model.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,5 +48,19 @@ public interface MyProjectFreelancerService {
 	 * @return
 	 */
 	List<FreelancerService> selectSalesList(int memberNo, int mainCategoryNo, String searchInput, int freelancerFL);
+
+	/** 신고하기
+	 * @param filePath 
+	 * @param webPath 
+	 * @param tradeNo
+	 * @param reportPersonNo
+	 * @param reportedPersonNo
+	 * @param reportContent
+	 * @param reportFile
+	 * @return
+	 * @throws Exception
+	 */
+	Map<String, Object> insertreportSubmit(String webPath, String filePath, int tradeNo, int reportPersonNo, int reportedPersonNo, String reportContent,
+			MultipartFile reportFile)  throws Exception;
 
 }

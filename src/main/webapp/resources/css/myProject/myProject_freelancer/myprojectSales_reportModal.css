@@ -53,6 +53,7 @@
 }
 
 button{
+  cursor: pointer;
   display:inline-block;
 	text-align:center;
   width: 150px;

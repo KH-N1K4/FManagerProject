@@ -50,6 +50,14 @@ public class FreelancerService {
 	private String freelancerNickName;
 	private int workCount;       			//WORK_COUNT 발송물 발송 횟수
 	
+	//거래신고 테이블
+	private int tradeReportNo;				//TRADE_REPORT_NO 거래 신고 번호 SEQUENCE: SEQ_TRADE_REPORT_NO
+	private int	reportPersonNo;				//REPORT_PERSON 거래 신고자 회원 번호
+	private int	reportedPersonNo;			//REPORTED_PERSON 거래 피신고자 회원 번호
+	private String reportContent;			//TRADE_REPORT_CONTENT 거래 신고 내용
+	private String reportRefundFL;			//REFUND_FL 환불 여부 환불:Y 미환불:N
+	private String  reportFilePath;			//TRADE_REPORT_FILE_PATH 거래 신고 첨부파일
+	
 	//거래 작업물 발송
 	private int workNo;						//WORK_NO 작업물 번호 SEQUENCE: SEQ_WORK_NO
 	private String workSendDate;			//WORK_SEND_DATE 작업물 발송 날짜
