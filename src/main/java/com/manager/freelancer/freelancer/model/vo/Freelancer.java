@@ -21,7 +21,18 @@ public class Freelancer {
 	private int    bankAccountNumber;		// 은행 계좌번호
 	private String freelancerIntro;	// 자기소개
 	
+	//학력 전공부분
+	private String major; // input값 전체 받을 부분
+	
+	private int majorNo;
+	private String majorAcademyName;
+	private String majorName;
+	private int majorGraduateStatus;
+	
+	
 	// 경력사항 부분
+	private String career; // input값 전체 받을 부분
+	
 	private int careerNo;
 	private char careerFlag; 				// 경력사항 유무
 	private String careerCompanyName; 		// 회사명
@@ -31,6 +42,8 @@ public class Freelancer {
 	private String careerPeriod; 			// 근무기간
 	
 	// 자격증 부분
+	private String license; // input값전체 받을 부분
+	
 	private int licenseNo;  				// 자격증 번호
 	private String licenseName;				// 자격증 이름
 	private String licenseDate;				// 자격증 발급일
