@@ -28,11 +28,17 @@ public class ManagerController {
 	// 회원 관리 - 회원 목록 조회
 	@GetMapping("/manager/memberList")
 	public String managerMemberList(Model model, 
+									@RequestParam(value="value", required=false) String value,
 									@RequestParam(value="cp", required=false, defaultValue = "1") int cp,
 									@RequestParam Map<String, Object> pm) {
 		
 		if(pm.get("key")==null) {
-			Map<String, Object> map=service.selectMemberList(cp);
+			Map<String, Object> map=service.selectMemberList(value,cp);
+			model.addAttribute("map", map);
+		} else {
+			System.out.println(value);
+			pm.put("value2", value);
+			Map<String, Object> map=service.selectMemberList(pm, cp);
 			model.addAttribute("map", map);
 		}
 		
@@ -50,7 +56,7 @@ public class ManagerController {
 		return member;
 	}
 	
-	//회원 유형별 목록 조회
+	//회원 유형별 목록 조회 ajax
 	@GetMapping("/manager/memberType")
 	@ResponseBody
 	public Map<String, Object> managerMemberType(Model model, 
@@ -59,6 +65,7 @@ public class ManagerController {
 									@RequestParam Map<String, Object> pm) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(value);
 		
 		if(pm.get("key")==null) {
 			map=service.selectMemberTypeList(value,cp);
@@ -67,28 +74,6 @@ public class ManagerController {
 		System.out.println(map);
 		return map;
 	}
-	
-	//회원 유형별 목록 조회
-	@GetMapping("/manager/memberType2")
-	public String managerMemberType2(Model model, 
-								@RequestParam String value,
-								@RequestParam(value="cp", required=false, defaultValue = "1") int cp,
-								@RequestParam Map<String, Object> pm) {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		if(pm.get("key")==null) {
-			map=service.selectMemberTypeList(value,cp);
-			model.addAttribute("map", map);
-		}
-		System.out.println(map);
-		return "/manager/memberList";
-	}
-	
-	
-	
-	
-	
 	
 	// 회원 탈퇴
 	@GetMapping("/manager/memberDelete")

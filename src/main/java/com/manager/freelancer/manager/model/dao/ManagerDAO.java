@@ -33,8 +33,9 @@ public class ManagerDAO {
 	 * 
 	 * @return
 	 */
-	public int getMemberListCount() {
-		return sqlSession.selectOne("managerMapper.getMemberListCount");
+	public int getMemberListCount(String value2) {
+		System.out.println("======="+value2);
+		return sqlSession.selectOne("managerMapper.getMemberListCount",value2);
 	}
 
 	/**
@@ -43,13 +44,13 @@ public class ManagerDAO {
 	 * @param pagination
 	 * @return
 	 */
-	public List<Member> selectMemberList(Pagination pagination) {
+	public List<Member> selectMemberList(String value2,Pagination pagination) {
 
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 
-		return sqlSession.selectList("managerMapper.selectMemberList", null, rowBounds);
+		return sqlSession.selectList("managerMapper.selectMemberList", value2, rowBounds);
 	}
 
 	/**
@@ -114,6 +115,57 @@ public class ManagerDAO {
 		return sqlSession.update("managerMapper.managerMemberDelete",memberNo);
 	}
 
+	
+	
+	/** 검색 조건 일치 회원 수 조회
+	 * @param pm
+	 * @return
+	 */
+	public int getMemberListCount(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getMemberListCount_search",pm);
+	}
+	
+	/** 검색 조건 일치 회원 목록 조회
+	 * @param pagination
+	 * @param pm
+	 * @return
+	 */
+	public List<Member> selectMemberList(Pagination pagination, Map<String, Object> pm) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectMemberList_search", pm, rowBounds);
+	}
+	
+
+	/** 회원 유형별 검색 조건 일치 회원 수 조회
+	 * @param pm
+	 * @return
+	 */
+	public int getMemberListCount2(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getMemberListCount_search2",pm);
+	}
+
+	
+
+	/**회원 유형별 검색 조건 일치 회원 목록 조회
+	 * @param pagination
+	 * @param pm
+	 * @return
+	 */
+	public List<Member> selectMemberList2(Pagination pagination, Map<String, Object> pm) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectMemberList_search2", pm, rowBounds);
+	}
+
+	
+	
+	
+	
 	
 	
 	/** 이용 문의 내역 수 조회

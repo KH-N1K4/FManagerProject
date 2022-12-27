@@ -18,10 +18,23 @@
 	<jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp" />
 	
 	<%-- 검색을 진행한 경우 --%>
-        <c:if test="${not empty param.key}">
-            <%-- &key=t&query=테스트 --%>
-            <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
-        </c:if>
+		<c:if test="${not empty param}">
+        	<c:forEach var="parameter" items="${param}">
+				<c:if test="${parameter.key != 'cp'}">
+					<c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+				</c:if>
+			</c:forEach>
+    	</c:if>
+		<c:forEach var="inputValue" items="${param.value}">
+			<c:choose>
+				<c:when test="${inputValue == 'N'}">
+					<c:set var="inputValue1" value="selected" />
+				</c:when>
+				<c:when test="${inputValue == 'Y'}">
+					<c:set var="inputValue2" value="selected" />
+				</c:when>
+			</c:choose>
+		</c:forEach>
 
 	<div class="main">
 		<div id="member-manage-title-area">
@@ -30,8 +43,8 @@
 			<span class="search-area"> 
 				<select class="member-select-input" name="selectmemberType" id="selectmemberType" onchange="selectChange()">
 					<option value="">구분</option>
-					<option value="N">일반 회원</option>
-					<option value="Y">프리랜서</option>
+					<option value="N" ${inputValue1}>일반 회원</option>
+					<option value="Y" ${inputValue2}>프리랜서</option>
 				</select>
 			</span>
 		</div>
@@ -123,14 +136,15 @@
 			</div>
 		
 		<!-- 검색창 -->
-			<form action="${boardCode}" method="get" id="memberSearch" onsubmit="return true">
+			<form action="/manager/memberList" method="get" id="memberSearch" onsubmit="return true">
 
 				<select name="key" id="search-key">
-					<option value="t">회원번호</option>
-					<option value="c">회원 이름</option>
+					<option value="no">회원번호</option>
+					<option value="na">회원 이름</option>
 				</select> 
 				<input type="text" name="query" id="search-query" placeholder="검색어를 입력해주세요.">
-				<button>검색</button>
+				<input type="hidden" name="value" id="inputValue">
+				<button id="frmBtn">검색</button>
 			</form>
 
 	</div>
@@ -139,8 +153,6 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	<script>
-		const key=document.getElementById("search-query").value;
-		const sURL="&key=${param.key}&query=${param.query}";
 
 	</script>
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

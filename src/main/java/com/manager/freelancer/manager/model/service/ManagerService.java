@@ -12,7 +12,7 @@ public interface ManagerService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectMemberList(int cp);
+	Map<String, Object> selectMemberList(String value,int cp);
 
 	/** 회원 상세 조회
 	 * @param memberNo
@@ -20,7 +20,7 @@ public interface ManagerService {
 	 */
 	Member selectMemberDetail(int memberNo);
 
-	/** 회원 구분 
+	/** 회원 유형별 조회 ajax
 	 * @param value
 	 * @param cp
 	 * @return
@@ -33,10 +33,26 @@ public interface ManagerService {
 	 */
 	int managerMemberDelete(int memberNo);
 
+
+	/** 회원 검색
+	 * @param pm
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectMemberList(Map<String, Object> pm, int cp);
+
+	/** 회원 유형별 검색
+	 * @param pm
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectMemberTypeList(Map<String, Object> pm, int cp);
+
 	/** 문의 내역 조회 + 페이징
 	 * @param cp
 	 * @return
 	 */
 	Map<String, Object> selectUserInquiryList(int cp);
 
+	
 }

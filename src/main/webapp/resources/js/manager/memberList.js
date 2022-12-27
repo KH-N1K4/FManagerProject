@@ -1,6 +1,4 @@
-console.log(sURL);
-console.log(key);
-console.log(key == "");
+
 
 /* 모달 */
 modalShow();
@@ -13,9 +11,10 @@ function selectChange() {
     const value = (selectmemberType.options[selectmemberType.selectedIndex].value);
     const memberTable = document.querySelector('#member-manage-table');
     const pagination = document.querySelector(".pagination");
-
+    console.log(value);
+   
     $.ajax({
-        url: '/manager/memberType/',
+        url: '/manager/memberType',
         type: 'GET',
         data: { 'value': value },
         success: (map) => {
@@ -34,6 +33,28 @@ function selectChange() {
                 }
                 document.querySelector('.pagination').innerHTML = "";
 
+                
+                if (document.getElementById("search-key") != null) { // 검색창이 존재할 때
+                    const params = new URL(location.href).searchParams;
+                    // 주소에서 쿼리스트링만 분리한 객체
+                    
+                    document.getElementById("search-query").value="";
+                    const key = params.get("key");
+                    
+                    const option = document.querySelectorAll("#search-key > option");
+                    for (let op of option) {
+
+                        // option의 value와 key가 일치할 때
+                        if (op.value == key) {
+                            // op.setAttribute("selected", true)
+                            op.selected = false;
+                        }
+                    }
+                    
+                }
+                
+
+                
                 for (member of map.memberList) {
                     const table = document.createElement("div");
                     table.classList.add('member-manage-table-content');
@@ -81,19 +102,19 @@ function selectChange() {
                 modalShow();
                 deleteMember();
 
-
+                console.log(map.pagination);
 
                 /* 페이징 */
                 const li1 = document.createElement("li");
                 const a1 = document.createElement("a");
-                a1.setAttribute('href', "/manager/memberType2?cp=1"+"&value="+value);
+                a1.setAttribute('href', "/manager/memberList?cp=1"+"&value="+value);
                 a1.appendChild(document.createTextNode("<<"));
                 li1.append(a1);
                 pagination.append(li1);
 
                 const li2 = document.createElement("li");
                 const a2 = document.createElement("a");
-                a2.setAttribute("href", "/manager/memberType2?cp=" + map.pagination.prevPage+"&value="+value);
+                a2.setAttribute("href", "/manager/memberList?cp=" + map.pagination.prevPage+"&value="+value);
                 a2.appendChild(document.createTextNode("<"));
                 li2.append(a2);
                 pagination.append(li2);
@@ -110,7 +131,7 @@ function selectChange() {
 
                     } else {
                         const a3 = document.createElement("a");
-                        a3.setAttribute("href", "/manager/memberType2?cp=" + i+"&value="+value);
+                        a3.setAttribute("href", "/manager/memberList?cp=" + i+"&value="+value);
                         a3.appendChild(document.createTextNode(i));
                         li3.append(a3);
                         pagination.append(li3);
@@ -119,19 +140,53 @@ function selectChange() {
 
                 const li4 = document.createElement("li");
                 const a4 = document.createElement("a");
-                a4.setAttribute("href", "/manager/memberType2?cp=" + map.pagination.nextPage+"&value="+value);
+                a4.setAttribute("href", "/manager/memberList?cp=" + map.pagination.nextPage+"&value="+value);
                 a4.appendChild(document.createTextNode(">"));
                 li4.append(a4);
                 pagination.append(li4);
 
                 const li5 = document.createElement("li");
                 const a5 = document.createElement("a");
-                a5.setAttribute("href", "/manager/memberType2?cp=" + map.pagination.maxPage+"&value="+value);
+                a5.setAttribute("href", "/manager/memberList?cp=" + map.pagination.maxPage+"&value="+value);
                 a5.appendChild(document.createTextNode(">>"));
                 li5.append(a5);
                 pagination.append(li5);
 
 
+ 
+                /* 검색창 */
+                /*document.getElementById("memberSearch").innerHTML="";
+                document.getElementById("memberSearch").setAttribute("action","/manager/memberType2"+"&value="+value);
+                const selectKey = document.createElement("select");
+                selectKey.setAttribute("name","key");
+                selectKey.setAttribute("id","search-key");
+                const option1 = document.createElement("option");
+                option1.value="no";
+                option1.appendChild(document.createTextNode("회원 번호"));
+                const option2 = document.createElement("option");
+                option2.value="na";
+                option2.appendChild(document.createTextNode("회원 이름"));
+                selectKey.append(option1);
+                selectKey.append(option2);
+                document.getElementById("memberSearch").append(selectKey);
+
+                const inputSearch = document.createElement("input");
+                inputSearch.setAttribute("type","text");
+                inputSearch.setAttribute("name","query");
+                inputSearch.setAttribute("id","search-query");
+                inputSearch.setAttribute("placeholder","검색어를 입력해주세요.");
+                document.getElementById("memberSearch").append(inputSearch);
+
+                const searchBtn = document.createElement("button");
+                searchBtn.appendChild(document.createTextNode("검색"));
+                document.getElementById("memberSearch").append(searchBtn); */
+                
+
+                
+                document.getElementById("inputValue").value=value;
+
+                 
+                
             }
         }
     });
@@ -253,3 +308,35 @@ function modalShow() {
         });
     }
 };
+
+
+
+/* 검색 결과 남겨 놓기 */
+(() => {
+    const select = document.getElementById("search-key");
+    const input = document.getElementById("search-query");
+    const option = document.querySelectorAll("#search-key > option");
+
+    if (select != null) { // 검색창이 존재할 때
+        const params = new URL(location.href).searchParams;
+        // 주소에서 쿼리스트링만 분리한 객체
+        
+        const key = params.get("key");
+        const query = params.get("query");
+        
+        // input에 이전 검색어를 값으로 추가
+        input.value = query;
+        
+        // select에서 이전 검색한 key의 값과 일치하는 option태그에
+        // selected 속성 추가
+        for (let op of option) {
+            
+            // option의 value와 key가 일치할 때
+            if (op.value == key) {
+                // op.setAttribute("selected", true)
+                op.selected = true;
+            }
+        }
+
+    }
+})();
