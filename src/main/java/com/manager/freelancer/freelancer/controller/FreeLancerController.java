@@ -52,6 +52,8 @@ public class FreeLancerController {
 		@PostMapping("/member/freelancer/enrollFreelancerSignUp")
 		public String enrollFreelancerSignup(@SessionAttribute("loginMember") Member loginMember,//회원번호 == 프리랜서번호
 				String major, // major input태그에 적힌 값들
+				String career,
+				String license,
 				Freelancer inputFreelancer,
 				String[] freelancerField  ) {
 		
@@ -59,7 +61,8 @@ public class FreeLancerController {
 			
 		inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 로그인한 회원번호를 inputFreelancer에 세팅
 		inputFreelancer.setMajor(major);
-		
+		inputFreelancer.setCareer(career);
+		inputFreelancer.setLicense(license);
 		int result = service.enrollFreelancerSignup(inputFreelancer);
 		
 //		String path = null;

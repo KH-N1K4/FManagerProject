@@ -58,5 +58,18 @@
     		WHERE MEMBER_NO = #{freelancerNo}
     	</update>
    
+   		<!-- 경력 사항  -->
+  		<insert id="enrollFreelancerCareer" parameterType = "com.manager.freelancer.freelancer.model.vo.Career">
   
+    		INSERT INTO "CAREER" VALUES
+			(SEQ_CAREER_NO.NEXTVAL, 'Y', #{careerCompanyName},#{careerCompanyDepartment},#{careerCompanyPosition},#{careerCompanyRegion},'15년',#{freelancerNo})	
+    	</insert>
+    	
+    	<!--  자격증  -->
+    	<insert id="enrollFreelancerLicense" parameterType = "com.manager.freelancer.freelancer.model.vo.License">
+    		INSERT INTO "LICENSE"
+    		VALUES(SEQ_LICENSE_NO.NEXTVAL, #{licenseName}, '2022/01/01', #{licenseAgency}, #{freelancerNo})
+    	</insert>
+    	
+    	
 </mapper>

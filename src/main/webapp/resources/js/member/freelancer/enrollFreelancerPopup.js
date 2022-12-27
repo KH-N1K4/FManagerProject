@@ -108,6 +108,9 @@ sendContent2.addEventListener('click',function() {
     licenseInput2.value += result2[i].value +',';
   }
   modal2.style.display='none';
+  if(licenseInput2.value.trim().length != 0){
+    freelancerCont.value = 1 // 수정하기 > 숫자환산
+  }
 });
 
 const result3 = document.getElementsByClassName("input3"); // 모달창의 input들
@@ -122,3 +125,8 @@ sendContent3.addEventListener("click", function(){
     modal3.style.display="none"
 });
 
+const freelancerCont = document.getElementById("freelancerCont");
+
+// if(licenseInput2.value.trim().length != 0){
+//   freelancerCont.value = 1
+// }

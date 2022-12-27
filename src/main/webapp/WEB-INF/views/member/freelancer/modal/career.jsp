@@ -11,31 +11,31 @@
         <div>
             <div class="item">회사명</div>
             <div>
-                <input type="text" name="careerCompany" id="careerCompany" class="input2">
+                <input type="text" name="careerCompanyName" id="careerCompanyName" class="input2">
             </div>
         </div>
         <div>
             <div class="item">근무부서</div>
             <div>
-                <input type="text" name="careerDepartment" id="careerDepartment" class="input2">
+                <input type="text" name="careerCompanyDepartment" id="careerDepartment" class="input2">
             </div>
         </div>
         <div>
             <div class="item">직위</div>
             <div>
-                <input type="text" name="careerPosition" id="careerPosition" class="input2">
+                <input type="text" name="careerCompanyPosition" id="careerPosition" class="input2">
             </div>
         </div>
         <div>
             <div class="item">근무지</div>
             <div>
-                <input type="text" name="careerRegion" id="careerRegion" class="input2">
+                <input type="text" name="careerCompanyRegion" id="careerRegion" class="input2">
             </div>
         </div>
         <div>
             <div class="item">근무기간</div>
             <div>
-                <select name="careerPeriod" id="careerPeriod" class="select date">
+                <select name="careerCompanyPeriod1" id="careerCompanyPeriod" class="input2">
                     <option value="0">년</option>
                     <option value="1">1년</option>
                     <option value="2">2년</option>
@@ -43,7 +43,7 @@
                     <option value="4">4년</option>
                     <option value="5">5년</option>
                 </select>
-                <select name="careerPeriod" id="careerPeriod" class="select date">
+                <select name="careerCompanyPeriod2" id="careerCompanyPeriod" class="input2">
                     <option value="0">개월</option>
                     <option value="1">1개월</option>
                     <option value="2">2개월</option>
