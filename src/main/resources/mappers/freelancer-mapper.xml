@@ -33,44 +33,30 @@
 	      <result property="freelancerIntroduction" column="FREELACER_INTRODUCTION" />
 	      <result property="regionNo" column="REGION_NO" />
 	      <result property="gradeNo" column="GRADE_NO" />
-	     
-	     
     	</resultMap>
     	
-    	<insert id="enrollFreelancer" parameterType = "Freelancer">
+    	<!-- <resultMap type="com.manager.freelancer.freelancer.model.vo.Major" id="major_rm">
+    		
+    	</resultMap> -->
+    	
+	
+    	<insert id="enrollFreelancer" parameterType = "Freelancer" >
+  
     		INSERT INTO "FREELANCER"
-    		VALUES(5, #{freelancerCont}, #{contactTime1}, #{contactTime2}, #{freelancerIntro}, #{freelancerRegionNo},1 )
-    		
-    		
+    		VALUES(#{freelancerNo}, #{freelancerCont}, #{contactTime1}, #{contactTime2}, #{freelancerIntro},#{regionNo} ,1 )
+   
     	</insert>
     	
-<!--     	private int holdNo; // 활동정지 번호
-	   private String holdDate; // 활동정지일
-	   private String holdReason; // 활동정지 사유
-	   private String HManagerEmail; // 활동정지 시킨 매니저아이디 //H_MEMBER_EMAIL
-	   private String HManagerNickname; // 활동정지 시킨 매니저아이디 //H_MEMBER_NICKNAME -->
+    	<!--  학력/전공  -->
+    	<insert id="enrollFreelancerMajor" parameterType = "com.manager.freelancer.freelancer.model.vo.Major">
+    		INSERT INTO "MAJOR"
+    		VALUES(SEQ_MAJOR_NO.NEXTVAL, #{majorAcademyName}, #{majorName}, #{majorGraduateStatus}, #{freelancerNo})
+    	</insert>
     	
- <!--  private int memberNo;
-	private String memberEmail;
-	private String memberPw;
-	private String memberNickname;
-	private String memberResidence;
-	private String profileImage;
-	private String enrollDate;
-	private String memberDeleteFlag;
-	private String authorityName;
-	private int memberLevelNo; -->
-  
-  <!-- "MEMBER_NO"   NUMBER      NOT NULL,
-   "MEMBER_EMAIL"   VARCHAR2(50)      NOT NULL,
-   "MEMBER_PW"   VARCHAR2(100)      NOT NULL,
-   "MEMBER_NICKNAME"   VARCHAR2(30)      NOT NULL,
-   "MEMBER_RESIDENCE"   VARCHAR2(30)      NULL,
-   "PROFILE_IMG"   VARCHAR2(300)      NULL,
-   "ENROLL_DATE"   DATE   DEFAULT SYSDATE   NOT NULL,
-   "MEMBER_DEL_FL"   CHAR(1)   DEFAULT 'N'   NOT NULL,
-   "AUTHORITY_NAME"   CHAR(1)   DEFAULT 'G'   NOT NULL,
-   "MEMBER_LEVEL_NO"   NUMBER      NULL -->
-  
+    	<update id="updateFreelancerFlag">
+    		UPDATE "MEMBER" SET FREELANCER_FL = 'Y'
+    		WHERE MEMBER_NO = #{freelancerNo}
+    	</update>
+   
   
 </mapper>

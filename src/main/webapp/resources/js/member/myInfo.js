@@ -97,7 +97,157 @@ function profileValidate(){
         return true;
     }
 
-    alert("이미지 변경 후 클릭하세요");
-    return false;
+    // alert("이미지 변경 후 클릭하세요");
+    return true;
+    // 그니까 false 가 나올 때 프로필 변경 없이 정보 수정만 되게 어떻게 하지??????
+
+    
 }
 
+
+
+// 변수명.key 또는 변수명["key"]를 이용하면 객체 속성 접근 가능
+const checkObj={
+                "memberNickname":true,
+                "memberTel":true
+            };
+
+
+
+// 내정보 수정 양식이 제출 되었을 때 
+document.getElementsByName("myPage-frm")[0].addEventListener("submit",function(event){
+
+
+   
+    for(key in checkObj){
+        let str;
+
+        if(!checkObj[key]){
+            switch(key){
+                case "memberNickname": str="닉네임이 유효하지 않습니다."; break;
+                case "memberTel": str="전화번호 유효하지 않습니다."; break;
+            }
+
+            alert(str); // 대화상자 출력 
+            // 유효하지 않은 입력으로 포커스 이동 
+            document.getElementById(key).focus();
+            
+            event.preventDefault(); // 제출 이벤트 제거 
+            return; // 함수 종료
+        }
+    }
+
+})
+
+// 닉네임 유효성 검사
+const memberNickname=document.getElementById("memberNickname");
+const originNickname=memberNickname.value;
+const nickMessage=document.getElementById("nickMessage");
+
+memberNickname.addEventListener("input",function(){
+
+    if(memberNickname.value==originNickname){
+        nickMessage.innerText="한글, 영어, 숫자로만 2~10글자";
+        nickMessage.classList.remove("error","confirm");
+        // memberNickname.value="";
+
+        checkObj.memberNickname=true;
+        // return;
+    }
+
+    const reqEx=/^[가-힣\w]{2,10}$/;
+
+    if(reqEx.test(memberNickname.value)){// 유효한 경우 
+        // ** 닉네임 중복 검사 코드 추가 예정 **
+        
+        const param={"memberNickname":memberNickname.value};
+
+        $.ajax({
+            url:'/nicknameDupCheck',
+            data:param,
+            type:"GET", // type 미작성시 기본값 GET
+            success:(res)=>{
+                // 매개변수 res == 서버 비동기 통신 응답 데이터
+
+
+                // console.log("res : " +res);
+                if(res==0){ // 중복 아님
+                    nickMessage.innerText="사용 가능한 닉네임 입니다.";
+                    nickMessage.classList.add("confirm");
+                    nickMessage.classList.remove("error");
+                    checkObj.memberNickname=true;
+                }else if(memberNickname.value==originNickname){
+                    nickMessage.innerText="한글, 영어, 숫자로만 2~10글자";
+                    nickMessage.classList.add("confirm");
+                    nickMessage.classList.remove("error");
+                    checkObj.memberNickname=true;
+                }else{
+                    nickMessage.innerText="이미 사용중인 닉네임입니다.";
+                    nickMessage.classList.add("error");
+                    nickMessage.classList.remove("confirm");
+                    checkObj.memberNickname=false;
+                }
+            },
+            error:()=>{
+                console.log("닉네임 중복 검사 실패");
+            },
+            complete:tempFn
+        });
+        
+    }else{
+        nickMessage.innerText="닉네임 형식이 유효하지 않습니다.";
+        nickMessage.classList.add("error");
+        nickMessage.classList.remove("confirm");
+
+        checkObj.memberNickname=false;
+    }
+
+   
+
+});
+
+function tempFn(){
+    console.log("닉네임 검사 완료");
+};
+
+// 전화번호 유효성 검사 
+const memberTel = document.getElementById("memberTel");
+const originTel=memberTel.value;
+const telMessage=document.getElementById("telMessage");
+
+memberTel.addEventListener("input",function(){
+    // 문자가 입력되지 않은 경우 
+    if(memberTel.value==originTel){
+        telMessage.innerText="전화번호를 입력해주세요(- 제외)";
+        telMessage.classList.remove("confirm","error");
+        checkObj.memberTel=true;
+        // return;
+    }else{
+        checkObj.memberTel=false;
+    }
+
+    // 전화번호 정규 표현식 검사
+    const regEx=/^0(1[01679]|2|[3-6][1-5]|70)[1-9]\d{2,3}\d{4}$/;
+
+    if(regEx.test(memberTel.value)){ // 유효한 경우
+        telMessage.innerText="유효한 전화번호 형식입니다";
+        telMessage.classList.add("confirm");
+        telMessage.classList.remove("error");
+
+        checkObj.memberTel=true;
+    }else if(memberTel.value==originTel){
+        telMessage.innerText="전화번호를 입력해주세요(- 제외)";
+        telMessage.classList.add("confirm");
+        telMessage.classList.remove("error");
+
+        checkObj.memberTel=true;
+    }else{
+        telMessage.innerText="전화번호 형식이 유효하지 않습니다";
+        telMessage.classList.add("error");
+        telMessage.classList.remove("confirm");
+
+        checkObj.memberTel=false;
+    }
+});
+
+// 변하지 않는 경우도 추가하기!

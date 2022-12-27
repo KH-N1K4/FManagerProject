@@ -134,7 +134,7 @@
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>예산</span></div>
-                  <div class="list_content"><input type="text" id="budget" class="budget box" name="budget" placeholder="예산 금액" maxlength="30" autocomplete="off" value=""><span>원</span></div>
+                  <div class="list_content"><input type="number" id="budget" class="budget box" name="budget" placeholder="예산 금액" maxlength="30" autocomplete="off" value=""><span>원</span></div>
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>모집마감일</span></div>

@@ -9,9 +9,40 @@
     
  			<a id="logo" href="/"><img src="/resources/images/final_logo.png" alt=""></a>
             <div class="header-top">
-                <span>회원가입</span>
-                <span>로그인</span>
+                <c:choose>
+                    <%-- 로그인 X인 경우 --%>
+                    <c:when test="${empty sessionScope.loginMember}">
+                    
+                    	
+		                
+		                <span><a href="/member/signUp">회원가입</a></span>
+		                <span><a href="/member/login">로그인</a></span>
+		               
+         
+                    </c:when>
 
+                    <%-- 로그인 O인 경우 --%>
+                    <c:otherwise>
+                    	<span><a href="/manager/memberList">관리자</a></span>
+                    	<span><a href="/member/enrollFreelancer">전문가 등록</a></span>
+                     	<span><a href="/member/myProject/myRequestList">내프로젝트</a></span>
+                    
+                        <label for="header-menu-toggle">
+                            ${loginMember.memberNickname}
+                            <i class="fa-solid fa-caret-down"></i>
+                        </label>
+                        
+                        <a><img style="width: 32px; height: 32px; border-radius:100%; border:1px solid black;" src="${loginMember.memberProfile}"></a>
+
+                        <input type="checkbox" id="header-menu-toggle">
+
+                        <div id="header-menu">
+                            <a href="/member/myInfo">내정보</a>
+                            <a href="/member/logout">로그아웃</a>
+                        </div>
+                    </c:otherwise>
+                
+                </c:choose>
             </div>
 
 

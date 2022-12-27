@@ -69,7 +69,6 @@
                         <span></span> <span class="checkboxText">개인정보 제공 동의</span>
                     </label>
                     
-                    
 
             <button id="signUpBtn">가입</button>
 

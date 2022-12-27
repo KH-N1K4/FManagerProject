@@ -170,6 +170,7 @@
 }
 
 .submitButton{
+  cursor: pointer;
   width: 130px;
   height: 40px;
   background-color: #5b8d2a;
