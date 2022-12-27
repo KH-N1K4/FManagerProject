@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.service.ManagerService;
 import com.manager.freelancer.manager.model.vo.Member;
 
@@ -28,7 +27,8 @@ public class ManagerController {
 	
 	// 회원 관리 - 회원 목록 조회
 	@GetMapping("/manager/memberList")
-	public String managerMemberList(Model model, @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+	public String managerMemberList(Model model, 
+									@RequestParam(value="cp", required=false, defaultValue = "1") int cp,
 									@RequestParam Map<String, Object> pm) {
 		
 		if(pm.get("key")==null) {
@@ -64,18 +64,38 @@ public class ManagerController {
 			map=service.selectMemberTypeList(value,cp);
 			model.addAttribute("map", map);
 		}
-		
+		System.out.println(map);
 		return map;
 	}
 	
+	//회원 유형별 목록 조회
+	@GetMapping("/manager/memberType2")
+	public String managerMemberType2(Model model, 
+								@RequestParam String value,
+								@RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+								@RequestParam Map<String, Object> pm) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(pm.get("key")==null) {
+			map=service.selectMemberTypeList(value,cp);
+			model.addAttribute("map", map);
+		}
+		System.out.println(map);
+		return "/manager/memberList";
+	}
+	
+	
+	
+	
+	
 	
 	// 회원 탈퇴
-	@GetMapping("manager/memberDelete")
+	@GetMapping("/manager/memberDelete")
 	@ResponseBody
 	public int managerMemberDelete(@RequestParam int memberNo) {
 		
 		int result = service.managerMemberDelete(memberNo);
-		
 		
 		return result;
 	}

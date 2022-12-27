@@ -97,7 +97,9 @@
 						
 							<c:when test="${i==pagination.currentPage}">
 								<!-- 현재 보고있는 페이지 -->
-								<li><a class="current">${i}</a></li>
+								<li>
+									<a class="current">${i}</a>
+								</li>
 							</c:when>
 							
 							<c:otherwise>
