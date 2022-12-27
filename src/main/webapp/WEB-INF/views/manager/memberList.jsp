@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="memberList" value="${map.memberList}" />
 <c:set var="pagination" value="${map.pagination}" />
-<c:set var="member" value="${member}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,7 +137,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 	
 	<script>
-		/* const memberList = ${memberList}; */
+		const sURL = "&key=${param.key}&query=${param.query}";
 	</script>
 	<script src="/resources/js/manager/memberList.js"></script>
 </body>

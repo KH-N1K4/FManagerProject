@@ -22,6 +22,8 @@
 		<result property="freelancerPeriod" column="FREELANCER_PERIOD" />
 		<result property="freeContactTime1" column="FREE_CONTACT_TIME1" />
 		<result property="freeContactTime2" column="FREE_CONTACT_TIME2" />
+		<result property="freelancerBankName" column="BANK_NAME" />
+		<result property="freelancerAccountNo" column="ACCOUNT_NO" />
 	</resultMap>
 
 
@@ -78,9 +80,12 @@
 	
 	<!-- 프리랜서 상세 조회 -->
 	<select id="selectFreelancerDetail" resultMap="manager_member_rm">
-		SELECT FREELANCER_INTRODUCTION, REGION_NAME, FREELANCER_PERIOD, FREE_CONTACT_TIME1, FREE_CONTACT_TIME2
+		SELECT FREELANCER_INTRODUCTION, REGION_NAME, FREELANCER_PERIOD, FREE_CONTACT_TIME1, FREE_CONTACT_TIME2,
+					ACCOUNT_NO, BANK_NAME
 		FROM FREELANCER
 		JOIN REGION USING(REGION_NO)
+		JOIN FREELANCER_ACCOUNT USING (FREELANCER_NO)
+		JOIN BANK USING (BANK_CODE)
 		WHERE FREELANCER_NO=#{memberNo}
 	</select>
 	

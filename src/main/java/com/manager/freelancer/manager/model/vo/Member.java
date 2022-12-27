@@ -33,4 +33,7 @@ public class Member {
 	private int freeContactTime1;
 	private int freeContactTime2;
 	
+	private int freelancerAccountNo;
+	private String freelancerBankName;
+	
 }
