@@ -57,12 +57,26 @@
 		</foreach>
   	</insert>
   	
-  	<!-- 이용문의 내역 조회 -->
-  	<select id="selectInquiryList" resultType="list" resultMap="userInquiry_rm"> 
+	<!-- 이용문의 내역 조회 -->
+<!--   	<select id="selectInquiryList" resultType="list" resultMap="userInquiry_rm"> 
+  		SELECT USER_INQUIRY_NO, INQUIRY_TYPE_NO, USER_INQUIRY_TITLE, USER_INQUIRY_REQUEST,
+  			   TO_CHAR(USER_INQUIRY_CREATE_DATE, 'YYYY-MM-DD') USER_INQUIRY_CREATE_DATE
+		FROM USER_INQUIRY WHERE MEMBER_NO = #{memberNo}
+  	</select>  -->
+  	
+  	<!-- 1. 특정 게시판의 전체 게시글 수 조회 -->
+  	<select id="getListCount" parameterType="_int" resultType="_int">
+  		SELECT COUNT(*) FROM USER_INQUIRY
+		WHERE MEMBER_NO = #{memberNo}
+  	</select>
+  	
+  	<!-- 특정 게시판 목록 조회 -->
+  	<select id="selectInquiryList" parameterType="_int" resultMap="userInquiry_rm">
   		SELECT USER_INQUIRY_NO, INQUIRY_TYPE_NO, USER_INQUIRY_TITLE, USER_INQUIRY_REQUEST,
   			   TO_CHAR(USER_INQUIRY_CREATE_DATE, 'YYYY-MM-DD') USER_INQUIRY_CREATE_DATE
 		FROM USER_INQUIRY WHERE MEMBER_NO = #{memberNo}
   	</select>
+  	
   	
   	<!-- 이용문의 상세 내역 조회 -->
   	<select id="viewInquiryDetail" resultType="userInquiry" resultMap="userInquiry_rm"> 
@@ -79,6 +93,48 @@
   		SELECT * FROM USER_INQUIRY_FILE
 		WHERE USER_INQUIRY_NO = #{userInquiryNo}
 		ORDER BY INQUIRY_FILE_ORDER
+  	</select>
+  	
+  	<!-- 1. 검색 조건이 일치하는 게시글 수 조회 -->
+  	<select id="getListCount_search" resultType="_int">
+  		SELECT COUNT(*) 
+  		FROM USER_INQUIRY
+		WHERE MEMBER_NO = #{memberNo}
+		<if test='query != null and query != ""'>
+			<choose>
+				<when test='key == "t"'>
+					AND USER_INQUIRY_TITLE LIKE '%${query}%'
+				</when>
+				<when test='key == "c"'>
+					AND USER_INQUIRY_CONTENT LIKE '%${query}%'
+				</when>
+				<when test='key == "tc"'>
+					AND (USER_INQUIRY_TITLE LIKE '%${query}%' OR
+					USER_INQUIRY_CONTENT LIKE '%${query}%')
+				</when>
+			</choose>
+		</if>
+  	</select>
+  	
+  	<!-- 검색 조건 일치 게시글 목록 조회 -->
+  	<select id="selectInquiryList_search" parameterType="_int" resultMap="userInquiry_rm">
+  		SELECT USER_INQUIRY_NO, INQUIRY_TYPE_NO, USER_INQUIRY_TITLE, USER_INQUIRY_REQUEST,
+  			   TO_CHAR(USER_INQUIRY_CREATE_DATE, 'YYYY-MM-DD') USER_INQUIRY_CREATE_DATE
+		FROM USER_INQUIRY WHERE MEMBER_NO = #{memberNo}
+		<if test='query != null and query != ""'>
+			<choose>
+				<when test='key == "t"'>
+					AND USER_INQUIRY_TITLE LIKE '%${query}%'
+				</when>
+				<when test='key == "c"'>
+					AND USER_INQUIRY_CONTENT LIKE '%${query}%'
+				</when>
+				<when test='key == "tc"'>
+					AND (USER_INQUIRY_TITLE LIKE '%${query}%' OR
+					USER_INQUIRY_CONTENT LIKE '%${query}%')
+				</when>
+			</choose>
+		</if>
   	</select>
   
 </mapper>

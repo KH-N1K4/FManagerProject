@@ -123,7 +123,11 @@
 
                         </section>
                     </c:if>
+                    <div id="goToList">
+                        <button>목록으로</button>
+                    </div>
                 </form>
+
             </div>
 
 
