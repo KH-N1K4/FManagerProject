@@ -64,15 +64,11 @@
                 </div>
            <!--  <input type="checkbox" name="signUpagree" id="agree"><label for="agree"></label><span class="agreeText">개인정보 제공 동의</span> -->
 
-			<input type="checkbox" name="signUpCheck" id="check" value="5">
-			<label for="agree" class="checkbox">
+			<input type="checkbox" name="signUpCheck" id="signUpCheck" value="5">
+			<label for="signUpCheck" class="checkbox">
                         <span></span> <span class="checkboxText">개인정보 제공 동의</span>
                     </label>
                     
-                    <!-- <input type="checkbox" name="memberInterest" id="sound" value="5">
-                    <label for="sound" class="checkbox">
-                        <span></span> <span class="checkboxText">음향</span>
-                    </label> -->
 
             <button id="signUpBtn">가입</button>
 
