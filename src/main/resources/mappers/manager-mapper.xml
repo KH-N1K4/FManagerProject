@@ -133,8 +133,7 @@
 	
 	<!-- 회원 탈퇴 -->
 	<update id="managerMemberDelete">
-		UPDATE SET MEMBER_DELETE_FL = 'Y'
-		FROM MEMBER
+		UPDATE MEMBER SET MEMBER_DELETE_FL = 'Y'
 		WHERE MEMBER_NO=#{memberNo}
 	</update>
 	

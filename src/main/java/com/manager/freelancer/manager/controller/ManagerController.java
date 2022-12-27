@@ -95,6 +95,8 @@ public class ManagerController {
 	@ResponseBody
 	public int managerMemberDelete(@RequestParam int memberNo) {
 		
+		System.out.println(memberNo);
+		
 		int result = service.managerMemberDelete(memberNo);
 		
 		return result;

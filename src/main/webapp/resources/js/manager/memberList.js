@@ -4,6 +4,8 @@ console.log(key == "");
 
 /* 모달 */
 modalShow();
+/* 회원 탈퇴 */
+deleteMember();
 
 /* 회원 구분 select */
 function selectChange() {
@@ -77,6 +79,7 @@ function selectChange() {
                 }
 
                 modalShow();
+                deleteMember();
 
 
 
@@ -144,24 +147,34 @@ function selectChange() {
 
 
 /* 회원 탈퇴 */
-const deleteBtn = document.querySelector(".deleteBtn");
-
-deleteBtn.addEventListener("click", e => {
-    const memberNo = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
-    console.log(memberNo);
-    $.ajax({
-        url: '/manager/memberDelete',
-        data: { 'memberNo': memberNo },
-        success: (result) => {
-            if (result > 0) {
-
-            } else {
-
+function deleteMember(){
+    const deleteBtn = document.querySelectorAll(".deleteBtn");
+    
+    for(d of deleteBtn){
+        d.addEventListener("click", e => {
+            if(confirm("정말로?")){
+    
+                const memberNo = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
+                console.log(memberNo);
+                $.ajax({
+                    url: '/manager/memberDelete',
+                    data: { 'memberNo': memberNo },
+                    type: 'GET',
+                    success: (result) => {
+                        if (result > 0) {
+                            selectChange();
+                        } else {
+            
+                        }
+                    }
+                });
             }
-        }
-    });
+        
+        });
+    }
 
-});
+}
+
 
 
 
