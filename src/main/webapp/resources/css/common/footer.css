@@ -8,9 +8,10 @@ body{
 
 #footer{
 
-margin-top:100px;
+  /* margin-top:100px; */
   background-color: rgb(190, 190, 190);
   height: 250px;
+  
 }
 
 #footer-in a{

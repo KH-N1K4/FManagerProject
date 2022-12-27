@@ -39,12 +39,22 @@ public class UserInquiryDAO {
 	}
 	
 	
-	/** 이용문의 내역 조회하기 
+	/** 이용 문의 내역 조회하기 
 	 * @param memberNo
 	 * @return userInquiry
 	 */
 	public List<UserInquiry> selectInquiryList(int memberNo) {
 		return sqlSession.selectList("inquiryMapper.selectInquiryList",memberNo);
+	}
+
+
+	/** 이용 문의 내역 상세보기
+	 * @param userInquiryNo
+	 * @return
+	 */
+	public UserInquiry viewInquiryDetail(int userInquiryNo) {
+		
+		return sqlSession.selectOne("inquiryMapper.viewInquiryDetail",userInquiryNo);
 	}
 
 	
