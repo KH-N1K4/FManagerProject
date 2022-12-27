@@ -163,3 +163,22 @@ table td{
     height: auto;
     margin-bottom: 20px;
 }
+
+/* 목록으로 버튼 */
+#goToList{
+    width: 800px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#goToList button{
+    width: 150px;
+    height: 60px;
+    background-color: #538126;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #538126;
+    cursor: pointer;
+    font-size: 16px;
+}

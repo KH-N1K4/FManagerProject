@@ -2,6 +2,7 @@ package com.manager.freelancer.customerCenter.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -79,14 +80,36 @@ public class UserInquiryController {
 		
 	}
 	
+//	// 이용문의 내역으로 이동 및 조회
+//	@GetMapping("/userInquiryList")
+//	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model) {
+//		
+//		List<UserInquiry> userInquiry = service.selectInquiryList(loginMember.getMemberNo());
+//		System.out.println(userInquiry);
+//		
+//		model.addAttribute("userInquiry",userInquiry);
+//		
+//		return "customerCenter/inquiryList";
+//	}
+	
 	// 이용문의 내역으로 이동 및 조회
 	@GetMapping("/userInquiryList")
-	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model) {
+	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model,
+								  @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+								  @RequestParam Map<String,Object> pm) {
 		
-		List<UserInquiry> userInquiry = service.selectInquiryList(loginMember.getMemberNo());
-		System.out.println(userInquiry);
 		
-		model.addAttribute("userInquiry",userInquiry);
+		if(pm.get("key")==null) {
+			
+			Map<String, Object> map = service.selectInquiryList(loginMember.getMemberNo(), cp);
+			model.addAttribute("map",map);
+		} else {
+			pm.put("memberNo", loginMember.getMemberNo());
+			Map<String, Object> map = service.selectInquiryList(pm, cp);
+			model.addAttribute("map",map);
+		}
+		
+		
 		
 		return "customerCenter/inquiryList";
 	}

@@ -80,20 +80,68 @@ table td{
 /* ------------------------------------------------------ */
 
 
-/* 페이지 리스트 */
-#pageList{
+.formBox{
     display: flex;
-    justify-content: center;
-    margin-bottom: 50px;
+    justify-content: space-between;
+}
+.formBox input{
+    width: 150px;
+    height: 20px;
+    border-radius: 5px;
+}
+.formBox input:hover{
+    border: 1px solid #538126;
 }
 
-a{
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.pagination li {
+    width: 20px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.pagination a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 100%;
+}
+
+
+table a{
     text-decoration: none;
     color: black;
 }
 
+/* 하단 검색 창  */
+#inquirySearch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
+#inquirySearch div{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-hr{
-    color: #538126;
+#inquirySearch input{
+    width: 200px;
+    height: 25px;
+}
+#inquirySearch button{
+    width: 100px;
+    height: 32px;
+    margin-left: 10px;
 }
 
