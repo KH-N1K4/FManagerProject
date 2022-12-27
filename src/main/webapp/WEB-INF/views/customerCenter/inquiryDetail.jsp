@@ -56,15 +56,33 @@
                             <td><textarea name="" id="" cols="94" rows="10">${userInquiry.userInquiryContent}</textarea></td>
                         </tr>
                         <tr>
-                            <th>첨부파일</th>
-                            <td colspan="3">
-                                <div class="container">
-                                    <input type="text" class="upload-name" 
-                                    value="${userInquiry.inquiryFilePath}" placeholder="파일을 업로드 하세요" readonly>
-                                    <label for="upload-file">파일선택</label>
-                                    <input type="file" id="upload-file">
+                            <div>업로드 이미지</div>
+                            <div class="img-box">
+
+                                <div class="boardImg">
+                                    <label for="img1">
+                                        <img class="preview" src="">
+                                    </label>
+                                    <input type="file" name="images" class="inputImage" id="img1" accept="image/*">
+                                    <span class="delete-image">&times;</span>
                                 </div>
-                            </td>
+
+                                <div class="boardImg">
+                                    <label for="img2">
+                                        <img class="preview" src="">
+                                    </label>
+                                    <input type="file" name="images" class="inputImage" id="img2" accept="image/*">
+                                    <span class="delete-image">&times;</span>
+                                </div>
+
+                                <div class="boardImg">
+                                    <label for="img3">
+                                        <img class="preview" src="">
+                                    </label>
+                                    <input type="file" name="images" class="inputImage" id="img3" accept="image/*">
+                                    <span class="delete-image">&times;</span>
+                                </div>
+                            </div>    
                         </tr>
                     </table>
                     <hr><br>
