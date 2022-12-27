@@ -33,8 +33,8 @@
 
                     <table>
                         <tr>
-                            <th style="width:100px">1</th>
-                            <th style="width:500px">제목 1</th>
+                            <th style="width:100px">${userInquiry.userInquiryNo}</th>
+                            <th style="width:500px">${userInquiry.userInquiryTitle}</th>
                             <th style="width:100px">상태</th>
                             <th style="width:100px"><button>해결</button></th>
                         </tr>
@@ -45,7 +45,7 @@
                     <table>
                         <tr>
                             <th style="width:100px">작성자</th>
-                            <td style="width:700px">노성찬</td>
+                            <td style="width:700px">${userInquiry.memberName}</td>
                         </tr>
                         <tr>
                             <th>구분</th>
@@ -53,14 +53,14 @@
                         </tr>
                         <tr>
                             <th>내용</th>
-                            <td><textarea name="" id="" cols="94" rows="10"></textarea></td>
+                            <td><textarea name="" id="" cols="94" rows="10">${userInquiry.userInquiryContent}</textarea></td>
                         </tr>
                         <tr>
                             <th>첨부파일</th>
                             <td colspan="3">
                                 <div class="container">
                                     <input type="text" class="upload-name" 
-                                    value="파일을 업로드 하세요" placeholder="파일을 업로드 하세요" disabled>
+                                    value="${userInquiry.inquiryFilePath}" placeholder="파일을 업로드 하세요" readonly>
                                     <label for="upload-file">파일선택</label>
                                     <input type="file" id="upload-file">
                                 </div>

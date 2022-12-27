@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fmanager - 문의내역</title>
     <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/inquiryList.css">
-
 </head>
 <body>
 
@@ -31,10 +30,11 @@
                     <h3 id="title">내 문의 내역</h3>
 
                     <div>문의 유형 
-                        <select name="" id="division">
-                            <option value="">전체</option> 
-                            <option value="">문의</option> 
-                            <option value="">신고</option> 
+                        <select name="inquiryTypeNo" id="division">
+                            <option value="0">전체</option> 
+                            <option value="1">문의</option> 
+                            <option value="2">환불</option> 
+                            <option value="3">신고</option> 
                         </select>
                     </div>
 
@@ -43,15 +43,23 @@
                     <table>
                         <tr>
                             <th style="width:100px">번호</th>
-                            <th style="width:200px">구분</th>
-                            <th style="width:370px">제목</th>
+                            <th style="width:100px">문의 유형</th>
+                            <th style="width:350px">제목</th>
+                            <th style="width:120px">작성일</th>
                             <th style="width:100px">상태</th>
                         </tr>
                         <c:forEach var="inquiry" begin="0" end="9" step="1" items="${userInquiry}">
                             <tr>
                                 <td>${inquiry.userInquiryNo}</td>
-                                <td>${inquiry.inquiryTypeNo}</td>
-                                <td><a href="/userInquiryDetail">${inquiry.userInquiryTitle}</a></td>
+                                <td>
+                                <c:choose>
+                                    <c:when test="${inquiry.inquiryTypeNo == 1}">문의</c:when>
+                                    <c:when test="${inquiry.inquiryTypeNo == 2}">환불</c:when>
+                                    <c:when test="${inquiry.inquiryTypeNo == 3}">신고</c:when>
+                                </c:choose>
+                                </td>
+                                <td><a href="/userInquiryDetail/${inquiry.userInquiryNo}">${inquiry.userInquiryTitle}</a></td>
+                                <td>${inquiry.userInquiryCreateDate}</td>
                                 <td><button>해결</button></td>
                             </tr>
                         </c:forEach>
@@ -59,6 +67,7 @@
                     <hr>
                 </form>
 
+                
                 <br><br>
                 <div id="pageList">
                     <a href=""> << </a> &nbsp;&nbsp;

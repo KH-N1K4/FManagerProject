@@ -26,4 +26,11 @@ public interface UserInquiryService {
 	 */
 	List<UserInquiry> selectInquiryList(int memberNo);
 
+
+	/** 이용문의 내역 상세보기 
+	 * @param userInquiryNo
+	 * @return userInquiry
+	 */
+	UserInquiry viewInquiryDetail(int userInquiryNo);
+
 }

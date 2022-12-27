@@ -30,7 +30,7 @@
                 <form action="userInquiryInsert" id="inquirySubmit" method="POST" enctype="multipart/form-data">
                     <h3 id="title">문의하기</h3>
                     <span id="tltleInfo">[중요] 작업 문의는 해당 전문가에게 직접 남겨주세요.</span>
-                    <br><br>
+                    <br><br><br>
 
                     <div>문의 유형</div>
                     <select name="inquiryTypeNo" id="division">
@@ -64,9 +64,9 @@
                             </c:when>
                         </c:choose>
                     </c:forEach>
-
-
-                    <h5>업로드 이미지</h5>
+                    <br>    
+                    
+                    <div>업로드 이미지</div>
                     <div class="img-box">
 
                         <div class="boardImg">

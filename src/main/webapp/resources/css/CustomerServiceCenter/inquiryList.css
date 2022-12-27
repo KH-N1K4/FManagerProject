@@ -57,10 +57,11 @@
 
 /* 문의 유형 */
 #division{
-    width: 200px;
+    width: 150px;
     height: 30px;
     margin-left: 20px;
     margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 /* ----------------------테이블 폼---------------------- */
