@@ -35,15 +35,21 @@
         <div>
             <div class="item">근무기간</div>
             <div>
-                <select name="careerCompanyPeriod1" id="careerCompanyPeriod" class="input2">
+                <select name="careerCompanyPeriod1" id="careerCompanyPeriod1" class="input2">
                     <option value="0">년</option>
                     <option value="1">1년</option>
                     <option value="2">2년</option>
                     <option value="3">3년</option>
                     <option value="4">4년</option>
                     <option value="5">5년</option>
+                    <option value="6">6년</option>
+                    <option value="7">7년</option>
+                    <option value="8">8년</option>
+                    <option value="9">9년</option>
+                    <option value="10">10년</option>
+                    <option value="11">11년</option>
                 </select>
-                <select name="careerCompanyPeriod2" id="careerCompanyPeriod" class="input2">
+                <select name="careerCompanyPeriod2" id="careerCompanyPeriod2" class="input2">
                     <option value="0">개월</option>
                     <option value="1">1개월</option>
                     <option value="2">2개월</option>
@@ -56,7 +62,6 @@
                     <option value="9">9개월</option>
                     <option value="10">10개월</option>
                     <option value="11">11개월</option>
-                    <option value="12">12개월</option>
                 </select>
                 
             </div>

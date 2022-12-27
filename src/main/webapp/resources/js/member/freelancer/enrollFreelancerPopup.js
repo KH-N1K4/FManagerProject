@@ -82,34 +82,53 @@ modalClose3.addEventListener('click', () => {
 
 // })
 
-
+//
 const result1 = document.getElementsByClassName('input1');
 const select1 = document.getElementById('graduateStatus');
 const licenseInput1 = document.getElementById('majorPopup');
 const sendContent1 = document.getElementById('sendContent1');
 
-sendContent1.addEventListener('click',function() {
-  for(let i = 0; i < result1.length; i++) {
-    licenseInput1.value += result1[i].value +',';
+// const select = document.getElementById('graduateStatus');
+// const value = select.value;
+// const text = select.options[select.selectedIndex].text;
 
-    if(i === result1[i].length){
-      result[i].value.substr(0, result1[i].value.length);
-    }
+// const allOptions = Array.from(select.options).map(option => option.value);
+
+
+sendContent1.addEventListener('click',function() {
+  const test1 = $("#graduateStatus option:selected").text()
+  // console.log($(".graduateStatus option:selected").text());
+  document.getElementById('majorStatus').value = $("#graduateStatus option:selected").val(); // input hidden값
+  for(let i = 0; i < result1.length-1; i++) {
+    licenseInput1.value += result1[i].value +',';
   }
+  licenseInput1.value += test1;
   modal1.style.display='none';
 });
+
+
 
 const result2 = document.getElementsByClassName('input2');
 const licenseInput2 = document.getElementById('careerPopup');
 const sendContent2 = document.getElementById('sendContent2');
 
+
+
 sendContent2.addEventListener('click',function() {
-  for(let i = 0; i < result2.length; i++) {
+  const test2 = $("#careerCompanyPeriod1 option:selected").text();
+  const test3 = $("#careerCompanyPeriod2 option:selected").text();
+  
+  for(let i = 0; i < result2.length-2; i++) {
     licenseInput2.value += result2[i].value +',';
   }
+  licenseInput2.value += test2+" ";  // ?년 [4]
+  licenseInput2.value += test3;     // ?개월 [5]
+
   modal2.style.display='none';
   if(licenseInput2.value.trim().length != 0){
-    freelancerCont.value = 1 // 수정하기 > 숫자환산
+    freelancerCont.value += 
+    licenseInput2.value.split(',')[4].split('년')[0];
+
   }
 });
 
@@ -118,15 +137,17 @@ const licenseInput3 = document.getElementById("licensePopup"); // 전문가등�
 const sendContent3 = document.getElementById("sendContent3"); // 모달창 제출 버튼
 
 sendContent3.addEventListener("click", function(){
-    for(let i =0; i<result3.length; i++){
-    document.getElementById("licensePopup").value +=   result3[i].value  +','
+    for(let i =0; i<result3.length-1; i++){
+    document.getElementById("licensePopup").value +=   result3[i].value  +',';
+    // if(licenseInput3[i].value = 1){
+    //   result3[i].innerText
+    // }
     }
+    licenseInput3.value += result3[2].value;
     // document.getElementById("licensePopup").value = result.value;
     modal3.style.display="none"
 });
 
-const freelancerCont = document.getElementById("freelancerCont");
+const bankcode = document.getElementsByClassName("bankCode");
+const bankAccountNumber = document.getElementById("bankAccountNumber");
 
-// if(licenseInput2.value.trim().length != 0){
-//   freelancerCont.value = 1
-// }

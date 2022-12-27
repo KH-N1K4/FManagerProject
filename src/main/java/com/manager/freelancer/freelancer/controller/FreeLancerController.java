@@ -53,6 +53,7 @@ public class FreeLancerController {
 		public String enrollFreelancerSignup(@SessionAttribute("loginMember") Member loginMember,//회원번호 == 프리랜서번호
 				String major, // major input태그에 적힌 값들
 				String career,
+				int majorStatus, // major에서 재학상태값
 				String license,
 				Freelancer inputFreelancer,
 				String[] freelancerField  ) {
@@ -61,6 +62,7 @@ public class FreeLancerController {
 			
 		inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 로그인한 회원번호를 inputFreelancer에 세팅
 		inputFreelancer.setMajor(major);
+		inputFreelancer.setMajorGraduateStatus(majorStatus);
 		inputFreelancer.setCareer(career);
 		inputFreelancer.setLicense(license);
 		int result = service.enrollFreelancerSignup(inputFreelancer);

@@ -12,7 +12,7 @@
                 <div>
                     <div class="item">발급일</div>
                     <div>
-                        <input type="text" name="licenseDate" id="licenseContent2" class="input3">
+                        <input type="text" name="licenseDate" id="licenseContent2" class="input3" placeholder="'2022-01-01'형식으로 입력">
                     </div>
                 </div>
                 <div>

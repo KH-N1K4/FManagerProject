@@ -43,5 +43,11 @@ public class FreeLancerDAO {
 	}
 
 
+	// 프리랜서 계좌등록(insert)
+	public int insertFreelancerAccount(Freelancer inputFreelancer) {
+		return sqlSession.insert("freelancerMapper.insertinsertFreelancerAccount", inputFreelancer);
+	}
+
+
 	
 }

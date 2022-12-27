@@ -79,6 +79,7 @@
                 <div class="item">학력/전공</div>
                 <div>
                     <input type="text" name="major" id="majorPopup" class="modal">
+                    <input name="majorStatus" id="majorStatus" type="hidden">
                 </div>
             </div>
             <div>
@@ -103,14 +104,14 @@
             <div>
                 <div class="item">수익금 입금 계좌</div>
                 <div>
-                    <select name="" id="bankName" class="select">
-                        <option value="">전체</option>
-                        <option value="">신한</option>
-                        <option value="">국민</option>
-                        <option value="">우리</option>
-                        <option value="">기업</option>
+                    <select name="bankCode" id="bankCode" class="select">
+                        <option value="0">전체</option>
+                        <option value="1">신한</option>
+                        <option value="2">국민</option>
+                        <option value="3">우리</option>
+                        <option value="4">기업</option>
                     </select>
-                    <input type="text" name="" id="account">
+                    <input type="text" name="bankAccountNumber" id="bankAccountNumber">
                 </div>
             </div>
             <div>
@@ -140,6 +141,8 @@
           
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
     <script src="/resources/js/member/freelancer/enrollFreelancerPopup.js"></script> 
 
 </body>

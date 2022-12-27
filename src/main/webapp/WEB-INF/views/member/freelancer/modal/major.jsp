@@ -19,7 +19,7 @@
                 <div>
                     <div class="item">상태</div>
                     <div>
-                        <select name="graduateStatus" id="graduateStatus" class="input1">
+                        <select name="graduateStatus" id="graduateStatus" class="input1 ">
                             <option value="0">선택해주세요</option>
                             <option value="1">재학</option>
                             <option value="2">휴학</option>
