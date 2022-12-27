@@ -90,8 +90,11 @@ function alertAndFocus(input,str){
 // (확인 클릭 -> 탈퇴 / 취소 -> 탈퇴 취소 )
 
 const memberDeleteForm=document.getElementById("memberDeleteForm");
-
+// 동의 체크박스 
+    const agree=document.getElementById("agree");
 if(memberDeleteForm!=null){ // 탈퇴 폼이 있을 경우 
+
+    
     memberDeleteForm.addEventListener("submit",function(event){ 
 
         const memberPw=document.getElementById("memberPw");
@@ -104,8 +107,7 @@ if(memberDeleteForm!=null){ // 탈퇴 폼이 있을 경우
             return;
         }
 
-        // 동의 체크박스 
-        const agree=document.getElementById("agree");
+        
 
         if(!agree.checked){
             alert("탈퇴 동의하시면 체크를 눌러주세요");
@@ -118,18 +120,6 @@ if(memberDeleteForm!=null){ // 탈퇴 폼이 있을 경우
             alert("탈퇴 취소");
             event.preventDefault();
         }
-
-
-        // if(agree.checked){
-        //     if(!confirm("정말 탈퇴하시겠습니까?")){
-        //         event.preventDefault();
-        //     }
-        // }else{
-        //     alert("탈퇴 동의하시면 체크를 눌러주세요");
-        //     agree.focus();
-        //     event.preventDefault();
-        //     return;
-        // }
 
     })
 }

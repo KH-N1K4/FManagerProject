@@ -21,7 +21,7 @@
        
         <section>
             <div id="title">회원 탈퇴</div>
-            <form action="/member/deleteMember" name="myPage-frm" method="POST" id="memberDeleteForm">
+            <form action="/member/myInfo/deleteMember" name="myPage-frm" method="POST" id="memberDeleteForm">
                 <div id="inputArea">
                     <div>
                         <div class="item">이메일</div>
@@ -56,6 +56,9 @@
 
         
     </div>
+    
+    <script src="/resources/js/member/changePw.js"></script>
+    
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

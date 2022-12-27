@@ -66,10 +66,11 @@
         
     </div>
     <div id="nav">
+    
     	 <ul>
                 <c:forEach var="boardType" items="${boardTypeList}">
                     <li>
-                        <a href="/board/${boardType.BOARD_CODE}">${boardType.BOARD_NAME}</a>
+                        <a href="/category/${boardType.MAIN_CATEGORY_NO}">${boardType.MAIN_CATEGORY_NAME}</a>
                     </li>
                 </c:forEach>
                 
