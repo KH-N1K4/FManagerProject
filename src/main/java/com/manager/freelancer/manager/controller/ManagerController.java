@@ -92,8 +92,12 @@ public class ManagerController {
 	// 서비스 등록 내역 관리
 	@GetMapping("/manager/serviceList")
 	public String managerServiceList(Model model, 
-			@RequestParam(value="value", required=false) String value,
+			@RequestParam(value="status", required=false) String status,
 			@RequestParam(value="cp", required=false, defaultValue = "1") int cp) {
+		
+		Map<String, Object> map=service.selectServiceList(status,cp);
+		model.addAttribute("map", map);
+		
 		return "/manager/serviceList";
 	}
 	

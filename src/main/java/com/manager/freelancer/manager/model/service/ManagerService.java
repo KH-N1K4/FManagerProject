@@ -41,6 +41,13 @@ public interface ManagerService {
 	 */
 	Map<String, Object> selectMemberList(Map<String, Object> pm, int cp);
 
+	/** 서비스 목록 조회
+	 * @param status
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectServiceList(String status, int cp);
+
 
 	
 }

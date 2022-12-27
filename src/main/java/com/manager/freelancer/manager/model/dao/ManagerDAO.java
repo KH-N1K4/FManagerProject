@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
+import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
 
@@ -34,8 +35,8 @@ public class ManagerDAO {
 	 * @return
 	 */
 	public int getMemberListCount(String value2) {
-		System.out.println("======="+value2);
-		return sqlSession.selectOne("managerMapper.getMemberListCount",value2);
+		System.out.println("=======" + value2);
+		return sqlSession.selectOne("managerMapper.getMemberListCount", value2);
 	}
 
 	/**
@@ -44,7 +45,7 @@ public class ManagerDAO {
 	 * @param pagination
 	 * @return
 	 */
-	public List<Member> selectMemberList(String value2,Pagination pagination) {
+	public List<Member> selectMemberList(String value2, Pagination pagination) {
 
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
@@ -83,25 +84,29 @@ public class ManagerDAO {
 		return sqlSession.selectOne("managerMapper.selectFreelancerDetail", memberNo);
 	}
 
-	/** 회원 탈퇴
+	/**
+	 * 회원 탈퇴
+	 * 
 	 * @param memberNo
 	 * @return
 	 */
 	public int managerMemberDelete(int memberNo) {
-		return sqlSession.update("managerMapper.managerMemberDelete",memberNo);
+		return sqlSession.update("managerMapper.managerMemberDelete", memberNo);
 	}
 
-	
-	
-	/** 검색 조건 일치 회원 수 조회
+	/**
+	 * 검색 조건 일치 회원 수 조회
+	 * 
 	 * @param pm
 	 * @return
 	 */
 	public int getMemberListCount(Map<String, Object> pm) {
-		return sqlSession.selectOne("managerMapper.getMemberListCount_search",pm);
+		return sqlSession.selectOne("managerMapper.getMemberListCount_search", pm);
 	}
-	
-	/** 검색 조건 일치 회원 목록 조회
+
+	/**
+	 * 검색 조건 일치 회원 목록 조회
+	 * 
 	 * @param pagination
 	 * @param pm
 	 * @return
@@ -113,7 +118,30 @@ public class ManagerDAO {
 
 		return sqlSession.selectList("managerMapper.selectMemberList_search", pm, rowBounds);
 	}
-	
-	
+
+	/**
+	 * 서비스 수 조회
+	 * 
+	 * @param status
+	 * @return
+	 */
+	public int getServiceListCount(String status) {
+		return sqlSession.selectOne("managerMapper.getServiceListCount", status);
+	}
+
+	/**
+	 * 서비스 목록 조회
+	 * 
+	 * @param status
+	 * @param pagination
+	 * @return
+	 */
+	public List<FreelancerService> selectServiceList(String status, Pagination pagination) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectServiceList", status, rowBounds);
+	}
 
 }
