@@ -25,6 +25,29 @@
 		<result property="freelancerBankName" column="BANK_NAME" />
 		<result property="freelancerAccountNo" column="ACCOUNT_NO" />
 	</resultMap>
+	
+	<!-- 이용문의 -->
+	<resultMap type="UserInquiry" id="userInquiry_rm">
+	  	<id property="userInquiryNo" column="USER_INQUIRY_NO"/>
+	  	<result property="userInquiryTitle" column="USER_INQUIRY_TITLE" />
+	  	<result property="userInquiryContent" column="USER_INQUIRY_CONTENT" />
+	  	<result property="inquiryRequest" column="USER_INQUIRY_REQUEST" />
+	  	<result property="userInquiryCreateDate" column="USER_INQUIRY_CREATE_DATE" />
+	  	<result property="memberNo" column="MEMBER_NO" />
+	  	<result property="inquiryFileNo" column="INQUIRY_FILE_NO" />
+	  	<result property="inquiryFilePath" column="INQUIRY_FILE_PATH" />
+	  	<result property="inquiryFileOrder" column="INQUIRY_FILE_ORDER" />
+	  	<result property="inquiryTypeNo" column="INQUIRY_TYPE_NO" />
+  	</resultMap>
+  	
+  	<!-- 이용 문의 첨부 파일 -->
+	<resultMap type="UserInquiryImage" id="userInquiryImage_rm">
+      <id property="inquiryFileNo" column="INQUIRY_FILE_NO"/>
+      <result property="inquiryFileTitle" column="INQUIRY_FILE_TITLE"/>
+      <result property="inquiryFilePath" column="INQUIRY_FILE_PATH"/>
+      <result property="inquiryFileOrder" column="INQUIRY_FILE_ORDER"/>
+      <result property="userInquiryNo" column="USER_INQUIRY_NO"/>
+   </resultMap>
 
 
 
@@ -108,6 +131,32 @@
 		ORDER BY 1 DESC
 	</select>
 	
+	<!-- 회원 탈퇴 -->
+	<update id="managerMemberDelete">
+		UPDATE SET MEMBER_DELETE_FL = 'Y'
+		FROM MEMBER
+		WHERE MEMBER_NO=#{memberNo}
+	</update>
+	
+	
+	
+	
+	
+	<!-- 전체 이용문의 내역 수 조회 -->
+	<select id="getUserInguiryListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM USER_INQUIRY
+	</select>
+	
+	<!-- 이용 문의 내역 조회 -->
+	<!-- <select id="selectUserInquiryList">
+		SELECT USER_INQUIRY_NO, USER_INQUIRY_TITLE, INQUIRY_TYPE_NO,
+		TO_CHAR(MEMBER_ENROLL_DATE, 'YYYY"년" MM"월" DD"일"') MEMBER_ENROLL_DATE, FREELANCER_FL
+		FROM MEMBER
+		WHERE MEMBER_DELETE_FL='N'
+		AND AUTHORITY=1
+		ORDER BY 1 DESC
+	</select> -->
 
 </mapper>
 

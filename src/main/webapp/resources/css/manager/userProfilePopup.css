@@ -1,5 +1,6 @@
 .member-info{
     min-width: 500px;
+    max-width: 700px;
     margin:0;
     /* min-height: 100vh; */
   
@@ -159,7 +160,7 @@ input[type="checkbox"]:checked + label span::after {
 /* 버튼 */
 .btnArea{
 	margin:auto;
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 	padding: 10px;
 	width:200px;
 	height:30px;
@@ -235,16 +236,16 @@ textarea{
     flex-direction: row;
     width: 500px !important;
 }
-#bankName{
+#freelancerBankName{
     width: 100px;
     height: 30px;
     position: relative;
     top: 0px;
     margin-right: 10px;
 }
-#account{
+#freelancerAccount{
     width: 300px;
-    height: 24px;
+    height: 30px;
 }
 
 /* 포트폴리오 */

@@ -3,6 +3,7 @@ package com.manager.freelancer.manager.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.vo.Member;
 
 public interface ManagerService {
@@ -25,5 +26,17 @@ public interface ManagerService {
 	 * @return
 	 */
 	Map<String, Object> selectMemberTypeList(String value, int cp);
+
+	/** 회원 탈퇴
+	 * @param memberNo
+	 * @return
+	 */
+	int managerMemberDelete(int memberNo);
+
+	/** 문의 내역 조회 + 페이징
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectUserInquiryList(int cp);
 
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.dao.ManagerDAO;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
@@ -57,6 +58,8 @@ public class ManagerServiceImpl implements ManagerService{
 			member.setRegionName(freelancer.getRegionName());
 			member.setFreelancerPeriod(freelancer.getFreelancerPeriod());
 			member.setFreelancerIntroduction(freelancer.getFreelancerIntroduction());
+			member.setFreelancerBankName(freelancer.getFreelancerBankName());
+			member.setFreelancerAccountNo(freelancer.getFreelancerAccountNo());
 		}
 		
 		return member;
@@ -113,6 +116,38 @@ public class ManagerServiceImpl implements ManagerService{
 			map.put("memberList", memberList);
 		}
 		
+
+		return map;
+	}
+	
+	
+	//회원 탈퇴
+	@Override
+	public int managerMemberDelete(int memberNo) {
+		return dao.managerMemberDelete(memberNo);
+	}
+	
+	
+	
+	// 이용문의 내역 조회 + 페이징
+	@Override
+	public Map<String, Object> selectUserInquiryList(int cp) {
+		
+		int listCount = dao.getUserInguiryListCount();
+		Pagination pagination = new Pagination(listCount, cp);
+		List<UserInquiry> userInquiryList = dao.selectUserInquiryList(pagination);
+		/*
+		 * if(memberList!=null) { for(Member m : memberList) {
+		 * if(m.getFreelancerFlag().equals("N")) { m.setMemberType("일반 회원");
+		 * m.setFreelancerGrade(""); } else { m.setMemberType("프리랜서"); String gradeName
+		 * = dao.selectFreelancerGrade(m.getMemberNo());
+		 * m.setFreelancerGrade(gradeName); } }
+		 * 
+		 * }
+		 */
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		/* map.put("memberList", memberList); */
 
 		return map;
 	}

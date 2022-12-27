@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
 
@@ -103,6 +104,36 @@ public class ManagerDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 
 		return sqlSession.selectList("managerMapper.selectMemberList2", value, rowBounds);
+	}
+
+	/** 회원 탈퇴
+	 * @param memberNo
+	 * @return
+	 */
+	public int managerMemberDelete(int memberNo) {
+		return sqlSession.update("managerMapper.managerMemberDelete",memberNo);
+	}
+
+	
+	
+	/** 이용 문의 내역 수 조회
+	 * @return
+	 */
+	public int getUserInguiryListCount() {
+		return sqlSession.selectOne("managerMapper.getUserInguiryListCount");
+	}
+
+	/** 이용문의 내역 조회 + 페이징
+	 * @param pagination
+	 * @return
+	 */
+	public List<UserInquiry> selectUserInquiryList(Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectUserInquiryList", null, rowBounds);
 	}
 
 	

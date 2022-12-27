@@ -124,13 +124,8 @@
 						<div class="itemTitle free">
 							<div class="item">수익금 출금 은행</div>
 							<div class="accountArea">
-								<select name="" id="bankName">
-									<option value="">전체</option>
-									<option value="">신한</option>
-									<option value="">국민</option>
-									<option value="">우리</option>
-									<option value="">기업</option>
-								</select> <input type="text" name="" id="account" value="110-412-549956" readonly>
+								<input type="text" name="" id="freelancerBankName" readonly>
+								<input type="text" name="" id="freelancerAccount" readonly>
 							</div>
 						</div>
 					</div>
@@ -144,9 +139,6 @@
 						<div class="service">g</div>
 					</div>
 				</div>
-			</div>
-			<div class="btnArea">
-				<a href="/memberDelete">탈퇴</a>
 			</div>
 
 

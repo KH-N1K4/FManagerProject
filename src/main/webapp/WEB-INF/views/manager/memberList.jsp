@@ -45,6 +45,7 @@
 				<div class="member-division">구분</div>
 				<div class="member-grade">등급</div>
 				<div class="member-enrollDate">가입일</div>
+				<div class="member-delete"> </div>
 			</div>
 
 			<!-- 테이블 내용 -->
@@ -56,6 +57,7 @@
 						<div class="member-division">${member.memberType}</div>
 						<div class="member-grade">${member.freelancerGrade}</div>
 						<div class="member-enrollDate">${member.memberEnrollDate}</div>
+						<div class="member-delete"><a class="deleteBtn">탈퇴</a></div>
 					</div>
 				</c:forEach>
 			</c:if>
@@ -134,11 +136,13 @@
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
+	<script>
+		const key=document.getElementById("search-query").value;
+		const sURL="&key=${param.key}&query=${param.query}";
+
+	</script>
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 	
-	<script>
-		const sURL = "&key=${param.key}&query=${param.query}";
-	</script>
 	<script src="/resources/js/manager/memberList.js"></script>
 </body>
 </html>

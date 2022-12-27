@@ -1,6 +1,7 @@
 package com.manager.freelancer.manager.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.service.ManagerService;
 import com.manager.freelancer.manager.model.vo.Member;
 
@@ -66,6 +68,26 @@ public class ManagerController {
 		return map;
 	}
 	
+	
+	// 회원 탈퇴
+	@GetMapping("manager/memberDelete")
+	@ResponseBody
+	public int managerMemberDelete(@RequestParam int memberNo) {
+		
+		int result = service.managerMemberDelete(memberNo);
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/manager/tradeList")
 	public String managerTradeList() {
 		return "/manager/tradeList";
@@ -86,10 +108,26 @@ public class ManagerController {
 		return "/manager/reviewList";
 	}
 	
+	
+	
+	
+	
+	// 이용문의 관리 - 문의 내역
 	@GetMapping("/manager/userInquiry")
-	public String managerUserInquiry() {
+	public String managerUserInquiry(Model model, 
+									@RequestParam(value="cp", required=false, defaultValue = "1") int cp) {
+		
+		Map<String, Object> userInquiryList = service.selectUserInquiryList(cp);
+		
 		return "/manager/userInquiryList";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/manager/userInquiry/1")
 	public String managerUserInquiryDetail() {
