@@ -3,8 +3,6 @@
 .mainArea{
     width: 1200px;
     height: auto;
-    /* border-right: 1px solid black;  */
-    /* border-left: 1px solid black;  */
     display: flex;
     margin:auto;
 }
@@ -12,8 +10,7 @@
 /* 사이드 메뉴 영역*/
 .sideMenu{
     width: 200px;
-    height: 800px;
-    background-color: white;
+    height: auto;
 }
 
 
@@ -24,8 +21,9 @@
 }
 
 /* ---------문의하기폼--------- */
-#inquirySubmit{
-    margin: 50px
+.inquirySubmit{
+    margin: 50px;
+    
 }
 
 /* 문의하기 페이지 제목 */
@@ -35,78 +33,62 @@
 #tltleInfo{
     font-size: 15px;
     color: #538126;
+    font-weight: 400;
+    text-decoration: green;
 }
 
 /* 각 문의하기 작성소제목 */
-#inquirySubmit div{
+.inquirySubmit div{
     font-size: 15px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 /* hover 했을 경우*/
-#inquirySubmit input:hover{
+.inquirySubmit input:hover{
     border: 2px solid #538126;
 }
-#inquirySubmit select:hover{
+.inquirySubmit select:hover{
     border: 2px solid #538126;
 }
-#inquirySubmit textarea:hover{
+.inquirySubmit textarea:hover{
+    border: 2px solid #538126;
+}
+.boardImg label:hover{
     border: 2px solid #538126;
 }
 
 /* 문의 유형 */
 #division{
     width: 608px;
-    height: 30px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #dddddd;
 }
 #titleInput{
-    width: 600px;
-    height: 25px;
-}
-#inquirySubmit textarea{
-    width: 600px;
-}
-/* ----------------------파일업로드 */
-.upload-name {
-    display: inline-block;
+    padding-left: 10px;
+    width: 595px;
     height: 40px;
-    padding: 0 10px;
-    vertical-align: middle;
+    border-radius: 5px;
     border: 1px solid #dddddd;
-    width: 60%;
-    color: #999999;
-    border-radius: 5px;
 }
-.container label {
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    vertical-align: middle;
-    background-color: #538126;
-    cursor: pointer;
-    height: 20px;
-    margin-left: 10px;
+.inquirySubmit textarea{
+    width: 600px;
     border-radius: 5px;
-}
-.container input[type="file"] {
-    position: absolute;
-    width: 0;
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 0;
+    border: 1px solid #dddddd;
 }
 
+
 /* ---------등록 버튼--------- */
-#inquiryInsert{
+.inquiryInsert{
     margin-top: 50px;
     width: 300px;
     height: 50px;
     background-color: #538126;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
-#inquiryInsert a{
+.inquiryInsert a{
     text-decoration: none;
     color: #fff;
     font-size: 18px;
@@ -119,6 +101,7 @@
     background-color: #fff;
     border:1px solid #538126;
     cursor: pointer;
+    border-radius: 5px;
 }
 #goToMain a{
     text-decoration: none;
@@ -156,7 +139,6 @@
     height: 180px;
     display: inline-block;
     text-align: center;
-
     position: relative;
 }
 
@@ -170,6 +152,7 @@
     align-items: center;
     border: 1px solid #ccc;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .inputImage{
@@ -179,7 +162,7 @@
 
 .boardImg img{
     max-width: 100%;
-    max-height: 100%;
+    max-height: 100%; 
 }
 
 /* 삭제 버튼 */
@@ -189,6 +172,7 @@
     right: 7px;
     font-size: 20px;
     cursor: pointer;
+
 }
 /* ----------------------------------- */
 

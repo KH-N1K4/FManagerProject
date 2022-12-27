@@ -21,6 +21,9 @@ public class UserInquiry {
 	private String inquiryFilePath;                 // 이용문의 첨부 파일 경로
 	private int inquiryFileOrder;                   // 이용문의 첨부 파일 순서
 	private int inquiryTypeNo;                      // 이용문의 유형 번호
+	private String memberName;                      // 회원 이름
+	private String memberProfile;                   // 회원 프로필 
+	
 	
 	
 	// 이미지 목록

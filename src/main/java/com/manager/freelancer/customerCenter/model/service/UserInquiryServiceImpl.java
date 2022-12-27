@@ -110,6 +110,12 @@ public class UserInquiryServiceImpl implements UserInquiryService {
 		return dao.selectInquiryList(memberNo);
 	}
 
+	// 이용문의 내역 상세 조회하기 
+	@Override
+	public UserInquiry viewInquiryDetail(int userInquiryNo) {
+		return dao.viewInquiryDetail(userInquiryNo);
+	}
+
 
 	
 

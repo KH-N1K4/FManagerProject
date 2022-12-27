@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +51,7 @@ public class UserInquiryController {
 			
 			userInquiry.setMemberNo(loginMember.getMemberNo());
 			
-			String webPath = "/resources/images/";
+			String webPath = "/resources/images/customerCenterImage/";
 			String folderPath = sessoin.getServletContext().getRealPath(webPath);
 			
 			System.out.println(userInquiry);
@@ -92,8 +93,17 @@ public class UserInquiryController {
 	
 	
 	// 이용문의 상세 보기로 이동 
-	@GetMapping("/userInquiryDetail")
-	public String viewInquiryDetail() {
+	@GetMapping("/userInquiryDetail/{userInquiryNo}")
+	public String viewInquiryDetail(@PathVariable(value="userInquiryNo") int userInquiryNo, Model model) {
+		
+		UserInquiry userInquiry = service.viewInquiryDetail(userInquiryNo);
+		
+		userInquiry.setUserInquiryNo(userInquiryNo);
+		
+		
+		model.addAttribute("userInquiry",userInquiry);
+		
+		System.out.println(userInquiry.getImageList());
 		
 		return "customerCenter/inquiryDetail";
 	}
