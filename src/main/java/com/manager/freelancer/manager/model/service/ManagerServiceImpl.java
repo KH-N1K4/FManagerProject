@@ -133,54 +133,5 @@ public class ManagerServiceImpl implements ManagerService {
 		return map;
 	}
 
-	// 회원 유형별 검색 목록 조회
-	@Override
-	public Map<String, Object> selectMemberTypeList(Map<String, Object> pm, int cp) {
-		int listCount = dao.getMemberListCount2(pm);
-		Pagination pagination = new Pagination(listCount, cp);
-		List<Member> memberList = dao.selectMemberList2(pagination, pm);
-
-		if (memberList != null) {
-			for (Member m : memberList) {
-				if (m.getFreelancerFlag().equals("N")) {
-					m.setMemberType("일반 회원");
-					m.setFreelancerGrade("");
-				} else {
-					m.setMemberType("프리랜서");
-					String gradeName = dao.selectFreelancerGrade(m.getMemberNo());
-					m.setFreelancerGrade(gradeName);
-				}
-			}
-
-		}
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		map.put("memberList", memberList);
-
-		return map;
-	}
-
-	// 이용문의 내역 조회 + 페이징
-	@Override
-	public Map<String, Object> selectUserInquiryList(int cp) {
-
-		int listCount = dao.getUserInguiryListCount();
-		Pagination pagination = new Pagination(listCount, cp);
-		List<UserInquiry> userInquiryList = dao.selectUserInquiryList(pagination);
-		/*
-		 * if(memberList!=null) { for(Member m : memberList) {
-		 * if(m.getFreelancerFlag().equals("N")) { m.setMemberType("일반 회원");
-		 * m.setFreelancerGrade(""); } else { m.setMemberType("프리랜서"); String gradeName
-		 * = dao.selectFreelancerGrade(m.getMemberNo());
-		 * m.setFreelancerGrade(gradeName); } }
-		 * 
-		 * }
-		 */
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("pagination", pagination);
-		/* map.put("memberList", memberList); */
-
-		return map;
-	}
 
 }

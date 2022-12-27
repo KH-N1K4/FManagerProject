@@ -89,6 +89,14 @@ public class ManagerController {
 	
 	
 	
+	// 서비스 등록 내역 관리
+	@GetMapping("/manager/serviceList")
+	public String managerServiceList(Model model, 
+			@RequestParam(value="value", required=false) String value,
+			@RequestParam(value="cp", required=false, defaultValue = "1") int cp) {
+		return "/manager/serviceList";
+	}
+	
 	
 	
 	
@@ -99,12 +107,6 @@ public class ManagerController {
 	public String managerTradeList() {
 		return "/manager/tradeList";
 	}
-	
-	@GetMapping("/manager/serviceList")
-	public String managerServiceList() {
-		return "/manager/serviceList";
-	}
-	
 	@GetMapping("/manager/projectRequestList")
 	public String managerprojectRequestList() {
 		return "/manager/projectRequestList";
@@ -119,26 +121,8 @@ public class ManagerController {
 	
 	
 	
-	// 이용문의 관리 - 문의 내역
-	@GetMapping("/manager/userInquiry")
-	public String managerUserInquiry(Model model, 
-									@RequestParam(value="cp", required=false, defaultValue = "1") int cp) {
-		
-		Map<String, Object> userInquiryList = service.selectUserInquiryList(cp);
-		
-		return "/manager/userInquiryList";
-	}
 	
 	
-	
-	
-	
-	
-	
-	
-	@GetMapping("/manager/userInquiry/1")
-	public String managerUserInquiryDetail() {
-		return "/manager/userInquiryDetail";
-	}
+
 	
 }

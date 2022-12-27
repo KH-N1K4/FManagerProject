@@ -5,6 +5,23 @@ modalShow();
 /* 회원 탈퇴 */
 deleteMember();
 
+
+/* 검색 여러 번 해도 구분 남아있게..? */
+/* const selectmemberType = document.getElementById("selectmemberType")
+const value = (selectmemberType.options[selectmemberType.selectedIndex].value);
+const memberTable = document.querySelector('#member-manage-table');
+const pagination = document.querySelector(".pagination");
+
+const options=selectmemberType.childNodes;
+for(o of options){
+    if(o.getAttribute("selected")){
+        const value = o.getAttribute("value");
+        document.getElementById("inputValue").value=value;
+    }
+} */
+
+
+
 /* 회원 구분 select */
 function selectChange() {
     const selectmemberType = document.getElementById("selectmemberType")

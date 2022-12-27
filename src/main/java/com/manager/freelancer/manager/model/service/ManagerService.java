@@ -41,18 +41,6 @@ public interface ManagerService {
 	 */
 	Map<String, Object> selectMemberList(Map<String, Object> pm, int cp);
 
-	/** 회원 유형별 검색
-	 * @param pm
-	 * @param cp
-	 * @return
-	 */
-	Map<String, Object> selectMemberTypeList(Map<String, Object> pm, int cp);
-
-	/** 문의 내역 조회 + 페이징
-	 * @param cp
-	 * @return
-	 */
-	Map<String, Object> selectUserInquiryList(int cp);
 
 	
 }

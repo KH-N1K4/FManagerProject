@@ -83,30 +83,6 @@ public class ManagerDAO {
 		return sqlSession.selectOne("managerMapper.selectFreelancerDetail", memberNo);
 	}
 
-	/**
-	 * 유형별 회원 수 조회
-	 * 
-	 * @param value
-	 * @return
-	 */
-	public int getMemberListCount2(String value) {
-		return sqlSession.selectOne("managerMapper.getMemberListCount2", value);
-	}
-
-	/** 유형별 회원 목록 조회 + 페이징
-	 * @param value
-	 * @param pagination
-	 * @return
-	 */
-	public List<Member> selectMemberList2(String value, Pagination pagination) {
-		
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-
-		return sqlSession.selectList("managerMapper.selectMemberList2", value, rowBounds);
-	}
-
 	/** 회원 탈퇴
 	 * @param memberNo
 	 * @return
@@ -138,56 +114,6 @@ public class ManagerDAO {
 		return sqlSession.selectList("managerMapper.selectMemberList_search", pm, rowBounds);
 	}
 	
-
-	/** 회원 유형별 검색 조건 일치 회원 수 조회
-	 * @param pm
-	 * @return
-	 */
-	public int getMemberListCount2(Map<String, Object> pm) {
-		return sqlSession.selectOne("managerMapper.getMemberListCount_search2",pm);
-	}
-
-	
-
-	/**회원 유형별 검색 조건 일치 회원 목록 조회
-	 * @param pagination
-	 * @param pm
-	 * @return
-	 */
-	public List<Member> selectMemberList2(Pagination pagination, Map<String, Object> pm) {
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-
-		return sqlSession.selectList("managerMapper.selectMemberList_search2", pm, rowBounds);
-	}
-
-	
-	
-	
-	
-	
-	
-	/** 이용 문의 내역 수 조회
-	 * @return
-	 */
-	public int getUserInguiryListCount() {
-		return sqlSession.selectOne("managerMapper.getUserInguiryListCount");
-	}
-
-	/** 이용문의 내역 조회 + 페이징
-	 * @param pagination
-	 * @return
-	 */
-	public List<UserInquiry> selectUserInquiryList(Pagination pagination) {
-		
-		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
-
-		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-
-		return sqlSession.selectList("managerMapper.selectUserInquiryList", null, rowBounds);
-	}
-
 	
 
 }
