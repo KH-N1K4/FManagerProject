@@ -21,7 +21,7 @@
 }
 
 /* ---------문의하기폼--------- */
-#inquirySubmit{
+.inquirySubmit{
     margin: 50px;
     
 }
@@ -38,19 +38,19 @@
 }
 
 /* 각 문의하기 작성소제목 */
-#inquirySubmit div{
+.inquirySubmit div{
     font-size: 15px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 /* hover 했을 경우*/
-#inquirySubmit input:hover{
+.inquirySubmit input:hover{
     border: 2px solid #538126;
 }
-#inquirySubmit select:hover{
+.inquirySubmit select:hover{
     border: 2px solid #538126;
 }
-#inquirySubmit textarea:hover{
+.inquirySubmit textarea:hover{
     border: 2px solid #538126;
 }
 .boardImg label:hover{
@@ -71,7 +71,7 @@
     border-radius: 5px;
     border: 1px solid #dddddd;
 }
-#inquirySubmit textarea{
+.inquirySubmit textarea{
     width: 600px;
     border-radius: 5px;
     border: 1px solid #dddddd;
@@ -79,7 +79,7 @@
 
 
 /* ---------등록 버튼--------- */
-#inquiryInsert{
+.inquiryInsert{
     margin-top: 50px;
     width: 300px;
     height: 50px;
@@ -88,7 +88,7 @@
     cursor: pointer;
     border-radius: 5px;
 }
-#inquiryInsert a{
+.inquiryInsert a{
     text-decoration: none;
     color: #fff;
     font-size: 18px;

@@ -3,7 +3,7 @@
 /* mainArea /sideMenu영역  */
 .mainArea{
     width: 1200px;
-    height: 800px;
+    height: auto;
     display: flex;
     margin:auto;
 }
@@ -70,22 +70,12 @@ table{
     margin: 0 auto;
 }
 table th{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #538126;
     height: 50px;
 }
 table td{
     height: 50px;
     text-align: center;
-}
-table button{
-    width: 80px;
-    height: 30px;
-    background-color: #538126;
-    border: 1px solid #538126;
-    border-radius: 10%;
-    color: #fff;
-    font-weight: 200;
-    margin-left: 10px;
 }
 /* ------------------------------------------------------ */
 
@@ -94,6 +84,7 @@ table button{
 #pageList{
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
 }
 
 a{
@@ -105,3 +96,4 @@ a{
 hr{
     color: #538126;
 }
+

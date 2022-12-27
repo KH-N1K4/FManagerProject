@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header_black_ver2.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header_black_ver2 customer.jsp"/>
 
 
     <section class="content">
@@ -26,17 +26,21 @@
 
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
-                <form action="" id="inquirySubmit">
+                <div id="inquirySubmit">
                     <h3 id="title">내 문의 내역</h3>
 
-                    <div>문의 유형 
-                        <select name="inquiryTypeNo" id="division">
-                            <option value="0">전체</option> 
-                            <option value="1">문의</option> 
-                            <option value="2">환불</option> 
-                            <option value="3">신고</option> 
-                        </select>
-                    </div>
+
+
+                    <form action="/userInquiryList" id="selectForm"> 
+                        <div>문의 유형
+                            <select name="inquiryTypeNo" id="division">
+                                <option value="0">전체</option> 
+                                <option value="1">문의</option> 
+                                <option value="2">환불</option> 
+                                <option value="3">신고</option> 
+                            </select>
+                        </div>
+                    </form>
 
                     <hr>
 
@@ -60,27 +64,34 @@
                                 </td>
                                 <td><a href="/userInquiryDetail/${inquiry.userInquiryNo}">${inquiry.userInquiryTitle}</a></td>
                                 <td>${inquiry.userInquiryCreateDate}</td>
-                                <td><button>해결</button></td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${inquiry.inquiryRequest == null}">
+                                            답변 대기 
+                                        </c:when>
+                                        <c:when test="${inquiry.inquiryRequest != null}">
+                                            해결 
+                                        </c:when>
+                                    </c:choose>
+                                </td>
                             </tr>
                         </c:forEach>
                     </table>
                     <hr>
-                </form>
+                </div>
 
-                
-                <br><br>
-                <div id="pageList">
+                <%-- <div id="pageList">
                     <a href=""> << </a> &nbsp;&nbsp;
                     <a href=""> < </a> &nbsp;&nbsp;
                     <a href="">페이지</a> &nbsp;&nbsp;
                     <a href="">></a> &nbsp;&nbsp;
                     <a href="">>></a>
-                </div>
+                </div> --%>
             </div>
 
         </div>
     </section>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
+    <script src="/resources/js/customerCenter/inquiryList.js"></script>
 </body>
 </html>

@@ -53,6 +53,7 @@ public class UserInquiryDAO {
 	 * @return
 	 */
 	public UserInquiry viewInquiryDetail(int userInquiryNo) {
+		
 		return sqlSession.selectOne("inquiryMapper.viewInquiryDetail",userInquiryNo);
 	}
 

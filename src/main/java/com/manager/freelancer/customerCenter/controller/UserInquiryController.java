@@ -51,7 +51,7 @@ public class UserInquiryController {
 			
 			userInquiry.setMemberNo(loginMember.getMemberNo());
 			
-			String webPath = "/resources/images/";
+			String webPath = "/resources/images/customerCenterImage/";
 			String folderPath = sessoin.getServletContext().getRealPath(webPath);
 			
 			System.out.println(userInquiry);
@@ -97,12 +97,13 @@ public class UserInquiryController {
 	public String viewInquiryDetail(@PathVariable(value="userInquiryNo") int userInquiryNo, Model model) {
 		
 		UserInquiry userInquiry = service.viewInquiryDetail(userInquiryNo);
+		
 		userInquiry.setUserInquiryNo(userInquiryNo);
 		
-		System.out.println(userInquiry);
-		System.out.println(userInquiryNo);
 		
 		model.addAttribute("userInquiry",userInquiry);
+		
+		System.out.println(userInquiry.getImageList());
 		
 		return "customerCenter/inquiryDetail";
 	}
