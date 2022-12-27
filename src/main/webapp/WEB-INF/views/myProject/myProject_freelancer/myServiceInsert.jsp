@@ -109,7 +109,7 @@
                     <input type = "file" name="serviceFilePath" accept="image/*" required>
                   </div>
                   <div class="list_content">
-                    <input type = "file" name="serviceFilePath" accept="image/*">
+                    <input type = "file" name="serviceFilePath" accept="image/*" multiple="multiple">
                   </div>
                 </div>
                 

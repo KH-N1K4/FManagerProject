@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.Pagination;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 @Repository
@@ -57,18 +59,61 @@ public class MyProjectFreelancerDAO {
 		return sqlSession.insert("myProjectFreelancerSerive.insertFileImageList", servicefileList);
 	}
 
-	/**나의 서비스 들고오기
+	/**나의 서비스 페이지 카운트
 	 * @param memberNo
-	 * @param mainCategoryNo 
+	 * @param mainCategoryNo
 	 * @return
 	 */
-	public List<FreelancerService> selectMyService(int memberNo, int mainCategoryNo) {
+	public int getMyServiceListCount(int memberNo, int mainCategoryNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("mainCategoryNo", mainCategoryNo);
+		return sqlSession.selectOne("myProjectFreelancerSerive.getMyServiceListCount", map);
+	}
+	
+	/**나의 서비스 들고오기
+	 * @param memberNo
+	 * @param i
+	 * @return
+	 */
+	public List<FreelancerService> selectMyService(int memberNo, int i) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); //로그인 세션 회원 번호
+		map.put("mainCategoryNo", i); //카테고리별 서비스 들고오기
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyService", map);
+	}
+	
+	/**나의 서비스 들고오기 페이지 처리
+	 * @param memberNo
+	 * @param mainCategoryNo 
+	 * @param pagination 
+	 * @return
+	 */
+	public List<FreelancerService> selectMyService(int memberNo, int mainCategoryNo, Pagination pagination) {
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
+	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); //로그인 세션 회원 번호
 		map.put("mainCategoryNo", mainCategoryNo); //카테고리별 서비스 들고오기
-		return sqlSession.selectList("myProjectFreelancerSerive.selectMyService", map);
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyService", map,rowBounds);
 	}
 
+	/**판매내역 들고 오기 페이징 처리
+	 * @param memberNo
+	 * @param freelancerFL
+	 * @param searchInput
+	 * @param mainCategoryNo
+	 * @return
+	 */
+	public int getSalesListCount(int memberNo, int freelancerFL, String searchInput, int mainCategoryNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("mainCategoryNo", mainCategoryNo);
+		map.put("freelancerFL", freelancerFL);
+		map.put("searchInput", searchInput);
+		return sqlSession.selectOne("myProjectFreelancerSerive.getSalesListCount", map);
+	}
+	
 	/**판매내역 들고 오기-정렬포함memberNo,freelancerFL,searchInput, mainCategoryNo
 	 * @param memberNo
 	 * @param freelancerFL
@@ -77,13 +122,15 @@ public class MyProjectFreelancerDAO {
 	 * @return
 	 */
 	public List<FreelancerService> selectSalesList(int memberNo, int freelancerFL, String searchInput,
-			int mainCategoryNo) {
+			int mainCategoryNo, Pagination pagination) {
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
+	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); //로그인 세션 회원 번호
 		map.put("mainCategoryNo", mainCategoryNo); //카테고리별 판매내역
 		map.put("freelancerFL", freelancerFL); //판매 진행상태별 판매내역
 		map.put("searchInput", searchInput); //상품명 입력시 상품명으로 판매내역 검색하기
-		return sqlSession.selectList("myProjectFreelancerSerive.selectSalesList", map);
+		return sqlSession.selectList("myProjectFreelancerSerive.selectSalesList", map,rowBounds);
 	}
 
 	/**신고하기
@@ -114,4 +161,41 @@ public class MyProjectFreelancerDAO {
 	public int insertsendworkSubmit(int tradeNo) {
 		return sqlSession.insert("myProjectFreelancerSerive.insertsendworkSubmit",tradeNo);
 	}
+
+	/**거래 프리랜서 작업상태 완료로 변경하기
+	 * @param tradeNo
+	 * @return
+	 */
+	public int insertfinishSubmit(int tradeNo) {
+		return sqlSession.update("myProjectFreelancerSerive.insertfinishSubmit",tradeNo);
+	}
+
+	/**프리랜서가 한 프로젝트 의뢰 제안 들고오기
+	 * @param memberNo
+	 * @param mainCategoryNo
+	 * @return
+	 */
+	public List<FreelancerService> selectMyProposal(int memberNo, int mainCategoryNo , Pagination pagination ) {
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
+	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("mainCategoryNo", mainCategoryNo); 
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyProposal",map,rowBounds);
+	}
+
+	/**프리랜서가 한 프로젝트 의뢰 제안 페이징 카운트 
+	 * @param memberNo
+	 * @param mainCategoryNo
+	 * @return
+	 */
+	public int getMyProposalListCount(int memberNo, int mainCategoryNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("mainCategoryNo", mainCategoryNo);
+		return sqlSession.selectOne("myProjectFreelancerSerive.getMyProposalListCount", map);
+	}
+
+
+	
 }

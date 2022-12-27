@@ -16,6 +16,7 @@ import com.manager.freelancer.common.Util;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.dao.MyProjectFreelancerDAO;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.Pagination;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 
@@ -122,22 +123,56 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		
 		return serviceNo;
 	}
-
+	
 	/**
-	 * 나의 서비스 들고오기
+	 * 페이지 처리 안함
 	 */
 	@Override
-	public List<FreelancerService> selectMyService(int memberNo,int mainCategoryNo) {
-		return dao.selectMyService(memberNo, mainCategoryNo);
+	public List<FreelancerService> selectMyService(int memberNo, int i) {
+		
+		return dao.selectMyService(memberNo,i);
+	}
+
+	/**
+	 * 나의 서비스 들고오기 페이지 처리
+	 */
+	@Override
+	public Map<String, Object> selectMyService(int memberNo,int mainCategoryNo, int cp) {
+		
+		int listCount = dao.getMyServiceListCount(memberNo,mainCategoryNo);
+		
+		Pagination pagination = new Pagination(listCount,cp); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
+		
+		List<FreelancerService> myService = dao.selectMyService(memberNo,mainCategoryNo,pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("myService",myService);
+		map.put("listCount",listCount);
+		
+		
+		return map;
 	}
 
 	/**
 	 *판매내역 들고오기loginMember.getMemberNo(),mainCategoryNo,searchInput,freelancerFL
 	 */
 	@Override
-	public List<FreelancerService> selectSalesList(int memberNo, int mainCategoryNo, String searchInput,
-			int freelancerFL) {
-		return dao.selectSalesList(memberNo,freelancerFL,searchInput, mainCategoryNo);
+	public Map<String, Object> selectSalesList(int memberNo, int mainCategoryNo, String searchInput,
+			int freelancerFL,int cp) {
+		
+		int listCount = dao.getSalesListCount(memberNo,freelancerFL,searchInput, mainCategoryNo);
+		
+		Pagination pagination = new Pagination(listCount,cp); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
+		List<FreelancerService> salesList = dao.selectSalesList(memberNo,freelancerFL,searchInput, mainCategoryNo,pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("salesList",salesList);
+		map.put("listCount",listCount);
+		
+		return map;
 	}
 
 	/**
@@ -213,4 +248,46 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		}
 		return message;
 	}
+
+	/**
+	 *거래 프리랜서 작업 상태 완료로 변경하기
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public String insertfinishSubmit(int tradeNo) throws Exception{
+
+		String message ="";
+		int result = dao.insertfinishSubmit(tradeNo);
+		if(result > 0) {
+			message = "작업상태가 완료로 변경되었습니다.";
+					
+		}else {
+			message = "작업상태 변경 실패했습니다.";
+			throw new Exception("작업상태 변경");
+		}
+		return message;
+	}
+
+	/**
+	 *프리랜서가 한 프로젝트 의뢰 제안 들고오기
+	 */
+	@Override
+	public Map<String, Object> selectMyProposal(int memberNo, int mainCategoryNo, int cp) {
+		
+		int listCount = dao.getMyProposalListCount(memberNo,mainCategoryNo);
+		
+		Pagination pagination = new Pagination(listCount,cp); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
+		
+		List<FreelancerService> myProposalList = dao.selectMyProposal(memberNo,mainCategoryNo,pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("myProposalList",myProposalList);
+		map.put("listCount",listCount);
+		
+		return map; 
+	}
+
+	
 }

@@ -21,6 +21,14 @@
     <!-- hearder salesList-->
     <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
     <!-- hearder -->
+    <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+            <c:if test="${parameter.key != 'cp'}">
+            
+                <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+            </c:if>
+        </c:forEach>
+    </c:if>
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
         <!-- sideMenu -->
@@ -119,7 +127,7 @@
                           </td>
                           <td class="tc">
                             <c:if test="${sales.freelancerFL == 1}">
-                              <a href="#" id="finishBtn" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
+                              <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
                               <c:if test="${sales.workCount le sales.serviceEditNum}">
                                 <a href="#" id="sendBtn${sales.tradeNo}" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>
                               </c:if>
@@ -186,6 +194,42 @@
               </div>
             </div>
           </div>
+          <c:if test="${listCount != 0}">
+                
+                <div class="pagination-area">
+
+
+                    <ul class="pagination">
+                    
+                        <!-- 첫 페이지로 이동 -->
+                        <li><a href="/member/myProject/freelancer/myServiceSales?cp=1${sURL}">&lt;&lt;</a></li>
+        
+                        <!-- 이전 목록 마지막 번호로 이동 -->
+                        <li><a href="/member/myProject/freelancer/myServiceSales?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+        
+            
+                        <!-- 특정 페이지로 이동 -->
+                        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                        <c:choose>
+                            <c:when test="${i== pagination.currentPage}">
+                            <!-- 현재 페이지인 경우 -->
+                            <li><a class="current">${i}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                            <!-- 현재 페이지를 제외한 나머지 -->
+                            <li><a href="/member/myProject/freelancer/myServiceSales?cp=${i}${sURL}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                        </c:forEach>
+                        <!-- 다음 목록 시작 번호로 이동 -->
+                        <li><a href="/member/myProject/freelancer/myServiceSales?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+        
+                        <!-- 끝 페이지로 이동 -->
+                        <li><a href="/member/myProject/freelancer/myServiceSales?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+        
+                    </ul>
+                </div>
+            </c:if>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
         <div class="reportModal">

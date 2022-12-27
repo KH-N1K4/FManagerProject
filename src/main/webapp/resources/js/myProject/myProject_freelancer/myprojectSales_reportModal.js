@@ -39,6 +39,7 @@ Submit.addEventListener("click", (e) => {
             if(result.messageIN == "신고가 접수되었습니다."){
               alert(result.messageIN);
               modal.classList.toggle('show');
+              document.querySelector('.fileRemove').style.display ="none";
               saleslist.forEach(function(arg,i){
                 if(arg.tradeNo == tradeNo){
                   arg.tradeReportNo = result.tradeReportNo;
