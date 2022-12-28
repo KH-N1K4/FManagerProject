@@ -105,6 +105,7 @@ const modalClose = document.querySelector('.reportModal_close');
 $('.reportBtn').click(function(){
   document.querySelector('#ajaxReview').style.backgroundColor = '#538126';
   document.querySelector('#reportContent').value = "";
+  document.querySelector('.fileRemove').style.display ="block";
   $(".fileaddDiv").remove();
   const tradeNoValue = this.title;
   $('#memberName').val(loginMemberName);
@@ -119,6 +120,7 @@ $('.reportBtn').click(function(){
       if(arg.tradeReportNo != 0){
         document.querySelector('#reportContent').value = arg.reportContent.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
         //.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+        document.querySelector('.fileRemove').style.display ="none";
         if(arg.reportFilePath != null){
           /* document.querySelector('#reportFilePath').value = arg.reportFilePath; */
           const div = document.createElement("div");
@@ -158,3 +160,83 @@ modalClose.addEventListener('click', () => {
     body.style.overflow = 'hidden';
   }
 });
+
+/* 발송하기 */
+$('.sendBtn').click(function(){
+  const tradeNoValue = this.title;
+  $.ajax({
+        
+    url: "/sendworkSubmit",
+    data: { 
+      "tradeNo"  : tradeNoValue,
+    },
+    type: "POST", 
+    dataType: "JSON", // 응답 데이터의 형식이 JSON이다. -> 자동으로 JS 객체로 변환
+    success: (result) => {
+        console.log(result);
+        console.log(tradeNoValue);
+        if(result == "작업물 발송이 완료되었습니다."){
+          alert(result);
+          saleslist.forEach(function(arg){
+            if(arg.tradeNo == tradeNoValue){
+              console.log("더하기 전:"+arg.workCount);
+              arg.workCount = arg.workCount+1;
+              console.log("더하기 후:"+arg.workCount);
+              if(arg.workCount == arg.serviceEditNum+1){
+                document.getElementById('serviceEditNum'+arg.tradeNo).innerText = (arg.workCount-1)+"/"+arg.serviceEditNum;
+              }else{
+                document.getElementById('serviceEditNum'+arg.tradeNo).innerText = arg.workCount+"/"+arg.serviceEditNum;
+              }
+
+              if(arg.workCount > arg.serviceEditNum){
+                $('#sendBtn'+arg.tradeNo).remove();
+              }
+              
+            } 
+          });
+          
+        }
+    },
+    error: () => {
+        console.log("발송 실패")
+    }
+
+
+  });
+
+});
+
+
+/* 완료하기 */
+$('.finishBtn').click(function(){
+  const tradeNoValue = this.title;
+  $.ajax({
+        
+    url: "/finishSubmit",
+    data: { 
+      "tradeNo"  : tradeNoValue,
+    },
+    type: "POST", 
+    dataType: "JSON", // 응답 데이터의 형식이 JSON이다. -> 자동으로 JS 객체로 변환
+    success: (result) => {
+        console.log(result);
+        console.log(tradeNoValue);
+        if(result == "작업상태가 완료로 변경되었습니다."){
+          alert(result);
+          $('#finishBtn'+tradeNoValue).remove();
+          $('#sendBtn'+tradeNoValue).remove();
+          $('#reportBtn'+tradeNoValue).remove();
+          
+        }
+    },
+    error: () => {
+        console.log("작업상태 완료 실패")
+    }
+
+
+  });
+
+});
+
+
+

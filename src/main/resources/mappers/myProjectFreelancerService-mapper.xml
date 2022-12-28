@@ -71,8 +71,36 @@
 			<result property="serviceFilePath" column="REQUEST_FILE_PATH"/>
 			<result property="serviceNo" column="SERVICE_NO"/>
 		</resultMap>
-    
-    
+		
+		<!-- 프로젝트 의뢰 -->
+		<resultMap type="myProjectFreelancerRequest" id="request_rm">												<!-- 프로젝트 의뢰하기 SEQ_PROJECT_REQUEST_NO-->
+			<id property="projectRequestNo" column="PROJECT_REQUEST_NO"/>											<!-- 프로젝트 의뢰 번호 -->
+			<result property="projectRequestTitle" column="PROJECT_REQUEST_TITLE"/>						<!-- 프로젝트 의뢰 제목 -->
+			<result property="projectRequestSummary" column="PROJECT_REQUEST_SUMMARY"/>				<!-- 프로젝트 의뢰 요약 -->
+			<result property="projectRequestContent" column="PROJECT_REQUEST_CONTENT"/>				<!-- 프로젝트 의뢰 사항 -->
+			<result property="projectRequestBudget" column="PROJECT_REQUEST_BUDGET"/>					<!-- 프로젝트 의뢰 예산 -->
+			<result property="projectRequestBudgetString" column="PROJECT_REQUEST_BUDGET_STRING"/>					<!-- 프로젝트 의뢰 예산 -->
+			<result property="projectRecruitDate" column="REQUEST_RECRUIT_DATE"/>							<!-- 프로젝트 모집 마감일 -->
+			<result property="projectWorkDate" column="REQUEST_WORK_DATE"/>										<!-- 프로젝트 작업 마감일 -->
+			<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD "/>							<!-- 프로젝트 작업기간 -->
+			<result property="projectCreateDate" column="PROJECT_REQUEST_CREATE_DATE"/>				<!-- 프로젝트 의뢰 등록일 -->
+			<result property="mainCategotyNo" column="MAIN_CATEGORY_NO"/>											<!-- 카테고리1 번호(FK) -->
+			<result property="mainCategotyName" column="MAIN_CATEGORY_NAME"/>											<!-- 카테고리1 번호(FK) -->
+			<result property="thirdCategotyNo" column="THIRD_CATEGORY_NO"/>										<!-- 카테고리3 번호(FK) -->
+			<result property="thirdCategotyName" column="THIRD_CATEGORY_NAME"/>										<!-- 카테고리3 번호(FK) -->
+			<result property="projectRequestfile" column="REQUEST_FILE_PATH"/>										<!-- 이미지 경로 -->
+			
+			<result property="clientNo" column="MEMBER_NO"/>																					<!-- 회원 번호(FK)-의뢰인 회원번호 -->
+			<result property="proposalNo" column="PROJECT_PROPOSAL_NO"/>															<!-- 프로젝트 제안 번호 SEQUENCE :SEQ_PROJECT_PROPOSAL_NO -->
+			<result property="proposalAdoptStatus" column="PROPOSAL_ADOPT_STATUS"/>										<!-- 프로젝트 채택 상태 1:대기중 2:채택 3: 모집마감 -->
+			<result property="proposalAdoptStatusString" column="PROPOSAL_ADOPT_STATUS_STRING"/>			<!-- 프로젝트 채택 상태 1:대기중 2:채택 3: 모집마감 -->
+			<result property="proposalPrice" column="PROPOSAL_PRICE"/>																<!-- 프로젝트 제안 가격 -->
+			<result property="proposalPriceString" column="PROPOSAL_PRICE_STRING"/>										<!-- 프로젝트 제안 가격 -->
+			<result property="proposalEditNum" column="PROPOSAL_EDIT_NUM"/>														<!-- 프로젝트 수정 횟수 -->
+			<result property="proposalCreateDate" column="PROPOSAL_CREATE_DATE"/>											<!-- 프로젝트 제안 등록일 -->
+			<result property="freelancerNo" column="FREELANCER_NO"/>																	<!-- 프리랜서 번호(FK) -->
+		</resultMap>
+		   
     <select id="selectmaincategoryList" resultMap="fService_rm">
     SELECT * FROM MAIN_CATEGORY
     </select>
@@ -106,6 +134,23 @@
 			</foreach>
 		</insert>
 		
+		<select id="getMyServiceListCount" parameterType="java.util.HashMap" resultType="_int">
+		SELECT COUNT(*)
+		FROM (SELECT * 
+			FROM SERVICE
+			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
+		LEFT JOIN (SELECT s.*,
+		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
+		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		WHERE RUM = 1
+		AND SERVICE_STATUS NOT IN (5)
+		AND FREELANCER_NO = #{memberNo}
+			<if test="mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+			</if>
+		</select>
+		
 		<select id="selectMyService" parameterType="java.util.HashMap" resultMap="fService_rm">
 		SELECT SERVICE_NO,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,TO_CHAR(SERVICE_PRICE, 'FM999,999,999,999') SERVICE_PRICE_STRING, 
 			SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,
@@ -129,6 +174,34 @@
 			<if test="mainCategoryNo != 0">
 				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
 			</if>
+		</select>
+		<!--  -->
+		<select id="getSalesListCount" parameterType="java.util.HashMap" resultType="_int">
+		SELECT COUNT(*)
+		FROM (SELECT * FROM TRADE
+			JOIN (SELECT * 
+				FROM SERVICE
+				LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+				LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)) USING(SERVICE_NO)
+			LEFT JOIN (SELECT TRADE_NO, NVL(WORK_COUNT,0) WORK_COUNT
+				FROM TRADE 
+				LEFT JOIN (SELECT COUNT(*) WORK_COUNT,TRADE_NO 
+					FROM TRADE
+					JOIN "WORK" USING(TRADE_NO)
+					GROUP BY TRADE_NO) USING (TRADE_NO)) USING (TRADE_NO) 
+			JOIN (SELECT MEMBER_NO,MEMBER_NICKNAME,MEMBER_NAME FROM "MEMBER") USING(MEMBER_NO)
+			LEFT JOIN TRADE_REPORT USING(TRADE_NO) HAVING REPORT_PERSON = FREELANCER_NO) t
+		WHERE FREELANCER_NO = #{memberNo}
+		<if test="mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+		</if>
+		<if test="freelancerFL != 0">
+				 AND FREELANCER_DONE_FL = #{freelancerFL}
+		</if>
+		<if test='searchInput neq null and searchInput neq ""'>
+				 AND SERVICE_TITLE LIKE '%${searchInput}%' 
+		</if>
+		ORDER BY TRADE_NO
 		</select>
 		
 		<select id="selectSalesList" parameterType="java.util.HashMap" resultMap="fService_rm">
@@ -179,5 +252,62 @@
 		</if>
     
     </insert>
+    
+    <insert id="insertsendworkSubmit" parameterType="_int">
+    	INSERT INTO "WORK"
+    	VALUES(SEQ_WORK_NO.NEXTVAL,DEFAULT,#{tradeNo})
+    </insert>
+    
+    <update id="insertfinishSubmit" parameterType="_int">
+    UPDATE TRADE
+		SET FREELANCER_DONE_FL = 2
+		WHERE TRADE_NO = #{tradeNo}
+    </update>
+    
+    <select id="selectMyProposal" resultMap="request_rm">
+    SELECT p.*,TO_CHAR(PROPOSAL_PRICE, 'FM999,999,999,999') PROPOSAL_PRICE_STRING,
+				CASE WHEN PROPOSAL_ADOPT_STATUS = 1 THEN '대기중'
+				     WHEN PROPOSAL_ADOPT_STATUS = 2 THEN '채택'
+				     WHEN PROPOSAL_ADOPT_STATUS = 3 THEN '모집마감'
+				END AS PROPOSAL_ADOPT_STATUS_STRING
+		FROM (SELECT * FROM PROJECT_PROPOSAL 
+		LEFT JOIN (SELECT PROJECT_REQUEST_NO,PROJECT_REQUEST_TITLE,
+			PROJECT_REQUEST_SUMMARY,PROJECT_REQUEST_CONTENT,TO_CHAR(PROJECT_REQUEST_BUDGET, 'FM999,999,999,999') PROJECT_REQUEST_BUDGET_STRING,
+			TO_CHAR(REQUEST_RECRUIT_DATE, 'YYYY.MM.DD') REQUEST_RECRUIT_DATE,TO_CHAR(REQUEST_WORK_DATE, 'YYYY.MM.DD') REQUEST_WORK_DATE,
+			PROJECT_WORK_PERIOD,TO_CHAR(PROJECT_REQUEST_CREATE_DATE, 'YYYY.MM.DD') PROJECT_REQUEST_CREATE_DATE,
+			THIRD_CATEGORY_NO,MEMBER_NO
+			FROM PROJECT_REQUEST) USING (PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		LEFT JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)) p
+		WHERE FREELANCER_NO = #{memberNo}
+		AND REQUEST_FILE_ORDER = 1
+		<if test="mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+		</if>
+		ORDER BY PROJECT_REQUEST_NO
+    </select>
+    
+     <select id="getMyProposalListCount" resultType="_int">
+    SELECT COUNT(*)
+		FROM (SELECT * FROM PROJECT_PROPOSAL 
+		LEFT JOIN (SELECT PROJECT_REQUEST_NO,PROJECT_REQUEST_TITLE,
+			PROJECT_REQUEST_SUMMARY,PROJECT_REQUEST_CONTENT,TO_CHAR(PROJECT_REQUEST_BUDGET, 'FM999,999,999,999') PROJECT_REQUEST_BUDGET_STRING,
+			TO_CHAR(REQUEST_RECRUIT_DATE, 'YYYY.MM.DD') REQUEST_RECRUIT_DATE,TO_CHAR(REQUEST_WORK_DATE, 'YYYY.MM.DD') REQUEST_WORK_DATE,
+			PROJECT_WORK_PERIOD,TO_CHAR(PROJECT_REQUEST_CREATE_DATE, 'YYYY.MM.DD') PROJECT_REQUEST_CREATE_DATE,
+			THIRD_CATEGORY_NO,MEMBER_NO
+			FROM PROJECT_REQUEST) USING (PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		LEFT JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)) p
+		WHERE FREELANCER_NO = #{memberNo}
+		AND REQUEST_FILE_ORDER = 1
+		<if test="mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+		</if>
+		ORDER BY PROJECT_REQUEST_NO
+    </select>
   
 </mapper>

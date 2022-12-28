@@ -32,22 +32,30 @@ public interface MyProjectFreelancerService {
 	 */
 	int insertService(String webPath, String filePath, List<MultipartFile> serviceFile, Member loginMember,
 			FreelancerService freelancerVo) throws IOException;
-
-	/**나의 서비스 들고오기
+	
+	/**페이지 처리 안하는 나의 서비스
+	 * @param memberNo
+	 * @param i
+	 * @return
+	 */
+	List<FreelancerService> selectMyService(int memberNo, int i);
+	
+	/**나의 서비스 들고오기 -- 페이지 처리하는 나의 서비스
 	 * @param memberNo
 	 * @param mainCategoryNo 
 	 * @return
 	 */
-	List<FreelancerService> selectMyService(int memberNo, int mainCategoryNo);
+	Map<String, Object> selectMyService(int memberNo, int mainCategoryNo, int cp);
 
 	/**판매 내역 들고오기,loginMember.getMemberNo(),mainCategoryNo,searchInput,freelancerFL
 	 * @param memberNo
 	 * @param freelancerFL
 	 * @param searchInput
 	 * @param mainCategoryNo 
+	 * @param cp 
 	 * @return
 	 */
-	List<FreelancerService> selectSalesList(int memberNo, int mainCategoryNo, String searchInput, int freelancerFL);
+	Map<String, Object> selectSalesList(int memberNo, int mainCategoryNo, String searchInput, int freelancerFL, int cp);
 
 	/** 신고하기
 	 * @param filePath 
@@ -62,5 +70,27 @@ public interface MyProjectFreelancerService {
 	 */
 	Map<String, Object> insertreportSubmit(String webPath, String filePath, int tradeNo, int reportPersonNo, int reportedPersonNo, String reportContent,
 			MultipartFile reportFile)  throws Exception;
+
+	/** 작업물 발송하기
+	 * @param tradeNo
+	 * @return
+	 */
+	String insertsendworkSubmit(int tradeNo) throws Exception;
+
+	/**거래 프리랜서 작업상태 완료하기
+	 * @param tradeNo
+	 * @return
+	 */
+	String insertfinishSubmit(int tradeNo) throws Exception;
+
+	/**프리랜서가 한 프로젝트 의뢰 제안 들고오기
+	 * @param memberNo
+	 * @param mainCategoryNo
+	 * @param cp 
+	 * @return
+	 */
+	Map<String, Object> selectMyProposal(int memberNo, int mainCategoryNo, int cp);
+
+
 
 }

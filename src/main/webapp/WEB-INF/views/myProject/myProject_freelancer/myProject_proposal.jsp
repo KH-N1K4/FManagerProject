@@ -10,8 +10,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나의 서비스</title>
-    <link rel="stylesheet" href="/resources/css/myProject/myProject_freelancer/myproject_myService.css">    
+    <title>보낸 제안</title>
+    <link rel="stylesheet" href="/resources/css/myProject/myProject_freelancer/myProject_proposal.css">    
 </head>
 <body>
     <!-- hearder -->
@@ -35,9 +35,9 @@
 
         <section class="mainMenu">
             <div id="titleSection">
-                <div id="title">나의 서비스</div>
+                <div id="title">보낸 제안</div>
                 <div id="titleSelect">
-                    <form action ="/member/myProject/freelancer/myService" class="OptionfrmSearch" method="get" name="OptionfrmSearch" id="OptionfrmSearch">
+                    <form action ="/member/myProject/freelancer/myProposal" class="OptionfrmSearch" method="get" name="OptionfrmSearch" id="OptionfrmSearch">
                         <select  id = "srchOption1" class="srchOption box" name="mainCategoryNo" title="${mainCategoryNoInput}">
                             <option value="0" selected="">전체</option>
                             <c:if test="${not empty maincategory}">
@@ -48,41 +48,40 @@
                         </select>
                     </form>
                 </div>
-                <div id="serviceInsert"><a href="/member/myProject/freelancer/myServiceInsert">등록하기</a></div>
             </div>
-            <c:if test="${not empty myService}">
-                <c:forEach items="${myService}" var="service">
+            <c:if test="${not empty myProposal}">
+                <c:forEach items="${myProposal}" var="proposal">
                     <div id="contentSection">
-                        <div id="serviceImage">
-                            <img src="${service.serviceFilePath2}" alt="">
+                        <div id="proposalImage">
+                            <img src="${proposal.projectRequestfile}" alt="">
                         </div>
-                        <div id="serviceContent">
-                            <div id="serviceTitle">
-                                <a href="#" id="serviceName" class="serviceName" suggestionName="">
-                                    ${service.serviceTitle}
+                        <div id="proposalContent">
+                            <div id="proposalTitle">
+                                <a href="#" id="proposalName" class="proposalName" suggestionName="">
+                                    ${proposal.projectRequestTitle}
                                 </a>
                             </div>
-                            <div id="serviceSummary">
-                                <p>${service.serviceSummary}</p>
+                            <div id="proposalSummary">
+                                <p>${proposal.projectRequestSummary}</p>
                             </div>
                             <div class="detail">
-                                <div id="servicePrice">
-                                    <div>가격</div>
-                                    <div>${service.servicePriceString}원</div>
+                                <div id="proposalCategory">
+                                    <div>모집분야</div>
+                                    <div>${proposal.mainCategotyName} > ${proposal.thirdCategotyName}</div>
                                 </div>
-                                <div id="serviceEdit">
-                                    <div>수정 횟수</div>
-                                    <div>${service.serviceEditNum}회</div>
+                                <div id="proposalBubget">
+                                    <div>예산</div>
+                                    <div>${proposal.projectRequestBudgetString}원</div>
                                 </div>
-                                <div id="serviceWorkDate">
-                                    <div>작업 일수</div>
-                                    <div>${service.serviceWorkPeriod}일</div>
+                                <div id="proposalEndDate">
+                                    <div>모집 마감</div>
+                                    <div>${proposal.projectRecruitDate}</div>
                                 </div>
                             </div>
                             
                         </div>
-                        <div id="serviceStatus">
-                            <div>${service.serviceStatusString}</div>
+                        <div id="proposalStatus">
+                            <div>${proposal.proposalAdoptStatusString}</div><!-- 대기중 -->
                         </div>
                     </div>
                 </c:forEach> 
@@ -95,36 +94,36 @@
                     <ul class="pagination">
                     
                         <!-- 첫 페이지로 이동 -->
-                        <li><a href="/member/myProject/freelancer/myService?cp=1${sURL}">&lt;&lt;</a></li>
+                        <li><a href="/member/myProject/freelancer/myProposal?cp=1${sURL}">&lt;&lt;</a></li>
         
                         <!-- 이전 목록 마지막 번호로 이동 -->
-                        <li><a href="/member/myProject/freelancer/myService?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+                        <li><a href="/member/myProject/freelancer/myProposal?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
         
             
                         <!-- 특정 페이지로 이동 -->
-                        <c:forEach var="countPage" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                         <c:choose>
-                            <c:when test="${countPage== pagination.currentPage}">
+                            <c:when test="${i== pagination.currentPage}">
                             <!-- 현재 페이지인 경우 -->
-                            <li><a class="current">${countPage}</a></li>
+                            <li><a class="current">${i}</a></li>
                             </c:when>
                             <c:otherwise>
                             <!-- 현재 페이지를 제외한 나머지 -->
-                            <li><a href="/member/myProject/freelancer/myService?cp=${countPage}${sURL}">${countPage}</a></li>
+                            <li><a href="/member/myProject/freelancer/myProposal?cp=${i}${sURL}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
                         </c:forEach>
                         <!-- 다음 목록 시작 번호로 이동 -->
-                        <li><a href="/member/myProject/freelancer/myService?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+                        <li><a href="/member/myProject/freelancer/myProposal?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
         
                         <!-- 끝 페이지로 이동 -->
-                        <li><a href="/member/myProject/freelancer/myService?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                        <li><a href="/member/myProject/freelancer/myProposal?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
         
                     </ul>
                 </div>
             </c:if>
+            
         </section>
-
         
     </div>
     <!-- **************************************footer*************************************-->
@@ -132,6 +131,7 @@
     <!-- **************************************footer*************************************-->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-    <script src="/resources/js/myProject/myProject_freelancer/myServiceFreelancer.js"></script>
+    <script src="/resources/js/myProject/myProject_freelancer/myProject_proposal.js"></script>
+
 </body>
 </html>

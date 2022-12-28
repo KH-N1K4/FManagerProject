@@ -37,14 +37,18 @@ public class MyProjectFreelancerController {
 	// 내 프로젝트 전문가페이지 나의 서비스 이동 --정렬 완료
 	@GetMapping("/member/myProject/freelancer/myService")
 	public String myService(Model model, HttpSession session,
-			@RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo
+			@RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
+			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp
 					) {
 		
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		List<FreelancerService> maincategoryList = service.selectmaincategoryList();
-		List<FreelancerService> myService = service.selectMyService(loginMember.getMemberNo(),mainCategoryNo);
+		//List<FreelancerService> myService
+		Map<String, Object> map  = service.selectMyService(loginMember.getMemberNo(),mainCategoryNo,cp);
 		model.addAttribute("maincategoryList",maincategoryList);
-		model.addAttribute("myService",myService);
+		model.addAttribute("myService",map.get("myService"));
+		model.addAttribute("pagination",map.get("pagination"));
+		model.addAttribute("listCount",map.get("listCount"));
 		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
 		
 		return "myProject/myProject_freelancer/myServiceFreelancer";
@@ -93,18 +97,25 @@ public class MyProjectFreelancerController {
 	public String myServiceSales(Model model, HttpSession session,
 				@RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
 				@RequestParam(value="freelancerFL",required=false, defaultValue="0") int freelancerFL,
-				@RequestParam(value="searchInput",required=false) String searchInput
+				@RequestParam(value="searchInput",required=false) String searchInput,
+				@RequestParam(value="cp" , required = false, defaultValue = "1") int cp
 						) {
 			
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		List<FreelancerService> maincategoryList = service.selectmaincategoryList();
-		List<FreelancerService> salesList = service.selectSalesList(loginMember.getMemberNo(),mainCategoryNo,searchInput,freelancerFL);
+		Map<String, Object> map = service.selectSalesList(loginMember.getMemberNo(),mainCategoryNo,searchInput,freelancerFL,cp);
+		//List<FreelancerService> salesList 
 		List<FreelancerService> inpurMyService = service.selectMyService(loginMember.getMemberNo(),0); //나의 서비스 들고와서 자동완성
 		
 		model.addAttribute("maincategoryList",maincategoryList);
 		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
-		model.addAttribute("salesList",salesList);
-		model.addAttribute("GsonsalesList",new Gson().toJson(salesList));
+		
+		model.addAttribute("salesList",map.get("salesList"));
+		model.addAttribute("pagination",map.get("pagination"));
+		model.addAttribute("listCount",map.get("listCount"));
+		
+		model.addAttribute("GsonsalesList",new Gson().toJson(map.get("salesList")));
+		
 		model.addAttribute("freelancerFL",freelancerFL);
 		model.addAttribute("searchInput",searchInput);
 		model.addAttribute("inpurMyService",new Gson().toJson(inpurMyService));
@@ -144,6 +155,56 @@ public class MyProjectFreelancerController {
 			map.put("reportContent",reportContent);
 		
 			return new Gson().toJson(map);
+	}
+	
+	
+	//발송하기 Ajax
+	@PostMapping("/sendworkSubmit")
+	@ResponseBody
+	public String insertsendworkSubmit(
+			@RequestParam(value="tradeNo") int tradeNo) throws Exception{
+		
+		String message = service.insertsendworkSubmit(tradeNo);
+		
+		return new Gson().toJson(message);
+	}
+	
+	//작업완료하기 Ajax  --- 거래테이블에서 의뢰자,프리랜서 작업상태가 두개 다 완료이면 정산 내역 테이블에 마감 상태로 상태값 변함
+	//트리거 작성 완성해놓음 --트리거 이름:  DONEFL_WORK_STATUS /DONEFL_WORK_STATUS2
+	@PostMapping("/finishSubmit")
+	@ResponseBody
+	public String insertfinishSubmit(
+			@RequestParam(value="tradeNo") int tradeNo) throws Exception{
+			
+		String message = service.insertfinishSubmit(tradeNo);
+			
+		return new Gson().toJson(message);
+	}
+	
+	// 내가 보낸 제안 페이지 이동 --메인 카테고리별 정렬 포함
+	@GetMapping("/member/myProject/freelancer/myProposal")
+	public String myProposal(Model model, HttpSession session,
+			@RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
+			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp
+					) {
+			
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		List<FreelancerService> maincategoryList = service.selectmaincategoryList();
+		Map<String, Object> map  = service.selectMyProposal(loginMember.getMemberNo(),mainCategoryNo,cp);
+		model.addAttribute("maincategoryList",maincategoryList);
+		model.addAttribute("myProposal",map.get("myProposalList"));
+		model.addAttribute("pagination",map.get("pagination"));
+		model.addAttribute("listCount",map.get("listCount"));
+		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
+			
+		return "myProject/myProject_freelancer/myProject_proposal";
+	}
+	
+	//수익관리 페이지
+	@GetMapping("/member/myProject/freelancer/profitManagerment")
+	public String profitManagerment(Model model, HttpSession session) {
+			
+		return "myProject/myProject_freelancer/profitManagerment";
 	}
 
 }
