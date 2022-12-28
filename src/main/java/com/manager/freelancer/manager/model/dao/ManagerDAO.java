@@ -12,6 +12,7 @@ import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
+import com.manager.freelancer.manager.model.vo.Settlement;
 
 @Repository
 public class ManagerDAO {
@@ -175,6 +176,28 @@ public class ManagerDAO {
 	 */
 	public int managerServiceDelete(int serviceNo) {
 		return sqlSession.update("managerMapper.managerServiceDelete", serviceNo);
+	}
+
+	/** 계좌 내역 수 조회
+	 * @param status
+	 * @return
+	 */
+	public int getTradeListCount(String status) {
+		return sqlSession.selectOne("managerMapper.getTradeListCount", status);
+	}
+
+	/** 계좌 내역 목록 조회
+	 * @param status
+	 * @param pagination
+	 * @return
+	 */
+	public List<Settlement> selectTradeList(String status, Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectTradeList", status, rowBounds);
 	}
 
 }

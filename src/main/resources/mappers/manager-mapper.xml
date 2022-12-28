@@ -32,6 +32,16 @@
 		<result property="serviceStatus" column="SERVICE_STATUS" />
 	</resultMap>
 	
+	<resultMap type="com.manager.freelancer.manager.model.vo.Settlement" id="manager_trade_rm">
+		<id property="settlementNo" column="SETTLEMENT_NO"/>
+		<result property="tradeNo" column="TRADE_NO" />
+		<result property="workStatus" column="WORK_STATUS" />
+		<result property="paymentType" column="PAYMENT_TYPE" />
+		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="serviceTitle" column="SERVICE_TITLE" />
+		<result property="userName" column="USER_NAME" />
+	</resultMap>
+	
 
 
 	<!-- 프리랜서 등급 조회 -->
@@ -205,6 +215,29 @@
 		WHERE SERVICE_NO=#{serviceNo}
 	</update>
 	
+	
+	
+	<!-- 전체 계좌 내역 수 조회 -->
+	<select id="getTradeListCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM SETTLEMENT
+		<if test='status != 0'>
+			WHERE WORK_STATUS= #{status}
+		</if>
+	</select>
+	
+	<!-- 계좌 내역 목록 조회 -->
+	<select id="selectTradeList" parameterType="_int" resultMap="manager_trade_rm">
+		SELECT TO_CHAR(PAYMENT_DATE, 'YYYY"년" MM"월" DD"일"') PAYMENT_DATE, TRADE_NO, 
+					SERVICE_TITLE, WORK_STATUS, MEMBER_NAME AS USER_NAME, PAYMENT_TYPE, PAYMENT_PRICE
+		FROM SETTLEMENT
+		JOIN "MEMBER" ON (MEMBER.MEMBER_NO=SETTLEMENT.USER_NO)
+		JOIN TRADE USING (TRADE_NO)
+		JOIN SERVICE USING (SERVICE_NO)
+		<if test='status != 0'>
+			WHERE WORK_STATUS= #{status}
+		</if>
+		ORDER BY 1 DESC
+	</select>
 
 </mapper>
 

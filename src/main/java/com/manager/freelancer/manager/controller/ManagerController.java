@@ -89,6 +89,8 @@ public class ManagerController {
 	
 	
 	
+	//======================================================================================
+	
 	
 	
 	
@@ -135,10 +137,48 @@ public class ManagerController {
 	}
 	
 	
+	
+	
+	
+	//======================================================================================
+	
+	
+	
+	
+	
+	// 계좌 관리
 	@GetMapping("/manager/tradeList")
-	public String managerTradeList() {
+	public String managerTradeList(Model model, 
+									@RequestParam(value="status", required=false) String status,
+									@RequestParam(value="cp", required=false, defaultValue = "1") int cp) {
+		
+		Map<String, Object> map=service.selectTradeList(status,cp);
+		model.addAttribute("map", map);
+		
 		return "/manager/tradeList";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/manager/projectRequestList")
 	public String managerprojectRequestList() {
 		return "/manager/projectRequestList";

@@ -12,6 +12,7 @@ import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.dao.ManagerDAO;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
+import com.manager.freelancer.manager.model.vo.Settlement;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 
 @Service
@@ -204,6 +205,30 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	
 	
-	
+	// 계좌 내역 목록
+	@Override
+	public Map<String, Object> selectTradeList(String status, int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int listCount = dao.getTradeListCount(status);
+		Pagination pagination = new Pagination(listCount, cp);
+
+		List<Settlement> tradeList = dao.selectTradeList(status, pagination);
+		
+		if(tradeList!=null) {
+			for(Settlement t : tradeList) {
+				if(t.getWorkStatus()==1) t.setWorkStatusString("진행중");
+				else if(t.getWorkStatus()==2) t.setWorkStatusString("정산 완료");
+				else if(t.getWorkStatus()==3) t.setWorkStatusString("환불 완료");
+				else t.setWorkStatusString("마감");
+			}
+		}
+
+		map.put("pagination", pagination);
+		map.put("tradeList", tradeList);
+
+		return map;
+	}
 
 }

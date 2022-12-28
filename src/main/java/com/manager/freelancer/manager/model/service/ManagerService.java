@@ -61,6 +61,13 @@ public interface ManagerService {
 	 */
 	int managerServiceDelete(int serviceNo);
 
+	/** 계좌 내역
+	 * @param status
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectTradeList(String status, int cp);
+
 
 	
 }
