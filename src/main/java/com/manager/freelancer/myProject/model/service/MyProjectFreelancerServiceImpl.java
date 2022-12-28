@@ -226,6 +226,7 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("messageIN",message);
 		map.put("tradeReportNo",tradeReportNo);
+		map.put("reportFilePath",reportFilePath);
 		
 		return map;
 	}

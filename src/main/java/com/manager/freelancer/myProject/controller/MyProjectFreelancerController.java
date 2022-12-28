@@ -152,6 +152,8 @@ public class MyProjectFreelancerController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("messageIN",resurt.get("messageIN"));
 			map.put("tradeReportNo",resurt.get("tradeReportNo"));
+			map.put("reportFilePath",resurt.get("reportFilePath"));
+			//map.put("reportFilePath",reportFilePath);
 			map.put("reportContent",reportContent);
 		
 			return new Gson().toJson(map);

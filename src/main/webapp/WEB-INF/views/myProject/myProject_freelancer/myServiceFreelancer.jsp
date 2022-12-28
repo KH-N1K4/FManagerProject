@@ -57,13 +57,15 @@
                             <img src="${service.serviceFilePath2}" alt="">
                         </div>
                         <div id="serviceContent">
-                            <div id="serviceTitle">
-                                <a href="#" id="serviceName" class="serviceName" suggestionName="">
-                                    ${service.serviceTitle}
-                                </a>
-                            </div>
-                            <div id="serviceSummary">
-                                <p>${service.serviceSummary}</p>
+                            <div>
+                                <div id="serviceTitle">
+                                    <a href="#" id="serviceName" class="serviceName" suggestionName="">
+                                        ${service.serviceTitle}
+                                    </a>
+                                </div>
+                                <div id="serviceSummary">
+                                    <p>${service.serviceSummary}</p>
+                                </div>
                             </div>
                             <div class="detail">
                                 <div id="servicePrice">

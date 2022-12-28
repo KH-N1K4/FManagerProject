@@ -43,9 +43,28 @@ Submit.addEventListener("click", (e) => {
               saleslist.forEach(function(arg,i){
                 if(arg.tradeNo == tradeNo){
                   arg.tradeReportNo = result.tradeReportNo;
+                  arg.reportFilePath = result.reportFilePath;
                   arg.reportContent = result.reportContent;
                   document.querySelector('#ajaxReview').disabled = true;
                   //수정본이 이상하다며 욕설
+                  if(arg.reportFilePath != null){
+                    /* document.querySelector('#reportFilePath').value = arg.reportFilePath; */
+                    const div = document.createElement("div");
+                    div.classList.add("list_content"); 
+                    div.classList.add("fileaddDiv"); 
+                    const a = document.createElement("a");
+                    a.setAttribute("href", arg.reportFilePath);
+                    a.setAttribute("target", "_blank");//target="_blank"
+                    a.style.textDecoration ="none";
+                    a.style.color ="black";
+                    a.style.fontSize ="12px";
+                    a.innerText = "업로드 파일 다운로드";
+                    const fileadd= document.getElementById("fileadd");
+                    fileadd.append(div);
+                    div.append(a);
+          
+                  }
+
                 } 
               });
             }

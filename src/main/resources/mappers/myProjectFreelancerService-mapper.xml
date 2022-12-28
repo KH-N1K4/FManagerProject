@@ -158,7 +158,7 @@
 			CASE WHEN SERVICE_STATUS = 1 THEN '승인대기 중'
 			     WHEN SERVICE_STATUS = 2 THEN '판매 중'
 			     WHEN SERVICE_STATUS = 3 THEN '미승인'
-			     WHEN SERVICE_STATUS = 3 THEN '판매 중지'
+			     WHEN SERVICE_STATUS = 4 THEN '판매 중지'
 			END AS SERVICE_STATUS_STRING
 			,SERVICE_CREATE_DATE,THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH,MAIN_CATEGORY_NO
 		FROM (SELECT * 
@@ -242,7 +242,7 @@
 		</selectKey>
 		<if test='reportFilePath neq null'>
 				 INSERT INTO "TRADE_REPORT"
-				 VALUES(#{tradeReportNo},#{reportPersonNo},#{reportedPersonNo},#{reportContent},DEFAULT,#{reportFilePath},#{tradeNo})
+				 VALUES(#{tradeReportNo},#{reportPersonNo},#{reportedPersonNo},#{reportContent},DEFAULT,#{reportFilePath},#{tradeNo},DEFAULT)
 		</if>
 		<if test='reportFilePath eq null'>
 				 INSERT INTO "TRADE_REPORT" 

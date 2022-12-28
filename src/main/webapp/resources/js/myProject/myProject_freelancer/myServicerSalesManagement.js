@@ -105,6 +105,7 @@ const modalClose = document.querySelector('.reportModal_close');
 $('.reportBtn').click(function(){
   document.querySelector('#ajaxReview').style.backgroundColor = '#538126';
   document.querySelector('#reportContent').value = "";
+  document.querySelector('#reportFilePath').value = "";
   document.querySelector('.fileRemove').style.display ="block";
   $(".fileaddDiv").remove();
   const tradeNoValue = this.title;
