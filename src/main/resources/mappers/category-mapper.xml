@@ -2,25 +2,68 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="categoryMapper">
 
-	<resultMap type="MainCategory" id="mainCategory_rm">
- 
- 		<!-- DB에서 PK에 해당하는 필드, 컬럼을 작성하는 태그 -->
- 		<id property="mainCategoryNo" column="MAIN_CATEGORY_NO"/>
- 		
- 		<!-- 나머지 일반 컬럼 -->
- 		<result property="mainCategoryName" column="MAIN_CATEGORY_NAME"/>
-	 		
-	 </resultMap>
-	
-  <select id="selectBoardType" resultType="map">
+
+	<resultMap type="myProjectFreelancerService" id="fService_rm">
+    	 <id property="serviceNo" column="SERVICE_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
+    		   		
+	      <result property="serviceTitle" column="SERVICE_TITLE" />								<!-- 서비스 제목 -->							
+	      <result property="serviceSummary" column="SERVICE_SUMMARY" />						<!-- 서비스 한 줄 요약 -->
+	      <result property="serviceContent" column="SERNICE_CONTENT" />						<!-- 서비스 내용 -->
+	      <result property="servicePrice" column="SERVICE_PRICE"/>								<!-- 서비스 가격 -->
+	      <result property="servicePriceString" column="SERVICE_PRICE_STRING"/>		<!-- 서비스 가격 문자 형태 1,000-->
+	      <result property="serviceEditNum" column="SERVICE_EDIT_NUM"/>						<!-- 서비스 수정 횟수 -->
+	      <result property="serviceWorkPeriod" column="SERVICE_WORK_PERIOD" />		<!-- 서비스 작업 일수 -->
+	     
+	      
+	      <!-- 서비스 첨부파일 -->
+	      <result property="serviceFileNo" column="REQUEST_FILE_NO"/> 						<!-- 서비스 첨부파일 번호 SEQUENCE: SEQ_SERVICE_FILE_NO -->
+	      <result property="serviceFilePath2" column="REQUEST_FILE_PATH"/>					<!-- 서비스 첨부파일 경로 -->
+	      
+	      
+	      
+	       <!-- 카테고리 -->
+	      <result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />								<!-- 메인 1카테고리 -->
+	      <result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />						<!-- 메인 1카테고리 이름 -->
+	      <result property="subCategoryNo" column="SUB_CATEGORY_NO" />									<!-- 메인 2카테고리 -->
+	      <result property="subCategoryName" column="SUB_CATEGORY_NAME" />							<!-- 메인 2카테고리 이름  -->
+	      <result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />							<!-- 메인 3카테고리 -->	
+	      <result property="thirdCategoryName" column="THIRD_CATEGORY_NAME" />					<!-- 메인 3카테고리 이름-->
+	      
+	      
+    </resultMap>
+
+
+  <select id="selectMainCategoryList" resultType="map">
  
  	SELECT * FROM MAIN_CATEGORY
  	ORDER BY 1
  
  </select>
- 	
- 	
+ 
+ 
+  <select id="selectSubCategoryList" resultType="map">
+ 
+ 	SELECT * FROM SUB_CATEGORY
+ 	ORDER BY 1
+ </select>
+  <select id="selectThirdCategoryList" resultType="map">
+ 
+ 	SELECT * FROM CATEGORY
+ 	ORDER BY 1
+ </select>
+ 
+ <select id="selectBoardList" resultMap="fService_rm"> 
+ 	SELECT SERVICE_TITLE, SERVICE_SUMMARY , SERVICE_PRICE, REQUEST_FILE_PATH, THIRD_CATEGORY_NO,SUB_CATEGORY_NO,MAIN_CATEGORY_NO, SERVICE_NO
+ 	FROM SERVICE
+ 	JOIN SERVICE_FILE USING(SERVICE_NO)
+ 	JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+ 	JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+ 	JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+	WHERE MAIN_CATEGORY_NO=#{mainCategoryNo}
+	ORDER BY 1 DESC
 
+ </select>
+ 	
 
 	
   

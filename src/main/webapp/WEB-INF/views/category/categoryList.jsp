@@ -13,6 +13,8 @@
 
     <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
 
+
+
     <section class="content">
         <div class="mainArea">
             <!-- 사이드 메뉴 -->
@@ -46,23 +48,24 @@
                         <option value="">마감 임박순</option>
                     </select>
                 </form>
+                
 
                 <div id="imageContent">
                 
-                <c:forEach var="i" begin="0" end="19" step="1">
-                	<a href="/category/1/1">
+                <c:forEach var="service" items="${map }">
+                	<a href="/category/${service.mainCategoryNo}/${service.subCategoryNo }/${service.thirdCategoryNo }/${service.serviceNo }">
 	                    <div id="image">
-	                        <div><img src="/resources/images/샘플1.jpg"></div>
+	                        <div><img src="${service.serviceFilePath2 }"></div>
 	                        <!-- 하트버튼 추가 예정 -->
-	                        <span>프로스튜디오</span>
-	                        <span>개인 프로필 사진 촬영하기</span>
-	                        <span>가격: 140,000원</span>
+	                        <span>${service.serviceTitle }</span>
+	                        <span>${service.serviceSummary }</span>
+	                        <span>가격: ${servicePrice}원</span>
 	                    </div>
                     </a>
                 </c:forEach>
                 </div>    
             </div>
-
+	
         </div>
     </section>
 
@@ -70,5 +73,6 @@
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
+   
 </body>
 </html>

@@ -21,7 +21,7 @@
 
        <section>
             <div id="title">비밀번호 변경</div>
-            <form action="/member/changePw" method="POST" name="myPage-frm" id="changePwForm">
+            <form action="/member/myInfo/changePw" method="POST" name="myPage-frm" id="changePwForm">
                 <div id="inputArea">
                     <div>
                         <div class="item">비밀번호</div>
