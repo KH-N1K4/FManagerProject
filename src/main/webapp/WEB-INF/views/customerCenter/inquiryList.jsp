@@ -113,7 +113,7 @@
                                             <li><a class="current">${i}</a></li>
                                         </c:when>
                                         <c:otherwise>
-                                            <%-- 현제 페이지를 제외한 나머지  --%>
+                                            <%-- 현재 페이지를 제외한 나머지  --%>
                                             <li><a href="/userInquiryList?cp=${i}${sURL}">${i}</a></li>
                                         </c:otherwise>
                                     </c:choose>
@@ -128,15 +128,13 @@
                         </ul>
                     </div>
                     <form action="/userInquiryList" id="inquirySearch" method="get"> 
-                        <div>
-                            <select name="key" id="search-key">
-                                <option value="t">제목</option> 
-                                <option value="c">내용</option> 
-                                <option value="tc">제목+내용</option> 
-                            </select> 
-                            <input type="text" name="query" id="search-query" placeholder=" 검색어를 입력해주세요" >  
-                            <button>검색</button>
-                        </div>
+                        <select name="key" id="search-key">
+                            <option value="t">제목</option> 
+                            <option value="c">내용</option> 
+                            <option value="tc">제목+내용</option> 
+                        </select> 
+                        <input type="text" name="query" id="search-query" placeholder=" 검색어를 입력해주세요" >  
+                        <button>검색</button>
                     </form>
             </div>
 

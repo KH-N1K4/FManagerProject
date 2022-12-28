@@ -29,17 +29,17 @@
             <!-- ///////////////////////////////// -->
             <div class="mainContent">
                 <!-- 문의 내역 상세보기 -->
-                <form action="" id="inquirySubmit" >
+                <div id="inquirySubmit">
                     <h3 id="title">문의내역</h3>
 
                     <hr>
 
                     <table>
                         <tr>
-                            <th style="width:100px">${userInquiry.userInquiryNo}</th>
-                            <th style="width:450px">${userInquiry.userInquiryTitle}</th>
-                            <th style="width:100px">상태</th>
-                            <th style="width:150px">
+                            <th style="width:150px">${userInquiry.userInquiryNo}</th>
+                            <th style="width:500px">${userInquiry.userInquiryTitle}</th>
+                            <th style="width:150px">상태</th>
+                            <th style="width:200px">
                                 <c:choose>
                                     <c:when test="${userInquiry.inquiryRequest == null}">
                                         답변 대기 
@@ -66,7 +66,7 @@
                         <table>
                             <tr>
                                 <th style="width:100px">작성자</th>
-                                <td style="width:500px">${userInquiry.memberName}</td>
+                                <td style="width:750px">${userInquiry.memberName}</td>
                             </tr>
                             <tr>
                                 <th>구분</th>
@@ -113,20 +113,19 @@
                             <table>
                                 <tr>
                                     <th style="width:100px">작성자</th>
-                                    <td style="width:500px">${userInquiry.memberName}</td>
+                                    <td style="width:750px">${userInquiry.memberName}</td>
                                 </tr>
                                 <tr>
-                                    <th style="width:80px">답변 내용</th>
+                                    <th>답변 내용</th>
                                     <td class="textArea">${userInquiry.inquiryRequest}</td>
                                 </tr>
                             </table>
-
                         </section>
                     </c:if>
                     <div id="goToList">
-                        <button>목록으로</button>
+                        <button id="goToListbtn">목록으로</button>
                     </div>
-                </form>
+                </div>
 
             </div>
 
@@ -135,6 +134,7 @@
     </section>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="/resources/js/customerCenter/inquiryDetail.js"></script>   
 </body>
 </html>
