@@ -10,11 +10,12 @@
           body.style.overflow = 'hidden';
         }
       });
+      
       modalClose.addEventListener('click', () => {
         modal.classList.toggle('show');
 
-        if (modal.classList.contains('show')) {
-          body.style.overflow = 'hidden';
+        if (!modal.classList.contains('show')) {
+          body.style.overflow = 'visible';
         }
       });
 

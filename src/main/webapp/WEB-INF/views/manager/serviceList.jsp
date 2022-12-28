@@ -22,13 +22,16 @@
 	<div class="main">
 		<div id="service-list-title-area">
 
-			<span id="service-list-title">서비스 관리</span> <span class="select-area"> <select class="select-area-input" name="" id="">
-					<option value="전체">전체</option>
-					<option value="승인완료">승인완료</option>
-					<option value="승인대기중">승인대기중</option>
-					<option value="반려">반려</option>
-			</select>
-			</span>
+			<span id="service-list-title">서비스 등록 관리</span> 
+				<span class="select-area"> 
+					<select class="select-area-input" name="selectServiceStatus" id="selectServiceStatus" onchange="selectChange()">
+						<option value="0">전체</option>
+						<option value="1">승인대기중</option>
+						<option value="2">판매중</option>
+						<option value="3">미승인</option>
+						<option value="4">판매 중지</option>
+					</select>
+				</span>
 		</div>
 
 		<div id="service-list-table">
@@ -38,7 +41,7 @@
 				<div class="service-num">번호</div>
 				<div class="service-title">제목</div>
 				<div class="service-status">상태</div>
-				<div class="service-button">삭제</div>
+				<div class="service-button"> </div>
 			</div>
 
 			<!-- 테이블 내용 -->
@@ -46,16 +49,16 @@
 				<c:forEach var="service" items="${serviceList}">
 					<div class="service-list-table-content">
 						<div class="service-num">${service.serviceNo}</div>
-						<div class="service-title"><a class="detailBtn">${service.serviceTitle}</a></div>
+						<div class="service-title"><a class="detailBtn" href="">${service.serviceTitle}</a></div>
 						<div class="service-status">${service.serviceStatusString}</div>
 						<div class="service-button">
-							<span class="service-button-value">삭제</span>
+							<a class="service-button-value">삭제</a>
 						</div>
 					</div>
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty serviceList}">
-				<div class="service-list-table-content">서비스가 존재하지 않습니다.</div>
+				<div class="service-list-table-content center">서비스가 존재하지 않습니다.</div>
 			</c:if>
 
 
@@ -112,6 +115,9 @@
 	<!-- main -->
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	<script src="/resources/js/manager/serviceList.js"></script>
 
 </body>
 </html>

@@ -46,7 +46,27 @@ public interface ManagerService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectServiceList(String status, int cp);
+	Map<String, Object> selectServiceList(int cp);
+
+	/** 서비스 상태별 조회 ajax
+	 * @param listType
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectServiceTypeList(int status, int cp);
+
+	/** 서비스 삭제
+	 * @param serviceNo
+	 * @return
+	 */
+	int managerServiceDelete(int serviceNo);
+
+	/** 계좌 내역
+	 * @param status
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectTradeList(int status, int cp);
 
 
 	
