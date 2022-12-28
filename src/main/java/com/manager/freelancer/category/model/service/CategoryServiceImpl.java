@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.manager.freelancer.category.model.dao.CategoryDAO;
-import com.manager.freelancer.category.model.vo.Category;
+import com.manager.freelancer.category.model.vo.AskService;
+import com.manager.freelancer.category.model.vo.Service;
 
-@Service
+@org.springframework.stereotype.Service
 public class CategoryServiceImpl implements CategoryService{
 	
 	
@@ -32,9 +32,21 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public List<Category> selectBoardList(int mainCategoryNo) {
-		List<Category> boardList=dao.selectBoardList(mainCategoryNo);
+	public List<Service> selectBoardList(int mainCategoryNo) {
+		List<Service> boardList=dao.selectBoardList(mainCategoryNo);
 		return boardList;
 	}
+
+	@Override
+	public Service viewService(int serviceNo) {
+		return dao.viewService(serviceNo);
+	}
+
+	@Override
+	public int askService(AskService as) {
+		return dao.askService(as);
+	}
+
+	
 
 }

@@ -89,28 +89,96 @@ public class ManagerController {
 	
 	
 	
+	//======================================================================================
+	
+	
+	
+	
 	// 서비스 등록 내역 관리
 	@GetMapping("/manager/serviceList")
-	public String managerServiceList(Model model, 
-			@RequestParam(value="status", required=false) String status,
+	public String managerServiceList(Model model,
 			@RequestParam(value="cp", required=false, defaultValue = "1") int cp) {
 		
-		Map<String, Object> map=service.selectServiceList(status,cp);
+		Map<String, Object> map=service.selectServiceList(cp);
 		model.addAttribute("map", map);
 		
 		return "/manager/serviceList";
 	}
 	
 	
+	// 서비스 상태별 목록 조회 ajax
+	@GetMapping("/manager/serviceType")
+	@ResponseBody
+	public Map<String,Object> managerServiceType(Model model,
+											@RequestParam(value="status", required=false) int status,
+											@RequestParam(value="cp", required=false, defaultValue = "1") int cp){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(status);
+		
+		map=service.selectServiceTypeList(status,cp);
+		model.addAttribute("map", map);
+		System.out.println(map);
+		
+		return map;
+	}
+	
+	
+	// 서비스 삭제
+	@GetMapping("/manager/serviceDelete")
+	@ResponseBody
+	public int managerServiceDelete(@RequestParam int serviceNo) {
+		
+		System.out.println(serviceNo);
+		
+		int result = service.managerServiceDelete(serviceNo);
+		
+		return result;
+	}
 	
 	
 	
 	
 	
+	//======================================================================================
+	
+	
+	
+	
+	
+	// 계좌 관리
 	@GetMapping("/manager/tradeList")
-	public String managerTradeList() {
+	public String managerTradeList(Model model, 
+									@RequestParam(value="status", required=false, defaultValue = "0") int status,
+									@RequestParam(value="cp", required=false, defaultValue = "1") int cp) {
+		
+		Map<String, Object> map=service.selectTradeList(status,cp);
+		model.addAttribute("map", map);
+		
 		return "/manager/tradeList";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@GetMapping("/manager/projectRequestList")
 	public String managerprojectRequestList() {
 		return "/manager/projectRequestList";
