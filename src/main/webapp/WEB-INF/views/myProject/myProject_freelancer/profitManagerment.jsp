@@ -6,26 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>수익관리</title>
 
-  <link rel="stylesheet" href="/resources/css/profitManagement.css">
+  <link rel="stylesheet" href="/resources/css/myProject/myProject_freelancer/profitManagerment.css">
   
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
+    <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
         <!-- sideMenu -->
-        <section class="sideMenu">
-          <div class="aside">
-            <a class="myProject_User_side" href="">나의 서비스</a>
-            <a class="myProject_User_side" href="">판매 관리</a>
-            <a class="myProject_User_side" href="">보낸 제안</a>
-            <a class="myProject_User_side" href="">서비스 문의 내역</a>
-            <a class="myProject_User_side" href="">수익 관리</a>
-            <a class="myProject_User_side" href="">등급 관리</a>
-            <a class="myProject_User_side" href="">프리랜서 클럽</a>
-          </div>
-        </section>
+        <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProjectSide2.jsp"/>
         <!-- sideMenu -->
 
         <!-- sideMenu를 제외한 메인 내용 -->
@@ -44,8 +34,7 @@
             <div>총 수익</div>
           </div>
           <div id="middleBox">
-            <div>대충 통계 부분</div>
-            <div>made in sungchan </div>
+            <canvas id="myChart"></canvas>
           </div>
           <div id="selectBox">
             <span>수익금 내역</span> 
@@ -60,6 +49,10 @@
         <!-- sideMenu를 제외한 메인 내용 -->
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+    <script src="/resources/js/myProject/myProject_freelancer/profitManagerment.js"></script>
 </body>
 </html>

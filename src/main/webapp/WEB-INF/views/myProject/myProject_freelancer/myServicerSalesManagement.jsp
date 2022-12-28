@@ -116,7 +116,7 @@
                           </td>
                           <td  class="tc">
                             <div class="client_name_area td_link">
-                              <a href="#" id="clientName" class="clientName" expertName="">${sales.memberName}</a>
+                              <span id="clientName" class="clientName" expertName="">${sales.memberName}</span>
                             </div>
                           </td>
                           <td class="tc">

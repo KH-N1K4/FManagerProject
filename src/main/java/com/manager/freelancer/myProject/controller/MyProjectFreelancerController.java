@@ -199,5 +199,12 @@ public class MyProjectFreelancerController {
 			
 		return "myProject/myProject_freelancer/myProject_proposal";
 	}
+	
+	//수익관리 페이지
+	@GetMapping("/member/myProject/freelancer/profitManagerment")
+	public String profitManagerment(Model model, HttpSession session) {
+			
+		return "myProject/myProject_freelancer/profitManagerment";
+	}
 
 }
