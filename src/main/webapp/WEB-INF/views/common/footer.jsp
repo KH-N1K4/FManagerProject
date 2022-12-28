@@ -34,7 +34,7 @@
 
 
                 <br><br><br>
-                <a href="/userInquiry">문의하기</a>
+                <a href="/manager/memberList">문의하기</a>
                 <br>
                 <a href="/userInquiryList">고객센터</a>
 

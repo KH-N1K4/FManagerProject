@@ -1,151 +1,117 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="serviceList" value="${map.serviceList}" />
+<c:set var="pagination" value="${map.pagination}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>서비스 관리</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>서비스 관리</title>
 
-    <link rel="stylesheet" href="/resources/css/manager/serviceList.css">
+<link rel="stylesheet" href="/resources/css/manager/serviceList.css">
 
-    <style>
-       body{
-            margin:0;
-        }
 
-        #logo{
-            width: 200px;
-            height: 100px;  
-
-           
-            position: absolute;
-
-            left: 60px;
-            top:40px;
-
-            /* border:1px solid black; */
-        }
-
-        #logo>img{
-            width: 100%;
-        }
-
-      
-
-        #header1{
-            width: 1200px;
-            height: 160px;
-            margin:auto;
-            
-            position: relative;
-
-            
-        }
-
-       
-
-        .header-top{
-            position: absolute;
-
-            right: 20px;
-            top:20px;
-        }
-        
-        .header-top>span{
-            margin:0 20px;
-
-            cursor: pointer;
-            color:black;
-        }
-        #nav{
-            height: 40px;
-            background-color: black;
-        }
-
-        #nav>ul{
-            width: 1200px;
-            margin:auto;
-        }
-
-        #nav>ul>li{
-            list-style: none;
-            float: left;
-            margin:12px 30px;
-            color:white;
-        }
-
-       
-
-    </style>
 </head>
 <body>
-    
-    <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp"/>
-  
 
-    <div class="main">
-        <div id="service-list-title-area">
-            
-                <span id="service-list-title">서비스 등록 내역 게시판</span>
-                <span class="select-area">
-                    <select class="select-area-input" name="" id="">
-                        <option value="전체">전체</option>
-                        <option value="승인완료">승인완료</option>
-                        <option value="승인대기중">승인대기중</option>
-                        <option value="반려">반려</option>
-                    </select>
-                </span>
-        </div>
+	<jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp" />
 
-        <div id="service-list-table">
-        
-            <!-- 테이블 컬럼명 -->
-            <div class="service-list-table-column">
-                <div class="service-num">번호</div>
-                <div class="service-title">제목</div>
-                <div class="service-status">상태</div>
-                <div class="service-button">삭제
-                
 
-                </div>
-            </div>
+	<div class="main">
+		<div id="service-list-title-area">
 
-            <!-- 테이블 내용 -->
-            <div class="service-list-table-content">
-                <div class="service-num">1</div>
-                <div class="service-title">제목1</div>
-                <div class="service-status">승인대기중</div>
-                <div class="service-button">
-                    <span class="service-button-value">삭제</span>
-                </div>
-            </div>
-            <div class="service-list-table-content">
-                <div class="service-num">1</div>
-                <div class="service-title">제목1</div>
-                <div class="service-status">승인완료</div>
-                <div class="service-button">
-                    <span class="service-button-value">삭제</span>
-                </div>
-            </div>
-            <div class="service-list-table-content">
-                <div class="service-num">1</div>
-                <div class="service-title">제목1</div>
-                <div class="service-status">반려</div>
-                <div class="service-button">
-                    <span class="service-button-value">삭제</span>
-                </div>
-            </div>
- 
-            
-        
-            
+			<span id="service-list-title">서비스 관리</span> <span class="select-area"> <select class="select-area-input" name="" id="">
+					<option value="전체">전체</option>
+					<option value="승인완료">승인완료</option>
+					<option value="승인대기중">승인대기중</option>
+					<option value="반려">반려</option>
+			</select>
+			</span>
+		</div>
 
-        </div> <!-- buy-table -->
+		<div id="service-list-table">
 
-    </div> <!-- main -->
-    
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+			<!-- 테이블 컬럼명 -->
+			<div class="service-list-table-column">
+				<div class="service-num">번호</div>
+				<div class="service-title">제목</div>
+				<div class="service-status">상태</div>
+				<div class="service-button">삭제</div>
+			</div>
+
+			<!-- 테이블 내용 -->
+			<c:if test="${not empty serviceList}">
+				<c:forEach var="service" items="${serviceList}">
+					<div class="service-list-table-content">
+						<div class="service-num">${service.serviceNo}</div>
+						<div class="service-title"><a class="detailBtn">${service.serviceTitle}</a></div>
+						<div class="service-status">${service.serviceStatusString}</div>
+						<div class="service-button">
+							<span class="service-button-value">삭제</span>
+						</div>
+					</div>
+				</c:forEach>
+			</c:if>
+			<c:if test="${empty serviceList}">
+				<div class="service-list-table-content">서비스가 존재하지 않습니다.</div>
+			</c:if>
+
+
+		</div>
+		<!-- buy-table -->
+		
+		<!-- pagination -->
+		<div class="pagination-area">
+
+
+				<ul class="pagination">
+
+					<!-- 첫 페이지로 이동 -->
+					<li><a href="/manager/memberList?cp=1${sURL}">&lt;&lt;</a></li>
+
+					<!-- 이전 목록 마지막 번호로 이동 -->
+					<li><a href="/manager/memberList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+
+
+
+					<c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1" >
+					
+						<!-- 특정 페이지로 이동 -->
+						<c:choose>
+						
+							<c:when test="${i==pagination.currentPage}">
+								<!-- 현재 보고있는 페이지 -->
+								<li>
+									<a class="current">${i}</a>
+								</li>
+							</c:when>
+							
+							<c:otherwise>
+								<!-- 현재 페이지를 제외한 나머지 -->
+								<li><a href="/manager/memberList?cp=${i}${sURL}">${i}</a></li>
+							</c:otherwise>
+						
+						</c:choose>
+						
+					</c:forEach>
+					
+					
+					
+					<!-- 다음 목록 시작 번호로 이동 -->
+					<li><a href="/manager/memberList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+
+					<!-- 끝 페이지로 이동 -->
+					<li><a href="/manager/memberList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+
+				</ul>
+			</div>
+
+	</div>
+	<!-- main -->
+
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 </body>
 </html>

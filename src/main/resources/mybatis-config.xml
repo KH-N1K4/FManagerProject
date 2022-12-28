@@ -22,6 +22,7 @@
 		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
 		<typeAlias type="com.manager.freelancer.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.manager.freelancer.manager.model.vo.Member" alias="Member2"/>
+		<typeAlias type="com.manager.freelancer.manager.model.vo.FreelancerService" alias="ManagerService"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.MainCategory" alias="MainCategory"/>
 		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
 		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Freelancer" alias="Freelancer"/>

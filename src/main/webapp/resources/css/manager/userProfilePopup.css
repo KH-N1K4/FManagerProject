@@ -1,5 +1,6 @@
 .member-info{
     min-width: 500px;
+    max-width: 700px;
     margin:0;
     /* min-height: 100vh; */
   
@@ -106,6 +107,7 @@ form[name='myPage-frm'] {
     font-size: 20px;
     color: #538126;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 .input{
     width: 400px;
@@ -158,7 +160,7 @@ input[type="checkbox"]:checked + label span::after {
 /* 버튼 */
 .btnArea{
 	margin:auto;
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 	padding: 10px;
 	width:200px;
 	height:30px;
@@ -229,15 +231,21 @@ textarea{
 }
 
 /* 은행 */
-#bankName{
-    width: 150px;
+.accountArea{
+    display: flex;
+    flex-direction: row;
+    width: 500px !important;
+}
+#freelancerBankName{
+    width: 100px;
     height: 30px;
     position: relative;
     top: 0px;
+    margin-right: 10px;
 }
-#account{
-    width: 400px;
-    margin-bottom: 100px;
+#freelancerAccount{
+    width: 300px;
+    height: 30px;
 }
 
 /* 포트폴리오 */
@@ -264,15 +272,26 @@ textarea{
 }
 
 #serviceArea{
-    width: 500px;
+    width: 7s00px;
 }
 
 
+.itemTitle.free{
+    display: flex;
+    flex-direction: row;
+}
 
+.freelancerArea .itemTitle>div{
+    width: 180px;
+    margin-bottom: 30px;
+}
+.field{
+    width: 470px !important;
+}
 
-
-
-
+.freelancerArea .field>.checkbox{
+    margin-right:50px
+}
 
 
 

@@ -85,6 +85,9 @@
 .member-enrollDate {
 	width: 400px;
 }
+.member-delete{
+	width: 150px;
+}
 
 /* 테이블 값 부분 */
 .member-manage-table-content {
@@ -162,8 +165,8 @@
 }
 
 /* 모달 */
-.member-modal, .freelancer-modal {
-	position: absolute;
+.member-modal{
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -173,11 +176,11 @@
 	z-index: 2;
 }
 
-.member-modal.show, .freelancer-modal.show {
+.member-modal.show{
 	display: block;
 }
 
-.member-info, .freelancer-info {
+.member-info {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -191,5 +194,16 @@
 
 
 .infoBtn {
+	cursor: pointer;
+}
+
+.deleteBtn{
+	display: inline-block;
+	width: 100px;
+	height: 25px;
+	border-radius: 5px;
+	text-decoration: none;
+	color: white;
+	background-color: black;
 	cursor: pointer;
 }

@@ -71,66 +71,74 @@
 							<textarea name="" id="freelancerIntroduction" cols="77" rows="8" readonly></textarea>
 						</div>
 					</div>
-					<div class="itemTitle">
-						<div class="item">지역</div>
-						<div>
-							<span id="freelancerRegionName"></span>
+					<div>
+						<div class="itemTitle free">
+							<div class="item">지역</div>
+							<div>
+								<span id="freelancerRegionName"></span>
+							</div>
+						</div>
+						<div class="itemTitle free">
+							<div class="item">전문 분야</div>
+							<div class="field">
+								<input type="checkbox" name="" id="design"> 
+									<label for="design" class="checkbox fieldCheck"> 
+										<span></span>디자인
+									</label> 
+								<input type="checkbox" name="" id="it"> 
+									<label for="it" class="checkbox fieldCheck"> 
+										<span></span>IT.프로그래밍
+									</label> <br>
+								<input type="checkbox" name="" id="video">
+									<label for="video" class="checkbox fieldCheck">
+										<span></span>영상
+									</label> 
+								<input type="checkbox" name="" id="photo"> 
+									<label for="photo" class="checkbox fieldCheck"> 
+										<span></span>사진
+									</label> 
+								<input type="checkbox" name="" id="sound"> 
+									<label for="sound" class="checkbox fieldCheck"> 
+										<span></span>음향
+									</label>
+							</div>
+						</div>
+						<div class="itemTitle free">
+							<div class="item">기간</div>
+							<div><span id="freelancerPeriod"></span>년</div>
+						</div>
+						<div class="itemTitle free">
+							<div class="item">경력 사항</div>
+							<div></div>
+						</div>
+						<div class="itemTitle free">
+							<div class="item">자격증</div>
+							<div></div>
+						</div>
+						<div class="itemTitle free">
+							<div class="item">연락 가능 시간</div>
+							<div>
+								<span id="freeContactTime1"></span> 시 ~ <span id="freeContactTime2"></span> 시
+							</div>
+						</div>
+						<div class="itemTitle free">
+							<div class="item">수익금 출금 은행</div>
+							<div class="accountArea">
+								<input type="text" name="" id="freelancerBankName" readonly>
+								<input type="text" name="" id="freelancerAccount" readonly>
+							</div>
 						</div>
 					</div>
-					<div class="itemTitle">
-						<div class="item">전문 분야</div>
-						<div class="field">
-							<input type="checkbox" name="" id="design"> <label for="design" class="checkbox"> <span></span>디자인
-							</label> <input type="checkbox" name="" id="it"> <label for="it" class="checkbox"> <span></span>IT.프로그래밍
-							</label> <input type="checkbox" name="" id="video"> <label for="video" class="checkbox"> <span></span>영상
-							</label> <input type="checkbox" name="" id="photo"> <label for="photo" class="checkbox"> <span></span>사진
-							</label> <input type="checkbox" name="" id="sound"> <label for="sound" class="checkbox"> <span></span>음향
-							</label>
-						</div>
+					<div id="addArea">
+						<div class="item">포트폴리오</div>
 					</div>
-					<div class="itemTitle">
-						<div class="item">기간</div>
-						<div><span id="freelancerPeriod"></span>년</div>
-					</div>
-					<div class="itemTitle">
-						<div class="item">경력 사항</div>
-						<div></div>
-					</div>
-					<div class="itemTitle">
-						<div class="item">자격증</div>
-						<div></div>
-					</div>
-					<div class="itemTitle">
-						<div class="item">연락 가능 시간</div>
-						<div>
-							<span id="freeContactTime1"></span> 시 ~ <span id="freeContactTime2"></span> 시
-						</div>
-					</div>
-					<div class="itemTitle">
-						<div class="item">수익금 출금 은행</div>
-						<div>
-							<select name="" id="bankName">
-								<option value="">전체</option>
-								<option value="">신한</option>
-								<option value="">국민</option>
-								<option value="">우리</option>
-								<option value="">기업</option>
-							</select> <input type="text" name="" id="account" value="110-412-549956" readonly style="background-color: gainsboro;">
-						</div>
+					<div id="serviceArea">
+						<div class="service">g</div>
+						<div class="service">g</div>
+						<div class="service">g</div>
+						<div class="service">g</div>
 					</div>
 				</div>
-				<div id="addArea">
-					<div class="item">포트폴리오</div>
-				</div>
-				<div id="serviceArea">
-					<div class="service">g</div>
-					<div class="service">g</div>
-					<div class="service">g</div>
-					<div class="service">g</div>
-				</div>
-			</div>
-			<div class="btnArea">
-				<a href="/memberDelete">탈퇴</a>
 			</div>
 
 
