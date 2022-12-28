@@ -1,14 +1,16 @@
 .main{
     width: 1100px;
-    height: 1200px;
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
+    min-height: 450px;
+    max-height: 1400px;;
 }
 
 #manager-buy-title-area{
     position: relative;
 
     margin-top: 20px;
-    margin-bottom: 20px; }
+    margin-bottom: 20px; 
+}
 
 #manager-buy-title {
 
@@ -46,12 +48,20 @@
 /* 컬럼명들 */
 .manager-buy-table-column{
     border-bottom: 1px solid black;
+    padding-bottom : 20px;
 }
+
+#manager-buy-table{
+	border-bottom : 1px solid black;
+	margin-bottom: 50px;
+}
+
 #manager-buy-table > div{
     display: flex;
     flex-direction: row;
     align-items: center;
     text-align: center;
+    padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 20px;
 }

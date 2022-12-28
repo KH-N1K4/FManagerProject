@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="tradeList" value="${map.tradeList}" />
+<c:set var="pagination" value="${map.pagination}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +24,7 @@
 			<span id="manager-buy-title">계좌 관리</span>
 			<span class="search-area"> 
 				<select class="member-select-input" name="selectmemberType" id="selectmemberType" onchange="selectChange()">
-					<option value="0">구분</option>
+					<option value="0">작업 상태</option>
 					<option value="1">진행중</option>
 					<option value="2">정산 완료</option>
 					<option value="3">환불 완료</option>
@@ -45,19 +48,24 @@
 			</div>
 
 			<!-- 테이블 내용 -->
-			<div class="manager-buy-table-content">
-				<div class="manager-num">2022-12-28</div>
-				<div class="manager-trade-num">456</div>
-				<div class="manager-service-name">로고 디자인 제작 로고 디자인 제작 로고 디자</div>
-				<div class="manager-expert">김지윤</div>
-				<div class="manager-work-status">환불 완료</div>
-				<div class="manager-division">입금</div>
-				<div class="manager-division">10,000</div>
-				<div class="manager-option">
-					<span>정산</span> <span>환불</span>
-				</div>
-			</div>
 
+			<c:if test="${not empty tradeList}">
+				<c:forEach var="trade" items="${tradeList}">
+					<div class="manager-buy-table-content">
+						<div class="manager-num">${trade.paymentDate}</div>
+						<div class="manager-trade-num">${trade.tradeNo}</div>
+						<div class="manager-service-name">${trade.serviceTitle}</div>
+						<div class="manager-expert">${trade.userName}</div>
+						<div class="manager-work-status">${trade.workStatusString}</div>
+						<div class="manager-division">${trade.paymentTypeString}</div>
+						<div class="manager-division">${trade.paymentPrice}</div>
+						<div class="manager-option">
+							
+							<span>정산</span> <span>환불</span>
+						</div>
+					</div>
+				</c:forEach>
+			</c:if>
 
 		</div>
 		<!-- buy-table -->
@@ -120,6 +128,8 @@
 	<!-- main -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	
+	<script src="/resources/js/manager/tradeList.js"></script>
 </body>
 </html>

@@ -207,7 +207,7 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	// 계좌 내역 목록
 	@Override
-	public Map<String, Object> selectTradeList(String status, int cp) {
+	public Map<String, Object> selectTradeList(int status, int cp) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -222,6 +222,10 @@ public class ManagerServiceImpl implements ManagerService {
 				else if(t.getWorkStatus()==2) t.setWorkStatusString("정산 완료");
 				else if(t.getWorkStatus()==3) t.setWorkStatusString("환불 완료");
 				else t.setWorkStatusString("마감");
+				
+				if(t.getPaymentType()==1) t.setPaymentTypeString("입금");
+				else if(t.getPaymentType()==2) t.setPaymentTypeString("출금");
+				else t.setPaymentTypeString("환불");
 			}
 		}
 

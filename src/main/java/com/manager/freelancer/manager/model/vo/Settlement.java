@@ -14,6 +14,7 @@ public class Settlement {
 	private int workStatus;
 	private String workStatusString;
 	private int paymentType;
+	private String paymentTypeString;
 	private String paymentDate;
 	private int paymentPrice;
 	

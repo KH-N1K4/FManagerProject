@@ -182,7 +182,7 @@ public class ManagerDAO {
 	 * @param status
 	 * @return
 	 */
-	public int getTradeListCount(String status) {
+	public int getTradeListCount(int status) {
 		return sqlSession.selectOne("managerMapper.getTradeListCount", status);
 	}
 
@@ -191,7 +191,7 @@ public class ManagerDAO {
 	 * @param pagination
 	 * @return
 	 */
-	public List<Settlement> selectTradeList(String status, Pagination pagination) {
+	public List<Settlement> selectTradeList(int status, Pagination pagination) {
 		
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 

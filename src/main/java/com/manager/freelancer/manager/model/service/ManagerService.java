@@ -66,7 +66,7 @@ public interface ManagerService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectTradeList(String status, int cp);
+	Map<String, Object> selectTradeList(int status, int cp);
 
 
 	

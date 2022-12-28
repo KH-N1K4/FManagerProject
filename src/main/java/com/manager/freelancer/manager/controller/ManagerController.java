@@ -149,7 +149,7 @@ public class ManagerController {
 	// 계좌 관리
 	@GetMapping("/manager/tradeList")
 	public String managerTradeList(Model model, 
-									@RequestParam(value="status", required=false) String status,
+									@RequestParam(value="status", required=false, defaultValue = "0") int status,
 									@RequestParam(value="cp", required=false, defaultValue = "1") int cp) {
 		
 		Map<String, Object> map=service.selectTradeList(status,cp);
