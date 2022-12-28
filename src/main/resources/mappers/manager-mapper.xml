@@ -32,7 +32,7 @@
 		<result property="serviceStatus" column="SERVICE_STATUS" />
 	</resultMap>
 	
-	<resultMap type="com.manager.freelancer.manager.model.vo.Settlement" id="manager_trade_rm">
+	<resultMap type="Settlement" id="manager_trade_rm">
 		<id property="settlementNo" column="SETTLEMENT_NO"/>
 		<result property="tradeNo" column="TRADE_NO" />
 		<result property="workStatus" column="WORK_STATUS" />
