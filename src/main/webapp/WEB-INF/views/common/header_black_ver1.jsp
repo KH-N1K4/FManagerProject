@@ -25,7 +25,7 @@
         <ul>
             <li><a href="/manager/serviceList">서비스 관리</a></li>
             <li><a href="/manager/memberList">회원 관리</a></li>
-            <li><a href="/manager/userInquiry">1:1문의 관리</a></li>
+            <li><a href="/manager/managerInquiryList">1:1문의 관리</a></li>
             <li><a href="/manager/tradeList">구매내역 관리</a></li>
             <li><a href="/manager/reviewList">리뷰 관리</a></li>
         </ul>
