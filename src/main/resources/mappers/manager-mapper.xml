@@ -181,6 +181,30 @@
 		WHERE SERVICE_STATUS != 5
 	</select>
 	
+	
+	<!-- 서비스 상태별 수 조회 -->
+	<select id="getServiceListCount2" resultType="_int">
+		SELECT COUNT(*) FROM SERVICE
+		WHERE SERVICE_STATUS != 5
+		AND SERVICE_STATUS = #{status}
+	</select>
+	
+	
+	<!-- 서비스 상태별 목록 조회 -->
+	<select id="selectServiceList2">
+		SELECT SERVICE_NO, SERVICE_TITLE, SERVICE_STATUS
+		FROM SERVICE
+		WHERE SERVICE_STATUS != 5
+		AND SERVICE_STATUS = #{status}
+	</select>
+	
+	
+	<!-- 서비스 삭제 -->
+	<update id="managerServiceDelete">
+		UPDATE SERVICE SET SERVICE_DELETE_FL = 'Y'
+		WHERE SERVICE_NO=#{serviceNo}
+	</update>
+	
 
 </mapper>
 

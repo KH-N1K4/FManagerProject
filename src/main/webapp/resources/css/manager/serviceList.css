@@ -92,10 +92,13 @@
 .service-button-value{
     display: inline-block;
     width: 90px;
-    border-radius: 15px;
+    height: 25px;
+    border-radius: 5px;
     text-align: center;
+    text-decoration: none;
     color: white;
-    background-color: rgb(33, 138, 33);
+    background-color: black;
+    cursor:pointer;
 }
 
 /* pagination */

@@ -138,14 +138,14 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	//서비스 목록 조회
 	@Override
-	public Map<String, Object> selectServiceList(String status, int cp) {
+	public Map<String, Object> selectServiceList(int cp) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int listCount = dao.getServiceListCount(status);
+		int listCount = dao.getServiceListCount();
 		Pagination pagination = new Pagination(listCount, cp);
 
-		List<FreelancerService> serviceList = dao.selectServiceList(status, pagination);
+		List<FreelancerService> serviceList = dao.selectServiceList(pagination);
 		
 		if(serviceList!=null) {
 			for(FreelancerService s : serviceList) {
@@ -162,6 +162,37 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	
+	// 서비스 상태별 조회
+	@Override
+	public Map<String, Object> selectServiceTypeList(int status, int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int listCount = dao.getServiceListCount(status);
+		Pagination pagination = new Pagination(listCount, cp);
+
+		List<FreelancerService> serviceList = dao.selectServiceList(pagination,status);
+		
+		if(serviceList!=null) {
+			for(FreelancerService s : serviceList) {
+				if(s.getServiceStatus()==1) s.setServiceStatusString("승인 대기중");
+				else if(s.getServiceStatus()==2) s.setServiceStatusString("판매중");
+				else if(s.getServiceStatus()==3) s.setServiceStatusString("미승인");
+				else s.setServiceStatusString("판매 중지");
+			}
+		}
+		map.put("serviceList", serviceList);
+		map.put("pagination", pagination);
+		
+		return map;
+	}
+	
+	
+	// 서비스 삭제
+	@Override
+	public int managerServiceDelete(int serviceNo) {
+		return dao.managerServiceDelete(serviceNo);
+	}
 	
 	
 	
