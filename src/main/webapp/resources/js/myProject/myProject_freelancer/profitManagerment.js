@@ -1,28 +1,46 @@
 const ctx = document.getElementById('myChart');
+const d = new Date();
+var arr = new Array();
+let num = 0;
+for(var i=12; i>=0; i--){
+  const agodate = (new Date(d.getFullYear(), d.getMonth()-i,d.getDate()));
+  const year =agodate.getFullYear();
+  const months =agodate.getMonth()+1;
+  const agodate2 = year+"-"+months;
+  arr[num] = agodate2;
+  num =num+1;
+}
 
-/* new Chart(ctx, {
+new Chart(ctx, {
 
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
+  type: 'line',
+    
+  data: {
+    labels: arr,
+    datasets: [
+      {
+        label: '총수익(원)',
+        data:  [3000, 1000, 5000, 6000, 10000,3000, 1000, 5000, 6000, 10000,10000,10000,20000],
+        backgroundColor: 'rgb(54, 162, 235)'
+      }/* ,
+      {
+        label: '예상수익(원)',
+        data: [1000, 500, 2000, 3000, 5000,1000, 500, 2000, 3000, 5000,2000,2000],
+        backgroundColor: 'rgb(255, 205, 86)',
+      } */
+    ]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
       }
     }
+  }
 
+});
 
-}); */
-
-
+/* 
 const labels = Utils.months({count: 7});
 const data = {
   labels: labels,
@@ -126,3 +144,4 @@ const actions = [
   }
 ];
 
+ */
