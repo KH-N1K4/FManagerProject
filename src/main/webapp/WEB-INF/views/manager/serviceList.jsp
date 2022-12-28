@@ -22,7 +22,7 @@
 	<div class="main">
 		<div id="service-list-title-area">
 
-			<span id="service-list-title">서비스 관리</span> 
+			<span id="service-list-title">서비스 등록 관리</span> 
 				<span class="select-area"> 
 					<select class="select-area-input" name="selectServiceStatus" id="selectServiceStatus" onchange="selectChange()">
 						<option value="0">전체</option>
@@ -58,7 +58,7 @@
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty serviceList}">
-				<div class="service-list-table-content">서비스가 존재하지 않습니다.</div>
+				<div class="service-list-table-content center">서비스가 존재하지 않습니다.</div>
 			</c:if>
 
 
@@ -116,6 +116,7 @@
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 	<script src="/resources/js/manager/serviceList.js"></script>
 
 </body>

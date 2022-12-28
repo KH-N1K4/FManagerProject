@@ -1,8 +1,8 @@
 .main{
     width: 1100px;
-    margin: 0 auto;
-    min-height: 500px;
-    max-height: 1200px;
+    margin: 0 auto 50px auto;
+    min-height: 450px;
+    max-height: 1400px;
 }
 
 
@@ -33,7 +33,9 @@
 
 .select-area-input{
     width: 150px;
-    height: 35px;    
+    height: 35px;
+    position: absolute;
+    top: 4px;    
 }
 
 .search-area > select{
@@ -99,6 +101,15 @@
     color: white;
     background-color: black;
     cursor:pointer;
+}
+
+.detailBtn{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.center{
+    justify-content: center;
 }
 
 /* pagination */

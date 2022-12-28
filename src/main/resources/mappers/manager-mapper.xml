@@ -191,7 +191,7 @@
 	
 	
 	<!-- 서비스 상태별 목록 조회 -->
-	<select id="selectServiceList2">
+	<select id="selectServiceList2" resultMap="manager_service_rm">
 		SELECT SERVICE_NO, SERVICE_TITLE, SERVICE_STATUS
 		FROM SERVICE
 		WHERE SERVICE_STATUS != 5

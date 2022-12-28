@@ -1,5 +1,6 @@
 package com.manager.freelancer.manager.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,11 +168,18 @@ public class ManagerServiceImpl implements ManagerService {
 	public Map<String, Object> selectServiceTypeList(int status, int cp) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<FreelancerService> serviceList = new ArrayList<FreelancerService>();
+		Pagination pagination;
 		
-		int listCount = dao.getServiceListCount(status);
-		Pagination pagination = new Pagination(listCount, cp);
-
-		List<FreelancerService> serviceList = dao.selectServiceList(pagination,status);
+		if(status !=0) {
+			int listCount = dao.getServiceListCount(status);
+			pagination = new Pagination(listCount, cp);
+			serviceList = dao.selectServiceList(pagination,status);
+		} else {
+			int listCount = dao.getServiceListCount();
+			pagination = new Pagination(listCount, cp);
+			serviceList = dao.selectServiceList(pagination);
+		}
 		
 		if(serviceList!=null) {
 			for(FreelancerService s : serviceList) {
