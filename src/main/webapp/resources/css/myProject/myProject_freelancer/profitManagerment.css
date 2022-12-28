@@ -104,7 +104,10 @@
     font-weight: bold;
     font-size: 20px;
   }
-  
+  #myChart{
+    width: 850px !important;
+    height: 380px;
+  }
   #selectBox{
     margin-top: 20px;
     font-weight: bold;

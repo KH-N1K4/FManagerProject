@@ -49,7 +49,7 @@
         <!-- sideMenu를 제외한 메인 내용 -->
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
