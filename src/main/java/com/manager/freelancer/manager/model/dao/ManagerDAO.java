@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
+import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
 
@@ -32,8 +34,9 @@ public class ManagerDAO {
 	 * 
 	 * @return
 	 */
-	public int getMemberListCount() {
-		return sqlSession.selectOne("managerMapper.getMemberListCount");
+	public int getMemberListCount(String value2) {
+		System.out.println("=======" + value2);
+		return sqlSession.selectOne("managerMapper.getMemberListCount", value2);
 	}
 
 	/**
@@ -42,13 +45,13 @@ public class ManagerDAO {
 	 * @param pagination
 	 * @return
 	 */
-	public List<Member> selectMemberList(Pagination pagination) {
+	public List<Member> selectMemberList(String value2, Pagination pagination) {
 
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 
-		return sqlSession.selectList("managerMapper.selectMemberList", null, rowBounds);
+		return sqlSession.selectList("managerMapper.selectMemberList", value2, rowBounds);
 	}
 
 	/**
@@ -82,29 +85,63 @@ public class ManagerDAO {
 	}
 
 	/**
-	 * 유형별 회원 수 조회
+	 * 회원 탈퇴
 	 * 
-	 * @param value
+	 * @param memberNo
 	 * @return
 	 */
-	public int getMemberListCount2(String value) {
-		return sqlSession.selectOne("managerMapper.getMemberListCount2", value);
+	public int managerMemberDelete(int memberNo) {
+		return sqlSession.update("managerMapper.managerMemberDelete", memberNo);
 	}
 
-	/** 유형별 회원 목록 조회 + 페이징
-	 * @param value
-	 * @param pagination
+	/**
+	 * 검색 조건 일치 회원 수 조회
+	 * 
+	 * @param pm
 	 * @return
 	 */
-	public List<Member> selectMemberList2(String value, Pagination pagination) {
-		
+	public int getMemberListCount(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getMemberListCount_search", pm);
+	}
+
+	/**
+	 * 검색 조건 일치 회원 목록 조회
+	 * 
+	 * @param pagination
+	 * @param pm
+	 * @return
+	 */
+	public List<Member> selectMemberList(Pagination pagination, Map<String, Object> pm) {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 
-		return sqlSession.selectList("managerMapper.selectMemberList2", value, rowBounds);
+		return sqlSession.selectList("managerMapper.selectMemberList_search", pm, rowBounds);
 	}
 
-	
+	/**
+	 * 서비스 수 조회
+	 * 
+	 * @param status
+	 * @return
+	 */
+	public int getServiceListCount(String status) {
+		return sqlSession.selectOne("managerMapper.getServiceListCount", status);
+	}
+
+	/**
+	 * 서비스 목록 조회
+	 * 
+	 * @param status
+	 * @param pagination
+	 * @return
+	 */
+	public List<FreelancerService> selectServiceList(String status, Pagination pagination) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectServiceList", status, rowBounds);
+	}
 
 }

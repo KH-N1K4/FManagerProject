@@ -1,6 +1,7 @@
 package com.manager.freelancer.manager.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,18 @@ public class ManagerController {
 	
 	// 회원 관리 - 회원 목록 조회
 	@GetMapping("/manager/memberList")
-	public String managerMemberList(Model model, @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+	public String managerMemberList(Model model, 
+									@RequestParam(value="value", required=false) String value,
+									@RequestParam(value="cp", required=false, defaultValue = "1") int cp,
 									@RequestParam Map<String, Object> pm) {
 		
 		if(pm.get("key")==null) {
-			Map<String, Object> map=service.selectMemberList(cp);
+			Map<String, Object> map=service.selectMemberList(value,cp);
+			model.addAttribute("map", map);
+		} else {
+			System.out.println(value);
+			pm.put("value2", value);
+			Map<String, Object> map=service.selectMemberList(pm, cp);
 			model.addAttribute("map", map);
 		}
 		
@@ -48,7 +56,7 @@ public class ManagerController {
 		return member;
 	}
 	
-	//회원 유형별 목록 조회
+	//회원 유형별 목록 조회 ajax
 	@GetMapping("/manager/memberType")
 	@ResponseBody
 	public Map<String, Object> managerMemberType(Model model, 
@@ -57,25 +65,52 @@ public class ManagerController {
 									@RequestParam Map<String, Object> pm) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(value);
 		
 		if(pm.get("key")==null) {
 			map=service.selectMemberTypeList(value,cp);
 			model.addAttribute("map", map);
 		}
-		
+		System.out.println(map);
 		return map;
 	}
+	
+	// 회원 탈퇴
+	@GetMapping("/manager/memberDelete")
+	@ResponseBody
+	public int managerMemberDelete(@RequestParam int memberNo) {
+		
+		System.out.println(memberNo);
+		
+		int result = service.managerMemberDelete(memberNo);
+		
+		return result;
+	}
+	
+	
+	
+	// 서비스 등록 내역 관리
+	@GetMapping("/manager/serviceList")
+	public String managerServiceList(Model model, 
+			@RequestParam(value="status", required=false) String status,
+			@RequestParam(value="cp", required=false, defaultValue = "1") int cp) {
+		
+		Map<String, Object> map=service.selectServiceList(status,cp);
+		model.addAttribute("map", map);
+		
+		return "/manager/serviceList";
+	}
+	
+	
+	
+	
+	
+	
 	
 	@GetMapping("/manager/tradeList")
 	public String managerTradeList() {
 		return "/manager/tradeList";
 	}
-	
-	@GetMapping("/manager/serviceList")
-	public String managerServiceList() {
-		return "/manager/serviceList";
-	}
-	
 	@GetMapping("/manager/projectRequestList")
 	public String managerprojectRequestList() {
 		return "/manager/projectRequestList";
@@ -86,14 +121,12 @@ public class ManagerController {
 		return "/manager/reviewList";
 	}
 	
-	@GetMapping("/manager/userInquiry")
-	public String managerUserInquiry() {
-		return "/manager/userInquiryList";
-	}
 	
-	@GetMapping("/manager/userInquiry/1")
-	public String managerUserInquiryDetail() {
-		return "/manager/userInquiryDetail";
-	}
+	
+	
+	
+	
+	
+
 	
 }
