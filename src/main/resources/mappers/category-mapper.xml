@@ -3,7 +3,7 @@
 <mapper namespace="categoryMapper">
 
 
-	<resultMap type="myProjectFreelancerService" id="fService_rm">
+	<resultMap type="Service" id="service_rm">
     	 <id property="serviceNo" column="SERVICE_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
     		   		
 	      <result property="serviceTitle" column="SERVICE_TITLE" />								<!-- 서비스 제목 -->							
@@ -13,15 +13,11 @@
 	      <result property="servicePriceString" column="SERVICE_PRICE_STRING"/>		<!-- 서비스 가격 문자 형태 1,000-->
 	      <result property="serviceEditNum" column="SERVICE_EDIT_NUM"/>						<!-- 서비스 수정 횟수 -->
 	      <result property="serviceWorkPeriod" column="SERVICE_WORK_PERIOD" />		<!-- 서비스 작업 일수 -->
+	      <result property="serviceCreateDate" column="SERVICE_CREATE_DATE" />		<!-- 서비스 작업 일수 -->
+	      <result property="requestFilePath" column="REQUEST_FILE_PATH" />		<!-- 서비스 작업 일수 -->
 	     
 	      
-	      <!-- 서비스 첨부파일 -->
-	      <result property="serviceFileNo" column="REQUEST_FILE_NO"/> 						<!-- 서비스 첨부파일 번호 SEQUENCE: SEQ_SERVICE_FILE_NO -->
-	      <result property="serviceFilePath2" column="REQUEST_FILE_PATH"/>					<!-- 서비스 첨부파일 경로 -->
-	      
-	      
-	      
-	       <!-- 카테고리 -->
+	         <!-- 카테고리 -->
 	      <result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />								<!-- 메인 1카테고리 -->
 	      <result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />						<!-- 메인 1카테고리 이름 -->
 	      <result property="subCategoryNo" column="SUB_CATEGORY_NO" />									<!-- 메인 2카테고리 -->
@@ -29,12 +25,45 @@
 	      <result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />							<!-- 메인 3카테고리 -->	
 	      <result property="thirdCategoryName" column="THIRD_CATEGORY_NAME" />					<!-- 메인 3카테고리 이름-->
 	      
+	      <result property="memberName" column="MEMBER_NAME" />					<!-- 메인 3카테고리 이름-->
+	      <result property="memberProfile" column="MEMBER_PROFILE" />					<!-- 메인 3카테고리 이름-->
+	      <result property="freelancerNo" column="FREELANCER_NO" />					<!-- 메인 3카테고리 이름-->
+	      
+	      
+	      
+	      
+	      <collection property="imageFileList" 
+	      javaType="java.util.ArrayList" ofType="ImageFile"
+	      select="selectImageFileList"
+	      column="SERVICE_NO"/> 
+	      
+	      
+	     <!--  <collection property="commentList" 
+	      javaType="java.util.ArrayList" ofType="Comment"
+	      select="selectCommentList"
+	      column="BOARD_NO"/> -->
+	      
 	      
     </resultMap>
+    
+    
+  <resultMap type="ImageFile" id="imageFile_rm">
+      <id property="imageFileNo" column="REQUEST_FILE_NO"/>
+      <result property="imageFilePath" column="REQUEST_FILE_PATH"/>
+      
+      <result property="serviceNo" column="SERVICE_NO"/>
+   </resultMap>
+   
+   
+  <resultMap type="AskService" id="askService_rm">
+      <id property="serviceInquiryNo" column="SERVICE_INQUIRY_NO"/>
+      <result property="serviceInquiryContent" column="SERVICE_INQUIRY_CONTENT"/>
+      <result property="memberNo" column="MEMBER_NO"/>
+      <result property="serviceNo" column="SERVICE_NO"/>
+   </resultMap>
 
 
   <select id="selectMainCategoryList" resultType="map">
- 
  	SELECT * FROM MAIN_CATEGORY
  	ORDER BY 1
  
@@ -52,18 +81,57 @@
  	ORDER BY 1
  </select>
  
- <select id="selectBoardList" resultMap="fService_rm"> 
- 	SELECT SERVICE_TITLE, SERVICE_SUMMARY , SERVICE_PRICE, REQUEST_FILE_PATH, THIRD_CATEGORY_NO,SUB_CATEGORY_NO,MAIN_CATEGORY_NO, SERVICE_NO
- 	FROM SERVICE
- 	JOIN SERVICE_FILE USING(SERVICE_NO)
- 	JOIN CATEGORY USING(THIRD_CATEGORY_NO)
- 	JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
- 	JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
-	WHERE MAIN_CATEGORY_NO=#{mainCategoryNo}
-	ORDER BY 1 DESC
+ <select id="selectBoardList" resultMap="service_rm"> 
+ 	SELECT *
+	FROM (
+	   SELECT SERVICE_NO, REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY SERVICE_NO ORDER BY SERVICE_NO, REQUEST_FILE_PATH)) RNUM
+	   ,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,
+		SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,SERVICE_CREATE_DATE, THIRD_CATEGORY_NO, SUB_CATEGORY_NO, MAIN_CATEGORY_NO
+		FROM SERVICE_FILE
+		JOIN SERVICE USING(SERVICE_NO)
+		JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		WHERE MAIN_CATEGORY_NO=#{mainCategoryNo}
+	) 
+	WHERE RNUM =1
 
  </select>
  	
+ 	
+ 	
+ 	<select id="viewService" resultMap="service_rm">
+			SELECT *
+	FROM (
+	   SELECT FREELANCER_NO, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_NAME,
+	   (SELECT MEMBER_PROFILE FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_PROFILE,
+	   SERVICE_NO, REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY SERVICE_NO ORDER BY SERVICE_NO, REQUEST_FILE_PATH)) RNUM
+	   ,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,
+		SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,SERVICE_CREATE_DATE, THIRD_CATEGORY_NAME, SUB_CATEGORY_NAME, MAIN_CATEGORY_NAME
+		FROM SERVICE_FILE
+		JOIN SERVICE USING(SERVICE_NO)
+		JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		JOIN FREELANCER USING(FREELANCER_NO)
+		WHERE SERVICE_NO=#{serviceNo}
+	) 
+	WHERE RNUM =1
+	</select> 
+	
+	<select id="selectImageFileList" resultMap="imageFile_rm">
+	
+		SELECT * FROM SERVICE_FILE
+		WHERE SERVICE_NO=#{serviceNo}
+		 
+	</select>
+	
+	<insert id="askService">
+		INSERT INTO SERVICE_INQUIRY
+		VALUES(SEQ_SERVICE_INQUIRY_NO.NEXTVAL,#{serviceInquiryContent},DEFAULT, #{memberNo}, #{serviceNo} )
+	
+	</insert>
+	
 
 	
   

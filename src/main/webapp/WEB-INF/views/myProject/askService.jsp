@@ -6,24 +6,24 @@
 
 <div class="modal_body">
     	<span class="modal_close">x</span>
-    <div id="askServiceMain">
-        <form action="">
-    
-        <div id="serviceSection">
-        <div id="servicePhoto"></div>
-            <div>
-
-                <div id="serviceContent"><span>결제중 상품 제목</span><br>
-                <span>결제중 상품 내용입니다.</span></div>
-               
-            
-            </div>
-        </div>
-
-        <span>서비스 문의 남기기</span>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-        <button>문의보내기</button>
-        </form>
-    </div>
+   		<div id="askServiceMain">
+	        <form action="/askService" method="POST">
+	    
+	        <div id="serviceSection">
+	        <div id="servicePhoto"><img alt="" src="${fService.requestFilePath }" style="width:100%;"></div>
+	            <div>
+	
+	                <div id="serviceContent"><span>${fService.serviceTitle }</span><br>
+	                <span>${fService.serviceSummary }</span></div>
+	               
+	            
+	            </div>
+	        </div>
+			<input type="hidden" name="serviceNo" id="serviceNo" value="${fService.serviceNo }"/>
+	        <span>서비스 문의 남기기</span>
+	        <textarea name="serviceInquiryContent" id="serviceInquiryContent" id="" cols="30" rows="10"></textarea>
+	        <button>문의보내기</button>
+	        </form>
+ 	  	</div>
     </div>
 
