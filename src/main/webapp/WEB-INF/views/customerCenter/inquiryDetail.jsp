@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +14,7 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header_black_ver2.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header_black_ver2 customer.jsp"/>
 
    
     <section class="content">
@@ -26,57 +29,105 @@
             <!-- ///////////////////////////////// -->
             <div class="mainContent">
                 <!-- 문의 내역 상세보기 -->
-                <form action="" id="inquirySubmit">
+                <form action="" id="inquirySubmit" >
                     <h3 id="title">문의내역</h3>
 
                     <hr>
 
                     <table>
                         <tr>
-                            <th style="width:100px">1</th>
-                            <th style="width:500px">제목 1</th>
+                            <th style="width:100px">${userInquiry.userInquiryNo}</th>
+                            <th style="width:450px">${userInquiry.userInquiryTitle}</th>
                             <th style="width:100px">상태</th>
-                            <th style="width:100px"><button>해결</button></th>
+                            <th style="width:150px">
+                                <c:choose>
+                                    <c:when test="${userInquiry.inquiryRequest == null}">
+                                        답변 대기 
+                                    </c:when>
+                                    <c:when test="${userInquiry.inquiryRequest != null}">
+                                        해결 
+                                    </c:when>
+                                </c:choose>
+                            </th>
                         </tr>
                     </table>
 
-                    <hr>
+                    <hr><br>
 
-                    <table>
-                        <tr>
-                            <th style="width:100px">작성자</th>
-                            <td style="width:700px">노성찬</td>
-                        </tr>
-                        <tr>
-                            <th>구분</th>
-                            <td>문의</td>
-                        </tr>
-                        <tr>
-                            <th>내용</th>
-                            <td><textarea name="" id="" cols="94" rows="10"></textarea></td>
-                        </tr>
-                        <tr>
-                            <th>첨부파일</th>
-                            <td colspan="3">
-                                <div class="container">
-                                    <input type="text" class="upload-name" 
-                                    value="파일을 업로드 하세요" placeholder="파일을 업로드 하세요" disabled>
-                                    <label for="upload-file">파일선택</label>
-                                    <input type="file" id="upload-file">
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="content">
+                        <c:choose>
+                            <c:when test="${userInquiry.memberProfile == null}">
+                                <a href="/member/myInfo"><img src="/resources/images/프로필.PNG" class="myProfile"></a>
+                            </c:when>
+                            <c:when test="${userInquiry.memberProfile != null}">
+                                <a href="/member/myInfo"><img src="${userInquiry.memberProfile}" class="myProfile"></a>
+                            </c:when>
+                        </c:choose>
+                        <table>
+                            <tr>
+                                <th style="width:100px">작성자</th>
+                                <td style="width:500px">${userInquiry.memberName}</td>
+                            </tr>
+                            <tr>
+                                <th>구분</th>
+                                <td>문의</td>
+                            </tr>
+                            <tr>
+                                <th>내용</th>
+                                <td class="textArea"><br>${userInquiry.userInquiryContent}<br><br></td>
+                            </tr>
+                            <tr>
+                                <th class="uploadImage">업로드<br>파일</th>
+                                <td class="imageBox">
+                                    <c:if test="${not empty userInquiry.imageList}">
+                                        <c:if test="${fn:length(userInquiry.imageList)>0}">
+                                            <c:forEach var="i" begin="0" end="${fn:length(userInquiry.imageList)-1}">
+                                            <div class="img-box">
+                                                    <div class="boardImg">
+                                                        <label for="img1">
+                                                            <img class="preview" src="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}">
+                                                        </label>
+                                                        <a href="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}" download="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}">다운로드</a>
+                                                    </div>
+                                            </div>    
+                                            <br>
+
+                                            </c:forEach>
+                                        </c:if>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                     <hr><br>
 
                     <!-- ///////////////////////////////// -->
-                    <!-- 댓글 남기기 -->
-                    <section id="comment">
-                        <img src="/1.jpg" alt="" class="myProfile">
-                        <input type="text" placeholder="    댓글을 남겨주세요"  id="commentInput">&nbsp;
-                        <button id="commentSumit">등록</button>
-                    </section>
+
+                    <c:if test="${not empty userInquiry.inquiryRequest}">
+                        <!-- 댓글 남기기 -->
+                        <section id="comment">
+                            <div>
+                                <img src="/resources/images/프로필.PNG" class="myProfile">
+                            </div>
+                            <div>
+                            <table>
+                                <tr>
+                                    <th style="width:100px">작성자</th>
+                                    <td style="width:500px">${userInquiry.memberName}</td>
+                                </tr>
+                                <tr>
+                                    <th style="width:80px">답변 내용</th>
+                                    <td class="textArea">${userInquiry.inquiryRequest}</td>
+                                </tr>
+                            </table>
+
+                        </section>
+                    </c:if>
+                    <div id="goToList">
+                        <button>목록으로</button>
+                    </div>
                 </form>
+
             </div>
 
 
@@ -84,7 +135,6 @@
     </section>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
-
+    <script src="/resources/js/customerCenter/inquiryDetail.js"></script>   
 </body>
 </html>

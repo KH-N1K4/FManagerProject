@@ -2,6 +2,7 @@ package com.manager.freelancer.customerCenter.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +52,7 @@ public class UserInquiryController {
 			
 			userInquiry.setMemberNo(loginMember.getMemberNo());
 			
-			String webPath = "/resources/images/";
+			String webPath = "/resources/images/customerCenterImage/";
 			String folderPath = sessoin.getServletContext().getRealPath(webPath);
 			
 			System.out.println(userInquiry);
@@ -78,22 +80,53 @@ public class UserInquiryController {
 		
 	}
 	
+//	// 이용문의 내역으로 이동 및 조회
+//	@GetMapping("/userInquiryList")
+//	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model) {
+//		
+//		List<UserInquiry> userInquiry = service.selectInquiryList(loginMember.getMemberNo());
+//		System.out.println(userInquiry);
+//		
+//		model.addAttribute("userInquiry",userInquiry);
+//		
+//		return "customerCenter/inquiryList";
+//	}
+	
 	// 이용문의 내역으로 이동 및 조회
 	@GetMapping("/userInquiryList")
-	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model) {
+	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model,
+								  @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+								  @RequestParam Map<String,Object> pm) {
 		
-		List<UserInquiry> userInquiry = service.selectInquiryList(loginMember.getMemberNo());
-		System.out.println(userInquiry);
 		
-		model.addAttribute("userInquiry",userInquiry);
+		if(pm.get("key")==null) {
+			
+			Map<String, Object> map = service.selectInquiryList(loginMember.getMemberNo(), cp);
+			model.addAttribute("map",map);
+		} else {
+			pm.put("memberNo", loginMember.getMemberNo());
+			Map<String, Object> map = service.selectInquiryList(pm, cp);
+			model.addAttribute("map",map);
+		}
+		
+		
 		
 		return "customerCenter/inquiryList";
 	}
 	
 	
 	// 이용문의 상세 보기로 이동 
-	@GetMapping("/userInquiryDetail")
-	public String viewInquiryDetail() {
+	@GetMapping("/userInquiryDetail/{userInquiryNo}")
+	public String viewInquiryDetail(@PathVariable(value="userInquiryNo") int userInquiryNo, Model model) {
+		
+		UserInquiry userInquiry = service.viewInquiryDetail(userInquiryNo);
+		
+		userInquiry.setUserInquiryNo(userInquiryNo);
+		
+		
+		model.addAttribute("userInquiry",userInquiry);
+		
+		System.out.println(userInquiry.getImageList());
 		
 		return "customerCenter/inquiryDetail";
 	}

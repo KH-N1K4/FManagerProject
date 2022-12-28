@@ -1,46 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
- <link rel="stylesheet" href="/resources/css/common/header_ver1.css">
+ <link rel="stylesheet" href="/resources/css/common/header_black_ver2 customer.css">
 
 <div id="header">
         <div id="header1">
 
-            <a id="logo" href="/"><img src="/resources/images/final_logo_color.png" alt=""></a>
-
-            <div id="search">
-                <input type="text" placeholder="검색어를 입력하세요" id="search-input">
-
-                <span>▾</span>
-            </div>
-
-
-
-
-
-
+            <a id="logo" href="/"><img src="../resources/images/final_logo.png" alt=""></a>
 
             <div class="header-top">
-            
-            
-            
-            	<c:choose>
+                <c:choose>
                     <%-- 로그인 X인 경우 --%>
                     <c:when test="${empty sessionScope.loginMember}">
-                    
-                    	
-		                
 		                <span><a href="/member/signUp">회원가입</a></span>
 		                <span><a href="/member/login">로그인</a></span>
-		               
-         
                     </c:when>
 
                     <%-- 로그인 O인 경우 --%>
                     <c:otherwise>
-                    	<span><a href="/manager/memberList">관리자</a></span>
-                    	<span><a href="/member/enrollFreelancer">전문가 등록</a></span>
-                     	<span><a href="/member/myProject/myRequestList">내프로젝트</a></span>
+                    	<span><a href="/manager/memberList">메세지</a></span>
+                    	<span><a href="/">홈으로</a></span>
                     
                         <label for="header-menu-toggle">
                             ${loginMember.memberNickname}
@@ -58,26 +37,11 @@
                     </c:otherwise>
                 
                 </c:choose>
+
             </div>
 
 
         </div>
 
         
-    </div>
-    <div id="nav">
-    
-    	 <ul>
-                <c:forEach var="boardType" items="${boardTypeList}">
-                    <li>
-                        <a href="/category/${boardType.MAIN_CATEGORY_NO}">${boardType.MAIN_CATEGORY_NAME}</a>
-                    </li>
-                </c:forEach>
-                
-                
-                
-                 <div class="nav-project"><a href="/projectRequest/requestList">프로젝트 의뢰</a></div>
-            </ul>
-    
-      
     </div>

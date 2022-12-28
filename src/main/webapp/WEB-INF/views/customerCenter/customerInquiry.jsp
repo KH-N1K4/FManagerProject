@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header_black_ver2.jsp"/>
+     <jsp:include page="/WEB-INF/views/common/header_black_ver2 customer.jsp"/>
 
 
     <!-- 메인 -->
@@ -27,7 +27,7 @@
 
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
-                <form action="userInquiryInsert" id="inquirySubmit" method="POST" enctype="multipart/form-data">
+                <form action="userInquiryInsert" class="inquirySubmit"  id="inquiryInsert" method="POST" enctype="multipart/form-data">
                     <h3 id="title">문의하기</h3>
                     <span id="tltleInfo">[중요] 작업 문의는 해당 전문가에게 직접 남겨주세요.</span>
                     <br><br>
@@ -46,7 +46,7 @@
                     <br><br>
 
                     <div>문의 내용</div>
-                    <textarea name="userInquiryContent" id="" cols="30" rows="10"></textarea>
+                    <textarea name="userInquiryContent" id="contentInput" cols="30" rows="10"></textarea>
 
                     <br>
 
@@ -94,7 +94,7 @@
                         </div>
                     </div>    
 
-                    <button id="inquiryInsert"><a href="">제출</a></button>
+                    <button class="inquiryInsert" id="inquiryInsert">제출</button>
                     <button id="goToMain"><a href="/">메인으로</a></button>
 
 

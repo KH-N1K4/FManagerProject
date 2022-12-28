@@ -166,7 +166,7 @@ public class MemberController {
 	
 	
 	
-	@PostMapping("/member/updateMyInfo")
+	@PostMapping("/member/myInfo/updateMyInfo")
 	public String updateProfile(Member inputMember, // input값 
 			@RequestParam(value="profileImage") MultipartFile profileImage, // 업로드된 파일 
 			@SessionAttribute("loginMember") Member loginMember, // 회원번호 필요
@@ -233,13 +233,13 @@ public class MemberController {
 	
 	
 	// 비밀번호 변경  이동
-	@GetMapping("/member/changePw")
+	@GetMapping("/member/myInfo/changePw")
 	public String changePw() {
 		return "member/changePw";
 	}
 	
 	
-	@PostMapping("/member/changePw")
+	@PostMapping("/member/myInfo/changePw")
 	public String changePw(
 			@SessionAttribute("loginMember") Member loginMember,
 			@RequestParam Map<String, Object> paramMap,
@@ -258,7 +258,7 @@ public class MemberController {
 		String message=null;
 		
 		if(result>0) {
-			path="myInfo";
+			path="/member/myInfo";
 			message="비밀번호가 변경되었습니다.";
 		}else {
 			path="changePw";
@@ -271,13 +271,13 @@ public class MemberController {
 	}
 	
 	// 회원 탈퇴 이동
-	@GetMapping("/member/deleteMember")
+	@GetMapping("/member/myInfo/deleteMember")
 	public String deleteMember() {
 		return "member/deleteMember";
 	}
 	
 	// 회원 탈퇴
-	@PostMapping("/member/deleteMember")
+	@PostMapping("/member/myInfo/deleteMember")
 	public String deleteMember(String memberEmail, String memberPw,@SessionAttribute("loginMember") Member loginMember,RedirectAttributes ra, SessionStatus status) {
 		
 		int result=0;
@@ -310,7 +310,7 @@ public class MemberController {
 	}
 	
 	// 찜목록 이동
-	@GetMapping("/member/likeList")
+	@GetMapping("/member/myInfo/likeList")
 	public String likeList() {
 		return "member/likeList";
 	}

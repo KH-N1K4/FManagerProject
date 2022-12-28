@@ -3,7 +3,7 @@
 /* mainArea /sideMenu영역  */
 .mainArea{
     width: 1200px;
-    height: 800px;
+    height: auto;
     display: flex;
     margin:auto;
 }
@@ -57,10 +57,11 @@
 
 /* 문의 유형 */
 #division{
-    width: 200px;
+    width: 150px;
     height: 30px;
     margin-left: 20px;
     margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 /* ----------------------테이블 폼---------------------- */
@@ -69,38 +70,78 @@ table{
     margin: 0 auto;
 }
 table th{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #538126;
     height: 50px;
 }
 table td{
     height: 50px;
     text-align: center;
 }
-table button{
-    width: 80px;
-    height: 30px;
-    background-color: #538126;
-    border: 1px solid #538126;
-    border-radius: 10%;
-    color: #fff;
-    font-weight: 200;
-    margin-left: 10px;
-}
 /* ------------------------------------------------------ */
 
 
-/* 페이지 리스트 */
-#pageList{
+.formBox{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+}
+.formBox input{
+    width: 150px;
+    height: 20px;
+    border-radius: 5px;
+}
+.formBox input:hover{
+    border: 1px solid #538126;
 }
 
-a{
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.pagination li {
+    width: 20px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.pagination a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 100%;
+}
+
+
+table a{
     text-decoration: none;
     color: black;
 }
 
-
-hr{
-    color: #538126;
+/* 하단 검색 창  */
+#inquirySearch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
 }
+#inquirySearch div{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#inquirySearch input{
+    width: 200px;
+    height: 25px;
+}
+#inquirySearch button{
+    width: 100px;
+    height: 32px;
+    margin-left: 10px;
+}
+

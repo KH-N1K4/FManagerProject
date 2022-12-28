@@ -136,5 +136,12 @@ a{
     border: 1px solid #538126;
 } 
 
+ul{
+	list-style:none;    padding-inline-start: 0;
+}
+
+li{
+	list-style:none;
+}
 
 

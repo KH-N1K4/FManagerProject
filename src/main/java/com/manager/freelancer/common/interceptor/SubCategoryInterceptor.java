@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,7 +24,7 @@ import com.manager.freelancer.category.model.service.CategoryService;
 // ** Dispatcher Servlet 이후에 동작하므로 
 // 각종 Spring 어노테이션을 인식하고 bean을 DI할 수 있다. **
 
-public class BoardTypeInterceptor implements HandlerInterceptor {
+public class SubCategoryInterceptor implements HandlerInterceptor {
 	
 	@Autowired
 	private CategoryService service;
@@ -47,17 +48,14 @@ public class BoardTypeInterceptor implements HandlerInterceptor {
 		
 		// aplication scope 내장 객체 얻어오기 
 		ServletContext application=request.getSession().getServletContext();
-		
-		if(application.getAttribute("boardTypeList")==null) {
+		if(application.getAttribute("subCategoryList")==null) {
 			
 			// boardTypeList 조회하는 Service 호출
-			List<Map<String,Object>> boardTypeList=service.selectBoardType();
-			
+			List<Map<String,Object>> subCategoryList=service.selectSubCategoryList();
+			List<Map<String,Object>> thirdCategoryList=service.selectThirdCategoryList();
 			// application scope에 세팅 
-			application.setAttribute("boardTypeList", boardTypeList);
-			
-			
-			
+			application.setAttribute("subCategoryList", subCategoryList);	
+			application.setAttribute("thirdCategoryList", thirdCategoryList);	
 		}
 		
 		return HandlerInterceptor.super.preHandle(request, response, handler);

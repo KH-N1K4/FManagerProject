@@ -39,15 +39,22 @@
 	
 	
 	<!-- 인터셉터 등록/매핑주소 설정 -->
-	<!-- <interceptors>
+	 <interceptors>
 	
 		<interceptor>
-		<mapping path="/**" /> 모든 요청 주소
-			<beans:bean id="boardTypeInterceptor" 
-			class="com.manager.freelancer.common.interceptor.BoardTypeInterceptor"/>
+		<mapping path="/**" /> 
+			<beans:bean id="MainCategoryInterceptor" 
+			class="com.manager.freelancer.common.interceptor.MainCategoryInterceptor"/>
 		</interceptor>
+		
+		<interceptor>
+		<mapping path="/category/*" /> 
+			<beans:bean id="SubCategoryInterceptor" 
+			class="com.manager.freelancer.common.interceptor.SubCategoryInterceptor"/>
+		</interceptor>
+		
 	
-	</interceptors> -->
+	</interceptors> 
 	
 	
 </beans:beans>

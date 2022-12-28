@@ -3,7 +3,9 @@ package com.manager.freelancer.customerCenter.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.manager.freelancer.common.Util;
 import com.manager.freelancer.customerCenter.model.dao.UserInquiryDAO;
+import com.manager.freelancer.customerCenter.model.vo.Pagination;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiryImage;
 
@@ -108,6 +111,53 @@ public class UserInquiryServiceImpl implements UserInquiryService {
 	@Override
 	public List<UserInquiry> selectInquiryList(int memberNo) {
 		return dao.selectInquiryList(memberNo);
+	}
+
+	// 이용문의 내역 상세 조회하기 
+	@Override
+	public UserInquiry viewInquiryDetail(int userInquiryNo) {
+		return dao.viewInquiryDetail(userInquiryNo);
+	}
+	
+	// 이용문의 내역 상세 조회하기 + 페이징 처리 
+	@Override
+	public Map<String, Object> selectInquiryList(int memberNo, int cp) {
+		
+		// 1. 특정 게시판의 전체 게시글 수 조회 
+		int listCount = dao.getListCount(memberNo);
+		
+		// 2. 전체 게시글 수 + cp(현재 페이지) 이용해서 페이징 처리 객체 생성
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		// 3. 페이징 처리객체를 이용해서 게시글 목록 조회 
+		List<UserInquiry> userInquiryList = dao.selectInquiryList(pagination,memberNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("userInquiryList", userInquiryList);
+		
+		return map;
+	}
+
+	// 검색 목록 조회
+	@Override
+	public Map<String, Object> selectInquiryList(Map<String, Object> pm, int cp) {
+		
+		// 1. 검색 조건이 일치하는 전체 게시글 수 조회 
+		int listCount = dao.getListCount(pm);
+		
+		// 2. 검색 조건이 일치하는 게시글 수 + cp(현재 페이지) 이용해서 페이징 처리 객체 생성
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		// 3. 페이징 처리객체를 이용해서 검색 조건이 일치하는 게시글 목록 조회 
+		List<UserInquiry> userInquiryList = dao.selectInquiryList(pagination, pm);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("userInquiryList", userInquiryList);
+		
+		return map;
+
 	}
 
 
