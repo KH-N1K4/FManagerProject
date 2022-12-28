@@ -27,6 +27,7 @@
 		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
 		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Freelancer" alias="Freelancer"/>
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiry" alias="UserInquiry"/>
+		<typeAlias type="com.manager.freelancer.manager.model.vo.ManagerInquiry" alias="ManagerInquiry"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.FreelancerService" alias="myProjectFreelancerService"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectFreelancer" alias="myProjectFreelancer"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit" alias="myProjectFreelancerProfit"/>
@@ -35,6 +36,7 @@
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry" alias="myProjectServiceInquiry"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectTrade" alias="myProjectTrade"/>
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiryImage" alias="UserInquiryImage"/>
+		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.ManagerInquiryImage" alias="ManagerInquiryImage"/>
 		
 		<typeAlias type="com.manager.freelancer.category.model.vo.Service" alias="Service"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.ImageFile" alias="ImageFile"/>
@@ -52,6 +54,7 @@
 		<mapper resource="/mappers/myProjectFreelancer-mapper.xml"/>
 		<mapper resource="/mappers/myProjectFreelancerService-mapper.xml"/>
 		<mapper resource="/mappers/userInquiry-mapper.xml"/>
+		<mapper resource="/mappers/managerInquiry-mapper.xml"/>
 		<mapper resource="/mappers/category-mapper.xml"/>
 
 	</mappers>
