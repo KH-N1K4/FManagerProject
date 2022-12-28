@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.customerCenter.model.vo.Pagination;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
+import com.manager.freelancer.manager.model.vo.ManagerInquiry;
 
 @Repository
 public class ManagerInquiryDAO {
@@ -21,7 +22,7 @@ public class ManagerInquiryDAO {
 	 * @return
 	 */
 	public int getListCount() {
-		return sqlSession.selectOne("managerInquiry.getListCount");
+		return sqlSession.selectOne("userInquiry.getListCount_manager");
 	}
 
 	/** 3. 페이징 처리객체를 이용해서 게시글 목록 조회 
@@ -35,7 +36,7 @@ public class ManagerInquiryDAO {
 		
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		return sqlSession.selectList("managerInquiry.selectManagerInquiryList", rowBounds);
+		return sqlSession.selectList("userInquiry.selectInquiryList_manager", rowBounds);
 	}
 
 	

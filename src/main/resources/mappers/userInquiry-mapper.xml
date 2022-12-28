@@ -69,12 +69,20 @@
   		SELECT COUNT(*) FROM USER_INQUIRY
 		WHERE MEMBER_NO = #{memberNo}
   	</select>
+  	<select id="getListCount_manager" parameterType="_int" resultType="_int">
+  		SELECT COUNT(*) FROM USER_INQUIRY
+  	</select>
   	
   	<!-- 특정 게시판 목록 조회 -->
   	<select id="selectInquiryList" parameterType="_int" resultMap="userInquiry_rm">
   		SELECT USER_INQUIRY_NO, INQUIRY_TYPE_NO, USER_INQUIRY_TITLE, USER_INQUIRY_REQUEST,
   			   TO_CHAR(USER_INQUIRY_CREATE_DATE, 'YYYY-MM-DD') USER_INQUIRY_CREATE_DATE
 		FROM USER_INQUIRY WHERE MEMBER_NO = #{memberNo}
+  	</select>
+  	<select id="selectInquiryList_manager" parameterType="_int" resultMap="userInquiry_rm">
+  		SELECT USER_INQUIRY_NO, INQUIRY_TYPE_NO, USER_INQUIRY_TITLE, USER_INQUIRY_REQUEST,
+  			   TO_CHAR(USER_INQUIRY_CREATE_DATE, 'YYYY-MM-DD') USER_INQUIRY_CREATE_DATE
+		FROM USER_INQUIRY 
   	</select>
   	
   	

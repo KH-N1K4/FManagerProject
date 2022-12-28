@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="managerInquiryList" value="${map.managerInquiryList}"/>
+<c:set var="pagination" value="${map.pagination}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +18,9 @@
     
     <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp"/>
 
+    <c:if test="${not empty param.key}">
+        <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
+    </c:if>
 
     <div class="main">
         <div id="question-list-title-area">
@@ -41,8 +46,47 @@
                 <div class="question-date">작성일</div>
                 <div class="question-status">상태</div>
             </div>
+            
+            <c:choose>   
+                <c:when test="${empty managerInquiryList}">
+                    <div>게시글이 존재하지 않습니다.</div>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="managerInquiry" items="${managerInquiryList}">
+                        <div class="question-list-table-content">
+                            <div class="question-num">${managerInquiry.userInquiryNo}</div>
+                            <div class="question-type">
+                            <c:choose>
+                                <c:when test="${managerInquiry.inquiryTypeNo == 1}">문의</c:when>
+                                <c:when test="${managerInquiry.inquiryTypeNo == 2}">환불</c:when>
+                                <c:when test="${managerInquiry.inquiryTypeNo == 3}">신고</c:when>
+                            </c:choose>
+                            </div>
+                            <div class="question-title"><a href="/mangerInquiryDetail/${managerInquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${managerInquiry.userInquiryTitle}</a></div>
+                            <div class="question-date">${managerInquiry.userInquiryCreateDate}</div>
+                            <div class="question-status">
+                            <c:choose>
+                                <c:when test="${userinquiry.inquiryRequest == null}">
+                                    <span class="question-wating">대기중</span>
+                                </c:when>
+                                <c:when test="${userinquiry.inquiryRequest != null}">
+                                    <span class="question-answer">답변 완료</span>
+                                </c:when>
+                            </c:choose>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>    
 
             <!-- 테이블 내용 -->
+
+
+
+
+
+
+
             <div class="question-list-table-content">
                 <div class="question-num">1</div>
                 <div class="question-type">문의</div>
@@ -51,8 +95,8 @@
                 <div class="question-status">
                     <span class="question-answer">답변 완료</span>
                 </div>
-                
             </div>
+
             <div class="question-list-table-content">
                 <div class="question-num">2</div>
                 <div class="question-type">신고</div>
