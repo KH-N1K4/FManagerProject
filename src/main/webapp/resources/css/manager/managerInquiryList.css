@@ -5,60 +5,64 @@
 }
 
 #question-list-title-area{
-    position: relative;
-    margin-top: 20px;
-    margin-bottom: 20px; 
+    display: inline-block;
+    margin: 20px 0;
+    width: 1100px;
+    height: 150px;;
 }
 
 #question-list-title {
-    display: inline-block;
     font-weight: bold;
     font-size: 30px;
-    margin: 20px 20px;
+    margin: 20px 30px;
+    width: 1040px;
 }
 
 .select-area{
-    width: 150px;
-    height: 30px;
-    vertical-align: middle;
-    position: absolute;
-    right: 0;
-    top: 20px;
+    width: 300px;
+    height: 40px;
+    margin: 0 50px;
 }
-
 .select-area-input{
     width: 150px;
-    height: 35px;
-    
-}
-.search-area > select{
-    width: 150px;
-    height: 35px;
-    vertical-align: middle;
+    height: 25px;
+    margin-left: 15px;
+    border-radius: 5px;
 }
 
 
+
+
+/* ================================ */
+/* 중간 가로 줄 */
 .question-list-table-column{
     border-bottom: 1px solid black;
 }
+/* ================================ */
 
+/* ================================ */
 /* 컬럼명들 */
 .question-num{
     width: 100px;
 }
 .question-type{
-    width: 100px;
+    width: 150px;
 }
 
 .question-title{
-    width: 800px;
+    width: 450px;
+}
+.question-date{
+    width: 200px;
 }
 
 .question-status{
-    width: 100px;
+    width: 200px;
     text-align: center;
 }
+/* ================================ */
 
+/* ================================ */
 /* 테이블 값 부분 */
 #question-list-table > div{
     display: flex;
@@ -70,13 +74,15 @@
 }
 
 .question-list-table-content{
-  /* display: flex; */
-    /* align-items: center;
-    justify-content: center; */
     padding: 10px 0;
     height: 15px;
 }
+/* ================================ */
 
+
+
+/* ================================ */
+/* 상태 표시 - 답변 완료 */
 .question-answer{
     display: inline-block;
     width: 100px;
@@ -85,14 +91,8 @@
     border-radius: 15px;
     background-color: rgb(33, 138, 33);
 }
-.question-tempo{
-    display: inline-block;
-    width: 100px;
-    text-align: center;
-    color: white;
-    border-radius: 15px;
-    background-color: rgba(138, 50, 33, 0.751);
-}
+
+/* 상태 표시 - 대기중  */
 .question-wating{
     display: inline-block;
     width: 100px;
@@ -100,4 +100,6 @@
     color: white;
     border-radius: 15px;
     background-color: rgb(165, 173, 165);
+
 }
+/* ================================ */
