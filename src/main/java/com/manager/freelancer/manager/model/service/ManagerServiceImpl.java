@@ -1,5 +1,6 @@
 package com.manager.freelancer.manager.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.dao.ManagerDAO;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
+import com.manager.freelancer.manager.model.vo.Settlement;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 
 @Service
@@ -138,14 +140,14 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	//서비스 목록 조회
 	@Override
-	public Map<String, Object> selectServiceList(String status, int cp) {
+	public Map<String, Object> selectServiceList(int cp) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int listCount = dao.getServiceListCount(status);
+		int listCount = dao.getServiceListCount();
 		Pagination pagination = new Pagination(listCount, cp);
 
-		List<FreelancerService> serviceList = dao.selectServiceList(status, pagination);
+		List<FreelancerService> serviceList = dao.selectServiceList(pagination);
 		
 		if(serviceList!=null) {
 			for(FreelancerService s : serviceList) {
@@ -162,9 +164,75 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	
+	// 서비스 상태별 조회
+	@Override
+	public Map<String, Object> selectServiceTypeList(int status, int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<FreelancerService> serviceList = new ArrayList<FreelancerService>();
+		Pagination pagination;
+		
+		if(status !=0) {
+			int listCount = dao.getServiceListCount(status);
+			pagination = new Pagination(listCount, cp);
+			serviceList = dao.selectServiceList(pagination,status);
+		} else {
+			int listCount = dao.getServiceListCount();
+			pagination = new Pagination(listCount, cp);
+			serviceList = dao.selectServiceList(pagination);
+		}
+		
+		if(serviceList!=null) {
+			for(FreelancerService s : serviceList) {
+				if(s.getServiceStatus()==1) s.setServiceStatusString("승인 대기중");
+				else if(s.getServiceStatus()==2) s.setServiceStatusString("판매중");
+				else if(s.getServiceStatus()==3) s.setServiceStatusString("미승인");
+				else s.setServiceStatusString("판매 중지");
+			}
+		}
+		map.put("serviceList", serviceList);
+		map.put("pagination", pagination);
+		
+		return map;
+	}
+	
+	
+	// 서비스 삭제
+	@Override
+	public int managerServiceDelete(int serviceNo) {
+		return dao.managerServiceDelete(serviceNo);
+	}
 	
 	
 	
-	
+	// 계좌 내역 목록
+	@Override
+	public Map<String, Object> selectTradeList(int status, int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int listCount = dao.getTradeListCount(status);
+		Pagination pagination = new Pagination(listCount, cp);
+
+		List<Settlement> tradeList = dao.selectTradeList(status, pagination);
+		
+		if(tradeList!=null) {
+			for(Settlement t : tradeList) {
+				if(t.getWorkStatus()==1) t.setWorkStatusString("진행중");
+				else if(t.getWorkStatus()==2) t.setWorkStatusString("정산 완료");
+				else if(t.getWorkStatus()==3) t.setWorkStatusString("환불 완료");
+				else t.setWorkStatusString("마감");
+				
+				if(t.getPaymentType()==1) t.setPaymentTypeString("입금");
+				else if(t.getPaymentType()==2) t.setPaymentTypeString("출금");
+				else t.setPaymentTypeString("환불");
+			}
+		}
+
+		map.put("pagination", pagination);
+		map.put("tradeList", tradeList);
+
+		return map;
+	}
 
 }

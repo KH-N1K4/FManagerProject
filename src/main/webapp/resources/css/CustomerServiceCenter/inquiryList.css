@@ -128,17 +128,20 @@ table a{
     align-items: center;
     margin: 40px 0;
 }
-#inquirySearch div{
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
+/* 하단 검색창 selectBox */
+#inquirySearch select{
+    width: 100px;
+    height: 30px;
+}
+/* 하단 검색창 input */
 #inquirySearch input{
     width: 200px;
     height: 25px;
+    margin-left: 10px;
 }
+
+/* 하단 검색창 button */
 #inquirySearch button{
     width: 100px;
     height: 32px;

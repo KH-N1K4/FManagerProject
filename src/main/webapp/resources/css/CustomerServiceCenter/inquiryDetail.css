@@ -3,8 +3,6 @@
 .mainArea{
     width: 1200px;
     height: auto;
-    border-right: 1px solid black; 
-    border-left: 1px solid black; 
     display: flex;
     margin:auto;
 }
@@ -18,8 +16,7 @@
 
 /* 메인 영역 */
 .mainContent{
-    width: 900px;
-    margin-left: 20px;
+    width: 1000px;
 }
 
 /*  --------------사이드 메뉴  --------------*/
@@ -37,38 +34,27 @@
 
 /* ///////////////// ////////////////////////////*/
 
-/* ---------문의하기폼--------- */
+/* ---------문의내역 콘텐츠--------- */
 #inquirySubmit{
     margin: 50px;
+    width: 900px;
 }
 
 /* 문의하기 페이지 제목 */
 #title{
     font-size: 30px;
+    width: 900px;
 }
-#tltleInfo{
-    font-size: 15px;
-    color: #538126;
-}
+
 
 
 /* ----------------------테이블 폼---------------------- */
-table{
-    border-collapse: collapse;
-}
-
 table th{
-    height: auto;
-    width:200px;
+    height: 30px;
     text-align: center;
 }
-table td{
-    height: 50px;
-}
-
-
 .uploadImage{
-    height: 230px;
+    height: 250px;
 }
 /* ------------------------------------------------------ */
 
@@ -98,21 +84,20 @@ table td{
 
 /* ----------------------------------- */
 /* 첨부파일 이미지 영역 */
-.img-box{
+.imageBox{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    height: 250px;
 }
-
 
 /* 이미지를 감싸는 div */
 .boardImg{
     width: 180px;
     height: 180px;
-    display: inline-block;
     text-align: center;
     position: relative;
+    margin-right: 10px;
 }
-
 
 /* 이미지 */
 .boardImg>label{
@@ -122,36 +107,16 @@ table td{
     justify-content: center;
     align-items: center;
     border: 1px solid #ccc;
-    cursor: pointer;
     border-radius: 5px;
-}
-
-.inputImage{
-    display: none;
-    width: 180px;
 }
 
 .boardImg img{
     max-width: 100%;
     max-height: 100%; 
 }
-/* 삭제 버튼 */
-.delete-image {
-    position: absolute;
-    top: 0;
-    right: 7px;
-    font-size: 20px;
-    cursor: pointer;
-
-}
-
-.imageBox{
-    height: 200px;
-    display:flex;
-
-}
-.img-box{
-    margin-right: 40px;
+.boardImg a{
+    text-decoration: none;
+    color: #538126;
 }
 
 
@@ -181,4 +146,4 @@ table td{
     border: 1px solid #538126;
     cursor: pointer;
     font-size: 16px;
-}
+} */

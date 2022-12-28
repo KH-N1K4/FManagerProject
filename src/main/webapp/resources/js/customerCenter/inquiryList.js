@@ -1,15 +1,5 @@
 
-const selectForm = document.getElementById("selectForm");
-const division = document.getElementById("division");
-
-division.addEventListener("change",()=>{
-
-
-    selectForm.addEventListener("submit",()=>{
-
-        
-
-
-    })
-
-});
+const division = document.getElementById("division")
+const value = (division.options[division.selectedIndex].value);
+const memberTable = document.querySelector('#member-manage-table');
+const pagination = document.querySelector(".pagination");

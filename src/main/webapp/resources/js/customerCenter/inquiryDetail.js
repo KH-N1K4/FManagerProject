@@ -1,11 +1,20 @@
 
-const goToList = document.getElementById("goToList");
+const goToList = document.getElementById("goToListbtn");
 
 goToList.addEventListener("click",() => {
 
-        const pathname = location.pathname;
         const queryString = location.search;
-        const url = pathname.substring(0, pathname.lastIndexOf("/")) + queryString;
+        const url = "/userInquiryList" + queryString;
 
         location.href = url;
+
+});
+
+
+const division = document.getElementById("division");
+
+division.addEventListener("change",()=>{
+
+        
+
 });

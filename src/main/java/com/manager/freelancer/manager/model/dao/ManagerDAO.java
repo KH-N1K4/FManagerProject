@@ -12,6 +12,7 @@ import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
+import com.manager.freelancer.manager.model.vo.Settlement;
 
 @Repository
 public class ManagerDAO {
@@ -125,8 +126,8 @@ public class ManagerDAO {
 	 * @param status
 	 * @return
 	 */
-	public int getServiceListCount(String status) {
-		return sqlSession.selectOne("managerMapper.getServiceListCount", status);
+	public int getServiceListCount() {
+		return sqlSession.selectOne("managerMapper.getServiceListCount");
 	}
 
 	/**
@@ -136,12 +137,67 @@ public class ManagerDAO {
 	 * @param pagination
 	 * @return
 	 */
-	public List<FreelancerService> selectServiceList(String status, Pagination pagination) {
+	public List<FreelancerService> selectServiceList(Pagination pagination) {
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 
-		return sqlSession.selectList("managerMapper.selectServiceList", status, rowBounds);
+		return sqlSession.selectList("managerMapper.selectServiceList", null, rowBounds);
+	}
+
+	/**
+	 * 서비스 상태별 수 조회
+	 * 
+	 * @param status
+	 * @return
+	 */
+	public int getServiceListCount(int status) {
+		return sqlSession.selectOne("managerMapper.getServiceListCount2", status);
+	}
+
+	/**
+	 * 서비스 상태별 목록 조회
+	 * 
+	 * @param pagination
+	 * @param status
+	 * @return
+	 */
+	public List<FreelancerService> selectServiceList(Pagination pagination, int status) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectServiceList2", status, rowBounds);
+	}
+
+	/** 서비스 삭제
+	 * @param serviceNo
+	 * @return
+	 */
+	public int managerServiceDelete(int serviceNo) {
+		return sqlSession.update("managerMapper.managerServiceDelete", serviceNo);
+	}
+
+	/** 계좌 내역 수 조회
+	 * @param status
+	 * @return
+	 */
+	public int getTradeListCount(int status) {
+		return sqlSession.selectOne("managerMapper.getTradeListCount", status);
+	}
+
+	/** 계좌 내역 목록 조회
+	 * @param status
+	 * @param pagination
+	 * @return
+	 */
+	public List<Settlement> selectTradeList(int status, Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectTradeList", status, rowBounds);
 	}
 
 }
