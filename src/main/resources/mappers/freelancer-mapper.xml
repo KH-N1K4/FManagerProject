@@ -52,11 +52,31 @@
     		INSERT INTO "MAJOR"
     		VALUES(SEQ_MAJOR_NO.NEXTVAL, #{majorAcademyName}, #{majorName}, #{majorGraduateStatus}, #{freelancerNo})
     	</insert>
-    	
+    	<!-- 프리랜서등록시 member테이블의 프리랜서_FL N값 => Y값으로 변경 -->
     	<update id="updateFreelancerFlag">
     		UPDATE "MEMBER" SET FREELANCER_FL = 'Y'
     		WHERE MEMBER_NO = #{freelancerNo}
     	</update>
    
+   		<!-- 경력 사항  -->
+  		<insert  id="enrollFreelancerCareer" parameterType = "com.manager.freelancer.freelancer.model.vo.Career">
   
+    		INSERT INTO "CAREER" VALUES
+			(SEQ_CAREER_NO.NEXTVAL, 'Y', #{careerCompanyName},#{careerCompanyDepartment},#{careerCompanyPosition},#{careerCompanyRegion},#{careerCompanyPeriod1},#{freelancerNo})	
+    	</insert>
+    	
+    	<!--  자격증  -->
+    	<insert id="enrollFreelancerLicense" parameterType = "com.manager.freelancer.freelancer.model.vo.License">
+    		INSERT INTO "LICENSE"
+    		VALUES(SEQ_LICENSE_NO.NEXTVAL, #{licenseName}, #{licenseDate}, #{licenseAgency}, #{freelancerNo})
+    	</insert>
+    	
+    	
+    	<!-- 계좌등록 -->
+    	<insert id="insertFreelancerAccount" parameterType = "Freelancer">
+    		INSERT INTO "FREELANCER_ACCOUNT"
+    		VALUES(#{freelancerNo}, #{bankAccountNumber}, #{bankCode})
+    	</insert>
+    	
+    	
 </mapper>
