@@ -1,11 +1,13 @@
 package com.manager.freelancer.member.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.member.model.vo.Member;
 
 @Repository
@@ -85,8 +87,18 @@ public class MemberDAO {
 	 * @return result 
 	 */
 	public int changePw(Map<String, Object> paramMap) {
-		
 		return sqlSession.update("memberMapper.changePw",paramMap);
+	}
+
+
+	public List<AskService> selectSendSuggestion(int memberNo) {
+		
+		return sqlSession.selectList("categoryMapper.selectSendSuggesion", memberNo);
+	}
+
+
+	public AskService selectSendSuggesionContent(String serviceInquiryNo) {
+		return  sqlSession.selectOne("categoryMapper.selectSendSuggesionContent", serviceInquiryNo);
 	}
 	
 }

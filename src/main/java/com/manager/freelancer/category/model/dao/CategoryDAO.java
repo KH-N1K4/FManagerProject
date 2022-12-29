@@ -44,5 +44,9 @@ public class CategoryDAO {
 		return sqlSession.insert("categoryMapper.askService",as);
 	}
 
+	public int pauseService(int serviceNo) {
+		return sqlSession.update("categoryMapper.pauseService",serviceNo);
+	}
+
 
 }

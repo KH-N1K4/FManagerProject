@@ -3,6 +3,7 @@ package com.manager.freelancer.member.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.member.model.dao.MemberDAO;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.member.model.vo.Util;
@@ -218,6 +220,21 @@ public class MemberServiceImpl implements MemberService{
 			
 			
 			return 0;// 비밀번호 불일치시 0 반환 
+		}
+
+
+
+		@Override
+		public List<AskService> selectSendSuggestion(int memberNo) {
+			
+			return dao.selectSendSuggestion(memberNo);
+		}
+
+
+
+		@Override
+		public AskService selectSendSuggesionContent(String serviceInquiryNo) {
+			return dao.selectSendSuggesionContent(serviceInquiryNo);
 		}
 	
 	

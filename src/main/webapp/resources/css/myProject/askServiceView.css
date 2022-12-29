@@ -1,0 +1,26 @@
+#askServiceMain{
+    width: 450px;
+    height: 450px;
+    padding:20px;
+}
+
+#serviceContent{
+	background-color:lightgray;
+	border-radius:10px;
+	height:70px;
+	padding:20px;
+}
+
+#serviceTitle{
+	font-size:20px;
+}
+#serviceSummary{
+	font-size:15px;
+}
+
+#serviceInquiryContent{
+	border:1px solid black;
+	height:300px;
+	margin-top:50px;
+}
+
