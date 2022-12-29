@@ -111,7 +111,11 @@
                           </td>
                           <td class="tl">
                             <div class="suggestion_name_area td_link">
-                              <a href="#" id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</a>
+                              <c:choose>
+                                <c:when test="${sales.serviceDelFL eq 'Y'}"><span id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</span></c:when>
+                                <c:otherwise><a href="#" id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</a></c:otherwise>
+                            </c:choose>
+                              
                             </div>
                           </td>
                           <td  class="tc">
@@ -126,7 +130,7 @@
                             <span class="text">${sales.freelancerFLString}</span>
                           </td>
                           <td class="tc">
-                            <c:if test="${sales.freelancerFL == 1}">
+                            <c:if test="${sales.freelancerFLString eq '진행 중'}">
                               <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
                               <c:if test="${sales.workCount le sales.serviceEditNum}">
                                 <a href="#" id="sendBtn${sales.tradeNo}" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>

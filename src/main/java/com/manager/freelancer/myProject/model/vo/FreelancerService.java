@@ -30,6 +30,7 @@ public class FreelancerService {
 	private int serviceStatus;			//SERVICE_STATUS 1:승인 대기 중, 2:판매 중, 3:미승인, 4:판매 중지,5: 의뢰용일회성서비스
 	private String serviceStatusString;	//SERVICE_STATUS_STRING 1:승인 대기 중, 2:판매 중, 3:미승인, 4:판매 중지,5: 의뢰용일회성서비스
 	private String serviceCreateDate;	//SERVICE_CREATE_DATE 서비스 등록일
+	private String serviceDelFL;		//SERVICE_DEL_FL 서비스 삭제 여부
 
 	private int serviceFileNo;			//REQUEST_FILE_NO 서비스 첨부파일 번호 SEQUENCE: SEQ_SERVICE_FILE_NO
 	private String serviceFilePath2;	//REQUEST_FILE_PATH 서비스 첨부파일 경로
