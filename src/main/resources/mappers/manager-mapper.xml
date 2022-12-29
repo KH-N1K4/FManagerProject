@@ -324,6 +324,68 @@
 	</select>
 	
 	
+	<!-- 환불하기 1 -->
+	<insert id="managerRefund" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyColumn="FREELANCER_NO, MEMBER_NO,PAYMENT_PRICE"
+			keyProperty="freelancerNo, memberNo, paymentPrice" resultType="_int" order="BEFORE">
+			SELECT ( SELECT S.FREELANCER_NO
+						FROM TRADE T
+						JOIN SERVICE S ON (S.SERVICE_NO=T.SERVICE_NO)
+						WHERE T.TRADE_NO=#{tradeNo}) FREELANCER_NO,
+					  ( SELECT MEMBER_NO
+						FROM TRADE 
+						WHERE TRADE_NO=#{tradeNo}) MEMBER_NO,
+						( SELECT PAYMENT_PRICE
+						FROM SETTLEMENT 
+						WHERE TRADE_NO=#{tradeNo}) PAYMENT_PRICE
+				FROM DUAL
+		</selectKey>
+		<if test='refundPercent==0'>
+			INSERT INTO SETTLEMENT VALUES(
+				SEQ_SETTLEMENT_NO.NEXTVAL, 3, #{freelancerNo}, 3, DAFAULT, #{paymentPrice}, #{tradeNo})
+		</if>
+		<if test='refundPercent==1'>
+			INSERT INTO SETTLEMENT VALUES(
+				SEQ_SETTLEMENT_NO.NEXTVAL, 3, #{memberNo}, 3, DAFAULT, #{paymentPrice}, #{tradeNo})
+		</if>
+	</insert>
+	
+	<!-- 환불하기 m -->
+	<insert id="managerRefund_m" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyColumn="MEMBER_NO,PAYMENT_PRICE"
+			keyProperty="freelancerNo, memberNo, paymentPrice" resultType="_int" order="BEFORE">
+			SELECT 
+					  ( SELECT MEMBER_NO
+						FROM TRADE 
+						WHERE TRADE_NO=5) MEMBER_NO,
+						( SELECT PAYMENT_PRICE
+						FROM SETTLEMENT 
+						WHERE TRADE_NO=#{tradeNo}) PAYMENT_PRICE
+				FROM DUAL
+		</selectKey>
+		
+		INSERT INTO SETTLEMENT VALUES(
+				SEQ_SETTLEMENT_NO.NEXTVAL, 3, #{memberNo2}, 3, DAFAULT, #{paymentPrice2}*#{refundPercent}, #{tradeNo})
+	</insert>
+	
+	<!-- 환불하기 f -->
+	<insert id="managerRefund_f" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyColumn="FREELANCER_NO, PAYMENT_PRICE"
+			keyProperty="freelancerNo, paymentPrice" resultType="_int" order="BEFORE">
+			SELECT ( SELECT S.FREELANCER_NO
+						FROM TRADE T
+						JOIN SERVICE S ON (S.SERVICE_NO=T.SERVICE_NO)
+						WHERE T.TRADE_NO=5) FREELANCER_NO,
+						( SELECT PAYMENT_PRICE
+						FROM SETTLEMENT 
+						WHERE TRADE_NO=#{tradeNo}) PAYMENT_PRICE
+				FROM DUAL
+		</selectKey>
+		
+		INSERT INTO SETTLEMENT VALUES(
+				SEQ_SETTLEMENT_NO.NEXTVAL, 3, #{freelancerNo3}, 3, DAFAULT, #{paymentPrice3}*(1-#{refundPercent}), #{tradeNo})
+	</insert>
+	
 	
 
 </mapper>

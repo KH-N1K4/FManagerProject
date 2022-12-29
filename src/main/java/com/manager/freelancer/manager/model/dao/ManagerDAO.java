@@ -230,5 +230,20 @@ public class ManagerDAO {
 		return sqlSession.selectOne("managerMapper.selectTradeInfo", tradeNo);
 	}
 
+	public int managerRefund(Map<String, Integer> pm) {
+		
+		int result;
+		
+		if(pm.get("refundPercent").equals(0) || pm.get("refundPercent").equals(1)) {
+			result = sqlSession.insert("managerMapper.managerRefund",pm);
+		} else {
+			result = sqlSession.insert("managerMapper.managerRefund_m",pm);
+			if(result>0) {
+				result=sqlSession.insert("managerMapper.managerRefund_f",pm);
+			}
+		}
+		return result;
+	}
+
 
 }

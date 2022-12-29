@@ -90,5 +90,12 @@ public interface ManagerService {
 	TradeInfo selectTradeInfo(int tradeNo);
 
 
+	/** 환불하기
+	 * @param pm
+	 * @return
+	 */
+	int managerRefund(Map<String, Integer> pm);
+
+
 	
 }

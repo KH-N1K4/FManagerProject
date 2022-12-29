@@ -37,7 +37,6 @@
                     </select>
                 </div>
             </div>
-            <input type="hidden" name="tradeNo">
             <div class="btnArea">
                 <button class="modalBtn">환불</button>
                 <button type="button" class="modalBtn modalClose">취소</button>

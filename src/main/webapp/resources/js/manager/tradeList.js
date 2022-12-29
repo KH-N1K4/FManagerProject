@@ -59,7 +59,10 @@ function selectChange() {
         
                         const child2 = document.createElement("div");
                         child2.classList.add('manager-trade-num');
-                        child2.append(document.createTextNode(trade.tradeNo));
+                        const child2a = document.createElement("a");
+                        child2a.classList.add("tradeInfo");
+                        child2a.append(document.createTextNode(trade.tradeNo));
+                        child2.append(child2a);
         
                         const child3 = document.createElement("div");
                         child3.classList.add('manager-service-name');
@@ -243,11 +246,18 @@ function refund(){
                         document.getElementById("cancaleInquiryDate").innerText = tradeInfo.cancelInquiryDate
                         
                     }
+
+                    refundFrm.classList.add("show");
+        
+                    const inputTradeNo = document.createElement("input");
+                    inputTradeNo.setAttribute("type","hidden");
+                    inputTradeNo.setAttribute("name","tradeNo");
+                    inputTradeNo.value=tradeInfo.tradeNo;
+                    refundFrm.append(inputTradeNo)
                 }
 
             });
             
-            refundFrm.classList.add("show");
 
             modalClose.addEventListener("click",()=>{
 
@@ -298,6 +308,9 @@ function tradeInfo(){
                 type: 'GET',
                 success: (tradeInfo)=>{
                     if(tradeInfo!=null){
+                        
+
+
                         if(!tradeModal.classList.contains('show')){
                             tradeModal.classList.add('show');
                             body.style.overflow='hidden';

@@ -312,7 +312,12 @@ public class ManagerServiceImpl implements ManagerService {
 		return tradeInfo;
 	}
 	
-	
+	// 환불하기
+	@Override
+	public int managerRefund(Map<String, Integer> pm) {
+		
+		return dao.managerRefund(pm);
+	}
 	
 
 }
