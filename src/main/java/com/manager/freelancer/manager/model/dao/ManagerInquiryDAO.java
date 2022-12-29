@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.customerCenter.model.vo.Pagination;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
-import com.manager.freelancer.manager.model.vo.ManagerInquiry;
 
 @Repository
 public class ManagerInquiryDAO {
