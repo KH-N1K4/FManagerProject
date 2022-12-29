@@ -236,10 +236,17 @@ public class ManagerDAO {
 		
 		if(pm.get("refundPercent").equals(0) || pm.get("refundPercent").equals(1)) {
 			result = sqlSession.insert("managerMapper.managerRefund",pm);
+			if(result>0) {
+				result = sqlSession.update("managerMapper.updateStatus",pm);
+			}
 		} else {
+			
 			result = sqlSession.insert("managerMapper.managerRefund_m",pm);
 			if(result>0) {
 				result=sqlSession.insert("managerMapper.managerRefund_f",pm);
+				if(result>0) {
+					result = sqlSession.update("managerMapper.updateStatus",pm);
+				}
 			}
 		}
 		return result;

@@ -178,15 +178,20 @@ public class ManagerController {
 	// 환불하기
 	@GetMapping("/manager/settlement/refund")
 	public String managerRefund(Model model,
-					@RequestParam int tradeNo, @RequestParam(value="refundPercent", required = false) int refundPercent) {
+					@RequestParam int tradeNo, @RequestParam(value="refundPercent", required = false) int refundPercent,
+					@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+					@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
 		
 		Map<String, Integer> pm = new HashMap<String, Integer>();
 		pm.put("tradeNo", tradeNo);
 		pm.put("refundPercent", refundPercent);
-		
+
 		int result = service.managerRefund(pm);
 		
-		System.out.println(result);
+		if(result>0) {
+			Map<String, Object> map = service.selectTradeList(status, cp);
+			model.addAttribute("map", map);
+		}
 		
 		
 		return "/manager/tradeList";
