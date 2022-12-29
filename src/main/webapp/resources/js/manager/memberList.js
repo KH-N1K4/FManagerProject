@@ -168,35 +168,6 @@ function selectChange() {
                 a5.appendChild(document.createTextNode(">>"));
                 li5.append(a5);
                 pagination.append(li5);
-
-
- 
-                /* 검색창 */
-                /*document.getElementById("memberSearch").innerHTML="";
-                document.getElementById("memberSearch").setAttribute("action","/manager/memberType2"+"&value="+value);
-                const selectKey = document.createElement("select");
-                selectKey.setAttribute("name","key");
-                selectKey.setAttribute("id","search-key");
-                const option1 = document.createElement("option");
-                option1.value="no";
-                option1.appendChild(document.createTextNode("회원 번호"));
-                const option2 = document.createElement("option");
-                option2.value="na";
-                option2.appendChild(document.createTextNode("회원 이름"));
-                selectKey.append(option1);
-                selectKey.append(option2);
-                document.getElementById("memberSearch").append(selectKey);
-
-                const inputSearch = document.createElement("input");
-                inputSearch.setAttribute("type","text");
-                inputSearch.setAttribute("name","query");
-                inputSearch.setAttribute("id","search-query");
-                inputSearch.setAttribute("placeholder","검색어를 입력해주세요.");
-                document.getElementById("memberSearch").append(inputSearch);
-
-                const searchBtn = document.createElement("button");
-                searchBtn.appendChild(document.createTextNode("검색"));
-                document.getElementById("memberSearch").append(searchBtn); */
                 
 
                 

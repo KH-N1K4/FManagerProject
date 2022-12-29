@@ -47,6 +47,11 @@ public class CategoryServiceImpl implements CategoryService{
 		return dao.askService(as);
 	}
 
+	@Override
+	public int pauseService(int serviceNo) {
+		return dao.pauseService(serviceNo);
+	}
+
 	
 
 }

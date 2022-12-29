@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.vo.Member;
+import com.manager.freelancer.manager.model.vo.TradeInfo;
 
 public interface ManagerService {
 
@@ -67,6 +68,33 @@ public interface ManagerService {
 	 * @return
 	 */
 	Map<String, Object> selectTradeList(int status, int cp);
+
+	/** 검색 일치 계좌 내역
+	 * @param pm
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectTradeList(Map<String, Object> pm, int cp);
+
+	/** 작업 상태별 계좌 내역 조회
+	 * @param status
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectTradeStatusList(int status, int cp);
+
+	/** 거래 정보 조회
+	 * @param tradeNo
+	 * @return
+	 */
+	TradeInfo selectTradeInfo(int tradeNo);
+
+
+	/** 환불하기
+	 * @param pm
+	 * @return
+	 */
+	int managerRefund(Map<String, Object> pm);
 
 
 	

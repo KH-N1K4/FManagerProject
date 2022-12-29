@@ -28,6 +28,7 @@
 	      <result property="memberName" column="MEMBER_NAME" />					<!-- 메인 3카테고리 이름-->
 	      <result property="memberProfile" column="MEMBER_PROFILE" />					<!-- 메인 3카테고리 이름-->
 	      <result property="freelancerNo" column="FREELANCER_NO" />					<!-- 메인 3카테고리 이름-->
+	      <result property="serviceDeleteFL" column="SERVICE_DEL_FL" />				
 	      
 	      
 	      
@@ -60,6 +61,9 @@
       <result property="serviceInquiryContent" column="SERVICE_INQUIRY_CONTENT"/>
       <result property="memberNo" column="MEMBER_NO"/>
       <result property="serviceNo" column="SERVICE_NO"/>
+      <result property="serviceTitle" column="SERVICE_TITLE"/>
+      <result property="serviceSummary" column="SERVICE_SUMMARY"/>
+      <result property="requestFilePath" column="REQUEST_FILE_PATH" />		<!-- 서비스 작업 일수 -->
    </resultMap>
 
 
@@ -93,6 +97,7 @@
 		JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		WHERE MAIN_CATEGORY_NO=#{mainCategoryNo}
+		AND SERVICE_DEL_FL='N'
 	) 
 	WHERE RNUM =1
 
@@ -107,7 +112,7 @@
 	   (SELECT MEMBER_PROFILE FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_PROFILE,
 	   SERVICE_NO, REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY SERVICE_NO ORDER BY SERVICE_NO, REQUEST_FILE_PATH)) RNUM
 	   ,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,
-		SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,SERVICE_CREATE_DATE, THIRD_CATEGORY_NAME, SUB_CATEGORY_NAME, MAIN_CATEGORY_NAME
+		SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,SERVICE_CREATE_DATE, THIRD_CATEGORY_NAME, SUB_CATEGORY_NAME, MAIN_CATEGORY_NAME,SERVICE_DEL_FL
 		FROM SERVICE_FILE
 		JOIN SERVICE USING(SERVICE_NO)
 		JOIN CATEGORY USING(THIRD_CATEGORY_NO)
@@ -132,7 +137,32 @@
 	
 	</insert>
 	
-
+	<update id="pauseService">
+		UPDATE SERVICE SET SERVICE_DEL_FL='Y'
+		WHERE SERVICE_NO=#{serviceNo}
 	
-  
+	</update>
+	
+	<select id="selectSendSuggesion" resultMap="askService_rm">
+		SELECT SERVICE_NO, MEMBER_NO,SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY, SERVICE_INQUIRY_NO 
+		FROM SERVICE_INQUIRY 
+		JOIN SERVICE USING(SERVICE_NO)
+		WHERE MEMBER_NO=#{memberNo}
+		ORDER BY 1 DESC
+	</select>
+	
+	
+	<select id="selectSendSuggesionContent" resultMap="askService_rm">
+			SELECT *
+			FROM (
+			   SELECT SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY,
+			   REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY SERVICE_NO ORDER BY SERVICE_NO, REQUEST_FILE_PATH)) RNUM
+				FROM SERVICE_FILE
+				JOIN SERVICE USING(SERVICE_NO)
+				JOIN SERVICE_INQUIRY USING(SERVICE_NO)
+				WHERE SERVICE_INQUIRY_NO=#{serviceInquiryNo}
+			) 
+			WHERE RNUM =1
+	</select>
+ 
 </mapper>

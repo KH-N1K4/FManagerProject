@@ -13,6 +13,7 @@ import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.manager.model.vo.Settlement;
+import com.manager.freelancer.manager.model.vo.TradeInfo;
 
 @Repository
 public class ManagerDAO {
@@ -199,5 +200,57 @@ public class ManagerDAO {
 
 		return sqlSession.selectList("managerMapper.selectTradeList", status, rowBounds);
 	}
+
+	/** 검색 일치 계좌 내역 수 조회
+	 * @param pm
+	 * @return
+	 */
+	public int getTradeListCount(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getTradeListCount_search", pm);
+	}
+
+	/** 검색 일치 계좌 내역 목록 조회
+	 * @param pm
+	 * @param pagination
+	 * @return
+	 */
+	public List<Settlement> selectTradeList(Map<String, Object> pm, Pagination pagination) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectTradeList_search", pm, rowBounds);
+	}
+
+	/** 거래 정보 조회
+	 * @param tradeNo
+	 * @return
+	 */
+	public TradeInfo selectTradeInfo(int tradeNo) {
+		return sqlSession.selectOne("managerMapper.selectTradeInfo", tradeNo);
+	}
+
+	public int managerRefund(Map<String, Object> pm) {
+		
+		int result;
+		
+		if(pm.get("refundPercent").equals(0) || pm.get("refundPercent").equals(1)) {
+			result = sqlSession.insert("managerMapper.managerRefund",pm);
+			if(result>0) {
+				result = sqlSession.update("managerMapper.updateStatus",pm);
+			}
+		} else {
+			
+			result = sqlSession.insert("managerMapper.managerRefund_m",pm);
+			if(result>0) {
+				result=sqlSession.insert("managerMapper.managerRefund_f",pm);
+				if(result>0) {
+					result = sqlSession.update("managerMapper.updateStatus",pm);
+				}
+			}
+		}
+		return result;
+	}
+
 
 }

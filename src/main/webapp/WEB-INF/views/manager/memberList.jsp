@@ -50,7 +50,7 @@
 		</div>
 
 		<div id="member-manage-table">
-...............................
+
 			<!-- 테이블 컬럼명 -->
 			<div class="member-manage-table-column">
 				<div class="member-num">회원번호</div>
@@ -75,8 +75,8 @@
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty memberList}">
-				<div class="member-manage-table-content">
-					회원이 존재하지 않습니다.
+				<div class="member-manage-table-content center">
+					회원이 존재하지 않습니다. 
 				</div>
 			</c:if>
 
