@@ -13,9 +13,35 @@
 <link rel="stylesheet" href="/resources/css/manager/tradeList.css">
 
 </head>
-<body>
+<body id="mainBody">
 
 	<jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp" />
+
+	<%-- 검색을 진행한 경우 --%>
+		<c:if test="${not empty param}">
+        	<c:forEach var="parameter" items="${param}">
+				<c:if test="${parameter.key != 'cp'}">
+					<c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+				</c:if>
+			</c:forEach>
+    	</c:if>
+
+		<c:forEach var="inputStatus" items="${param.status}">
+			<c:choose>
+				<c:when test="${inputStatus == 1}">
+					<c:set var="inputStatus1" value="selected" />
+				</c:when>
+				<c:when test="${inputStatus == 2}">
+					<c:set var="inputStatus2" value="selected" />
+				</c:when>
+				<c:when test="${inputStatus == 3}">
+					<c:set var="inputStatus3" value="selected" />
+				</c:when>
+				<c:when test="${inputStatus == 4}">
+					<c:set var="inputStatus4" value="selected" />
+				</c:when>
+			</c:choose>
+		</c:forEach>
 
 
 	<div class="main">
@@ -23,12 +49,12 @@
 
 			<span id="manager-buy-title">계좌 관리</span>
 			<span class="search-area"> 
-				<select class="member-select-input" name="selectmemberType" id="selectmemberType" onchange="selectChange()">
+				<select class="member-select-input" name="selectWorkStatus" id="selectWorkStatus" onchange="selectChange()">
 					<option value="0">작업 상태</option>
-					<option value="1">진행중</option>
-					<option value="2">정산 완료</option>
-					<option value="3">환불 완료</option>
-					<option value="4">마감</option>
+					<option value="1" ${inputStatus1}>진행중</option>
+					<option value="2" ${inputStatus2}>정산 완료</option>
+					<option value="3" ${inputStatus3}>환불 완료</option>
+					<option value="4" ${inputStatus4}>마감</option>
 				</select>
 			</span>
 		</div>
@@ -43,7 +69,7 @@
 				<div class="manager-expert">거래자</div>
 				<div class="manager-work-status">작업 상태</div>
 				<div class="manager-division">구분</div>
-				<div class="manager-division">가격</div>
+				<div class="manager-division">금액</div>
 				<div class="manager-option"></div>
 			</div>
 
@@ -53,18 +79,27 @@
 				<c:forEach var="trade" items="${tradeList}">
 					<div class="manager-buy-table-content">
 						<div class="manager-num">${trade.paymentDate}</div>
-						<div class="manager-trade-num">${trade.tradeNo}</div>
-						<div class="manager-service-name">${trade.serviceTitle}</div>
+						<div class="manager-trade-num"><a class="tradeInfo">${trade.tradeNo}</a></div>
+						<div class="manager-service-name"><a class="detailBtn">${trade.serviceTitle}</a></div>
 						<div class="manager-expert">${trade.userName}</div>
 						<div class="manager-work-status">${trade.workStatusString}</div>
 						<div class="manager-division">${trade.paymentTypeString}</div>
 						<div class="manager-division">${trade.paymentPrice}</div>
 						<div class="manager-option">
-							
-							<span>정산</span> <span>환불</span>
+							<c:if test="${trade.workStatus == 1}">
+							<a class="btn refund">환불</a>
+							</c:if>
+							<c:if test="${trade.workStatus == 4}">
+							<a class="btn" href="/manager/settlement/calculate">정산</a>
+							</c:if>
 						</div>
 					</div>
 				</c:forEach>
+			</c:if>
+			<c:if test="${empty tradeList}">
+				<div class="manager-buy-table-content center">
+					거래 내역이 존재하지 않습니다.
+				</div>
 			</c:if>
 
 		</div>
@@ -76,11 +111,13 @@
 
 				<ul class="pagination">
 
+					<c:if test="${not empty tradeList}">
+
 					<!-- 첫 페이지로 이동 -->
-					<li><a href="/manager/memberList?cp=1${sURL}">&lt;&lt;</a></li>
+					<li><a href="/manager/tradeList?cp=1${sURL}">&lt;&lt;</a></li>
 
 					<!-- 이전 목록 마지막 번호로 이동 -->
-					<li><a href="/manager/memberList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+					<li><a href="/manager/tradeList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
 
 
 
@@ -98,7 +135,7 @@
 							
 							<c:otherwise>
 								<!-- 현재 페이지를 제외한 나머지 -->
-								<li><a href="/manager/memberList?cp=${i}${sURL}">${i}</a></li>
+								<li><a href="/manager/tradeList?cp=${i}${sURL}">${i}</a></li>
 							</c:otherwise>
 						
 						</c:choose>
@@ -108,21 +145,30 @@
 					
 					
 					<!-- 다음 목록 시작 번호로 이동 -->
-					<li><a href="/manager/memberList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+					<li><a href="/manager/tradeList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
 
 					<!-- 끝 페이지로 이동 -->
-					<li><a href="/manager/memberList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+					<li><a href="/manager/tradeList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+
+					</c:if>
+
 
 				</ul>
 			</div>
 			
 			<!-- 검색창 -->
-			<form action="/manager/memberList" method="get" id="memberSearch" onsubmit="return true">
+			<form action="/manager/tradeList" method="get" id="tradeSearch" onsubmit="return true">
 
-				<input type="text" name="query" id="search-query" placeholder="계좌 번호를 입력해주세요.">
-
+				<input type="text" name="query" id="search-query" placeholder="거래 번호를 입력해주세요.">
+				<input type="hidden" name="status" id="inputStatus">
 				<button id="frmBtn">검색</button>
 			</form>
+
+
+
+			<div class="trade-modal">
+            	<jsp:include page="/WEB-INF/views/manager/refundModal.jsp" /> 
+       		</div>
 
 	</div>
 	<!-- main -->

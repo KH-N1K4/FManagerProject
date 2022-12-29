@@ -95,6 +95,10 @@
 	height: 15px;
 }
 
+.center{
+    justify-content: center;
+}
+
 /* pagination */
 .pagination {
 	list-style: none;
@@ -200,7 +204,8 @@
 .deleteBtn{
 	display: inline-block;
 	width: 100px;
-	height: 25px;
+	height: 30px;
+	line-height: 30px;
 	border-radius: 5px;
 	text-decoration: none;
 	color: white;
