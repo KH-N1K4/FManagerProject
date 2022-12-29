@@ -94,7 +94,7 @@ public interface ManagerService {
 	 * @param pm
 	 * @return
 	 */
-	int managerRefund(Map<String, Integer> pm);
+	int managerRefund(Map<String, Object> pm);
 
 
 	

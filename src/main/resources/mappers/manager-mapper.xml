@@ -366,8 +366,15 @@
 				FROM DUAL
 		</selectKey>
 		
-		INSERT INTO SETTLEMENT VALUES(
-				#{settlementNo}.NEXTVAL, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}*${refundPercent}, #{tradeNo})
+		<if test='refundPercent=="0.3"'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}*0.3, #{tradeNo})
+		</if>
+		<if test='refundPercent=="0.7"'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}*0.7, #{tradeNo})
+		</if>
+		
 	</insert>
 	
 	<!-- 환불하기 f -->
@@ -385,8 +392,15 @@
 				FROM DUAL
 		</selectKey>
 		
-		INSERT INTO SETTLEMENT VALUES(
-				#{settlementNo}.NEXTVAL, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPric3}*(1-${refundPercent}), #{tradeNo})
+		<if test='refundPercent eq "0.3"'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPrice}*0.3, #{tradeNo})
+		</if>
+		<if test='refundPercent eq "0.7"'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPrice}*0.7, #{tradeNo})
+		</if>
+		
 	</insert>
 	
 	

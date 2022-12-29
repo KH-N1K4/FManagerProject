@@ -182,7 +182,7 @@ public class ManagerController {
 					@RequestParam(value = "status", required = false, defaultValue = "0") int status,
 					@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
 		
-		Map<String, Integer> pm = new HashMap<String, Integer>();
+		Map<String, Object> pm = new HashMap<String, Object>();
 		pm.put("tradeNo", tradeNo);
 		pm.put("refundPercent", refundPercent);
 

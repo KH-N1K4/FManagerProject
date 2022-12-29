@@ -314,7 +314,7 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	// 환불하기
 	@Override
-	public int managerRefund(Map<String, Integer> pm) {
+	public int managerRefund(Map<String, Object> pm) {
 		
 		return dao.managerRefund(pm);
 	}

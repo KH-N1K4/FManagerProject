@@ -230,7 +230,7 @@ public class ManagerDAO {
 		return sqlSession.selectOne("managerMapper.selectTradeInfo", tradeNo);
 	}
 
-	public int managerRefund(Map<String, Integer> pm) {
+	public int managerRefund(Map<String, Object> pm) {
 		
 		int result;
 		
