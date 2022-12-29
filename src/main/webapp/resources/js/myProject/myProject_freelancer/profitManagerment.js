@@ -24,6 +24,8 @@ for(var i=11; i>=0; i--){
   booleanVal == false;
 }
 
+var typeChart = 'line';
+
 new Chart(ctx, {
 
   type: 'line',

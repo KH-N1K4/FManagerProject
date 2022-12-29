@@ -205,17 +205,19 @@ public class MyProjectFreelancerController {
 	
 	//수익관리 페이지
 	@GetMapping("/member/myProject/freelancer/profitManagerment")
-	public String profitManagerment(Model model, HttpSession session) {
+	public String profitManagerment(Model model, HttpSession session,
+			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
 		
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		List<myProjectFreelancerProfit>	profitList = service.selectMonthMyProfit(loginMember.getMemberNo());
-		List<myProjectFreelancerProfit>	profit = service.selectMyProfit(loginMember.getMemberNo());
+		List<myProjectFreelancerProfit>	profitList = service.selectMonthMyProfit(loginMember.getMemberNo());//달별 총 수익 
+		List<myProjectFreelancerProfit>	profit = service.selectMyProfit(loginMember.getMemberNo());//최근 1년간 예상수익 총수익
+		Map<String, Object>	map = service.selectMyProfitEachList(loginMember.getMemberNo(),cp);//거래별 정산 내역
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("profitList", profitList);
-		model.addAttribute("map",map);	
 		model.addAttribute("profitList",new Gson().toJson(profitList));	
-		model.addAttribute("profit",profit);	
+		model.addAttribute("profit",profit);
+		model.addAttribute("myProfitEachList",map.get("myProfitEachList"));
+		model.addAttribute("pagination",map.get("pagination"));
+		model.addAttribute("listCount",map.get("listCount"));
 		return "myProject/myProject_freelancer/profitManagerment";
 	}
 

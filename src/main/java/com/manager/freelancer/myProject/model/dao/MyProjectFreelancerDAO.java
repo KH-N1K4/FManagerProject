@@ -213,6 +213,25 @@ public class MyProjectFreelancerDAO {
 		return sqlSession.selectList("myProjectFreelancerSerive.selectMyProfit", memberNo);
 	}
 
+	/**거래별 정산 내역 출력
+	 * @param memberNo
+	 * @param pagination 
+	 * @return
+	 */
+	public List<myProjectFreelancerProfit> selectMyProfitEachList(int memberNo, Pagination pagination) {
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
+	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyProfitEachList", memberNo,rowBounds);
+	}
+
+	/**거래별 정산 내역 출력 페이지
+	 * @param memberNo
+	 * @return
+	 */
+	public int getMyProfitEachListCount(int memberNo) {
+		return sqlSession.selectOne("myProjectFreelancerSerive.getMyProfitEachListCount", memberNo);
+	}
+
 
 	
 }

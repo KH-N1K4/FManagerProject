@@ -15,6 +15,14 @@
 
     <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
     <!-- 화면 크기 width: 1200px로 고정 -->
+    <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+            <c:if test="${parameter.key != 'cp'}">
+            
+                <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+            </c:if>
+        </c:forEach>
+    </c:if>
     <div class="mainInBody"> 
         <!-- sideMenu -->
         <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProjectSide2.jsp"/>
@@ -56,95 +64,74 @@
             <table cellspacing="0" class="tbl_lst_type">	
               <caption><span class="blind">수임금 내역</span></caption>				
               <colgroup>
-                <col width="40"><col width="*"><col width="100"><col width="95"><col width="95"><col width="180">
+                <col width="40"><col width="*"><col width="200"><col width="200">
               </colgroup>
               <thead>
                 <tr>
                   <th scope="col" class="frst"><strong class="line_n">번호</strong></th>
-                  <th scope="col" class=""><strong class="line_r">서비스명</strong></th>   
-                  <th scope="col" class=""><strong class="line_r">의뢰인</strong></th>  
-                  <th scope="col" class=""><strong class="line_n">수정횟수</strong></th>
-                  <th scope="col" class=""><strong class="line_n">작업상태</strong></th>
-                  <!-- 작업 상태가 진행중일때 버튼으로 쓰일 컬럼들 -->
-                  <th scope="col" class="last"><strong class="line_n"></strong></th>                  
+                  <th scope="col" class=""><strong class="line_r">정산 날짜</strong></th>   
+                  <th scope="col" class=""><strong class="line_r">정산금</strong></th>  
+                  <th scope="col" class=""><strong class="line_n">서비스 판매금액</strong></th>                 
                 </tr>
               </thead>
               <tbody id = "selecttbody">
-                <tr class="suggestionTable" suggestionNumeber="">
-                  <td class="tc">
-                    <span class="num">1</span>
-                  </td>
-                  <td class="tl">
-                    <div class="suggestion_name_area td_link">
-                      <a href="#" id="suggestionName" class="suggestionName" suggestionName="">로고 디자인 제작</a>
-                    </div>
-                  </td>
-                  <td  class="tc">
-                    <div class="expert_name_area td_link">
-                      <a href="#" id="expertName" class="expertName" expertName="">홍길동</a>
-                    </div>
-                  </td>
-                  <td class="tc">
-                    <span class="num">1/3</span>
-                  </td>
-                  <td class="tc">
-                    <span class="text">진행중</span>
-                  </td>
-                  <td class="tc">
-                    <a href="#" id="finishBtn" title="" class="finishBtn btn_type"><span>완료</span></a>
-                    <a href="#" id="sendBtn" title="" class="sendBtn btn_type"><span>발송</span></a>
-                    <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
-                  </td>                
-                </tr>
-                <tr class="suggestionTable" suggestionNumeber="">
-                  <td class="tc">
-                    <span class="num">2</span>
-                  </td>
-                  <td class="tl">
-                    <div class="suggestion_name_area td_link">
-                      <a href="#" id="suggestionName" class="suggestionName" suggestionName="">프리랜서 마켓 웹사이트 제작</a>
-                    </div>
-                  </td>
-                  <td  class="tc">
-                    <div class="expert_name_area td_link">
-                      <a href="#" id="expertName" class="expertName" expertName="">김이듀</a>
-                    </div>
-                  </td>
-                  <td class="tc">
-                    <span class="num">1/5</span>
-                  </td>
-                  <td class="tc">
-                    <span class="text">완료</span>
-                  </td>
-                  <td class="tc">
-                  </td>                
-                </tr>
-                <tr class="suggestionTable" suggestionNumeber="">
-                  <td class="tc">
-                    <span class="num">3</span>
-                  </td>
-                  <td class="tl">
-                    <div class="suggestion_name_area td_link">
-                      <a href="#" id="suggestionName" class="suggestionName" suggestionName="">웨딩 촬영 디자인</a>
-                    </div>
-                  </td>
-                  <td  class="tc">
-                    <div class="expert_name_area td_link">
-                      <a href="#" id="expertName" class="expertName" expertName="">최사진</a>
-                    </div>
-                  </td>
-                  <td class="tc">
-                    <span class="num">1/4</span>
-                  </td>
-                  <td class="tc">
-                    <span class="text">주문 취소</span>
-                  </td>
-                  <td class="tc">
-                  </td>                
-                </tr>
+                <c:if test="${not empty myProfitEachList}">
+                      <c:forEach items="${myProfitEachList}" var="myProfitEach">
+                        <tr class="myProfitnTable" suggestionNumeber="">
+                          <td class="tc">
+                            <span class="num">${myProfitEach.num}</span>
+                          </td>
+                          <td  class="tc">
+                            <span class="num">${myProfitEach.paymentDateString}</span>
+                          </td>
+                          <td class="tc">
+                            <span class="num">${myProfitEach.paymentPriceString}</span>
+                          </td>
+                          <td class="tc">
+                            <span class="num">${myProfitEach.servicePriceString}</span>
+                          </td>              
+                        </tr>
+                      </c:forEach>
+                </c:if>
               </tbody>
             </table>
           </div>
+          <c:if test="${listCount != 0}">
+                
+                <div class="pagination-area">
+
+
+                    <ul class="pagination">
+                    
+                        <!-- 첫 페이지로 이동 -->
+                        <li><a href="/member/myProject/freelancer/profitManagerment?cp=1${sURL}">&lt;&lt;</a></li>
+        
+                        <!-- 이전 목록 마지막 번호로 이동 -->
+                        <li><a href="/member/myProject/freelancer/profitManagerment?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+        
+            
+                        <!-- 특정 페이지로 이동 -->
+                        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                        <c:choose>
+                            <c:when test="${i== pagination.currentPage}">
+                            <!-- 현재 페이지인 경우 -->
+                            <li><a class="current">${i}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                            <!-- 현재 페이지를 제외한 나머지 -->
+                            <li><a href="/member/myProject/freelancer/profitManagerment?cp=${i}${sURL}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                        </c:forEach>
+                        <!-- 다음 목록 시작 번호로 이동 -->
+                        <li><a href="/member/myProject/freelancer/profitManagerment?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+        
+                        <!-- 끝 페이지로 이동 -->
+                        <li><a href="/member/myProject/freelancer/profitManagerment?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+        
+                    </ul>
+                </div>
+            </c:if>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
     </div>

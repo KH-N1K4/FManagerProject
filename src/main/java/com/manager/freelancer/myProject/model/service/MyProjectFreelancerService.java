@@ -104,6 +104,13 @@ public interface MyProjectFreelancerService {
 	 */
 	List<myProjectFreelancerProfit> selectMyProfit(int memberNo);
 
+	/** 거래별 정산 내역 출력
+	 * @param memberNo
+	 * @param cp 
+	 * @return
+	 */
+	Map<String, Object> selectMyProfitEachList(int memberNo, int cp);
+
 
 
 }

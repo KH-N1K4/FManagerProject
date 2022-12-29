@@ -307,5 +307,27 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		return dao.selectMyProfit(memberNo);
 	}
 
+	/**
+	 *거래별 정산 내역 출력
+	 */
+	@Override
+	public Map<String, Object> selectMyProfitEachList(int memberNo, int cp) {
+		
+		int listCount = dao.getMyProfitEachListCount(memberNo);
+		
+		Pagination pagination = new Pagination(listCount,cp); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
+		
+		List<myProjectFreelancerProfit> myProfitEachList =  dao.selectMyProfitEachList(memberNo,pagination);//return dao.selectMyProfitEachList(memberNo);
+				
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("myProfitEachList",myProfitEachList);
+		map.put("listCount",listCount);
+		
+		return map; 
+	}
+
 	
 }

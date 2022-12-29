@@ -27,6 +27,8 @@ public class myProjectFreelancerProfit {
 										//-- 1. 내 서비스 등록 가져오기 *****
 		
 		private int serviceNo;           //"SERVICE_NO"서비스 번호 
-		private String servicePriceString;        //"SERVICE_PRICEString"서비스 가격 
+		private int servicePrice;           //"SERVICE_PRICE"서비스 번호 
+		private String servicePriceString;        //"SERVICE_PRICE_STRING"서비스 가격 
 		private int freelancerNo;        //"FREELANCER_NO"전문가 번호
+		private int num;        //행 번호
 }
