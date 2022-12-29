@@ -1,0 +1,50 @@
+.modalMain{
+    width: 700px;
+    margin: auto;
+}
+
+
+
+
+.tradeInfoArea{
+    width: 650px;
+    height: 400px;
+    background-color: rgb(233, 233, 233);
+    display: flex;
+}
+.tradeInfoArea>div{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+
+
+.infoTitle{
+    width: 300px;
+    text-align: end;
+}
+.infoTitle + div{
+    width: 200px;
+    background-color: rgb(219, 219, 219);
+}
+.infoTitle + div > span{
+    font-weight: bold;
+}
+
+.selectPercent{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+.modalBtn{
+    width: 300px;
+    text-align: center;
+    background-color: black;
+    color: white;
+}

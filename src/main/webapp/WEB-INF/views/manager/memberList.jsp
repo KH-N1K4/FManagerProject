@@ -75,8 +75,8 @@
 				</c:forEach>
 			</c:if>
 			<c:if test="${empty memberList}">
-				<div class="member-manage-table-content">
-					회원이 존재하지 않습니다.
+				<div class="member-manage-table-content center">
+					회원이 존재하지 않습니다. 
 				</div>
 			</c:if>
 
