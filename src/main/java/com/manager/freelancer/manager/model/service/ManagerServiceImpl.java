@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.dao.ManagerDAO;
@@ -301,9 +302,40 @@ public class ManagerServiceImpl implements ManagerService {
 	// 거래 정보 조회
 	@Override
 	public TradeInfo selectTradeInfo(int tradeNo) {
-		return dao.selectTradeInfo(tradeNo);
+		
+		TradeInfo tradeInfo = dao.selectTradeInfo(tradeNo);
+		
+		if(tradeInfo.getWorkEditNum()>tradeInfo.getServiceEditNum()) {
+			tradeInfo.setWorkEditNum(tradeInfo.getServiceEditNum());
+		}
+		
+		return tradeInfo;
 	}
+	
 	
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

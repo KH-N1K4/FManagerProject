@@ -227,8 +227,7 @@ public class ManagerDAO {
 	 * @return
 	 */
 	public TradeInfo selectTradeInfo(int tradeNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("managerMapper.selectTradeInfo", tradeNo);
 	}
 
 

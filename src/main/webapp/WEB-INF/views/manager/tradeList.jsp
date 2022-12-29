@@ -79,7 +79,7 @@
 				<c:forEach var="trade" items="${tradeList}">
 					<div class="manager-buy-table-content">
 						<div class="manager-num">${trade.paymentDate}</div>
-						<div class="manager-trade-num">${trade.tradeNo}</div>
+						<div class="manager-trade-num"><a class="tradeInfo">${trade.tradeNo}</a></div>
 						<div class="manager-service-name"><a class="detailBtn">${trade.serviceTitle}</a></div>
 						<div class="manager-expert">${trade.userName}</div>
 						<div class="manager-work-status">${trade.workStatusString}</div>

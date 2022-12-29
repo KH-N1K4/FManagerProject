@@ -175,7 +175,19 @@ public class ManagerController {
 	}
 
 	
-	
+	// 환불하기
+	@GetMapping("/manager/settlement/refund")
+	public String managerRefund(Model model,
+					@RequestParam int tradeNo, @RequestParam int refundPercent) {
+		
+		System.out.println(tradeNo);
+		System.out.println(refundPercent);
+		
+		
+		
+		return "/manager/tradeList";
+	}
+		
 	
 	
 	

@@ -1,4 +1,5 @@
 refund();
+tradeInfo();
 
 /* 작업 상태 구분 */
 function selectChange() {
@@ -215,6 +216,8 @@ function refund(){
     const body = document.querySelector('#mainBody');
     const tradeModal = document.querySelector(".trade-modal");
     const modalClose = document.querySelector(".modalClose");
+    const x = document.querySelector(".x");
+    const refundFrm = document.getElementById("refundFrm");
     
     for(r of refundBtn){
         r.addEventListener("click", e => {
@@ -231,12 +234,41 @@ function refund(){
                         if(!tradeModal.classList.contains('show')){
                             tradeModal.classList.add('show');
                             body.style.overflow='hidden';
-                        } 
+                        }
+
+                        document.getElementById("tradeDate").innerText = tradeInfo.tradeDate
+                        document.getElementById("workPeriod").innerText = tradeInfo.workPeriod
+                        document.getElementById("workEditNum").innerText = tradeInfo.workEditNum
+                        document.getElementById("serviceEditNum").innerText = tradeInfo.serviceEditNum
+                        document.getElementById("cancaleInquiryDate").innerText = tradeInfo.cancelInquiryDate
+                        
                     }
                 }
 
             });
             
+            refundFrm.classList.add("show");
+
+            modalClose.addEventListener("click",()=>{
+
+                if (tradeModal.classList.contains('show')) {
+                    tradeModal.classList.remove('show');
+                }
+    
+                if (!tradeModal.classList.contains('show')) {
+                    body.style.overflow = 'visible';
+                }
+            });
+            x.addEventListener("click",()=>{
+
+                if (tradeModal.classList.contains('show')) {
+                    tradeModal.classList.remove('show');
+                }
+    
+                if (!tradeModal.classList.contains('show')) {
+                    body.style.overflow = 'visible';
+                }
+            });
             
         
         });
@@ -244,5 +276,73 @@ function refund(){
 
 }
 
+
+/* 거래정보 확인하기 */
+function tradeInfo(){
+    const tradeInfo = document.querySelectorAll(".tradeInfo");
+    const body = document.querySelector('#mainBody');
+    const tradeModal = document.querySelector(".trade-modal");
+    const modalClose = document.querySelector(".modalClose");
+    const x = document.querySelector(".x");
+    const refundFrm = document.getElementById("refundFrm");
+    
+    for(t of tradeInfo){
+        t.addEventListener("click", e => {
+
+            const tradeNo = e.target.innerText;
+            console.log(tradeNo);
+
+            $.ajax({
+                url : '/manager/tradeInfo',
+                data : {'tradeNo':tradeNo},
+                type: 'GET',
+                success: (tradeInfo)=>{
+                    if(tradeInfo!=null){
+                        if(!tradeModal.classList.contains('show')){
+                            tradeModal.classList.add('show');
+                            body.style.overflow='hidden';
+                        }
+
+                        document.getElementById("tradeDate").innerText = tradeInfo.tradeDate
+                        document.getElementById("workPeriod").innerText = tradeInfo.workPeriod
+                        document.getElementById("workEditNum").innerText = tradeInfo.workEditNum
+                        document.getElementById("serviceEditNum").innerText = tradeInfo.serviceEditNum
+                        document.getElementById("cancaleInquiryDate").innerText = tradeInfo.cancelInquiryDate
+                        
+
+
+                    }
+                }
+
+            });
+            
+            refundFrm.classList.remove("show");
+
+            modalClose.addEventListener("click",()=>{
+
+                if (tradeModal.classList.contains('show')) {
+                    tradeModal.classList.remove('show');
+                }
+    
+                if (!tradeModal.classList.contains('show')) {
+                    body.style.overflow = 'visible';
+                }
+            });
+            x.addEventListener("click",()=>{
+
+                if (tradeModal.classList.contains('show')) {
+                    tradeModal.classList.remove('show');
+                }
+    
+                if (!tradeModal.classList.contains('show')) {
+                    body.style.overflow = 'visible';
+                }
+            });
+            
+        
+        });
+    }
+
+}
 /* 정산하기 */
 
