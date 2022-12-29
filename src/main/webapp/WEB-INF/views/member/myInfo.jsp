@@ -24,7 +24,7 @@
             
             
             
-            <form action="/member/updateMyInfo" enctype="multipart/form-data" method="POST" name="myPage-frm"  onsubmit="return profileValidate();">
+            <form action="/member/myInfo/updateMyInfo" enctype="multipart/form-data" method="POST" name="myPage-frm"  onsubmit="return profileValidate();">
                 <div>
                     <div id="content">
                         <div class="profile-image-area">

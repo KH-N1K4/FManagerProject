@@ -29,6 +29,9 @@ public class Service {
 	private int serviceWorkPeriod;		//SERVICE_WORK_PERIOD 서비스 작업 일수
 	private String serviceCreateDate;	//SERVICE_CREATE_DATE 서비스 등록일
 	
+	
+	private String serviceDeleteFL;	
+	
 	private String requestFilePath;	
 	private String memberName;
 	private String memberProfile;

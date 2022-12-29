@@ -37,26 +37,37 @@
                             <span>응답시간<span>00</span></span>
                             <span>응답률<span>00</span></span>
                         </div>
-                        <a id="askService">서비스 문의 남기기></a>
                         
-                      
+                        <c:if test="${loginMember.memberNo!=fService.freelancerNo }"> 
+                        	<a id="askService">서비스 문의 남기기></a>       
+                        </c:if>              
                     </div>
                 </div>
-                <a id="buyBtn" href="/category/1/1/1/1/payment">구매하기</a>
-               <!--  <button id="buyBtn">구매하기</button> -->
+     
+              	<c:if test="${fService.serviceDeleteFL=='Y' }">
+              		<a id="pauseService1">판매가 중지된 상품입니다.</a>
+              	</c:if>
+              	<c:if test="${fService.serviceDeleteFL=='N' }">
+	          		<c:choose>  
+	          			
+						<c:when test="${loginMember.memberNo==fService.freelancerNo }"> 
+							<form action="/freelancer/pauseSerivce">
+								<input type="hidden" name="serviceNo"value="${fService.serviceNo }">
+							
+								<button id="pauseService">판매중지</button>
+							</form>
+							
+						</c:when> 
+						<c:otherwise>
+							<a id="buyBtn" href="/category/1/1/1/1/payment">구매하기</a>
+						</c:otherwise>
+					</c:choose> 
+				</c:if> 
+              
             </div>
             
         </div>
-        <!-- <div class="detailContent">
-
-            <ul>
-                <li>서비스 설명</li>
-                <li>포트폴리오</li>
-                <li>취소/환불</li>
-                <li>서비스 평가</li>
-            </ul>
-
-        </div>   -->
+        
         
         <!-- 서비스 설명 부분 -->
         <div id="serviceInfo">
@@ -83,13 +94,20 @@
 
   
 
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
     
      <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     
-    
+     <script>
+        
+        const memberNo="${loginMember.memberNo}";
+        const serviceNo="${fService.serviceNo}";
+     
+    </script>	
      <script src="/resources/js/category/modal.js"></script>
+     <script src="/resources/js/category/category.js"></script>
+     
+     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
 </body>
 </html>

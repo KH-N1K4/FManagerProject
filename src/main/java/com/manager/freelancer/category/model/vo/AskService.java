@@ -13,6 +13,11 @@ import lombok.ToString;
 @ToString
 public class AskService {
 	private String serviceInquiryContent;
+	private String requestFilePath;
+	private int serviceInquiryNo;
 	private int memberNo;
 	private String serviceNo;
+	
+	private String serviceTitle;
+	private String serviceSummary;
 }

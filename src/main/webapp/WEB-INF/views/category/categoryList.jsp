@@ -53,9 +53,9 @@
                 
                 <c:forEach var="service" items="${map }">
                 	<a href="/category/${service.mainCategoryNo}/${service.subCategoryNo }/${service.thirdCategoryNo }/${service.serviceNo }">
+	                      	<!-- <span class="like-area">♥</span> -->
 	                    <div id="image">
 	                        <div><img src="${service.requestFilePath }"></div>
-	                        <!-- 하트버튼 추가 예정 -->
 	                        <span>${service.serviceTitle }</span>
 	                        <span>${service.serviceSummary }</span>
 	                        <span>가격: ${service.servicePrice}원</span>

@@ -22,6 +22,8 @@ public interface CategoryService {
 	Service viewService(int serviceNo);
 
 	int askService(AskService as);
+
+	int pauseService(int serviceNo);
 	
 
 }
