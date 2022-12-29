@@ -1,28 +1,44 @@
 
 /* mainArea /sideMenu영역  */
 .mainArea{
-    width: 1200px;
+    width: 1100px;
     height: auto;
     display: flex;
-    margin:auto;
+    margin: auto;
 }
 
+/*  --------------사이드 메뉴  --------------*/
 /* 사이드 메뉴 영역*/
 .sideMenu{
-    width: 200px;
+    width: 300px;
     height: auto;
 }
 
+#inquiry{
+    text-align: left;
+    margin: 50px 0 0 70px;
+}
+#inquiryList{
+    text-align: left;
+    margin: 40px 0 0 70px;
+}
+#inquiry a, #inquiryList a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 22px;
+}
+/*  --------------사이드 메뉴  --------------*/
 
 /* 메인 영역 */
 .mainContent{
-    width: 900px;
-    margin-left: 20px;
+    width: 800px;
 }
-
+/* =============================== */
 /* ---------문의하기폼--------- */
 .inquirySubmit{
     margin: 50px;
+    /* background-color: bisque; */
     
 }
 
@@ -30,21 +46,22 @@
 #title{
     font-size: 30px;
 }
+
+/* 문의하기 설명 */
 #tltleInfo{
-    font-size: 15px;
+    font-size: 18px;
     color: #538126;
-    font-weight: 400;
-    text-decoration: green;
 }
 
 /* 각 문의하기 작성소제목 */
 .inquirySubmit div{
-    font-size: 15px;
+    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
+/* =============================== */
 /* hover 했을 경우*/
-.inquirySubmit input:hover{
+#titleInput:hover{
     border: 2px solid #538126;
 }
 .inquirySubmit select:hover{
@@ -56,72 +73,62 @@
 .boardImg label:hover{
     border: 2px solid #538126;
 }
+/* =============================== */
 
 /* 문의 유형 */
-#division{
-    width: 608px;
-    height: 40px;
-    border-radius: 5px;
-    border: 1px solid #dddddd;
-}
 #titleInput{
     padding-left: 10px;
-    width: 595px;
+    width: 645px;
     height: 40px;
     border-radius: 5px;
     border: 1px solid #dddddd;
 }
 .inquirySubmit textarea{
-    width: 600px;
+    width: 650px;
     border-radius: 5px;
     border: 1px solid #dddddd;
 }
 
 
+
+
 /* ---------등록 버튼--------- */
-.inquiryInsert{
+.buttonArea{
+    display: flex;
+    width: 800px;
+    height: 50px;
     margin-top: 50px;
-    width: 300px;
+}
+.inquiryInsert{
+    width: 320px;
     height: 50px;
     background-color: #538126;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-}
-.inquiryInsert a{
     text-decoration: none;
     color: #fff;
     font-size: 18px;
 }
 
 #goToMain{
-    margin-top: 50px;
-    width: 300px;
+    margin-left: 10px;
+    width: 320px;
     height: 50px;
     background-color: #fff;
     border:1px solid #538126;
     cursor: pointer;
     border-radius: 5px;
-}
-#goToMain a{
     text-decoration: none;
     color: #538126;
     font-size: 18px;
+    text-align: center;
+    line-height: 50px;
 }
+
 /* --------------------------- */
 
-/*  --------------사이드 메뉴  --------------*/
-#inquiry{
-    margin: 50px 50px 0px 50px;
-}
-#inquiryList{
-    margin: 20px 50px;
-}
-#inquiry a, #inquiryList a{
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-}
+
 
 
 /* ----------------------------------- */
@@ -129,7 +136,7 @@
 .img-box{
     display: flex;
     justify-content: space-between;
-    width: 600px;
+    width: 650px;
 }
 
 
@@ -156,13 +163,14 @@
 }
 
 .inputImage{
-    display: none;
-    width: 180px;
+    /* display: none; */
+    width: 100%;
+    height: 100%;
 }
 
 .boardImg img{
     max-width: 100%;
-    max-height: 100%; 
+    max-width: 100%; 
 }
 
 /* 삭제 버튼 */

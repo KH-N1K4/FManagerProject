@@ -26,11 +26,11 @@
         <div id="question-list-title-area">
             
                 <div id="question-list-title">문의 내역</div><br>
-                <div class="select-area">문의 유형
+                <div class="select-area">진행 상태
                     <select class="select-area-input" name="" id="">
-                        <option value="전체">전체</option>
-                        <option value="문의">문의</option>
-                        <option value="신고">환불</option>
+                        <option value="0">전체</option>
+                        <option value="1">대기중</option>
+                        <option value="2">작성완료</option>
                     </select>
                 </div>
             
@@ -41,35 +41,35 @@
             <!-- 테이블 컬럼명 -->
             <div class="question-list-table-column">
                 <div class="question-num">번호</div>
-                <div class="question-type">문의 유형</div>
                 <div class="question-title">제목</div>
                 <div class="question-date">작성일</div>
-                <div class="question-status">상태</div>
+                <div class="question-status">진행 상태</div>
             </div>
             
+            <!-- 테이블 내용 -->
             <c:choose>   
                 <c:when test="${empty managerInquiryList}">
-                    <div>게시글이 존재하지 않습니다.</div>
+                    <div class="contentList">게시글이 존재하지 않습니다.</div>
                 </c:when>
                 <c:otherwise>
                     <c:forEach var="managerInquiry" items="${managerInquiryList}">
                         <div class="question-list-table-content">
                             <div class="question-num">${managerInquiry.userInquiryNo}</div>
-                            <div class="question-type">
+                            <%-- <div class="question-type">
                             <c:choose>
                                 <c:when test="${managerInquiry.inquiryTypeNo == 1}">문의</c:when>
                                 <c:when test="${managerInquiry.inquiryTypeNo == 2}">환불</c:when>
                                 <c:when test="${managerInquiry.inquiryTypeNo == 3}">신고</c:when>
                             </c:choose>
-                            </div>
-                            <div class="question-title"><a href="/mangerInquiryDetail/${managerInquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${managerInquiry.userInquiryTitle}</a></div>
+                            </div> --%>
+                            <div class="question-title"><a href="/managerInquiryDetail/${managerInquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${managerInquiry.userInquiryTitle}</a></div>
                             <div class="question-date">${managerInquiry.userInquiryCreateDate}</div>
                             <div class="question-status">
                             <c:choose>
-                                <c:when test="${userinquiry.inquiryRequest == null}">
-                                    <span class="question-wating">대기중</span>
+                                <c:when test="${managerInquiry.inquiryRequest == null}">
+                                    <span class="question-wating">답변 대기</span>
                                 </c:when>
-                                <c:when test="${userinquiry.inquiryRequest != null}">
+                                <c:when test="${managerInquiry.inquiryRequest != null}">
                                     <span class="question-answer">답변 완료</span>
                                 </c:when>
                             </c:choose>
@@ -79,44 +79,16 @@
                 </c:otherwise>
             </c:choose>    
 
-            <!-- 테이블 내용 -->
-
-
-
-
-
-
-
-            <div class="question-list-table-content">
-                <div class="question-num">1</div>
-                <div class="question-type">문의</div>
-                <div class="question-title"><a href="">제목1</a></div>
-                <div class="question-date">작성일</div>
-                <div class="question-status">
-                    <span class="question-answer">답변 완료</span>
-                </div>
-            </div>
-
-            <div class="question-list-table-content">
-                <div class="question-num">2</div>
-                <div class="question-type">신고</div>
-                <div class="question-title"><a href="">제목2</div>
-                <div class="question-date">작성일</div>
-                <div class="question-status">
-                    <span class="question-wating">대기중</span>
-                </div>
-                
-            </div>
         
         </div> <!-- buy-table -->
         <div class="pagination-area">
                         <ul class="pagination">
                         
                             <!-- 첫 페이지로 이동 -->
-                            <li><a href="/userInquiryList?cp=1${sURL}">&lt;&lt;</a></li>
+                            <li><a href="/manager/managerInquiryList?cp=1${sURL}">&lt;&lt;</a></li>
 
                             <!-- 이전 목록 마지막 번호로 이동 -->
-                            <li><a href="/userInquiryList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+                            <li><a href="/manager/managerInquiryList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
 
                                 <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
                                     <c:choose>
@@ -126,20 +98,20 @@
                                         </c:when>
                                         <c:otherwise>
                                             <%-- 현재 페이지를 제외한 나머지  --%>
-                                            <li><a href="/userInquiryList?cp=${i}${sURL}">${i}</a></li>
+                                            <li><a href="/manager/managerInquiryList?cp=${i}${sURL}">${i}</a></li>
                                         </c:otherwise>
                                     </c:choose>
                                 </c:forEach>
                             
                             <!-- 다음 목록 시작 번호로 이동 -->
-                            <li><a href="/userInquiryList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+                            <li><a href="/manager/managerInquiryList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
 
                             <!-- 끝 페이지로 이동 -->
-                            <li><a href="/userInquiryList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                            <li><a href="/manager/managerInquiryList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
 
                         </ul>
                     </div>
-                    <form action="/userInquiryList" id="inquirySearch" method="get"> 
+                    <form action="/manager/managerInquiryList" id="inquirySearch" method="get"> 
                         <select name="key" id="search-key">
                             <option value="t">제목</option> 
                             <option value="c">내용</option> 
