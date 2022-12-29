@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 import com.manager.freelancer.myProject.model.service.MyProjectFreelancerService;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 import com.manager.freelancer.member.model.vo.Member;
 
 @SessionAttributes({"loginMember"})
@@ -205,7 +206,16 @@ public class MyProjectFreelancerController {
 	//수익관리 페이지
 	@GetMapping("/member/myProject/freelancer/profitManagerment")
 	public String profitManagerment(Model model, HttpSession session) {
-			
+		
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		List<myProjectFreelancerProfit>	profitList = service.selectMonthMyProfit(loginMember.getMemberNo());
+		List<myProjectFreelancerProfit>	profit = service.selectMyProfit(loginMember.getMemberNo());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("profitList", profitList);
+		model.addAttribute("map",map);	
+		model.addAttribute("profitList",new Gson().toJson(profitList));	
+		model.addAttribute("profit",profit);	
 		return "myProject/myProject_freelancer/profitManagerment";
 	}
 

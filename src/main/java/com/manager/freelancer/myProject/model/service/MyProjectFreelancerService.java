@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 
 public interface MyProjectFreelancerService {
 
@@ -90,6 +91,18 @@ public interface MyProjectFreelancerService {
 	 * @return
 	 */
 	Map<String, Object> selectMyProposal(int memberNo, int mainCategoryNo, int cp);
+
+	/**나의 달별 총 수익 들고오기
+	 * @param memberNo
+	 * @return
+	 */
+	List<myProjectFreelancerProfit> selectMonthMyProfit(int memberNo);
+
+	/** 검색해오는 시검의 1년간 총 수익이랑 예상 수익 들고오기
+	 * @param memberNo
+	 * @return
+	 */
+	List<myProjectFreelancerProfit> selectMyProfit(int memberNo);
 
 
 

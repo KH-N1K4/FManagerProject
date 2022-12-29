@@ -35,6 +35,9 @@
 	      <result property="freelancerNo" column="FREELANCER_NO"/>
 	      <result property="freelancerNickName" column="FREELANCER_NICKNAME"/>
 	      <result property="workCount" column="WORK_COUNT"/>											<!-- 발송물 발송 횟수 -->
+	      
+	      <result property="workStatus" column="WORK_STATUS"/>										<!-- 2:정산 완료 3:주문취소 -->
+	      <result property="workStatusString" column="WORK_STATUS_STRING"/>				<!-- 2:정산 완료 3:주문취소 -->
      	  
      	  <!-- 거래신고 테이블 -->
      	  <result property="tradeReportNo" column="TRADE_REPORT_NO"/>							<!-- 거래 신고 번호 SEQUENCE: SEQ_TRADE_REPORT_NO -->
@@ -101,11 +104,33 @@
 			<result property="proposalCreateDate" column="PROPOSAL_CREATE_DATE"/>											<!-- 프로젝트 제안 등록일 -->
 			<result property="freelancerNo" column="FREELANCER_NO"/>																	<!-- 프리랜서 번호(FK) -->
 		</resultMap>
-		   
+		
+		<!-- 프리랜서 수익금 내역관리 -->
+		<resultMap type="myProjectFreelancerProfit" id="profit_rm">								
+			<id property="settlementNo" column="SETTLEMENT_NO"/>						        <!-- 거래 내역 번호 -->
+			<result property="paymentType" column="PAYMENT_TYPE"/>									<!-- 거래 종류(1:입금, 2:출금, 3:환불) -->			
+			<result property="userNo" column="USER_NO"/>													  <!-- 거래 회원 번호  -->
+			<result property="workStatus" column="WORK_STATUS"/>										<!-- 1: 진행중, 2: 정산 완료, 3:환불 완료, 4:마감   -->
+			<result property="paymentDate" column="PAYMENT_DATE"/>									<!-- 거래 날짜 -->
+			<result property="paymentDateString" column="PAYMENT_DATE_STRING"/>									<!-- 거래 날짜 -->
+			<result property="paymentPrice" column="PAYMENT_PRICE"/>								<!-- 거래 금액 -->
+			<result property="profitType" column="PROFIT_TYPE"/>										<!-- 1. 총수익 2. 정산예정 금액 -->
+			<result property="paymentPriceString" column="PAYMENT_PRICE_STRING"/>		<!-- 거래 금액 -->
+			<result property="tradeNo" column="TRADE_NO"/>													<!-- 거래 번호(FK)  -->
+			<result property="serviceNo" column="SERVICE_NO"/>											<!-- 서비스 번호  -->
+			<result property="servicePrice" column="SERVICE_PRICE"/>								<!-- 서비스 가격  -->
+			<result property="servicePriceString" column="SERVICE_PRICE_STRING"/>		<!-- 서비스 가격  -->
+			<result property="freelancerNo" column="FREELANCER_NO"/>								<!-- 전문가 번호  -->
+			
+		</resultMap>
+		
+		
+		<!-- 메인 카테고리 리스트 -->   
     <select id="selectmaincategoryList" resultMap="fService_rm">
     SELECT * FROM MAIN_CATEGORY
     </select>
     
+    <!-- 카테고리 리스트 --> 
     <select id="selectcategoryList" resultMap="fService_rm">
     SELECT THIRD_CATEGORY_NO,THIRD_CATEGORY_NAME,MAIN_CATEGORY_NO 
 		FROM CATEGORY 
@@ -113,6 +138,7 @@
 		ORDER BY 1
     </select>
     
+    <!-- 서비스 등록하기 1.번-->
     <insert id="insertService" parameterType="java.util.HashMap" useGeneratedKeys="true">
     <selectKey keyProperty="serviceNo" resultType="_int" order="BEFORE">
 			SELECT SEQ_SERVICE_NO.NEXTVAL FROM DUAL
@@ -123,6 +149,7 @@
 		DEFAULT,DEFAULT,#{freelancerVo.thirdCategoryNo},#{loginMember},DEFAULT)
     </insert>
     
+    <!-- 서비스 등록하고 서비스 이미지 등록하기 2.번-->
     <insert id="insertFileImageList" parameterType="list">
 		INSERT INTO SERVICE_FILE
 		SELECT SEQ_SERVICE_FILE_NO.NEXTVAL REQUEST_FILE_NO, A.* FROM
@@ -135,6 +162,7 @@
 			</foreach>
 		</insert>
 		
+		<!-- 나의 서비스 들고 오기 전 페이징 처리 -->
 		<select id="getMyServiceListCount" parameterType="java.util.HashMap" resultType="_int">
 		SELECT COUNT(*)
 		FROM (SELECT * 
@@ -153,10 +181,36 @@
 			</if>
 		</select>
 		
+		<!-- 판매 관리 페이지 검색할때 자동완성 하기위해서 서비스 다 들고 오기 -->
+		<select id="selectMyServiceInput" parameterType="java.util.HashMap" resultMap="fService_rm">
+		SELECT SERVICE_NO,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,TO_CHAR(SERVICE_PRICE, 'FM999,999,999,999') SERVICE_PRICE_STRING, 
+			SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,
+			SERVICE_STATUS,SERVICE_DEL_FL,
+			CASE WHEN SERVICE_STATUS = 1 THEN '승인대기 중'
+			     WHEN SERVICE_STATUS = 2 THEN '판매 중'
+			     WHEN SERVICE_STATUS = 3 THEN '미승인'
+			     WHEN SERVICE_STATUS = 4 THEN '판매 중지'
+			END AS SERVICE_STATUS_STRING
+			,SERVICE_CREATE_DATE,THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH,MAIN_CATEGORY_NO
+		FROM (SELECT * 
+			FROM SERVICE
+			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
+		LEFT JOIN (SELECT s.*,
+		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
+		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		WHERE RUM = 1
+		AND FREELANCER_NO = #{memberNo}
+			<if test="mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+			</if>
+		</select>
+		
+		<!-- 나의 서비스 다 들고오기 -->
 		<select id="selectMyService" parameterType="java.util.HashMap" resultMap="fService_rm">
 		SELECT SERVICE_NO,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,TO_CHAR(SERVICE_PRICE, 'FM999,999,999,999') SERVICE_PRICE_STRING, 
 			SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,
-			SERVICE_STATUS,
+			SERVICE_STATUS,SERVICE_DEL_FL,
 			CASE WHEN SERVICE_STATUS = 1 THEN '승인대기 중'
 			     WHEN SERVICE_STATUS = 2 THEN '판매 중'
 			     WHEN SERVICE_STATUS = 3 THEN '미승인'
@@ -178,7 +232,7 @@
 				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
 			</if>
 		</select>
-		<!--  -->
+		<!-- 나의 판매 서비스 들고오기 전 페이지 처리 -->
 		<select id="getSalesListCount" parameterType="java.util.HashMap" resultType="_int">
 		SELECT COUNT(*)
 		FROM (SELECT * FROM TRADE
@@ -193,7 +247,46 @@
 					JOIN "WORK" USING(TRADE_NO)
 					GROUP BY TRADE_NO) USING (TRADE_NO)) USING (TRADE_NO) 
 			JOIN (SELECT MEMBER_NO,MEMBER_NICKNAME,MEMBER_NAME FROM "MEMBER") USING(MEMBER_NO)
-			LEFT JOIN TRADE_REPORT USING(TRADE_NO) HAVING REPORT_PERSON = FREELANCER_NO) t
+			JOIN "SETTLEMENT" USING(TRADE_NO)
+			LEFT JOIN TRADE_REPORT USING(TRADE_NO) WHERE REPORT_PERSON = FREELANCER_NO OR REPORT_PERSON IS null)
+		WHERE FREELANCER_NO = 30
+		AND PAYMENT_TYPE = 1
+		AND (TRADE_REPORT_TYPE_NO IS NULL OR TRADE_REPORT_TYPE_NO = 1)
+		<if test="mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+		</if>
+		<if test="freelancerFL != 0">
+				 AND FREELANCER_DONE_FL = #{freelancerFL}
+		</if>
+		<if test='searchInput neq null and searchInput neq ""'>
+				 AND SERVICE_TITLE LIKE '%${searchInput}%' 
+		</if>
+		ORDER BY TRADE_NO
+		</select>
+		<!-- 나의 판매 내역 들고 오기 -->
+		<select id="selectSalesList" parameterType="java.util.HashMap" resultMap="fService_rm">
+		SELECT t.*,
+			CASE WHEN FREELANCER_DONE_FL = 1 THEN '진행 중'
+			     WHEN FREELANCER_DONE_FL = 2 THEN '작업 완료'
+			     WHEN FREELANCER_DONE_FL = 3 THEN '진행 취소'
+			END AS FREELANCER_DONE_FL_STRING,
+			CASE WHEN WORK_STATUS = 3 THEN '진행 취소'
+	     		 WHEN WORK_STATUS = 2 THEN '정산 완료'
+			END AS WORK_STATUS_STRING
+		FROM (SELECT * FROM TRADE
+			JOIN (SELECT * 
+				FROM SERVICE
+				LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+				LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)) USING(SERVICE_NO)
+			LEFT JOIN (SELECT TRADE_NO, NVL(WORK_COUNT,0) WORK_COUNT
+				FROM TRADE 
+				LEFT JOIN (SELECT COUNT(*) WORK_COUNT,TRADE_NO 
+					FROM TRADE
+					JOIN "WORK" USING(TRADE_NO)
+					GROUP BY TRADE_NO) USING (TRADE_NO)) USING (TRADE_NO) 
+			JOIN (SELECT MEMBER_NO,MEMBER_NICKNAME,MEMBER_NAME FROM "MEMBER") USING(MEMBER_NO)
+			JOIN "SETTLEMENT" USING(TRADE_NO)
+			LEFT JOIN TRADE_REPORT USING(TRADE_NO) WHERE REPORT_PERSON = FREELANCER_NO OR REPORT_PERSON IS null) t
 		WHERE FREELANCER_NO = #{memberNo}
 		AND PAYMENT_TYPE = 1
 		AND (TRADE_REPORT_TYPE_NO IS NULL OR TRADE_REPORT_TYPE_NO = 1)
@@ -208,44 +301,7 @@
 		</if>
 		ORDER BY TRADE_NO
 		</select>
-		
-		<select id="selectSalesList" parameterType="java.util.HashMap" resultMap="fService_rm">
-		SELECT t.*,
-			CASE WHEN FREELANCER_DONE_FL = 1 THEN '진행 중'
-			     WHEN FREELANCER_DONE_FL = 2 THEN '작업 완료'
-			     WHEN FREELANCER_DONE_FL = 3 THEN '주문 취소'
-			     WHEN WORK_STATUS = 3 THEN '주문 취소'
-			     WHEN WORK_STATUS = 2 THEN '정산 완료'
-			END AS FREELANCER_DONE_FL_STRING
-		FROM (SELECT * FROM TRADE
-			JOIN (SELECT * 
-				FROM SERVICE
-				LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
-				LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)) USING(SERVICE_NO)
-			LEFT JOIN (SELECT TRADE_NO, NVL(WORK_COUNT,0) WORK_COUNT
-				FROM TRADE 
-				LEFT JOIN (SELECT COUNT(*) WORK_COUNT,TRADE_NO 
-					FROM TRADE
-					JOIN "WORK" USING(TRADE_NO)
-					GROUP BY TRADE_NO) USING (TRADE_NO)) USING (TRADE_NO) 
-			JOIN (SELECT MEMBER_NO,MEMBER_NICKNAME,MEMBER_NAME FROM "MEMBER") USING(MEMBER_NO)
-			JOIN "SETTLEMENT" USING(TRADE_NO)
-			LEFT JOIN TRADE_REPORT USING(TRADE_NO) HAVING REPORT_PERSON = FREELANCER_NO) t
-		WHERE FREELANCER_NO #{memberNo}
-		AND PAYMENT_TYPE = 1
-		AND (TRADE_REPORT_TYPE_NO IS NULL OR TRADE_REPORT_TYPE_NO = 1)
-		<if test="mainCategoryNo != 0">
-				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
-		</if>
-		<if test="freelancerFL != 0">
-				 AND FREELANCER_DONE_FL = #{freelancerFL}
-		</if>
-		<if test='searchInput neq null and searchInput neq ""'>
-				 AND SERVICE_TITLE LIKE '%${searchInput}%' 
-		</if>
-		ORDER BY TRADE_NO
-		</select>
-		
+		<!-- 신고하기 -->
 		<insert id="insertreportSubmit" parameterType="java.util.HashMap" useGeneratedKeys="true">
     <selectKey keyProperty="tradeReportNo" resultType="_int" order="BEFORE">
 			SELECT SEQ_TRADE_REPORT_NO.NEXTVAL FROM DUAL
@@ -262,18 +318,18 @@
 		</if>
     
     </insert>
-    
+    <!-- 작업물 발송 -->
     <insert id="insertsendworkSubmit" parameterType="_int">
     	INSERT INTO "WORK"
     	VALUES(SEQ_WORK_NO.NEXTVAL,DEFAULT,#{tradeNo})
     </insert>
-    
+    <!-- 작업 완료 누르기  -->
     <update id="insertfinishSubmit" parameterType="_int">
     UPDATE TRADE
 		SET FREELANCER_DONE_FL = 2
 		WHERE TRADE_NO = #{tradeNo}
     </update>
-    
+    <!-- 내가 보낸 제안 들고오기 -->
     <select id="selectMyProposal" resultMap="request_rm">
     SELECT p.*,TO_CHAR(PROPOSAL_PRICE, 'FM999,999,999,999') PROPOSAL_PRICE_STRING,
 				CASE WHEN PROPOSAL_ADOPT_STATUS = 1 THEN '대기중'
@@ -298,7 +354,7 @@
 		</if>
 		ORDER BY PROJECT_REQUEST_NO
     </select>
-    
+    <!-- 내가 보낸 제안 페이지 처리  -->
      <select id="getMyProposalListCount" resultType="_int">
     SELECT COUNT(*)
 		FROM (SELECT * FROM PROJECT_PROPOSAL 
@@ -319,5 +375,61 @@
 		</if>
 		ORDER BY PROJECT_REQUEST_NO
     </select>
-  
+  	
+  	<!-- 나의 달별 총 수익 들고오기 -->
+  	<select id="selectMonthMyProfit" parameterType="_int" resultMap="profit_rm">
+  	SELECT SUM(PAYMENT_PRICE) PAYMENT_PRICE,PAYMENT_DATE_STRING 
+		FROM (SELECT  p.*,TO_CHAR(PAYMENT_DATE,'YYYY-MM') PAYMENT_DATE_STRING 
+			FROM (SELECT * FROM SETTLEMENT
+					JOIN TRADE USING(TRADE_NO)
+					JOIN SERVICE USING(SERVICE_NO)
+					WHERE FREELANCER_NO = #{memberNo}
+					AND WORK_STATUS IN (3)       
+					AND PAYMENT_TYPE IN (3)
+					AND USER_NO = #{memberNo}          
+					AND PAYMENT_DATE BETWEEN TO_DATE(to_char(add_months(sysdate,-12),'yyyy-mm'),'yyyy-mm') AND SYSDATE
+					UNION 
+					SELECT * FROM SETTLEMENT
+					JOIN TRADE USING(TRADE_NO)
+					JOIN SERVICE USING(SERVICE_NO)
+					WHERE FREELANCER_NO = #{memberNo}
+					AND WORK_STATUS IN (2)     
+					AND PAYMENT_TYPE IN (2)
+					AND PAYMENT_DATE BETWEEN TO_DATE(to_char(add_months(sysdate,-12),'yyyy-mm'),'yyyy-mm') AND SYSDATE) p)
+		GROUP BY PAYMENT_DATE_STRING
+  	</select>
+  	
+  		<!-- 검색해오는 시검의 1년간 총 수익이랑 예상 수익 들고오기 -->
+  	<select id="selectMyProfit" parameterType="_int" resultMap="profit_rm">
+  	SELECT (SELECT TO_CHAR(SUM(PAYMENT_PRICE), 'FM999,999,999,999')
+		FROM (SELECT  p.*,TO_CHAR(PAYMENT_DATE,'YYYY-MM') PAYMENT_DATE_STRING 
+			FROM (SELECT * FROM SETTLEMENT
+					JOIN TRADE USING(TRADE_NO)
+					JOIN SERVICE USING(SERVICE_NO)
+					WHERE FREELANCER_NO = #{memberNo}
+					AND WORK_STATUS IN (1,4)      
+					AND PAYMENT_TYPE IN (1)
+					AND PAYMENT_DATE BETWEEN TO_DATE(to_char(add_months(sysdate,-12),'yyyy-mm'),'yyyy-mm') AND SYSDATE) p)) PAYMENT_PRICE_STRING, '2' PROFIT_TYPE
+				FROM DUAL
+		UNION
+		SELECT (SELECT TO_CHAR(SUM(PAYMENT_PRICE), 'FM999,999,999,999')
+		FROM (SELECT  p.*,TO_CHAR(PAYMENT_DATE,'YYYY-MM') PAYMENT_DATE_STRING 
+			FROM (SELECT * FROM SETTLEMENT
+					JOIN TRADE USING(TRADE_NO)
+					JOIN SERVICE USING(SERVICE_NO)
+					WHERE FREELANCER_NO = #{memberNo}
+					AND WORK_STATUS IN (3)      
+					AND PAYMENT_TYPE IN (3)
+					AND USER_NO = #{memberNo}            
+					AND PAYMENT_DATE BETWEEN TO_DATE(to_char(add_months(sysdate,-12),'yyyy-mm'),'yyyy-mm') AND SYSDATE
+					UNION 
+					SELECT * FROM SETTLEMENT
+					JOIN TRADE USING(TRADE_NO)
+					JOIN SERVICE USING(SERVICE_NO)
+					WHERE FREELANCER_NO = #{memberNo}
+					AND WORK_STATUS IN (2)      
+					AND PAYMENT_TYPE IN (2)
+					AND PAYMENT_DATE BETWEEN TO_DATE(to_char(add_months(sysdate,-12),'yyyy-mm'),'yyyy-mm') AND SYSDATE) p)) PAYMENT_PRICE_STRING, '1' PROFIT_TYPE
+				FROM DUAL
+  	</select>
 </mapper>

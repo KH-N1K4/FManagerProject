@@ -59,9 +59,12 @@
                         <div id="serviceContent">
                             <div>
                                 <div id="serviceTitle">
-                                    <a href="#" id="serviceName" class="serviceName" suggestionName="">
-                                        ${service.serviceTitle}
-                                    </a>
+                                    <c:choose>
+                                        <c:when test="${service.serviceStatus == 4}"><span id="serviceName" class="serviceName" suggestionName="">${service.serviceTitle}</span></c:when>
+                                        <c:otherwise><a href="#" id="serviceName" class="serviceName" suggestionName="">
+                                            ${service.serviceTitle}
+                                        </a></c:otherwise>
+                                    </c:choose>
                                 </div>
                                 <div id="serviceSummary">
                                     <p>${service.serviceSummary}</p>

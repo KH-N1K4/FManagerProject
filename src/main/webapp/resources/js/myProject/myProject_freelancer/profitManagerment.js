@@ -2,6 +2,7 @@
 const ctx = document.getElementById('myChart');
 const d = new Date();
 var arr = new Array();
+var arrProfit = new Array();
 let num = 0;
 for(var i=11; i>=0; i--){
   const agodate = (new Date(d.getFullYear(), d.getMonth()-i,d.getDate()));
@@ -9,7 +10,18 @@ for(var i=11; i>=0; i--){
   const months =agodate.getMonth()+1;
   const agodate2 = year+"-"+months;
   arr[num] = agodate2;
+  var booleanVal = false;
+  profitList.forEach(function(arg){
+    if(arg.paymentDateString == agodate2){
+      arrProfit[num] = arg.paymentPrice;
+      booleanVal = true;
+    };
+    if(booleanVal == false){
+      arrProfit[num] = 0;
+    }
+  });
   num =num+1;
+  booleanVal == false;
 }
 
 new Chart(ctx, {
@@ -20,7 +32,7 @@ new Chart(ctx, {
     datasets: [
       {
         label: '총 수익(원)',
-        data:  [3000, 5000, 6000, 10000,3000, 1000, 5000, 6000, 10000,10000,10000,20000],
+        data:  arrProfit,
         backgroundColor: 'rgb(253, 98, 93)',
         borderColor:'rgb(253, 98, 93)',
         borderWidth: 3,
@@ -58,4 +70,16 @@ new Chart(ctx, {
   }
 
 });
+
+/* 가입 최종로그인날짜 상세조회에서 달력 현재 날짜로 세팅하고 미래날짜는 선택 불가 */
+document.getElementById('startDate').valueAsDate = new Date();  
+document.getElementById('endtDate').valueAsDate = new Date();  
+
+var now_utc = Date.now() // 지금 날짜를 밀리초로
+// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
+// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+document.getElementById("startDate").setAttribute("max", today); //min날짜를 today로 하면 어제 날짜부터 선택 불가
+document.getElementById("endtDate").setAttribute("max", today);
 

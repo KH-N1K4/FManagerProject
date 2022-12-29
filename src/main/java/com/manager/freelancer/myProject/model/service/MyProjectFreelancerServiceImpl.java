@@ -17,6 +17,7 @@ import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.dao.MyProjectFreelancerDAO;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 
@@ -288,6 +289,22 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		map.put("listCount",listCount);
 		
 		return map; 
+	}
+
+	/**
+	 *나의 달별 총 수익 들고오기
+	 */
+	@Override
+	public List<myProjectFreelancerProfit> selectMonthMyProfit(int memberNo) {
+		return dao.selectMonthMyProfit(memberNo);
+	}
+
+	/**
+	 *검색해오는 시검의 1년간 총 수익이랑 예상 수익 들고오기
+	 */
+	@Override
+	public List<myProjectFreelancerProfit> selectMyProfit(int memberNo) {
+		return dao.selectMyProfit(memberNo);
 	}
 
 	

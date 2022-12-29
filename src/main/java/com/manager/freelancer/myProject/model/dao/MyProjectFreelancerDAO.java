@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 @Repository
@@ -71,7 +72,7 @@ public class MyProjectFreelancerDAO {
 		return sqlSession.selectOne("myProjectFreelancerSerive.getMyServiceListCount", map);
 	}
 	
-	/**나의 서비스 들고오기
+	/**나의 서비스 들고오기 검색 할때 씀
 	 * @param memberNo
 	 * @param i
 	 * @return
@@ -80,7 +81,7 @@ public class MyProjectFreelancerDAO {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); //로그인 세션 회원 번호
 		map.put("mainCategoryNo", i); //카테고리별 서비스 들고오기
-		return sqlSession.selectList("myProjectFreelancerSerive.selectMyService", map);
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyServiceInput", map);
 	}
 	
 	/**나의 서비스 들고오기 페이지 처리
@@ -194,6 +195,22 @@ public class MyProjectFreelancerDAO {
 		map.put("memberNo", memberNo); 
 		map.put("mainCategoryNo", mainCategoryNo);
 		return sqlSession.selectOne("myProjectFreelancerSerive.getMyProposalListCount", map);
+	}
+
+	/**나의 달별 총 수익 들고오기
+	 * @param memberNo
+	 * @return
+	 */
+	public List<myProjectFreelancerProfit> selectMonthMyProfit(int memberNo) {
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMonthMyProfit", memberNo);
+	}
+
+	/**검색해오는 시검의 1년간 총 수익이랑 예상 수익 들고오기
+	 * @param memberNo
+	 * @return
+	 */
+	public List<myProjectFreelancerProfit> selectMyProfit(int memberNo) {
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyProfit", memberNo);
 	}
 
 
