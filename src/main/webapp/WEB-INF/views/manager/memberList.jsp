@@ -50,7 +50,7 @@
 		</div>
 
 		<div id="member-manage-table">
-...............................
+
 			<!-- 테이블 컬럼명 -->
 			<div class="member-manage-table-column">
 				<div class="member-num">회원번호</div>
