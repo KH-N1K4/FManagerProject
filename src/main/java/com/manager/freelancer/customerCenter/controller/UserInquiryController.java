@@ -80,18 +80,6 @@ public class UserInquiryController {
 		
 	}
 	
-//	// 이용문의 내역으로 이동 및 조회
-//	@GetMapping("/userInquiryList")
-//	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model) {
-//		
-//		List<UserInquiry> userInquiry = service.selectInquiryList(loginMember.getMemberNo());
-//		System.out.println(userInquiry);
-//		
-//		model.addAttribute("userInquiry",userInquiry);
-//		
-//		return "customerCenter/inquiryList";
-//	}
-	
 	// 이용문의 내역으로 이동 및 조회
 	@GetMapping("/userInquiryList")
 	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model,
@@ -108,8 +96,6 @@ public class UserInquiryController {
 			Map<String, Object> map = service.selectInquiryList(pm, cp);
 			model.addAttribute("map",map);
 		}
-		
-		
 		
 		return "customerCenter/inquiryList";
 	}

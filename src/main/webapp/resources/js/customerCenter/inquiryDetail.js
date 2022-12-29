@@ -10,11 +10,3 @@ goToList.addEventListener("click",() => {
 
 });
 
-
-const division = document.getElementById("division");
-
-division.addEventListener("change",()=>{
-
-        
-
-});

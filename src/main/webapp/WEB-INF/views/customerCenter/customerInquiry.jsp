@@ -13,7 +13,7 @@
 </head>
 <body>
 
-     <jsp:include page="/WEB-INF/views/common/header_black_ver2 customer.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header_black_ver2 customer.jsp"/>
 
 
     <!-- 메인 -->
@@ -30,14 +30,6 @@
                 <form action="userInquiryInsert" class="inquirySubmit"  id="inquiryInsert" method="POST" enctype="multipart/form-data">
                     <h3 id="title">문의하기</h3>
                     <span id="tltleInfo">[중요] 작업 문의는 해당 전문가에게 직접 남겨주세요.</span>
-                    <br><br>
-
-                    <div>문의 유형</div>
-                    <select name="inquiryTypeNo" id="division">
-                        <option value="1">문의</option> 
-                        <option value="2">환불</option> 
-                    </select>
-
                     <br><br>
 
                     <div>제목</div>
@@ -65,8 +57,9 @@
                         </c:choose>
                     </c:forEach>
 
+                    <br><br><br>
 
-                    <h5>업로드 이미지</h5>
+                    <div>첨부 파일</div>
                     <div class="img-box">
 
                         <div class="boardImg">
@@ -92,11 +85,12 @@
                             <input type="file" name="images" class="inputImage" id="img3" accept="image/*">
                             <span class="delete-image">&times;</span>
                         </div>
-                    </div>    
+                    </div><br>    
 
-                    <button class="inquiryInsert" id="inquiryInsert">제출</button>
-                    <button id="goToMain"><a href="/">메인으로</a></button>
-
+                    <div class="buttonArea">
+                        <button class="inquiryInsert" id="inquiryInsert">제출</button>
+                        <div id="goToMain">메인으로</div>
+                    </div>
 
                     <%-- 삭제될 이미지 순서를 저장한 input 태그 --%>
                     <input type="hidden" name="deleteList" id="deleteList" value="">

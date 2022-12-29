@@ -42,10 +42,10 @@
                             <th style="width:200px">
                                 <c:choose>
                                     <c:when test="${userInquiry.inquiryRequest == null}">
-                                        답변 대기 
+                                        <span class="question-wating">답변 대기</span>
                                     </c:when>
                                     <c:when test="${userInquiry.inquiryRequest != null}">
-                                        해결 
+                                        <span class="question-answer">답변 완료</span>
                                     </c:when>
                                 </c:choose>
                             </th>

@@ -38,12 +38,11 @@
 
                     <section class="formBox">
                         <form action="/userInquiryList" id="selectForm"> 
-                            <div>문의 유형
+                            <div>진행 상태
                                 <select name="inquiryTypeNo" id="division">
                                     <option value="0">전체</option> 
-                                    <option value="1">문의</option> 
-                                    <option value="2">환불</option> 
-                                    <option value="3">신고</option> 
+                                    <option value="1">답변 완료</option> 
+                                    <option value="2">답변 대기중</option> 
                                 </select>
                             </div>
                         </form>
@@ -54,10 +53,9 @@
                     <table>
                         <tr>
                             <th style="width:100px">번호</th>
-                            <th style="width:100px">문의 유형</th>
-                            <th style="width:350px">제목</th>
-                            <th style="width:120px">작성일</th>
-                            <th style="width:100px">상태</th>
+                            <th style="width:470px">제목</th>
+                            <th style="width:150px">작성일</th>
+                            <th style="width:150px">상태</th>
                         </tr>
                         <c:choose>
                             <c:when test="${empty userInquiryList}">
@@ -70,22 +68,15 @@
                                 <c:forEach var="userinquiry" items="${userInquiryList}">
                                     <tr>
                                         <td>${userinquiry.userInquiryNo}</td>
-                                        <td>
-                                        <c:choose>
-                                            <c:when test="${userinquiry.inquiryTypeNo == 1}">문의</c:when>
-                                            <c:when test="${userinquiry.inquiryTypeNo == 2}">환불</c:when>
-                                            <c:when test="${userinquiry.inquiryTypeNo == 3}">신고</c:when>
-                                        </c:choose>
-                                        </td>
                                         <td><a href="/userInquiryDetail/${userinquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${userinquiry.userInquiryTitle}</a></td>
                                         <td>${userinquiry.userInquiryCreateDate}</td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${userinquiry.inquiryRequest == null}">
-                                                    답변 대기 
+                                                    <span class="question-wating">답변 대기</span>
                                                 </c:when>
                                                 <c:when test="${userinquiry.inquiryRequest != null}">
-                                                    해결 
+                                                    <span class="question-answer">답변 완료</span>
                                                 </c:when>
                                             </c:choose>
                                         </td>
