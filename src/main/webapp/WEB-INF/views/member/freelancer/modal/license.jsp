@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div>
-                    <button id="sendContent3">적용</button>
+                    <button  id="sendContent3">적용</button>
                 </div>
         </div><%-- licenseInputMain --%>
     </div>
