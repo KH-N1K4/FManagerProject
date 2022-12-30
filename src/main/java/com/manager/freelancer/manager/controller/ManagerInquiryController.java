@@ -69,9 +69,10 @@ public class ManagerInquiryController {
 	@PostMapping("/managerInquiryDetail")
 	@ResponseBody
 	public String updateComment(@RequestParam(value="userInquiryNo") int userInquiryNo,
-								@RequestParam(value="inputComment") String inputComment) {
+								@RequestParam(value="inputComment") String inputComment,
+								@SessionAttribute("loginMember") Member loginMember) {
 		
-		int result = service.updateComment(userInquiryNo, inputComment);
+		int result = service.updateComment(userInquiryNo, inputComment,loginMember);
 
 		return new Gson().toJson(result);
 	}

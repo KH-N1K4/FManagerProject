@@ -36,7 +36,7 @@
 
                     <table>
                         <tr>
-                            <th style="width:150px">${userInquiry.userInquiryNo}</th>
+                            <th style="width:150px">${userInquiry.userInquiryNo}번</th>
                             <th style="width:500px">${userInquiry.userInquiryTitle}</th>
                             <th style="width:150px">상태</th>
                             <th style="width:200px">
@@ -65,12 +65,12 @@
                         </c:choose>
                         <table>
                             <tr>
-                                <th style="width:100px">작성자</th>
-                                <td style="width:750px">${userInquiry.memberName}</td>
+                                <th style="width:150px">작성자</th>
+                                <td style="width:650px">${userInquiry.memberNickname}</td>
                             </tr>
                             <tr>
-                                <th>구분</th>
-                                <td>문의</td>
+                                <th>작성일</th>
+                                <td>${userInquiry.userInquiryCreateDate}</td>
                             </tr>
                             <tr>
                                 <th>내용</th>
@@ -91,7 +91,6 @@
                                                     </div>
                                             </div>    
                                             <br>
-
                                             </c:forEach>
                                         </c:if>
                                     </c:if>
@@ -102,21 +101,24 @@
                     <hr><br>
 
                     <!-- ///////////////////////////////// -->
-
                     <c:if test="${not empty userInquiry.inquiryRequest}">
                         <!-- 댓글 남기기 -->
                         <section id="comment">
                             <div>
-                                <img src="/resources/images/프로필.PNG" class="myProfile">
+                                <img src="${userInquiry.managerProfile}" class="myProfile">
                             </div>
                             <div>
                             <table>
                                 <tr>
-                                    <th style="width:100px">작성자</th>
-                                    <td style="width:750px">${userInquiry.memberName}</td>
+                                    <th style="width:150px">작성자</th>
+                                    <td style="width:650px">${userInquiry.managerNickname}</td>
                                 </tr>
                                 <tr>
-                                    <th>답변 내용</th>
+                                    <th>작성일</th>
+                                    <td>${userInquiry.inquiryRequestDate}</td>
+                                </tr>
+                                <tr>
+                                    <th>답변</th>
                                     <td class="textArea">${userInquiry.inquiryRequest}</td>
                                 </tr>
                             </table>

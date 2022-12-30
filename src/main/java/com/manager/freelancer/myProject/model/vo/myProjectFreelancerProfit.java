@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class myProjectFreelancerProfit {
+public class myProjectFreelancerProfit {//지윤
 		private int settlementNo;		//SETTLEMENT_NO 거래 내역 번호 SEQUENCE: SEQ_SETTLEMENT_NO
 		private int paymentType;		//PAYMENT_TYPE 거래 종류(1:입금, 2:출금, 3:환불)
 		private int userNo;				//USER_NO 거래 회원 번호 
