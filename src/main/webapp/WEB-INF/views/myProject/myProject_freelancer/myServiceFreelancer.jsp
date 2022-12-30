@@ -60,10 +60,10 @@
                             <div>
                                 <div id="serviceTitle">
                                     <c:choose>
-                                        <c:when test="${service.serviceStatus == 4}"><span id="serviceName" class="serviceName" suggestionName="">${service.serviceTitle}</span></c:when>
-                                        <c:otherwise><a href="#" id="serviceName" class="serviceName" suggestionName="">
+                                        <c:when test="${service.serviceDelFL eq 'N' && service.serviceStatus == 2}"><a href="#" id="serviceName" class="serviceName" suggestionName="">
                                             ${service.serviceTitle}
-                                        </a></c:otherwise>
+                                        </a></c:when>
+                                        <c:otherwise><span id="serviceName" class="serviceName" suggestionName="">${service.serviceTitle}</span></c:otherwise>
                                     </c:choose>
                                 </div>
                                 <div id="serviceSummary">

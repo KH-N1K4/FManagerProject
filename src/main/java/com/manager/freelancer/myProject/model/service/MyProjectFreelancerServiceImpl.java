@@ -330,5 +330,27 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		return map; 
 	}
 
+	/**
+	 * 서비스 문의 내역
+	 */
+	@Override
+	public Map<String, Object> myServiceInquiry(int memberNo, int cp, String startDate, String endtDate,
+			int mainCategoryNo, String searchInput) {
+		
+		int listCount = dao.getmyServiceInquiryListCount(memberNo,startDate,endtDate,mainCategoryNo,searchInput);
+		
+		Pagination pagination = new Pagination(listCount,cp,20,5);
+		
+		List<FreelancerService> inquiryList = dao.myServiceInquiryList(memberNo,pagination,startDate,endtDate,mainCategoryNo,searchInput);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("inquiryList",inquiryList);
+		map.put("listCount",listCount);
+		
+		return map;
+	}
+
 	
 }
