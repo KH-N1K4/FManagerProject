@@ -230,27 +230,89 @@ public class ManagerDAO {
 		return sqlSession.selectOne("managerMapper.selectTradeInfo", tradeNo);
 	}
 
-	public int managerRefund(Map<String, Object> pm) {
-		
-		int result;
-		
-		if(pm.get("refundPercent").equals(0) || pm.get("refundPercent").equals(1)) {
-			result = sqlSession.insert("managerMapper.managerRefund",pm);
-			if(result>0) {
-				result = sqlSession.update("managerMapper.updateStatus",pm);
-			}
-		} else {
-			
-			result = sqlSession.insert("managerMapper.managerRefund_m",pm);
-			if(result>0) {
-				result=sqlSession.insert("managerMapper.managerRefund_f",pm);
-				if(result>0) {
-					result = sqlSession.update("managerMapper.updateStatus",pm);
-				}
-			}
-		}
-		return result;
+
+	/** 거래번호로 프리랜서 번호 얻기
+	 * @param pm
+	 * @return
+	 */
+	public int getFreelancerNo(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getFreelancerNo",pm);
 	}
+
+	/** 거래번호로 회원 번호 얻기
+	 * @param pm
+	 * @return
+	 */
+	public int getMemberNo(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getMemberNo",pm);
+	}
+	
+	/** 거래 번호로 가격 얻기
+	 * @param pm
+	 * @return
+	 */
+	public int getPaymentPrice(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getPaymentPrice",pm);
+	}
+
+	/** 환불하기1
+	 * @param pm
+	 * @return
+	 */
+	public int managerRefund1(Map<String, Object> pm) {
+		
+		return sqlSession.insert("managerMapper.managerRefund1",pm);
+	}
+	
+	/** 환불하기2
+	 * @param pm
+	 * @return
+	 */
+	public int managerRefund2(Map<String, Object> pm) {
+		
+		return sqlSession.insert("managerMapper.managerRefund2",pm);
+	}
+	
+	/** 환불 후 작업 상태 변경
+	 * @param pm
+	 * @return 
+	 */
+	public int updateStatus(Map<String, Object> pm) {
+		return sqlSession.update("managerMapper.updateStatus",pm);
+	}
+
+	/** 정산하기
+	 * @param map
+	 * @return
+	 */
+	public int managerCalculate(Map<String, Object> map) {
+		return sqlSession.insert("managerMapper.managerCalculate",map);
+	}
+
+	/** 정산 후 작업 상태 변경
+	 * @param tradeNo
+	 * @return
+	 */
+	public int updateStatus(int tradeNo) {
+		return sqlSession.update("managerMapper.updateStatusCal",tradeNo);
+	}
+
+	/** 정산을 위한 프리랜서 번호 얻기
+	 * @param tradeNo
+	 * @return
+	 */
+	public int getFreelancerNo2(int tradeNo) {
+		return sqlSession.selectOne("managerMapper.getFreelancerNo2",tradeNo);
+	}
+
+	/** 정산을 위한 가격 얻기
+	 * @param tradeNo
+	 * @return
+	 */
+	public int getPaymentPrice2(int tradeNo) {
+		return sqlSession.selectOne("managerMapper.getPaymentPrice2",tradeNo);
+	}
+
 
 
 }
