@@ -268,3 +268,21 @@ tbody a{
   color: #73358C !important;
   letter-spacing: 0 !important;
 }
+
+
+#container_button{
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  width: 100px;
+  height: 30px;
+  padding: 5px 0;
+  font-size: 15px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #538126;
+  border: 1px solid #538126;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+ /*  line-height: 1px; */
+}

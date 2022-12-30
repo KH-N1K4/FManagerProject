@@ -435,7 +435,7 @@
   	</select>
   	
   	
-  	<select id="selectMyProfitEachList" parameterType="_int" resultMap="profit_rm">
+  	<select id="selectMyProfitEachList" parameterType="java.util.HashMap" resultMap="profit_rm">
   	SELECT  p.*,TO_CHAR(PAYMENT_DATE,'YYYY-MM-DD hh:mm') PAYMENT_DATE_STRING,
 		TO_CHAR((PAYMENT_PRICE), 'FM999,999,999,999') PAYMENT_PRICE_STRING,
 		TO_CHAR((SERVICE_PRICE), 'FM999,999,999,999') SERVICE_PRICE_STRING,
@@ -446,7 +446,16 @@
 					WHERE FREELANCER_NO = #{memberNo}
 					AND WORK_STATUS IN (3)      
 					AND PAYMENT_TYPE IN (3)
-					AND USER_NO = #{memberNo}          
+					AND USER_NO = #{memberNo}  
+					<if test="startDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
+					</if>  
+					<if test="endtDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
+					</if>  
+					<if test="startDate neq '' and endtDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
+					</if>      
 					UNION 
 					SELECT * FROM SETTLEMENT
 					JOIN TRADE USING(TRADE_NO)
@@ -454,11 +463,20 @@
 					WHERE FREELANCER_NO  =#{memberNo}
 					AND WORK_STATUS IN (2)    
 					AND PAYMENT_TYPE IN (2)
+					<if test="startDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
+					</if>  
+					<if test="endtDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
+					</if>  
+					<if test="startDate neq '' and endtDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
+					</if>
 					) p 
 				ORDER BY PAYMENT_DATE
   	</select>
   	
-  	<select id="getMyProfitEachListCount" parameterType="_int" resultType="_int">
+  	<select id="getMyProfitEachListCount" parameterType="java.util.HashMap" resultType="_int">
   	SELECT COUNT(*) 
 		FROM (SELECT * FROM SETTLEMENT
 				JOIN TRADE USING(TRADE_NO)
@@ -466,7 +484,16 @@
 				WHERE FREELANCER_NO = #{memberNo}
 				AND WORK_STATUS IN (3)       
 				AND PAYMENT_TYPE IN (3)
-				AND USER_NO = #{memberNo}         
+				AND USER_NO = #{memberNo} 
+				<if test="startDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
+				</if>  
+				<if test="endtDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
+				</if>  
+				<if test="startDate neq '' and endtDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
+				</if>        
 				UNION 
 				SELECT * FROM SETTLEMENT
 				JOIN TRADE USING(TRADE_NO)
@@ -474,6 +501,15 @@
 				WHERE FREELANCER_NO = #{memberNo}
 				AND WORK_STATUS IN (2)      
 				AND PAYMENT_TYPE IN (2)
+				<if test="startDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
+				</if>  
+				<if test="endtDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
+				</if>  
+				<if test="startDate neq '' and endtDate neq ''">
+						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
+				</if>
 				) p
 			</select>
 </mapper>

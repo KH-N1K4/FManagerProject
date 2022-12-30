@@ -216,20 +216,30 @@ public class MyProjectFreelancerDAO {
 	/**거래별 정산 내역 출력
 	 * @param memberNo
 	 * @param pagination 
+	 * @param endtDate 
+	 * @param startDate 
 	 * @return
 	 */
-	public List<myProjectFreelancerProfit> selectMyProfitEachList(int memberNo, Pagination pagination) {
+	public List<myProjectFreelancerProfit> selectMyProfitEachList(int memberNo, Pagination pagination, String startDate, String endtDate) {
 		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
 	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
-		return sqlSession.selectList("myProjectFreelancerSerive.selectMyProfitEachList", memberNo,rowBounds);
+	    Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("startDate", startDate);
+		map.put("endtDate", endtDate);
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyProfitEachList", map,rowBounds);
 	}
 
 	/**거래별 정산 내역 출력 페이지
 	 * @param memberNo
 	 * @return
 	 */
-	public int getMyProfitEachListCount(int memberNo) {
-		return sqlSession.selectOne("myProjectFreelancerSerive.getMyProfitEachListCount", memberNo);
+	public int getMyProfitEachListCount(int memberNo, String startDate, String endtDate) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("startDate", startDate);
+		map.put("endtDate", endtDate);
+		return sqlSession.selectOne("myProjectFreelancerSerive.getMyProfitEachListCount", map);
 	}
 
 

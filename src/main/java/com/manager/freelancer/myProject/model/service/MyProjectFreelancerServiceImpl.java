@@ -311,13 +311,14 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 	 *거래별 정산 내역 출력
 	 */
 	@Override
-	public Map<String, Object> selectMyProfitEachList(int memberNo, int cp) {
+	public Map<String, Object> selectMyProfitEachList(int memberNo, int cp, String startDate, String endtDate) {
 		
-		int listCount = dao.getMyProfitEachListCount(memberNo);
+		int listCount = dao.getMyProfitEachListCount(memberNo,startDate,endtDate);
 		
-		Pagination pagination = new Pagination(listCount,cp); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
+		Pagination pagination = new Pagination(listCount,cp,10,5); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
+		//int listCount, int currentPage, int limit, int pageSize
 		
-		List<myProjectFreelancerProfit> myProfitEachList =  dao.selectMyProfitEachList(memberNo,pagination);//return dao.selectMyProfitEachList(memberNo);
+		List<myProjectFreelancerProfit> myProfitEachList =  dao.selectMyProfitEachList(memberNo,pagination,startDate,endtDate);//return dao.selectMyProfitEachList(memberNo);
 				
 		
 		Map<String, Object> map = new HashMap<String, Object>();

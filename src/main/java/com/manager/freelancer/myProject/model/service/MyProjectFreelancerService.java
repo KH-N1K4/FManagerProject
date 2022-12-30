@@ -107,9 +107,11 @@ public interface MyProjectFreelancerService {
 	/** 거래별 정산 내역 출력
 	 * @param memberNo
 	 * @param cp 
+	 * @param endtDate 
+	 * @param startDate 
 	 * @return
 	 */
-	Map<String, Object> selectMyProfitEachList(int memberNo, int cp);
+	Map<String, Object> selectMyProfitEachList(int memberNo, int cp, String startDate, String endtDate);
 
 
 

@@ -206,18 +206,22 @@ public class MyProjectFreelancerController {
 	//수익관리 페이지
 	@GetMapping("/member/myProject/freelancer/profitManagerment")
 	public String profitManagerment(Model model, HttpSession session,
-			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
+			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
+			@RequestParam(value="endtDate" , required = false, defaultValue = "") String endtDate,
+			@RequestParam(value="startDate" , required = false, defaultValue = "") String startDate) {
 		
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		List<myProjectFreelancerProfit>	profitList = service.selectMonthMyProfit(loginMember.getMemberNo());//달별 총 수익 
 		List<myProjectFreelancerProfit>	profit = service.selectMyProfit(loginMember.getMemberNo());//최근 1년간 예상수익 총수익
-		Map<String, Object>	map = service.selectMyProfitEachList(loginMember.getMemberNo(),cp);//거래별 정산 내역
+		Map<String, Object>	map = service.selectMyProfitEachList(loginMember.getMemberNo(),cp,startDate,endtDate);//거래별 정산 내역
 		
 		model.addAttribute("profitList",new Gson().toJson(profitList));	
 		model.addAttribute("profit",profit);
 		model.addAttribute("myProfitEachList",map.get("myProfitEachList"));
 		model.addAttribute("pagination",map.get("pagination"));
 		model.addAttribute("listCount",map.get("listCount"));
+		model.addAttribute("endtDate",endtDate);
+		model.addAttribute("startDate",startDate);
 		return "myProject/myProject_freelancer/profitManagerment";
 	}
 

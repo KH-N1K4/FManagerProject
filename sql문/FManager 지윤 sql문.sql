@@ -400,7 +400,8 @@ ROWNUM NUM
 			WHERE FREELANCER_NO = 30
 			AND WORK_STATUS IN (3)       ---------3.환불완료   환불 받은 수익
 			AND PAYMENT_TYPE IN (3)
-			AND USER_NO = 30             --------1.전문가인지 판결
+			AND USER_NO = 30           --------1.전문가인지 판결
+			AND TO_DATE(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <= '2022-11-10'
 			--AND PAYMENT_DATE BETWEEN #{} AND #{}
 			UNION 
 			SELECT * FROM SETTLEMENT
@@ -409,6 +410,7 @@ ROWNUM NUM
 			WHERE FREELANCER_NO = 30
 			AND WORK_STATUS IN (2)       ---------2.정산 완료
 			AND PAYMENT_TYPE IN (2)
+			AND TO_DATE(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <= '2022-11-10'
 			) p --AND PAYMENT_DATE BETWEEN #{} AND #{}
 		ORDER BY PAYMENT_DATE;
 	

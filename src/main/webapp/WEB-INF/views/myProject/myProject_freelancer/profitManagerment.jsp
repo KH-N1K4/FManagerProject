@@ -37,6 +37,11 @@
                 <div class="container_title"><span>수익 관리</span></div>
                 <!-- 상단 내프로젝트 페이지 제목 -->
               </section>
+              <section class="container_header_right"><!-- 버튼 -->
+                <div class="container_button">
+                  <div id="container_button">전환</a>
+                </div>
+              </section>
             </div>
           </div>
           <div id="topBox">
@@ -53,9 +58,9 @@
               <span>수익금 내역</span> 
             </div>
             <div class="selectdiv">
-              <form>
-                <input type="date" class="startDate DateBox" name="startDate" id="startDate">
-                <input type="date" class="endtDate DateBox" name="endtDate" id="endtDate">
+              <form action="/member/myProject/freelancer/profitManagerment" method="get" name="startDatebtn">
+                <input type="date" class="startDate DateBox" name="startDate" id="startDate" title="${startDate}">
+                <input type="date" class="endtDate DateBox" name="endtDate" id="endtDate" title="${endtDate}">
                 <button class="selectbtn">조회</button>
               </form>
             </div>
