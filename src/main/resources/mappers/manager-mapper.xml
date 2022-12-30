@@ -374,6 +374,35 @@
 	</update>
 	
 	
+	<!-- 정산을 위한 프리랜서 번호 얻기 -->
+	<select id="getFreelancerNo2" resultType="_int">
+	SELECT S.FREELANCER_NO
+	FROM TRADE T
+	JOIN SERVICE S ON (S.SERVICE_NO=T.SERVICE_NO)
+	WHERE T.TRADE_NO=#{tradeNo}
+	</select>
+	
+	<!-- 정산을 위한 가격 얻기 -->
+	<select id="getPaymentPrice2" resultType="_int">
+	SELECT SERVICE_PRICE AS PAYMENT_PRICE
+	FROM TRADE 
+	JOIN SERVICE USING (SERVICE_NO)
+	WHERE TRADE_NO=#{tradeNo}
+	</select>
+	
+	<!-- 정산하기 -->
+	<insert id="managerCalculate">
+		INSERT INTO SETTLEMENT VALUES (
+		SEQ_SETTLEMENT_NO.NEXTVAL, 2, #{freelancerNo}, 2, SYSDATE, #{paymentPrice}, #{tradeNo}
+		)
+	</insert>
+	
+	
+	<!-- 정산 후 작업 상태 변경 -->
+	<update id="updateStatusCal">
+		UPDATE SETTLEMENT SET WORK_STATUS=2
+		WHERE TRADE_NO=#{tradeNo}
+	</update>
 
 </mapper>
 

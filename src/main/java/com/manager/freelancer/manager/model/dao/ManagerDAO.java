@@ -281,6 +281,38 @@ public class ManagerDAO {
 		return sqlSession.update("managerMapper.updateStatus",pm);
 	}
 
+	/** 정산하기
+	 * @param map
+	 * @return
+	 */
+	public int managerCalculate(Map<String, Object> map) {
+		return sqlSession.insert("managerMapper.managerCalculate",map);
+	}
+
+	/** 정산 후 작업 상태 변경
+	 * @param tradeNo
+	 * @return
+	 */
+	public int updateStatus(int tradeNo) {
+		return sqlSession.update("managerMapper.updateStatusCal",tradeNo);
+	}
+
+	/** 정산을 위한 프리랜서 번호 얻기
+	 * @param tradeNo
+	 * @return
+	 */
+	public int getFreelancerNo2(int tradeNo) {
+		return sqlSession.selectOne("managerMapper.getFreelancerNo2",tradeNo);
+	}
+
+	/** 정산을 위한 가격 얻기
+	 * @param tradeNo
+	 * @return
+	 */
+	public int getPaymentPrice2(int tradeNo) {
+		return sqlSession.selectOne("managerMapper.getPaymentPrice2",tradeNo);
+	}
+
 
 
 }

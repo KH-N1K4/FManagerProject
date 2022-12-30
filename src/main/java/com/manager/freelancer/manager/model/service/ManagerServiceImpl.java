@@ -348,7 +348,20 @@ public class ManagerServiceImpl implements ManagerService {
 	//정산하기
 	@Override
 	public int managerCalculate(int tradeNo) {
-		return 0;
+		
+		int freelancerNo = dao.getFreelancerNo2(tradeNo); //프리랜서 번호 얻기
+		int paymentPrice = dao.getPaymentPrice2(tradeNo); //가격 얻기
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("freelancerNo", freelancerNo);
+		map.put("paymentPrice", paymentPrice);
+		map.put("tradeNo", tradeNo);
+		
+		int result = dao.managerCalculate(map);
+		
+		if(result>0) result = dao.updateStatus(tradeNo);
+		
+		return result;
 	}
 	
 	

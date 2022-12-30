@@ -106,7 +106,7 @@ function selectChange() {
                         if(trade.workStatus==4){
                             const btn = document.createElement("a");
                             btn.classList.add("btn");
-                            btn.setAttribute("href","/manager/settlement/calculate");
+                            btn.setAttribute("onclick","calculate()");
                             btn.setAttribute("id","calBtn");
                             btn.append(document.createTextNode("정산"));
                             child8.append(btn);
@@ -368,13 +368,5 @@ function tradeInfo(){
 
 }
 /* 정산하기 */
-function calculate(){
-    const calBtn = document.getElementById("calBtn");
-    calBtn.addEventListener("click",e=>{
-        const tradeNo = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild.innerText;
-    
-    
-    });
 
-}
 

@@ -97,7 +97,7 @@
 							<a class="btn refund">환불</a>
 							</c:if>
 							<c:if test="${trade.workStatus == 4}">
-							<a class="btn" id="calBtn" href="/manager/settlement/calculate">정산</a>
+							<a class="btn" href="/manager/settlement/calculate">정산</a>
 							</c:if>
 						</div>
 					</div>
