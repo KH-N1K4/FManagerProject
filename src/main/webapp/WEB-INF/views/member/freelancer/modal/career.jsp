@@ -2,7 +2,6 @@
 
 
 
-    <div id="title">경력사항</div>
     <div class="modal_body">
     	<span class="modal_close2">x</span>
 

@@ -17,8 +17,7 @@ public class Freelancer {
 	private int freelancerCont; 			// 총 경력기간
 	private int contactTime1;				// 연락가능시간 시작
 	private int contactTime2;				// 연락가능시간 끝
-	private int bankCode;				// 은행 이름
-	private int bankAccountNumber;		// 은행 계좌번호
+		
 	private String freelancerIntro;			// 자기소개
 	
 	//학력 전공부분
@@ -49,5 +48,9 @@ public class Freelancer {
 	private String licenseDate;				// 자격증 발급일
 	private String licenseAgency;			// 자격증 발급 기관
 	
+	private int bankCode; // 은행 이름
+	private long bankAccountNumber; // 은행 계좌번호
 	
+	//프리랜서 전문분야
+	private String freelancerField;
 }

@@ -1,5 +1,8 @@
 package com.manager.freelancer.freelancer.model.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,6 +11,7 @@ import com.manager.freelancer.freelancer.model.vo.Career;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.freelancer.model.vo.License;
 import com.manager.freelancer.freelancer.model.vo.Major;
+import com.manager.freelancer.freelancer.model.vo.Region;
 
 @Repository
 public class FreeLancerDAO {
@@ -45,7 +49,24 @@ public class FreeLancerDAO {
 
 	// 프리랜서 계좌등록(insert)
 	public int insertFreelancerAccount(Freelancer inputFreelancer) {
-		return sqlSession.insert("freelancerMapper.insertinsertFreelancerAccount", inputFreelancer);
+		return sqlSession.insert("freelancerMapper.insertFreelancerAccount", inputFreelancer);
+	}
+
+
+	// 전문분야 Insert
+	public int insertFreelancerField(Map<String, String> map) {
+
+		return sqlSession.insert("freelancerMapper.insertFreelancerField", map);
+	}
+	
+	public List<Region> getRegionList() {
+		return sqlSession.selectList("freelancerMapper.getRegionList");
+	}
+
+	// 전문가 정보 조회
+	public Freelancer freelancerInfo(int freelancerNo) { // inputfreelancer에는 회원번호(프리랜서번호)가 있다.
+
+		return sqlSession.selectOne("freelancerMapper.freelancerInfo", freelancerNo);
 	}
 
 
