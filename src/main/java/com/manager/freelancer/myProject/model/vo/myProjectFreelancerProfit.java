@@ -19,7 +19,16 @@ public class myProjectFreelancerProfit {
 										//--2. 입금된거 중에서 진행중이면 예상수익 / 정산완료,진행중 총수익*****
 		
 		private String paymentDate;		//PAYMENT_DATE 거래 날짜
+		private String paymentDateString;		//PAYMENT_DATE 거래 날짜
 		private int paymentPrice;		//PAYMENT_PRICE 거래 금액
+		private int profitType;		//1. 총수익 2. 정산예정 금액
+		private String paymentPriceString;		//PAYMENT_PRICEString 거래 금액
 		private int tradeNo;			//TRADE_NO 거래 번호(FK) 
 										//-- 1. 내 서비스 등록 가져오기 *****
+		
+		private int serviceNo;           //"SERVICE_NO"서비스 번호 
+		private int servicePrice;           //"SERVICE_PRICE"서비스 번호 
+		private String servicePriceString;        //"SERVICE_PRICE_STRING"서비스 가격 
+		private int freelancerNo;        //"FREELANCER_NO"전문가 번호
+		private int num;        //행 번호
 }

@@ -17,6 +17,7 @@ import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.dao.MyProjectFreelancerDAO;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 
@@ -226,6 +227,7 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("messageIN",message);
 		map.put("tradeReportNo",tradeReportNo);
+		map.put("reportFilePath",reportFilePath);
 		
 		return map;
 	}
@@ -284,6 +286,45 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		
 		map.put("pagination", pagination);
 		map.put("myProposalList",myProposalList);
+		map.put("listCount",listCount);
+		
+		return map; 
+	}
+
+	/**
+	 *나의 달별 총 수익 들고오기
+	 */
+	@Override
+	public List<myProjectFreelancerProfit> selectMonthMyProfit(int memberNo) {
+		return dao.selectMonthMyProfit(memberNo);
+	}
+
+	/**
+	 *검색해오는 시검의 1년간 총 수익이랑 예상 수익 들고오기
+	 */
+	@Override
+	public List<myProjectFreelancerProfit> selectMyProfit(int memberNo) {
+		return dao.selectMyProfit(memberNo);
+	}
+
+	/**
+	 *거래별 정산 내역 출력
+	 */
+	@Override
+	public Map<String, Object> selectMyProfitEachList(int memberNo, int cp, String startDate, String endtDate) {
+		
+		int listCount = dao.getMyProfitEachListCount(memberNo,startDate,endtDate);
+		
+		Pagination pagination = new Pagination(listCount,cp,10,5); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
+		//int listCount, int currentPage, int limit, int pageSize
+		
+		List<myProjectFreelancerProfit> myProfitEachList =  dao.selectMyProfitEachList(memberNo,pagination,startDate,endtDate);//return dao.selectMyProfitEachList(memberNo);
+				
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("myProfitEachList",myProfitEachList);
 		map.put("listCount",listCount);
 		
 		return map; 

@@ -56,10 +56,14 @@
                             <img src="${proposal.projectRequestfile}" alt="">
                         </div>
                         <div id="proposalContent">
-                            <div id="proposalTitle">
-                                <a href="#" id="proposalName" class="proposalName" suggestionName="">
-                                    ${proposal.projectRequestTitle}
-                                </a>
+                            <div id="proposalTitle"><!-- ${proposal.proposalAdoptStatusString} --><c:choose>
+                                    <c:when test="${proposal.proposalAdoptStatus == 1}">
+                                        <a href="#" id="proposalName" class="proposalName" suggestionName="">${proposal.projectRequestTitle}</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span id="proposalName" class="proposalName" suggestionName="">${proposal.projectRequestTitle}</span>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div id="proposalSummary">
                                 <p>${proposal.projectRequestSummary}</p>

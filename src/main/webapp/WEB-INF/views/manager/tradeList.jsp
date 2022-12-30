@@ -79,7 +79,14 @@
 				<c:forEach var="trade" items="${tradeList}">
 					<div class="manager-buy-table-content">
 						<div class="manager-num">${trade.paymentDate}</div>
-						<div class="manager-trade-num"><a class="tradeInfo">${trade.tradeNo}</a></div>
+						<div class="manager-trade-num">
+							<c:if test="${trade.workStatus!=1}">
+								<a>${trade.tradeNo}</a>
+							</c:if>
+							<c:if test="${trade.workStatus==1}">
+								<a class="tradeInfo">${trade.tradeNo}</a>
+							</c:if>
+						</div>
 						<div class="manager-service-name"><a class="detailBtn">${trade.serviceTitle}</a></div>
 						<div class="manager-expert">${trade.userName}</div>
 						<div class="manager-work-status">${trade.workStatusString}</div>
@@ -175,7 +182,9 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-	
+	<script>
+		
+	</script>
 	<script src="/resources/js/manager/tradeList.js"></script>
 </body>
 </html>
