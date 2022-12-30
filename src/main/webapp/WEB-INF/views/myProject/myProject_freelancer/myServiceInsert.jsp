@@ -63,11 +63,11 @@
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>제목</span></div>
-                  <div class="list_content"><input type="text" class="inputBoxSize box" name="serviceTitle" maxlength="30" autocomplete="off" required></div>
+                  <div class="list_content"><input type="text" class="inputBoxSize box" name="serviceTitle" maxlength="20" autocomplete="off" required></div>
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>한줄요약</span></div>
-                  <div class="list_content"><textarea class="projectRequestOnecontent projectRequestContent box" id="projectRequestOnecontent" maxlength="100"  name="serviceSummary" required></textarea>
+                  <div class="list_content"><textarea class="projectRequestOnecontent projectRequestContent box" id="projectRequestOnecontent" maxlength="50"  name="serviceSummary" required></textarea>
                   </div>
                 </div>
                 <div class="myProjectadd_info_list">

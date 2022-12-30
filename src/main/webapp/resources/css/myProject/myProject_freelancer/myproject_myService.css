@@ -104,6 +104,9 @@ font-size: 20px;
 
 /* 서비스 설명 */
 #serviceContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 500px;
     height: 225px;
 }
@@ -124,7 +127,6 @@ font-size: 20px;
 
 #serviceSummary{
     font-size: 18px;
-    height: 100px;
     margin-left: 20px;
 }
 .detail{
