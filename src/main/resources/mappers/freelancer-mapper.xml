@@ -22,7 +22,7 @@
     	-->
     	<!-- mybatis-config 수정 -->
     	
-    	<resultMap type="Freelancer" id="freelancer_rm">
+    	<resultMap type="Freelancer" id="freelancer_rm"> 
    
    	      <id property="freelancerNo" column="FREELANCER_NO"/>
 
@@ -34,16 +34,37 @@
 	      <result property="regionNo" column="REGION_NO" />
 	      <result property="gradeNo" column="GRADE_NO" />
     	</resultMap>
-    	
-    	<!-- <resultMap type="com.manager.freelancer.freelancer.model.vo.Major" id="major_rm">
-    		
-    	</resultMap> -->
-    	
+ 	   	
+ 		<!-- 전문가 정보 조회 -->
+ 		<!-- <resultMap type="com.manager.freelancer.freelancer.model.vo.FreelancerInfo" id="freelancerInfo">
+			<id property="freelancerNo" column="FREELANCER_NO"/>
+			
+			<result property="freelancerIntro" column="FREELANCER_INTRODUCTION"/>  자기소개 
+			<result property="regionNo" column = "REGION_NO"/>						 지역
+			<result property="freelancerCont" column="FREELANCER_PERIOD"/>		경력기간	
+			<result property="contactTime1" column="FREE_CONTACT_TIME1"/>		연락가능시간1			 
+			<result property="contactTime2" column="FREE_CONTACT_TIME2"/>			 
+ 			
+ 			<result property="freelancerField" column="MAIN_CATEGORY_NO"/>  전문분야
+ 			
+ 			<result property="careerCompanyName" column="CAREER_COMPANY"/>   회사명 
+ 			<result property="careerCompanyDepartment" column="CAREER_DEPARTMENT"/> 회사부서 
+ 			<result property="careerCompanyPosition" column="CAREER_POSITION"/>		회사직위 
+ 			<result property="careerCompanyRegion" column="CAREER_REGION"/>			회사위치 
+ 			<result property="careerPeriod" column="CAREER_PERIOD"/>				경력기간 
+ 			
+ 			<result property="licenseName" column="LICENSE_NAME"/>					자격증명 
+ 			<result property="licenseDate" column="LICENSE_DATE"/>					자격증 취득일자 
+ 			<result property="licenseAgency" column="LICENSE_AGENCY"/>				자격증 발급처
+ 			
+ 			<result property="bankCode" column="BANK_CODE"/>						은행코드 
+ 			<result property="bankAccountNumber" column="ACCOUNT_NO"/>				계좌번호
+ 		</resultMap>
+    	 -->
 	
-    	<insert id="enrollFreelancer" parameterType = "Freelancer" >
-  
+    	<insert id="enrollFreelancer" parameterType = "Freelancer">
     		INSERT INTO "FREELANCER"
-    		VALUES(#{freelancerNo}, #{freelancerCont}, #{contactTime1}, #{contactTime2}, #{freelancerIntro},#{regionNo} ,1 )
+    		VALUES(#{freelancerNo}, #{freelancerCont}, #{contactTime1}, #{contactTime2}, #{freelancerIntro},#{regionNo} ,DEFAULT)
    
     	</insert>
     	
@@ -78,5 +99,21 @@
     		VALUES(#{freelancerNo}, #{bankAccountNumber}, #{bankCode})
     	</insert>
     	
+    	
+    	<insert id="insertFreelancerField" parameterType = "map">
+    		INSERT INTO "FIELD"
+    		VALUES(#{freelancerField}, #{freelancerNo})
+    	</insert>
+    	
+    	
+    	<select id="freelancerInfo" parameterType="int"  resultType="Freelancer">
+			SELECT FREELANCER_INTRODUCTION as freelancerIntro,REGION_NO as regionNo, FREELANCER_PERIOD as freelancerCont
+			FROM FREELANCER 
+			WHERE FREELANCER_NO = #{freelancerNo} 
+    	</select>
+    	 
+    	<select id="getRegionList" resultType="com.manager.freelancer.freelancer.model.vo.Region">
+    		SELECT REGION_NO as regionNumber,REGION_NAME as regionName from REGION
+    	</select>	
     	
 </mapper>

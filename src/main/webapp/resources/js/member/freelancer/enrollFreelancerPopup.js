@@ -21,9 +21,10 @@ const btnOpenPopup3 = document.getElementById('licensePopup');
 //------------------------------------------------------------------
 btnOpenPopup1.addEventListener('click', () => {
   modal1.classList.toggle('show');
-  modal1.style.display = 'block';
+  modal1.style.display = 'block'; 
   if (modal1.classList.contains('show')) {
     body1.style.display = 'block';
+    // body1.style.overflow='hidden';
   }
 });
 
@@ -85,7 +86,7 @@ modalClose3.addEventListener('click', () => {
 //
 const result1 = document.getElementsByClassName('input1');
 const select1 = document.getElementById('graduateStatus');
-const licenseInput1 = document.getElementById('majorPopup');
+const majorInput1 = document.getElementById('majorPopup');
 const sendContent1 = document.getElementById('sendContent1');
 
 // const select = document.getElementById('graduateStatus');
@@ -100,16 +101,16 @@ sendContent1.addEventListener('click',function() {
   // console.log($(".graduateStatus option:selected").text());
   document.getElementById('majorStatus').value = $("#graduateStatus option:selected").val(); // input hidden값
   for(let i = 0; i < result1.length-1; i++) {
-    licenseInput1.value += result1[i].value +',';
+    majorInput1.value += result1[i].value +',';
   }
-  licenseInput1.value += test1;
+  majorInput1.value += test1;
   modal1.style.display='none';
 });
 
 
 
 const result2 = document.getElementsByClassName('input2');
-const licenseInput2 = document.getElementById('careerPopup');
+const careerInput2 = document.getElementById('careerPopup');
 const sendContent2 = document.getElementById('sendContent2');
 
 
@@ -119,15 +120,15 @@ sendContent2.addEventListener('click',function() {
   const test3 = $("#careerCompanyPeriod2 option:selected").text();
   
   for(let i = 0; i < result2.length-2; i++) {
-    licenseInput2.value += result2[i].value +',';
+    careerInput2.value += result2[i].value +',';
   }
-  licenseInput2.value += test2+" ";  // ?년 [4]
-  licenseInput2.value += test3;     // ?개월 [5]
+  careerInput2.value += test2+" ";  // ?년 [4]
+  careerInput2.value += test3;     // ?개월 [5]
 
   modal2.style.display='none';
-  if(licenseInput2.value.trim().length != 0){
+  if(careerInput2.value.trim().length != 0){
     freelancerCont.value += 
-    licenseInput2.value.split(',')[4].split('년')[0];
+    careerInput2.value.split(',')[4].split('년')[0];
 
   }
 });
@@ -148,6 +149,4 @@ sendContent3.addEventListener("click", function(){
     modal3.style.display="none"
 });
 
-const bankcode = document.getElementsByClassName("bankCode");
-const bankAccountNumber = document.getElementById("bankAccountNumber");
 
