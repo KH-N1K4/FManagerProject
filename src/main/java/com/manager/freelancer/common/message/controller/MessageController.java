@@ -1,6 +1,7 @@
 package com.manager.freelancer.common.message.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.manager.freelancer.common.message.model.service.MessageService;
+import com.manager.freelancer.common.message.model.vo.ChattingRoom;
 import com.manager.freelancer.member.model.vo.Member;
 
 
@@ -39,18 +41,43 @@ public class MessageController {
         map.put("loginMemberNo", loginMember.getMemberNo());
         
         // 기존 채팅방이 있는지 확인
-        //int chattingNo = service.checkChattingRoomNo(map); 
+        ChattingRoom chartRoom = service.checkChattingRoomNo(map); 
         
-		/*
-		 * if(chattingNo == 0) { // 기존 채팅방이 없다면
-		 * 
-		 * // 새로운 채팅방 생성 후 채팅방 번호 반환 chattingNo = service.createChattingRoom(map); }
-		 * 
-		 * ra.addFlashAttribute("chattingNo", chattingNo);
-		 */
+        int chatRoomNo = chartRoom.getChatRoomNo();
+        
+		if(chatRoomNo == 0) { // 기존 채팅방이 없다면
+			// 새로운 채팅방 생성 후 채팅방 번호 반환 
+			chatRoomNo = service.createChattingRoom(map); 
+		}else {
 			
-		return "common/message";
+			 ChattingRoom chartRoom2 = service.delectFLRoomNo(map);
+		     String chatRoomMemDelFL = chartRoom2.getChatRoomDelFL();
+		     int chatRoomNo2 = chartRoom2.getChatRoomNo();
+		     if(chatRoomMemDelFL.equals("Y") && chatRoomNo2 != 0) {
+				int result = service.updateChattingRoom(chartRoom2); 
+				if(result>0) {
+					System.out.println("업데이트 성공");
+				}else {
+					System.out.println("업데이트 실패");
+				}
+			}
+		}
+		
+		
+		  
+		ra.addFlashAttribute("chatRoomNo", chatRoomNo);
+		
+			
+		return "redirect:/member/message/chatting";
 	}
+	
+	@GetMapping("/member/message/chatting")
+    public String chatting(@SessionAttribute("loginMember") Member loginMember, Model model) {
+        
+        List<ChattingRoom> roomList = service.selectRoomList(loginMember.getMemberNo());
+        model.addAttribute("roomList", roomList);
+        return "common/message";
+    }
 	
 	
 	
