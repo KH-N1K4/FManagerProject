@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FreelancerService {
+public class FreelancerService {//지윤
 	private int mainCategoryNo;			//MAIN_CATEGORY_NO 메인 1카테고리
 	private String mainCategoryName;	//MAIN_CATEGORY_NAME 메인 1카테고리 이름
 	private int subCategoryNo;			//SUB_CATEGORY_NO 메인 2카테고리

@@ -53,7 +53,7 @@
 		<mapper resource="/mappers/ajax-mapper.xml"/>
 		<mapper resource="/mappers/manager-mapper.xml"/>
 		<mapper resource="/mappers/freelancer-mapper.xml"/>
-		<mapper resource="/mappers/myProjectFreelancer-mapper.xml"/>
+		<mapper resource="/mappers/myProject-mapper.xml"/>
 		<mapper resource="/mappers/myProjectFreelancerService-mapper.xml"/>
 		<mapper resource="/mappers/userInquiry-mapper.xml"/>
 		<mapper resource="/mappers/category-mapper.xml"/>
