@@ -224,5 +224,12 @@ public class MyProjectFreelancerController {
 		model.addAttribute("startDate",startDate);
 		return "myProject/myProject_freelancer/profitManagerment";
 	}
+	
+	//등급관리 페이지
+	@GetMapping("/member/myProject/freelancer/myProjectGrade")
+	public String myProjectGrade() {
+		
+		return "myProject/myProject_freelancer/myProjectGrade";
+	}
 
 }
