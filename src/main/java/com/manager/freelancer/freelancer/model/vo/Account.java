@@ -9,8 +9,10 @@ import lombok.ToString;
 @ToString
 public class Account {
 
-	private String bankCode; // 뱅크코드 전체
-	private int bankAccountNumber; // 계좌번호
-	
-	private int freelancerNo;
+	/*
+	 * private int bankCode; // 은행코드 private int bankAccountNumber2; // 계좌번호 private
+	 * String bankAccountNumber3; // 계좌번호
+	 * 
+	 * private int freelancerNo;
+	 */
 }
