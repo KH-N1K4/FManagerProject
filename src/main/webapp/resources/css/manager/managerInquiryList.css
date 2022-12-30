@@ -20,14 +20,18 @@
 
 .select-area{
     width: 300px;
-    height: 40px;
+    height: 45px;
     margin: 0 50px;
+    font-size: 18px;
+
 }
 .select-area-input{
     width: 150px;
     height: 25px;
     margin-left: 15px;
     border-radius: 5px;
+    text-align-last: center;
+    font-size: 17px;
 }
 
 
@@ -43,22 +47,27 @@
 /* ================================ */
 /* 컬럼명들 */
 .question-num{
-    width: 100px;
-}
-.question-type{
-    width: 150px;
+    width: 200px;
+    font-size: 18px;
 }
 
 .question-title{
-    width: 450px;
+    width: 500px;
+    font-size: 18px;
+}
+.question-title a{
+   text-decoration: none;
+   color: black;
 }
 .question-date{
     width: 200px;
+    font-size: 18px;
 }
 
 .question-status{
     width: 200px;
     text-align: center;
+    font-size: 18px;
 }
 /* ================================ */
 
@@ -80,26 +89,113 @@
 /* ================================ */
 
 
-
 /* ================================ */
 /* 상태 표시 - 답변 완료 */
 .question-answer{
     display: inline-block;
     width: 100px;
+    height: 24px;
     text-align: center;
     color: white;
-    border-radius: 15px;
-    background-color: rgb(33, 138, 33);
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #538126
 }
 
 /* 상태 표시 - 대기중  */
 .question-wating{
     display: inline-block;
     width: 100px;
+    height: 24px;
     text-align: center;
     color: white;
-    border-radius: 15px;
+    border-radius: 5px;
+    font-size: 15px;
     background-color: rgb(165, 173, 165);
 
 }
 /* ================================ */
+
+/* ================================ */
+/* 페이지 */
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-top: 300px;
+}
+
+.pagination li {
+    width: 20px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.pagination a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 100%;
+}
+
+.current {
+    font-weight: bold;
+    background-color: #538126;
+    border-radius: 50%;
+    color: white !important;
+    letter-spacing: 0 !important;
+}
+/* ================================ */
+
+
+/* ================================ */
+/* 하단 검색 창  */
+#inquirySearch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
+
+/* 하단 검색창 selectBox */
+#inquirySearch select{
+    width: 150px;
+    height: 45px;
+}
+/* 하단 검색창 input */
+#inquirySearch input{
+    width: 300px;
+    height: 39px;
+    margin-left: 10px;
+}
+
+/* 하단 검색창 button */
+#inquirySearch button{
+    width: 100px;
+    height: 45px;
+    margin-left: 10px;
+    background-color: #538126;
+    color: #fff;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+#search-key{
+    font-size: 17px;
+    text-align-last: center;
+}
+/* ================================ */
+
+/* ================================ */
+/* 게시글 미 존재 시  */
+.contentList{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    font-size: 20px;
+}
+/* ================================ */
+
+

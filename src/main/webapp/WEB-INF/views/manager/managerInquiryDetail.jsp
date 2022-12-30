@@ -1,140 +1,160 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ë¬¸ìë´ì­</title>
-    <link rel="stylesheet" href="/resources/css/manager/userInquiryDetail.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>문의 내역 상세보기­</title>
+<link rel="stylesheet"
+	href="/resources/css/manager/managerInquiryDetail.css">
 
-    <style>
-    body{
-        margin:0;
-    }
 
-    #logo{
-            width: 200px;
-            height: 100px;  
 
-        
-            position: absolute;
 
-            left: 60px;
-            top:40px;
-
-            /* border:1px solid black; */
-        }
-
-        #logo>img{
-            width: 100%;
-        }
-
-    
-
-        #header1{
-            width: 1200px;
-            height: 160px;
-            margin:auto;
-            
-            position: relative;
-        }
-
-    
-
-        .header-top{
-            position: absolute;
-
-            right: 20px;
-            top:20px;
-        }
-        
-        .header-top>span{
-            margin:0 20px;
-
-            cursor: pointer;
-            color:black;
-        }
-        #nav{
-            height: 40px;
-            background-color: black;
-        }
-
-        #nav>ul{
-            width: 1200px;
-            margin:auto;
-        }
-
-        #nav>ul>li{
-            list-style: none;
-            float: left;
-            margin:12px 30px;
-            color:white;
-        }
-
-    
-
-    </style>
 </head>
 <body>
-    
-    <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp"/>
-    <div class="main">
-        <div class="table-title">내역 상세보기</div>
-        <div class="question-table-title">
-            <span>1</span>
-            <span>제목</span>
-            <span>상태</span>
-            <span>대기중</span>
-        </div>
 
-        <table class="question-table">
-        
-            <tr>
-                <td class="column-title">작성자</td>
-                <td colspan="3">이메일@example.com</td>
-            </tr>
-            <tr>
-                <td class="column-title">구분</td>
-                <td colspan="3">이메일@example.com</td>
-            </tr>
-            <tr>
-                <td class="column-title">내용</td>
-                <td colspan="3" class="question-content">
-                    <input type="text" >
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="file-area-title">첨부파일</td>
-                <td class="file-area">
-                    <div>파일.jpg</div>                
-                </td>
-                <td class="file-area">
-                    <div>파일.jpg</div>                
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="icon-area interval"></td>
-                <td class="content-area1 interval">
-                    <input type="text">
-                </td>
-            </tr>
-            <tr>
-                <td class="asd"></td>
-                <td class="content-area2">
-                    <input type="text">
-                </td>
-                <td class="button-area">
-                    <div>답변 남기기</div>
-                </td>
-            </tr>
-        </table>
+	<jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp" />
+	<div class="main">
+		<div class="mainContent">
+			<!-- 문의 내역 상세보기 -->
+			<div id="question-list-title-area">
+                <div id="question-list-title">이용문의 상세 보기</div><br>
+            </div>
+
+            <%-- 테이블 제목 행 --%>
+            <table>
+                <tr>
+                    <th style="width: 200px">${managerInquiry.userInquiryNo}번</th>
+                    <th style="width: 600px">${managerInquiry.userInquiryTitle}</th>
+                    <th style="width: 100px">상태 
+                    <th style="width: 200px">
+                    <c:choose>
+                        <c:when test="${managerInquiry.inquiryRequest == null}">
+                            <span class="question-wating">답변 대기</span>
+                        </c:when>
+                        <c:when test="${managerInquiry.inquiryRequest != null}">
+                            <span class="question-answer">답변 완료</span>
+                        </c:when>
+                    </c:choose>
+                    </th>
+                </tr>
+            </table>
+
+				<hr>
+				<br>
+
+				<div class="content">
+					<c:choose>
+                        <c:when test="${managerInquiry.memberProfile == null}">
+                            <img src="/resources/images/프로필.PNG" class="myProfile">
+                        </c:when>
+                        <c:when test="${managerInquiry.memberProfile != null}">
+                            <img src="${managerInquiry.memberProfile}" class="myProfile">
+                        </c:when>
+                    </c:choose>
+					<table>
+						<tr>
+							<th style="width: 150px" class="firstTh">작성자</th>
+							<td style="width: 850px">${managerInquiry.memberName}</td>
+						</tr>
+						<tr>
+							<th>작성일</th>
+							<td>${managerInquiry.userInquiryCreateDate}</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td style="height: 150px">${managerInquiry.userInquiryContent}</td>
+						</tr>
+						<tr>
+							<th class="uploadImage">업로드<br>파일
+							</th>
+							<td class="imageBox">
+								<c:if test="${not empty managerInquiry.imageList}">
+                                    <c:if test="${fn:length(managerInquiry.imageList)>0}">
+                                        <c:forEach var="i" begin="0" end="${fn:length(managerInquiry.imageList)-1}">
+                                        <div class="img-box">
+                                            <div class="boardImg">
+                                                <label for="img1">
+                                                    <img class="preview" src="/resources/images/customerCenterImage/${managerInquiry.imageList[i].inquiryFilePath}">
+                                                </label>
+                                                <a href="/resources/images/customerCenterImage/${managerInquiry.imageList[i].inquiryFilePath}" download="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}">다운로드</a>
+                                            </div>
+                                        </div>    
+                                        <br>
+                                        </c:forEach>
+                                    </c:if>
+                                </c:if>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<hr>
+				<br>
+
+				<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////a -->
+
+				<c:if test="${not empty managerInquiry.inquiryRequest}">
+                        <!-- 댓글 남기기 -->
+                        <section id="comment">
+                            <c:choose>
+                                <c:when test="${loginMember.memberProfile == null}">
+                                    <a href="/member/myInfo"><img src="/resources/images/프로필.PNG" class="myProfile"></a>
+                                </c:when>
+                                <c:when test="${loginMember.memberProfile != null}">
+                                    <a href="/member/myInfo"><img src="${loginMember.memberProfile}" class="myProfile"></a>
+                                </c:when>
+                            </c:choose>
+                            <table>
+                                <tr>
+                                    <th class="writer">작성자</th>
+                                    <td class="writerContent">${loginMember.memberName}</td>
+                                </tr>
+                                <tr>
+                                    <th>답변 내용</th>
+                                    <td class="textArea">${managerInquiry.inquiryRequest}</td>
+                                </tr>
+                            </table>
+                        </section>
+                </c:if>
+                <c:if test="${empty managerInquiry.inquiryRequest}">
+                    <section id="comment">
+                        <div class="profileImage">
+                        <c:choose>
+                            <c:when test="${loginMember.memberProfile == null}">
+                                <a href="/member/myInfo"><img src="/resources/images/프로필.PNG" class="myProfile"></a>
+                            </c:when>
+                            <c:when test="${loginMember.memberProfile != null}">
+                                <a href="/member/myInfo"><img src="${loginMember.memberProfile}" class="myProfile"></a>
+                            </c:when>
+                        </c:choose>
+                        </div>
+                        <div id="commentInput">
+                            <input type="text" name="inquiryRequest" class="inputComment" id="inputComment">
+                            <button id="commentBtn">등록</button>
+                        </div>
+                    </section>
+                </c:if>
 
 
-    </div> <!-- main -->
-    
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+				<div id="goToList">
+					<button id="goToListbtn">목록으로</button>
+				</div>
+		</div>
+	</div>
+	<!-- main -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
+    <script>
+        var memberName = '${loginMember.memberName}';
+        var userInquiryNo = '${managerInquiry.userInquiryNo}';
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="/resources/js/manager/managerInquiry.js"></script> 
 </body>
 </html>

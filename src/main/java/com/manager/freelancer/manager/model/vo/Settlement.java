@@ -16,7 +16,7 @@ public class Settlement {
 	private int paymentType;
 	private String paymentTypeString;
 	private String paymentDate;
-	private int paymentPrice;
+	private String paymentPrice;
 	
 	private String serviceTitle;
 	private String userName;

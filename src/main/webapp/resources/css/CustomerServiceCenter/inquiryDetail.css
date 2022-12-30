@@ -73,6 +73,32 @@ table th{
 
 
 
+/* ================================ */
+/* 상태 표시 - 답변 완료 */
+.question-answer{
+    display: inline-block;
+    width: 100px;
+    height: 24px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #538126
+}
+
+/* 상태 표시 - 대기중  */
+.question-wating{
+    display: inline-block;
+    width: 100px;
+    height: 24px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: rgb(165, 173, 165);
+
+}
+/* ================================ */
 
 
 
@@ -146,4 +172,4 @@ table th{
     border: 1px solid #538126;
     cursor: pointer;
     font-size: 16px;
-} */
+} 

@@ -88,7 +88,7 @@
 
 /* 구매하기 버튼 */
 
-#buyBtn, #requestBtn{
+#buyBtn, #requestBtn, #pauseService{
 	display:inline-block;
 	text-align:center;
     width: 695px;
@@ -96,6 +96,20 @@
     font-size: 20px;
     background-color: #538126;
     border:1px solid #538126;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    margin:17px 0;
+}
+
+#pauseService1{
+	display:inline-block;
+	text-align:center;
+    width: 695px;
+    padding:15px 0;
+    font-size: 20px;
+    background-color: lightgray;
+    border:1px solid lightgray;
     border-radius: 5px;
     color:white;
     font-weight: bold;

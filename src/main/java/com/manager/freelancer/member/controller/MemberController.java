@@ -2,6 +2,7 @@ package com.manager.freelancer.member.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -18,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.member.model.service.MemberService;
 import com.manager.freelancer.member.model.vo.Member;
 
@@ -313,6 +316,26 @@ public class MemberController {
 	@GetMapping("/member/myInfo/likeList")
 	public String likeList() {
 		return "member/likeList";
+	}
+	
+	@GetMapping("/member/myInfo/sendSuggestion")
+	public String sendSuggestion(@SessionAttribute("loginMember") Member loginMember, Model model) {
+		
+		List<AskService> askServiceList=service.selectSendSuggestion(loginMember.getMemberNo());
+		
+		model.addAttribute("askServiceList",askServiceList);
+		
+		return "member/sendSuggestion";
+	}
+	
+	@GetMapping("/member/myInfo/sendSuggestionContent")
+	@ResponseBody
+	public AskService sendSuggestionContent(String serviceInquiryNo) {
+		
+		AskService askView=service.selectSendSuggesionContent(serviceInquiryNo);
+		
+		
+		return askView;
 	}
 
 	

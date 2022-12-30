@@ -7,12 +7,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.dao.ManagerDAO;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.manager.model.vo.Settlement;
+import com.manager.freelancer.manager.model.vo.TradeInfo;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 
 @Service
@@ -234,5 +236,111 @@ public class ManagerServiceImpl implements ManagerService {
 
 		return map;
 	}
+	
+	// 검색 일치 계좌 내역
+	@Override
+	public Map<String, Object> selectTradeList(Map<String, Object> pm, int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int listCount = dao.getTradeListCount(pm);
+		Pagination pagination = new Pagination(listCount, cp);
+
+		List<Settlement> tradeList = dao.selectTradeList(pm, pagination);
+		
+		if(tradeList!=null) {
+			for(Settlement t : tradeList) {
+				if(t.getWorkStatus()==1) t.setWorkStatusString("진행중");
+				else if(t.getWorkStatus()==2) t.setWorkStatusString("정산 완료");
+				else if(t.getWorkStatus()==3) t.setWorkStatusString("환불 완료");
+				else t.setWorkStatusString("마감");
+				
+				if(t.getPaymentType()==1) t.setPaymentTypeString("입금");
+				else if(t.getPaymentType()==2) t.setPaymentTypeString("출금");
+				else t.setPaymentTypeString("환불");
+			}
+		}
+
+		map.put("pagination", pagination);
+		map.put("tradeList", tradeList);
+
+		return map;
+	}
+	
+	// 작업상태별 목록 조회
+	@Override
+	public Map<String, Object> selectTradeStatusList(int status, int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int listCount = dao.getTradeListCount(status);
+		Pagination pagination = new Pagination(listCount, cp);
+
+		List<Settlement> tradeList = dao.selectTradeList(status, pagination);
+		
+		if(tradeList!=null) {
+			for(Settlement t : tradeList) {
+				if(t.getWorkStatus()==1) t.setWorkStatusString("진행중");
+				else if(t.getWorkStatus()==2) t.setWorkStatusString("정산 완료");
+				else if(t.getWorkStatus()==3) t.setWorkStatusString("환불 완료");
+				else t.setWorkStatusString("마감");
+				
+				if(t.getPaymentType()==1) t.setPaymentTypeString("입금");
+				else if(t.getPaymentType()==2) t.setPaymentTypeString("출금");
+				else t.setPaymentTypeString("환불");
+			}
+		}
+
+		map.put("pagination", pagination);
+		map.put("tradeList", tradeList);
+
+		return map;
+	}
+	
+	
+	
+	// 거래 정보 조회
+	@Override
+	public TradeInfo selectTradeInfo(int tradeNo) {
+		
+		TradeInfo tradeInfo = dao.selectTradeInfo(tradeNo);
+		
+		if(tradeInfo.getWorkEditNum()>tradeInfo.getServiceEditNum()) {
+			tradeInfo.setWorkEditNum(tradeInfo.getServiceEditNum());
+		}
+		
+		return tradeInfo;
+	}
+	
+	// 환불하기
+	@Override
+	public int managerRefund(Map<String, Object> pm) {
+		
+		return dao.managerRefund(pm);
+	}
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

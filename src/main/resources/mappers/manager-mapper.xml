@@ -32,14 +32,24 @@
 		<result property="serviceStatus" column="SERVICE_STATUS" />
 	</resultMap>
 	
-	<resultMap type="Settlement" id="manager_trade_rm">
+	<resultMap type="Settlement" id="manager_settlement_rm">
 		<id property="settlementNo" column="SETTLEMENT_NO"/>
 		<result property="tradeNo" column="TRADE_NO" />
 		<result property="workStatus" column="WORK_STATUS" />
 		<result property="paymentType" column="PAYMENT_TYPE" />
 		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="paymentPrice" column="PAYMENT_PRICE" />
 		<result property="serviceTitle" column="SERVICE_TITLE" />
 		<result property="userName" column="USER_NAME" />
+	</resultMap>
+	
+	<resultMap type="com.manager.freelancer.manager.model.vo.TradeInfo" id="manager_tradeInfo_rm">
+		<id property="tradeNo" column="TRADE_NO" />
+		<result property="tradeDate" column="TRADE_DATE" />
+		<result property="workPeriod" column="SERVICE_WORK_PERIOD" />
+		<result property="serviceEditNum" column="SERVICE_EDIT_NUM" />
+		<result property="workEditNum" column="WORK_EDIT_NUM" />
+		<result property="cancelInquiryDate" column="CANCEL_INQUIRY_DATE" />
 	</resultMap>
 	
 
@@ -176,6 +186,12 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	
 	<!-- 서비스 수 조회 -->
 	<select id="getServiceListCount" resultType="_int">
 		SELECT COUNT(*) FROM SERVICE
@@ -217,6 +233,13 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
 	<!-- 전체 계좌 내역 수 조회 -->
 	<select id="getTradeListCount" parameterType="_int" resultType="_int">
 		SELECT COUNT(*) FROM SETTLEMENT
@@ -226,9 +249,10 @@
 	</select>
 	
 	<!-- 계좌 내역 목록 조회 -->
-	<select id="selectTradeList" parameterType="_int" resultMap="manager_trade_rm">
-		SELECT TO_CHAR(PAYMENT_DATE, 'YYYY"년" MM"월" DD"일"') PAYMENT_DATE, TRADE_NO, 
-					SERVICE_TITLE, WORK_STATUS, MEMBER_NAME AS USER_NAME, PAYMENT_TYPE, PAYMENT_PRICE
+	<select id="selectTradeList" parameterType="_int" resultMap="manager_settlement_rm">
+		SELECT TO_CHAR(PAYMENT_DATE, 'YYYY"-"MM"-"DD') PAYMENT_DATE, TRADE_NO, 
+					SERVICE_TITLE, WORK_STATUS, MEMBER_NAME AS USER_NAME, PAYMENT_TYPE,
+					TO_CHAR(PAYMENT_PRICE, '999,999,999') PAYMENT_PRICE
 		FROM SETTLEMENT
 		JOIN "MEMBER" ON (MEMBER.MEMBER_NO=SETTLEMENT.USER_NO)
 		JOIN TRADE USING (TRADE_NO)
@@ -238,6 +262,155 @@
 		</if>
 		ORDER BY 1 DESC
 	</select>
+	
+	<!-- 검색 일치 계좌 내역 수 조회 -->
+	<select id="getTradeListCount_search" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM SETTLEMENT
+		<if test='status != 0'>
+			WHERE WORK_STATUS= #{status}
+		</if>
+		<if test='query!=null and query!=""'>
+			<choose>
+				<when test='status != 0'>
+					AND TRADE_NO = ${query}
+				</when>
+				<when test='status == 0'>
+					WHERE TRADE_NO = ${query}
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 검색 일치 계좌 내역 목록 조회 -->
+	<select id="selectTradeList_search" parameterType="map" resultMap="manager_settlement_rm">
+		SELECT TO_CHAR(PAYMENT_DATE, 'YYYY"년" MM"월" DD"일"') PAYMENT_DATE, TRADE_NO, 
+					SERVICE_TITLE, WORK_STATUS, MEMBER_NAME AS USER_NAME, PAYMENT_TYPE,
+					TO_CHAR(PAYMENT_PRICE, '999,999,999') PAYMENT_PRICE
+		FROM SETTLEMENT
+		JOIN "MEMBER" ON (MEMBER.MEMBER_NO=SETTLEMENT.USER_NO)
+		JOIN TRADE USING (TRADE_NO)
+		JOIN SERVICE USING (SERVICE_NO)
+		<if test='status != 0'>
+			WHERE WORK_STATUS= #{status}
+		</if>
+		<if test='query!=0'>
+			<choose>
+				<when test='status != 0'>
+					AND TRADE_NO = ${query}
+				</when>
+				<when test='status == 0'>
+					WHERE TRADE_NO = ${query}
+				</when>
+			</choose>
+		</if>
+		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 거래 정보 조회 -->
+	<select id="selectTradeInfo" resultMap="manager_tradeInfo_rm">
+		SELECT TRADE_NO, TO_CHAR(PAYMENT_DATE, 'YYYY"-"MM"-"DD') TRADE_DATE, 
+				SERVICE_EDIT_NUM, SERVICE_WORK_PERIOD,
+				(SELECT COUNT(*) 
+				 FROM WORK 
+				 WHERE TRADE_NO=#{trdeNo}) WORK_EDIT_NUM, 
+				 (SELECT NVL(MAX(TO_CHAR(TRADE_REPORT_CREATE_DATE, 'YYYY"-"MM"-"DD')), '취소 문의 없음')
+				  FROM TRADE_REPORT
+				  WHERE TRADE_NO=#{trdeNo} AND TRADE_REPORT_TYPE_NO=2) CANCEL_INQUIRY_DATE
+		FROM TRADE
+		JOIN SETTLEMENT USING (TRADE_NO)
+		JOIN SERVICE USING (SERVICE_NO)
+		WHERE TRADE_NO=#{trdeNo}
+		AND PAYMENT_TYPE=1
+	</select>
+	
+	
+	<!-- 환불하기 1 -->
+	<insert id="managerRefund" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyColumn="FREELANCER_NO,MEMBER_NO,PAYMENT_PRICE,SEQ_SETTLEMENT_NO"
+			keyProperty="freelancerNo,memberNo,paymentPrice,settlementNo" resultType="map" order="BEFORE">
+			SELECT ( SELECT S.FREELANCER_NO
+						FROM TRADE T
+						JOIN SERVICE S ON (S.SERVICE_NO=T.SERVICE_NO)
+						WHERE T.TRADE_NO=#{tradeNo}) AS FREELANCER_NO,
+					  ( SELECT MEMBER_NO
+						FROM TRADE 
+						WHERE TRADE_NO=#{tradeNo}) AS MEMBER_NO,
+						( SELECT PAYMENT_PRICE
+						FROM SETTLEMENT 
+						WHERE TRADE_NO=#{tradeNo}) AS PAYMENT_PRICE,
+						(SELECT SEQ_SETTLEMENT_NO.NEXTVAL FROM DUAL) AS SEQ_SETTLEMENT_NO
+				FROM DUAL
+		</selectKey>
+		<if test='refundPercent==0'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPrice}, #{tradeNo})
+		</if>
+		<if test='refundPercent==1'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}, #{tradeNo})
+		</if>
+	</insert>
+	
+	<!-- 환불하기 m -->
+	<insert id="managerRefund_m" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyColumn="MEMBER_NO,PAYMENT_PRICE,SEQ_SETTLEMENT_NO"
+			keyProperty="memberNo,paymentPrice,settlementNo" resultType="hashmap" order="BEFORE">
+			SELECT 
+					  ( SELECT MEMBER_NO
+						FROM TRADE 
+						WHERE TRADE_NO=5) AS MEMBER_NO,
+						( SELECT PAYMENT_PRICE
+						FROM SETTLEMENT 
+						WHERE TRADE_NO=#{tradeNo}) AS PAYMENT_PRICE,
+						(SELECT SEQ_SETTLEMENT_NO.NEXTVAL FROM DUAL) AS SEQ_SETTLEMENT_NO
+				FROM DUAL
+		</selectKey>
+		
+		<if test='refundPercent=="0.3"'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}*0.3, #{tradeNo})
+		</if>
+		<if test='refundPercent=="0.7"'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}*0.7, #{tradeNo})
+		</if>
+		
+	</insert>
+	
+	<!-- 환불하기 f -->
+	<insert id="managerRefund_f" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyColumn="FREELANCER_NO,PAYMENT_PRICE,SEQ_SETTLEMENT_NO"
+			keyProperty="freelancerNo,paymentPrice,settlementNo" resultType="hashmap" order="BEFORE">
+			SELECT ( SELECT S.FREELANCER_NO
+						FROM TRADE T
+						JOIN SERVICE S ON (S.SERVICE_NO=T.SERVICE_NO)
+						WHERE T.TRADE_NO=5) AS FREELANCER_NO,
+						( SELECT PAYMENT_PRICE
+						FROM SETTLEMENT 
+						WHERE TRADE_NO=#{tradeNo}) AS PAYMENT_PRICE,
+						(SELECT SEQ_SETTLEMENT_NO.NEXTVAL FROM DUAL) AS SEQ_SETTLEMENT_NO
+				FROM DUAL
+		</selectKey>
+		
+		<if test='refundPercent eq "0.3"'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPrice}*0.3, #{tradeNo})
+		</if>
+		<if test='refundPercent eq "0.7"'>
+			INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPrice}*0.7, #{tradeNo})
+		</if>
+		
+	</insert>
+	
+	
+	<!-- 작업 상태 변경 -->
+	<update id="updateStatus">
+		UPDATE SETTLEMENT SET WORK_STATUS=3
+		WHERE TRADE_NO=#{tradeNo}
+	</update>
+	
+	
 
 </mapper>
 

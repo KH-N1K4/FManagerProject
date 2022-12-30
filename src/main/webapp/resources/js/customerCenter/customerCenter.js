@@ -95,3 +95,10 @@ if(inquiryInsert != null ){
 
 
 }
+
+const goToMain = document.getElementById("goToMain");
+
+goToMain.addEventListener("click",()=>{
+
+    location.href = "/";
+});
