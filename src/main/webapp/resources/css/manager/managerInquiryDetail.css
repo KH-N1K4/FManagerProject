@@ -53,7 +53,7 @@ table th{
     height: 95px;
 }
 /* 댓글 등록 버튼 */
-#comment button{
+#commentBtn{
     width: 145px;
     height: 100px;
     background-color: #538126;
@@ -61,6 +61,7 @@ table th{
     border: 1px solid #538126;
     font-size: 18px;
     color: white;
+    cursor: pointer;
 
 }
 
@@ -170,9 +171,18 @@ table th{
 
 }
 
+
 .writer{
     width: 150px;
 }
 .writerContent{
     width: 850px;
+}
+
+
+#requestStatus{
+    width: 100px;
+}
+#requestStatusView{
+    width: 200px;
 }
