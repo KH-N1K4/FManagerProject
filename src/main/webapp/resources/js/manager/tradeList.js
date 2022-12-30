@@ -1,3 +1,5 @@
+
+
 refund();
 tradeInfo();
 
@@ -59,10 +61,14 @@ function selectChange() {
         
                         const child2 = document.createElement("div");
                         child2.classList.add('manager-trade-num');
-                        const child2a = document.createElement("a");
-                        child2a.classList.add("tradeInfo");
-                        child2a.append(document.createTextNode(trade.tradeNo));
-                        child2.append(child2a);
+                        if(trade.workStatus==1){
+                            const child2a = document.createElement("a");
+                            child2a.classList.add("tradeInfo");
+                            child2a.append(document.createTextNode(trade.tradeNo));
+                            child2.append(child2a);
+                        } else {
+                            child2.append(document.createTextNode(trade.tradeNo));
+                        }
         
                         const child3 = document.createElement("div");
                         child3.classList.add('manager-service-name');
@@ -100,7 +106,8 @@ function selectChange() {
                         if(trade.workStatus==4){
                             const btn = document.createElement("a");
                             btn.classList.add("btn");
-                            btn.classList.add("calculate");
+                            btn.setAttribute("href","/manager/settlement/calculate");
+                            btn.setAttribute("id","calBtn");
                             btn.append(document.createTextNode("정산"));
                             child8.append(btn);
                         } 
@@ -172,6 +179,9 @@ function selectChange() {
 
 
                 }
+
+                refund();
+                tradeInfo();
 
             }
 
@@ -358,4 +368,13 @@ function tradeInfo(){
 
 }
 /* 정산하기 */
+function calculate(){
+    const calBtn = document.getElementById("calBtn");
+    calBtn.addEventListener("click",e=>{
+        const tradeNo = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild.innerText;
+    
+    
+    });
+
+}
 

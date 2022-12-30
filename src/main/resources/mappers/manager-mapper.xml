@@ -260,7 +260,7 @@
 		<if test='status != 0'>
 			WHERE WORK_STATUS= #{status}
 		</if>
-		ORDER BY 1 DESC
+		ORDER BY SETTLEMENT_NO DESC
 	</select>
 	
 	<!-- 검색 일치 계좌 내역 수 조회 -->
@@ -303,7 +303,7 @@
 				</when>
 			</choose>
 		</if>
-		ORDER BY 1 DESC
+		ORDER BY SETTLEMENT_NO DESC
 	</select>
 	
 	<!-- 거래 정보 조회 -->
@@ -323,85 +323,48 @@
 		AND PAYMENT_TYPE=1
 	</select>
 	
+	<!-- 거래번호로 프리랜서 번호 조회 -->
+	<select id="getFreelancerNo" resultType="_int">
+	SELECT S.FREELANCER_NO
+	FROM TRADE T
+	JOIN SERVICE S ON (S.SERVICE_NO=T.SERVICE_NO)
+	WHERE T.TRADE_NO=#{tradeNo}
+	</select>
 	
-	<!-- 환불하기 1 -->
-	<insert id="managerRefund" parameterType="map" useGeneratedKeys="true">
-		<selectKey keyColumn="FREELANCER_NO,MEMBER_NO,PAYMENT_PRICE,SEQ_SETTLEMENT_NO"
-			keyProperty="freelancerNo,memberNo,paymentPrice,settlementNo" resultType="map" order="BEFORE">
-			SELECT ( SELECT S.FREELANCER_NO
-						FROM TRADE T
-						JOIN SERVICE S ON (S.SERVICE_NO=T.SERVICE_NO)
-						WHERE T.TRADE_NO=#{tradeNo}) AS FREELANCER_NO,
-					  ( SELECT MEMBER_NO
-						FROM TRADE 
-						WHERE TRADE_NO=#{tradeNo}) AS MEMBER_NO,
-						( SELECT PAYMENT_PRICE
-						FROM SETTLEMENT 
-						WHERE TRADE_NO=#{tradeNo}) AS PAYMENT_PRICE,
-						(SELECT SEQ_SETTLEMENT_NO.NEXTVAL FROM DUAL) AS SEQ_SETTLEMENT_NO
-				FROM DUAL
+	<!-- 거래번호로 회원 번호 조회 -->
+	<select id="getMemberNo" resultType="_int">
+	SELECT MEMBER_NO
+	FROM TRADE 
+	WHERE TRADE_NO=#{tradeNo}
+	</select>
+	
+	<!-- 거래번호로 가격 조회 -->
+	<select id="getPaymentPrice" resultType="_int">
+	SELECT SERVICE_PRICE AS PAYMENT_PRICE
+	FROM TRADE 
+	JOIN SERVICE USING (SERVICE_NO)
+	WHERE TRADE_NO=#{tradeNo}
+	</select>
+	
+	
+	<!-- 환불하기1 회원 -->
+	<insert id="managerRefund1" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyProperty="settlementNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_SETTLEMENT_NO.NEXTVAL FROM DUAL
 		</selectKey>
-		<if test='refundPercent==0'>
-			INSERT INTO SETTLEMENT VALUES(
-				#{settlementNo}, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPrice}, #{tradeNo})
-		</if>
-		<if test='refundPercent==1'>
-			INSERT INTO SETTLEMENT VALUES(
-				#{settlementNo}, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}, #{tradeNo})
-		</if>
+		INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}*(#{refundPercent}/100), #{tradeNo})
 	</insert>
 	
-	<!-- 환불하기 m -->
-	<insert id="managerRefund_m" parameterType="map" useGeneratedKeys="true">
-		<selectKey keyColumn="MEMBER_NO,PAYMENT_PRICE,SEQ_SETTLEMENT_NO"
-			keyProperty="memberNo,paymentPrice,settlementNo" resultType="hashmap" order="BEFORE">
-			SELECT 
-					  ( SELECT MEMBER_NO
-						FROM TRADE 
-						WHERE TRADE_NO=5) AS MEMBER_NO,
-						( SELECT PAYMENT_PRICE
-						FROM SETTLEMENT 
-						WHERE TRADE_NO=#{tradeNo}) AS PAYMENT_PRICE,
-						(SELECT SEQ_SETTLEMENT_NO.NEXTVAL FROM DUAL) AS SEQ_SETTLEMENT_NO
-				FROM DUAL
+	<!-- 환불하기2 프리랜서 -->
+	<insert id="managerRefund2" parameterType="map" useGeneratedKeys="true">
+		<selectKey keyProperty="settlementNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_SETTLEMENT_NO.NEXTVAL FROM DUAL
 		</selectKey>
-		
-		<if test='refundPercent=="0.3"'>
-			INSERT INTO SETTLEMENT VALUES(
-				#{settlementNo}, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}*0.3, #{tradeNo})
-		</if>
-		<if test='refundPercent=="0.7"'>
-			INSERT INTO SETTLEMENT VALUES(
-				#{settlementNo}, 3, #{memberNo}, 3, SYSDATE, #{paymentPrice}*0.7, #{tradeNo})
-		</if>
-		
+		INSERT INTO SETTLEMENT VALUES(
+				#{settlementNo}, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPrice}*((100-#{refundPercent})/100), #{tradeNo})
 	</insert>
-	
-	<!-- 환불하기 f -->
-	<insert id="managerRefund_f" parameterType="map" useGeneratedKeys="true">
-		<selectKey keyColumn="FREELANCER_NO,PAYMENT_PRICE,SEQ_SETTLEMENT_NO"
-			keyProperty="freelancerNo,paymentPrice,settlementNo" resultType="hashmap" order="BEFORE">
-			SELECT ( SELECT S.FREELANCER_NO
-						FROM TRADE T
-						JOIN SERVICE S ON (S.SERVICE_NO=T.SERVICE_NO)
-						WHERE T.TRADE_NO=5) AS FREELANCER_NO,
-						( SELECT PAYMENT_PRICE
-						FROM SETTLEMENT 
-						WHERE TRADE_NO=#{tradeNo}) AS PAYMENT_PRICE,
-						(SELECT SEQ_SETTLEMENT_NO.NEXTVAL FROM DUAL) AS SEQ_SETTLEMENT_NO
-				FROM DUAL
-		</selectKey>
 		
-		<if test='refundPercent eq "0.3"'>
-			INSERT INTO SETTLEMENT VALUES(
-				#{settlementNo}, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPrice}*0.3, #{tradeNo})
-		</if>
-		<if test='refundPercent eq "0.7"'>
-			INSERT INTO SETTLEMENT VALUES(
-				#{settlementNo}, 3, #{freelancerNo}, 3, SYSDATE, #{paymentPrice}*0.7, #{tradeNo})
-		</if>
-		
-	</insert>
 	
 	
 	<!-- 작업 상태 변경 -->

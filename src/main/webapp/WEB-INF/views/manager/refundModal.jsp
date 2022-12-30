@@ -31,9 +31,9 @@
                 <div>
                     <select class="refund-select-input" name="refundPercent" id="selectRefundPercent">
                         <option value="0">0%</option>
-                        <option value="0.3">30%</option>
-                        <option value="0.7">70%</option>
-                        <option value="1">100%</option>
+                        <option value="30">30%</option>
+                        <option value="70">70%</option>
+                        <option value="100">100%</option>
                     </select>
                 </div>
             </div>

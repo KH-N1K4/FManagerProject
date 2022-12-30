@@ -316,8 +316,41 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public int managerRefund(Map<String, Object> pm) {
 		
-		return dao.managerRefund(pm);
+		int freelancerNo = dao.getFreelancerNo(pm);
+		int memberNo = dao.getMemberNo(pm);
+		int paymentPrice = dao.getPaymentPrice(pm);
+		
+		pm.put("freelancerNo",freelancerNo);
+		pm.put("memberNo",memberNo);
+		pm.put("paymentPrice",paymentPrice);
+		
+		int result;
+		
+		// refundPercent가 0이면
+		if(pm.get("refundPercent").equals(100)){
+			result = dao.managerRefund1(pm);
+		} else if (pm.get("refundPercent").equals(0)) {
+			result = dao.managerRefund2(pm);
+		} else {
+			result = dao.managerRefund1(pm);
+			if(result>0) result = dao.managerRefund2(pm);
+		}
+		
+		if(result>0) {
+			result = dao.updateStatus(pm);
+		}
+		
+		
+		return result;
 	}
+	
+	
+	//정산하기
+	@Override
+	public int managerCalculate(int tradeNo) {
+		return 0;
+	}
+	
 	
 
 }

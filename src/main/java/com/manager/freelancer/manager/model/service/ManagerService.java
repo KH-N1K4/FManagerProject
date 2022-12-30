@@ -96,6 +96,12 @@ public interface ManagerService {
 	 */
 	int managerRefund(Map<String, Object> pm);
 
+	/** 정산하기
+	 * @param tradeNo
+	 * @return
+	 */
+	int managerCalculate(int tradeNo);
+
 
 	
 }
