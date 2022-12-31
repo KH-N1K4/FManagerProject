@@ -33,6 +33,9 @@ public class Message {
 	private String chatMessage;				//"CHAT"."CHAT_MESSAGE" 작성한 메세지
 	private String chatSendTime;			//"CHAT"."CHAT_SEND_TIME" 작성 시간 SYSDATE
 	private int senderNo;					//"CHAT"."SENDER_NO" 작성자(회원번호)(FK)
+	private String readFlag;					//"CHAT"."SENDER_NO" 작성자(회원번호)(FK)
+	private String lastMessage;
+	private String notReadCount;
 	
 	//회원 신고
 	private int memberReportNo;				//"MEMBER_REPORT"."MEMBER_REPORT_NO" 회원 신고 번호 SEQ_MEMBER_REPORT_NO

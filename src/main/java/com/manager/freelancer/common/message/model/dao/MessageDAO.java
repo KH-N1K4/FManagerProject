@@ -40,6 +40,7 @@ public class MessageDAO {
 	 * @return
 	 */
 	public List<ChattingRoom> selectRoomList(int memberNo) {
+
 		return sqlSession.selectList("messageMapper.selectRoomList", memberNo);
 	}
 

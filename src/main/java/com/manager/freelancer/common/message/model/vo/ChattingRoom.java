@@ -10,12 +10,14 @@ import lombok.ToString;
 public class ChattingRoom {
 	private int chatRoomNo; 
     private String lastMessage;
+    private String MaxMessageNo;
     private String sendTime;
     private int clientNo;
     private String clientNickName;
     private String clientProfile;
     private int notReadCount;
     
+    private String chatRoomCreateDate;//<result property="chatRoomCreateDate" column="CHAT_ROOM_CREATE_DATE" />	
     private String chatRoomOpenMemDelFL;
     private String chatRoomClientDelFL;
     private String chatRoomDelFL;
