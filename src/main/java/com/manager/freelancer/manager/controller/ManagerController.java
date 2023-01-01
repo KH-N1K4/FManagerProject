@@ -149,7 +149,7 @@ public class ManagerController {
 			model.addAttribute("map", map);
 		}
 
-		return "/manager/serviceList";
+		return "redirect:/manager/serviceList";
 	}
 
 	// 서비스 반려
@@ -164,7 +164,7 @@ public class ManagerController {
 			model.addAttribute("map", map);
 		}
 
-		return "/manager/serviceList";
+		return "redirect:/manager/serviceList";
 	}
 
 	// ======================================================================================
@@ -317,7 +317,7 @@ public class ManagerController {
 			model.addAttribute("map", map);
 		}
 
-		return "/manager/projectRequestList";
+		return "redirect:/manager/projectRequestList";
 	}
 
 	// 프로젝트 의뢰 반려
@@ -332,7 +332,7 @@ public class ManagerController {
 			model.addAttribute("map", map);
 		}
 
-		return "/manager/projectRequestList";
+		return "redirect:/manager/projectRequestList";
 	}
 	
 	

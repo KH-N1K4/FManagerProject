@@ -519,7 +519,6 @@
 	<update id="managerRequestRestore">
 	UPDATE PROJECT_REQUEST SET PROJECT_REQUEST_STATUS=3 WHERE PROJECT_REQUEST_NO=#{projectRequestNo} 
 	</update>
-TO_CHAR(REQUEST_RECRUIT_DATE, 'YYYY"년" MM"월" DD"일"') REQUEST_RECRUIT_DATE
 
 </mapper>
 
