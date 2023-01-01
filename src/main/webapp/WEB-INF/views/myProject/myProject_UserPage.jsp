@@ -8,53 +8,7 @@
   <title>myProject_UserPage</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/myProject_UserPage.css">
-  <style>
-    body{
-        margin:0;
-    }
-
-    #logo{
-        width: 200px;
-        height: 100px; 
-        position: absolute;
-        left: 60px;
-        top:40px;
-        /* border:1px solid black; */
-    }
-
-    #header{
-        background-color: #538126;
-    }
-
-    #logo>img{
-        width: 100%;
-    }
-
-    #header1{
-        width: 1200px;
-        height: 160px;
-        margin:auto;
-        position: relative;    
-    }
-
-    .header-top{
-        position: absolute;
-        right:0;
-        top:20px;
-        align-items: center;
-        display: flex;
-    }
-    
-    .header-top span{
-        margin:0 12px;
-        cursor: pointer;
-        color:white !important;
-    }
-    .header-top img{
-        border-radius: 45%;
-    }
-
-</style>
+  
 </head>
 <body>
   <main>
@@ -70,11 +24,15 @@
         <!-- sideMenu를 제외한 메인 내용 -->
         <section class="mainContent">
           <div class="container">
+
+            <%-- container_header 시작 --%>
             <div class="container_header">
+
               <section class="container_header_left">
                 <!-- 상단 내프로젝트 페이지 제목 -->
                 <div class="container_title"><span>내 프로젝트</span></div>
                 <!-- 상단 내프로젝트 페이지 제목 -->
+
                 <!-- 상단 selectbox -->
                 <div class="selectbox">
                   <select  id = "srchOption" class="srchOption" name="srchOption" >
@@ -87,24 +45,37 @@
                   </select>
                 </div>
                 <!-- 상단 selectbox -->
+
               </section>
+
               <section class="container_header_right">
                 <div>
                   <a class="myProject_register" href="/member/myProject/myRequestInsert"><span>등록하기</span></a>
                 </div>
               </section>
+
             </div>
-            <!--  -->
+            <%-- container_header 끝 --%>
+
             <!-- 프로젝트 의뢰 1번 -->
             <div class="myProject_content">
               <a class="myProject_link" href="">
+              
+                <%-- 서비스 사진 --%>
                 <div class="projuctContent_image">
                   <img  src="/resources/images/projectImage01.PNG">
                 </div>
+                <%-- 서비스 사진 --%>
+                
+                
                 <div class="projuctContent_info">
+
+                  <%-- 서비스 제목 --%>
                   <div class="info_title">
                     <span>로고 디자인 제작 요청</span>
                   </div>
+                  <%-- 서비스 제목 --%>
+
                   <diV class="info_content">
                     <div class="info_content_left">
                       <div class="info_content_list">
@@ -128,59 +99,17 @@
                         </div>
                       </div>
                     </div>
+                    <%-- 승인 상태 --%>
                     <div class="info_content_right">
                       <div class="signState">
-                        <span>승인대기중</span>
+                        <span>승인 대기중</span>
                       </div>
                     </div>
+                    <%-- 승인 상태 --%>
                   </diV>
                 </div>
               </a>
             </div>
-            <!-- 프로젝트 의뢰 1번 -->
-            <!-- 프로젝트 의뢰 2번 -->
-            <div class="myProject_content">
-              <a class="myProject_link" href="">
-                <div class="projuctContent_image">
-                  <img  src="/resources/images/projectImage02.PNG">
-                </div>
-                <div class="projuctContent_info">
-                  <div class="info_title">
-                    <span>프리랜서 마켓 웹사이트 제작 요청</span>
-                  </div>
-                  <diV class="info_content">
-                    <div class="info_content_left">
-                      <div class="info_content_list">
-                        <div class="list_title"><span>모집분야</span></div>
-                        <div class="list_content">
-                          <div class="main1category"><span>IT·프로그래밍</span></div>
-                          <span>></span>
-                          <div class="main3category"><span>홈페이지</span></div>
-                        </div>
-                      </div>
-                      <div class="info_content_list">
-                        <div class="list_title"><span>예산</span></div>
-                        <div class="list_content">
-                          <span>1000원</span>
-                        </div>
-                      </div>
-                      <div class="info_content_list">
-                        <div class="list_title"><span>모집마감일</span></div>
-                        <div class="list_content">
-                          <span>2022.02.01</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="info_content_right">
-                      <div class="signState">
-                        <span>승인대기중</span>
-                      </div>
-                    </div>
-                  </diV>
-                </div>
-              </a>
-            </div>
-            <!-- 프로젝트 의뢰 2번 -->
           </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
