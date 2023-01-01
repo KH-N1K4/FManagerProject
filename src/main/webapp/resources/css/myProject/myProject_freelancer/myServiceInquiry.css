@@ -1,0 +1,275 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+main{
+  position: relative;
+}
+
+.mainInBody{
+  width: 1200px;
+  margin:auto;
+  min-height: 100vh;
+  display: flex;
+}
+/* 사이드메뉴 */
+.sideMenu{
+  display: flex;
+  margin: 20px 0;
+  width: 300px;
+  min-height: 100vh;
+  align-self: flex-start;
+}
+.aside{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.aside a:hover{
+  color: #538126;
+}
+
+.myProject_User_side{
+  text-decoration: none;
+  cursor: pointer;
+  padding: 8px 20px;
+  font-weight: bold;
+  color: black;
+  font-size: 20px;
+}
+/* 사이드메뉴 */
+
+/* 메인내용 */
+.mainContent{
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+}
+.container{
+  position: relative;
+}
+
+.container_header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px 5px;
+  padding-bottom: 10px;
+}
+
+.container_header_left{
+  display: flex;
+  align-items: flex-end;
+  
+}
+
+/* 내프로젝트 */
+.container_title > span{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.container_title{
+  padding-right: 30px;
+}
+
+.DateBox{
+  font-size: 15px;
+  width: 150px;
+  height: 30px;
+  border-radius: 3%;
+  border: 1px solid #c6c6c9;
+}
+
+.box{
+  width:130px;
+  height:30px;
+  border-radius: 3%;
+  border: 1px solid #c6c6c9;
+  margin-right: 10px;
+}
+
+#searchboxRelative{/* 자동완성 div 포함 */
+  position: relative;
+}
+
+#searchboxInclude{/* 자동완성 div 포함 */
+  position:absolute;
+  z-index: 3;
+  background-color: white;
+}
+
+.searchInput{
+  width:200px;
+  height:30px;
+  border-radius: 3%;
+  border: 1px solid #c6c6c9;
+  /* margin-left: 10px; */
+  margin-right: 10px;
+}
+
+.submitButton{
+  cursor: pointer;
+  display:inline-block;
+	text-align:center;
+  width: 100px;
+  height:30px;
+  padding:5px 0;
+  font-size: 15px;
+  background-color: #538126;
+  border:1px solid #538126;
+  border-radius: 5px;
+  color:white;
+  font-weight: bold;
+}
+/* 내프로젝트 */
+
+
+/* 데이터 출력 테이블 */
+
+table, th, td {
+  border: none; 
+}
+
+caption {
+  display: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+table {
+  border-style: none; 
+  text-indent: initial;
+  /* border-collapse:collapse; */ 
+  width:100%;
+}
+
+.serviceInquiryContent{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  width:400px;
+}
+
+.tbl_lst_type {
+  width: 930px;
+  font-size: 16px;
+  line-height: 16px;
+  table-layout: fixed;
+}
+
+tbody{
+  padding-top: 10px;
+  border: 0px;
+  vertical-align: middle;
+  width:930px;
+}
+
+tbody tr{
+  display: table;
+  width:930px;
+}
+tbody td:nth-of-type(1){
+  width: 40px;
+}
+tbody td:nth-of-type(2){
+  width: 200px;
+}
+tbody td:nth-of-type(3){
+  padding-left: 15px;
+}
+tbody td:nth-of-type(4){
+  width: 100px;
+}
+tbody td:nth-of-type(5){
+  width: 150px;
+}
+
+.tc {
+  text-align: center;
+}
+
+.tr {
+  text-align: right;
+}
+
+.td_link > a{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tbl_lst_type th strong{
+  font-size: 20px;
+}
+
+table th {
+  padding-bottom: 15px;
+  border-bottom: 1px solid black;
+}
+
+tbody a{
+  text-decoration: none;
+}
+
+.btn_type{
+  display:inline-block;
+	text-align:center;
+  width: 100px;
+  height:25px;
+  padding:3px 0;
+  font-size: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.chattingBtn{
+  background-color: #538126;
+  border:1px solid #538126; 
+  color:white;
+}
+
+
+
+/* 화살표 */
+
+.pagination{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 9px;
+  padding: 0;
+}
+
+.pagination li{
+  width: 20px;
+  margin: 0 5px;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.pagination a{
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: #666;
+}
+
+.current{
+  font-weight: bold;
+  border:1px solid #73358C;
+  border-radius: 10%;
+  color: #73358C !important;
+  letter-spacing: 0 !important;
+}

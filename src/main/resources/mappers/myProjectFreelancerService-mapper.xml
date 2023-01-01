@@ -55,6 +55,7 @@
      	  <result property="serviceInquiryNo" column="SERVICE_INQUIRY_NO"/>							<!-- 서비스 문의 번호 SEQUENCE: SEQ_SERVICE_INQUIRY_NO -->
 	      <result property="serviceInquiryContent" column="SERVICE_INQUIRY_CONTENT"/>	  <!-- 서비스 문의 내용 -->
 	      <result property="serviceInquiryDate" column="SERVICE_INQUIRY_CREATE_DATE"/>  <!-- 서비스 문의 작성 날짜 -->
+	      <result property="serviceInquiryDateString" column="SERVICE_INQUIRY_DATE_STRING"/>  <!-- 서비스 문의 작성 날짜 -->
      	  
      	  <!-- 카테고리 -->
 	      <result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />								<!-- 메인 1카테고리 -->
@@ -434,7 +435,7 @@
 				FROM DUAL
   	</select>
   	
-  	
+  	<!-- 수익 정산 내역 리스트 -->
   	<select id="selectMyProfitEachList" parameterType="java.util.HashMap" resultMap="profit_rm">
   	SELECT  p.*,TO_CHAR(PAYMENT_DATE,'YYYY-MM-DD hh:mm') PAYMENT_DATE_STRING,
 		TO_CHAR((PAYMENT_PRICE), 'FM999,999,999,999') PAYMENT_PRICE_STRING,
@@ -476,6 +477,7 @@
 				ORDER BY PAYMENT_DATE
   	</select>
   	
+  	<!-- 수익 정산 내역 페이지 처리 -->
   	<select id="getMyProfitEachListCount" parameterType="java.util.HashMap" resultType="_int">
   	SELECT COUNT(*) 
 		FROM (SELECT * FROM SETTLEMENT
@@ -511,5 +513,59 @@
 						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
 				</if>
 				) p
+			</select>
+			
+			<select id="getmyServiceInquiryListCount" parameterType="java.util.HashMap" resultType="_int">
+			SELECT COUNT(*) 
+			FROM (SELECT * FROM SERVICE_INQUIRY
+				JOIN SERVICE USING(SERVICE_NO)
+				LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+				LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+				LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+				JOIN "MEMBER" USING(MEMBER_NO)) s
+			WHERE FREELANCER_NO = #{memberNo} 
+			<if test="startDate neq ''">
+				AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
+			</if> 
+			<if test="endtDate neq ''">
+				AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
+			</if>
+			<if test="startDate neq '' and endtDate neq ''">
+				AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
+			</if>
+			<if test="mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+			</if>
+			<if test='searchInput neq null and searchInput neq ""'>
+				 AND SERVICE_TITLE LIKE '%${searchInput}%' 
+			</if>
+			ORDER BY SERVICE_INQUIRY_CREATE_DATE
+			</select>
+			
+			<select id="myServiceInquiryList" parameterType="java.util.HashMap" resultMap="fService_rm">
+			SELECT s.* ,TO_CHAR(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD') SERVICE_INQUIRY_DATE_STRING
+			FROM (SELECT * FROM SERVICE_INQUIRY
+				JOIN SERVICE USING(SERVICE_NO)
+				LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+				LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+				LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+				JOIN "MEMBER" USING(MEMBER_NO)) s
+			WHERE FREELANCER_NO = #{memberNo} 
+			<if test="startDate neq ''">
+				AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
+			</if> 
+			<if test="endtDate neq ''">
+				AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
+			</if>
+			<if test="startDate neq '' and endtDate neq ''">
+				AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
+			</if>
+			<if test="mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+			</if>
+			<if test='searchInput neq null and searchInput neq ""'>
+				 AND SERVICE_TITLE LIKE '%${searchInput}%' 
+			</if>
+			ORDER BY SERVICE_INQUIRY_CREATE_DATE
 			</select>
 </mapper>

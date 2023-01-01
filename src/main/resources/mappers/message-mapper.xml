@@ -2,17 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="messageMapper">
 	
-  	<resultMap type="message" id="message_rm">
-    		<id property="chartRoomNo" column="CHAT_ROOM_NO"/>														<!-- "CHAT_ROOM" 채팅방 번호 SEQUENCE: SEQ_CHAT_ROOM_NO -->										
+  	<resultMap type="Message" id="message_rm">
+    		<id property="chatRoomNo" column="CHAT_ROOM_NO"/>														<!-- "CHAT_ROOM" 채팅방 번호 SEQUENCE: SEQ_CHAT_ROOM_NO -->										
 	      <result property="chatRoomDelFL" column="CHAT_ROOM_DEL_FL" />									<!--"CHAT_ROOM" 채팅방 삭제 여부 Y :삭제 N: 개설 -->							
 	      <result property="chatRoomCreateDate" column="CHAT_ROOM_CREATE_DATE" />				<!-- "CHAT_ROOM"채팅방 개설일 -->
-	      <result property="chatFounderNo" column="CHAT_FOUNDER_NO" />									<!-- "CHAT_ROOM" 채팅방 개설자(FREELANCER_NO FK) -->
+	      <result property="chatFounderNo" column="CHAT_OPENMEM_NO" />									<!-- "CHAT_ROOM" 채팅방 개설자(FREELANCER_NO FK) -->
 	      <result property="clientNo" column="CLIENT_NO" />															<!-- "CHAT_ROOM"  채팅방 참여자(회원번호 FK) -->
 	      
 	      <result property="chatNo" column="CHAT_NO" />																	<!-- "CHAT" '채팅 메세지 번호 SEQUENCE: SEQ_CHAT_NO' -->
 	      <result property="chatMessage" column="CHAT_MESSAGE" />												<!-- "CHAT" 작성한 메세지 -->
 	      <result property="chatSendTime" column="CHAT_SEND_TIME" />										<!-- "CHAT"."" 작성 시간 SYSDATE -->
 	      <result property="senderNo" column="SENDER_NO" />															<!-- "CHAT" 작성자(회원번호)(FK) -->
+	      <result property="notReadCount" column="NOT_READ_COUNT" />															<!-- "CHAT" 작성자(회원번호)(FK) -->
+	      <result property="lastMessage" column="MAX_MESSAGE_NO" />															<!-- "CHAT" 작성자(회원번호)(FK) -->
+	      <result property="readFlag" column="READ_FL" />															<!-- "CHAT" 작성자(회원번호)(FK) -->
 	      
 	      <result property="memberReportNo" column="MEMBER_REPORT_NO" />										<!-- "MEMBER_REPORT" 회원 신고 번호 SEQ_MEMBER_REPORT_NO -->
 	      <result property="memberReportTitle" column="MEMBER_REPORT_TITLE" />							<!-- "MEMBER_REPORT" 회원 문의 제목 -->
@@ -32,5 +35,157 @@
 	      <result property="memberDeleteFL" column="MEMBER_DELETE_FL" />						<!-- 회원 탈퇴 여부 탈퇴:Y 회원:N -->
 	      <result property="freelancerFL" column="FREELANCER_FL" />									<!--프리랜서 등록 여부 등록:Y 미등록:N -->
     </resultMap>	
+    
+    <resultMap type="ChattingRoom" id="chatRoom_rm">
+    		<id property="chatRoomNo" column="CHAT_ROOM_NO"/>														<!-- "CHAT_ROOM" 채팅방 번호 SEQUENCE: SEQ_CHAT_ROOM_NO -->										
+	      
+	      <result property="chatRoomOpenMemDelFL" column="CHAT_ROOM_OPENMEM_DEL_FL" />									<!--"CHAT_ROOM" 채팅방 삭제 여부 Y :삭제 N: 개설 -->							
+	      <result property="chatRoomClientDelFL" column="CHAT_ROOM_CLIENT_DEL_FL" />
+	      <result property="chatRoomDelFL" column="CHAT_ROOM_DEL_FL" />
+	      <result property="chatRoomDelNo" column="CHAT_ROOM_DEL_NO" />
+	      <result property="chatRoomOpenUpdateDate" column="CHAT_ROOM_OPENMEM_UPDATE_DATE" />
+	      <result property="chatRoomClientUpdateDate" column="CHAT_ROOM_CLIENT_UPDATE_DATE" />
+	      <result property="chatRoomCreateDate" column="CHAT_ROOM_CREATE_DATE" />				<!-- "CHAT_ROOM"채팅방 개설일 -->
+	      <result property="chatFounderNo" column="CHAT_OPENMEM_NO" />									<!-- "CHAT_ROOM" 채팅방 개설자(FREELANCER_NO FK) -->
+	      <result property="clientNo" column="CLIENT_NO" />															<!-- "CHAT_ROOM"  채팅방 참여자(회원번호 FK) -->
+	      <result property="clientNickName" column="CLIENT_NICKNAME" />											
+	      <result property="clientProfile" column="CLIENT_PROFILE" />	
+	      											
+	      <result property="lastMessage" column="LAST_MESSAGE" />
+	      <result property="MaxMessageNo" column="MAX_MESSAGE_NO" />
+      	<result property="sendTime" column="SEND_TIME" />			
+      	<result property="notReadCount" column="NOT_READ_COUNT" />								
+      	<result property="clientGrade" column="CLIENT_GRADE_NAME" />								
+      	<result property="clientFreeContactTime" column="CLIENT_FREE_CONTACT_TIME" />								
+	      
+    </resultMap>	
 
+
+	   <!-- 채팅 확인 -->
+	   <select id="checkChattingRoomNo" resultMap="chatRoom_rm">
+	      SELECT NVL(SUM(CHAT_ROOM_NO),0) CHAT_ROOM_NO
+	      FROM CHAT_ROOM
+	      WHERE ((CHAT_OPENMEM_NO = #{loginMemberNo} AND CLIENT_NO = #{clientNo})
+	      OR (CHAT_OPENMEM_NO = #{clientNo} AND CLIENT_NO = #{loginMemberNo}))
+	   </select>
+	   
+	   <!-- 채팅방 나가기 여부 확인 -->
+	   <select id="delectFLRoomNo" resultMap="chatRoom_rm">
+	      SELECT CHAT_ROOM_NO,
+			CASE WHEN CHAT_OPENMEM_NO = #{loginMemberNo} THEN CHAT_ROOM_OPENMEM_DEL_FL
+			     WHEN CLIENT_NO = #{loginMemberNo} THEN CHAT_ROOM_CLIENT_DEL_FL
+			END AS CHAT_ROOM_DEL_FL,
+			CASE WHEN CHAT_OPENMEM_NO = #{loginMemberNo} THEN 'CHAT_OPENMEM_NO'
+			     WHEN CLIENT_NO = #{loginMemberNo} THEN 'CLIENT_NO'
+			END AS CHAT_ROOM_DEL_NO,
+			CHAT_ROOM_OPENMEM_DEL_FL,CHAT_ROOM_CLIENT_DEL_FL
+	      FROM CHAT_ROOM
+	      WHERE ((CHAT_OPENMEM_NO = #{loginMemberNo} AND CLIENT_NO = #{clientNo})
+	      OR (CHAT_OPENMEM_NO = #{clientNo} AND CLIENT_NO = #{loginMemberNo}))
+	   </select>
+	   
+	   <!-- 채팅방 생성 -->
+	   <insert id="createChattingRoom" parameterType="map" useGeneratedKeys="true">
+	   
+	      <selectKey keyProperty="chatRoomNo" order="BEFORE" resultType="_int">
+	         SELECT SEQ_CHAT_ROOM_NO.NEXTVAL FROM DUAL
+	      </selectKey>
+	   
+	      INSERT INTO CHAT_ROOM
+	      VALUES(#{chatRoomNo}, DEFAULT, DEFAULT, #{clientNo},#{loginMemberNo} ,DEFAULT,NULL,NULL)
+	   </insert>
+	   
+	   <update id="updateChattingRoom">
+	   		UPDATE CHAT_ROOM
+	   		<if test="chatRoomDelNo == 'CHAT_OPENMEM_NO'">
+	   		SET CHAT_ROOM_OPENMEM_DEL_FL = 'N',
+	   		CHAT_ROOM_OPENMEM_UPDATE_DATE = SYSDATE
+	   		</if>
+	   		<if test="chatRoomDelNo == 'CLIENT_NO'">
+	   		SET CHAT_ROOM_CLIENT_DEL_FL = 'N',
+	   		CHAT_ROOM_CLIENT_UPDATE_DATE = SYSDATE
+	   		</if>
+	   		WHERE CHAT_ROOM_NO = #{chatRoomNo}
+	   </update>
+	   
+	   <!-- 참여 중인 채팅방 목록 -->
+		 <select id="selectRoomList" resultMap="chatRoom_rm">
+      SELECT CHAT_ROOM_NO
+         ,(SELECT CHAT_MESSAGE FROM (
+            SELECT * FROM CHAT M2
+            JOIN CHAT_ROOM ON CHAT_ROOM.CHAT_ROOM_NO = M2.CHAT_ROOM_NO
+            WHERE M2.CHAT_ROOM_NO = R.CHAT_ROOM_NO 
+            AND (CHAT_ROOM_OPENMEM_UPDATE_DATE IS NULL OR CHAT_SEND_TIME <![CDATA[>=]]> CHAT_ROOM_OPENMEM_UPDATE_DATE AND CHAT_OPENMEM_NO = #{memberNo})
+            AND (CHAT_ROOM_CLIENT_UPDATE_DATE IS NULL OR CHAT_SEND_TIME <![CDATA[>=]]> CHAT_ROOM_CLIENT_UPDATE_DATE AND CLIENT_NO = #{memberNo})
+            ORDER BY CHAT_NO DESC) 
+            WHERE ROWNUM = 1) LAST_MESSAGE
+         ,TO_CHAR((SELECT 
+				CASE WHEN (CHAT_OPENMEM_NO = #{memberNo} AND CHAT_ROOM_OPENMEM_UPDATE_DATE IS NULL) THEN NVL(SEND_TIME,CHAT_ROOM_CREATE_DATE)
+					 WHEN (CHAT_OPENMEM_NO = #{memberNo} AND CHAT_ROOM_OPENMEM_UPDATE_DATE IS NOT NULL AND SEND_TIME <![CDATA[>]]> CHAT_ROOM_OPENMEM_UPDATE_DATE) THEN NVL(SEND_TIME,CHAT_ROOM_CREATE_DATE)
+					 WHEN (CHAT_OPENMEM_NO = #{memberNo} AND CHAT_ROOM_OPENMEM_UPDATE_DATE IS NOT NULL AND SEND_TIME <![CDATA[<]]> CHAT_ROOM_OPENMEM_UPDATE_DATE) THEN CHAT_ROOM_OPENMEM_UPDATE_DATE
+					 WHEN (CLIENT_NO = #{memberNo} AND CHAT_ROOM_CLIENT_UPDATE_DATE IS NULL) THEN NVL(SEND_TIME,CHAT_ROOM_CREATE_DATE)
+					 WHEN (CLIENT_NO = #{memberNo} AND CHAT_ROOM_CLIENT_UPDATE_DATE IS NOT NULL AND SEND_TIME <![CDATA[>]]> CHAT_ROOM_CREATE_DATE) THEN NVL(SEND_TIME,CHAT_ROOM_CREATE_DATE)
+					 WHEN (CLIENT_NO = #{memberNo} AND CHAT_ROOM_CLIENT_UPDATE_DATE IS NOT NULL AND SEND_TIME <![CDATA[<]]> CHAT_ROOM_CREATE_DATE) THEN CHAT_ROOM_CREATE_DATE
+				END AS LAST_SEND_TIME
+			FROM (SELECT * FROM (SELECT NVL((SELECT MAX(CHAT_SEND_TIME) CHAT_SEND_TIME 
+			               FROM CHAT M
+			               JOIN CHAT_ROOM ON CHAT_ROOM.CHAT_ROOM_NO = M.CHAT_ROOM_NO
+			               WHERE R.CHAT_ROOM_NO  = M.CHAT_ROOM_NO), CHAT_ROOM_CREATE_DATE) SEND_TIME, CHAT_ROOM_NO
+			               FROM CHAT_ROOM R
+			      WHERE (CHAT_OPENMEM_NO = #{memberNo}
+			      OR CLIENT_NO = #{memberNo}))
+			JOIN CHAT_ROOM USING(CHAT_ROOM_NO)) M
+               WHERE R.CHAT_ROOM_NO  = M.CHAT_ROOM_NO), 
+               'YYYY.MM.DD HH24:MI') SEND_TIME
+         ,NVL2((SELECT CHAT_OPENMEM_NO FROM CHAT_ROOM R2
+            WHERE R2.CHAT_ROOM_NO = R.CHAT_ROOM_NO
+            AND R2.CHAT_OPENMEM_NO = #{memberNo}),
+            R.CLIENT_NO, -- NOT NULL 
+            R.CHAT_OPENMEM_NO
+            ) CLIENT_NO   
+         ,NVL2((SELECT CHAT_OPENMEM_NO FROM CHAT_ROOM R2
+            WHERE R2.CHAT_ROOM_NO = R.CHAT_ROOM_NO
+            AND R2.CHAT_OPENMEM_NO = #{memberNo}),
+            (SELECT MEMBER_NICKNAME FROM MEMBER WHERE MEMBER_NO = R.CLIENT_NO),
+            (SELECT MEMBER_NICKNAME FROM MEMBER WHERE MEMBER_NO = R.CHAT_OPENMEM_NO)
+            ) CLIENT_NICKNAME   
+         ,NVL2((SELECT CHAT_OPENMEM_NO FROM CHAT_ROOM R2
+            WHERE R2.CHAT_ROOM_NO = R.CHAT_ROOM_NO
+            AND R2.CHAT_OPENMEM_NO = #{memberNo}),
+            (SELECT MEMBER_PROFILE FROM MEMBER WHERE MEMBER_NO = R.CLIENT_NO),
+            (SELECT MEMBER_PROFILE FROM MEMBER WHERE MEMBER_NO = R.CHAT_OPENMEM_NO)
+            ) CLIENT_PROFILE
+         ,(SELECT COUNT(*) FROM (SELECT * FROM CHAT JOIN CHAT_ROOM USING(CHAT_ROOM_NO)) M 
+         	WHERE M.CHAT_ROOM_NO = R.CHAT_ROOM_NO 
+         	AND READ_FL = 'N' AND SENDER_NO != #{memberNo}
+         	AND (CHAT_ROOM_OPENMEM_UPDATE_DATE IS NULL OR CHAT_SEND_TIME <![CDATA[>=]]> CHAT_ROOM_OPENMEM_UPDATE_DATE AND CHAT_OPENMEM_NO = #{memberNo})
+            AND (CHAT_ROOM_CLIENT_UPDATE_DATE IS NULL OR CHAT_SEND_TIME <![CDATA[>=]]> CHAT_ROOM_CLIENT_UPDATE_DATE AND CLIENT_NO = #{memberNo})) NOT_READ_COUNT
+         ,(SELECT MAX(CHAT_NO) CHAT_SEND_TIME FROM CHAT M 
+         WHERE R.CHAT_ROOM_NO  = M.CHAT_ROOM_NO
+         AND (CHAT_ROOM_OPENMEM_UPDATE_DATE IS NULL OR CHAT_SEND_TIME <![CDATA[>=]]> CHAT_ROOM_OPENMEM_UPDATE_DATE AND CHAT_OPENMEM_NO = #{memberNo})
+         AND (CHAT_ROOM_CLIENT_UPDATE_DATE IS NULL OR CHAT_SEND_TIME <![CDATA[>=]]> CHAT_ROOM_CLIENT_UPDATE_DATE AND CLIENT_NO = #{memberNo})
+         ) MAX_MESSAGE_NO,
+         NVL2((SELECT CHAT_OPENMEM_NO FROM CHAT_ROOM R2
+            WHERE R2.CHAT_ROOM_NO = R.CHAT_ROOM_NO
+            AND R2.CHAT_OPENMEM_NO = 30),
+            (SELECT CASE WHEN FREELANCER_FL ='Y' THEN (FREE_CONTACT_TIME1||':00-'||FREE_CONTACT_TIME2||':00') ELSE NULL END AS FREE_CONTACT_TIME 
+            	FROM MEMBER LEFT JOIN FREELANCER ON (MEMBER_NO=FREELANCER_NO) WHERE MEMBER_NO = R.CLIENT_NO),
+            (SELECT CASE WHEN FREELANCER_FL ='Y' THEN (FREE_CONTACT_TIME1||':00-'||FREE_CONTACT_TIME2||':00') ELSE NULL END AS FREE_CONTACT_TIME 
+            	FROM MEMBER LEFT JOIN FREELANCER ON (MEMBER_NO=FREELANCER_NO) WHERE MEMBER_NO = R.CHAT_OPENMEM_NO)
+            ) CLIENT_FREE_CONTACT_TIME,
+         NVL2((SELECT CHAT_OPENMEM_NO FROM CHAT_ROOM R2
+            WHERE R2.CHAT_ROOM_NO = R.CHAT_ROOM_NO
+            AND R2.CHAT_OPENMEM_NO = 30),
+            (SELECT GRADE_NAME 
+            	FROM MEMBER LEFT JOIN (SELECT * FROM FREELANCER JOIN GRADE USING(GRADE_NO)) ON (MEMBER_NO=FREELANCER_NO) WHERE MEMBER_NO = R.CLIENT_NO),
+            (SELECT GRADE_NAME 
+            	FROM MEMBER LEFT JOIN (SELECT * FROM FREELANCER JOIN GRADE USING(GRADE_NO)) ON (MEMBER_NO=FREELANCER_NO) WHERE MEMBER_NO = R.CHAT_OPENMEM_NO)
+            ) CLIENT_GRADE_NAME
+      FROM CHAT_ROOM R
+      WHERE (CHAT_OPENMEM_NO = #{memberNo}
+      OR CLIENT_NO = #{memberNo})
+      AND ((CHAT_ROOM_OPENMEM_DEL_FL = 'N' AND CHAT_OPENMEM_NO = #{memberNo})
+	  OR (CHAT_ROOM_CLIENT_DEL_FL = 'N' AND CLIENT_NO = #{memberNo}))
+      ORDER BY MAX_MESSAGE_NO DESC NULLS LAST
+     </select>
 </mapper>
