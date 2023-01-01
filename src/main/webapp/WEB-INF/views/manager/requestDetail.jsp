@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>서비스 관리 상세보기</title>
+    <title>프로젝트 의뢰 관리 상세보기</title>
     
     <link rel="stylesheet" href="/resources/css/myProject/askService.css">
     <link rel="stylesheet" href="/resources/css/category/serviceDetail.css">
@@ -47,17 +47,17 @@
         
 
         <div class="detailHeader">
-            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${freelancerService.requestFilePath }" style="height:100%;"></div>
+            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="" style="height:100%;"></div>
             <div class="serviceContent">
-                <div class="serviceTitle">${freelancerService.serviceTitle }</div>
-                <div class="serviceSummary">${freelancerService.serviceSummary }</div>
+                <div class="serviceTitle">${projectRequest.projectRequestTitle }</div>
+                <div class="serviceSummary">${projectRequest.projectRequestSummary}</div>
                 <div class="serviceInfo">
-                    <span>가격 <span>${freelancerService.servicePrice }</span>원</span>
-                    <span>수정횟수 <span>${freelancerService.serviceEditNum }</span>회</span>
-                    <span>작업일수 <span>${freelancerService.serviceWorkPeriod }</span>일</span>   
+                    <span>예산 <span>${projectRequest.projectRequestBudget }</span>원</span>
+                    <span>모집 마감일 <span>${projectRequest.requestRecruitDate }</span>회</span>
+                    <span>작업 마감일 <span>${projectRequest.requestWorkDate }</span>일</span>   
                 </div>
 
-                <div class="expertPage">
+                <%-- <div class="expertPage">
                     <div class="expertPhoto"><img alt="" src="${freelancerService.freelancerImage }" style="width:100%;"></div>
                     <div class="expertContent">
                         <div class="expertName"><a href="/category/viewFreelancerDetail">${freelancerService.freelancerName }</a></div>
@@ -67,20 +67,20 @@
                         </div>
                                     
                     </div>
-                </div>
+                </div> --%>
      
-                <c:if test="${freelancerService.serviceStatus==1}">
-                    <a id="approvalBtn" href="/manager/${freelancerService.serviceNo}/serviceApproval">승인</a>
-                    <a id="restoreBtn" href="/manager/${freelancerService.serviceNo}/serviceRestore">반려</a>
+                <c:if test="${projectRequest.projectRequestStatus==1}">
+                    <a id="approvalBtn" href="/manager/${projectRequest.projectRequestNo}/requestApproval">승인</a>
+                    <a id="restoreBtn" href="/manager/${projectRequest.projectRequestNo}/requestRestore">반려</a>
               	</c:if>
-                <c:if test="${freelancerService.serviceStatus==2 }">
-              		<a id="pauseService1">판매 중인 상품입니다.</a>
+                <c:if test="${projectRequest.projectRequestStatus==2 }">
+              		<a id="pauseService1">모집 중인 상품입니다.</a>
               	</c:if>
-                <c:if test="${freelancerService.serviceStatus==3 }">
+                <c:if test="${projectRequest.projectRequestStatus==3 }">
               		<a id="pauseService1">미승인 상품입니다.</a>
               	</c:if>
-                <c:if test="${freelancerService.serviceStatus==4 }">
-              		<a id="pauseService1">판매 중지된 상품입니다.</a>
+                <c:if test="${projectRequest.projectRequestStatus==4 }">
+              		<a id="pauseService1">모집 마감된 상품입니다.</a>
               	</c:if>
               
             </div>
@@ -98,9 +98,9 @@
         
         <div class="detailInner">
         
-	        <c:forEach var="imageFile" items="${freelancerService.imageFileList }">
+	        <%-- <c:forEach var="imageFile" items="${projectRequest.imageFileList }">
 	                	<img alt="" src="" style="width:100%;">
-	        </c:forEach>
+	        </c:forEach> --%>
 
         </div>
         

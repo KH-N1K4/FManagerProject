@@ -11,7 +11,7 @@ function selectChange() {
     console.log(status);
 
     $.ajax({
-        url: '/manager/serviceType',
+        url: '/manager/requestType',
         type: 'GET',
         data: { 'status': status },
         success: (map) => {
@@ -32,34 +32,34 @@ function selectChange() {
 
                 document.querySelector(".pagination").innerHTML = "";
 
-                if (map.serviceList.length==0) {
+                if (map.requestList.length==0) {
                     const table = document.createElement("div");
                     table.classList.add('service-list-table-content');
                     table.classList.add('center');
-                    table.appendChild(document.createTextNode("해당 서비스가 존재하지 않습니다."));
+                    table.appendChild(document.createTextNode("해당 의뢰가 존재하지 않습니다."));
                     serviceTable.append(table);
                 } else {
 
-                    for (service of map.serviceList) {
+                    for (request of map.requestList) {
 
                         const table = document.createElement("div");
                         table.classList.add('service-list-table-content');
 
                         const child1 = document.createElement("div");
                         child1.classList.add('service-num');
-                        child1.append(document.createTextNode(service.serviceNo));
+                        child1.append(document.createTextNode(request.projectRequestNo));
 
                         const child2 = document.createElement("div");
                         child2.classList.add('service-title');
                         const child2a = document.createElement("a");
                         child2a.classList.add('detailBtn');
-                        child2a.setAttribute("href", "/manager/serviceDetail/"+service.serviceNo);
-                        child2a.append(document.createTextNode(service.serviceTitle));
+                        child2a.setAttribute("href", "/manager/requestDetail/"+request.projectRequestNo);
+                        child2a.append(document.createTextNode(request.projectRequestTitle));
                         child2.append(child2a);
 
                         const child3 = document.createElement("div");
                         child3.classList.add('service-status');
-                        child3.append(document.createTextNode(service.serviceStatusString));
+                        child3.append(document.createTextNode(request.projectRequestStatusString));
 
                         const child4 = document.createElement("div");
                         child4.classList.add('service-button');
@@ -80,14 +80,14 @@ function selectChange() {
                     /* 페이징 */
                     const li1 = document.createElement("li");
                     const a1 = document.createElement("a");
-                    a1.setAttribute('href', "/manager/serviceList?cp=1" + "&value=" + status);
+                    a1.setAttribute('href', "/manager/requestList?cp=1" + "&value=" + status);
                     a1.appendChild(document.createTextNode("<<"));
                     li1.append(a1);
                     pagination.append(li1);
     
                     const li2 = document.createElement("li");
                     const a2 = document.createElement("a");
-                    a2.setAttribute("href", "/manager/serviceList?cp=" + map.pagination.prevPage + "&value=" + status);
+                    a2.setAttribute("href", "/manager/requestList?cp=" + map.pagination.prevPage + "&value=" + status);
                     a2.appendChild(document.createTextNode("<"));
                     li2.append(a2);
                     pagination.append(li2);
@@ -104,7 +104,7 @@ function selectChange() {
     
                         } else {
                             const a3 = document.createElement("a");
-                            a3.setAttribute("href", "/manager/serviceList?cp=" + i + "&value=" + status);
+                            a3.setAttribute("href", "/manager/requestList?cp=" + i + "&value=" + status);
                             a3.appendChild(document.createTextNode(i));
                             li3.append(a3);
                             pagination.append(li3);
@@ -113,14 +113,14 @@ function selectChange() {
     
                     const li4 = document.createElement("li");
                     const a4 = document.createElement("a");
-                    a4.setAttribute("href", "/manager/serviceList?cp=" + map.pagination.nextPage + "&value=" + status);
+                    a4.setAttribute("href", "/manager/requestList?cp=" + map.pagination.nextPage + "&value=" + status);
                     a4.appendChild(document.createTextNode(">"));
                     li4.append(a4);
                     pagination.append(li4);
     
                     const li5 = document.createElement("li");
                     const a5 = document.createElement("a");
-                    a5.setAttribute("href", "/manager/serviceList?cp=" + map.pagination.maxPage + "&value=" + status);
+                    a5.setAttribute("href", "/manager/requestList?cp=" + map.pagination.maxPage + "&value=" + status);
                     a5.appendChild(document.createTextNode(">>"));
                     li5.append(a5);
                     pagination.append(li5);
@@ -161,11 +161,10 @@ function deleteService() {
         d.addEventListener("click", e => {
             if (confirm("정말로?")) {
 
-                const serviceNo = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
-                console.log(serviceNo);
+                const projectRequestNo = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
                 $.ajax({
-                    url: '/manager/serviceDelete',
-                    data: { 'serviceNo': serviceNo },
+                    url: '/manager/requestDelete',
+                    data: { 'projectRequestNo': projectRequestNo },
                     type: 'GET',
                     success: (result) => {
                         if (result > 0) {
