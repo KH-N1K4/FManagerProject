@@ -26,6 +26,10 @@ public class ChattingRoom {
     private String chatRoomOpenUpdateDate;
     private String chatRoomClientUpdateDate;
     
+    private String clientGrade;
+    private String clientFreeContactTime;
+    //<result property="clientGrade" column="CLIENT_GRADE_NAME" />								
+  	//<result property="clientFreeContactTime" column="CLIENT_FREE_CONTACT_TIME" />	
     //result property="chatRoomOpenUpdateDate" column="CHAT_ROOM_OPENMEM_UPDATE_DATE" />
     //<result property="chatRoomClientUpdateDate" column="CHAT_ROOM_CLIENT_UPDATE_DATE" />
     

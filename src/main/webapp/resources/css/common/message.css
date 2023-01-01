@@ -20,23 +20,70 @@
     height: 1000px;
     background-color: rgb(204, 204, 204);
     text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
 }   
+
+.chatting-list{
+	width: 100%;
+    margin: 0;
+    padding: 0;
+	list-style: none;
+}
+
 .chat{
     width: 600px;
     height: 1000px;
     background-color: #fff;
 }
 
-#chattingList{
+.chattingList{
     margin: 10px;
     width: 280px;
-    height: 120px;
     background-color: #FFF;
     border: 1px solid green;
-    display: flex;
+    display: inline-flex;
+    flex-direction: column;
 }
 
-#chattingList img{
+.chatting-item.select{/* 선택하면 색깔 */
+	background-color: #ddd;
+}
+
+.chatting-item{/* 선택하면 커서 */
+	cursor: pointer;
+}
+
+.chatting-item * {
+	pointer-events: none;
+}
+
+.item-header{
+    display: flex;
+    flex-direction: row;
+}
+.chatting-item{
+    list-style: none;
+}
+
+.item-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.recent-message{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  text-align: start;
+  width: 240px;
+}
+
+.chattingList img{
     width: 90px;
     height: 90px;
     border-radius: 50%;
@@ -55,6 +102,7 @@
     width: 600px;
     height: 830px;
     background-color:  antiquewhite;
+    overflow: auto;/* 스크롤 추가 */
 }
 /* 채팅창 채팅 메세지 */
 #chattingMessage{
@@ -99,7 +147,7 @@
     height: 100px;
     display: flex;
 }
-#messageInput input{
+#messageInput textarea{
     width: 550px;
     height: 60px;
     margin: 20px;
@@ -116,6 +164,10 @@
     height: 50px;
     background-color: white;
     margin: 0 20px;
+}
+
+#addFile input{
+    
 }
 
 #insert{
@@ -186,6 +238,13 @@
     border-radius: 5%;
     border: none;
     margin-top: 490px;
+}
+
+.outbtn.show {
+    display: block;
+}
+.outbtn {
+    display: none;
 }
 
 
