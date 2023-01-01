@@ -9,7 +9,6 @@
 	  	<result property="userInquiryContent" column="USER_INQUIRY_CONTENT" />
 	  	<result property="inquiryRequest" column="USER_INQUIRY_REQUEST" />
 	  	<result property="inquiryRequestDate" column="USER_INQUIRY_REQUEST_DATE" />
-	  	<result property="inquiryRequestWriter" column="USER_INQUIRY_REQUEST_WRITER" />
 	  	<result property="inquiryRequest" column="USER_INQUIRY_REQUEST" />
 	  	<result property="userInquiryCreateDate" column="USER_INQUIRY_CREATE_DATE" />
 	  	<result property="memberNo" column="MEMBER_NO" />

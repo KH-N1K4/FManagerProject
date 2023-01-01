@@ -23,18 +23,19 @@
     </c:if>
 
     <div class="main">
+
         <div id="question-list-title-area">
-            
-                <div id="question-list-title">문의 내역</div><br>
-                <div class="select-area">진행 상태
-                    <select class="select-area-input" name="" id="">
-                        <option value="0">전체</option>
-                        <option value="1">대기중</option>
-                        <option value="2">작성완료</option>
-                    </select>
-                </div>
-            
-        </div>
+
+			<span id="question-list-title">문의 내역 </span> 
+			<span class="select-area"> 
+				<select class="select-area-input" name="selectStatus" id="selectStatus" onchange="selectChange()">
+					<option value="">진행상태</option>
+					<option value="">답변 대기</option>
+					<option value="">답변 완료</option>
+				</select>
+			</span>
+
+		</div>
 
         <div id="question-list-table">
         
@@ -55,13 +56,6 @@
                     <c:forEach var="managerInquiry" items="${managerInquiryList}">
                         <div class="question-list-table-content">
                             <div class="question-num">${managerInquiry.userInquiryNo}</div>
-                            <%-- <div class="question-type">
-                            <c:choose>
-                                <c:when test="${managerInquiry.inquiryTypeNo == 1}">문의</c:when>
-                                <c:when test="${managerInquiry.inquiryTypeNo == 2}">환불</c:when>
-                                <c:when test="${managerInquiry.inquiryTypeNo == 3}">신고</c:when>
-                            </c:choose>
-                            </div> --%>
                             <div class="question-title"><a href="/managerInquiryDetail/${managerInquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${managerInquiry.userInquiryTitle}</a></div>
                             <div class="question-date">${managerInquiry.userInquiryCreateDate}</div>
                             <div class="question-status">
@@ -124,6 +118,7 @@
     </div> <!-- main -->
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
-
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <%-- <script src="/resources/js/manager/managerInquiryList.js"></script>  --%>
 </body>
 </html>

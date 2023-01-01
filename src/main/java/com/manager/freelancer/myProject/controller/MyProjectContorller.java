@@ -17,6 +17,9 @@ public class MyProjectContorller {
 	// 내 프로젝트 이동
 	@GetMapping("/member/myProject/myRequestList")
 	public String likeList() {
+		
+		
+		
 		return "myProject/myProject_UserPage";
 	}
 	
