@@ -121,16 +121,40 @@ const selectChattingFn = () => {
 			const ul = document.querySelector(".display-chatting");
 
 			ul.innerHTML = ""; // 이전 내용 지우기
-
+      var booleanDay = false;
+      var arrDayList = new Array();
+      var num =0;
 			// 메세지 만들어서 출력하기
 			for(let msg of messageList){
+
+        const arrDay =msg.sendTime.split(" ");
+
+        
+        const liDay = document.createElement("li");
+        const spanDay = document.createElement("span");
+        spanDay.innerText = arrDay[0];
+        liDay.classList.add("Daylist");
+        liDay.append(spanDay);
+
+        arrDayList[num] = arrDay[0];
+        if(num !=0){
+          if(arrDayList[num] !=arrDayList[num-1]){
+            booleanDay = false;
+          }
+        }
+        num = num+1;
+        if(booleanDay == false){
+          ul.append(liDay);
+          booleanDay = true;
+        }
+
 				//<li>,  <li class="my-chat">
 				const li = document.createElement("li");
 
 				// 보낸 시간
 				const span = document.createElement("span");
 				span.classList.add("chatDate");
-				span.innerText = msg.sendTime;
+				span.innerText = arrDay[1];//msg.sendTime;
 
 				// 메세지 내용
 				const p = document.createElement("p");
@@ -147,7 +171,7 @@ const selectChattingFn = () => {
 					li.classList.add("target-chat");
 
 					// 상대 프로필
-					// <img src="/resources/images/user.png">
+					// <img src="/resources/images/프로필.PNG">
 					const img = document.createElement("img");
 					img.setAttribute("src", selectClientProfile);
 					
@@ -177,7 +201,7 @@ const selectChattingFn = () => {
 
 
 
-// 비동기로 채팅방 목록 조회    ---------------------고쳐야함!!!!!!!!!!!!!!!!!!!!!!!!
+// 비동기로 채팅방 목록 조회   
 const selectRoomList = () => {
 	$.ajax({
 		url: "/chatting/roomList",
@@ -194,6 +218,7 @@ const selectRoomList = () => {
 			for(let room of roomList){
 				const li = document.createElement("li");
 				li.classList.add("chatting-item");
+				li.classList.add("chattingList");
 				li.setAttribute("id", room.chatRoomNo + "-" + room.clientNo);
 
 				if(room.chatRoomNo == selectChatRoomNo){
@@ -203,36 +228,39 @@ const selectRoomList = () => {
 				// item-header 부분
 				const itemHeader = document.createElement("div");
 				itemHeader.classList.add("item-header");
+        const listProfileDiv = document.createElement("div");
 
 				const listProfile = document.createElement("img");
 				listProfile.classList.add("list-profile");
 
-				if(room.targetProfile == undefined)	
-					listProfile.setAttribute("src", "/resources/images/user.png");
+				if(room.clientProfile == undefined)	
+					listProfile.setAttribute("src", "/resources/images/프로필.PNG");
 				else								
-					listProfile.setAttribute("src", room.targetProfile);
+					listProfile.setAttribute("src", room.clientProfile);
+        
+        const infoDiv = document.createElement("div");
+        infoDiv.setAttribute("id","info");
+        
+        const targetName = document.createElement("span");
+				targetName.classList.add("target-name");
+				targetName.innerText = room.clientNickName;
+				const br = document.createElement("br");
+				const recentSendTime = document.createElement("span");
+				recentSendTime.classList.add("recent-send-time");
+				recentSendTime.innerText = room.sendTime;
+				
+				infoDiv.append(targetName, br,recentSendTime);
 
-				itemHeader.append(listProfile);
+        itemHeader.append(listProfileDiv);
+        listProfileDiv.append(listProfile);
+				itemHeader.append(infoDiv);//확인 완료
 
 				// item-body 부분
 				const itemBody = document.createElement("div");
 				itemBody.classList.add("item-body");
 
-				const p = document.createElement("p");
-
-				const targetName = document.createElement("span");
-				targetName.classList.add("target-name");
-				targetName.innerText = room.targetNickName;
-				
-				const recentSendTime = document.createElement("span");
-				recentSendTime.classList.add("recent-send-time");
-				recentSendTime.innerText = room.sendTime;
-				
-				
-				p.append(targetName, recentSendTime);
-				
-				
-				const div = document.createElement("div");
+        const itemContent = document.createElement("div");
+        itemBody.classList.add("item-content");
 				
 				const recentMessage = document.createElement("p");
 				recentMessage.classList.add("recent-message");
@@ -241,9 +269,9 @@ const selectRoomList = () => {
 					recentMessage.innerHTML = room.lastMessage;
 				}
 				
-				div.append(recentMessage);
+				itemContent.append(recentMessage);
 
-				itemBody.append(p,div);
+				itemBody.append(itemContent);
 
 				// 현재 채팅방을 보고있는게 아니고 읽지 않은 개수가 0개 이상인 경우 -> 읽지 않은 메세지 개수 출력
 				if(room.notReadCount > 0 && room.chatRoomNo != selectChatRoomNo ){
@@ -251,7 +279,7 @@ const selectRoomList = () => {
 					const notReadCount = document.createElement("p");
 					notReadCount.classList.add("not-read-count");
 					notReadCount.innerText = room.notReadCount;
-					div.append(notReadCount);
+					itemContent.append(notReadCount);
 				}else{
 					// 현재 채팅방을 보고있는 경우
 					// 비동기로 해당 채팅방 글을 읽음으로 표시
@@ -264,6 +292,14 @@ const selectRoomList = () => {
 					})
 				}
 				
+        const inputGrade = document.createElement("input");
+        inputGrade.setAttribute("type","hidden");
+        inputGrade.setAttribute("id",room.clientGrade);
+        const freeContactTime = document.createElement("input");
+        freeContactTime.setAttribute("type","hidden");
+        freeContactTime.setAttribute("id",room.clientFreeContactTime);
+        itemBody.append(inputGrade);
+        itemBody.append(freeContactTime);
 
 				li.append(itemHeader, itemBody);
 				chattingList.append(li);
@@ -347,7 +383,7 @@ chattingSock.onmessage = function(e) {
 			li.classList.add("target-chat");
 	
 			// 상대 프로필
-			// <img src="/resources/images/user.png">
+			// <img src="/resources/images/프로필.PNG">
 			const img = document.createElement("img");
 			img.setAttribute("src", selectClientProfile);
 			

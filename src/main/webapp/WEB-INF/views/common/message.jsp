@@ -73,21 +73,6 @@
 						</div>
 					</li> --%>
 				</ul>
-                <div id="chattingMessage"> 
-                    <div><img src="/Final/image/정채연.jfif"></div>
-                    <div id="message">
-                    </div>
-                </div>
-                <div id="chattingMessage"> 
-                    <div><img src="/Final/image/정채연.jfif"></div>
-                    <div id="message">
-                    </div>
-                </div>
-                <div id="chattingReMessage"> 
-                    <div><img src="/Final/image/아가뚱.jfif"></div>
-                    <div id="reMessage">
-                    </div>
-                </div>
             </div>
             <div id="messageInput">
                 <textarea id="inputChatting" rows="3" placeholder="     메세지를 입력해주세요."></textarea>
