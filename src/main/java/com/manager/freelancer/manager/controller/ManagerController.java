@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.manager.freelancer.manager.model.service.ManagerService;
+import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 
@@ -123,6 +125,57 @@ public class ManagerController {
 
 		return result;
 	}
+	
+	
+	// 서비스 상세보기
+	@GetMapping("/manager/serviceDetail/{serviceNo}")
+	public String managerServiceDetail(@PathVariable("serviceNo") int serviceNo, Model model) {
+		
+		FreelancerService freelancerService = service.managerServiceDetail(serviceNo);
+		model.addAttribute("freelancerService", freelancerService);
+		
+		
+		return "/manager/serviceDetail";
+	}
+	
+	// 서비스 승인
+	@GetMapping("/manager/{serviceNo}/serviceApproval")
+	public String managerServiceApproval(@PathVariable("serviceNo") int serviceNo, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+		
+		int result = service.managerServiceApproval(serviceNo);
+		
+		if(result>0) {
+			Map<String, Object> map = service.selectServiceList(cp);
+			model.addAttribute("map", map);
+		}
+		
+		return "/manager/serviceList";
+	}
+	
+	
+	
+	// 서비스 반려
+	@GetMapping("/manager/{serviceNo}/serviceRestore")
+	public String managerServiceRestort(@PathVariable("serviceNo") int serviceNo, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+		
+		int result = service.managerServiceRestore(serviceNo);
+		
+		if(result>0) {
+			Map<String, Object> map = service.selectServiceList(cp);
+			model.addAttribute("map", map);
+		}
+		
+		return "/manager/serviceList";
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	// ======================================================================================
 

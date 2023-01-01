@@ -205,6 +205,23 @@ public class ManagerServiceImpl implements ManagerService {
 		return dao.managerServiceDelete(serviceNo);
 	}
 	
+	// 서비스 상세보기
+	@Override
+	public FreelancerService managerServiceDetail(int serviceNo) {
+		return dao.managerServiceDetail(serviceNo);
+	}
+	
+	// 서비스 승인
+	@Override
+	public int managerServiceApproval(int serviceNo) {
+		return dao.managerServiceApproval(serviceNo);
+	}
+	
+	// 서비스 반려
+	@Override
+	public int managerServiceRestore(int serviceNo) {
+		return dao.managerServiceRestore(serviceNo);
+	}
 	
 	
 	// 계좌 내역 목록

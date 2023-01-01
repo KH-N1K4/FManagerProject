@@ -30,6 +30,13 @@
 		<id property="serviceNo" column="SERVICE_NO"/>
 		<result property="serviceTitle" column="SERVICE_TITLE" />
 		<result property="serviceStatus" column="SERVICE_STATUS" />
+		<result property="requestFilePath" column="REQUEST_FILE_PATH" />
+		<result property="serviceSummary" column="SERVICE_SUMMARY" />
+		<result property="servicePrice" column="SERVICE_PRICE" />
+		<result property="serviceEditNum" column="SERVICE_EDIT_NUM" />
+		<result property="serviceWorkPeriod" column="SERVICE_WORK_PERIOD" />
+		<result property="freelancerName" column="MEMBER_NAME" />
+		<result property="freelancerImage" column="MEMBER_PROFILE" />
 	</resultMap>
 	
 	<resultMap type="Settlement" id="manager_settlement_rm">
@@ -234,8 +241,35 @@
 	</update>
 	
 	
+	<!-- 서비스 상세보기 -->
+	<select id="managerServiceDetail" resultMap="manager_service_rm">
+	SELECT *
+	FROM (
+	   SELECT FREELANCER_NO, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_NAME,
+	   (SELECT MEMBER_PROFILE FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_PROFILE,
+	   SERVICE_NO, REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY SERVICE_NO ORDER BY SERVICE_NO, REQUEST_FILE_PATH)) RNUM
+	   ,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,
+		SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,SERVICE_CREATE_DATE, THIRD_CATEGORY_NAME, SUB_CATEGORY_NAME, MAIN_CATEGORY_NAME,SERVICE_DEL_FL,SERVICE_STATUS
+		FROM SERVICE_FILE
+		JOIN SERVICE USING(SERVICE_NO)
+		JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		JOIN FREELANCER USING(FREELANCER_NO)
+		WHERE SERVICE_NO=#{serviceNo}
+	) 
+	WHERE RNUM =1
+	</select>
 	
+	<!-- 서비스 승인 -->
+	<update id="managerServiceApproval">
+		UPDATE SERVICE SET SERVICE_STATUS=2 WHERE SERVICE_NO=#{serviceNo}
+	</update>
 	
+	<!-- 서비스 반려 -->
+	<update id="managerServiceRestore">
+		UPDATE SERVICE SET SERVICE_STATUS=3 WHERE SERVICE_NO=#{serviceNo}
+	</update>
 	
 	
 	

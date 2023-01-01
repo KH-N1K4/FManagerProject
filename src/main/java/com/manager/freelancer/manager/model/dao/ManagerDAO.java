@@ -178,6 +178,31 @@ public class ManagerDAO {
 	public int managerServiceDelete(int serviceNo) {
 		return sqlSession.update("managerMapper.managerServiceDelete", serviceNo);
 	}
+	
+	/** 서비스 상세보기
+	 * @param serviceNo
+	 * @return
+	 */
+	public FreelancerService managerServiceDetail(int serviceNo) {
+		return sqlSession.selectOne("managerMapper.managerServiceDetail", serviceNo);
+	}
+	
+	/** 서비스 승인
+	 * @param serviceNo
+	 * @return
+	 */
+	public int managerServiceApproval(int serviceNo) {
+		return sqlSession.update("managerMapper.managerServiceApproval", serviceNo);
+	}
+
+	/** 서비스 반려
+	 * @param serviceNo
+	 * @return
+	 */
+	public int managerServiceRestore(int serviceNo) {
+		return sqlSession.update("managerMapper.managerServiceRestore", serviceNo);
+	}
+
 
 	/** 계좌 내역 수 조회
 	 * @param status
@@ -312,6 +337,9 @@ public class ManagerDAO {
 	public int getPaymentPrice2(int tradeNo) {
 		return sqlSession.selectOne("managerMapper.getPaymentPrice2",tradeNo);
 	}
+
+	
+	
 
 
 
