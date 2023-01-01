@@ -100,6 +100,7 @@ const roomListAddEvent = () => {
         expert.children[2].children[3].innerText='';
         expert.children[2].children[4].innerText='';
       }
+      expert.children[4].id = selectChatRoomNo;
       /* 채팅 상대방 정보보기 */
       
 			// 비동기로 메세지 목록을 조회하는 함수 호출
@@ -107,7 +108,8 @@ const roomListAddEvent = () => {
 		});
 	}
 }
-
+var arrDayList = new Array();
+var num =0;
 // 비동기로 메세지 목록을 조회하는 함수
 const selectChattingFn = () => {
 	$.ajax({
@@ -122,8 +124,8 @@ const selectChattingFn = () => {
 
 			ul.innerHTML = ""; // 이전 내용 지우기
       var booleanDay = false;
-      var arrDayList = new Array();
-      var num =0;
+      arrDayList = new Array();
+      num =0;
 			// 메세지 만들어서 출력하기
 			for(let msg of messageList){
 
@@ -358,6 +360,21 @@ chattingSock.onmessage = function(e) {
 	// 현재 메세지를 받은 채팅방을 보고 있다면
 	if(selectChatRoomNo == msg.chatRoomNo){
 		const ul = document.querySelector(".display-chatting");
+
+    const arrDay =msg.sendTime.split(" ");
+    const liDay = document.createElement("li");
+    const spanDay = document.createElement("span");
+    spanDay.innerText = arrDay[0];
+    liDay.classList.add("Daylist");
+    liDay.append(spanDay);
+
+    arrDayList[num] = arrDay[0];
+    if(num !=0){
+      if(arrDayList[num] !=arrDayList[num-1]){
+          ul.append(liDay);
+      }
+    }
+    num = num+1;
 	
 		// 메세지 만들어서 출력하기
 		//<li>,  <li class="my-chat">
@@ -366,7 +383,7 @@ chattingSock.onmessage = function(e) {
 		// 보낸 시간
 		const span = document.createElement("span");
 		span.classList.add("chatDate");
-		span.innerText = msg.sendTime;
+		span.innerText = arrDay[1];//msg.sendTime;
 	
 		// 메세지 내용
 		const p = document.createElement("p");
@@ -408,3 +425,34 @@ chattingSock.onmessage = function(e) {
 
 	selectRoomList();
 }
+
+//나가기 버튼 누르면 실행
+$('#outbtnID').click(function(){
+  $.ajax({
+    url : "/chatting/updateOutFL",
+    data : {"chatRoomNo" : selectChatRoomNo, "memberNo" : loginMemberNo},
+    success : result => {
+      console.log(result);
+
+      const ul = document.querySelector(".display-chatting");
+			ul.innerHTML = "";
+      const expert = document.getElementsByClassName('expert')[0];
+      document.getElementsByClassName('outbtn')[0].classList.remove("show"); 
+
+      expert.children[0].children[0].setAttribute("src","");
+      expert.children[1].children[0].innerText="";
+      
+      expert.children[2].children[0].innerText='';
+      expert.children[2].children[1].innerText='';
+      expert.children[2].children[3].innerText='';
+      expert.children[2].children[4].innerText='';
+    
+      expert.children[4].id = '';
+      document.getElementById(selectChatRoomNo+"-"+selectClientNo).remove();
+    },
+    error: () => {
+        console.log("나가기 실패")
+    }
+  })
+});
+

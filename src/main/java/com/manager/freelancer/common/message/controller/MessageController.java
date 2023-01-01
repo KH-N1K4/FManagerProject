@@ -105,6 +105,12 @@ public class MessageController {
     public int updateReadFlag(@RequestParam Map<String, Object> paramMap) {
         return service.updateReadFlag(paramMap);
     }
+    
+    @GetMapping("/chatting/updateOutFL")
+    @ResponseBody
+    public int updateOutFL(@RequestParam Map<String, Object> paramMap) {
+        return service.updateOutFL(paramMap);
+    }
 	
 	
 }

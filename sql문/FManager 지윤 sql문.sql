@@ -212,8 +212,8 @@ VALUES
 --1초에 한번씩 요구사항이 변경되면서 전화를 하루에 50번 이상 오셔서 거래 안하고 싶어요
 --돈 하나도 안 받아도 상관 없으니까 제발 거래 취소해주세요!
 
-DELETE FROM "CHAT_ROOM" 
-WHERE CHAT_ROOM_NO=8;
+DELETE FROM "CHAT" 
+WHERE CHAT_NO=10;
 --SEQ_WORK_NO--SEQ_TRADE_REPORT_NO
 SELECT SEQ_CHAT_ROOM_NO.NEXTVAL FROM DUAL;--시퀀스 되돌리기기
 ALTER SEQUENCE SEQ_CHAT_ROOM_NO INCREMENT BY -2;
@@ -600,3 +600,31 @@ SELECT TO_CHAR(NVL((SELECT MAX(CHAT_SEND_TIME) CHAT_SEND_TIME
                FROM CHAT_ROOM R
       WHERE (CHAT_OPENMEM_NO = 30
       OR CLIENT_NO = 30);
+------------------------------------------------------------------------------------
+INSERT INTO "CHAT"
+      VALUES(SEQ_CHAT_NO.NEXTVAL, #{chatMessage}, DEFAULT, #{chatRoomNo}, #{senderNo}, DEFAULT)   
+-----------------------------------------------------------------------------------------------------
+UPDATE "CHAT" SET
+      READ_FL = 'Y'
+      WHERE CHAT_ROOM_NO = #{chatRoomNo}
+      AND SENDER_NO != #{memberNo};
+----------------------------------------------------------------------------------------------
+SELECT CHAT_NO, CHAT_MESSAGE, READ_FL, SENDER_NO, CHAT_ROOM_NO,
+      TO_CHAR(CHAT_SEND_TIME, 'YYYY.MM.DD HH24:MI') SEND_TIME 
+      FROM CHAT
+      JOIN CHAT_ROOM USING(CHAT_ROOM_NO) 
+      WHERE CHAT_ROOM_NO  = 10
+      AND (CHAT_ROOM_OPENMEM_UPDATE_DATE IS NULL OR CHAT_SEND_TIME >= CHAT_ROOM_OPENMEM_UPDATE_DATE AND CHAT_OPENMEM_NO = 30)
+      AND (CHAT_ROOM_CLIENT_UPDATE_DATE IS NULL OR CHAT_SEND_TIME >= CHAT_ROOM_CLIENT_UPDATE_DATE AND CLIENT_NO = 30)
+      ORDER BY CHAT_NO;
+     
+UPDATE "CHAT_ROOM" SET
+      CHAT_ROOM_OPENMEM_DEL_FL = 'Y'
+      WHERE CHAT_ROOM_NO = #{chatRoomNo}
+      AND CHAT_OPENMEM_NO = #{memberNo};
+     
+UPDATE "CHAT_ROOM" SET
+      CHAT_ROOM_CLIENT_DEL_FL = 'Y'
+      WHERE CHAT_ROOM_NO = #{chatRoomNo}
+      AND CLIENT_NO = #{memberNo};
+     

@@ -88,4 +88,12 @@ public class MessageDAO {
 		map.put("memberNo", memberNo);
 		return sqlSession.selectList("messageMapper.selectMessageList", map);
 	}
+
+	/**채팅방 나가기
+	 * @param paramMap
+	 * @return
+	 */
+	public int updateOutFL(Map<String, Object> paramMap) {
+		return sqlSession.update("messageMapper.updateOutFL", paramMap);
+	}
 }

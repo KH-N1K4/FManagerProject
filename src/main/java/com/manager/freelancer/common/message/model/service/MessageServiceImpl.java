@@ -89,4 +89,13 @@ public class MessageServiceImpl implements MessageService{
         }
         return messageList;
     }
+
+	/**
+	 *채팅방 나가기
+	 */
+	@Override
+	public int updateOutFL(Map<String, Object> paramMap) {
+
+		return dao.updateOutFL(paramMap);
+	}
 }

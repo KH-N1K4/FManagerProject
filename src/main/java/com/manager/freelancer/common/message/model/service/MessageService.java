@@ -54,5 +54,11 @@ public interface MessageService {
      * @return
      */
     List<Message> selectMessageList( Map<String, Object> paramMap, int memberNo);
+
+	/**채팅방 나가기
+	 * @param paramMap
+	 * @return
+	 */
+	int updateOutFL(Map<String, Object> paramMap);
 	
 }

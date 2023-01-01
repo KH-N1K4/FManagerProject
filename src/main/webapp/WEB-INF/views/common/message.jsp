@@ -93,7 +93,8 @@
                 <span><%--연락 가능 시간--%></span> <a><%--14:00-18:00--%></a><br>
                 <span><%--회원 등급--%></span>      <a><%--Master--%></a><br>
             </div>
-            <div class="outbtn"><button>채팅방 나가기</button></div>
+            <div class="outbtn"><button id="outbtnID">채팅방 나가기</button></div>
+            <input type="hidden" id="">
         </div>    
     </div>
   </section> 

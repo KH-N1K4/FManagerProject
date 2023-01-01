@@ -216,4 +216,8 @@
       AND (CHAT_ROOM_CLIENT_UPDATE_DATE IS NULL OR CHAT_SEND_TIME <![CDATA[>=]]> CHAT_ROOM_CLIENT_UPDATE_DATE AND CLIENT_NO = #{memberNo})
       ORDER BY CHAT_NO
    </select>
+   
+   <update id="updateOutFL">
+     
+   </update>
 </mapper>
