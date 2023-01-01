@@ -17,7 +17,6 @@ public class UserInquiry {
 	private String inquiryRequest;                  // 이용문의 답변
 	private String userInquiryCreateDate;           // 이용문의 작성 날짜 
 	private String inquiryRequestDate;           // 이용문의 답변 작성 날짜 
-	private String inquiryRequestWriter;           // 이용문의 답변 작성 날짜 
 	private int memberNo;                           // 회원 번호 
 	private int inquiryFileNo;                      // 이용문의 첨부 파일 번호
 	private String inquiryFilePath;                 // 이용문의 첨부 파일 경로

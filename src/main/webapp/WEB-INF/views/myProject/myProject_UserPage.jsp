@@ -61,12 +61,11 @@
     <!-- hearder -->
 	  <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
 
-    <!-- hearder -->
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
+
         <!-- sideMenu -->
         <jsp:include page="/WEB-INF/views/myProject/myProjectSide.jsp"/>
-        <!-- sideMenu -->
 
         <!-- sideMenu를 제외한 메인 내용 -->
         <section class="mainContent">
@@ -74,7 +73,7 @@
             <div class="container_header">
               <section class="container_header_left">
                 <!-- 상단 내프로젝트 페이지 제목 -->
-                <div class="container_title"><span>내프로젝트</span></div>
+                <div class="container_title"><span>내 프로젝트</span></div>
                 <!-- 상단 내프로젝트 페이지 제목 -->
                 <!-- 상단 selectbox -->
                 <div class="selectbox">
@@ -187,6 +186,11 @@
         <!-- sideMenu를 제외한 메인 내용 -->
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
+
+    1. 현재 페이지에서 필요한 테이블 
+      - 프로젝트  / 프로젝트 첨부 / 카테고리 1
+    2. 조회해야 하는 것 
+
   </main>
   <!-- **************************************footer*************************************-->
 
