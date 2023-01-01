@@ -1,14 +1,17 @@
 
 const ctx = document.getElementById('myChart');
-const d = new Date();
 var arr = new Array();
 var arrProfit = new Array();
-let num = 0;
-for(var i=11; i>=0; i--){
-  const agodate = (new Date(d.getFullYear(), d.getMonth()-i,d.getDate()));
+var num = 0;
+for(var i=1; i<=12; i++){
+  const d = new Date();
+  const agodate = (new Date(d.getFullYear()-1, d.getMonth()+
+  i));
+  console.log(num +":"+agodate+","+i);
   const year =agodate.getFullYear();
   const months =agodate.getMonth()+1;
   const agodate2 = year+"-"+months;
+  console.log(num +":"+agodate2+","+i);
   arr[num] = agodate2;
   var booleanVal = false;
   profitList.forEach(function(arg){

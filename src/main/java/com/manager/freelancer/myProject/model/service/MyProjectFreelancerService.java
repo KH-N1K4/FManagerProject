@@ -113,6 +113,18 @@ public interface MyProjectFreelancerService {
 	 */
 	Map<String, Object> selectMyProfitEachList(int memberNo, int cp, String startDate, String endtDate);
 
+	/**서비스 문의 내역
+	 * @param memberNo
+	 * @param cp
+	 * @param startDate
+	 * @param endtDate
+	 * @param mainCategoryNo
+	 * @param searchInput
+	 * @return
+	 */
+	Map<String, Object> myServiceInquiry(int memberNo, int cp, String startDate, String endtDate, int mainCategoryNo,
+			String searchInput);
+
 
 
 }

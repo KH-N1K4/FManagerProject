@@ -70,4 +70,5 @@ public class FreelancerService {//지윤
 	private int serviceInquiryNo;			//SERVICE_INQUIRY_NO 서비스 문의 번호 SEQUENCE: SEQ_SERVICE_INQUIRY_NO
 	private String serviceInquiryContent;	//SERVICE_INQUIRY_CONTENT 서비스 문의 내용
 	private String serviceInquiryDate;		//SERVICE_INQUIRY_CREATE_DATE 서비스 문의 작성 날짜
+	private String serviceInquiryDateString;		//SERVICE_INQUIRY_DATE_STRING
 }

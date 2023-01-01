@@ -242,6 +242,47 @@ public class MyProjectFreelancerDAO {
 		return sqlSession.selectOne("myProjectFreelancerSerive.getMyProfitEachListCount", map);
 	}
 
+	/**서비스 문의 내역 페이지
+	 * @param memberNo
+	 * @param startDate
+	 * @param endtDate
+	 * @param mainCategoryNo
+	 * @param mainCategoryNo2
+	 * @return
+	 */
+	public int getmyServiceInquiryListCount(int memberNo, String startDate, String endtDate, int mainCategoryNo,
+			String searchInput) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("startDate", startDate);
+		map.put("endtDate", endtDate);
+		map.put("mainCategoryNo",mainCategoryNo);
+		map.put("searchInput", searchInput);
+		return sqlSession.selectOne("myProjectFreelancerSerive.getmyServiceInquiryListCount", map);
+	}
+
+	/**서비스 문의 내역
+	 * @param memberNo
+	 * @param pagination
+	 * @param startDate
+	 * @param endtDate
+	 * @param mainCategoryNo
+	 * @param mainCategoryNo2
+	 * @return
+	 */
+	public List<FreelancerService> myServiceInquiryList(int memberNo, Pagination pagination, String startDate,
+			String endtDate, int mainCategoryNo, String searchInput) {
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
+	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("memberNo", memberNo); 
+		map.put("startDate", startDate);
+		map.put("endtDate", endtDate);
+		map.put("mainCategoryNo",mainCategoryNo);
+		map.put("searchInput", searchInput);
+		return sqlSession.selectList("myProjectFreelancerSerive.myServiceInquiryList", map, rowBounds);
+	}
+
 
 	
 }
