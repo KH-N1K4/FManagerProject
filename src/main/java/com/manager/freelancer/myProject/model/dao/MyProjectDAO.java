@@ -38,11 +38,9 @@ public class MyProjectDAO {
 		map.put("memberNo", memberNo); 
 		map.put("mainCategoryNo", mainCategoryNo);
 		
-		
 		int result = sqlSession.selectOne("myProjectMapper.getMyProjectListCount", map);
-		
-		System.out.println(result);
-		return sqlSession.selectOne("myProjectMapper.getMyProjectListCount", map);
+		System.out.println("result="+result);
+		return result;
 	}
 
 	/** 나의 프로젝트 들고오기 페이지 처리
