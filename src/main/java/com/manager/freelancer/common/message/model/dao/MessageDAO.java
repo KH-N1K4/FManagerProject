@@ -96,4 +96,13 @@ public class MessageDAO {
 	public int updateOutFL(Map<String, Object> paramMap) {
 		return sqlSession.update("messageMapper.updateOutFL", paramMap);
 	}
+
+	/**채팅방 나가기
+	 * @param paramMap
+	 * @return
+	 */
+	public int updateOutClientFL(Map<String, Object> paramMap) {
+		
+		return sqlSession.update("messageMapper.updateOutClientFL", paramMap);
+	}
 }

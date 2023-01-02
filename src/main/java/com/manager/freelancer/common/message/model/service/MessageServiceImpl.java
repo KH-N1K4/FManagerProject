@@ -95,7 +95,10 @@ public class MessageServiceImpl implements MessageService{
 	 */
 	@Override
 	public int updateOutFL(Map<String, Object> paramMap) {
-
-		return dao.updateOutFL(paramMap);
+		int result = dao.updateOutFL(paramMap);
+		if(result ==0) {
+			result = dao.updateOutClientFL(paramMap);
+		}
+		return result;
 	}
 }
