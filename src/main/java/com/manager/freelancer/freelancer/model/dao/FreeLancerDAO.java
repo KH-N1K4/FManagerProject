@@ -6,11 +6,13 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.manager.freelancer.freelancer.model.vo.Career;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.freelancer.model.vo.License;
 import com.manager.freelancer.freelancer.model.vo.Major;
+import com.manager.freelancer.freelancer.model.vo.Portfolio;
 import com.manager.freelancer.freelancer.model.vo.Region;
 
 @Repository
@@ -63,11 +65,51 @@ public class FreeLancerDAO {
 		return sqlSession.selectList("freelancerMapper.getRegionList");
 	}
 
+
+	public List<Portfolio> getPortfolioList(Freelancer inputFreelancer) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("freelancerMapper.getPortfolioList", inputFreelancer);
+	}
+	
 	// 전문가 정보 조회
 	public Freelancer freelancerInfo(int freelancerNo) { // inputfreelancer에는 회원번호(프리랜서번호)가 있다.
 
 		return sqlSession.selectOne("freelancerMapper.freelancerInfo", freelancerNo);
 	}
+
+
+	// 전문가 정보 수정
+	public int updateFreelancerInfo(Freelancer inputFreelancer) {
+
+		return sqlSession.update("freelancerMapper.updateFreelancerInfo", inputFreelancer);
+	}
+	// 전문가 정보 수정(경력사항)
+	public int updateFreelancerCareer(Freelancer inputFreelancer) {
+
+		return sqlSession.update("freelancerMapper.updateFreelancerCareer", inputFreelancer);
+	}
+
+	// 포트폴리오 등록
+	public int addPortfolio(Portfolio inputPortfolio) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("freelancerMapper.addPortfolio", inputPortfolio);
+	}
+
+
+	// 포트폴리오등록시 이미지 삽입
+	public int insertPortfolioImageList(List<MultipartFile> imageList) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("freelancerMapper.insertPortfolioImageList", imageList);
+	}
+
+
+
+
+
+
+
+	
+	
 
 
 	

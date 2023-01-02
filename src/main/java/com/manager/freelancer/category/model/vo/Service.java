@@ -36,6 +36,7 @@ public class Service {
 	private String memberName;
 	private String memberProfile;
 	private int freelancerNo;
+	private String likeCheckFL;
 	
 	private List<ImageFile> imageFileList;
 	
