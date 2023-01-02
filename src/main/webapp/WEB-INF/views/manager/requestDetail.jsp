@@ -8,8 +8,12 @@
     <title>프로젝트 의뢰 관리 상세보기</title>
     
     <link rel="stylesheet" href="/resources/css/myProject/askService.css">
-    <link rel="stylesheet" href="/resources/css/category/serviceDetail.css">
+    <link rel="stylesheet" href="/resources/css/manager/requestDetail.css">
     <style>
+    .main>*{
+        width: 1200px;
+        margin: auto;
+    }
     .expertPage{
         margin-bottom: 20px;
     }
@@ -40,7 +44,7 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp" />
     
 
        <div class="main">
@@ -52,9 +56,10 @@
                 <div class="serviceTitle">${projectRequest.projectRequestTitle }</div>
                 <div class="serviceSummary">${projectRequest.projectRequestSummary}</div>
                 <div class="serviceInfo">
-                    <span>예산 <span>${projectRequest.projectRequestBudget }</span>원</span>
-                    <span>모집 마감일 <span>${projectRequest.requestRecruitDate }</span>회</span>
-                    <span>작업 마감일 <span>${projectRequest.requestWorkDate }</span>일</span>   
+                    <span><span>예산</span> <span>${projectRequest.projectRequestBudget }</span>원</span>
+                    <span><span>작업일수</span> <span>${projectRequest.projectWorkPeriod }</span>일</span><br>
+                    <span><span>모집 마감일</span> <span>${projectRequest.requestRecruitDate }</span></span>
+                    <span><span>작업 마감일</span> <span>${projectRequest.requestWorkDate }</span></span>   
                 </div>
 
                 <%-- <div class="expertPage">
