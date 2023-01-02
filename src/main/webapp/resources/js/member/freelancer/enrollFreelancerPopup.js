@@ -96,13 +96,42 @@ const sendContent1 = document.getElementById('sendContent1');
 
 
 sendContent1.addEventListener('click',function() {
-  const test1 = $("#graduateStatus option:selected").text()
-  // console.log($(".graduateStatus option:selected").text());
-  document.getElementById('majorStatus').value = $("#graduateStatus option:selected").val(); // input hidden값
-  for(let i = 0; i < result1.length-1; i++) {
-    licenseInput1.value += result1[i].value +',';
-  }
-  licenseInput1.value += test1;
+  // const test1 = $("#graduateStatus option:selected").text()
+  // // console.log($(".graduateStatus option:selected").text());
+  // document.getElementById('majorStatus').value = $("#graduateStatus option:selected").val(); // input hidden값
+  // for(let i = 0; i < result1.length-1; i++) {
+  //   licenseInput1.value += result1[i].value +',';
+  // }
+
+
+  const newOne=document.createElement("div");
+  newOne.classList.add("newOne");
+
+   const newText=document.createElement("input");
+   const xBtn=document.createElement("span");
+   xBtn.classList.add("xbtn");
+   xBtn.innerHTML="&times;";
+  
+   newText.name="major";
+   newText.classList.add("addContent");
+   newText.value=result1[0].value+"/"+result1[1].value+"/"+result1[2].value;
+   newOne.append(newText);
+   newOne.append(xBtn);
+   licenseInput1.parentElement.append(newOne);
+
+
+    // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
+    xBtn.addEventListener("click",function(){
+    // 클릭된 X버튼의 부모 요소(div.row)를 삭제 
+    // 요소.remove() : 해당 요소를 제거 
+    this.parentElement.remove();
+})
+
+   if(select1.value==0){
+    alert("다시 선택");
+    // 이거 어떻게 막지..
+   }
+  //licenseInput1.value += test1;
   modal1.style.display='none';
 });
 
@@ -124,19 +153,50 @@ sendContent2.addEventListener('click',function() {
   licenseInput2.value += test2+" ";  // ?년 [4]
   licenseInput2.value += test3;     // ?개월 [5]
 
-  modal2.style.display='none';
-  if(licenseInput2.value.trim().length != 0){
-    freelancerCont.value += 
-    licenseInput2.value.split(',')[4].split('년')[0];
-
-  }
-});
+  // if(licenseInput2.value.trim().length != 0){
+    //   freelancerCont.value += 
+    //   licenseInput2.value.split(',')[4].split('년')[0];
+    
+    // }
+    
+    
+    
+    
+    const newOne=document.createElement("div");
+    newOne.classList.add("newOne");
+    
+    const newText=document.createElement("input");
+    const xBtn=document.createElement("span");
+    xBtn.classList.add("xbtn");
+    xBtn.innerHTML="&times;";
+    
+    newText.name="career";
+    newText.classList.add("addContent");
+    
+    
+    newText.value=result2[0].value+"/"+result2[1].value+"/"+result2[2].value+"/"+result2[3].value+"/"+test2+"년"+test3+"개월";
+    
+    
+    newOne.append(newText);
+    newOne.append(xBtn);
+    licenseInput2.parentElement.append(newOne);
+    
+    
+    // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
+    xBtn.addEventListener("click",function(){
+      // 클릭된 X버튼의 부모 요소(div.row)를 삭제 
+      // 요소.remove() : 해당 요소를 제거 
+      this.parentElement.remove();
+    })
+    modal2.style.display='none';
+  });
 
 const result3 = document.getElementsByClassName("input3"); // 모달창의 input들
 const licenseInput3 = document.getElementById("licensePopup"); // 전문가등록의 자격증input칸
 const sendContent3 = document.getElementById("sendContent3"); // 모달창 제출 버튼
 
 sendContent3.addEventListener("click", function(){
+
     for(let i =0; i<result3.length-1; i++){
     document.getElementById("licensePopup").value +=   result3[i].value  +',';
     // if(licenseInput3[i].value = 1){
@@ -145,6 +205,38 @@ sendContent3.addEventListener("click", function(){
     }
     licenseInput3.value += result3[2].value;
     // document.getElementById("licensePopup").value = result.value;
+
+
+    const newOne=document.createElement("div");
+    newOne.classList.add("newOne");
+  
+     const newText=document.createElement("input");
+     const xBtn=document.createElement("span");
+     xBtn.classList.add("xbtn");
+     xBtn.innerHTML="&times;";
+    
+     newText.name="license";
+     newText.classList.add("addContent");
+     newText.value=result3[0].value+"/"+result3[1].value+"/"+result3[2].value;
+     newOne.append(newText);
+     newOne.append(xBtn);
+     licenseInput3.parentElement.append(newOne);
+  
+  
+      // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
+      xBtn.addEventListener("click",function(){
+      // 클릭된 X버튼의 부모 요소(div.row)를 삭제 
+      // 요소.remove() : 해당 요소를 제거 
+      this.parentElement.remove();
+  })
+  
+     if(select1.value==0){
+      alert("다시 선택");
+      // 이거 어떻게 막지..
+     }
+
+
+
     modal3.style.display="none"
 });
 

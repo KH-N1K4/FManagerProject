@@ -32,9 +32,8 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public List<Service> selectBoardList(int mainCategoryNo) {
-		List<Service> boardList=dao.selectBoardList(mainCategoryNo);
-		return boardList;
+	public List<Service> selectBoardList(Map<String, Integer> map) {
+		return dao.selectBoardList(map);
 	}
 
 	@Override
@@ -50,6 +49,21 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public int pauseService(int serviceNo) {
 		return dao.pauseService(serviceNo);
+	}
+
+
+	public int serviceLikeCheck(Map<String, Object> map) {
+		return dao.serviceLikeCheck(map);
+	}
+
+	@Override
+	public int boardLikeUp(Map<String, Object> paramMap) {
+		return dao.boardLikeUp(paramMap);
+	}
+
+	@Override
+	public int boardLikeDown(Map<String, Object> paramMap) {
+		return dao.boardLikeDown(paramMap);
 	}
 
 	

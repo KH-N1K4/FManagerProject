@@ -8,6 +8,8 @@
     <title>카테고리</title>
     
     <link rel="stylesheet" href="/resources/css/category/projectRequest.css">
+    
+     <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -48,19 +50,37 @@
                     </select>
                 </form>
                 
-
                 <div id="imageContent">
-                
                 <c:forEach var="service" items="${map }">
-                	<a href="/category/${service.mainCategoryNo}/${service.subCategoryNo }/${service.thirdCategoryNo }/${service.serviceNo }">
-	                      	<!-- <span class="like-area">♥</span> -->
+                	<div>
+                	<%-- <a href="/category/${service.mainCategoryNo}/${service.subCategoryNo }/${service.thirdCategoryNo }/${service.serviceNo }"> --%>
+	                 
 	                    <div id="image">
-	                        <div><img src="${service.requestFilePath }"></div>
-	                        <span>${service.serviceTitle }</span>
-	                        <span>${service.serviceSummary }</span>
-	                        <span>가격: ${service.servicePrice}원</span>
+	                        <div><img src="${service.requestFilePath }">
+	                        <span class="like-area">
+	                        		<c:if test="${empty loginMember }">
+	                        			<i class="fa-regular fa-heart boardLike" ></i> 
+	                        		</c:if>
+	                        		<c:if test="${not empty loginMember }">
+		                        		<c:if test="${service.likeCheckFL=='N'}">
+				                            <i class="fa-regular fa-heart boardLike" id="${service.serviceNo }"></i>
+				                        </c:if>
+				                        <c:if test="${service.likeCheckFL=='Y'}">
+				                            <i class="fa-solid fa-heart boardLike" id="${service.serviceNo }"></i>
+				                        </c:if>
+	                        		</c:if>
+	                        </span>
+  
+	                        </div>
+	                        <a href="/category/${service.mainCategoryNo}/${service.subCategoryNo }/${service.thirdCategoryNo }/${service.serviceNo }" class="imageTitle">
+	                        ${service.serviceTitle }
+	                           <span class="imageOthers">${service.serviceSummary }</span>
+	                        <span class="imageOthers">가격: ${service.servicePrice}원</span>
+	                        </a>
+	                     
 	                    </div>
-                    </a>
+                    <!-- </a> -->
+                	</div>
                 </c:forEach>
                 </div>    
             </div>
@@ -69,7 +89,16 @@
     </section>
 
 
+	
+     <script>
+        
+        const memberNo="${loginMember.memberNo}";
+     
+    </script>	
 
+
+ 	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>	
+	 <script src="/resources/js/category/categoryList.js"></script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
    

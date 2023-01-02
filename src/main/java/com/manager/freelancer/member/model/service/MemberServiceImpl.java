@@ -236,6 +236,17 @@ public class MemberServiceImpl implements MemberService{
 		public AskService selectSendSuggesionContent(String serviceInquiryNo) {
 			return dao.selectSendSuggesionContent(serviceInquiryNo);
 		}
+
+
+
+		@Override
+		public List<com.manager.freelancer.category.model.vo.Service> selectLikeList(int memberNo) {
+			
+			return dao.selectLikeList(memberNo);
+		}
+
+
+
 	
 	
 }

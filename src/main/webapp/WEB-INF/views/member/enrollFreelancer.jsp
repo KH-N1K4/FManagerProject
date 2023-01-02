@@ -78,20 +78,19 @@
             <div>
                 <div class="item">학력/전공</div>
                 <div>
-                    <input type="text" name="major" id="majorPopup" class="modal">
-                    <input name="majorStatus" id="majorStatus" type="hidden">
+                    <input type="text" id="majorPopup" class="modal">
                 </div>
             </div>
             <div>
                 <div class="item">경력 사항</div>
                 <div>
-                    <input type="text" name="career" id="careerPopup" class="modal">
+                    <input type="text" id="careerPopup" class="modal">
                 </div>
             </div>
             <div>
                 <div class="item">자격증</div>
                 <div>
-                    <input type="text" name="license" id="licensePopup" class="modal">
+                    <input type="text" id="licensePopup" class="modal">
                 </div>
             </div>
             <div>

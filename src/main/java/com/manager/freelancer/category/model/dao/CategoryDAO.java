@@ -32,8 +32,8 @@ public class CategoryDAO {
 		return sqlSession.selectList("categoryMapper.selectThirdCategoryList");
 	}
 
-	public List<Service> selectBoardList(int mainCategoryNo) {
-		return sqlSession.selectList("categoryMapper.selectBoardList",mainCategoryNo);
+	public List<Service> selectBoardList(Map<String, Integer> map) {
+		return sqlSession.selectList("categoryMapper.selectBoardList",map);
 	}
 
 	public Service viewService(int serviceNo) {
@@ -46,6 +46,18 @@ public class CategoryDAO {
 
 	public int pauseService(int serviceNo) {
 		return sqlSession.update("categoryMapper.pauseService",serviceNo);
+	}
+
+	public int serviceLikeCheck(Map<String, Object> map) {
+		return sqlSession.selectOne("categoryMapper.serviceLikeCheck",map);
+	}
+
+	public int boardLikeUp(Map<String, Object> paramMap) {
+		return sqlSession.insert("categoryMapper.serviceLikeUp",paramMap);
+	}
+
+	public int boardLikeDown(Map<String, Object> paramMap) {
+		return sqlSession.delete("categoryMapper.serviceLikeDown",paramMap);
 	}
 
 

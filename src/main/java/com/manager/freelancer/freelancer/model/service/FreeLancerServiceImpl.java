@@ -20,40 +20,89 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 	@Override
 	public int enrollFreelancerSignup(Freelancer inputFreelancer) {
 
-		String[] splitMajor = inputFreelancer.getMajor().split(",");
-		Major temp1 = new Major();
-		temp1.setMajorAcademyName(splitMajor[0]);
-		temp1.setMajorName(splitMajor[1]);
-		
-		
-		
-//		if(splitMajor[2].equals("재학")) {
-//			splitMajor[2] ;
-//		}
-//		temp1.setMajorGraduateStatus(Integer.parseInt(splitMajor[2]));
-		
-		temp1.setMajorGraduateStatus(inputFreelancer.getMajorStatus());
-		temp1.setFreelancerNo(inputFreelancer.getFreelancerNo());
-		
-		String[] splitCareer = inputFreelancer.getCareer().split(",");
-		Career temp2 = new Career();
-		temp2.setCareerCompanyName(splitCareer[0]); // 회사명
-		temp2.setCareerCompanyDepartment(splitCareer[1]); //회사부서
-		temp2.setCareerCompanyPosition(splitCareer[2]); // 직급
-		temp2.setCareerCompanyRegion(splitCareer[3]);  // 회사위치
-		temp2.setCareerCompanyPeriod1(splitCareer[4]); //경력(년)
-//		temp2.setCareerCompanyPeriod2(splitCareer[5]); //경력(월)
-		temp2.setFreelancerNo(inputFreelancer.getFreelancerNo()); 
-		
-		String[] splitLicense = inputFreelancer.getLicense().split(",");
-		License temp3 = new License();
-		temp3.setLicenseName(splitLicense[0]);
-		temp3.setLicenseDate(splitLicense[1]);
-		temp3.setLicenseAgency(splitLicense[2]);
-		temp3.setFreelancerNo(inputFreelancer.getFreelancerNo());
-		
 		
 		int result = dao.enrollFreelancerSignup(inputFreelancer);
+		
+		System.out.println(inputFreelancer);
+		
+		
+		if(inputFreelancer.getMajor()!=null) {
+			
+			String[] splitMajor = inputFreelancer.getMajor().split(",");
+			
+			int tempNum=0;
+			for(int i=0;i<splitMajor.length;i++) {
+				String[] singleMajor=splitMajor[i].split("/");
+				
+				Major temp1 = new Major();
+				temp1.setMajorAcademyName(singleMajor[0]);
+				temp1.setMajorName(singleMajor[1]);
+				
+				
+				if(singleMajor[2].equals("재학")) {
+					tempNum=1;
+				}else if(singleMajor[2].equals("휴학")) {
+					tempNum=2;
+				}else if(singleMajor[2].equals("이수")) {
+					tempNum=3;
+				}else if(singleMajor[2].equals("졸업")) {
+					tempNum=4;
+				}
+				
+				temp1.setMajorGraduateStatus(tempNum);
+				temp1.setFreelancerNo(inputFreelancer.getFreelancerNo());
+				
+				result = dao.enrollFreelancerMajor(temp1);
+			}
+			
+		}
+		
+		
+		
+		
+		if(inputFreelancer.getCareer()!=null) {
+			String[] splitCareer = inputFreelancer.getCareer().split(",");
+			
+			for(int i=0;i<splitCareer.length;i++) {
+				
+				String[] singleCareer=splitCareer[i].split("/");
+				
+				Career temp2 = new Career();
+				temp2.setCareerCompanyName(singleCareer[0]); // 회사명
+				temp2.setCareerCompanyDepartment(singleCareer[1]); //회사부서
+				temp2.setCareerCompanyPosition(singleCareer[2]); // 직급
+				temp2.setCareerCompanyRegion(singleCareer[3]);  // 회사위치
+				temp2.setCareerCompanyPeriod1(singleCareer[4]); //경력(년)
+		//		temp2.setCareerCompanyPeriod2(splitCareer[5]); //경력(월)
+				temp2.setFreelancerNo(inputFreelancer.getFreelancerNo()); 
+				
+				result=dao.enrollFreelancerCareer(temp2);
+			}
+			
+			
+		}
+	
+		
+		
+		if(inputFreelancer.getLicense()!=null) {
+			
+			String[] splitLicense = inputFreelancer.getLicense().split(",");
+			
+			for(int i=0;i<splitLicense.length;i++) {
+				
+				String[] singleCareer=splitLicense[i].split("/");
+				License temp3 = new License();
+				temp3.setLicenseName(singleCareer[0]);
+				temp3.setLicenseDate(singleCareer[1]);
+				temp3.setLicenseAgency(singleCareer[2]);
+				temp3.setFreelancerNo(inputFreelancer.getFreelancerNo());
+				
+				result=dao.enrollfreelancerLicense(temp3);
+			}
+		}
+		
+		
+		
 		// result = frelancerNo
 		
 		// Member 프리랜서_FL N-> Y로 변경
@@ -62,17 +111,9 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 		// 프리랜서 계좌등록(insert)
 		result = dao.insertFreelancerAccount(inputFreelancer);
 		
-		// 프리랜서 전공분야 insert
 		
-		if(result > 0) {
-			result = dao.enrollFreelancerMajor(temp1);
-		}
-		if(result> 0) {
-			result = dao.enrollFreelancerCareer(temp2);
-		}
-		if(result>0) {
-			result = dao.enrollfreelancerLicense(temp3);
-		}
+	
+		
 
 		return result;
 	}
