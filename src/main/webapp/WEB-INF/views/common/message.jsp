@@ -76,13 +76,16 @@
             </div>
             <div id="messageInput">
                 <textarea id="inputChatting" rows="3" placeholder="     메세지를 입력해주세요."></textarea>
+                <div id="insert"><button id="send">전송</button></div>
             </div>
             <!-- 메세지 입력창 -->
             <div id="messageButton">
                 <div id="addFile">
-                    <input type="file"> 파일첨부
+                    <label for="img0" class="preview">
+                        첨부파일 전송
+                    </label>
+                    <input type="file" id="img0" name="img0">
                 </div>
-                <div id="insert"><button id="send">전송</button></div>
             </div>
         </div>    
         <!-- 오른쪽 전문가 프로필 -->
