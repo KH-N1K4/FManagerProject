@@ -36,7 +36,6 @@ function selectChange() {
         data: { 'value': value },
         success: (map) => {
             if (map != null) {
-                console.log(map);
 
                 const options=selectmemberType.childNodes;
                 for(o of options){

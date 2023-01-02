@@ -11,6 +11,9 @@ $(document).ready(function(){
   $("#srchOption2").val(srchOption2).prop('selected', true);
 
 });
+$("#srchOption1").change(function(){
+  $('#searchInput').val('');
+});
 
 $('#searchInput').keyup(function(){
     var txt = $(this).val();
@@ -18,11 +21,21 @@ $('#searchInput').keyup(function(){
         $('#searchboxInclude').children().remove();
 
         list.forEach(function(arg){
+          if($("#srchOption1").val() == arg.mainCategoryNo){
             if(arg.serviceTitle.indexOf(txt) > -1 ){
-                $('#searchboxInclude').append(
-                    $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-                );		
+              $('#searchboxInclude').append(
+                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
+              );		
             }
+          }
+          if($("#srchOption1").val()==0){
+            if(arg.serviceTitle.indexOf(txt) > -1 ){
+              $('#searchboxInclude').append(
+                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
+              );		
+            }
+          }
+ 
         });
         $('#searchboxInclude').children().each(function(){ //자동완성 div 각각 클릭시
             $(this).click(function(){
@@ -33,11 +46,28 @@ $('#searchInput').keyup(function(){
     } else {
         $('#searchboxInclude').children().remove();
 
-        list.forEach(function(arg){
+        /* list.forEach(function(arg){
           $('#searchboxInclude').append(
             $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
           );		
       
+        }); */
+        list.forEach(function(arg){
+          if($("#srchOption1").val() == arg.mainCategoryNo){
+            if(arg.serviceTitle.indexOf(txt) > -1 ){
+              $('#searchboxInclude').append(
+                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
+              );		
+            }
+          }
+          if($("#srchOption1").val()==0){
+            if(arg.serviceTitle.indexOf(txt) > -1 ){
+              $('#searchboxInclude').append(
+                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
+              );		
+            }
+          }
+ 
         });
       
         $('#searchboxInclude').children().each(function(){
@@ -55,12 +85,29 @@ $('#searchInput').click(function(){
   if(txt != ''){  //빈줄이 아니면 
       $('#searchboxInclude').children().remove();
 
-      list.forEach(function(arg){
+      /* list.forEach(function(arg){
           if(arg.serviceTitle.indexOf(txt) > -1 ){
               $('#searchboxInclude').append(
                   $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
               );		
           }
+      }); */
+      list.forEach(function(arg){
+        if($("#srchOption1").val() == arg.mainCategoryNo){
+          if(arg.serviceTitle.indexOf(txt) > -1 ){
+            $('#searchboxInclude').append(
+                $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
+            );		
+          }
+        }
+        if($("#srchOption1").val()==0){
+          if(arg.serviceTitle.indexOf(txt) > -1 ){
+            $('#searchboxInclude').append(
+                $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
+            );		
+          }
+        }
+
       });
       $('#searchboxInclude').children().each(function(){ //자동완성 div 각각 클릭시
           $(this).click(function(){
@@ -71,11 +118,28 @@ $('#searchInput').click(function(){
   } else {
       $('#searchboxInclude').children().remove();
 
-      list.forEach(function(arg){
+      /* list.forEach(function(arg){
         $('#searchboxInclude').append(
           $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
         );		
     
+      }); */
+      list.forEach(function(arg){
+        if($("#srchOption1").val() == arg.mainCategoryNo){
+          if(arg.serviceTitle.indexOf(txt) > -1 ){
+            $('#searchboxInclude').append(
+                $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
+            );		
+          }
+        }
+        if($("#srchOption1").val()==0){
+          if(arg.serviceTitle.indexOf(txt) > -1 ){
+            $('#searchboxInclude').append(
+                $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
+            );		
+          }
+        }
+
       });
     
       $('#searchboxInclude').children().each(function(){
@@ -105,6 +169,7 @@ const modalClose = document.querySelector('.reportModal_close');
 $('.reportBtn').click(function(){
   document.querySelector('#ajaxReview').style.backgroundColor = '#538126';
   document.querySelector('#reportContent').value = "";
+  document.querySelector('#reportFilePath').value = "";
   document.querySelector('.fileRemove').style.display ="block";
   $(".fileaddDiv").remove();
   const tradeNoValue = this.title;

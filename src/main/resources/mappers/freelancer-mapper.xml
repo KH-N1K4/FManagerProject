@@ -21,29 +21,67 @@
     	
     	-->
     	<!-- mybatis-config 수정 -->
-    	
-    	<resultMap type="Freelancer" id="freelancer_rm">
+    	<!-- Freelancer -> com.manager~  -->
+    	<resultMap type="Freelancer" id="freelancer_rm"> 
    
    	      <id property="freelancerNo" column="FREELANCER_NO"/>
 
    		  <result property="freelancerPeriod" column="FREELANCER_PERIOD" />
    		  <result property="contactTime1" column="FREE_CONTACT_TIME1" />
 	      <result property="contactTime2" column="FREE_CONTACT_TIME2" />
-	      
-	      <result property="freelancerIntroduction" column="FREELACER_INTRODUCTION" />
+	      <result property="freelancerIntro" column="FREELANCER_INTRODUCTION" />
 	      <result property="regionNo" column="REGION_NO" />
+	      <result property="regionName" column="REGION_NAME" />
 	      <result property="gradeNo" column="GRADE_NO" />
+	      
+	      <result property="careerCompanyName" column="CAREER_COMPANY"/>
+	      <result property="careerCompanyDepartment" column="CAREER_DEPARTMENT"/>
+	      <result property="careerCompanyPosition" column="CAREER_POSITION"/>
+	      <result property="careerCompanyRegion" column="CAREER_REGION"/>
+	      <result property="careerPeriod" column="CAREER_PERIOD"/>
+	      
+	      <result property="licenseName" column="LICENSE_NAME"/>
+	      <result property="licenseDate" column="LICENSE_DATE"/>
+	      <result property="licenseAgency" column="LICENSE_AGENCY"/>
+	      
+	      <result property="bankName" column="BANK_NAME"/>
+	      <result property="bankAccountNumber" column="ACCOUNT_NO"/>
+	      
+	      <result property="portfolioTitle" column="PORTFOLIO_TITLE"/>
+	      <result property="portfolioContent" column="PORTFOLIO_CONTENT"/>
+	      <result property="portfolioFilePath" column="PORTFOLIO_FILE_PATH"/>
     	</resultMap>
-    	
-    	<!-- <resultMap type="com.manager.freelancer.freelancer.model.vo.Major" id="major_rm">
-    		
-    	</resultMap> -->
-    	
+ 	   	
+ 		<!-- 전문가 정보 조회 -->
+ 		<!-- <resultMap type="com.manager.freelancer.freelancer.model.vo.FreelancerInfo" id="freelancerInfo">
+			<id property="freelancerNo" column="FREELANCER_NO"/>
+			
+			<result property="freelancerIntro" column="FREELANCER_INTRODUCTION"/>  자기소개 
+			<result property="regionNo" column = "REGION_NO"/>						 지역
+			<result property="freelancerCont" column="FREELANCER_PERIOD"/>		경력기간	
+			<result property="contactTime1" column="FREE_CONTACT_TIME1"/>		연락가능시간1			 
+			<result property="contactTime2" column="FREE_CONTACT_TIME2"/>			 
+ 			
+ 			<result property="freelancerField" column="MAIN_CATEGORY_NO"/>  전문분야
+ 			
+ 			<result property="careerCompanyName" column="CAREER_COMPANY"/>   회사명 
+ 			<result property="careerCompanyDepartment" column="CAREER_DEPARTMENT"/> 회사부서 
+ 			<result property="careerCompanyPosition" column="CAREER_POSITION"/>		회사직위 
+ 			<result property="careerCompanyRegion" column="CAREER_REGION"/>			회사위치 
+ 			<result property="careerPeriod" column="CAREER_PERIOD"/>				경력기간 
+ 			
+ 			<result property="licenseName" column="LICENSE_NAME"/>					자격증명 
+ 			<result property="licenseDate" column="LICENSE_DATE"/>					자격증 취득일자 
+ 			<result property="licenseAgency" column="LICENSE_AGENCY"/>				자격증 발급처
+ 			
+ 			<result property="bankCode" column="BANK_CODE"/>						은행코드 
+ 			<result property="bankAccountNumber" column="ACCOUNT_NO"/>				계좌번호
+ 		</resultMap>
+    	 -->
 	
-    	<insert id="enrollFreelancer" parameterType = "Freelancer" >
-  
+    	<insert id="enrollFreelancer" parameterType = "Freelancer">
     		INSERT INTO "FREELANCER"
-    		VALUES(#{freelancerNo}, #{freelancerCont}, #{contactTime1}, #{contactTime2}, #{freelancerIntro},#{regionNo} ,1 )
+    		VALUES(#{freelancerNo}, #{freelancerCont}, #{contactTime1}, #{contactTime2}, #{freelancerIntro},#{regionNo} ,DEFAULT)
    
     	</insert>
     	
@@ -79,4 +117,74 @@
     	</insert>
     	
     	
+    	<insert id="insertFreelancerField" parameterType = "map">
+    		INSERT INTO "FIELD"
+    		VALUES(#{freelancerField}, #{freelancerNo})
+    	</insert>
+    	
+    	
+    	<select id="freelancerInfo" parameterType="int"  resultType="Freelancer" resultMap="freelancer_rm">
+			SELECT FREELANCER_INTRODUCTION,REGION_NO,REGION_NAME, FREELANCER_PERIOD as freelancerCont, FREE_CONTACT_TIME1, FREE_CONTACT_TIME2,
+			CAREER_COMPANY, CAREER_DEPARTMENT,CAREER_POSITION,CAREER_REGION,CAREER_PERIOD,
+			LICENSE_NAME, LICENSE_DATE,LICENSE_AGENCY,
+			BANK_NAME,ACCOUNT_NO
+			FROM FREELANCER 
+			JOIN CAREER USING(FREELANCER_NO)
+			JOIN REGION USING(REGION_NO)
+			JOIN LICENSE USING(FREELANCER_NO)
+			JOIN FREELANCER_ACCOUNT USING(FREELANCER_NO)
+			JOIN BANK USING(BANK_CODE)
+			WHERE FREELANCER_NO = #{freelancerNo} 
+    	</select>
+    	 
+    	<select id="getRegionList" resultType="com.manager.freelancer.freelancer.model.vo.Region">
+    		SELECT REGION_NO as regionNumber,REGION_NAME as regionName from REGION
+    	</select>	
+    	
+    	<select id="getPortfolioList" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio">
+    		SELECT PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent
+    		FROM  PORTFOLIO
+    		WHERE FREELANCER_NO = #{freelancerNo}
+    	</select>
+    	
+    	<update id="updateFreelancerInfo" parameterType="Freelancer">
+    		UPDATE FREELANCER SET
+    		FREELANCER_INTRODUCTION = #{freelancerIntro},
+    		REGION_NO =#{regionNo},
+    		FREELANCER_PERIOD = #{freelancerCont},
+    		FREE_CONTACT_TIME1 = #{contactTime1},
+    		FREE_CONTACT_TIME2 = #{contactTime2}
+    		WHERE FREELANCER_NO = #{freelancerNo}
+    	</update>
+    	
+    	
+    	<update id="updateFreelancerCareer" parameterType="Freelancer">
+    		UPDATE CAREER SET
+    		CAREER_COMPANY = #{careerCompanyName},
+    		CAREER_DEPARTMENT = #{careerCompanyDepartment},
+    		CAREER_POSITION = #{careerCompanyPosition},
+    		CAREER_REGION = #{careerCompanyRegion},
+    		CAREER_PERIOD = #{careerPeriod}
+    		WHERE FREELANCER_NO = #{freelancerNo}
+    	</update>
+    	
+    	
+    	
+    	
+    	<!-- 포트폴리오 등록 -->
+    	<insert id="addPortfolio"  parameterType = "Freelancer" useGeneratedKeys="true">
+    		<selectKey keyProperty="portfolioNo" resultType="_int" order="BEFORE">
+    			SELECT SEQ_PORTFOLIO_NO.NEXTVAL FROM DUAL
+    		</selectKey>
+    		INSERT INTO PORTFOLIO VALUES
+    		(SEQ_PORTFOLIO_NO.NEXTVAL,#{portfolioTitle}, #{portfolioContent}, #{portfolioFilePath},#{freelancerNo})
+    	</insert>
+    	
+    	
+    	<!-- 포트폴리오 첨부파일 삽입 -->
+    	<insert id ="insertPortfolioImageList" parameterType="list">
+    		INSERT INTO PORTFOLIO_FILE
+    		
+    	
+    	</insert>
 </mapper>

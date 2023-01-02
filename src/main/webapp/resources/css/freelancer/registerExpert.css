@@ -1,6 +1,6 @@
 .main{
     width: 900px;
-    margin:auto;
+    margin: auto;
 }
 
 .main *{
@@ -14,6 +14,10 @@
     font-size: 30px;
     margin:60px 0;
     display: block;
+}
+/* 1228 폼 가운데정렬... */
+#registerFrm{
+    /* margin-left: 300px; */
 }
 
 #registerFrm>div:first-child{
@@ -53,8 +57,8 @@ input[type="text"]:focus{
     outline: 1px solid #538126;
 }
 
-/* 吏��뿭 */
-#area, #bankName{
+/* 吏��뿭 */ /* 변경전 : #bankName */
+#area, #bankCode{
     width: 150px;
     border: 1px solid #538126;
     box-sizing: border-box;
@@ -66,7 +70,7 @@ input[type="text"]:focus{
     position: relative;
     top: -1px;
 }
-#area:focus, #bankName:focus{
+#area:focus, #bankCode:focus{
     border: 1px solid #538126;
     box-sizing: border-box;
     border-radius: 10px;
@@ -111,6 +115,13 @@ input[type="checkbox"]:checked + label span::after {
     top: -5px;
     left: 1px
 }
+/* .input1{
+    width: 400px;
+    height: 30px;
+    color:#538126;
+    border:2px solid #538126;
+    border-radius: 5px;
+} */
 
 /* 湲곌컙 */
 .number{
@@ -118,15 +129,31 @@ input[type="checkbox"]:checked + label span::after {
 }
 
 /* ���뻾 */
-#bankName{
+/* 1228변경전 */
+/* #bankName{
+    position: relative;
+    top: -3px;
+} */
+
+/* 1228변경휴 */
+#bankCode{
     position: relative;
     top: -3px;
 }
-#account{
+/* 1228변경전 */
+/* #account{
+    width: 430px;
+} */
+
+/* 1228변경휴 */
+#bankAccountNumber{
     width: 430px;
 }
 
 /* 모달창 뜨는 부분 */
+/* .input1, .input2, .input3{
+	width: 587px;
+} */
 .modal{
 	width: 587px;
 }
@@ -163,18 +190,12 @@ textarea:focus{
     color:white;
     font-weight: bold;
     
+    /* 1228 버튼 위치 이동 */
+    margin-right : 300px
+    
 }
 
-/* .modal_license{
-	position:absolute;
-	width:100%;
-	height:100%;
-	
-	background:rgba(0,0,0,0.8);
-	top:0;left:0;
-	display:none;
-	
-} */
+
 
 
 
@@ -189,7 +210,6 @@ textarea:focus{
     display: none;
 
     background-color: rgba(0, 0, 0, 0.4);
-    z-index:2;
 }
 .modal_career {
     position: absolute;
@@ -202,9 +222,8 @@ textarea:focus{
     display: none;
 
     background-color: rgba(0, 0, 0, 0.4);
-    z-index:3;
 }
-.modal_license {
+/* .modal_license {
     position: absolute;
     top: 0;
     left: 0;
@@ -216,7 +235,20 @@ textarea:focus{
 
     background-color: rgba(0, 0, 0, 0.4);
     z-index:4;
-  }
+  } */
+  .modal_license{
+	position:absolute;
+	top:0;
+    left:0;
+
+	width:100%;
+	height:100%;
+	
+	display:none;
+
+	background:rgba(0,0,0,0.4);
+    z-index: 2;
+}
 
   .modal_license.show {
     display: block;
@@ -253,6 +285,7 @@ cursor:pointer;
 }
 
 
+
 .addContent{
 	margin:3px;
 	background-color:lightgray;
@@ -275,5 +308,32 @@ cursor:pointer;
 	position:absolute;
 	right:8px;
 	top:4px;
+}
+
+
+select{
+    border: 1px solid #538126;
+    box-sizing: border-box;
+    padding: 12px 13px;
+    font-weight: 400;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    position: relative;
+    top: -3px;
+}
+
+#sendContent1, #sendContent2, #sendContent3{
+    width: 150px;
+    padding:8px 0;
+    font-size: 16px;
+    background-color: #538126;
+    border:1px solid white;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    /* 1228 모달창 button 가운데로 옮김. */
+    margin-left: 50px;
+
 }
 

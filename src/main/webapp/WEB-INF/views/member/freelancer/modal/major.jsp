@@ -2,7 +2,7 @@
 
 
     <div class="modal_body">
-    	<span class="modal_close1">x</span>
+        <span class="modal_close1">x</span>
         <div id="majorInputMain">
                 <div>
                     <div class="item">학교명</div>
@@ -30,9 +30,9 @@
                 </div>
                 <div>
                     <button id="sendContent1">적용</button>
-                  
+                
                 </div>
-            </div>
+        </div>
     </div>
     <%-- <script src="/resources/js/member/freelancer/enrollFreelancerPopup.js"></script> --%>
 

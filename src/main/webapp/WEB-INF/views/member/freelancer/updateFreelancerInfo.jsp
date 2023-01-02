@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,34 +27,21 @@
                 <a class="myProject_User_side" href="">회원 탈퇴</a>
             </div>
         </section>
-        
+        <div>
+</div>
         <section class="mainMenu">
             <div id="title">수정하기</div>
-            <form action="">
+            <form action="/member/freelancer/updateFreelancerInfo" enctype="multipart/form-data" method="POST">
                 <div>
                     <div class="itemTitle">
                         <div class="item">지역</div>
                         <div>
-                            <select name="" id="area">
-                                <option value="">전체</option>
-                                <option value="">서울</option>
-                                <option value="">경기</option>
-                                <option value="">부산</option>
-                                <option value="">대구</option>
-                                <option value="">인천</option>
-                                <option value="">광주</option>
-                                <option value="">대전</option>
-                                <option value="">울산</option>
-                                <option value="">강원</option>
-                                <option value="">충북</option>
-                                <option value="">충남</option>
-                                <option value="">전북</option>
-                                <option value="">전남</option>
-                                <option value="">경북</option>
-                                <option value="">경남</option>
-                                <option value="">제주</option>
-                                <option value="">해외</option>
-                            </select>
+                            <select name="regionNo">
+                            <c:forEach var="list" items="${regionList}">
+                                <option value="${list.regionNumber}" 
+                                <c:if test ="${freelancer.regionNo eq list.regionNumber}">selected="selected"</c:if>>${list.regionName}</option>
+                            </c:forEach> 
+                            </select> 
                         </div>
                     </div>
                     <div class="itemTitle">
@@ -73,21 +62,32 @@
                     <div class="itemTitle">
                         <div class="item">기간</div>
                         <div>
-                            <input type="text" name="" id="" class="number"> 년
+                            <input type="text" name="freelancerCont" id="" class="number" value="${freelancer.freelancerCont}"> 년
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">경력 사항</div>
-                        <div></div>
+                        <div>
+                            <input type="text" name="careerCompanyName" id="" value="${freelancer.careerCompanyName}">
+                            <input type="text" name="careerCompanyDepartment" id="" value="${freelancer.careerCompanyDepartment}">
+                            <input type="text" name="careerCompanyPosition" id="" value="${freelancer.careerCompanyPosition}">
+                            <input type="text" name="careerCompanyRegion" id="" value="${freelancer.careerCompanyRegion}">
+                            <input type="text" name="careerPeriod" id="" value="${freelancer.careerPeriod}">
+                        </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">자격증</div>
-                        <div></div>
+                        <div>
+                            <input type="text" name="" id="" value="${freelancer.licenseName}">
+                            <input type="text" name="" id="" value="${freelancer.licenseDate}">
+                            <input type="text" name="" id="" value="${freelancer.licenseAgency}">
+                        </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">연락 가능 시간</div>
                         <div>
-                            <input type="text" name="" id="" class="number"> 시 ~ <input type="text" name="" id="" class="number"> 시
+                            <input type="text" name="contactTime1" id="" class="number" value="${freelancer.contactTime1}"> 시 ~ 
+                            <input type="text" name="contactTime2" id="" class="number" value="${freelancer.contactTime2}"> 시
                         </div>
                     </div>
                     <div class="itemTitle">
@@ -100,13 +100,15 @@
                                 <option value="">우리</option>
                                 <option value="">기업</option>
                             </select>
-                            <input type="text" name="" id="account">
+                            <input type="text" value="${freelancer.bankAccountNumber}"name="" id="account">
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">자기소개</div>
                         <div>
-                            <textarea name="" id="" cols="72" rows="10"></textarea>
+                            <%-- <input type="text" name="freelancerIntro" id="freelancerIntro" class="input" >  --%>
+
+                            <textarea name="freelancerIntro" id="freelancerIntro" cols="72" rows="10" >${freelancer.freelancerIntro}</textarea>
                         </div>
                     </div>
                     <div id="btnArea">

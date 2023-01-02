@@ -28,11 +28,11 @@
 
             <%-- 테이블 제목 행 --%>
             <table>
-                <tr>
+                <tr id="tableHead">
                     <th style="width: 200px">${managerInquiry.userInquiryNo}번</th>
                     <th style="width: 600px">${managerInquiry.userInquiryTitle}</th>
                     <th style="width: 100px">상태 
-                    <th style="width: 200px">
+                    <th id="requestStatusView">
                     <c:choose>
                         <c:when test="${managerInquiry.inquiryRequest == null}">
                             <span class="question-wating">답변 대기</span>
@@ -60,7 +60,7 @@
 					<table>
 						<tr>
 							<th style="width: 150px" class="firstTh">작성자</th>
-							<td style="width: 850px">${managerInquiry.memberName}</td>
+							<td style="width: 850px">${managerInquiry.memberNickname}</td>
 						</tr>
 						<tr>
 							<th>작성일</th>
@@ -103,7 +103,7 @@
                         <section id="comment">
                             <c:choose>
                                 <c:when test="${loginMember.memberProfile == null}">
-                                    <a href="/member/myInfo"><img src="/resources/images/프로필.PNG" class="myProfile"></a>
+                                    <a href="/member/myInfo"><img src="/resources/images/관리자 프로필.PNG" class="myProfile"></a>
                                 </c:when>
                                 <c:when test="${loginMember.memberProfile != null}">
                                     <a href="/member/myInfo"><img src="${loginMember.memberProfile}" class="myProfile"></a>
@@ -112,7 +112,7 @@
                             <table>
                                 <tr>
                                     <th class="writer">작성자</th>
-                                    <td class="writerContent">${loginMember.memberName}</td>
+                                    <td class="writerContent">${managerInquiry.inquiryRequestWriter}</td>
                                 </tr>
                                 <tr>
                                     <th>답변 내용</th>

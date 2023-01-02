@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 import com.manager.freelancer.myProject.model.service.MyProjectFreelancerService;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 import com.manager.freelancer.member.model.vo.Member;
 
 @SessionAttributes({"loginMember"})
@@ -152,6 +153,8 @@ public class MyProjectFreelancerController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("messageIN",resurt.get("messageIN"));
 			map.put("tradeReportNo",resurt.get("tradeReportNo"));
+			map.put("reportFilePath",resurt.get("reportFilePath"));
+			//map.put("reportFilePath",reportFilePath);
 			map.put("reportContent",reportContent);
 		
 			return new Gson().toJson(map);
@@ -202,9 +205,60 @@ public class MyProjectFreelancerController {
 	
 	//수익관리 페이지
 	@GetMapping("/member/myProject/freelancer/profitManagerment")
-	public String profitManagerment(Model model, HttpSession session) {
-			
+	public String profitManagerment(Model model, HttpSession session,
+			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
+			@RequestParam(value="endtDate" , required = false, defaultValue = "") String endtDate,
+			@RequestParam(value="startDate" , required = false, defaultValue = "") String startDate) {
+		
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		List<myProjectFreelancerProfit>	profitList = service.selectMonthMyProfit(loginMember.getMemberNo());//달별 총 수익 
+		List<myProjectFreelancerProfit>	profit = service.selectMyProfit(loginMember.getMemberNo());//최근 1년간 예상수익 총수익
+		Map<String, Object>	map = service.selectMyProfitEachList(loginMember.getMemberNo(),cp,startDate,endtDate);//거래별 정산 내역
+		
+		model.addAttribute("profitList",new Gson().toJson(profitList));	
+		model.addAttribute("profit",profit);
+		model.addAttribute("myProfitEachList",map.get("myProfitEachList"));
+		model.addAttribute("pagination",map.get("pagination"));
+		model.addAttribute("listCount",map.get("listCount"));
+		model.addAttribute("endtDate",endtDate);
+		model.addAttribute("startDate",startDate);
 		return "myProject/myProject_freelancer/profitManagerment";
+	}
+	
+	//서비스 문의 페이지
+	@GetMapping("/member/myProject/freelancer/myServiceInquiry")
+	public String myServiceInquiry(Model model, HttpSession session,
+			@RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
+			@RequestParam(value="endtDate" , required = false, defaultValue = "") String endtDate,
+			@RequestParam(value="startDate" , required = false, defaultValue = "") String startDate,
+			@RequestParam(value="searchInput",required=false) String searchInput,
+			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
+		
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		List<FreelancerService> maincategoryList = service.selectmaincategoryList();
+		List<FreelancerService> inputMyService = service.selectMyService(loginMember.getMemberNo(),0); //나의 서비스 들고와서 자동완성
+		Map<String, Object> map = service.myServiceInquiry(loginMember.getMemberNo(),cp,startDate,endtDate,mainCategoryNo,searchInput);
+		Map<String, Object> resurt = new HashMap<String, Object>();	
+		
+		model.addAttribute("maincategoryList",maincategoryList);
+		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
+		
+		model.addAttribute("inquiryList",map.get("inquiryList"));
+		model.addAttribute("pagination",map.get("pagination"));
+		model.addAttribute("listCount",map.get("listCount"));
+		
+		model.addAttribute("GsoninquiryList",new Gson().toJson(map.get("inquiryList")));
+
+		model.addAttribute("searchInput",searchInput);
+		model.addAttribute("inputMyService",new Gson().toJson(inputMyService));
+		return "myProject/myProject_freelancer/myServiceInquiry";
+	}
+	
+	//등급관리 페이지
+	@GetMapping("/member/myProject/freelancer/myProjectGrade")
+	public String myProjectGrade() {
+		
+		return "myProject/myProject_freelancer/myProjectGrade";
 	}
 
 }

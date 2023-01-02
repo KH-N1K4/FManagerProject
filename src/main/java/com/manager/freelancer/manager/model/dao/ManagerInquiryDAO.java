@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.customerCenter.model.vo.Pagination;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
+import com.manager.freelancer.member.model.vo.Member;
 
 @Repository
 public class ManagerInquiryDAO {
@@ -76,8 +77,9 @@ public class ManagerInquiryDAO {
 	 * @param userInquiryNo
 	 * @return result
 	 */
-	public int updateComment(int userInquiryNo, String inputComment) {
+	public int updateComment(int userInquiryNo, String inputComment, Member loginMember) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", loginMember.getMemberNo());
 		map.put("userInquiryNo",userInquiryNo);
 		map.put("inputComment",inputComment);
 		int result = sqlSession.update("inquiryMapper.updateComment",map);

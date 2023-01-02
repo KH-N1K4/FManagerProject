@@ -3,6 +3,7 @@ package com.manager.freelancer.manager.model.service;
 import java.util.Map;
 
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
+import com.manager.freelancer.member.model.vo.Member;
 
 public interface ManagerInquiryService {
 
@@ -31,6 +32,6 @@ public interface ManagerInquiryService {
 	 * @param inputComment 
 	 * @return
 	 */
-	int updateComment(int userInquiryNo, String inputComment);
+	int updateComment(int userInquiryNo, String inputComment, Member loginMember);
 
 }

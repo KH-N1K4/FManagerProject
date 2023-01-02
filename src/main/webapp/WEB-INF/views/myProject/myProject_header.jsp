@@ -13,7 +13,7 @@
             <a href="/member/myProject/freelancer/myService"><span>전문가 전환</span></a>
           </c:when>
         </c:choose>
-        <a><span>메세지</span></a>
+        <a href="/member/message/chatting"><span>메세지</span></a>
         <a href="/"><span>홈으로</span></a>
         <a><img style="width: 32px; height: 32px;" src="${loginMember.memberProfile}"></a>
       </div>

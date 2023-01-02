@@ -198,7 +198,24 @@ public class ManagerController {
 	}
 		
 	
-	
+	// 정산하기
+	@GetMapping("/manager/settlement/calculate")
+	@ResponseBody
+	public Map<String, Object> managerCalculate(Model model,
+			@RequestParam int tradeNo,
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+		
+		int result = service.managerCalculate(tradeNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(result>0) {
+			map = service.selectTradeList(status, cp);
+		}
+		
+		return map;
+	}
 	
 	
 	

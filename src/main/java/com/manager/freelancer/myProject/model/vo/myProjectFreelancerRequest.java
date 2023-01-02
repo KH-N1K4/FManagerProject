@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class myProjectFreelancerRequest {
+public class myProjectFreelancerRequest {//지윤
 	
 	private int projectRequestNo;				//PROJECT_REQUEST_NO 프로젝트 의뢰 번호 SEQUENCE: SEQ_PROJECT_REQUEST_NO
 	private String projectRequestTitle;			//PROJECT_REQUEST_TITLE 프로젝트 의뢰 제목

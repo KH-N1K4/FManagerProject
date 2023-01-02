@@ -47,23 +47,23 @@
             <div>
                 <div class="item">전문 분야</div>
                 <div>
-                    <input type="checkbox" name="freelancerField" id="design">
+                    <input type="checkbox" name="freelancerField" id="design" value="1">
                     <label for="design" class="checkbox">
                         <span></span>디자인
                     </label>
-                    <input type="checkbox" name="freelancerField" id="it">
+                    <input type="checkbox" name="freelancerField" id="it" value="2">
                     <label for="it" class="checkbox">
                         <span></span>IT.프로그래밍
                     </label>
-                    <input type="checkbox" name="freelancerField" id="video">
+                    <input type="checkbox" name="freelancerField" id="video" value="3">
                     <label for="video" class="checkbox">
                         <span></span>영상
                     </label>
-                    <input type="checkbox" name="freelancerField" id="photo">
+                    <input type="checkbox" name="freelancerField" id="photo" value="4">
                     <label for="photo" class="checkbox">
                         <span></span>사진
                     </label>
-                    <input type="checkbox" name="freelancerField" id="sound">
+                    <input type="checkbox" name="freelancerField" id="sound" value="5">
                     <label for="sound" class="checkbox">
                         <span></span>음향
                     </label>
@@ -110,7 +110,7 @@
                         <option value="3">우리</option>
                         <option value="4">기업</option>
                     </select>
-                    <input type="text" name="bankAccountNumber" id="bankAccountNumber">
+                    <input type="text" name="bankAccountNumber3" id="bankAccountNumber">
                 </div>
             </div>
             <div>
@@ -137,7 +137,7 @@
                     <jsp:include page="/WEB-INF/views/member/freelancer/modal/career.jsp" /> 
             </div>
 
-          
+    
 
     </div>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

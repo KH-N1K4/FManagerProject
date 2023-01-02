@@ -57,13 +57,18 @@
                             <img src="${service.serviceFilePath2}" alt="">
                         </div>
                         <div id="serviceContent">
-                            <div id="serviceTitle">
-                                <a href="#" id="serviceName" class="serviceName" suggestionName="">
-                                    ${service.serviceTitle}
-                                </a>
-                            </div>
-                            <div id="serviceSummary">
-                                <p>${service.serviceSummary}</p>
+                            <div>
+                                <div id="serviceTitle">
+                                    <c:choose>
+                                        <c:when test="${service.serviceDelFL eq 'N' && service.serviceStatus == 2}"><a href="#" id="serviceName" class="serviceName" suggestionName="">
+                                            ${service.serviceTitle}
+                                        </a></c:when>
+                                        <c:otherwise><span id="serviceName" class="serviceName" suggestionName="">${service.serviceTitle}</span></c:otherwise>
+                                    </c:choose>
+                                </div>
+                                <div id="serviceSummary">
+                                    <p>${service.serviceSummary}</p>
+                                </div>
                             </div>
                             <div class="detail">
                                 <div id="servicePrice">

@@ -37,8 +37,8 @@
 /* =============================== */
 /* ---------문의하기폼--------- */
 .inquirySubmit{
-    margin: 50px;
-    /* background-color: bisque; */
+    margin-top: 50px;
+    width: 800px;
     
 }
 
@@ -162,11 +162,11 @@
     border-radius: 5px;
 }
 
-.inputImage{
+/* .inputImage{ */
     /* display: none; */
-    width: 100%;
-    height: 100%;
-}
+    /* width: 100%; */
+    /* height: 100%; */
+/* } */
 
 .boardImg img{
     max-width: 100%;

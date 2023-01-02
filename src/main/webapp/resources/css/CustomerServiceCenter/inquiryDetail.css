@@ -1,43 +1,50 @@
 
 /* mainArea /sideMenu영역  */
 .mainArea{
-    width: 1200px;
+    width: 1100px;
     height: auto;
     display: flex;
-    margin:auto;
+    margin: auto;
 }
 
 /* 사이드 메뉴 영역*/
 .sideMenu{
-    width: 200px;
+    width: 300px;
     height: auto;
-    background-color:#538126;
 }
 
 /* 메인 영역 */
 .mainContent{
-    width: 1000px;
+    width: 800px;
 }
 
 /*  --------------사이드 메뉴  --------------*/
+.sideMenu{
+    width: 300px;
+    height: auto;
+}
+
 #inquiry{
-    margin: 50px 50px 0px 50px;
+    text-align: left;
+    margin: 50px 0 0 70px;
 }
 #inquiryList{
-    margin: 20px 50px;
+    text-align: left;
+    margin: 40px 0 0 70px;
 }
 #inquiry a, #inquiryList a{
     text-decoration: none;
-    color: white;
+    color: black;
     font-weight: bold;
+    font-size: 22px;
 }
 
 /* ///////////////// ////////////////////////////*/
 
 /* ---------문의내역 콘텐츠--------- */
 #inquirySubmit{
-    margin: 50px;
-    width: 900px;
+    width: 800px;
+    margin-top: 50px;
 }
 
 /* 문의하기 페이지 제목 */
@@ -122,7 +129,7 @@ table th{
     height: 180px;
     text-align: center;
     position: relative;
-    margin-right: 10px;
+    margin: 15px;
 }
 
 /* 이미지 */
@@ -157,11 +164,10 @@ table th{
 
 /* 목록으로 버튼 */
 #goToList{
-    width: 800px;
-    height: 200px;
+    width: 700px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 200px;
 }
 #goToList button{
     width: 150px;
@@ -171,5 +177,5 @@ table th{
     border-radius: 5px;
     border: 1px solid #538126;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
 } 

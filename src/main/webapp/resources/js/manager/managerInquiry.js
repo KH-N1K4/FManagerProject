@@ -48,6 +48,17 @@ document.getElementById("commentBtn").addEventListener("click",()=>{
                                 tr2.append(th2);
                                 tr2.append(td2);
 
+                                const tableHead = document.getElementById("tableHead"); 
+                                document.getElementById("requestStatusView").remove();
+                                const th3 = document.createElement("th");
+                                const span = document.createElement("span");
+                                span.innerText ="답변 완료";
+                                tableHead.append(th3);
+                                th3.append(span);
+                                th3.setAttribute("id","requestStatusView");
+                                span.setAttribute("class","question-answer");
+
+
                         /*  <table>
                                 <tr>
                                         <th style="width:150px">작성자</th>

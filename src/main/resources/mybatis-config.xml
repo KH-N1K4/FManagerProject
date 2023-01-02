@@ -42,6 +42,8 @@
 		<typeAlias type="com.manager.freelancer.category.model.vo.Service" alias="Service"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.ImageFile" alias="ImageFile"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.AskService" alias="AskService"/>
+		<typeAlias type="com.manager.freelancer.common.message.model.vo.Message" alias="Message"/>
+		<typeAlias type="com.manager.freelancer.common.message.model.vo.ChattingRoom" alias="ChattingRoom"/>
 
 	</typeAliases>
 	
@@ -52,10 +54,11 @@
 		<mapper resource="/mappers/ajax-mapper.xml"/>
 		<mapper resource="/mappers/manager-mapper.xml"/>
 		<mapper resource="/mappers/freelancer-mapper.xml"/>
-		<mapper resource="/mappers/myProjectFreelancer-mapper.xml"/>
+		<mapper resource="/mappers/myProject-mapper.xml"/>
 		<mapper resource="/mappers/myProjectFreelancerService-mapper.xml"/>
 		<mapper resource="/mappers/userInquiry-mapper.xml"/>
 		<mapper resource="/mappers/category-mapper.xml"/>
+		<mapper resource="/mappers/message-mapper.xml"/>
 
 	</mappers>
 	

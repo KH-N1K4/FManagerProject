@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class FreelancerService {
+public class FreelancerService {//지윤
 	private int mainCategoryNo;			//MAIN_CATEGORY_NO 메인 1카테고리
 	private String mainCategoryName;	//MAIN_CATEGORY_NAME 메인 1카테고리 이름
 	private int subCategoryNo;			//SUB_CATEGORY_NO 메인 2카테고리
@@ -30,6 +30,7 @@ public class FreelancerService {
 	private int serviceStatus;			//SERVICE_STATUS 1:승인 대기 중, 2:판매 중, 3:미승인, 4:판매 중지,5: 의뢰용일회성서비스
 	private String serviceStatusString;	//SERVICE_STATUS_STRING 1:승인 대기 중, 2:판매 중, 3:미승인, 4:판매 중지,5: 의뢰용일회성서비스
 	private String serviceCreateDate;	//SERVICE_CREATE_DATE 서비스 등록일
+	private String serviceDelFL;		//SERVICE_DEL_FL 서비스 삭제 여부
 
 	private int serviceFileNo;			//REQUEST_FILE_NO 서비스 첨부파일 번호 SEQUENCE: SEQ_SERVICE_FILE_NO
 	private String serviceFilePath2;	//REQUEST_FILE_PATH 서비스 첨부파일 경로
@@ -50,6 +51,9 @@ public class FreelancerService {
 	private String freelancerNickName;
 	private int workCount;       			//WORK_COUNT 발송물 발송 횟수
 	
+	private int workStatus;       			//<result property="workStatus" column="WORK_STATUS"/><!-- 2:정산 완료 3:주문취소 -->
+	private String workStatusString;       			//<result property="workStatusString" column="WORK_STATUS_STRING"/>	
+	
 	//거래신고 테이블
 	private int tradeReportNo;				//TRADE_REPORT_NO 거래 신고 번호 SEQUENCE: SEQ_TRADE_REPORT_NO
 	private int	reportPersonNo;				//REPORT_PERSON 거래 신고자 회원 번호
@@ -66,4 +70,5 @@ public class FreelancerService {
 	private int serviceInquiryNo;			//SERVICE_INQUIRY_NO 서비스 문의 번호 SEQUENCE: SEQ_SERVICE_INQUIRY_NO
 	private String serviceInquiryContent;	//SERVICE_INQUIRY_CONTENT 서비스 문의 내용
 	private String serviceInquiryDate;		//SERVICE_INQUIRY_CREATE_DATE 서비스 문의 작성 날짜
+	private String serviceInquiryDateString;		//SERVICE_INQUIRY_DATE_STRING
 }

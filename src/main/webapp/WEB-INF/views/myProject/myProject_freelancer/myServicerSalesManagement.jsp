@@ -111,7 +111,11 @@
                           </td>
                           <td class="tl">
                             <div class="suggestion_name_area td_link">
-                              <a href="#" id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</a>
+                              <c:choose>
+                                <c:when test="${sales.serviceDelFL eq 'N' && sales.serviceStatus == 2}"><a href="#" id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</a></c:when>
+                                <c:otherwise><span id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</span></c:otherwise>
+                              </c:choose>
+                              
                             </div>
                           </td>
                           <td  class="tc">
@@ -123,72 +127,33 @@
                             <span class="num" id="serviceEditNum${sales.tradeNo}"><c:choose><c:when test="${sales.workCount == sales.serviceEditNum+1}">${sales.workCount-1}/${sales.serviceEditNum}</c:when><c:otherwise>${sales.workCount}/${sales.serviceEditNum}</c:otherwise></c:choose></span>
                           </td>
                           <td class="tc">
-                            <span class="text">${sales.freelancerFLString}</span>
+                            <c:choose>
+                                <c:when test="${sales.workStatus == 2 || sales.workStatus == 3}">
+                                  <span class="text">${sales.workStatusString}</span></c:when>
+                                <c:otherwise><span class="text">${sales.freelancerFLString}</span></c:otherwise>
+                              </c:choose>
+                            
                           </td>
                           <td class="tc">
-                            <c:if test="${sales.freelancerFL == 1}">
-                              <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
-                              <c:if test="${sales.workCount le sales.serviceEditNum}">
-                                <a href="#" id="sendBtn${sales.tradeNo}" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>
-                              </c:if>
-                              <a href="#" id="reportBtn${sales.tradeNo}" title="${sales.tradeNo}" class="reportBtn btn_type"><span>신고</span></a>
-                            </c:if>
+                            <c:choose>
+                              <c:when test="${sales.freelancerFLString eq '진행 중' && (sales.workStatus != 2 && sales.workStatus != 3)}">
+                                <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
+                                <c:if test="${sales.workCount le sales.serviceEditNum}">
+                                  <a href="#" id="sendBtn${sales.tradeNo}" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>
+                                </c:if>
+                                <a href="#" id="reportBtn${sales.tradeNo}" title="${sales.tradeNo}" class="reportBtn btn_type"><span>신고</span></a>
+                              </c:when>
+                              <c:otherwise>
+                                <c:if test="${sales.tradeReportNo != 0}">
+                                  <a href="#" id="reportBtn${sales.tradeNo}" title="${sales.tradeNo}" class="reportBtn btn_type" style="width: 80px; background-color: white!important;"><span>신고내역</span></a>
+                                </c:if>
+                              </c:otherwise>
+                            </c:choose>
+                            
                           </td>                
                         </tr>
                       </c:forEach>
                     </c:if> 
-                    <tr class="suggestionTable" suggestionNumeber="">
-                      <td class="tc">
-                        <span class="num">2</span>
-                      </td>
-                      <td class="tc">
-                        <span class="num">2</span>
-                      </td>
-                      <td class="tl">
-                        <div class="suggestion_name_area td_link">
-                          <a href="#" id="suggestionName" class="suggestionName" suggestionName="">프리랜서 마켓 웹사이트 제작</a>
-                        </div>
-                      </td>
-                      <td  class="tc">
-                        <div class="expert_name_area td_link">
-                          <a href="#" id="expertName" class="expertName" expertName="">김이듀</a>
-                        </div>
-                      </td>
-                      <td class="tc">
-                        <span class="num">1/5</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">완료</span>
-                      </td>
-                      <td class="tc">
-                      </td>                
-                    </tr>
-                    <tr class="suggestionTable" suggestionNumeber="">
-                      <td class="tc">
-                        <span class="num">3</span>
-                      </td>
-                      <td class="tc">
-                        <span class="num">3</span>
-                      </td>
-                      <td class="tl">
-                        <div class="suggestion_name_area td_link">
-                          <a href="#" id="suggestionName" class="suggestionName" suggestionName="">웨딩 촬영 디자인</a>
-                        </div>
-                      </td>
-                      <td  class="tc">
-                        <div class="expert_name_area td_link">
-                          <a href="#" id="expertName" class="expertName" expertName="">최사진</a>
-                        </div>
-                      </td>
-                      <td class="tc">
-                        <span class="num">1/4</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">주문 취소</span>
-                      </td>
-                      <td class="tc">
-                      </td>                
-                    </tr>
                   </tbody>
                 </table>
               </div>
