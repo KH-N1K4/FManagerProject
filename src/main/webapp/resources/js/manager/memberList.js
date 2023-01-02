@@ -76,7 +76,7 @@ function selectChange() {
                     table.classList.add('member-manage-table-content');
 
                     const child1 = document.createElement("div");
-                    child1.classList.add('question-num');
+                    child1.classList.add('member-num');
                     child1.append(document.createTextNode(member.memberNo));
 
                     const child2 = document.createElement("div");

@@ -1,7 +1,6 @@
 package com.manager.freelancer.manager.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.manager.freelancer.manager.model.service.ManagerService;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
+import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 
+@SessionAttributes({"loginMember"})
 @Controller
 public class ManagerController {
 
@@ -335,13 +339,91 @@ public class ManagerController {
 		return "redirect:/manager/projectRequestList";
 	}
 	
+	//=======================================================
+	
+	// 회원 신고 목록 조회
+	@GetMapping("/manager/memberReportList")
+	public String managerMemberReport(Model model, @RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> pm) {
+
+		if (pm.get("key") == null) {
+			Map<String, Object> map = service.selectMemberReportList(status, cp);
+			model.addAttribute("map", map);
+		} else {
+			pm.put("status", status);
+			Map<String, Object> map = service.selectMemberReportList(pm, cp);
+			model.addAttribute("map", map);
+		}
+
+		return "/manager/memberReportList";
+	}
+	
+	//회원 신고 상세보기
+	@GetMapping("/manager/memberReportDetail/{memberReportNo}")
+	public String managerMemberReportDetail(
+			@PathVariable(value="memberReportNo") int memberReportNo, Model model,
+			@SessionAttribute("loginMember") com.manager.freelancer.member.model.vo.Member loginMember) {
+		
+		MemberReport memberReport = service.memberReportDetail(memberReportNo);
+		
+		model.addAttribute("memberReport",memberReport);
+		model.addAttribute("loginMember",loginMember);
+		
+		return "/manager/memberReportDetail";
+	}
+	
+	// 상태별 회원 신고 내역
+	@GetMapping("/manager/memberReportType")
+	@ResponseBody
+	public Map<String, Object> memberReportType(Model model, 
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map = service.selectMemberReportList(status, cp);
+		model.addAttribute("map", map);
+		
+		return map;
+	}
+	
+	
+	// 신고 내역 답변 등록
+	@PostMapping("/manager/memberReportRequest")
+	@ResponseBody
+	public int memberReportRequest(Model model, 
+			@RequestParam(value = "memberReportNo", required = false) int memberReportNo,
+			@RequestParam(value = "memberReportRequest", required = false) String memberReportRequest,
+			@SessionAttribute("loginMember") com.manager.freelancer.member.model.vo.Member loginMember) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberReportNo", memberReportNo);
+		map.put("memberReportRequest", memberReportRequest);
+		map.put("loginMember", loginMember);
+		
+		int result = service.insertReportRequest(map);
+		
+		return result;
+	}
+	
 	
 	
 	
 
 	@GetMapping("/manager/reviewList")
-	public String managerReport() {
+	public String managerReview() {
 		return "/manager/reviewList";
 	}
+	
+	
+	
+	
+	@GetMapping("/manager/tradeReportList")
+	public String managerTradeReport() {
+		return "/manager/tradeReportList";
+	}
+	
+	
 
 }

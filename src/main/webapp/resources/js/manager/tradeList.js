@@ -21,11 +21,7 @@ function selectChange() {
             if (map != null) {
 
                 if (document.getElementById("search-query") != null) { // 검색창이 존재할 때
-                    const params = new URL(location.href).searchParams;
-                    // 주소에서 쿼리스트링만 분리한 객체
-
-                    const query = params.get("query");
-
+                  
                     // input에 이전 검색어를 값으로 추가
                     document.getElementById("search-query").value = "";
 

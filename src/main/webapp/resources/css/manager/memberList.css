@@ -71,7 +71,7 @@
 }
 
 .member-name {
-	width: 350px;
+	width: 250px;
 }
 
 .member-division {
@@ -79,14 +79,14 @@
 }
 
 .member-grade {
-	width: 200px;
+	width: 150px;
 }
 
 .member-enrollDate {
 	width: 400px;
 }
 .member-delete{
-	width: 150px;
+	width: 140px;
 }
 
 /* 테이블 값 부분 */

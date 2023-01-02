@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.dao.ManagerDAO;
 import com.manager.freelancer.manager.model.vo.Member;
+import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
 import com.manager.freelancer.manager.model.vo.Settlement;
@@ -466,6 +467,63 @@ public class ManagerServiceImpl implements ManagerService {
 	public int managerRequestRestore(int projectRequestNo) {
 		return dao.managerRequestRestore(projectRequestNo);
 	}
+	
+	// 회원 신고 내역
+	@Override
+	public Map<String, Object> selectMemberReportList(int status, int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int listCount = dao.getMemberReportListCount(status);
+		Pagination pagination = new Pagination(listCount, cp);
+
+		List<MemberReport> memberReportList = dao.selectMemberReportList(status, pagination);
+		
+		
+		map.put("pagination", pagination);
+		map.put("memberReportList", memberReportList);
+
+		return map;
+	}
+	
+	// 검색 일치 회원 신고 내역
+	@Override
+	public Map<String, Object> selectMemberReportList(Map<String, Object> pm, int cp) {
+		int listCount = dao.getMemberReportListCount(pm);
+		Pagination pagination = new Pagination(listCount, cp);
+		List<MemberReport> memberReportList = dao.selectMemberReportList(pagination, pm);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("memberReportList", memberReportList);
+
+		return map;
+	}
+	
+	// 회원 신고 내역 상세 보기
+	@Override
+	public MemberReport memberReportDetail(int memberReportNo) {
+		return dao.memberReportDetail(memberReportNo);
+	}
+	
+	// 회원 신고 내역 답변 등록
+	@Override
+	public int insertReportRequest(Map<String, Object> map) {
+		return dao.insertReportRequest(map);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

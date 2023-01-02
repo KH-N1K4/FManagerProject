@@ -6,6 +6,7 @@ import java.util.Map;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
+import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 
@@ -158,6 +159,32 @@ public interface ManagerService {
 	 * @return
 	 */
 	int managerRequestRestore(int projectRequestNo);
+
+	/** 회원 신고 내역
+	 * @param status
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectMemberReportList(int status, int cp);
+
+	/** 검색 일치 회원 신고 내역
+	 * @param pm
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectMemberReportList(Map<String, Object> pm, int cp);
+
+	/** 회원 신고 상세 보기
+	 * @param memberReportNo
+	 * @return
+	 */
+	MemberReport memberReportDetail(int memberReportNo);
+
+	/** 회원 신고 내역 답변 등록
+	 * @param map
+	 * @return
+	 */
+	int insertReportRequest(Map<String, Object> map);
 
 	
 

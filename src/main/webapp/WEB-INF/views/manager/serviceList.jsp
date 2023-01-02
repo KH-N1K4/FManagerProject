@@ -49,7 +49,7 @@
 				<c:forEach var="service" items="${serviceList}">
 					<div class="service-list-table-content">
 						<div class="service-num">${service.serviceNo}</div>
-						<div class="service-title"><a class="detailBtn" href="/manager/serviceDetail/${service.serviceNo}">${service.serviceTitle}</a></div>
+						<div class="service-title"><a class="detailBtn" href="/manager/serviceDetail/${service.serviceNo}?cp=${pagination.currentPage}${sURL}">${service.serviceTitle}</a></div>
 						<div class="service-status">${service.serviceStatusString}</div>
 						<div class="service-button">
 							<a class="service-button-value">삭제</a>

@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="/resources/css/myProject/askService.css">
     <link rel="stylesheet" href="/resources/css/category/serviceDetail.css">
     <style>
+    .main>*{
+        width: 1200px;
+        margin: auto;
+    }
     .expertPage{
         margin-bottom: 20px;
     }
@@ -35,12 +39,25 @@
         font-size:20px;
         line-height:50px;
     }
+    #btnA{
+        display:inline-block;
+        text-align:center;
+        width: 695px;
+        height: 50px;
+        font-size: 20px;
+        background-color: lightgray;
+        border:1px solid lightgray;
+        border-radius: 5px;
+        color:white;
+        line-height:50px;
+        font-weight: bold;
+    }
 
     </style>
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp" />
     
 
        <div class="main">
@@ -74,13 +91,13 @@
                     <a id="restoreBtn" href="/manager/${freelancerService.serviceNo}/serviceRestore">반려</a>
               	</c:if>
                 <c:if test="${freelancerService.serviceStatus==2 }">
-              		<a id="pauseService1">판매 중인 상품입니다.</a>
+              		<a id="btnA">판매 중인 상품입니다.</a>
               	</c:if>
                 <c:if test="${freelancerService.serviceStatus==3 }">
-              		<a id="pauseService1">미승인 상품입니다.</a>
+              		<a id="btnA">미승인 상품입니다.</a>
               	</c:if>
                 <c:if test="${freelancerService.serviceStatus==4 }">
-              		<a id="pauseService1">판매 중지된 상품입니다.</a>
+              		<a id="btnA">판매 중지된 상품입니다.</a>
               	</c:if>
               
             </div>
@@ -98,9 +115,9 @@
         
         <div class="detailInner">
         
-	        <c:forEach var="imageFile" items="${freelancerService.imageFileList }">
+	        <%-- <c:forEach var="imageFile" items="${freelancerService.ServiceImageFileList }">
 	                	<img alt="" src="" style="width:100%;">
-	        </c:forEach>
+	        </c:forEach> --%>
 
         </div>
         
