@@ -15,17 +15,13 @@
 		<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD" />	
 		<result property="projectCreateDate" column="PROJECT_REQUEST_CREATE_DATE" />	
 		<result property="memberNo" column="MEMBER_NO" />	
-		<result property="projectRequestStatus" column=PROJECT_REQUEST_STATUS />	
+		<result property="projectRequestStatus" column="PROJECT_REQUEST_STATUS" />	
 		
 		<!-- 프로젝트 의뢰 첨부 파일 -->
-		<result property="requestFileNo" column=REQUEST_FILE_NO />	
+<!-- 		<result property="requestFileNo" column=REQUEST_FILE_NO />	
 		<result property="requestFilePath" column=REQUEST_FILE_PATH />	
-		<result property="requestFileOrder" column=REQUEST_FILE_ORDER />	
+		<result property="requestFileOrder" column=REQUEST_FILE_ORDER />	 -->
 		
   	</resultMap>
-  	<select id="selectmaincategoryList" resultMap="myProject_rm">
-  		SELECT * FROM MAIN_CATEGORY
-  	</select>
-  	
   	
 </mapper>
