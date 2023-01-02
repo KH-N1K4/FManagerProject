@@ -73,21 +73,6 @@
 						</div>
 					</li> --%>
 				</ul>
-                <div id="chattingMessage"> 
-                    <div><img src="/Final/image/정채연.jfif"></div>
-                    <div id="message">
-                    </div>
-                </div>
-                <div id="chattingMessage"> 
-                    <div><img src="/Final/image/정채연.jfif"></div>
-                    <div id="message">
-                    </div>
-                </div>
-                <div id="chattingReMessage"> 
-                    <div><img src="/Final/image/아가뚱.jfif"></div>
-                    <div id="reMessage">
-                    </div>
-                </div>
             </div>
             <div id="messageInput">
                 <textarea id="inputChatting" rows="3" placeholder="     메세지를 입력해주세요."></textarea>
@@ -108,7 +93,8 @@
                 <span><%--연락 가능 시간--%></span> <a><%--14:00-18:00--%></a><br>
                 <span><%--회원 등급--%></span>      <a><%--Master--%></a><br>
             </div>
-            <div class="outbtn"><button>채팅방 나가기</button></div>
+            <div class="outbtn"><button id="outbtnID">채팅방 나가기</button></div>
+            <input type="hidden" id="">
         </div>    
     </div>
   </section> 

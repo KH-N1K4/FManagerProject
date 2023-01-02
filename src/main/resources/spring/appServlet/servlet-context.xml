@@ -50,7 +50,7 @@
 		</interceptor>
 		
 		<interceptor>
-		<mapping path="/category/*" /> 
+		<mapping path="/category/**" /> 
 			<beans:bean id="SubCategoryInterceptor" 
 			class="com.manager.freelancer.common.interceptor.SubCategoryInterceptor"/>
 		</interceptor>

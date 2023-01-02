@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.manager.freelancer.common.message.model.vo.ChattingRoom;
+import com.manager.freelancer.common.message.model.vo.Message;
 
 public interface MessageService {
 
@@ -35,5 +36,29 @@ public interface MessageService {
 	 * @return
 	 */
 	ChattingRoom delectFLRoomNo(Map<String, Integer> map);
+
+    /**메세지 삽입
+     * @param msg
+     * @return
+     */
+    int insertMessage(Message msg);
+
+    /**업데이트 읽음 표시 
+     * @param paramMap
+     * @return
+     */
+    int updateReadFlag(Map<String, Object> paramMap);
+
+    /**채팅방 입장할때 메세지 리스트 들고 오기
+     * @param paramMap
+     * @return
+     */
+    List<Message> selectMessageList( Map<String, Object> paramMap, int memberNo);
+
+	/**채팅방 나가기
+	 * @param paramMap
+	 * @return
+	 */
+	int updateOutFL(Map<String, Object> paramMap);
 	
 }

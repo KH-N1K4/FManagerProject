@@ -30,7 +30,30 @@
 		<id property="serviceNo" column="SERVICE_NO"/>
 		<result property="serviceTitle" column="SERVICE_TITLE" />
 		<result property="serviceStatus" column="SERVICE_STATUS" />
+		<result property="requestFilePath" column="REQUEST_FILE_PATH" />
+		<result property="serviceSummary" column="SERVICE_SUMMARY" />
+		<result property="servicePrice" column="SERVICE_PRICE" />
+		<result property="serviceEditNum" column="SERVICE_EDIT_NUM" />
+		<result property="serviceWorkPeriod" column="SERVICE_WORK_PERIOD" />
+		<result property="freelancerNo" column="FREELANCER_NO" />
+		<result property="freelancerName" column="MEMBER_NAME" />
+		<result property="freelancerImage" column="MEMBER_PROFILE" />
+		<result property="thirdCategoryName" column="THIRD_CATEGORY_NAME" />
+		<result property="subCategoryName" column="SUB_CATEGORY_NAME" />
+		<result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />
+		
+		<collection property="ServiceImageFileList" 
+	      javaType="java.util.ArrayList" ofType="com.manager.freelancer.manager.model.vo.ServiceImageFile"
+	      select="selectImageFileList"
+	      column="SERVICE_NO"/>
 	</resultMap>
+	
+	      
+	 <resultMap type="com.manager.freelancer.manager.model.vo.ServiceImageFile" id="imageFile_rm">
+      <id property="imageFileNo" column="REQUEST_FILE_NO"/>
+      <result property="imageFilePath" column="REQUEST_FILE_PATH"/>
+      <result property="serviceNo" column="SERVICE_NO"/>
+   </resultMap>
 	
 	<resultMap type="Settlement" id="manager_settlement_rm">
 		<id property="settlementNo" column="SETTLEMENT_NO"/>
@@ -52,6 +75,56 @@
 		<result property="cancelInquiryDate" column="CANCEL_INQUIRY_DATE" />
 	</resultMap>
 	
+	
+	<resultMap type="com.manager.freelancer.manager.model.vo.ProjectRequest" id="manager_projectRequest_rm">
+		<id property="projectRequestNo" column="PROJECT_REQUEST_NO" />
+		<result property="projectRequestTitle" column="PROJECT_REQUEST_TITLE" />
+		<result property="projectRequestSummary" column="PROJECT_REQUEST_SUMMARY" />
+		<result property="projectRequestContent" column="PROJECT_REQUEST_CONTENT" />
+		<result property="projectRequestStatus" column="PROJECT_REQUEST_STATUS" />
+		<result property="projectRequestBudget" column="PROJECT_REQUEST_BUDGET" />
+		<result property="requestRecruitDate" column="REQUEST_RECRUIT_DATE" />
+		<result property="requestWorkDate" column="REQUEST_WORK_DATE" />
+		<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD" />
+		<result property="MemberNo" column="MEMBER_NO" />
+		<result property="MemberName" column="MEMBER_NAME" />
+	</resultMap>
+	
+	<resultMap type="com.manager.freelancer.manager.model.vo.MemberReport" id="manager_memberReport_rm">
+		<id property="memberReportNo" column="MEMBER_REPORT_NO" />
+		<result property="memberReportTitle" column="MEMBER_REPORT_TITLE" />
+		<result property="memberReportContent" column="MEMBER_REPORT_CONTENT" />
+		<result property="memberReportRequest" column="MEMBER_REPORT_REQUEST" />
+		<result property="memberReportCreateDate" column="MEMBER_REPORT_CREATE_DATE" />
+		<result property="memberReportAnswerDate" column="MEMBER_REPORT_ANSWER_DATE" />
+		<result property="reportMemberNo" column="REPORT_MEMBER" />
+		<result property="reportedMemberNo" column="REPORTED_MEMBER" />
+		<result property="reportMemberName" column="REPORT_MEMBER_NAME" />
+		<result property="reportedMemberName" column="REPORTED_MEMBER_NAME" />
+		<result property="memberReportAnswerMemberNo" column="MEMBER_REPORT_ANSWER_MEMBER_NO" />
+	
+		<collection property="reportImageFileList" javaType="java.util.ArrayList" 
+	  	select="selectReportImageList" ofType="com.manager.freelancer.manager.model.vo.MemberReportImage" column="MEMBER_REPORT_NO"/>
+  	</resultMap>
+  	
+  	
+	 <resultMap type="com.manager.freelancer.manager.model.vo.MemberReportImage" id="reportImageFile_rm">
+      <id property="memberReportFileNo" column="MEMBER_REPORT_FILE_NO"/>
+      <result property="memberReportFilePath" column="MEMBER_REPORT_FILE_PATH"/>
+      <result property="memberReportFileOrder" column="MEMBER_REPORT_FILE_ORDER"/>
+      <result property="memberReportNo" column="MEMBER_REPORT_NO"/>
+   </resultMap>
+   
+	<!-- <resultMap type="com.manager.freelancer.manager.model.vo.TradeReport" id="manager_tradeReport_rm">
+		<id property="tradeReportNo" column="TRADE_REPORT_NO" />
+		<result property="tradeNo" column="TRADE_NO" />
+		<result property="tradeReportMemberNo" column="TRADE_REPORT_MEMBER_NO" />
+		<result property="tradeReportedMemberNo" column="TRADE_REPORTED_MEMBER_NO" />
+		<result property="tradeReportContent" column="TRADE_REPORT_CONTENT" />
+		<result property="tradeReportFilePath" column="TRADE_REPORT_FILE_PATH" />
+		<result property="tradeReportCreateDate" column="TRADE_REPORT_CREATE_DATE" />
+		<result property="refundFlag" column="REFUND_FL" />
+	</resultMap> -->
 
 
 	<!-- 프리랜서 등급 조회 -->
@@ -93,16 +166,7 @@
 	</select>
 
 
-	<!-- 회원 관심 분야 조회 -->
-	<!-- <select id="selectMemberInterest"  resultMap="manager_member_rm" resultType="string">
-		SELECT (SELECT LISTAGG(MAIN_CATEGORY_NO, ',')
-						WITHIN GROUP (ORDER BY MAIN_CATEGORY_NO)
-						FROM (SELECT DISTINCT MAIN_CATEGORY_NO
-									FROM INTEREST I
-									WHERE I.MEMBER_NO = M.MEMBER_NO)) MEMBER_INTEREST
-		FROM "MEMBER" M
-		WHERE MEMBER_NO=#{memberNo}
-	</select> -->
+	
 
 
   <!-- 회원 상세 조회 -->
@@ -205,6 +269,8 @@
 		SELECT SERVICE_NO, SERVICE_TITLE, SERVICE_STATUS
 		FROM SERVICE
 		WHERE SERVICE_STATUS != 5
+		AND SERVICE_DEL_FL = 'N'
+		ORDER BY 1 DESC
 	</select>
 	
 	
@@ -222,6 +288,8 @@
 		FROM SERVICE
 		WHERE SERVICE_STATUS != 5
 		AND SERVICE_STATUS = #{status}
+		AND SERVICE_DEL_FL = 'N'
+		ORDER BY 1 DESC
 	</select>
 	
 	
@@ -232,8 +300,42 @@
 	</update>
 	
 	
+	<!-- 서비스 상세보기 -->
+	<select id="managerServiceDetail" resultMap="manager_service_rm">
+	SELECT SERVICE_NO,
+		FREELANCER_NO, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_NAME,
+	   (SELECT MEMBER_PROFILE FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_PROFILE,
+	   SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,SERVICE_CREATE_DATE, THIRD_CATEGORY_NAME, SUB_CATEGORY_NAME, MAIN_CATEGORY_NAME,
+		SERVICE_TITLE,SERVICE_SUMMARY,SERVICE_PRICE,SERVICE_DEL_FL, SERVICE_STATUS,
+			THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH,MAIN_CATEGORY_NO
+		FROM (SELECT * 
+			FROM SERVICE
+			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
+			LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		LEFT JOIN (SELECT s.*,
+		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
+		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		WHERE RUM = 1
+		AND SERVICE_DEL_FL='N'
+		AND SERVICE_NO=#{serviceNo}
+	</select>
 	
+	<!-- 서비스 이미지 리스트 -->
+	<select id="selectImageFileList" resultMap="imageFile_rm">
+		SELECT * FROM SERVICE_FILE
+		WHERE SERVICE_NO=#{serviceNo}
+	</select>
 	
+	<!-- 서비스 승인 -->
+	<update id="managerServiceApproval">
+		UPDATE SERVICE SET SERVICE_STATUS=2 WHERE SERVICE_NO=#{serviceNo}
+	</update>
+	
+	<!-- 서비스 반려 -->
+	<update id="managerServiceRestore">
+		UPDATE SERVICE SET SERVICE_STATUS=3 WHERE SERVICE_NO=#{serviceNo}
+	</update>
 	
 	
 	
@@ -403,6 +505,235 @@
 		UPDATE SETTLEMENT SET WORK_STATUS=2
 		WHERE TRADE_NO=#{tradeNo}
 	</update>
+
+
+
+
+	<!-- 프로젝트 의뢰 수 조회 -->
+	<select id="getRequestCount" resultType="_int">
+		SELECT COUNT(*) FROM PROJECT_REQUEST
+	</select>
+
+	<!-- 프로젝트 의뢰 목록 조회 -->
+	<select id="selectRequestList" resultMap="manager_projectRequest_rm">
+		SELECT *
+		FROM PROJECT_REQUEST
+		WHERE PROJECT_REQUEST_DEL_FL = 'N'
+		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 상태별 프로젝트 의뢰 수 조회 -->
+	<select id="getRequestCount2" resultType="_int">
+		SELECT COUNT(*) FROM PROJECT_REQUEST
+		WHERE PROJECT_REQUEST_STATUS=#{status}
+	</select>
+
+	<!-- 상태별 프로젝트 의뢰 목록 조회 -->
+	<select id="selectRequestList2" resultMap="manager_projectRequest_rm">
+		SELECT *
+		FROM PROJECT_REQUEST
+		WHERE PROJECT_REQUEST_STATUS=#{status}
+		AND PROJECT_REQUEST_DEL_FL = 'N'
+		ORDER BY 1 DESC
+	</select>
+
+	<!-- 프로젝트 의뢰 삭제 -->	
+	<update id="managerRequestDelete">
+		UPDATE PROJECT_REQUEST SET PROJECT_REQUEST_DEL_FL='Y'
+		WHERE PROJECT_REQUEST_NO=#{projectRequestNo}
+	</update>
+	
+	<!-- 프로젝트 의뢰 상세보기 -->
+	<select id="managerRequestDetail" resultMap="manager_projectRequest_rm">
+	SELECT PROJECT_REQUEST_NO, MEMBER_NO,
+	   PROJECT_WORK_PERIOD,
+	   TO_CHAR(REQUEST_RECRUIT_DATE, 'YYYY"-"MM"-"DD') REQUEST_RECRUIT_DATE,
+	   TO_CHAR(REQUEST_WORK_DATE, 'YYYY"-"MM"-"DD') REQUEST_WORK_DATE,
+	   THIRD_CATEGORY_NAME, SUB_CATEGORY_NAME, MAIN_CATEGORY_NAME,
+		PROJECT_REQUEST_TITLE,
+		PROJECT_REQUEST_SUMMARY,
+		PROJECT_REQUEST_CONTENT,
+		PROJECT_REQUEST_BUDGET,PROJECT_REQUEST_DEL_FL, PROJECT_REQUEST_STATUS,
+			THIRD_CATEGORY_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH,MAIN_CATEGORY_NO
+		FROM (SELECT * 
+			FROM PROJECT_REQUEST
+			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
+			LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		LEFT JOIN (SELECT s.*,
+		ROW_NUMBER() OVER (PARTITION BY PROJECT_REQUEST_NO ORDER BY REQUEST_FILE_NO) rum
+		FROM REQUEST_FILE s) USING(PROJECT_REQUEST_NO)
+		WHERE RUM = 1
+		AND PROJECT_REQUEST_DEL_FL='N'
+		AND PROJECT_REQUEST_NO=#{projectRequestNo}
+	</select>
+
+	<!-- 프로젝트 의뢰 승인 -->
+	<update id="managerRequestApproval">
+		UPDATE PROJECT_REQUEST SET PROJECT_REQUEST_STATUS=2 WHERE PROJECT_REQUEST_NO=#{projectRequestNo} 
+	</update>
+	
+	<!-- 프로젝트 의뢰 반려 -->
+	<update id="managerRequestRestore">
+	UPDATE PROJECT_REQUEST SET PROJECT_REQUEST_STATUS=3 WHERE PROJECT_REQUEST_NO=#{projectRequestNo} 
+	</update>
+	
+	
+	
+	
+	<!-- 회원 신고 수 -->
+	<select id="getMemberReportListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER_REPORT
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'>
+					WHERE MEMBER_REPORT_REQUEST IS NULL
+				</when>
+				<otherwise>
+					WHERE MEMBER_REPORT_REQUEST IS NOT NULL
+				</otherwise>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 회원 신고 내역 목록 -->
+	<select id="selectMemberReportList" resultMap="manager_memberReport_rm">
+		SELECT MEMBER_REPORT_NO , MEMBER_REPORT_TITLE ,MEMBER_REPORT_CONTENT , MEMBER_REPORT_REQUEST ,
+		 TO_CHAR(MEMBER_REPORT_CREATE_DATE, 'YYYY"-"MM"-"DD') MEMBER_REPORT_CREATE_DATE ,
+		MEMBER_REPORT_ANSWER_DATE , MEMBER_REPORT_ANSWER_MEMBER_NO, REPORT_MEMBER , REPORTED_MEMBER, 
+		MEMBER_NAME AS REPORT_MEMBER_NAME, 
+		(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=REPORTED_MEMBER) REPORTED_MEMBER_NAME
+		FROM MEMBER_REPORT
+		JOIN MEMBER ON (MEMBER_NO=REPORT_MEMBER)
+		WHERE MEMBER_REPORT_NO != 0
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'>
+					AND MEMBER_REPORT_REQUEST IS NULL
+				</when>
+				<otherwise>
+					AND MEMBER_REPORT_REQUEST IS NOT NULL
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 검색 일치 회원 신고 수 -->
+	<select id="getMemberReportListCount2" resultType="_int">
+		SELECT COUNT(*) 
+		FROM (SELECT MEMBER_REPORT_NO , MEMBER_REPORT_TITLE ,MEMBER_REPORT_CONTENT , MEMBER_REPORT_REQUEST , MEMBER_REPORT_CREATE_DATE ,
+		MEMBER_REPORT_ANSWER_DATE , MEMBER_REPORT_ANSWER_MEMBER_NO, REPORT_MEMBER , REPORTED_MEMBER, 
+		MEMBER_NAME AS REPORT_MEMBER_NAME, 
+		(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=REPORTED_MEMBER) REPORTED_MEMBER_NAME
+		FROM MEMBER_REPORT
+		JOIN MEMBER ON (MEMBER_NO=REPORT_MEMBER))
+		WHERE MEMBER_REPORT_NO != 0
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'>
+					WHERE MEMBER_REPORT_REQUEST IS NULL
+				</when>
+				<otherwise>
+					WHERE MEMBER_REPORT_REQUEST IS NOT NULL
+				</otherwise>
+			</choose>
+		</if>
+		<if test='query != null and query != ""'>
+			<choose>
+				<when test='key=="t"'>
+					AND MEMBER_REPORT_TITLE LIKE '%${query}%'
+				</when>
+				<when test='key=="c"'>
+					AND MEMBER_REPORT_CONTENT LIKE '%${query}%'
+				</when>
+				<when test='key=="tc"'>
+					AND (MEMBER_REPORT_TITLE LIKE '%${query}%' OR MEMBER_REPORT_CONTENT
+					LIKE '%${query}%')
+				</when>
+				<when test='key=="report"'>
+					AND REPORT_MEMBER_NAME LIKE '%${query}%'
+				</when>
+				<otherwise>
+					AND REPORTED_MEMBER_NAME LIKE '%${query}%'
+				</otherwise>
+			</choose>
+		</if>
+	</select>
+	
+	
+	<!-- 검색 일치 회원 신고 내역 목록 -->
+	<select id="selectMemberReportList2" resultMap="manager_memberReport_rm">
+		SELECT MEMBER_REPORT_NO , MEMBER_REPORT_TITLE ,MEMBER_REPORT_CONTENT , MEMBER_REPORT_REQUEST , 
+		TO_CHAR(MEMBER_REPORT_CREATE_DATE, 'YYYY"-"MM"-"DD') MEMBER_REPORT_CREATE_DATE ,
+		MEMBER_REPORT_ANSWER_DATE , MEMBER_REPORT_ANSWER_MEMBER_NO, REPORT_MEMBER , REPORTED_MEMBER, 
+		MEMBER_NAME AS REPORT_MEMBER_NAME, 
+		(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=REPORTED_MEMBER) REPORTED_MEMBER_NAME
+		FROM MEMBER_REPORT
+		JOIN MEMBER ON (MEMBER_NO=REPORT_MEMBER)
+		WHERE MEMBER_REPORT_NO != 0
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'>
+					AND MEMBER_REPORT_REQUEST IS NULL
+				</when>
+				<otherwise>
+					AND MEMBER_REPORT_REQUEST IS NOT NULL
+				</otherwise>
+			</choose>
+		</if>
+		<if test='query != null and query != ""'>
+			<choose>
+				<when test='key=="t"'>
+					AND MEMBER_REPORT_TITLE LIKE '%${query}%'
+				</when>
+				<when test='key=="c"'>
+					AND MEMBER_REPORT_CONTENT LIKE '%${query}%'
+				</when>
+				<when test='key=="tc"'>
+					AND (MEMBER_REPORT_TITLE LIKE '%${query}%' OR MEMBER_REPORT_CONTENT
+					LIKE '%${query}%')
+				</when>
+				<when test='key=="report"'>
+					AND REPORT_MEMBER_NAME LIKE '%${query}%'
+				</when>
+				<otherwise>
+					AND REPORTED_MEMBER_NAME LIKE '%${query}%'
+				</otherwise>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 회원 신고 내역 상세 보기 -->
+	<select id="memberReportDetail" resultMap="manager_memberReport_rm">
+		SELECT MEMBER_REPORT_NO , MEMBER_REPORT_TITLE ,MEMBER_REPORT_CONTENT , MEMBER_REPORT_REQUEST ,
+		 TO_CHAR(MEMBER_REPORT_CREATE_DATE, 'YYYY"-"MM"-"DD') MEMBER_REPORT_CREATE_DATE ,
+		MEMBER_REPORT_ANSWER_DATE , MEMBER_REPORT_ANSWER_MEMBER_NO, REPORT_MEMBER , REPORTED_MEMBER, 
+		MEMBER_NAME AS REPORT_MEMBER_NAME, 
+		(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=REPORTED_MEMBER) REPORTED_MEMBER_NAME
+		FROM MEMBER_REPORT
+		JOIN MEMBER ON (MEMBER_NO=REPORT_MEMBER)
+		WHERE MEMBER_REPORT_NO=#{memberReportNo}
+	</select>
+	
+	<!-- 회원 신고 내역 이미지 -->
+	<select id="selectReportImageList" resultMap="reportImageFile_rm">
+		SELECT * FROM MEMBER_REPORT_FILE
+		WHERE MEMBER_REPORT_NO=#{memberReportNo}
+	</select>
+	
+	<!-- 회원 신고 답변 등록 -->
+	<update id="insertReportRequest">
+		UPDATE MEMBER_REPORT SET
+		MEMBER_REPORT_REQUEST=#{memberReportRequest},
+		MEMBER_REPORT_ANSWER_DATE=SYSDATE,
+		MEMBER_REPORT_ANSWER_MEMBER_NO=#{loginMemer.memberName}
+		WHERE MEMBER_REPORT_NO=#{memberReportNo}
+	</update>
+	
+	
+	
+	
 
 </mapper>
 

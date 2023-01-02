@@ -92,4 +92,27 @@ public class ManagerInquiryDAO {
 	
 	
 	
+//	/** ajax 실험 중 
+//	 * @param value
+//	 * @return
+//	 */
+//	public int getListCount(String value) {
+//		return sqlSession.selectOne("inquiryMapper.getMemberListCount", value);
+//	}
+//
+//	/** ajax 실험 중 
+//	 * @param value
+//	 * @param pagination
+//	 * @return
+//	 */
+//	public List<UserInquiry> selectManagerInquiryList(String value, Pagination pagination) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	
+	
+	
+	
+	
 }

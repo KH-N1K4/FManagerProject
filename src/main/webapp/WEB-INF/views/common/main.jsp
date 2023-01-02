@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+<c:set var="serviceList" value="${resultMap.serviceList}"/>
+<c:set var="pagination" value="${resultMap.pagination}"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,126 +14,131 @@
     
     
     <link rel="stylesheet" href="/resources/css/common/mainPage.css">
-    
+    <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
     
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
         
-
+        
+        ${memberNo }
     <section class="content">
         <div class="mainArea">
 
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
                 <div id="imageContent">
-                	<%-- <c:forEach var="i" begin="0" end="19" step="1"> --%>
-	                	<a href="/category/1/1">
+                	 <c:forEach var="service" items="${serviceList }" > 
+	                	<%-- <a href="/service/${service.serviceNo}">
 		                    <div id="image">
-		                        <div><img src="/resources/images/강민경.jpg"></div>
+		                        <div><img src="${service.requestFilePath }">
+		                         <span class="like-area">
+	                        		<c:if test="${empty loginMember }">
+	                        			<i class="fa-regular fa-heart boardLike" ></i> 
+	                        		</c:if>
+	                        		<c:if test="${not empty loginMember }">
+		                        		<c:if test="${service.likeCheckFL=='N'}">
+				                            <i class="fa-regular fa-heart boardLike" id="${service.serviceNo }"></i>
+				                        </c:if>
+				                        <c:if test="${service.likeCheckFL=='Y'}">
+				                            <i class="fa-solid fa-heart boardLike" id="${service.serviceNo }"></i>
+				                        </c:if>
+	                        		</c:if>
+	                        	</span>
+		                        
+		                        </div>
 		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>강밍경</span>
-		                        <span>이제 나도 될 수 있다. 유튜버</span>
-		                        <span>가격: 100,000원</span>
+		                        <span>${service.serviceTitle }</span>
+		                        <span>${service.serviceSummary }</span>
+		                        <span>가격: ${service.servicePrice }원</span>
 		                    </div>
-	                    </a>
-	                	<a href="/category/1/2">
-		                    <div id="image">
-		                        <div><img src="/resources/images/정채연.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>채연찡</span>
-		                        <span>나만의 프로필을 만들어 보아요</span>
-		                        <span>가격: 150,000원</span>
-		                    </div>
-	                    </a>
-	                	<a href="/category/1/3">
-		                    <div id="image">
-		                        <div><img src="/resources/images/무파마.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>무파마</span>
-		                        <span>라면먹고갈래? 개존맛 라면만들기</span>
-		                        <span>가격: 10,000원</span>
-		                    </div>
-	                    </a>
-	                	<a href="/category/1/3">
-		                    <div id="image">
-		                        <div><img src="/resources/images/유럽흔남.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>유럽흔남</span>
-		                        <span>외국어 자신감을 가져보아요</span>
-		                        <span>가격: 108,000원</span>
-		                    </div>
-	                    </a>
-	                	<a href="/category/1/4">
-		                    <div id="image">
-		                        <div><img src="/resources/images/조규성.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>조규성</span>
-		                        <span>월드컵 영웅, 개발 조규성 헤딩 강의법</span>
-		                        <span>가격: 200,000원</span>
-		                    </div>
-	                    </a>
-	                	<a href="/category/1/4">
-		                    <div id="image">
-		                        <div><img src="/resources/images/최우식.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>최우식</span>
-		                        <span>그날 우리 행복했잖아</span>
-		                        <span>가격: 100,000원</span>
-		                    </div>
-	                    </a>
-	                	<a href="/category/1/5">
-		                    <div id="image">
-		                        <div><img src="/resources/images/태연.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>태연</span>
-		                        <span>노래잘하는법 알려드립</span>
-		                        <span>가격: 100,000원</span>
-		                    </div>
-	                    </a>
-	                	<a href="/category/1/5">
-		                    <div id="image">
-		                        <div><img src="/resources/images/태연.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>태연</span>
-		                        <span>노래잘하는법 알려드립</span>
-		                        <span>가격: 100,000원</span>
-		                    </div>
-	                    </a>
-	                	<a href="/category/1/5">
-		                    <div id="image">
-		                        <div><img src="/resources/images/태연.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>태연</span>
-		                        <span>노래잘하는법 알려드립</span>
-		                        <span>가격: 100,000원</span>
-		                    </div>
-	                    </a>
-	                	<a href="/category/1/5">
-		                    <div id="image">
-		                        <div><img src="/resources/images/태연.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>태연</span>
-		                        <span>노래잘하는법 알려드립</span>
-		                        <span>가격: 100,000원</span>
-		                    </div>
-	                    </a>
-	                	<a href="/category/1/5">
-		                    <div id="image">
-		                        <div><img src="/resources/images/태연.jpg"></div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>태연</span>
-		                        <span>노래잘하는법 알려드립</span>
-		                        <span>가격: 100,000원</span>
-		                    </div>
-	                    </a>
-                    <%-- </c:forEach> --%>
+	                    </a> --%>
+	                    
+	                    <div>
+                	<%-- <a href="/category/${service.mainCategoryNo}/${service.subCategoryNo }/${service.thirdCategoryNo }/${service.serviceNo }"> --%>
+	                 
+	                    <div id="image">
+	                        <div><img src="${service.requestFilePath }">
+	                        <span class="like-area">
+	                        		<c:if test="${empty loginMember }">
+	                        			<i class="fa-regular fa-heart boardLike" ></i> 
+	                        		</c:if>
+	                        		<c:if test="${not empty loginMember }">
+		                        		<c:if test="${service.likeCheckFL=='N'}">
+				                            <i class="fa-regular fa-heart boardLike" id="${service.serviceNo }"></i>
+				                        </c:if>
+				                        <c:if test="${service.likeCheckFL=='Y'}">
+				                            <i class="fa-solid fa-heart boardLike" id="${service.serviceNo }"></i>
+				                        </c:if>
+	                        		</c:if>
+	                        </span>
+  
+	                        </div>
+	                        <a href="/service/${service.serviceNo }" class="imageTitle">
+	                        ${service.serviceTitle }
+	                        <span class="imageOthers">${service.serviceSummary }</span>
+	                        <span class="imageOthers">가격: ${service.servicePrice}원</span>
+	                        </a>
+	                     
+	                    </div>
+                    <!-- </a> -->
+                	</div>
+	                	
+                     </c:forEach> 
                 </div>
             </div>
 
         </div>
     </section>   
+    
+    
+    
+    
+    <div class="pagination-area">
 
+
+                <ul class="pagination">
+                
+                    <!-- 첫 페이지로 이동 -->
+                    <li><a href="?cp=1${sURL}">&lt;&lt;</a></li>
+
+                    <!-- 이전 목록 마지막 번호로 이동 -->
+                    <li><a href="?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+
+					<c:forEach var="i" begin="${pagination.startPage}" 
+                        end="${pagination.endPage}" step="1">
+                        
+                        <c:choose>
+                            <c:when test="${i == pagination.currentPage}">
+                                <%-- 현재 페이지인 경우 --%>
+                                <!-- 현재 보고있는 페이지 -->
+                                <li><a class="current">${i}</a></li>
+                            </c:when>
+
+                            <c:otherwise>
+                                 <li><a href="?cp=${i}${sURL}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    
+                    <!-- 다음 목록 시작 번호로 이동 -->
+                    <li><a href="?cp=${pagination.nextPage}">&gt;</a></li>
+
+                    <!-- 끝 페이지로 이동 -->
+                    <li><a href="?cp=${pagination.maxPage}">&gt;&gt;</a></li>
+
+                </ul>
+            </div>
+            
+            
+            <script>
+        
+        const memberNo="${loginMember.memberNo}";
+     
+    </script>	
+
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>	
+	<script src="/resources/js/category/categoryList.js"></script> 
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
