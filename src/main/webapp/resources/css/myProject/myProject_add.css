@@ -1,5 +1,5 @@
 .mainInBody{
-  width: 1200px;
+  width: 1100px;
   margin:auto;
   min-height: 100vh;
 
@@ -89,18 +89,18 @@
 /*  */
 .srchOption{
   width: 250px;
-  height: 30px;
+  height: 40px;
   margin-right: 10px;
 }
 
 .inputBoxSize{
   width: 505px;
-  height: 28px;
+  height: 40px;
 }
 
 .budget{
   width: 482px;
-  height: 28px;
+  height: 40px;
   margin-right: 5px;
 }
 .box{
@@ -114,7 +114,7 @@
 
 .projectRequestContent{
   width: 505px;
-  height: 28px;
+  height: 40px;
   resize: none;
 }
 
@@ -143,12 +143,12 @@
 
 .Date{
   width: 510px;
-  height: 28px;
+  height: 40px;
 }
 
 .dateOption{
   width: 515px;
-  height: 30px;
+  height: 40px;
 }
 /*  */
 
@@ -161,12 +161,13 @@
 }
 
 .submitButton{
-  width: 130px;
-  height: 40px;
+  width: 200px;
+  height: 50px;
   background-color: #5b8d2a;
   border: #538126;
-  border-radius: 8%;
+  border-radius: 5px;
   font-size: 20px;
   color: aliceblue;
   font-weight: bold;
+  cursor: pointer;
 }
