@@ -47,17 +47,17 @@
 /* ================================ */
 /* 컬럼명들 */
 .question-no{
-    width: 100px;
+    width: 150px;
 }
 .question-num{
-    width: 100px;
+    width: 150px;
 }
 
 .question-date{
-    width: 150px;
+    width: 200px;
 }
 .question-type{
-    width: 100px;
+    width: 150px;
 }
 
 .question-status{
