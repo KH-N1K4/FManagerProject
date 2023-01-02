@@ -23,28 +23,38 @@
             <section class="mainMenu">
                 <div id="title">전문가 정보</div>
                 <div>
-                    <div id="updateArea"><a href="" id="update">수정하기</a></div>
+                    <div id="updateArea"><a href="/member/freelancer/updateFreelancerInfo" id="update">수정하기</a></div>
                     <div>
                         <div class="item">자기소개</div>
                         <div>
-                            <input type="text" name="" id="" class="input" value="${freelancer.freelancerIntro}"> 
+                            <input type="text" name="" id="" class="input" value="${freelancer.freelancerIntro}" readonly> 
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">지역</div>
                         <div>
-                            <select>
+                            <%-- <select>
                             <c:forEach var="list" items="${regionList}">
                                 <option value="${list.regionNumber}" 
-                                <c:if test ="${freelancer.regionNo eq list.regionNumber}">selected="selected"</c:if>>${list.regionName}</option>
-                            </c:forEach>
-                            </select>
+                                <c:if test ="${freelancer.regionNo eq list.regionNumber}">selected="selected"</c:if>
+                                >${list.regionName}
+                                </option>
+                            </c:forEach> 
+                            </select>  --%>
+
+                            <%-- <c:if test ="${freelancer.regionNo eq list.regionNumber}"></c:if> --%>
+                            <input type="text" value="${freelancer.regionName}"> 
+
+                                
+                        
+
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">전문 분야</div>
                         <div>
-                            <input type="checkbox" name="" id="design">
+                            <%-- <c:forEach var="field" items="${fn:split}"
+                            <input type="checkbox" name="" id="design"> --%>
                             <label for="design" class="checkbox">디자인</label>
                             <input type="checkbox" name="" id="it">
                             <label for="it" class="checkbox">IT.프로그래밍</label>
@@ -64,42 +74,60 @@
                     </div>
                     <div class="itemTitle">
                         <div class="item">경력 사항</div>
-                        <div></div>
+                        <div>
+                            <input type="text" name="" id=""value="${freelancer.careerCompanyName},${freelancer.careerCompanyDepartment},${freelancer.careerCompanyPosition},${freelancer.careerCompanyRegion},${freelancer.careerPeriod}">
+                            <%-- <input type="text" name="" id="" value="${freelancer.careerCompanyDepartment}">
+                            <input type="text" name="" id="" value="${freelancer.careerCompanyPosition}">
+                            <input type="text" name="" id="" value="${freelancer.careerCompanyRegion}">
+                            <input type="text" name="" id="" value="${freelancer.careerPeriod}"> --%>
+                        
+                        </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">자격증</div>
-                        <div></div>
+                        <div>
+                            <input type="text" name="" id="" value="${freelancer.licenseName},${freelancer.licenseDate},${freelancer.licenseAgency}">
+
+                        
+                        </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">연락 가능 시간</div>
                         <div>
-                            <input type="text" name="" id="" class="number"> 시 ~ <input type="text" name="" id="" class="number"> 시
+                            <input type="text" name="" id="" class="number" value="${freelancer.contactTime1}"> 시 ~ <input type="text" name="" id="" class="number" value="${freelancer.contactTime2}"> 시
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">수익금 출금 은행</div>
                         <div>
-                            <select name="" id="bankName">
-                                <option value="">전체</option>
-                                <option value="">신한</option>
-                                <option value="">국민</option>
-                                <option value="">우리</option>
-                                <option value="">기업</option>
-                            </select>
-                            <input type="text" name="" id="account">
+                            <input type="text" value="${freelancer.bankName}"> 
+
+                            <input type="text" value="${freelancer.bankAccountNumber}"name="" id="account">
                         </div>
                     </div>
                 </div>
                 <div id="addArea">
                     <div class="item">포트폴리오</div>
-                    <div><a href="" id="add">추가하기</a></div>
+                    <div><a href="/member/freelancer/modal/addPortfolio" id="add">추가하기</a></div>
                 </div>
                 <div id="serviceArea">
-                    <div class="service">g</div>
-                    <div class="service">g</div>
-                    <div class="service">g</div>
-                    <div class="service">g</div>
-                    <div class="service">g</div>
+                    <c:if test = "${not empty portfolioList}">
+                        <c:forEach var="portfolio" items="${portfolioList}">
+                        <span>
+                        
+                            <span class="service">
+                            <span><img src="/resources/images/무파마.jpg"></span>
+                            ${portfolio.portfolioTitle}<br>${portfolio.portfolioContent}
+                            </span>
+                            
+                        </span>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test ="${empty portfolioList}">
+                        <div>포트폴리오가 존재하지 않습니다!!</div>
+                    
+                    </c:if>
+                   
                 </div>
                 
             </section>
