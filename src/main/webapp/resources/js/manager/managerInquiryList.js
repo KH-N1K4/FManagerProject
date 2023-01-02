@@ -26,26 +26,24 @@ function selectChange() {
                 }
                 document.querySelector('.pagination').innerHTML = "";
 
-                
-                // if (document.getElementById("search-key") != null) { // 검색창이 존재할 때
-                //     const params = new URL(location.href).searchParams;
-                //     // 주소에서 쿼리스트링만 분리한 객체
-                    
-                //     document.getElementById("search-query").value="";
-                //     const key = params.get("key");
-                    
-                //     const option = document.querySelectorAll("#search-key > option");
-                //     for (let op of option) {
 
-                //         // option의 value와 key가 일치할 때
-                //         if (op.value == key) {
-                //             // op.setAttribute("selected", true)
-                //             op.selected = false;
-                //         }
-                //     }
-                    
-                // }
-                
+                        // <div class="question-list-table-content">
+                        //     <div class="question-num">${managerInquiry.userInquiryNo}</div>
+                        
+                        //     <div class="question-title"><a href="/managerInquiryDetail/${managerInquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${managerInquiry.userInquiryTitle}</a></div>
+                        //     <div class="question-date">${managerInquiry.userInquiryCreateDate}</div>
+                        //     <div class="question-status">
+                        //     <c:choose>
+                        //         <c:when test="${managerInquiry.inquiryRequest == null}">
+                        //             <span class="question-wating">답변 대기</span>
+                        //         </c:when>
+                        //         <c:when test="${managerInquiry.inquiryRequest != null}">
+                        //             <span class="question-answer">답변 완료</span>
+                        //         </c:when>
+                        //     </c:choose>
+                        //     </div>
+                        // </div>
+
 
                 
                 for (inquiry of map.managerInquiryList) {
@@ -54,60 +52,44 @@ function selectChange() {
 
                     const child1 = document.createElement("div");
                     child1.classList.add('question-num');
-                    child1.append(document.createTextNode(member.memberNo));
+                    child1.append(document.createTextNode(managerInquiry.userInquiryNo));
 
                     const child2 = document.createElement("div");
                     child2.classList.add('question-title');
                     const child2a = document.createElement("a");
-                    child2a.classList.add('infoBtn');
-                    child2a.append(document.createTextNode(member.memberName));
+                    child2a.setAttribute("href", "/managerInquiryDetail/${managerInquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}");
+                    child2a.append(document.createTextNode(managerInquiry.userInquiryTitle));
                     child2.append(child2a);
 
                     const child3 = document.createElement("div");
-                    child3.classList.add('member-division');
-                    child3.append(document.createTextNode(member.memberType));
+                    child3.classList.add('question-date');
+                    child3.append(document.createTextNode(managerInquiry.userInquiryCreateDate));
 
                     const child4 = document.createElement("div");
-                    child4.classList.add('member-grade');
-                    child4.append(document.createTextNode(member.freelancerGrade));
+                    child4.classList.add('question-status');
+                    child4.append(document.createTextNode(managerInquiry.inquiryRequest));
 
-                    const child5 = document.createElement("div");
-                    child5.classList.add('member-enrollDate');
-                    child5.append(document.createTextNode(member.memberEnrollDate));
-
-                    const child6 = document.createElement("div");
-                    child6.classList.add('member-delete');
-                    const child6a = document.createElement("a");
-                    child6a.classList.add('deleteBtn');
-                    child6a.append(document.createTextNode("탈퇴"));
-                    child6.append(child6a);
+                    
 
                     table.append(child1);
                     table.append(child2);
                     table.append(child3);
                     table.append(child4);
-                    table.append(child5);
-                    table.append(child6);
-                    memberTable.append(table);
+                    inquiryTable.append(table);
 
                 }
-
-                modalShow();
-                deleteMember();
-
-                console.log(map.pagination);
 
                 /* 페이징 */
                 const li1 = document.createElement("li");
                 const a1 = document.createElement("a");
-                a1.setAttribute('href', "/manager/memberList?cp=1"+"&value="+value);
+                a1.setAttribute('href', "/manager/memberList?cp=1${sURL}");
                 a1.appendChild(document.createTextNode("<<"));
                 li1.append(a1);
                 pagination.append(li1);
 
                 const li2 = document.createElement("li");
                 const a2 = document.createElement("a");
-                a2.setAttribute("href", "/manager/memberList?cp=" + map.pagination.prevPage+"&value="+value);
+                a2.setAttribute("href", "/manager/memberList?cp=${pagination.prevPage}${sURL}");
                 a2.appendChild(document.createTextNode("<"));
                 li2.append(a2);
                 pagination.append(li2);
@@ -124,7 +106,7 @@ function selectChange() {
 
                     } else {
                         const a3 = document.createElement("a");
-                        a3.setAttribute("href", "/manager/memberList?cp=" + i+"&value="+value);
+                        a3.setAttribute("href", "/manager/memberList?cp=${i}${sURL}");
                         a3.appendChild(document.createTextNode(i));
                         li3.append(a3);
                         pagination.append(li3);
@@ -133,14 +115,14 @@ function selectChange() {
 
                 const li4 = document.createElement("li");
                 const a4 = document.createElement("a");
-                a4.setAttribute("href", "/manager/memberList?cp=" + map.pagination.nextPage+"&value="+value);
+                a4.setAttribute("href", "/manager/memberList?cp=${pagination.nextPage}${sURL}");
                 a4.appendChild(document.createTextNode(">"));
                 li4.append(a4);
                 pagination.append(li4);
 
                 const li5 = document.createElement("li");
                 const a5 = document.createElement("a");
-                a5.setAttribute("href", "/manager/memberList?cp=" + map.pagination.maxPage+"&value="+value);
+                a5.setAttribute("href", "/manager/memberList?cp=${pagination.maxPage}${sURL}");
                 a5.appendChild(document.createTextNode(">>"));
                 li5.append(a5);
                 pagination.append(li5);

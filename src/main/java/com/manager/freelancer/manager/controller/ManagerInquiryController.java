@@ -1,5 +1,6 @@
 package com.manager.freelancer.manager.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,20 @@ public class ManagerInquiryController {
 		return new Gson().toJson(result);
 	}
 	
-	
+	// 진행 상태 별 조회 ajax
+	@GetMapping("/manager/inquiryStatus")
+	@ResponseBody
+	public Map<String, Object> managerServiceType(Model model,
+			@RequestParam String value,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map = service.selectInquiryStatusList(value, cp);
+		model.addAttribute("map", map);
+
+		return map;
+	}
 	
 
 }

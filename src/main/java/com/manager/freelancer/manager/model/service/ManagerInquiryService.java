@@ -34,4 +34,13 @@ public interface ManagerInquiryService {
 	 */
 	int updateComment(int userInquiryNo, String inputComment, Member loginMember);
 
+	/** 진행상태 별 ajax
+	 * @param value
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectInquiryStatusList(String value, int cp);
+
+	
+
 }
