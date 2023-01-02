@@ -119,7 +119,7 @@ sendContent1.addEventListener('click',function() {
    newText.value=result1[0].value+"/"+result1[1].value+"/"+result1[2].value;
    newOne.append(newText);
    newOne.append(xBtn);
-   licenseInput1.parentElement.append(newOne);
+   majorInput1.parentElement.append(newOne);
 
 
     // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
@@ -150,11 +150,11 @@ sendContent2.addEventListener('click',function() {
   const test2 = $("#careerCompanyPeriod1 option:selected").text();
   const test3 = $("#careerCompanyPeriod2 option:selected").text();
   
-  for(let i = 0; i < result2.length-2; i++) {
-    careerInput2.value += result2[i].value +',';
-  }
-  careerInput2.value += test2+" ";  // ?년 [4]
-  careerInput2.value += test3;     // ?개월 [5]
+  // for(let i = 0; i < result2.length-2; i++) {
+  //   careerInput2.value += result2[i].value +',';
+  // }
+  // careerInput2.value += test2+" ";  // ?년 [4]
+  // careerInput2.value += test3;     // ?개월 [5]
 
 
   // if(licenseInput2.value.trim().length != 0){
@@ -178,12 +178,12 @@ sendContent2.addEventListener('click',function() {
     newText.classList.add("addContent");
     
     
-    newText.value=result2[0].value+"/"+result2[1].value+"/"+result2[2].value+"/"+result2[3].value+"/"+test2+"년"+test3+"개월";
+    newText.value=result2[0].value+"/"+result2[1].value+"/"+result2[2].value+"/"+result2[3].value+"/"+test2+test3;
     
     
     newOne.append(newText);
     newOne.append(xBtn);
-    licenseInput2.parentElement.append(newOne);
+    careerInput2.parentElement.append(newOne);
     
     
     // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
@@ -201,13 +201,13 @@ const sendContent3 = document.getElementById("sendContent3"); // 모달창 제�
 
 sendContent3.addEventListener("click", function(){
 
-    for(let i =0; i<result3.length-1; i++){
-    document.getElementById("licensePopup").value +=   result3[i].value  +',';
+    // for(let i =0; i<result3.length-1; i++){
+    // document.getElementById("licensePopup").value +=   result3[i].value  +',';
     // if(licenseInput3[i].value = 1){
     //   result3[i].innerText
     // }
-    }
-    licenseInput3.value += result3[2].value;
+   // }
+    //licenseInput3.value += result3[2].value;
     // document.getElementById("licensePopup").value = result.value;
 
 
@@ -221,7 +221,7 @@ sendContent3.addEventListener("click", function(){
     
      newText.name="license";
      newText.classList.add("addContent");
-     newText.value=result3[0].value+"/"+result3[1].value+"/"+result3[2].value;
+    newText.value=result3[0].value+"/"+result3[1].value+"/"+result3[2].value;
      newOne.append(newText);
      newOne.append(xBtn);
      licenseInput3.parentElement.append(newOne);
@@ -233,13 +233,6 @@ sendContent3.addEventListener("click", function(){
       // 요소.remove() : 해당 요소를 제거 
       this.parentElement.remove();
   })
-  
-     if(select1.value==0){
-      alert("다시 선택");
-      // 이거 어떻게 막지..
-     }
-
-
 
     modal3.style.display="none"
 });
