@@ -46,17 +46,13 @@
 
 /* ================================ */
 /* 컬럼명들 */
+.question-no{
+    width: 100px;
+}
 .question-num{
     width: 100px;
 }
 
-.question-title{
-    width: 500px;
-}
-.question-title a{
-   text-decoration: none;
-   color: black;
-}
 .question-date{
     width: 150px;
 }

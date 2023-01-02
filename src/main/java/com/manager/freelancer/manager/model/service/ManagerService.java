@@ -186,6 +186,20 @@ public interface ManagerService {
 	 */
 	int insertReportRequest(Map<String, Object> map);
 
+	/** 거래 신고 내역 조회
+	 * @param status
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectMemberTradeList(int status, int cp);
+
+	/** 검색 일치 거래 신고 내역 조회
+	 * @param pm
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectMemberTradeList(Map<String, Object> pm, int cp);
+
 	
 
 	

@@ -407,6 +407,28 @@ public class ManagerController {
 		return result;
 	}
 	
+	//===============================================================
+	
+	// 거래 신고 내역 목록
+	@GetMapping("/manager/tradeReportList")
+	public String managerTradeReport(Model model, 
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> pm) {
+		
+		System.out.println(status);
+
+		if (pm.get("key") == null) {
+			Map<String, Object> map = service.selectMemberTradeList(status, cp);
+			model.addAttribute("map", map);
+		} else {
+			pm.put("status", status);
+			Map<String, Object> map = service.selectMemberTradeList(pm, cp);
+			model.addAttribute("map", map);
+		}
+
+		return "/manager/tradeReportList";
+	}
 	
 	
 	
@@ -417,12 +439,6 @@ public class ManagerController {
 	}
 	
 	
-	
-	
-	@GetMapping("/manager/tradeReportList")
-	public String managerTradeReport() {
-		return "/manager/tradeReportList";
-	}
 	
 	
 

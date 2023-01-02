@@ -16,6 +16,7 @@ import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
 import com.manager.freelancer.manager.model.vo.Settlement;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
+import com.manager.freelancer.manager.model.vo.TradeReport;
 
 @Repository
 public class ManagerDAO {
@@ -472,6 +473,48 @@ public class ManagerDAO {
 	 */
 	public int insertReportRequest(Map<String, Object> map) {
 		return sqlSession.update("managerMapper.insertReportRequest",map);
+	}
+
+	/** 거래 신고 수
+	 * @param status
+	 * @return
+	 */
+	public int getMemberTradeListCount(int status) {
+		return sqlSession.selectOne("managerMapper.getMemberTradeListCount",status);
+	}
+
+	/** 거래 신고 내역 조회
+	 * @param status
+	 * @param pagination
+	 * @return
+	 */
+	public List<TradeReport> selectMemberTradeList(int status, Pagination pagination) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectMemberTradeList", null, rowBounds);
+	}
+
+	/** 검색 일치 거래 신고 수
+	 * @param pm
+	 * @return
+	 */
+	public int getMemberTradeListCount(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getMemberTradeListCount2",pm);
+	}
+
+	/** 검색 일치 거래 신고 내역 조회
+	 * @param pagination
+	 * @param pm
+	 * @return
+	 */
+	public List<TradeReport> selectMemberTradeList(Pagination pagination, Map<String, Object> pm) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectMemberTradeList2", pm, rowBounds);
 	}
 
 	
