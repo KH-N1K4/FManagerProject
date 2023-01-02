@@ -1,6 +1,8 @@
 package com.manager.freelancer.manager.model.vo;
 
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,5 +18,15 @@ public class FreelancerService {
 	
 	private String serviceStatusString;
 	
+	private String requestFilePath;
+	private String serviceSummary;
+	private int servicePrice;
+	private int serviceEditNum;
+	private int serviceWorkPeriod;
+	
+	private String freelancerName;
+	private String freelancerImage;
+	
+	List<ServiceImageFile> imageFileList;
 
 }

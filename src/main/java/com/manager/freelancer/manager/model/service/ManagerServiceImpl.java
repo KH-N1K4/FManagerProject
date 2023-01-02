@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.dao.ManagerDAO;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
+import com.manager.freelancer.manager.model.vo.ProjectRequest;
 import com.manager.freelancer.manager.model.vo.Settlement;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
@@ -205,6 +207,23 @@ public class ManagerServiceImpl implements ManagerService {
 		return dao.managerServiceDelete(serviceNo);
 	}
 	
+	// 서비스 상세보기
+	@Override
+	public FreelancerService managerServiceDetail(int serviceNo) {
+		return dao.managerServiceDetail(serviceNo);
+	}
+	
+	// 서비스 승인
+	@Override
+	public int managerServiceApproval(int serviceNo) {
+		return dao.managerServiceApproval(serviceNo);
+	}
+	
+	// 서비스 반려
+	@Override
+	public int managerServiceRestore(int serviceNo) {
+		return dao.managerServiceRestore(serviceNo);
+	}
 	
 	
 	// 계좌 내역 목록
@@ -363,6 +382,91 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		return result;
 	}
+	
+	
+	
+	// 프로젝트 의뢰 목록 조회
+	@Override
+	public Map<String, Object> managerprojectRequestList(int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int listCount = dao.getRequestCount();
+		Pagination pagination = new Pagination(listCount, cp);
+
+		List<ProjectRequest> requestList = dao.selectRequestList(pagination);
+		
+		if(requestList!=null) {
+			for(ProjectRequest s : requestList) {
+				if(s.getProjectRequestStatus()==1) s.setProjectRequestStatusString("승인 대기중");
+				else if(s.getProjectRequestStatus()==2) s.setProjectRequestStatusString("모집중");
+				else if(s.getProjectRequestStatus()==3) s.setProjectRequestStatusString("미승인");
+				else s.setProjectRequestStatusString("모집 마감");
+			}
+		}
+		map.put("requestList", requestList);
+		map.put("pagination", pagination);
+		
+		return map;
+	}
+	
+	// 프로젝트 의뢰 상태 ajax
+	@Override
+	public Map<String, Object> managerprojectRequestType(int status, int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<ProjectRequest> requestList = new ArrayList<ProjectRequest>();
+		Pagination pagination;
+		
+		if(status !=0) {
+			int listCount = dao.getRequestCount2(status);
+			pagination = new Pagination(listCount, cp);
+			requestList = dao.selectRequestList2(pagination,status);
+		} else {
+			int listCount = dao.getRequestCount();
+			pagination = new Pagination(listCount, cp);
+			requestList = dao.selectRequestList(pagination);
+		}
+		
+		if(requestList!=null) {
+			for(ProjectRequest s : requestList) {
+				if(s.getProjectRequestStatus()==1) s.setProjectRequestStatusString("승인 대기중");
+				else if(s.getProjectRequestStatus()==2) s.setProjectRequestStatusString("모집중");
+				else if(s.getProjectRequestStatus()==3) s.setProjectRequestStatusString("미승인");
+				else s.setProjectRequestStatusString("모집 마감");
+			}
+		}
+		map.put("requestList", requestList);
+		map.put("pagination", pagination);
+		
+		return map;
+	}
+	
+	
+	// 프로젝트 의뢰 삭제
+	@Override
+	public int managerRequestDelete(int projectRequestNo) {
+		return dao.managerRequestDelete(projectRequestNo);
+	}
+	
+	// 프로젝트 의뢰 상세보기
+	@Override
+	public ProjectRequest managerRequestDetail(int projectRequestNo) {
+		return dao.managerRequestDetail(projectRequestNo);
+	}
+	
+	// 프로젝트 의뢰 승인
+	@Override
+	public int managerRequestApproval(int projectRequestNo) {
+		return dao.managerRequestApproval(projectRequestNo);
+	}
+	
+	// 프로젝트 의뢰 반려
+	@Override
+	public int managerRequestRestore(int projectRequestNo) {
+		return dao.managerRequestRestore(projectRequestNo);
+	}
+	
 	
 	
 

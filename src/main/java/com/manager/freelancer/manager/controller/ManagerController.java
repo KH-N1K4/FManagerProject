@@ -8,11 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.manager.freelancer.manager.model.service.ManagerService;
+import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
+import com.manager.freelancer.manager.model.vo.ProjectRequest;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 
 @Controller
@@ -66,7 +69,7 @@ public class ManagerController {
 
 		map = service.selectMemberTypeList(value, cp);
 		model.addAttribute("map", map);
-		
+
 		return map;
 	}
 
@@ -124,6 +127,46 @@ public class ManagerController {
 		return result;
 	}
 
+	// 서비스 상세보기
+	@GetMapping("/manager/serviceDetail/{serviceNo}")
+	public String managerServiceDetail(@PathVariable("serviceNo") int serviceNo, Model model) {
+
+		FreelancerService freelancerService = service.managerServiceDetail(serviceNo);
+		model.addAttribute("freelancerService", freelancerService);
+
+		return "/manager/serviceDetail";
+	}
+
+	// 서비스 승인
+	@GetMapping("/manager/{serviceNo}/serviceApproval")
+	public String managerServiceApproval(@PathVariable("serviceNo") int serviceNo, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		int result = service.managerServiceApproval(serviceNo);
+
+		if (result > 0) {
+			Map<String, Object> map = service.selectServiceList(cp);
+			model.addAttribute("map", map);
+		}
+
+		return "redirect:/manager/serviceList";
+	}
+
+	// 서비스 반려
+	@GetMapping("/manager/{serviceNo}/serviceRestore")
+	public String managerServiceRestort(@PathVariable("serviceNo") int serviceNo, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		int result = service.managerServiceRestore(serviceNo);
+
+		if (result > 0) {
+			Map<String, Object> map = service.selectServiceList(cp);
+			model.addAttribute("map", map);
+		}
+
+		return "redirect:/manager/serviceList";
+	}
+
 	// ======================================================================================
 
 	// 계좌 관리
@@ -145,12 +188,10 @@ public class ManagerController {
 		return "/manager/tradeList";
 	}
 
-	
-	
 	// 작업 상태별 계좌 내역 조회 ajax
 	@GetMapping("/manager/tradeStatus")
 	@ResponseBody
-	public Map<String, Object> managerTradeStatus(Model model, 
+	public Map<String, Object> managerTradeStatus(Model model,
 			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
 
@@ -161,69 +202,142 @@ public class ManagerController {
 
 		return map;
 	}
-	
+
 	// 환불하기 모달 오픈하면 나오는 거래 정보
 	@GetMapping("/manager/tradeInfo")
 	@ResponseBody
 	public TradeInfo managerTradeInfo(Model model, @RequestParam int tradeNo) {
-		
+
 		TradeInfo tradeInfo = service.selectTradeInfo(tradeNo);
-				
+
 		model.addAttribute("tradeInfo", tradeInfo);
-		
+
 		return tradeInfo;
 	}
 
-	
 	// 환불하기
 	@GetMapping("/manager/settlement/refund")
-	public String managerRefund(Model model,
-					@RequestParam int tradeNo, @RequestParam(value="refundPercent", required = false) int refundPercent,
-					@RequestParam(value = "status", required = false, defaultValue = "0") int status,
-					@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
-		
+	public String managerRefund(Model model, @RequestParam int tradeNo,
+			@RequestParam(value = "refundPercent", required = false) int refundPercent,
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
 		Map<String, Object> pm = new HashMap<String, Object>();
 		pm.put("tradeNo", tradeNo);
 		pm.put("refundPercent", refundPercent);
 
 		int result = service.managerRefund(pm);
-		
-		if(result>0) {
+
+		if (result > 0) {
 			Map<String, Object> map = service.selectTradeList(status, cp);
 			model.addAttribute("map", map);
 		}
-		
-		
+
 		return "/manager/tradeList";
 	}
-		
-	
+
 	// 정산하기
 	@GetMapping("/manager/settlement/calculate")
 	@ResponseBody
-	public Map<String, Object> managerCalculate(Model model,
-			@RequestParam int tradeNo,
+	public Map<String, Object> managerCalculate(Model model, @RequestParam int tradeNo,
 			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
-		
+
 		int result = service.managerCalculate(tradeNo);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		if(result>0) {
+
+		if (result > 0) {
 			map = service.selectTradeList(status, cp);
 		}
-		
+
 		return map;
 	}
-	
-	
-	
 
+//=================================================================================
+	// 프로젝트 의뢰 목록
 	@GetMapping("/manager/projectRequestList")
-	public String managerprojectRequestList() {
+	public String managerprojectRequestList(Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		Map<String, Object> map = service.managerprojectRequestList(cp);
+		model.addAttribute("map", map);
+
 		return "/manager/projectRequestList";
 	}
+
+	// 프로젝트 의뢰 상태
+	@GetMapping("/manager/requestType")
+	@ResponseBody
+	public Map<String, Object> managerprojectRequestType(Model model,
+			@RequestParam(value = "status", required = false) int status,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println(status);
+
+		map = service.managerprojectRequestType(status, cp);
+		model.addAttribute("map", map);
+		System.out.println(map);
+
+		return map;
+	}
+
+	// 프로젝트 의뢰 삭제
+	@GetMapping("/manager/requestDelete")
+	@ResponseBody
+	public int managerRequestDelete(@RequestParam int projectRequestNo) {
+
+		System.out.println(projectRequestNo);
+
+		int result = service.managerRequestDelete(projectRequestNo);
+
+		return result;
+	}
+
+	// 프로젝트 의뢰 상세보기
+	@GetMapping("/manager/requestDetail/{projectRequestNo}")
+	public String managerRequestDetail(@PathVariable("projectRequestNo") int projectRequestNo, Model model) {
+
+		ProjectRequest projectRequest = service.managerRequestDetail(projectRequestNo);
+		model.addAttribute("projectRequest", projectRequest);
+
+		return "/manager/requestDetail";
+	}
+
+	// 프로젝트 의뢰 승인
+	@GetMapping("/manager/{projectRequestNo}/requestApproval")
+	public String managerRequestApproval(@PathVariable("projectRequestNo") int projectRequestNo, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		int result = service.managerRequestApproval(projectRequestNo);
+
+		if (result > 0) {
+			Map<String, Object> map = service.managerprojectRequestList(cp);
+			model.addAttribute("map", map);
+		}
+
+		return "redirect:/manager/projectRequestList";
+	}
+
+	// 프로젝트 의뢰 반려
+	@GetMapping("/manager/{projectRequestNo}/requestRestore")
+	public String managerRequestRestore(@PathVariable("projectRequestNo") int projectRequestNo, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		int result = service.managerRequestRestore(projectRequestNo);
+
+		if (result > 0) {
+			Map<String, Object> map = service.managerprojectRequestList(cp);
+			model.addAttribute("map", map);
+		}
+
+		return "redirect:/manager/projectRequestList";
+	}
+	
+	
+	
+	
 
 	@GetMapping("/manager/reviewList")
 	public String managerReport() {

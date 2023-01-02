@@ -12,6 +12,7 @@ import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.Pagination;
+import com.manager.freelancer.manager.model.vo.ProjectRequest;
 import com.manager.freelancer.manager.model.vo.Settlement;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 
@@ -178,6 +179,31 @@ public class ManagerDAO {
 	public int managerServiceDelete(int serviceNo) {
 		return sqlSession.update("managerMapper.managerServiceDelete", serviceNo);
 	}
+	
+	/** 서비스 상세보기
+	 * @param serviceNo
+	 * @return
+	 */
+	public FreelancerService managerServiceDetail(int serviceNo) {
+		return sqlSession.selectOne("managerMapper.managerServiceDetail", serviceNo);
+	}
+	
+	/** 서비스 승인
+	 * @param serviceNo
+	 * @return
+	 */
+	public int managerServiceApproval(int serviceNo) {
+		return sqlSession.update("managerMapper.managerServiceApproval", serviceNo);
+	}
+
+	/** 서비스 반려
+	 * @param serviceNo
+	 * @return
+	 */
+	public int managerServiceRestore(int serviceNo) {
+		return sqlSession.update("managerMapper.managerServiceRestore", serviceNo);
+	}
+
 
 	/** 계좌 내역 수 조회
 	 * @param status
@@ -312,6 +338,85 @@ public class ManagerDAO {
 	public int getPaymentPrice2(int tradeNo) {
 		return sqlSession.selectOne("managerMapper.getPaymentPrice2",tradeNo);
 	}
+
+	/** 프로젝트 의뢰 수
+	 * @return
+	 */
+	public int getRequestCount() {
+		return sqlSession.selectOne("managerMapper.getRequestCount");
+	}
+
+	/** 프로젝트 의뢰 목록 조회
+	 * @param pagination
+	 * @return
+	 */
+	public List<ProjectRequest> selectRequestList(Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectRequestList", null, rowBounds);
+	}
+
+	
+	/** 상태별 프로젝트 의뢰 수
+	 * @param status
+	 * @return
+	 */
+	public int getRequestCount2(int status) {
+		return sqlSession.selectOne("managerMapper.getRequestCount2", status);
+	}
+
+
+	/** 상태별 프로젝트 의뢰 목록
+	 * @param pagination
+	 * @param status
+	 * @return
+	 */
+	public List<ProjectRequest> selectRequestList2(Pagination pagination, int status) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectRequestList2", status, rowBounds);
+	}
+
+	/** 프로젝트 의뢰 삭제
+	 * @param projectRequestNo
+	 * @return
+	 */
+	public int managerRequestDelete(int projectRequestNo) {
+		return sqlSession.update("managerMapper.managerRequestDelete",projectRequestNo);
+	}
+
+	/** 프로젝트 의뢰 상세보기
+	 * @param projectRequestNo
+	 * @return
+	 */
+	public ProjectRequest managerRequestDetail(int projectRequestNo) {
+		return sqlSession.selectOne("managerMapper.managerRequestDetail", projectRequestNo);
+	}
+
+	/** 프로젝트 의뢰 승인
+	 * @param projectRequestNo
+	 * @return
+	 */
+	public int managerRequestApproval(int projectRequestNo) {
+		return sqlSession.update("managerMapper.managerRequestApproval",projectRequestNo);
+	}
+
+	/** 프로젝트 의뢰 반려
+	 * @param projectRequestNo
+	 * @return
+	 */
+	public int managerRequestRestore(int projectRequestNo) {
+		return sqlSession.update("managerMapper.managerRequestRestore",projectRequestNo);
+	}
+
+	
+	
 
 
 

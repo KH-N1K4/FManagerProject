@@ -30,6 +30,13 @@
 		<id property="serviceNo" column="SERVICE_NO"/>
 		<result property="serviceTitle" column="SERVICE_TITLE" />
 		<result property="serviceStatus" column="SERVICE_STATUS" />
+		<result property="requestFilePath" column="REQUEST_FILE_PATH" />
+		<result property="serviceSummary" column="SERVICE_SUMMARY" />
+		<result property="servicePrice" column="SERVICE_PRICE" />
+		<result property="serviceEditNum" column="SERVICE_EDIT_NUM" />
+		<result property="serviceWorkPeriod" column="SERVICE_WORK_PERIOD" />
+		<result property="freelancerName" column="MEMBER_NAME" />
+		<result property="freelancerImage" column="MEMBER_PROFILE" />
 	</resultMap>
 	
 	<resultMap type="Settlement" id="manager_settlement_rm">
@@ -52,6 +59,20 @@
 		<result property="cancelInquiryDate" column="CANCEL_INQUIRY_DATE" />
 	</resultMap>
 	
+	
+	<resultMap type="com.manager.freelancer.manager.model.vo.ProjectRequest" id="manager_projectRequest_rm">
+		<id property="projectRequestNo" column="PROJECT_REQUEST_NO" />
+		<result property="projectRequestTitle" column="PROJECT_REQUEST_TITLE" />
+		<result property="projectRequestSummary" column="PROJECT_REQUEST_SUMMARY" />
+		<result property="projectRequestContent" column="PROJECT_REQUEST_CONTENT" />
+		<result property="projectRequestStatus" column="PROJECT_REQUEST_STATUS" />
+		<result property="projectRequestBudget" column="PROJECT_REQUEST_BUDGET" />
+		<result property="requestRecruitDate" column="REQUEST_RECRUIT_DATE" />
+		<result property="requestWorkDate" column="REQUEST_WORK_DATE" />
+		<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD" />
+		<result property="MemberNo" column="MEMBER_NO" />
+		<result property="MemberName" column="MEMBER_NAME" />
+	</resultMap>
 
 
 	<!-- 프리랜서 등급 조회 -->
@@ -205,6 +226,8 @@
 		SELECT SERVICE_NO, SERVICE_TITLE, SERVICE_STATUS
 		FROM SERVICE
 		WHERE SERVICE_STATUS != 5
+		AND SERVICE_DEL_FL = 'N'
+		ORDER BY 1 DESC
 	</select>
 	
 	
@@ -222,6 +245,8 @@
 		FROM SERVICE
 		WHERE SERVICE_STATUS != 5
 		AND SERVICE_STATUS = #{status}
+		AND SERVICE_DEL_FL = 'N'
+		ORDER BY 1 DESC
 	</select>
 	
 	
@@ -232,8 +257,35 @@
 	</update>
 	
 	
+	<!-- 서비스 상세보기 -->
+	<select id="managerServiceDetail" resultMap="manager_service_rm">
+	SELECT *
+	FROM (
+	   SELECT FREELANCER_NO, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_NAME,
+	   (SELECT MEMBER_PROFILE FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_PROFILE,
+	   SERVICE_NO, REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY SERVICE_NO ORDER BY SERVICE_NO, REQUEST_FILE_PATH)) RNUM
+	   ,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,
+		SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,SERVICE_CREATE_DATE, THIRD_CATEGORY_NAME, SUB_CATEGORY_NAME, MAIN_CATEGORY_NAME,SERVICE_DEL_FL,SERVICE_STATUS
+		FROM SERVICE_FILE
+		JOIN SERVICE USING(SERVICE_NO)
+		JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		JOIN FREELANCER USING(FREELANCER_NO)
+		WHERE SERVICE_NO=#{serviceNo}
+	) 
+	WHERE RNUM =1
+	</select>
 	
+	<!-- 서비스 승인 -->
+	<update id="managerServiceApproval">
+		UPDATE SERVICE SET SERVICE_STATUS=2 WHERE SERVICE_NO=#{serviceNo}
+	</update>
 	
+	<!-- 서비스 반려 -->
+	<update id="managerServiceRestore">
+		UPDATE SERVICE SET SERVICE_STATUS=3 WHERE SERVICE_NO=#{serviceNo}
+	</update>
 	
 	
 	
@@ -402,6 +454,70 @@
 	<update id="updateStatusCal">
 		UPDATE SETTLEMENT SET WORK_STATUS=2
 		WHERE TRADE_NO=#{tradeNo}
+	</update>
+
+
+
+
+	<!-- 프로젝트 의뢰 수 조회 -->
+	<select id="getRequestCount" resultType="_int">
+		SELECT COUNT(*) FROM PROJECT_REQUEST
+	</select>
+
+	<!-- 프로젝트 의뢰 목록 조회 -->
+	<select id="selectRequestList" resultMap="manager_projectRequest_rm">
+		SELECT *
+		FROM PROJECT_REQUEST
+		WHERE PROJECT_REQUEST_DEL_FL = 'N'
+		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 상태별 프로젝트 의뢰 수 조회 -->
+	<select id="getRequestCount2" resultType="_int">
+		SELECT COUNT(*) FROM PROJECT_REQUEST
+		WHERE PROJECT_REQUEST_STATUS=#{status}
+	</select>
+
+	<!-- 상태별 프로젝트 의뢰 목록 조회 -->
+	<select id="selectRequestList2" resultMap="manager_projectRequest_rm">
+		SELECT *
+		FROM PROJECT_REQUEST
+		WHERE PROJECT_REQUEST_STATUS=#{status}
+		AND PROJECT_REQUEST_DEL_FL = 'N'
+		ORDER BY 1 DESC
+	</select>
+
+	<!-- 프로젝트 의뢰 삭제 -->	
+	<update id="managerRequestDelete">
+		UPDATE PROJECT_REQUEST SET PROJECT_REQUEST_DEL_FL='Y'
+		WHERE PROJECT_REQUEST_NO=#{projectRequestNo}
+	</update>
+	
+	<!-- 프로젝트 의뢰 상세보기 -->
+	<select id="managerRequestDetail" resultMap="manager_projectRequest_rm">
+	SELECT *
+	FROM (
+	   SELECT MEMBER_NO, MEMBER_NAME, MEMBER_PROFILE,
+	   PROJECT_REQUEST_NO, REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY PROJECT_REQUEST_NO ORDER BY PROJECT_REQUEST_NO, REQUEST_FILE_PATH)) RNUM
+	   ,PROJECT_REQUEST_TITLE,PROJECT_REQUEST_SUMMARY,PROJECT_REQUEST_CONTENT,PROJECT_REQUEST_BUDGET,
+		PROJECT_WORK_PERIOD,TO_CHAR(REQUEST_RECRUIT_DATE, 'YYYY"년" MM"월" DD"일"') REQUEST_RECRUIT_DATE,
+		TO_CHAR(REQUEST_WORK_DATE, 'YYYY"년" MM"월" DD"일"') REQUEST_WORK_DATE, PROJECT_REQUEST_DEL_FL,PROJECT_REQUEST_STATUS
+		FROM REQUEST_FILE
+		JOIN PROJECT_REQUEST USING(PROJECT_REQUEST_NO)
+		JOIN MEMBER USING (MEMBER_NO)
+		WHERE PROJECT_REQUEST_NO=#{projectRequestNo}
+	) 
+	WHERE RNUM =1
+	</select>
+
+	<!-- 프로젝트 의뢰 승인 -->
+	<update id="managerRequestApproval">
+		UPDATE PROJECT_REQUEST SET PROJECT_REQUEST_STATUS=2 WHERE PROJECT_REQUEST_NO=#{projectRequestNo} 
+	</update>
+	
+	<!-- 프로젝트 의뢰 반려 -->
+	<update id="managerRequestRestore">
+	UPDATE PROJECT_REQUEST SET PROJECT_REQUEST_STATUS=3 WHERE PROJECT_REQUEST_NO=#{projectRequestNo} 
 	</update>
 
 </mapper>
