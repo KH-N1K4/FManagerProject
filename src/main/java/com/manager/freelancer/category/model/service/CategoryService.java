@@ -17,13 +17,20 @@ public interface CategoryService {
 
 	List<Map<String, Object>> selectThirdCategoryList();
 
-	List<Service> selectBoardList(int mainCategoryNo);
+	List<Service> selectBoardList(Map<String, Integer> map);
 
 	Service viewService(int serviceNo);
 
 	int askService(AskService as);
 
 	int pauseService(int serviceNo);
+
+	// 서비스 찜 
+	int serviceLikeCheck(Map<String, Object> map);
+
+	int boardLikeUp(Map<String, Object> paramMap);
+
+	int boardLikeDown(Map<String, Object> paramMap);
 	
 
 }

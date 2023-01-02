@@ -23,7 +23,6 @@
             <div id="title">프로필</div>
             
             
-            
             <form action="/member/myInfo/updateMyInfo" enctype="multipart/form-data" method="POST" name="myPage-frm"  onsubmit="return profileValidate();">
                 <div>
                     <div id="content">

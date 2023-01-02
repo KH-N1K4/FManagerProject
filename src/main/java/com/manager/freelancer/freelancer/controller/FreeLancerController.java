@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.manager.freelancer.freelancer.model.service.FreeLancerService;
@@ -104,15 +106,22 @@ public class FreeLancerController {
 		public String enrollFreelancerSignup(@SessionAttribute("loginMember") Member loginMember,//회원번호 == 프리랜서번호
 				String major, // major input태그에 적힌 값들
 				String career,
-				int majorStatus, // major에서 재학상태값
 				String license,
-				int bankCode,
-				String bankAccountNumber3,
-				Freelancer inputFreelancer
-				/*String[] freelancerField */ ) {
+
+				Freelancer inputFreelancer,
+				String[] freelancerField , RedirectAttributes ra,
+				@RequestHeader(value="referer") String referer
+        int bankCode,
+				String bankAccountNumber3
+				) {
+
 		
+			String message=null;
+			String path=null;
+			
 		// major > 학교명,전공,1
 			
+
 		inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 로그인한 회원번호를 inputFreelancer에 세팅
 		inputFreelancer.setMajor(major);
 		inputFreelancer.setMajorGraduateStatus(majorStatus);
@@ -127,21 +136,20 @@ public class FreeLancerController {
 			
 			int result = service.enrollFreelancerSignup(inputFreelancer);
 		
+
 		
-//		String path = null;
 		
 			if(result > 0) {
-//				path="/";
-				System.out.println("전문가등록성공");
+				path="/";
+				message="전문가등록성공";
 				
 			} else {
-//				path="/";
-				System.out.println("전문가등록실패");
-				
-
+				path=referer;
+				message="전문가등록실패";
 
 			}
-			return "/";
+			ra.addFlashAttribute("message",message);
+			return "redirect:"+path;
 		}
 		
 		// 포트폴리오 페이지 이동

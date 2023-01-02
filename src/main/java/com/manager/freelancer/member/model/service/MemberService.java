@@ -3,10 +3,10 @@ package com.manager.freelancer.member.model.service;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.manager.freelancer.category.model.vo.AskService;
+import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.member.model.vo.Member;
 
 
@@ -32,5 +32,7 @@ public interface MemberService {
 	List<AskService> selectSendSuggestion(int memberNo);
 
 	AskService selectSendSuggesionContent(String serviceInquiryNo);
+
+	List<Service> selectLikeList(int memberNo);
 
 }

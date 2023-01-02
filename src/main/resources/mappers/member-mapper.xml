@@ -114,7 +114,10 @@
  		MEMBER_PW=#{newPw}
  		WHERE MEMBER_NO=#{memberNo}
    </update>
-
+   
+   
+   
+  
 	
   
 </mapper>

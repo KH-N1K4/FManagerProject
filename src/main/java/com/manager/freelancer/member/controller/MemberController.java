@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.manager.freelancer.category.model.vo.AskService;
+import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.member.model.service.MemberService;
 import com.manager.freelancer.member.model.vo.Member;
 
@@ -314,10 +315,20 @@ public class MemberController {
 	
 	// 찜목록 이동
 	@GetMapping("/member/myInfo/likeList")
-	public String likeList() {
+	public String likeList(@SessionAttribute("loginMember") Member loginMember, Model model) {
+		
+		List<Service> map=service.selectLikeList(loginMember.getMemberNo());
+		
+		model.addAttribute("map",map);
+		
 		return "member/likeList";
 	}
 	
+	
+	
+	
+	
+	// 내가 보낸 제안 보기
 	@GetMapping("/member/myInfo/sendSuggestion")
 	public String sendSuggestion(@SessionAttribute("loginMember") Member loginMember, Model model) {
 		

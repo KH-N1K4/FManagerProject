@@ -10,56 +10,18 @@
 
 /* 사이드 메뉴 영역*/
 .sideMenu{
-    width: 200px;
+    width: 300px;
     height: 800px;
 }
 
 
 /* 메인 영역 */
 .mainContent{
-    width: 1000px;
+    width: 900px;
     /* margin-left: 20px; */
 }
 
-/*  --------------사이드 메뉴  --------------*/
-#design{
-    width: 150px;
-    text-align: center;
-    margin: 50px 20px 0px 0px;
-    font-size: 23px;
-    font-weight: bold;
-    border-bottom: 2px solid #538126; 
-}
-#subCategori{
-    width: 150px;
-    margin: 20px 0;
-    position: relative;
-}
-.sideMenu a{
-    text-decoration: none;
-    font-size: 15px;
-    color: gray;
-    width: 120px;
-}
-.sideMenu a:hover{
-    text-decoration: none;
-    font-size: 15px;
-    color: #538126;
-    width: 120px;
-}
-.sideMenu button{
-    /* margin-left: 49px; */
-    background-color: white;
-    border: none;
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-    padding: 0;
-    font-size: 8px;
-    color: #538126;
-    position: absolute;
-    right: 0;
-}
+
 
 
 
@@ -75,39 +37,9 @@
 }
 #image{
     height: 320px;
-    position:relative;
 }
-
-#image>div{
-	position:relative;
-}
-
-.like-area{
-	position:absolute; 
-	top:10px;
-	left:190px;
-	z-index:10px;
-	
-	
-	 display: block;
-   
-}
-
-.like-area>i{
-	font-size:25px;
-}
-
 #image:nth-child(4n){
     margin-right: 0;
-}
-
-.imageTitle{
-	display:block;
-	position:absolute;
-	margin-top:35px;
-	padding-top:205px;
-	width:225px;
-	top:0;
 }
 
 
@@ -115,7 +47,6 @@
 
 /* 셀렉박스 폼태그 */
 #inquirySubmit{
-    margin: 50px 0;
     position:relative;
 }
 #budget{
@@ -141,17 +72,12 @@
 }
 
 #imageContent span{
-   
-}
-
-.imageOthers{
     display: block;
-    /* width: 225px; */
+    width: 225px;
     font-size: 13px;
     color: grey;
     font-weight: bold;
-    margin-bottom: 5px;
-    position:relative;
+    margin-bottom: 10px;
 }
 
 a{
@@ -163,7 +89,7 @@ a{
     text-decoration: none;
     color: grey;
     margin-right: 25px;
-    margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 
