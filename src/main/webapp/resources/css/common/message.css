@@ -126,6 +126,7 @@
     display: flex;
     margin-bottom: 3px;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .Daylist{
@@ -149,7 +150,27 @@
 .chatDate{
     display: inline-flex;
     align-items: flex-end;
-    margin-bottom: 15px;
+    margin-bottom: 1px;
+}
+
+.imgContent{
+    width: 100px;
+    height: 100px;
+    margin: 6px 0;
+}
+
+.aContent{
+	display: inline-block;
+	border-radius: 5px;
+	text-align: left;
+	word-break: break-all;
+}
+
+.my-chat .aContent{
+    width: 430px;
+    height: auto;
+    background-color: white;
+    margin: 16px 0;
 }
 
 /* 채팅창 채팅 답변 */
@@ -157,6 +178,7 @@
     display: flex;
     flex-direction: row;
     margin-bottom: 3px;
+    align-items: center;
 }
 .target-chat img{
     width: 50px;
@@ -171,6 +193,14 @@
     background-color: rgb(183, 231, 183);
 }
 
+.target-chat .aContent{
+    width: 400px;
+    height: auto;
+    margin: 0;
+    background-color: rgb(183, 231, 183);
+    margin: 16px 0;
+}
+
 
 
 /* 메세지 입력창  */
@@ -178,9 +208,10 @@
     width: 600px;
     height: 100px;
     display: flex;
+    align-items: center;
 }
 #messageInput textarea{
-    width: 550px;
+    width: 475px;
     height: 60px;
     margin: 20px;
 }
@@ -189,17 +220,30 @@
     height: 70px;
     display: flex;
     border-bottom: 1px solid gray;
+    justify-content: center;
 
 }
 #addFile{
-    width: 480px;
+    width: 550px;
     height: 50px;
-    background-color: white;
     margin: 0 20px;
 }
 
-#addFile input{
     
+#addFile > label{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #558b32;
+    color:#FFF;
+    cursor: pointer;
+    position: relative;
+}
+
+#addFile input{
+    display: none;
 }
 
 #insert{

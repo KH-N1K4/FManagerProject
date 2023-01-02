@@ -160,14 +160,39 @@ const selectChattingFn = () => {
 
 				// 메세지 내용
 				const p = document.createElement("p");
-				p.classList.add("chat");
-				p.innerHTML = msg.chatMessage; // br태그 해석을 위해 innerHTML
+				const imgContent = document.createElement("img");
+				const aContent =document.createElement("a");
+				const regEx = /.+.(jpg|png|gif|bmp|JPG|PNG|BMP|GIF|jfif)/;
+				const regEx2 = /.+.(xls|xlsx|txt|html|htm|pdf|mp4|mpeg|mpg|avi|pptx|hwp|docx|doc|ppt)/;
+				if(regEx.test(msg.chatMessage)){
+					imgContent.classList.add("imgContent");
+					imgContent.setAttribute("src", msg.chatMessage);
+				}else{
+					if(regEx2.test(msg.chatMessage)){
+						aContent.classList.add("aContent");
+						aContent.setAttribute("href", msg.chatMessage);
+						aContent.innerHTML="파일 다운"
+					}else{
+						p.classList.add("chat");
+						p.innerHTML = msg.chatMessage; // br태그 해석을 위해 innerHTML
+					}
+					
+				}
 
 				// 내가 작성한 메세지인 경우
 				if(loginMemberNo == msg.senderNo){ 
 					li.classList.add("my-chat");
+					li.append(span);
+					if(regEx.test(msg.chatMessage)){
+						li.append(imgContent);
+					}else{
+						if(regEx2.test(msg.chatMessage)){
+							li.append(aContent);
+						}else{
+							li.append(p);
+						}
+					}
 					
-					li.append(span, p);
 					
 				}else{ // 상대가 작성한 메세지인 경우
 					li.classList.add("target-chat");
@@ -185,7 +210,18 @@ const selectChattingFn = () => {
 
 					const br = document.createElement("br");
 
-					div.append(b, br, p, span);
+					div.append(b, br);
+					if(regEx.test(msg.chatMessage)){
+						div.append(imgContent);
+					}else{
+						if(regEx2.test(msg.chatMessage)){
+							div.append(aContent);
+						}else{
+							div.append(p);
+						}
+						
+					}
+					div.append(span);
 					li.append(img,div);
 
 				}
@@ -268,7 +304,20 @@ const selectRoomList = () => {
 				recentMessage.classList.add("recent-message");
 
 				if(room.lastMessage != undefined){
-					recentMessage.innerHTML = room.lastMessage;
+					const regEx1 = /.+.(jpg|png|gif|bmp|JPG|PNG|BMP|GIF|jfif)/;
+					const regEx2 = /.+.(xls|xlsx|txt|html|htm|pdf|mp4|mpeg|mpg|avi|pptx|hwp|docx|doc|ppt)/;
+					console.log(regEx1.test(room.lastMessage));
+					if(regEx1.test(room.lastMessage)){
+						recentMessage.innerHTML = '사진';
+						console.log('사진');
+					}else{
+						if(regEx2.test(room.lastMessage)){
+							recentMessage.innerHTML = '파일';
+						}else{
+							recentMessage.innerHTML = room.lastMessage;
+						}
+						
+					}
 				}
 				
 				itemContent.append(recentMessage);
@@ -388,14 +437,41 @@ chattingSock.onmessage = function(e) {
 	
 		// 메세지 내용
 		const p = document.createElement("p");
-		p.classList.add("chat");
-		p.innerHTML = msg.chatMessage; // br태그 해석을 위해 innerHTML
+		const imgContent = document.createElement("img");
+		const aContent =document.createElement("a");
+		const regEx = /.+.(jpg|png|gif|bmp|JPG|PNG|BMP|GIF|jfif)/;
+		const regEx2 = /.+.(xls|xlsx|txt|html|htm|pdf|mp4|mpeg|mpg|avi|pptx|hwp|docx|doc|ppt)/;
+		if(regEx.test(msg.chatMessage)){
+			imgContent.classList.add("imgContent");
+			imgContent.setAttribute("src", msg.chatMessage);
+		}else{
+			if(regEx2.test(msg.chatMessage)){
+				aContent.classList.add("aContent");
+				aContent.setAttribute("href", msg.chatMessage);
+				aContent.innerHTML="파일 다운"
+			}else{
+				p.classList.add("chat");
+				p.innerHTML = msg.chatMessage; // br태그 해석을 위해 innerHTML
+			}
+			
+		}
+
 	
 		// 내가 작성한 메세지인 경우
 		if(loginMemberNo == msg.senderNo){ 
 			li.classList.add("my-chat");
-			
-			li.append(span, p);
+			li.append(span);
+			if(regEx.test(msg.chatMessage)){
+				li.append(imgContent);
+			}else{
+
+				if(regEx2.test(msg.chatMessage)){
+					li.append(aContent);
+				}else{
+					li.append(p);
+				}
+				
+			}
 			
 		}else{ // 상대가 작성한 메세지인 경우
 			li.classList.add("target-chat");
@@ -413,7 +489,17 @@ chattingSock.onmessage = function(e) {
 	
 			const br = document.createElement("br");
 	
-			div.append(b, br, p, span);
+			div.append(b, br);
+			if(regEx.test(msg.chatMessage)){
+				div.append(imgContent);
+			}else{
+				if(regEx2.test(msg.chatMessage)){
+					div.append(aContent);
+				}else{
+					div.append(p);
+				}
+			}
+			div.append(span);
 			li.append(img,div);
 	
 		}
@@ -457,3 +543,59 @@ $('#outbtnID').click(function(){
   })
 });
 
+
+
+document.getElementById('img0').addEventListener("change", event => {
+
+	// event.target.files : 선택된 파일의 정보가 배열 형태로 반환
+	if (event.target.files[0] != undefined) { // 선택된 파일이 있을 경우
+
+			const reader = new FileReader(); // 파일을 읽는 객체
+
+			reader.readAsDataURL(event.target.files[0]);
+			// 지정된 input type="file"의 파일을 읽어와
+			// URL 형태로 저장
+			console.log(event.target.files[0])
+			reader.onload = e => { // 파일을 다 읽어온 후
+					// e.target == reader
+					// e.target.result == 읽어온 파일 URL
+					/* document.getElementsByClassName('preview')[0].innerText =event.target.files[0].name; */
+
+					const formData = new FormData();
+					formData.append("img0", event.target.files[0]);
+
+					$.ajax({
+        
+						url: "/chatting/updatefiles",
+						data : formData,
+						type: "POST", 
+						processData : false,
+						contentType: false,
+						cache: false,
+						dataType: "JSON",
+						success : rename => {
+							console.log(rename);
+							var obj = {
+								"senderNo": loginMemberNo,
+								"clientNo": selectClientNo,
+								"chatRoomNo": selectChatRoomNo,
+								"chatMessage": rename
+							};
+							console.log(obj)
+					
+							// JSON.stringify() : 자바스크립트 객체를 JSON 문자열로 변환
+							chattingSock.send(JSON.stringify(obj));
+						}
+
+
+					});
+					
+
+					
+			}
+
+	} else { // 취소를 누를 경우
+			// 미리보기 지우기
+			document.getElementsByClassName('preview')[0].innerText ='';
+	}
+});
