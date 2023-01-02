@@ -10,6 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class myProjectFreelancer {
+	
 	private int freelancerNo;				//FREELANCER_NO 프리랜서 번호(PK+FK(회원번호))
 	private int freelancerPeriod;			//FREELANCER_PERIOD 프리랜서 기간
 	private int freeContactSTime;			//FREE_CONTACT_TIME1 연락가능시간시작

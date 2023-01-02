@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
-
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.manager.freelancer.freelancer.model.service.FreeLancerService;
+import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.freelancer.model.vo.Portfolio;
 import com.manager.freelancer.freelancer.model.vo.Region;
@@ -48,10 +48,15 @@ public class FreeLancerController {
 			
 			List<Region> regionList = service.getRegionList();
 			model.addAttribute("regionList",regionList);
-			System.out.println(regionList);
+			
+//			System.out.println(regionList);
+			
 			List<Portfolio> portfolioList = service.getPortfolioList(inputFreelancer);
 			model.addAttribute("portfolioList" ,portfolioList);
 
+//			List<Field> fieldList = service.getFieldList(inputFreelancer);  // Field vo도만듬..
+//			model.addAttribute("fieldList",fieldList);
+			
 			return "member/freelancer/freelancerInfo";
 		}
 		// 전문가 정보 수정 페이지로 이동
@@ -76,11 +81,13 @@ public class FreeLancerController {
 		public String updateFreelancerInfo(Model model,
 				Freelancer inputFreelancer, // input 값
 				@SessionAttribute("loginMember") Member loginMember,
+				String career,
 				RedirectAttributes ra) {
 			String message = null;
 			int result = 0;
 
 			inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 회원번호 세팅
+			inputFreelancer.setCareer(career);
 //			int freelancerNo = loginMember.getMemberNo(); // 0101 테스트! 회원번호->포트폴리오 조회하기 -> 실패
 //			Freelancer freelancer = service.freelancerInfo(loginMember.getMemberNo());
 //			model.addAttribute("freelancer", freelancer);

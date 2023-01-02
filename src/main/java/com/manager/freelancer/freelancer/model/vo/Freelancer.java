@@ -14,7 +14,7 @@ public class Freelancer {
 	private int gradeNo;					// 등급번호
 	private int regionNo;					// 지역이름(번호)
 	private String regionName;
-	private int mainCategoryNo; 			// 전문분야  이거 불확실.. String freelancerField?
+	private String mainCategoryNo;//int->String 			// 전문분야  이거 불확실.. String freelancerField?
 	private int freelancerCont; 			// 총 경력기간
 	private int contactTime1;				// 연락가능시간 시작
 	private int contactTime2;				// 연락가능시간 끝

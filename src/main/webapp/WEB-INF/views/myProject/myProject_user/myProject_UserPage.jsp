@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -67,7 +71,7 @@
                 </div>
                 <%-- 서비스 사진 --%>
                 
-                
+                ${map}
                 <div class="projuctContent_info">
 
                   <%-- 서비스 제목 --%>
@@ -76,12 +80,14 @@
                   </div>
                   <%-- 서비스 제목 --%>
 
+
+
                   <diV class="info_content">
                     <div class="info_content_left">
                       <div class="info_content_list">
                         <div class="list_title"><span>모집분야</span></div>
                         <div class="list_content">
-                          <div class="main1category"><span>디자인</span></div>
+                          <div class="main1category"><span>${maincategory}</span></div>
                           <span>></span>
                           <div class="main3category"><span>브랜드 디자인·가이드</span></div>
                         </div>
@@ -119,6 +125,7 @@
     1. 현재 페이지에서 필요한 테이블 
       - 프로젝트  / 프로젝트 첨부 / 카테고리 1
     2. 조회해야 하는 것 
+     ${myProject}
 
   </main>
   <!-- **************************************footer*************************************-->

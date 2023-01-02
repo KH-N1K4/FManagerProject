@@ -1,0 +1,191 @@
+/* 메인 영역 */
+.mainContent{
+    width: 1100px;
+    height: 1200px;
+    margin: auto;
+}
+
+/* ///////////////// ////////////////////////////*/
+/* 문의하기 페이지 제목 */
+#question-list-title-area{
+    display: inline-block;
+    margin: 20px 0;
+    width: 1100px;
+    height: 100px;
+}
+
+#question-list-title {
+    font-weight: bold;
+    font-size: 30px;
+    margin: 20px 30px;
+}
+
+
+/* ----------------------테이블 폼---------------------- */
+table th{
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+}
+.uploadImage{
+    height: 250px;
+}
+
+/* ------------------------------------------------------ */
+
+/* 프로필 이미지 사진 */
+.myProfile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.profileImage{
+    margin-right: 30px;
+}
+
+/* 댓글 남기는 영역 */
+#comment{
+    display: flex;
+    justify-content: center;
+}
+/* 댓글 창 */
+#comment input{
+    width: 800px;
+    height: 80px;
+}
+/* 댓글 등록 버튼 */
+#commentBtn{
+    width: 145px;
+    height: 80px;
+    background-color: black;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+
+
+
+/* ----------------------------------- */
+/* 첨부파일 이미지 영역 */
+.imageBox{
+    display: flex;
+    align-items: center;
+    height: 250px;
+}
+
+/* 이미지를 감싸는 div */
+.boardImg{
+    width: 180px;
+    height: 180px;
+    text-align: center;
+    position: relative;
+    margin-right: 10px;
+}
+
+/* 이미지 */
+.boardImg>label{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.boardImg img{
+    max-width: 100%;
+    max-height: 100%; 
+}
+.boardImg a{
+    text-decoration: none;
+    color: black;
+}
+
+
+/* 내용 */
+.content{
+    display: flex;
+    width: 1100px;
+}
+.textArea{
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* 목록으로 버튼 */
+#goToList{
+    width: 1100px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#goToList button{
+    width: 300px;
+    height: 60px;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    font-size: 18px;
+} 
+
+
+/* ================================ */
+/* 상태 표시 - 답변 완료 */
+.question-answer{
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: black
+}
+
+/* 상태 표시 - 대기중  */
+.question-wating{
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: rgb(165, 173, 165);
+
+}
+/* ================================ */
+
+
+.inputComment{
+    
+    font-size: 15px;
+    padding-left: 10px;
+
+}
+
+
+.writer{
+    width: 150px;
+}
+.writerContent{
+    width: 850px;
+}
+
+
+#requestStatus{
+    width: 100px;
+}
+#requestStatusView{
+    width: 200px;
+}

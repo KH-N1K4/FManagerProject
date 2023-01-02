@@ -53,6 +53,7 @@ function selectChange() {
                         child2.classList.add('service-title');
                         const child2a = document.createElement("a");
                         child2a.classList.add('detailBtn');
+                        child2a.setAttribute("href", "/manager/serviceDetail/"+service.serviceNo);
                         child2a.append(document.createTextNode(service.serviceTitle));
                         child2.append(child2a);
 

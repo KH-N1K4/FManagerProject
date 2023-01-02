@@ -13,30 +13,23 @@
 </head>
 <body>
     
-    <div id="header">
-        <div id="header1">
-
-            <div id="logo"><img src="../../resources/images/final_logo.png" alt=""></div>
-
-        </div>
-
-        
-    </div>
-
+     <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
 
 
     <div id="payingMain">
-
+	
         <div id="payingTitle">결제 중...</div>
-        <form action="">
-
+        <form action="/">
+		
+		
+		
         <div id="serviceSection">
-        <div id="servicePhoto"></div>
+        <div id="servicePhoto"> <img src="${param.servicePhoto }" style="width:100%;"> </div>
         <div>
 
-            <div id="serviceContent"><span>결제중 상품 제목</span><br>
-            <span>결제중 상품 내용입니다.</span></div>
-            <div id="serviceCost">총 결제 금액 <span>100,000</span>원</div>
+            <div id="serviceContent"><span>${param.serviceTitle }</span><br>
+            <span>${param.serviceSummary }</span></div>
+            <div id="serviceCost">총 결제 금액 <span>${param.servicePrice }</span>원</div>
         
         </div>
         </div>

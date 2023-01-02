@@ -68,19 +68,18 @@
                     <div class="itemTitle">
                         <div class="item">경력 사항</div>
                         <div>
-                            <input type="text" name="careerCompanyName" id="" value="${freelancer.careerCompanyName}">
-                            <input type="text" name="careerCompanyDepartment" id="" value="${freelancer.careerCompanyDepartment}">
+                            <input style="width :300px;" type="text" name="career" id="" value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerPeriod}">
+                            <%-- <input type="text" name="careerCompanyDepartment" id="" value="${freelancer.careerCompanyDepartment}">
                             <input type="text" name="careerCompanyPosition" id="" value="${freelancer.careerCompanyPosition}">
                             <input type="text" name="careerCompanyRegion" id="" value="${freelancer.careerCompanyRegion}">
-                            <input type="text" name="careerPeriod" id="" value="${freelancer.careerPeriod}">
+                            <input type="text" name="careerPeriod" id="" value="${freelancer.careerPeriod}"> --%>
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">자격증</div>
                         <div>
-                            <input type="text" name="" id="" value="${freelancer.licenseName}">
-                            <input type="text" name="" id="" value="${freelancer.licenseDate}">
-                            <input type="text" name="" id="" value="${freelancer.licenseAgency}">
+                            <input style="width :300px;" type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}">
+
                         </div>
                     </div>
                     <div class="itemTitle">
