@@ -24,9 +24,16 @@ public class FreelancerService {
 	private int serviceEditNum;
 	private int serviceWorkPeriod;
 	
+	private String serviceCreateDate;
+	
+	private String thirdCategoryName;
+	private String subCategoryName;
+	private String mainCategoryName;
+	
+	private int freelancerNo;
 	private String freelancerName;
 	private String freelancerImage;
 	
-	List<ServiceImageFile> imageFileList;
+	List<ServiceImageFile> ServiceImageFileList;
 
 }
