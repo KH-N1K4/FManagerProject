@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
@@ -107,11 +107,11 @@ public class FreeLancerController {
 				String major, // major input태그에 적힌 값들
 				String career,
 				String license,
-
+				
 				Freelancer inputFreelancer,
 				String[] freelancerField , RedirectAttributes ra,
-				@RequestHeader(value="referer") String referer
-        int bankCode,
+				@RequestHeader(value="referer") String referer,
+				int bankCode,
 				String bankAccountNumber3
 				) {
 
@@ -124,7 +124,6 @@ public class FreeLancerController {
 
 		inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 로그인한 회원번호를 inputFreelancer에 세팅
 		inputFreelancer.setMajor(major);
-		inputFreelancer.setMajorGraduateStatus(majorStatus);
 		inputFreelancer.setCareer(career);
 		inputFreelancer.setLicense(license);
 		
