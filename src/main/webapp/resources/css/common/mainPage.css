@@ -1,18 +1,11 @@
 
-/* 헤더, 풋터를 제외한 각 페이지 영역 */
-/* .content{
-    width: 1400px;
-    height: auto;
-    display: flex;
-    justify-content: center;
-}
- */
 /* mainArea /sideMenu영역  */
 .mainArea{
     width: 1200px;
     height: auto;
     display: flex;
 	margin:auto;
+	min-height:1000px;
 }
 
 /* 메인 영역 */
@@ -26,6 +19,7 @@
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
+    margin-top:30px;
 }
 /* ///////////////////////////////////////// */
 .mainContent img{
@@ -35,6 +29,10 @@
 #image{
     width: 220px;
     height: 320px;
+}
+
+#image>div{
+	position:relative;
 }
 #image:nth-child(5n){
     margin-right: 0px;
@@ -56,3 +54,110 @@
     margin-right: 19.2px;
     margin-top: 50px;
 }
+
+/* pagination */
+.pagination {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+	margin: 100px 0;
+}
+
+.pagination li {
+	width: 20px;
+	margin: 0 5px;
+	text-align: center;
+}
+
+.pagination a {
+	display: block;
+	text-decoration: none;
+	color: black;
+	width: 100%;
+	height: 100%;
+}
+
+.current {
+	font-weight: bold;
+	background-color: black;
+	border-radius: 50%;
+	color: white !important;
+	letter-spacing: 0 !important;
+}
+
+/* 여기까지 페이징 */
+
+
+
+/* 서비스 이미지 영역 */
+#imageContent{
+    display: flex;
+    flex-wrap: wrap;
+}
+/* ///////////////////////////////////////// */
+.mainContent img{
+    width: 225px;
+    height: 225px;
+}
+#image{
+    min-height: 340px;
+    position:relative;
+    margin-right:20px; 
+}
+
+#image>div{
+	position:relative;
+}
+
+.like-area{
+	position:absolute; 
+	top:10px;
+	left:190px;
+	z-index:10px;
+	
+	
+	display: block;
+   
+}
+
+.like-area>i{
+	font-size:25px;
+}
+
+#image:nth-child(4n){
+    margin-right: 0;
+}
+
+.imageTitle{
+	display:block;
+	position:absolute;
+	margin-top:35px;
+	padding-top:205px;
+	width:225px;
+	top:0;
+}
+
+
+.imageOthers{
+    display: block;
+    /* width: 225px; */
+    font-size: 13px;
+    color: grey;
+    font-weight: bold;
+    margin-bottom: 5px;
+    position:relative;
+}
+
+a{
+    text-decoration: none;
+    color: grey;
+}
+
+#imageContent a{
+    text-decoration: none;
+    color: grey;
+    margin-right: 25px;
+    margin-bottom: 50px;
+}
+

@@ -29,10 +29,39 @@ public class CategoryController {
 	@Autowired
 	private CategoryService service;
 	
-	// 카테고리 목록 조회
-	@GetMapping("/category/{mainCategoryNo}")
-	public String mainCategory(@PathVariable("mainCategoryNo") int mainCategoryNo, Model model,
+	
+	// 메인 목록 조회 
+	@GetMapping("/")
+	public String selectService(Model model,@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			@SessionAttribute(value="loginMember",required=false) Member loginMember) {
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		
+		
+		map.put("cp", cp);
+		if(loginMember!=null) {
+			map.put("memberNo", loginMember.getMemberNo());
+		}
+		
+		Map<String, Object> resultMap=service.serviceList(map);
+		
+		if(loginMember!=null) {
+			
+			model.addAttribute("memberNo", loginMember.getMemberNo());
+		}
+		
+		model.addAttribute("resultMap", resultMap);
+		
+		return "common/main";
+	}
+	
+	
+	
+	// 메인 카테고리 목록 조회
+	@GetMapping("/category/{mainCategoryNo}/0")
+	public String mainCategory(@PathVariable("mainCategoryNo") int mainCategoryNo, Model model,
+			@SessionAttribute(value="loginMember",required=false) Member loginMember,@RequestParam(value="cp", required=false, defaultValue="1") int cp) {
 		
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -42,19 +71,66 @@ public class CategoryController {
 			map.put("memberNo", loginMember.getMemberNo());
 		}
 		map.put("mainCategoryNo", mainCategoryNo);
-		List<Service> serviceList=service.selectBoardList(map);
+		map.put("cp", cp);
+		Map<String, Object> map2=service.selectBoardList(map);
 		
-		model.addAttribute("map",serviceList);
+		model.addAttribute("map",map2);
 			
 		return "/category/categoryList";
 	}
 	
-
+	
 	// 세부 카테고리 목록 조회
-	@GetMapping("/category/{mainCategoryCode}/{subCategoryCode}")
-	public String subCategory() {	
-		return "/category/categoryDetail";
+	@GetMapping("/category/{mainCategoryNo}/{thirdCategoryNo}")
+	public String subCategory(@PathVariable("mainCategoryNo") int mainCategoryNo,@PathVariable("thirdCategoryNo") int thirdCategoryNo,
+			Model model, @SessionAttribute(value="loginMember",required=false) Member loginMember,
+			@RequestParam(value="cp", required=false, defaultValue="1") int cp) {	
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		if(loginMember!=null) {
+			
+			map.put("memberNo", loginMember.getMemberNo());
+		}
+		map.put("mainCategoryNo", mainCategoryNo);
+		map.put("thirdCategoryNo", thirdCategoryNo);
+		map.put("cp", cp);
+		Map<String, Object> map2=service.selectBoardList(map);
+		
+		model.addAttribute("map",map2);
+			
+		return "/category/categoryList";
 	}
+	
+	
+	
+	
+	@GetMapping("/selectCategoryList")
+	@ResponseBody
+	public List<Service> selectCategoryList(@RequestParam(required = false) String order,@RequestParam String mainCategoryNo, 
+			@RequestParam(required = false) String budget,@RequestParam(required = false) String grade, 
+			Model model,@RequestParam(value="cp", required=false, defaultValue="1") int cp){
+		
+		Map<String, String> map=new HashMap<String, String>();
+		
+		System.out.println("순서 : "+order+"예산 : "+budget+"전문가등급 : "+grade);
+		
+		map.put("order", order);
+		map.put("budget", budget);
+		map.put("grade", grade);
+		map.put("mainCategoryNo", mainCategoryNo);
+		
+		
+		
+		List<Service> serviceList=service.selectCategoryList(map);
+		
+			
+		return serviceList;
+	
+	}
+	
+
+	
 	
 	// 서비스 상세 조회
 	@GetMapping("/category/{mainCategoryCode}/{subCategoryCode}/{lastCategoryCode}/{serviceNo}")
@@ -118,19 +194,6 @@ public class CategoryController {
 	}
 		
 		
-		
-	@GetMapping("/service/{serviceNo}")
-	public String viewService2(@PathVariable("serviceNo") int serviceNo, Model model) {	
-		
-		// 게시글 상세조회 서비스 호출 
-		Service fService=service.viewService(serviceNo);
-		
-		
-		model.addAttribute("fService",fService);
-		
-		
-		return "/category/categoryDetail";
-	}
 	
 	@PostMapping("/askService")
 	public String askService(AskService as, 
@@ -187,6 +250,39 @@ public class CategoryController {
 		
 		return "redirect:"+path;
 	}
+	
+	
+	
+	
+	@GetMapping("/service/{serviceNo}")
+	public String viewService2(@PathVariable("serviceNo") int serviceNo, Model model) {	
+		
+		// 게시글 상세조회 서비스 호출 
+		Service fService=service.viewService(serviceNo);
+		
+		
+		model.addAttribute("fService",fService);
+		
+		
+		return "/category/categoryDetail";
+	}
+	
+	@PostMapping("/service/payment/{serviceNo}")
+	public String buyService(@PathVariable("serviceNo") int serviceNo, Model model,
+			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			@RequestParam("serviceTitle") String serviceTitle,@RequestParam String serviceSummary,@RequestParam String servicePhoto
+			,@RequestParam String servicePrice) {	
+
+		model.addAttribute(serviceNo);
+		model.addAttribute(serviceTitle);
+		model.addAttribute(serviceSummary);
+		model.addAttribute(servicePhoto);
+		model.addAttribute(servicePrice);
+		
+		return "/myProject/paying";
+	}
+	
+	
 
 
 }
