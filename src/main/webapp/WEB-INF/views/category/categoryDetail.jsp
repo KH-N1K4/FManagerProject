@@ -9,6 +9,8 @@
     
     <link rel="stylesheet" href="/resources/css/myProject/askService.css">
      <link rel="stylesheet" href="/resources/css/category/serviceDetail.css">
+     
+      <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -21,7 +23,27 @@
         <div class="detailHeader">
             <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${fService.requestFilePath }" style="height:100%;"></div>
             <div class="serviceContent">
-                <div class="serviceTitle">${fService.serviceTitle }</div>
+            	
+                <div class="serviceTitle">${fService.serviceTitle }
+                	<%-- 찜하기 --%>
+                    <span class="like-area">
+                        <%-- likeCheck가 없다면 == 로그인 x 또는 좋아요x --%>
+                        <c:if test="${empty likeCheck}">
+                            <%-- 빈 하트 --%>
+                            <i class="fa-regular fa-heart" id="boardLike"></i>
+                        </c:if>
+                        <%-- likeCheck가 있다면 == 로그인 o, 좋아요o --%>
+                        <c:if test="${not empty likeCheck}">
+                            <%-- 찬 하트 --%>
+                            <i class="fa-solid fa-heart" id="boardLike"></i>
+                        </c:if>
+                        <%-- 좋아요 수 --%>
+                        <span>${board.likeCount}</span>
+                    </span>
+                
+                </div>
+                 
+                
                 <div class="serviceSummary">${fService.serviceSummary }</div>
                 <div class="serviceInfo">
                     <span>가격 <span>${fService.servicePrice }</span>원</span>
@@ -105,7 +127,7 @@
      
     </script>	
      <script src="/resources/js/category/modal.js"></script>
-     <script src="/resources/js/category/category.js"></script>
+     <script src="/resources/js/category/categoryDetail.js"></script>
      
      <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     

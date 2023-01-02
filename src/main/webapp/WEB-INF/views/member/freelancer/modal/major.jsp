@@ -21,10 +21,10 @@
                     <div>
                         <select name="graduateStatus" id="graduateStatus" class="input1 ">
                             <option value="0">선택해주세요</option>
-                            <option value="1">재학</option>
-                            <option value="2">휴학</option>
-                            <option value="3">이수</option>
-                            <option value="4">졸업</option>
+                            <option value="재학">재학</option>
+                            <option value="휴학">휴학</option>
+                            <option value="이수">이수</option>
+                            <option value="졸업">졸업</option>
                         </select>
                     </div>
                 </div>

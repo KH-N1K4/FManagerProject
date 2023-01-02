@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.category.model.vo.AskService;
+import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.member.model.vo.Member;
 
 @Repository
@@ -99,6 +100,11 @@ public class MemberDAO {
 
 	public AskService selectSendSuggesionContent(String serviceInquiryNo) {
 		return  sqlSession.selectOne("categoryMapper.selectSendSuggesionContent", serviceInquiryNo);
+	}
+
+
+	public List<Service> selectLikeList(int memberNo) {
+		return sqlSession.selectList("categoryMapper.selectLikeList", memberNo);
 	}
 	
 }

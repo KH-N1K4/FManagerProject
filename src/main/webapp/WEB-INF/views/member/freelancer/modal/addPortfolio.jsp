@@ -9,29 +9,42 @@
     <link rel="stylesheet" href="/resources/css/freelancer/portfolio.css">
 </head>
 <body>
-    <div id="content">포트폴리오 추가</div>
-    <div class="itemArea">
-        <div id="item">제목</div> 
-        <div>
-            <input type="text" name="" id="">
+    <form action="/member/freelancer/modal/addPortfolio" method="POST">
+
+        <div id="content">포트폴리오 추가</div>
+        <div class="itemArea">
+            <div id="item">제목</div> 
+            <div>
+                <input type="text" name="portfolioTitle" id="portfolioTitle">
+            </div>
         </div>
-    </div>
-    <div class="itemArea">
-        <div id="item">상세 설명</div> 
-        <div>
-            <textarea name="" id="" cols="50" rows="10"></textarea>
+        <div class="itemArea">
+            <div id="item">상세 설명</div> 
+            <div>
+                <textarea name="portfolioContent" id="portfolioContent" cols="50" rows="10"></textarea>
+            </div>
         </div>
-    </div>
-    <div class="itemArea">
-        <div id="item">첨부파일</div> 
-        <div>
-            <label for="image-input">파일 선택</label>
-            <input type="file" name="" id="image-input" accept="image/*">
+        <div class="itemArea">
+            <div id="item">첨부파일</div> 
+            <div>
+                <label for="image-input">파일 선택</label>
+                <input type="file" name="portfolioContent" id="image-input" accept="image/*">
+                <%-- <input type="text" name="portfolioFilePath"> --%> <%-- 테스트 --%>
+            </div>
         </div>
-    </div>
-    <div>
-        <button>등록</button>
-    </div>
+        <div>
+            <button>등록</button>
+        </div>
+    </form>
     
 </body>
 </html>
+
+<c:if test="${not empty message}">
+        <script>
+         alert("${message}");
+        </script>
+
+        <%-- message 1회 출력 후 모든 scope 삭제 --%>
+        <c:remove var="message"/>
+</c:if>
