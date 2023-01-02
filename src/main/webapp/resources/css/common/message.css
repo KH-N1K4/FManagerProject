@@ -66,7 +66,7 @@
     list-style: none;
 }
 
-.item-content{
+.item-content div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

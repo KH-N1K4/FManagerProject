@@ -191,10 +191,10 @@ const selectChattingFn = () => {
 				}
 
 				ul.append(li);
-				display.scrollTop = display.scrollHeight; // 스크롤 제일 밑으로
+
+				document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight; // 스크롤 제일 밑으로
+
 			}
-
-
 
 		},
 		error : () => {console.log("에러");}
@@ -356,9 +356,10 @@ chattingSock.onmessage = function(e) {
 	// 메소드를 통해 전달받은 객체값을 JSON객체로 변환해서 msg 변수에 저장.
 	const msg = JSON.parse(e.data);
 	console.log(msg);
-
+	console.log(msg+"SSSSSSSSSS");
 	// 현재 메세지를 받은 채팅방을 보고 있다면
 	if(selectChatRoomNo == msg.chatRoomNo){
+		console.log(msg+"SSSSSSSSSS22222222");
 		const ul = document.querySelector(".display-chatting");
 
     const arrDay =msg.sendTime.split(" ");
@@ -418,11 +419,11 @@ chattingSock.onmessage = function(e) {
 		}
 	
 		ul.append(li)
-		display.scrollTop = display.scrollHeight; // 스크롤 제일 밑으로
+		document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;// 스크롤 제일 밑으로
 	}
-
-
-
+	console.log(selectClientNo);
+	console.log(loginMemberNo);
+	
 	selectRoomList();
 }
 

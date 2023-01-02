@@ -230,4 +230,19 @@
       WHERE CHAT_ROOM_NO = #{chatRoomNo}
       AND CLIENT_NO = #{memberNo}
    </update>
+   
+   <!-- 채팅방 나가기 여부 확인: 상대방 -->
+	   <select id="delectFLRoomNoClient" resultMap="chatRoom_rm">
+	    SELECT CHAT_ROOM_NO,
+			CASE WHEN CHAT_OPENMEM_NO = #{clientNo} THEN CHAT_ROOM_OPENMEM_DEL_FL
+			     WHEN CLIENT_NO = #{clientNo} THEN CHAT_ROOM_CLIENT_DEL_FL
+			END AS CHAT_ROOM_DEL_FL,
+			CASE WHEN CHAT_OPENMEM_NO = #{clientNo} THEN 'CHAT_OPENMEM_NO'
+			     WHEN CLIENT_NO = #{clientNo} THEN 'CLIENT_NO'
+			END AS CHAT_ROOM_DEL_NO,
+			CHAT_ROOM_OPENMEM_DEL_FL,CHAT_ROOM_CLIENT_DEL_FL
+	      FROM CHAT_ROOM
+	      WHERE ((CHAT_OPENMEM_NO = #{clientNo} AND CLIENT_NO = #{loginMemberNo})
+	      OR (CHAT_OPENMEM_NO = #{loginMemberNo} AND CLIENT_NO = #{clientNo}))
+	   </select>
 </mapper>
