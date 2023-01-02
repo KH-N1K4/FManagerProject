@@ -2,6 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="myProjectMapper">
 	
-  
-  
+  	<resultMap type="myProject" id="myProject_rm">
+  		
+  		<id property="projectRequestNo" column="PROJECT_REQUEST_NO"/>
+  			
+		<result property="projectRequestTitle" column="PROJECT_REQUEST_TITLE" />	
+		<result property="projectRequestSummary" column="PROJECT_REQUEST_SUMMARY" />	
+		<result property="projectRequestContent" column="PROJECT_REQUEST_CONTENT" />	
+		<result property="projectRequestBudget" column="PROJECT_REQUEST_BUDGET" />	
+		<result property="projectRecruitDate" column="REQUEST_RECRUIT_DATE" />	
+		<result property="projectWorkDate" column="REQUEST_WORK_DATE" />	
+		<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD" />	
+		<result property="projectCreateDate" column="PROJECT_REQUEST_CREATE_DATE" />	
+		<result property="memberNo" column="MEMBER_NO" />	
+		<result property="projectRequestStatus" column=PROJECT_REQUEST_STATUS />	
+		
+		<!-- 프로젝트 의뢰 첨부 파일 -->
+		<result property="requestFileNo" column=REQUEST_FILE_NO />	
+		<result property="requestFilePath" column=REQUEST_FILE_PATH />	
+		<result property="requestFileOrder" column=REQUEST_FILE_ORDER />	
+		
+  	</resultMap>
+  	<select id="selectmaincategoryList" resultMap="myProject_rm">
+  		SELECT * FROM MAIN_CATEGORY
+  	</select>
+  	
+  	
 </mapper>
