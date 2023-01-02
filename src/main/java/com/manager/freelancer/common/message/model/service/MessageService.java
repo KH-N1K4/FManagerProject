@@ -31,7 +31,7 @@ public interface MessageService {
 	 */
 	int updateChattingRoom(ChattingRoom chatRoom);
 	
-	/**채팅방 나가기 여부 확인
+	/**채팅방 나가기 여부 확인: 나
 	 * @param map
 	 * @return
 	 */
@@ -60,5 +60,11 @@ public interface MessageService {
 	 * @return
 	 */
 	int updateOutFL(Map<String, Object> paramMap);
+
+	/**채팅방 나가기 여부 확인: 상대방
+	 * @param map
+	 * @return
+	 */
+	ChattingRoom delectFLRoomNoClient(Map<String, Integer> map);
 	
 }

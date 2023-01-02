@@ -96,13 +96,21 @@ public class MessageDAO {
 	public int updateOutFL(Map<String, Object> paramMap) {
 		return sqlSession.update("messageMapper.updateOutFL", paramMap);
 	}
-
+	
 	/**채팅방 나가기
 	 * @param paramMap
 	 * @return
 	 */
 	public int updateOutClientFL(Map<String, Object> paramMap) {
-		
 		return sqlSession.update("messageMapper.updateOutClientFL", paramMap);
+	}
+
+	/**채팅방 들어갈때 나기기 여부가 Y인지 조회:상대방
+	 * @param map
+	 * @return
+	 */
+	public ChattingRoom delectFLRoomNoClient(Map<String, Integer> map) {
+
+		return sqlSession.selectOne("messageMapper.delectFLRoomNoClient", map);
 	}
 }

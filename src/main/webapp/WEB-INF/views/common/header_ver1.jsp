@@ -70,7 +70,7 @@
     	 <ul>
                 <c:forEach var="boardType" items="${boardTypeList}">
                     <li>
-                        <a href="/category/${boardType.MAIN_CATEGORY_NO}">${boardType.MAIN_CATEGORY_NAME}</a>
+                        <a href="/category/${boardType.MAIN_CATEGORY_NO}/0">${boardType.MAIN_CATEGORY_NAME}</a>
                     </li>
                 </c:forEach>
                 

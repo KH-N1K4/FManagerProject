@@ -3,8 +3,10 @@ package com.manager.freelancer.common.message.model.websocket;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Collections;
 
 import org.slf4j.Logger;
@@ -19,6 +21,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.manager.freelancer.common.message.model.service.MessageService;
+import com.manager.freelancer.common.message.model.vo.ChattingRoom;
 import com.manager.freelancer.common.message.model.vo.Message;
 import com.manager.freelancer.member.model.vo.Member;
 
@@ -66,12 +69,28 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler {
 		      
 		// 메세지 DB에 insert
 		int result = service.insertMessage(msg);
-		      
+		
+		
+		
 		if(result > 0) { // 삽입 성공 시
+			Map<String, Integer> map = new HashMap<String, Integer>();
+			map.put("clientNo", msg.getClientNo());
+	        map.put("loginMemberNo", msg.getSenderNo());
+			ChattingRoom chartRoom2 = service.delectFLRoomNoClient(map);
+		    String chatRoomMemDelFL = chartRoom2.getChatRoomDelFL();//채팅방 들어갈때 나기기 여부가 Y인지 조회
+		    int chatRoomNo2 = chartRoom2.getChatRoomNo();
+		    if(chatRoomMemDelFL.equals("Y") && chatRoomNo2 != 0) {
+				int result2 = service.updateChattingRoom(chartRoom2);//채팅방 나가기 여부가 Y이면 N로 변경
+				if(result2>0) {
+					System.out.println("업데이트 성공");
+				}else {
+					System.out.println("업데이트 실패");
+				}
+			}
 		         
 			// 보낸 시간에 DB에 있고 msg 객체에는 없는 상태
 		    // -> 보낸 시간 생성
-		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 		    msg.setSendTime(sdf.format(new Date()));
 		         
 		    // msg 객체(채팅방번호, 대상번호, 내용, 보낸사람번호, 보낸시간)
@@ -80,7 +99,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler {
 		    //    대상번호, 보낸사람번호가 일치하는 2명에게 
 		    //    웹소켓으로 메세지 전달
 		         
-		         
+		    logger.debug(msg.toString()+"result로 들어옴");     
 		    // 전역변수로 선언된 sessions에는 접속중인 모든 회원의 세션 정보가 담겨 있음
 		    for(WebSocketSession s : sessions) {
 		    	// WebSocketSession은 HttpSession의 속성을 가로채서 똑같이 가지고 있기 때문에
@@ -92,7 +111,7 @@ public class ChattingWebsocketHandler extends TextWebSocketHandler {
 		                
 		        // 로그인 상태인 회원 중 targetNo가 일티하는 회원에게 메세지 전달
 		        if(loginMemberNo == msg.getClientNo() || loginMemberNo == msg.getSenderNo()) {
-		                    
+		        	logger.debug(msg.toString()+"전달 되는 가??");        
 		        	s.sendMessage(new TextMessage(new Gson().toJson(msg)));
 		        }
 		    }
