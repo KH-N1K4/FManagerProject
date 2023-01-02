@@ -9,8 +9,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.MyProject;
 import com.manager.freelancer.myProject.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.RequestFile;
 
 @Repository
 public class MyProjectDAO {
@@ -18,7 +20,7 @@ public class MyProjectDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	/** 메인 카데고리 들고오기
+	/** 메인 카테고리 들고오기
 	 *  @return List<MyProject> 카테고리 리스트 
 	 */
 	public List<MyProject> selectmaincategoryList() {
@@ -35,6 +37,11 @@ public class MyProjectDAO {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); 
 		map.put("mainCategoryNo", mainCategoryNo);
+		
+		
+		int result = sqlSession.selectOne("myProjectMapper.getMyProjectListCount", map);
+		
+		System.out.println(result);
 		return sqlSession.selectOne("myProjectMapper.getMyProjectListCount", map);
 	}
 
@@ -52,5 +59,38 @@ public class MyProjectDAO {
 		map.put("mainCategoryNo", mainCategoryNo); //카테고리별 서비스 들고오기
 		return sqlSession.selectList("myProjectMapper.selectMyProject", map,rowBounds);
 	}
+ 
+	/** 메인3 카테고리 들고오기
+	 * @return
+	 */
+	public List<MyProject> selectcategoryList() {
+		return sqlSession.selectList("myProjectMapper.selectcategoryList");
+	}
+
+	/** 내 서비스 등록하기 
+	 * @param myProject
+	 * @param loginMember
+	 * @return
+	 */
+	public int insertMyProject(MyProject myProject, Member loginMember) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("myProject", myProject); //입력한 서비스 값
+		map.put("loginMember", loginMember.getMemberNo());
+		
+		sqlSession.insert("myProjectMapper.insertMyProject",map);
+		int projectNum = (int)map.get("projectRequestNo");
+		return projectNum;
+	}
+	
+	/** 내 서비스 등록하기 (이미지 파일)
+	 * @param projectFileList
+	 * @return
+	 */
+	public int insertProjectFileList(List<RequestFile> projectFileList) {
+		return sqlSession.insert("myProjectMapper.insertFileImageList", projectFileList);
+	}
+
+
 	
 }

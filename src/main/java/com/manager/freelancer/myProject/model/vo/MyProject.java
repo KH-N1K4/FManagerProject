@@ -31,9 +31,9 @@ public class MyProject {
 	private int projectRequestStatus;       // PROJECT_REQUEST_STATUS 프로젝트 의뢰 상태
 	
 	// 의뢰 첨부파일
-	private int requestFileNo;		        // REQUEST_FILE_NO 프로젝트 의뢰 번호
-	private String requestFilePath;		    // REQUEST_FILE_PATH 프로젝트 의뢰 번호
-	private int requestFileOrder;		    // REQUEST_FILE_ORDER 프로젝트 의뢰 번호
+	private int requestFileNo;		        // REQUEST_FILE_NO 프로젝트 첨부 파일 번호 
+	private String requestFilePath;		    // REQUEST_FILE_PATH 프로젝트 첨부 파일 경로
+	private int requestFileOrder;		    // REQUEST_FILE_ORDER 프로젝트 첨부 파일 순서
 	
 	
 	
