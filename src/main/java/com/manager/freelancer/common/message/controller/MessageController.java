@@ -10,11 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
 import com.manager.freelancer.common.message.model.service.MessageService;
 import com.manager.freelancer.common.message.model.vo.ChattingRoom;
+import com.manager.freelancer.common.message.model.vo.Message;
 import com.manager.freelancer.member.model.vo.Member;
 
 
@@ -51,10 +55,10 @@ public class MessageController {
 		}else {
 			
 			 ChattingRoom chartRoom2 = service.delectFLRoomNo(map);
-		     String chatRoomMemDelFL = chartRoom2.getChatRoomDelFL();
+		     String chatRoomMemDelFL = chartRoom2.getChatRoomDelFL();//채팅방 들어갈때 나기기 여부가 Y인지 조회
 		     int chatRoomNo2 = chartRoom2.getChatRoomNo();
 		     if(chatRoomMemDelFL.equals("Y") && chatRoomNo2 != 0) {
-				int result = service.updateChattingRoom(chartRoom2); 
+				int result = service.updateChattingRoom(chartRoom2);//채팅방 나가기 여부가 Y이면 N로 변경
 				if(result>0) {
 					System.out.println("업데이트 성공");
 				}else {
@@ -79,6 +83,34 @@ public class MessageController {
         return "common/message";
     }
 	
+    @GetMapping("/chatting/selectMessage")
+    @ResponseBody
+    public String selectMessageList(@RequestParam Map<String, Object> paramMap,@SessionAttribute("loginMember") Member loginMember) {
+        System.out.println(paramMap);
+        List<Message> messageList = service.selectMessageList(paramMap,loginMember.getMemberNo());
+        return new Gson().toJson(messageList);
+    }
+    
+    
+    @GetMapping("/chatting/roomList")
+    @ResponseBody
+    public String selectRoomList(int memberNo) {
+        
+        List<ChattingRoom> roomList = service.selectRoomList(memberNo);
+        return new Gson().toJson(roomList);
+    }
+    
+    @GetMapping("/chatting/updateReadFlag")
+    @ResponseBody
+    public int updateReadFlag(@RequestParam Map<String, Object> paramMap) {
+        return service.updateReadFlag(paramMap);
+    }
+    
+    @GetMapping("/chatting/updateOutFL")
+    @ResponseBody
+    public int updateOutFL(@RequestParam Map<String, Object> paramMap) {
+        return service.updateOutFL(paramMap);
+    }
 	
 	
 }

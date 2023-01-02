@@ -31,7 +31,7 @@ public class Message {
 	//채팅방 메세지
 	private int chatNo;						//"CHAT"."CHAT_NO" '채팅 메세지 번호 SEQUENCE: SEQ_CHAT_NO'
 	private String chatMessage;				//"CHAT"."CHAT_MESSAGE" 작성한 메세지
-	private String chatSendTime;			//"CHAT"."CHAT_SEND_TIME" 작성 시간 SYSDATE
+	private String sendTime;			//"CHAT"."CHAT_SEND_TIME" 작성 시간 SYSDATE
 	private int senderNo;					//"CHAT"."SENDER_NO" 작성자(회원번호)(FK)
 	private String readFlag;					//"CHAT"."SENDER_NO" 작성자(회원번호)(FK)
 	private String lastMessage;
