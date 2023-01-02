@@ -71,30 +71,30 @@ public class ManagerInquiryServiceImpl implements ManagerInquiryService{
 			return dao.updateComment(userInquiryNo,inputComment,loginMember);
 		}
 
-		@Override
-		public Map<String, Object> selectInquiryStatusList(String value, int cp) {
-			Map<String, Object> map = new HashMap<String, Object>();
-
-			int listCount = dao.getListCount(value);
-			Pagination pagination = new Pagination(listCount, cp);
-
-			List<UserInquiry> managerInquiryList = dao.selectManagerInquiryList(value, pagination);
-
-			if (managerInquiryList != null) {
-				for (UserInquiry m : managerInquiryList) {
-					if (m.getInquiryRequest() == null) {
-						m.setInquiryStatus("답변 대기 중");
-					} else {
-						m.setInquiryStatus("답변 완료");
-					}
-				}
-
-			}
-			map.put("pagination", pagination);
-			map.put("managerInquiryList", managerInquiryList);
-
-			return map;
-		}
+//		@Override
+//		public Map<String, Object> selectInquiryStatusList(String value, int cp) {
+//			Map<String, Object> map = new HashMap<String, Object>();
+//
+//			int listCount = dao.getListCount(value);
+//			Pagination pagination = new Pagination(listCount, cp);
+//
+//			List<UserInquiry> managerInquiryList = dao.selectManagerInquiryList(value, pagination);
+//
+//			if (managerInquiryList != null) {
+//				for (UserInquiry m : managerInquiryList) {
+//					if (m.getInquiryRequest() == null) {
+//						m.setInquiryStatus("답변 대기 중");
+//					} else {
+//						m.setInquiryStatus("답변 완료");
+//					}
+//				}
+//
+//			}
+//			map.put("pagination", pagination);
+//			map.put("managerInquiryList", managerInquiryList);
+//
+//			return map;
+//		}
 		
 		
 
