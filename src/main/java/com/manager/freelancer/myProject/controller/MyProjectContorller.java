@@ -43,11 +43,13 @@ public class MyProjectContorller {
  		List<MyProject> maincategoryList = service.selectmaincategoryList();
 		
 		Map<String, Object> map  = service.selectMyProject(loginMember.getMemberNo(), mainCategoryNo, cp);
+		
 		model.addAttribute("maincategoryList",maincategoryList);
 		model.addAttribute("myProject",map.get("myProject"));
 		model.addAttribute("pagination",map.get("pagination"));
 		model.addAttribute("listCount",map.get("listCount"));
 		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
+		System.out.println(map);
 		
 		
 		return "myProject/myProject_user/myProject_UserPage";

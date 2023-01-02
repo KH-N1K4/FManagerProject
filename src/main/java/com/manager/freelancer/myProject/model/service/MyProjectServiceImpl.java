@@ -53,6 +53,7 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		map.put("myProject",myProject);
 		map.put("listCount",listCount);
 		
+		System.out.println("myProject="+myProject);
 		
 		return map;
 	}

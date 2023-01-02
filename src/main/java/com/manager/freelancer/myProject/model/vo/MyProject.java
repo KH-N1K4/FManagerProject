@@ -28,7 +28,7 @@ public class MyProject {
 	private String projectWorkPeriod;	    // PROJECT_WORK_PERIOD 프로젝트 작업 마감일
 	private String projectCreateDate;       // PROJECT_REQUEST_CREATE_DATE 프로젝트 의뢰 등록일
 	private int memberNo;                   // MEMBER_NO 회원 번호
-	private int projectRequestStatus;       // PROJECT_REQUEST_STATUS 프로젝트 의뢰 상태
+	private String projectRequestStatus;       // PROJECT_REQUEST_STATUS 프로젝트 의뢰 상태
 	
 	// 의뢰 첨부파일
 	private int requestFileNo;		        // REQUEST_FILE_NO 프로젝트 첨부 파일 번호 
