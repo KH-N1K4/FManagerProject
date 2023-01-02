@@ -53,16 +53,35 @@
                     <div class="itemTitle">
                         <div class="item">전문 분야</div>
                         <div>
-                            <%-- <c:forEach var="field" items="${fn:split}"
-                            <input type="checkbox" name="" id="design"> --%>
+                            <c:forEach var="field" items="${fn:split(freelancer.mainCategoryNo,',') }">
+                                <c:choose>
+                                    <c:when test="${field == 1}">
+                                        <c:set var="field1" value="checked"/>
+                                    </c:when>
+                                    <c:when test="${field == 2}">
+                                        <c:set var="field2" value="checked"/>
+                                    </c:when>
+                                    <c:when test="${field == 3}">
+                                        <c:set var="field3" value="checked"/>
+                                    </c:when>
+                                    <c:when test="${field == 4}">
+                                        <c:set var="field4" value="checked"/>
+                                    </c:when>
+                                    <c:when test="${field == 5}">
+                                        <c:set var="field5" value="checked"/>
+                                    </c:when>               
+                                </c:choose> 
+                            </c:forEach>
+
+                            <input type="checkbox" name="mainCategoryNo" id="design" value="1" ${field1}>
                             <label for="design" class="checkbox">디자인</label>
-                            <input type="checkbox" name="" id="it">
+                            <input type="checkbox" name="mainCategoryNo" id="it" value="2" ${field2}>
                             <label for="it" class="checkbox">IT.프로그래밍</label>
-                            <input type="checkbox" name="" id="video">
+                            <input type="checkbox" name="mainCategoryNo" id="video" value="3" ${field3}>
                             <label for="video" class="checkbox">영상</label>
-                            <input type="checkbox" name="" id="photo">
+                            <input type="checkbox" name="mainCategoryNo" id="photo" value="4" ${field4}>
                             <label for="photo" class="checkbox">사진</label>
-                            <input type="checkbox" name="" id="sound">
+                            <input type="checkbox" name="mainCategoryNo" id="sound"value="5" ${field5}>
                             <label for="sound" class="checkbox">음향</label>
                         </div>
                     </div>

@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.manager.freelancer.common.Util;
 import com.manager.freelancer.freelancer.model.dao.FreeLancerDAO;
 import com.manager.freelancer.freelancer.model.vo.Career;
+import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.freelancer.model.vo.License;
 import com.manager.freelancer.freelancer.model.vo.Major;
@@ -145,14 +146,29 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 		// TODO Auto-generated method stub
 		return dao.getPortfolioList(inputFreelancer);
 	}
+	@Override
+	public List<Field> getFieldList(Freelancer inputFreelancer) {
+		// TODO Auto-generated method stub
+		return dao.getFieldList(inputFreelancer);
+	}
+	 
 	
 	@Override
 	public int updateFreelancerInfo(Freelancer inputFreelancer) {
 
 		int result = dao.updateFreelancerInfo(inputFreelancer);
 		
-		if(result > 0) {
-			result = dao.updateFreelancerCareer(inputFreelancer);
+		if(inputFreelancer.getCareer()!=null) { // 수정하기의 경력사항 input값에 값이 담겨있다면
+			String[] splitCareer = inputFreelancer.getCareer().split("/");
+			Career temp1Career = new Career();
+			temp1Career.setCareerCompanyName(splitCareer[0]);
+			temp1Career.setCareerCompanyDepartment(splitCareer[1]);
+			temp1Career.setCareerCompanyPosition(splitCareer[2]);
+			temp1Career.setCareerCompanyRegion(splitCareer[3]);
+			temp1Career.setCareerCompantPeriod(splitCareer[4]);
+			temp1Career.setFreelancerNo(inputFreelancer.getFreelancerNo());
+			
+			result = dao.updateFreelancerCareer(temp1Career);
 		}
 		
 		return result;
