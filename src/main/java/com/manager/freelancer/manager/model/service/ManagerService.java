@@ -239,6 +239,20 @@ public interface ManagerService {
 	 */
 	int managerReviewDelete2(int reviewReportNo);
 
+	/** 검색 시 서비스 조회
+	 * @param pm
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectServiceList(Map<String, Object> pm, int cp);
+
+	/** 검색 시 프로젝트 의뢰 조회
+	 * @param pm
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> managerprojectRequestList(Map<String, Object> pm, int cp);
+
 	
 
 	

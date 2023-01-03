@@ -88,12 +88,12 @@
        </div>
 		
 		
-		
 		<!-- pagination -->
 		<div class="pagination-area">
 
 
 				<ul class="pagination">
+		<c:if test="${not empty memberList}">
 
 					<!-- 첫 페이지로 이동 -->
 					<li><a href="/manager/memberList?cp=1${sURL}">&lt;&lt;</a></li>
@@ -131,6 +131,7 @@
 
 					<!-- 끝 페이지로 이동 -->
 					<li><a href="/manager/memberList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+			</c:if>
 
 				</ul>
 			</div>
