@@ -24,7 +24,7 @@
 		<typeAlias type="com.manager.freelancer.manager.model.vo.Member" alias="Member2"/>
 		<typeAlias type="com.manager.freelancer.manager.model.vo.FreelancerService" alias="ManagerService"/>
 		<typeAlias type="com.manager.freelancer.manager.model.vo.Settlement" alias="Settlement"/>
-		<typeAlias type="com.manager.freelancer.manager.model.vo.Review" alias="Review"/>
+		<typeAlias type="com.manager.freelancer.manager.model.vo.ReviewReport" alias="ReviewReport"/>
 		<typeAlias type="com.manager.freelancer.manager.model.vo.ProjectRequest" alias="ProjectRequest"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.MainCategory" alias="MainCategory"/>
 		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
@@ -41,6 +41,7 @@
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiryImage" alias="UserInquiryImage"/>
 	
 		<typeAlias type="com.manager.freelancer.category.model.vo.Service" alias="Service"/>
+		<typeAlias type="com.manager.freelancer.category.model.vo.Trade" alias="Trade"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.ImageFile" alias="ImageFile"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.AskService" alias="AskService"/>
 		<typeAlias type="com.manager.freelancer.common.message.model.vo.Message" alias="Message"/>
