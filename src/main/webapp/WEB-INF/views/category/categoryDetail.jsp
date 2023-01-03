@@ -21,10 +21,12 @@
         <div><a href="">${fService.mainCategoryName }</a>><a href="">${fService.thirdCategoryName }</a></div>
 
         <div class="detailHeader">
-            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${fService.requestFilePath }" style="height:100%;"></div>
+            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${fService.requestFilePath }" style="height:100%;" name="servicePhoto"></div>
             <div class="serviceContent">
             	
-                <div class="serviceTitle">${fService.serviceTitle }
+                <div class="serviceTitle">
+                
+                	<span name="serviceTitle">${fService.serviceTitle }</span>
                 	<%-- 찜하기 --%>
                     <span class="like-area">
                         <%-- likeCheck가 없다면 == 로그인 x 또는 좋아요x --%>
@@ -44,9 +46,9 @@
                 </div>
                  
                 
-                <div class="serviceSummary">${fService.serviceSummary }</div>
+                <div class="serviceSummary" name="serviceSummary">${fService.serviceSummary }</div>
                 <div class="serviceInfo">
-                    <span>가격 <span>${fService.servicePrice }</span>원</span>
+                    <span>가격 <span name="servicePrice">${fService.servicePrice }</span>원</span>
                     <span>수정횟수 <span>${fService.serviceEditNum }</span>회</span>
                     <span>작업일수 <span>${fService.serviceWorkPeriod }</span>일</span>   
                 </div>
@@ -81,7 +83,15 @@
 							
 						</c:when> 
 						<c:otherwise>
-							<a id="buyBtn" href="/category/1/1/1/1/payment">구매하기</a>
+							<form action="/service/payment/${fService.serviceNo }">
+								<input type="hidden" name="serviceTitle" value="${fService.serviceTitle }">
+								<input type="hidden" name="serviceSummary" value="${fService.serviceSummary }">
+								<input type="hidden" name="servicePhoto" value="${fService.requestFilePath }">
+								<input type="hidden" name="servicePrice" value="${fService.servicePrice }">
+							
+								<button id="buyBtn">구매하기</a>
+							</form>
+							
 						</c:otherwise>
 					</c:choose> 
 				</c:if> 

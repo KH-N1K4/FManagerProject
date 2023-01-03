@@ -18,10 +18,95 @@
 		<result property="projectRequestStatus" column="PROJECT_REQUEST_STATUS" />	
 		
 		<!-- 프로젝트 의뢰 첨부 파일 -->
-<!-- 		<result property="requestFileNo" column=REQUEST_FILE_NO />	
-		<result property="requestFilePath" column=REQUEST_FILE_PATH />	
-		<result property="requestFileOrder" column=REQUEST_FILE_ORDER />	 -->
+		<result property="requestFileNo" column="REQUEST_FILE_NO" />	
+		<result property="requestFilePath" column="REQUEST_FILE_PATH" />	
+		<result property="requestFileOrder" column="REQUEST_FILE_ORDER" />
+		
+		 <!-- 카테고리 -->
+        <result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />							<!-- 메인 1카테고리 -->
+        <result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />						<!-- 메인 1카테고리 이름 -->
+        <result property="subCategoryNo" column="SUB_CATEGORY_NO" />						    <!-- 메인 2카테고리 -->
+        <result property="subCategoryName" column="SUB_CATEGORY_NAME" />					    <!-- 메인 2카테고리 이름  -->
+        <result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />					    <!-- 메인 3카테고리 -->	
+        <result property="thirdCategoryName" column="THIRD_CATEGORY_NAME" />					<!-- 메인 3카테고리 이름-->
 		
   	</resultMap>
   	
+  	<!-- 메인 카테고리 들고오기 -->
+  	<select id="selectmaincategoryList" resultMap="myProject_rm">
+    	SELECT * FROM MAIN_CATEGORY
+    </select>
+    
+    <!-- 3번 카테고리 리스트 --> 
+    <select id="selectcategoryList" resultMap="myProject_rm">
+    SELECT THIRD_CATEGORY_NO,THIRD_CATEGORY_NAME,MAIN_CATEGORY_NO 
+		FROM CATEGORY 
+		JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		ORDER BY 1
+    </select>
+    
+    <!-- 나의 프로젝트 페이지 카운트 -->
+  	<select id="getMyProjectListCount" resultType="_int">
+    	SELECT COUNT(*) 
+		FROM PROJECT_REQUEST 
+		JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	<!-- 	<if test="mainCategoryNo != 0">
+			AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+		</if> -->
+    </select>
+
+	<!-- 내 프로젝트 조회하기 --> 
+	<select id="selectMyProject" parameterType="java.util.HashMap" resultMap="myProject_rm">
+		SELECT PROJECT_REQUEST_NO, PROJECT_REQUEST_TITLE, PROJECT_REQUEST_SUMMARY,
+       		   PROJECT_REQUEST_CONTENT, PROJECT_REQUEST_BUDGET, 
+       		   TO_CHAR(REQUEST_RECRUIT_DATE, 'YYYY-MM-DD') REQUEST_RECRUIT_DATE,
+       		   TO_CHAR(PROJECT_REQUEST_CREATE_DATE, 'YYYY-MM-DD')PROJECT_REQUEST_CREATE_DATE,
+               REQUEST_WORK_DATE, PROJECT_WORK_PERIOD, SUB_CATEGORY_NO,SUB_CATEGORY_NAME,
+               THIRD_CATEGORY_NO,THIRD_CATEGORY_NAME, MAIN_CATEGORY_NO,MAIN_CATEGORY_NAME,  
+       	   CASE WHEN PROJECT_REQUEST_STATUS = 1 THEN '승인 대기 중'
+        	    WHEN PROJECT_REQUEST_STATUS = 2 THEN '모집 중'
+                WHEN PROJECT_REQUEST_STATUS = 3 THEN '미승인'
+                WHEN PROJECT_REQUEST_STATUS = 4 THEN '모집 마감'
+            END AS PROJECT_REQUEST_STATUS,
+                REQUEST_FILE_NO, REQUEST_FILE_PATH       
+		FROM PROJECT_REQUEST
+		JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	   <!--  <if test="mainCategoryNo != 0">
+			AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+		</if>  -->
+	</select>
+	
+	<!-- 내 프로젝트 등록하기 -->
+	<insert id="insertMyProject" parameterType="java.util.HashMap" useGeneratedKeys="true">
+		<selectKey keyProperty="projectRequestNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_PROJECT_REQUEST_NO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO "PROJECT_REQUEST" 
+		VALUES(#{projectRequestNo}, #{myProject.projectRequestTitle}, #{myProject.projectRequestSummary},
+			 #{myProject.projectRequestContent}, #{myProject.projectRequestBudget}, 
+			 #{myProject.projectRecruitDate},#{myProject.projectWorkDate},#{myProject.projectWorkPeriod}, 
+			 DEFAULT, #{myProject.thirdCategoryNo}, #{loginMember}, DEFAULT ,DEFAULT) 
+	</insert>
+	
+	<!-- 내 프로젝트 등록하기 (첨부파일) -->
+	<insert id="insertFileImageList" parameterType="list">
+		INSERT INTO REQUEST_FILE 
+		SELECT SEQ_PROJECT_REQUEST_NO.NEXTVAL REQUEST_FILE_NO, A.* FROM
+		<foreach collection="list" item="img" open="(" close=") A" separator="UNION ALL">
+			SELECT #{img.requestFilePath} REQUEST_FILE_PATH, 
+				   #{img.requestFileOrder} REQUEST_FILE_ORDER,
+				   #{img.projectRequestNo} PROJECT_REQUEST_NO
+			FROM DUAL
+		</foreach>
+	</insert>
+
+  	
 </mapper>
+	

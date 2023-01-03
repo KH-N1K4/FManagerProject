@@ -86,6 +86,8 @@
  	ORDER BY 1
  </select>
  
+ 
+ 
  <select id="selectBoardList" resultMap="service_rm"> 
 	
 		SELECT SERVICE_NO,
@@ -108,6 +110,7 @@
 		FROM SERVICE_FILE s) USING(SERVICE_NO)
 		WHERE RUM = 1
 		AND MAIN_CATEGORY_NO=#{mainCategoryNo}
+		<if test='thirdCategoryNo!=null'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
 		AND SERVICE_DEL_FL='N'
 		AND SERVICE_STATUS=2
  </select>
@@ -216,6 +219,102 @@
 	) JOIN "LIKE" USING(SERVICE_NO)
 	WHERE RNUM =1
 	AND MEMBER_NO=#{memberNo}
+	</select>
+	
+	
+	
+	<!-- ajax 분류에 따라 조회되게 -->
+	<select id="selectCategoryList" resultMap="service_rm">
+		SELECT SERVICE_NO,
+		
+		<if test='memberNo!=null'>
+		CASE WHEN MEMBER_NO = #{memberNo} THEN 'Y' ELSE 'N' END AS LIKE_CHECK_FL,
+		</if>
+	
+		SERVICE_TITLE,SERVICE_SUMMARY,SERVICE_PRICE,
+			THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH,MAIN_CATEGORY_NO
+		FROM (SELECT * 
+			FROM SERVICE
+			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
+		<if test='memberNo!=null'>
+			LEFT JOIN (SELECT * FROM "LIKE" WHERE MEMBER_NO=#{memberNo}) USING(SERVICE_NO)
+		</if>
+		LEFT JOIN (SELECT s.*,
+		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
+		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		JOIN FREELANCER USING(FREELANCER_NO)
+		WHERE RUM = 1
+		AND MAIN_CATEGORY_NO=#{mainCategoryNo}
+		<!-- AND SERVICE_DEL_FL='N' -->
+		<!-- AND SERVICE_STATUS=2 -->
+		<choose>
+			<when test="budget==0"></when>
+			<when test="budget==1"><![CDATA[AND SERVICE_PRICE < 10000]]> </when>
+			<when test="budget==5">AND SERVICE_PRICE BETWEEN 10000 AND 50000 </when>
+			<when test="budget==10">AND SERVICE_PRICE BETWEEN 50000 AND 100000  </when>
+			<when test="budget==20">AND SERVICE_PRICE BETWEEN 100000 AND 200000  </when>
+			<when test="budget==30">AND SERVICE_PRICE BETWEEN 200000 AND 300000  </when>
+			<when test="budget==50">AND SERVICE_PRICE BETWEEN 300000 AND 500000  </when>
+			<when test="budget==70">AND SERVICE_PRICE BETWEEN 500000 AND 700000  </when>
+			<when test="budget==100">AND SERVICE_PRICE BETWEEN 700000 AND 1000000  </when>
+			<otherwise><![CDATA[AND SERVICE_PRICE <1000000 ]]>  </otherwise>
+		</choose>
+		
+		<choose>
+			<when test="grade==0"></when>
+			<when test="grade==1">AND GRADE_NO =1 </when>
+			<otherwise>AND GRADE_NO=2</otherwise>
+		</choose>
+		
+		<if test='order==0'>
+			ORDER BY 1
+		</if>
+		<if test='order==1'>
+			ORDER BY 1 DESC
+		</if>
+	
+	</select>
+	
+	
+	<select id="serviceList" resultMap="service_rm">
+	
+		SELECT SERVICE_NO,
+		SERVICE_TITLE,SERVICE_SUMMARY,SERVICE_PRICE,
+			THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH,MAIN_CATEGORY_NO
+		FROM (SELECT * 
+			FROM SERVICE
+			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
+		LEFT JOIN (SELECT s.*,
+		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
+		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		WHERE RUM = 1 
+		AND SERVICE_DEL_FL='N'
+		AND SERVICE_STATUS=2
+		ORDER BY DBMS_RANDOM.RANDOM
+	
+	</select>
+	
+	
+	<!-- 페이징을 위한 서비스 개수 세기 -->
+	<select id="getListCount" resultType="Integer">
+	
+		SELECT COUNT(*)
+		FROM (SELECT * 
+			FROM SERVICE
+			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
+		LEFT JOIN (SELECT s.*,
+		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
+		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		WHERE RUM = 1
+		AND SERVICE_DEL_FL='N'
+		AND SERVICE_STATUS=2 
+		<if test='mainCategoryNo!=null'> AND MAIN_CATEGORY_NO=#{mainCategoryNo} </if>
+		<if test='thirdCategoryNo!=null'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
+
+	
 	</select>
  	
  </mapper>

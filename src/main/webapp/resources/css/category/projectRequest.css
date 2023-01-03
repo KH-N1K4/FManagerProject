@@ -74,8 +74,9 @@
     height: 225px;
 }
 #image{
-    height: 320px;
+    min-height: 340px;
     position:relative;
+    margin-right:25px; 
 }
 
 #image>div{
@@ -89,7 +90,7 @@
 	z-index:10px;
 	
 	
-	 display: block;
+	display: block;
    
 }
 
@@ -140,9 +141,7 @@
     left: 645px;
 }
 
-#imageContent span{
-   
-}
+/* 여기까지 select */
 
 .imageOthers{
     display: block;
@@ -179,4 +178,34 @@ li{
 	list-style:none;
 }
 
+/* pagination */
+.pagination {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+	margin: 100px 0;
+}
+
+.pagination li {
+	width: 20px;
+	margin: 0 5px;
+	text-align: center;
+}
+
+.pagination a {
+	display: block;
+	text-decoration: none;
+	color: black;
+	width: 100%;
+	height: 100%;
+}
+
+.current {
+	font-weight: bold;
+	background-color: black;
+	border-radius: 50%;
+	color: white !important;
+	letter-spacing: 0 !important;
+}
 

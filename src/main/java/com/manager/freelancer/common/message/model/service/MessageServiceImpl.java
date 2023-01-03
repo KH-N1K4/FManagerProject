@@ -101,4 +101,13 @@ public class MessageServiceImpl implements MessageService{
 		}
 		return result;
 	}
+
+	/**
+	 *채팅방 나가기 여부 확인: 상대방
+	 */
+	@Override
+	public ChattingRoom delectFLRoomNoClient(Map<String, Integer> map) {
+
+		return dao.delectFLRoomNoClient(map);
+	}
 }

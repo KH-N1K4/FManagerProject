@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.manager.freelancer.freelancer.model.vo.Career;
+import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.freelancer.model.vo.License;
 import com.manager.freelancer.freelancer.model.vo.Major;
@@ -25,7 +26,12 @@ public class FreeLancerDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("freelancerMapper.enrollFreelancer", inputFreelancer);
 	}
+	
+	// 전문가 정보 조회
+		public Freelancer freelancerInfo(int freelancerNo) { // inputfreelancer에는 회원번호(프리랜서번호)가 있다.
 
+			return sqlSession.selectOne("freelancerMapper.freelancerInfo", freelancerNo);
+		}
 	
 
 	public int enrollFreelancerMajor(Major temp1) {
@@ -70,12 +76,12 @@ public class FreeLancerDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("freelancerMapper.getPortfolioList", inputFreelancer);
 	}
-	
-	// 전문가 정보 조회
-	public Freelancer freelancerInfo(int freelancerNo) { // inputfreelancer에는 회원번호(프리랜서번호)가 있다.
-
-		return sqlSession.selectOne("freelancerMapper.freelancerInfo", freelancerNo);
+	public List<Field> getFieldList(Freelancer inputFreelancer) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("freelancerMapper.getFieldList", inputFreelancer);
 	}
+	
+	
 
 
 	// 전문가 정보 수정
@@ -84,9 +90,9 @@ public class FreeLancerDAO {
 		return sqlSession.update("freelancerMapper.updateFreelancerInfo", inputFreelancer);
 	}
 	// 전문가 정보 수정(경력사항)
-	public int updateFreelancerCareer(Freelancer inputFreelancer) {
+	public int updateFreelancerCareer(Career temp1Career) {
 
-		return sqlSession.update("freelancerMapper.updateFreelancerCareer", inputFreelancer);
+		return sqlSession.update("freelancerMapper.updateFreelancerCareer", temp1Career);
 	}
 
 	// 포트폴리오 등록
@@ -101,6 +107,10 @@ public class FreeLancerDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("freelancerMapper.insertPortfolioImageList", imageList);
 	}
+
+
+
+	
 
 
 

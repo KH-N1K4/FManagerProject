@@ -17,7 +17,7 @@ public interface CategoryService {
 
 	List<Map<String, Object>> selectThirdCategoryList();
 
-	List<Service> selectBoardList(Map<String, Integer> map);
+	
 
 	Service viewService(int serviceNo);
 
@@ -31,6 +31,16 @@ public interface CategoryService {
 	int boardLikeUp(Map<String, Object> paramMap);
 
 	int boardLikeDown(Map<String, Object> paramMap);
+
+	
+	// ajax
+	List<Service> selectCategoryList(Map map);
+
+	// 카테고리 조회
+	Map selectBoardList(Map<String, Integer> map);
+	
+	// 메인 전체 조회
+	Map serviceList(Map<String, Integer> map);
 	
 
 }
