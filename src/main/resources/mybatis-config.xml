@@ -40,6 +40,7 @@
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectTrade" alias="myProjectTrade"/>
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiryImage" alias="UserInquiryImage"/>
 	
+		<typeAlias type="com.manager.freelancer.category.model.vo.Review" alias="Review"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.Service" alias="Service"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.Trade" alias="Trade"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.ImageFile" alias="ImageFile"/>

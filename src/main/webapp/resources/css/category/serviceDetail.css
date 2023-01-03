@@ -140,7 +140,7 @@
 .detailInner{
 	box-sizing:border-box;
     width: 1200px;
-    border:1px solid black;
+   /*  border:1px solid black; */
 }
 
  .modal {
@@ -209,13 +209,17 @@
     font-size: 18px;
     color: black;
 }
-#serviceInfo button{
+#serviceInfo a{
     width: 300px;
     height: 50px;
     border: 1px solid rgba(185, 181, 181, 0.926);
     background-color: rgb(225, 220, 220);
+    display:inline-block;
+    box-sizing:border-box;
+    text-align:center;
+    padding:15px 0;
 }
-#serviceInfo button:hover{
+#serviceInfo a:hover{
     background-color: white;
     /* border: 1px solid rgba(185, 181, 181, 0.926); */
     border: 1px solid #538126; 
@@ -224,4 +228,73 @@
 
 #boardLike{
 	color:#538126; 
+}
+
+
+
+/* 개대충 리뷰부분 */
+.serviceReviewContent{
+     min-height: 150px;
+     position: relative;
+ }
+
+ .contentTop{
+     position:relative;
+     height: 90px;
+ }
+
+ .userProfile{
+     display: inline-block;
+     width: 70px;
+     height: 70px;
+     background-color: antiquewhite;
+     border-radius: 100%;
+     position: absolute;
+     margin:5px;
+     
+ }
+
+ .person{
+     padding-top:10px;
+     position: absolute;
+     left:85px;
+
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .serviceImage{
+     height: 200px;
+     width: 200px;
+     position:absolute;
+     right:0;
+     top:0;
+     background-color: burlywood;
+     margin:20px;
+ }
+
+ .serviceDetail{
+     position: absolute;
+     bottom:0;
+ }
+ 
+ .date{
+ width:900px;
+ }
+ 
+
+
+ .reviewResponse{
+ 	width:900px;
+     background-color: rgb(234, 234, 234);
+     padding:10px;
+     margin-top:10px;
+     border-radius: 5px;
+ }
+ .responseContent{
+     margin-top:10px;
+ }
+ 
+h3{
+	margin-top:50px;
 }
