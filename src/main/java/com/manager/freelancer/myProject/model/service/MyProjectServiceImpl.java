@@ -141,17 +141,17 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 	@Override
 	public Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo, MyProject myProject) {
 		
-int listCount = dao.getMyProjectListCount( memberNo, mainCategoryNo);
-		
-		Pagination pagination = new Pagination(listCount,cp); 
-		
-		List<MyProject> myProject = dao.selectMyProject(memberNo,mainCategoryNo,pagination);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("pagination", pagination);
-		map.put("myProject",myProject);
-		map.put("listCount",listCount);
+//int listCount = dao.getMyProjectListCount( memberNo, mainCategoryNo);
+//		
+//		Pagination pagination = new Pagination(listCount,cp); 
+//		
+//		List<MyProject> myProject = dao.selectMyProject(memberNo,mainCategoryNo,pagination);
+//		
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		
+//		map.put("pagination", pagination);
+//		map.put("myProject",myProject);
+//		map.put("listCount",listCount);
 		
 		return null;
 	}
