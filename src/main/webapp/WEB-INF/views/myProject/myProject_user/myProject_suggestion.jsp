@@ -10,53 +10,7 @@
   <title>myProject_suggestion</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/myProject_suggestion.css">
-  <style>
-    body{
-        margin:0;
-    }
-
-    #logo{
-        width: 200px;
-        height: 100px; 
-        position: absolute;
-        left: 60px;
-        top:40px;
-        /* border:1px solid black; */
-    }
-
-    #header{
-        background-color: #538126;
-    }
-
-    #logo>img{
-        width: 100%;
-    }
-
-    #header1{
-        width: 1200px;
-        height: 160px;
-        margin:auto;
-        position: relative;    
-    }
-
-    .header-top{
-        position: absolute;
-        right:0;
-        top:20px;
-        align-items: center;
-        display: flex;
-    }
-    
-    .header-top span{
-        margin:0 12px;
-        cursor: pointer;
-        color:white !important;
-    }
-    .header-top img{
-        border-radius: 45%;
-    }
-
-</style>
+  
 </head>
 <body>
   <main>

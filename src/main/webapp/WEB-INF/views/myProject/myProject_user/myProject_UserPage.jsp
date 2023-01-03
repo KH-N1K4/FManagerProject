@@ -62,6 +62,11 @@
             <%-- container_header 끝 --%>
 
             <!-- 프로젝트 의뢰 1번 -->
+            <c:if test="${empty myProject}">
+                <div class="myProject_content">
+                    <span>프로젝트가 존재하지 않습니다.</span>
+                </div>
+            </c:if>
             <c:if test="${not empty myProject}">
               <c:forEach items="${myProject}" var="myProject">
                   <div class="myProject_content">
@@ -76,7 +81,7 @@
 
                         <%-- 서비스 제목 --%>
                         <div class="info_title">
-                          <span>${myProject.projectRequestTitle}</span>
+                          <div>${myProject.projectRequestTitle}</div>
                         </div>
                         <%-- 서비스 제목 --%>
 

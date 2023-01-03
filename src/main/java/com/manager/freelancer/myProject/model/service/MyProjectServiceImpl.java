@@ -53,7 +53,6 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		map.put("myProject",myProject);
 		map.put("listCount",listCount);
 		
-		System.out.println("myProject="+myProject);
 		
 		return map;
 	}
@@ -136,6 +135,25 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		
 		
 		return 0;
+	}
+
+	// 받은 제안 조회 
+	@Override
+	public Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo, MyProject myProject) {
+		
+int listCount = dao.getMyProjectListCount( memberNo, mainCategoryNo);
+		
+		Pagination pagination = new Pagination(listCount,cp); 
+		
+		List<MyProject> myProject = dao.selectMyProject(memberNo,mainCategoryNo,pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("myProject",myProject);
+		map.put("listCount",listCount);
+		
+		return null;
 	}
 
 }
