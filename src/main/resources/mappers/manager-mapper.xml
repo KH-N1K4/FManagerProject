@@ -115,7 +115,7 @@
       <result property="memberReportNo" column="MEMBER_REPORT_NO"/>
    </resultMap>
    
-	<!-- <resultMap type="com.manager.freelancer.manager.model.vo.TradeReport" id="manager_tradeReport_rm">
+	<resultMap type="com.manager.freelancer.manager.model.vo.TradeReport" id="manager_tradeReport_rm">
 		<id property="tradeReportNo" column="TRADE_REPORT_NO" />
 		<result property="tradeNo" column="TRADE_NO" />
 		<result property="tradeReportMemberNo" column="TRADE_REPORT_MEMBER_NO" />
@@ -124,7 +124,21 @@
 		<result property="tradeReportFilePath" column="TRADE_REPORT_FILE_PATH" />
 		<result property="tradeReportCreateDate" column="TRADE_REPORT_CREATE_DATE" />
 		<result property="refundFlag" column="REFUND_FL" />
-	</resultMap> -->
+		<result property="tradeReportTypeNo" column="TRADE_REPORT_TYPE_NO" />
+		<result property="tradeReportMemberName" column="TRADE_REPORT_MEMBER_NAME" />
+		<result property="tradeReportedMemberName" column="TRADE_REPORTED_MEMBER_NAME" />
+	</resultMap>
+	
+	<resultMap type="ReviewReport" id="manager_reviewReport_rm">
+		<id property="reviewReportNo" column="REPORT_NO" />
+		<result property="reviewNo" column="REVIEW_NO" />
+		<result property="reviewDeleteFlag" column="REVIEW_DEL_FL" />
+		<result property="reviewContent" column="REVIEW_CONTENT" />
+		<result property="reviewImage" column="REVIEW_IMAGE" />
+		<result property="reviewPoint" column="REVIEW_POINT" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="memberName" column="MEMBER_NAME" />
+	</resultMap>
 
 
 	<!-- 프리랜서 등급 조회 -->
@@ -733,7 +747,177 @@
 	
 	
 	
+	<!-- 거래 신고 수 -->
+	<select id="getMemberTradeListCount" resultType="_int">
+	SELECT COUNT(*) FROM TRADE_REPORT
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'>
+					WHERE REFUND_FL ='N'
+				</when>
+				<otherwise>
+					WHERE REFUND_FL ='Y'
+				</otherwise>
+			</choose>
+		</if>
+	</select>
 	
+	<!-- 거래 신고 내역 조회 -->
+	<select id="selectMemberTradeList" resultMap="manager_tradeReport_rm">
+	SELECT TRADE_REPORT_NO , TRADE_REPORT_CONTENT , REFUND_FL, TRADE_NO,
+		 TO_CHAR(TRADE_REPORT_CREATE_DATE, 'YYYY"-"MM"-"DD') TRADE_REPORT_CREATE_DATE ,
+		REPORT_PERSON , REPORTED_PERSON, TRADE_REPORT_TYPE_NO,
+		MEMBER_NAME AS TRADE_REPORT_MEMBER_NAME, 
+		(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=REPORTED_PERSON) TRADE_REPORTED_MEMBER_NAME
+		FROM TRADE_REPORT
+		JOIN MEMBER ON (MEMBER_NO=REPORT_PERSON)
+		WHERE TRADE_REPORT_NO != 0
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'>
+					AND REFUND_FL ='N'
+				</when>
+				<otherwise>
+					AND REFUND_FL ='Y'
+				</otherwise>
+			</choose>
+		</if>
+		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 검색 일치 거래 신고 수 -->
+	<select id="getMemberTradeListCount2" resultType="_int">
+	SELECT COUNT(*) FROM TRADE_REPORT
+	WHERE TRADE_REPORT_NO != 0
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'> AND REFUND_FL ='N' </when>
+				<otherwise> AND REFUND_FL ='Y' </otherwise>
+			</choose>
+		</if>
+		<if test='type != 0'>
+			<choose>
+				<when test='type==1'> AND TRADE_REPORT_TYPE_NO = 1 </when>
+				<otherwise> AND TRADE_REPORT_TYPE_NO = 2 </otherwise>
+			</choose>
+		</if>
+		<if test='query != null and query != ""'>
+			<choose>
+				<when test='key=="c"'> AND TRADE_REPORT_CONTENT LIKE '%${query}%' </when>
+				<when test='key=="tn"'> AND TRADE_NO = ${query} </when>
+				<when test='key=="tn"'> AND TRADE_REPORT_NO = ${query} </when>
+				<when test='key=="report"'> AND TRADE_REPORT_MEMBER_NAME LIKE '%${query}%' </when>
+				<otherwise> AND TRADE_REPORTED_MEMBER_NAME LIKE '%${query}%' </otherwise>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 검색 일치 거래 신고 내역 조회 -->
+	<select id="selectMemberTradeList2" resultMap="manager_tradeReport_rm">
+	SELECT TRADE_REPORT_NO , TRADE_REPORT_CONTENT , REFUND_FL, TRADE_NO,
+		 TO_CHAR(TRADE_REPORT_CREATE_DATE, 'YYYY"-"MM"-"DD') TRADE_REPORT_CREATE_DATE ,
+		REPORT_PERSON , REPORTED_PERSON, TRADE_REPORT_TYPE_NO,
+		MEMBER_NAME AS TRADE_REPORT_MEMBER_NAME, 
+		(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=REPORTED_PERSON) TRADE_REPORTED_MEMBER_NAME
+		FROM TRADE_REPORT
+		JOIN MEMBER ON (MEMBER_NO=REPORT_PERSON)
+		WHERE TRADE_REPORT_NO != 0
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'> AND REFUND_FL ='N' </when>
+				<otherwise> AND REFUND_FL ='Y' </otherwise>
+			</choose>
+		</if>
+		<if test='type != 0'>
+			<choose>
+				<when test='type==1'> AND TRADE_REPORT_TYPE_NO = 1 </when>
+				<otherwise> AND TRADE_REPORT_TYPE_NO = 2 </otherwise>
+			</choose>
+		</if>
+		<if test='query != null and query != ""'>
+			<choose>
+				<when test='key=="c"'> AND TRADE_REPORT_CONTENT LIKE '%${query}%' </when>
+				<when test='key=="tn"'> AND TRADE_NO = ${query} </when>
+				<when test='key=="rn"'> AND TRADE_REPORT_NO = ${query} </when>
+				<when test='key=="report"'> AND TRADE_REPORT_MEMBER_NAME LIKE '%${query}%' </when>
+				<otherwise> AND TRADE_REPORTED_MEMBER_NAME LIKE '%${query}%' </otherwise>
+			</choose>
+		</if>
+		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 상태별 거래 신고 수 -->
+	<select id="getReportStatusListCount" resultType="_int">
+		SELECT COUNT(*) FROM TRADE_REPORT
+		WHERE TRADE_REPORT_NO != 0
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'> AND REFUND_FL ='N' </when>
+				<otherwise> AND REFUND_FL ='Y' </otherwise>
+			</choose>
+		</if>
+		<if test='type != 0'>
+			<choose>
+				<when test='type==1'> AND TRADE_REPORT_TYPE_NO = 1 </when>
+				<otherwise> AND TRADE_REPORT_TYPE_NO = 2 </otherwise>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 상태별 거래 신고 내역 조회 -->
+	<select id="selectReportStatusList" resultMap="manager_tradeReport_rm">
+		SELECT TRADE_REPORT_NO , TRADE_REPORT_CONTENT , REFUND_FL, TRADE_NO,
+		 TO_CHAR(TRADE_REPORT_CREATE_DATE, 'YYYY"-"MM"-"DD') TRADE_REPORT_CREATE_DATE ,
+		REPORT_PERSON , REPORTED_PERSON, TRADE_REPORT_TYPE_NO,
+		MEMBER_NAME AS TRADE_REPORT_MEMBER_NAME, 
+		(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=REPORTED_PERSON) TRADE_REPORTED_MEMBER_NAME
+		FROM TRADE_REPORT
+		JOIN MEMBER ON (MEMBER_NO=REPORT_PERSON)
+		WHERE TRADE_REPORT_NO != 0
+		<if test='status != 0'>
+			<choose>
+				<when test='status==1'> AND REFUND_FL ='N' </when>
+				<otherwise> AND REFUND_FL ='Y' </otherwise>
+			</choose>
+		</if>
+		<if test='type != 0'>
+			<choose>
+				<when test='type==1'> AND TRADE_REPORT_TYPE_NO = 1 </when>
+				<otherwise> AND TRADE_REPORT_TYPE_NO = 2 </otherwise>
+			</choose>
+		</if>
+		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 거래 신고 상세 보기 -->
+	<select id="tradeReportDetail" resultMap="manager_tradeReport_rm">
+			SELECT TRADE_REPORT_NO , TRADE_REPORT_CONTENT , REFUND_FL, TRADE_NO,
+		 TO_CHAR(TRADE_REPORT_CREATE_DATE, 'YYYY"-"MM"-"DD') TRADE_REPORT_CREATE_DATE ,
+		REPORT_PERSON , REPORTED_PERSON, TRADE_REPORT_TYPE_NO, TRADE_REPORT_FILE_PATH,
+		MEMBER_NAME AS TRADE_REPORT_MEMBER_NAME, 
+		(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=REPORTED_PERSON) TRADE_REPORTED_MEMBER_NAME
+		FROM TRADE_REPORT
+		JOIN MEMBER ON (MEMBER_NO=REPORT_PERSON)
+		WHERE TRADE_REPORT_NO = #{tradeReportNo}
+	</select>
+	
+	
+	
+	<!-- 리뷰 신고 수 -->
+	<select id="getReviewReportListCount" resultType="_int">
+	SELECT COUNT(*) FROM REPORT
+	</select>	
+	
+	
+	<!-- 리뷰 신고 목록 -->
+	<select id="selectReviewReportList" resultMap="manager_reviewReport_rm">
+	SELECT REPORT_NO, REVIEW_NO, REPORT_DEL_FL, MEMBER_NO, MEMBER_NAME, REVIEW_CONTENT, REVIEW_IMAGE,
+	REVIEW_POINT
+	FROM REPORT 
+	JOIN REVIEW USING (REVIEW_NO)
+	JOIN TRADE ON (TRADE_NO=REVIEW_NO)
+	JOIN MEMBER USING (MEMBER_NO)
+	</select>
 
 </mapper>
 

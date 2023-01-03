@@ -44,34 +44,83 @@
     width: 100px;
 }
 .review-content{
-    width: 750px;
+    width: 650px;
 }
 
 
 .review-writer{
-    width: 150px;
+    width: 130px;
 }
 
 
 .review-delete{
-    width: 100px;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
 }
 
 /* 테이블 값 부분 */
 .review-manage-table-content{
-   /* display: flex; */
-    /* align-items: center;
-    justify-content: center; */
-    padding: 10px 0;
+    display: flex; 
+    align-items: center;
+    /* justify-content: center; */
+    padding: 20px 0;
     height: 15px;
+}
+
+.center{
+    margin-top: 20px;
+    justify-content: center;
 }
 
 .review-delete > span{
     display: inline-block;
     width: 100px;
+    height: 30px;
+    line-height: 30px;
     text-align: center;
     color: white;
-    background-color: rgb(33, 138, 33);
-    border-radius: 15px;
-
+    border-radius: 5px;
+    margin-left: 5px;
 }
+.deleteBtn{
+    background-color: black;
+}
+.holdBtn{
+    background-color: gray;
+}
+
+
+/* ================================ */
+/* 페이지 */
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-top: 300px;
+}
+
+.pagination li {
+    width: 20px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.pagination a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 100%;
+}
+
+.current {
+    font-weight: bold;
+    background-color: black;
+    border-radius: 50%;
+    color: white !important;
+    letter-spacing: 0 !important;
+}
+/* ================================ */

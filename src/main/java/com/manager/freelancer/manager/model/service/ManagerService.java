@@ -8,7 +8,9 @@ import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
+import com.manager.freelancer.manager.model.vo.ReviewReport;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
+import com.manager.freelancer.manager.model.vo.TradeReport;
 
 public interface ManagerService {
 
@@ -185,6 +187,39 @@ public interface ManagerService {
 	 * @return
 	 */
 	int insertReportRequest(Map<String, Object> map);
+
+	/** 거래 신고 내역 조회
+	 * @param status
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectMemberTradeList(int status, int cp);
+
+	/** 검색 일치 거래 신고 내역 조회
+	 * @param pm
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectMemberTradeList(Map<String, Object> pm, int cp);
+
+	/** 상태별 거래 신고 조회
+	 * @param map
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectReportStatusList(Map<String, Object> map, int cp);
+
+	/** 거래 신고 상세 보기
+	 * @param tradeReportNo
+	 * @return
+	 */
+	TradeReport tradeReportDetail(int tradeReportNo);
+
+	/** 리뷰 신고 목록
+	 * @param cp 
+	 * @return
+	 */
+	Map<String, Object> selectReviewReportList(int cp);
 
 	
 
