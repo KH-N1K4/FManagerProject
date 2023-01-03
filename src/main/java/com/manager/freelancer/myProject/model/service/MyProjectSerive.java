@@ -41,4 +41,13 @@ public interface MyProjectSerive {
 	int insertMyProject(String webPath, String filePath, List<MultipartFile> myProjectFile, Member loginMember,
 			MyProject myProject) throws IOException;
 
+	/** 받은 제안 조회
+	 * @param memberNo
+	 * @param cp
+	 * @param mainCategoryNo
+	 * @param myProject
+	 * @return
+	 */
+	Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo, MyProject myProject);
+
 }

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.service.MyProjectSerive;
+import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.MyProject;
 
 
@@ -33,6 +34,7 @@ public class MyProjectContorller {
 	@Autowired
 	private MyProjectSerive service;
 	
+	//------------------------------------------------------------------------
 	// 내 프로젝트 이동
 	@GetMapping("/member/myProject/myRequestList")
 	public String likeList(Model model, HttpSession session,
@@ -49,12 +51,11 @@ public class MyProjectContorller {
 		model.addAttribute("pagination",map.get("pagination"));
 		model.addAttribute("listCount",map.get("listCount"));
 		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
-		System.out.println(map);
 		
 		
 		return "myProject/myProject_user/myProject_UserPage";
 	}
-	
+	//------------------------------------------------------------------------
 	// 내 프로젝트 등록하기 페이지 이동
 	@GetMapping("/member/myProject/myRequestInsert")
 	public String myReceiveList(Model model) {
@@ -69,7 +70,7 @@ public class MyProjectContorller {
 		return "myProject/myProject_user/myProject_add";
 	}
 	
-	
+	//------------------------------------------------------------------------
 	// 내 프로젝트 등록
 	@PostMapping("/myProject/user/myProjectInsert")
 	public String myProjectInsert(@RequestParam(value="myProjectFile") List<MultipartFile> myProjectFile,
@@ -92,17 +93,28 @@ public class MyProjectContorller {
 		
 		return "redirect: /member/myProject/myRequestInsert";
 	}
-	
-	
-	
-	
-	
-	// 받은 제안 이동
+	//------------------------------------------------------------------------
+	// 받은 제안 페이지 이동 
 	@GetMapping("/member/myProject/myReceiveList")
-	public String myRequestInsert() {
-		return "myProject/myProject_suggestion";
+	public String myRequestInsert(Model model, MyProject myProject,
+								  @RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
+								  @SessionAttribute("loginMember") Member loginMember,
+								  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
+		
+		
+//		List<MyProject> maincategoryList = service.selectmaincategoryList();
+//		
+//		Map<String, Object> map = service.selectProposal(loginMember.getMemberNo(),cp,mainCategoryNo, myProject);
+//		
+//		model.addAttribute("maincategoryList",maincategoryList);
+//		model.addAttribute("myProject",map.get("myProject"));
+//		model.addAttribute("pagination",map.get("pagination"));
+//		model.addAttribute("listCount",map.get("listCount"));
+//		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
+		
+		return "myProject/myProject_user/myProject_suggestion";
 	}
-	
+	//------------------------------------------------------------------------
 	
 
 	// 구매 관리 이동
