@@ -28,10 +28,19 @@
 
 			<span id="question-list-title">거래 신고 내역 </span> 
 			<span class="select-area"> 
-				<select class="select-area-input" name="status" id="selectStatus" onchange="selectChange()">
+                <span class="select-title">진행 상태</span>
+				<select class="select-area-input" name="status" id="selectStatus" onchange="selectStatusChange()">
 					<option value="">진행상태</option>
 					<option value="1">답변 대기</option>
 					<option value="2">해결 완료</option>
+				</select>
+			</span>
+			<span class="select-area"> 
+                <span class="select-title">신고 타입</span>
+				<select class="select-area-input" name="type" id="selectType" onchange="selectStatusChange()">
+					<option value="">신고 타입</option>
+					<option value="1">거래 신고</option>
+					<option value="2">주문 취소</option>
 				</select>
 			</span>
 
@@ -43,10 +52,10 @@
             <div class="question-list-table-column">
                 <div class="question-no">신고 번호</div>
                 <div class="question-num">거래 번호</div>
-                <div class="question-date">작성일</div>
                 <div class="question-type">신고 종류</div>
                 <div class="question-report">신고자</div>
                 <div class="question-reported">피신고자</div>
+                <div class="question-date">작성일</div>
                 <div class="question-status">진행 상태</div>
             </div>
             
@@ -60,12 +69,12 @@
                 <c:otherwise>
                     <c:forEach var="tradeReport" items="${tradeReportList}">
                         <div class="question-list-table-content">
-                            <div class="question-num">${tradeReport.tradeReportNo}</div>
+                            <div class="question-num"><a class="reportDetailBtn" href="/manager/tradeReportDetail/${tradeReport.tradeReportNo}">${tradeReport.tradeReportNo}</a></div>
                             <div class="question-no">${tradeReport.tradeNo}</div>
-                            <div class="question-date">${tradeReport.tradeReportCreateDate}</div>
                             <div class="question-type">${tradeReport.tradeReportTypeName}</div>
                             <div class="question-report">${tradeReport.tradeReportMemberName}</div>
                             <div class="question-reported">${tradeReport.tradeReportedMemberName}</div>
+                            <div class="question-date">${tradeReport.tradeReportCreateDate}</div>
                             <div class="question-status">
                             <c:choose>
                                 <c:when test="${tradeReport.refundFlag == 'N'}">
@@ -116,6 +125,8 @@
                     <form action="/manager/tradeReportList" id="inquirySearch" method="get"> 
                         <select name="key" id="search-key">
                             <option value="c">내용</option> 
+                            <option value="tn">거래 번호</option> 
+                            <option value="rn">신고 번호</option> 
                             <option value="report">신고자명</option> 
                             <option value="reported">피신고자명</option> 
                         </select> 
@@ -128,6 +139,6 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
- <script src="/resources/js/manager/memberTradeList.js"></script>
+ <script src="/resources/js/manager/tradeReportList.js"></script>
 </body>
 </html>

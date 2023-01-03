@@ -546,6 +546,13 @@ public class ManagerServiceImpl implements ManagerService {
 		int listCount = dao.getMemberTradeListCount(pm);
 		Pagination pagination = new Pagination(listCount, cp);
 		List<TradeReport> tradeReportList = dao.selectMemberTradeList(pagination, pm);
+		
+		if(tradeReportList!=null) {
+			for(TradeReport t: tradeReportList) {
+				if(t.getTradeReportTypeNo()==1) t.setTradeReportTypeName("거래 신고");
+				else t.setTradeReportTypeName("주문 취소");
+			} 
+		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
@@ -555,10 +562,40 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	
+	// 상태별 거래 신고 조회
+	@Override
+	public Map<String, Object> selectReportStatusList(Map<String, Object> map, int cp) {
+		
+		int listCount = dao.getReportStatusListCount(map);
+		Pagination pagination = new Pagination(listCount, cp);
+		List<TradeReport> tradeReportList = dao.selectReportStatusList(pagination, map);
+		
+		if(tradeReportList!=null) {
+			for(TradeReport t: tradeReportList) {
+				if(t.getTradeReportTypeNo()==1) t.setTradeReportTypeName("거래 신고");
+				else t.setTradeReportTypeName("주문 취소");
+			} 
+		}
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("pagination", pagination);
+		resultMap.put("tradeReportList", tradeReportList);
+		
+		return resultMap;
+	}
 	
 	
-	
-	
+	// 거래 신고 상세 보기
+	@Override
+	public TradeReport tradeReportDetail(int tradeReportNo) {
+		
+		TradeReport tradeReport = dao.tradeReportDetail(tradeReportNo);
+				
+		if(tradeReport.getTradeReportTypeNo()==1) tradeReport.setTradeReportTypeName("거래 신고");
+		else tradeReport.setTradeReportTypeName("주문 취소");		
+		
+		return tradeReport;
+	}
 	
 	
 	

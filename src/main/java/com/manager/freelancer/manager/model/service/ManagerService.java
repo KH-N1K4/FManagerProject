@@ -9,6 +9,7 @@ import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
+import com.manager.freelancer.manager.model.vo.TradeReport;
 
 public interface ManagerService {
 
@@ -199,6 +200,19 @@ public interface ManagerService {
 	 * @return
 	 */
 	Map<String, Object> selectMemberTradeList(Map<String, Object> pm, int cp);
+
+	/** 상태별 거래 신고 조회
+	 * @param map
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectReportStatusList(Map<String, Object> map, int cp);
+
+	/** 거래 신고 상세 보기
+	 * @param tradeReportNo
+	 * @return
+	 */
+	TradeReport tradeReportDetail(int tradeReportNo);
 
 	
 

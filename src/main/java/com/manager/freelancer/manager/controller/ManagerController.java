@@ -20,6 +20,7 @@ import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
+import com.manager.freelancer.manager.model.vo.TradeReport;
 
 @SessionAttributes({"loginMember"})
 @Controller
@@ -413,6 +414,7 @@ public class ManagerController {
 	@GetMapping("/manager/tradeReportList")
 	public String managerTradeReport(Model model, 
 			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "value", required = false, defaultValue = "0") int value,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			@RequestParam Map<String, Object> pm) {
 		
@@ -423,6 +425,7 @@ public class ManagerController {
 			model.addAttribute("map", map);
 		} else {
 			pm.put("status", status);
+			pm.put("value", value);
 			Map<String, Object> map = service.selectMemberTradeList(pm, cp);
 			model.addAttribute("map", map);
 		}
@@ -430,13 +433,44 @@ public class ManagerController {
 		return "/manager/tradeReportList";
 	}
 	
+	// 상태별 ajax
+	@GetMapping("/manager/tradeReportStatus")
+	@ResponseBody
+	public Map<String, Object> tradeReportStatus(Model model, 
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "type", required = false, defaultValue = "0") int type,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", status);
+		map.put("type", type);
+
+		Map<String, Object> resultMap = service.selectReportStatusList(map, cp);
+		model.addAttribute("resultMap", resultMap);
+		
+		return resultMap;
+	}
+	
+	// 거래 신고 상세 보기
+	@GetMapping("/manager/tradeReportDetail/{tradeReportNo}")
+	public String managerTradeReportDetail(
+			@PathVariable(value="tradeReportNo") int tradeReportNo, Model model,
+			@SessionAttribute("loginMember") com.manager.freelancer.member.model.vo.Member loginMember) {
+		
+		TradeReport tradeReport = service.tradeReportDetail(tradeReportNo);
+		
+		model.addAttribute("tradeReport",tradeReport);
+		model.addAttribute("loginMember",loginMember);
+		
+		return "/manager/tradeReportDetail";
+	}
 	
 	
 
-	@GetMapping("/manager/reviewList")
-	public String managerReview() {
-		return "/manager/reviewList";
-	}
+//	@GetMapping("/manager/reviewList")
+//	public String managerReview() {
+//		return "/manager/reviewList";
+//	}
 	
 	
 	

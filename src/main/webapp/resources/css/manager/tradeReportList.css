@@ -16,6 +16,7 @@
 	font-weight: bold;
 	font-size: 30px;
 	margin: 20px 20px;
+    margin-right: 300px;
 }
 
 .select-area{
@@ -24,14 +25,19 @@
 	vertical-align: middle;
 
 }
+.select-title{
+    margin-left: 30px;
+    margin-right: 10px;
+}
 .select-area-input{
     width: 150px;
 	height: 30px;
-	position: absolute;
+	/* position: absolute;
 	right: 30px;
-	top: 30px;
+	top: 30px; */
 	padding-left: 10px;
 }
+
 
 
 
@@ -47,28 +53,28 @@
 /* ================================ */
 /* 컬럼명들 */
 .question-no{
-    width: 150px;
+    width: 100px;
 }
 .question-num{
-    width: 150px;
+    width: 100px;
 }
 
 .question-date{
     width: 200px;
 }
 .question-type{
-    width: 150px;
+    width: 200px;
 }
 
 .question-status{
-    width: 150px;
+    width: 200px;
     text-align: center;
 }
 .question-report{
-    width: 100px;
+    width: 150px;
 }
 .question-reported{
-    width: 100px;
+    width: 150px;
 }
 
 
@@ -92,6 +98,10 @@
 .question-list-table-content{
     padding: 10px 0;
     height: 15px;
+}
+.reportDetailBtn{
+    text-decoration: none;
+    color: black;
 }
 /* ================================ */
 

@@ -493,7 +493,7 @@ public class ManagerDAO {
 
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 
-		return sqlSession.selectList("managerMapper.selectMemberTradeList", null, rowBounds);
+		return sqlSession.selectList("managerMapper.selectMemberTradeList", status, rowBounds);
 	}
 
 	/** 검색 일치 거래 신고 수
@@ -515,6 +515,31 @@ public class ManagerDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 
 		return sqlSession.selectList("managerMapper.selectMemberTradeList2", pm, rowBounds);
+	}
+
+	/** 상태별 거래 신고 수
+	 * @param map
+	 * @return
+	 */
+	public int getReportStatusListCount(Map<String, Object> map) {
+		return sqlSession.selectOne("managerMapper.getReportStatusListCount",map);
+	}
+
+	/** 상태별 거래 신고 조회
+	 * @param pagination
+	 * @param map
+	 * @return
+	 */
+	public List<TradeReport> selectReportStatusList(Pagination pagination, Map<String, Object> map) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectReportStatusList", map, rowBounds);
+	}
+
+	public TradeReport tradeReportDetail(int tradeReportNo) {
+		return sqlSession.selectOne("managerMapper.tradeReportDetail",tradeReportNo);
 	}
 
 	
