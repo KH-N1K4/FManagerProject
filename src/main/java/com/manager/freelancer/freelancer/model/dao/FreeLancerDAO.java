@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.manager.freelancer.freelancer.model.vo.Bank;
 import com.manager.freelancer.freelancer.model.vo.Career;
 import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
@@ -81,7 +82,10 @@ public class FreeLancerDAO {
 		return sqlSession.selectList("freelancerMapper.getFieldList", inputFreelancer);
 	}
 	
-	
+	public List<Bank> getBankList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("freelancerMapper.getBankList");
+	}
 
 
 	// 전문가 정보 수정
@@ -93,6 +97,16 @@ public class FreeLancerDAO {
 	public int updateFreelancerCareer(Career temp1Career) {
 
 		return sqlSession.update("freelancerMapper.updateFreelancerCareer", temp1Career);
+	}
+	// 전문자 정보 수정(자격증)
+	public int updatefreelancerLicense(License temp2License) {
+
+		return sqlSession.update("freelancerMapper.updateFreelancerLicense", temp2License);
+	}
+	// 전문가 정보 수정(은행)
+	public int updateFreelancerBank(Freelancer inputFreelancer) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("freelancerMapper.updateFreelancerBank", inputFreelancer);
 	}
 
 	// 포트폴리오 등록
@@ -108,6 +122,21 @@ public class FreeLancerDAO {
 		return sqlSession.insert("freelancerMapper.insertPortfolioImageList", imageList);
 	}
 
+	public int updateFreelancerField(Freelancer inputFreelancer) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("freelancerMapper.updateFreelancerField",inputFreelancer);
+	}
+
+
+
+//	public int updateFreelancerBank(int inputBankCode, long inputBankAccount, Freelancer inputFreelancer) {
+//		// TODO Auto-generated method stub
+//		return sqlSession.update("freelancerMapper.updateFreelancerBank",inputBankCode,inputBankAccount,inputFreelancer);
+//	}
+
+	
+
+	
 
 
 	

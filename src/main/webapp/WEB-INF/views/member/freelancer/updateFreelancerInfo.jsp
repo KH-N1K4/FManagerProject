@@ -47,15 +47,35 @@
                     <div class="itemTitle">
                         <div class="item">전문 분야</div>
                         <div>
-                            <input type="checkbox" name="" id="design">
+                              <c:forEach var="field" items="${fn:split(freelancer.mainCategoryNo,',') }">
+                                <c:choose>
+                                    <c:when test="${field == 1}">
+                                        <c:set var="field1" value="checked"/>
+                                    </c:when>
+                                    <c:when test="${field == 2}">
+                                        <c:set var="field2" value="checked"/>
+                                    </c:when>
+                                    <c:when test="${field == 3}">
+                                        <c:set var="field3" value="checked"/>
+                                    </c:when>
+                                    <c:when test="${field == 4}">
+                                        <c:set var="field4" value="checked"/>
+                                    </c:when>
+                                    <c:when test="${field == 5}">
+                                        <c:set var="field5" value="checked"/>
+                                    </c:when>               
+                                </c:choose> 
+                            </c:forEach>
+
+                            <input type="checkbox" name="mainCategoryNo" id="design" value="1" ${field1}>
                             <label for="design" class="checkbox">디자인</label>
-                            <input type="checkbox" name="" id="it">
+                            <input type="checkbox" name="mainCategoryNo" id="it" value="2" ${field2}>
                             <label for="it" class="checkbox">IT.프로그래밍</label>
-                            <input type="checkbox" name="" id="video">
+                            <input type="checkbox" name="mainCategoryNo" id="video" value="3" ${field3}>
                             <label for="video" class="checkbox">영상</label>
-                            <input type="checkbox" name="" id="photo">
+                            <input type="checkbox" name="mainCategoryNo" id="photo" value="4" ${field4}>
                             <label for="photo" class="checkbox">사진</label>
-                            <input type="checkbox" name="" id="sound">
+                            <input type="checkbox" name="mainCategoryNo" id="sound"value="5" ${field5}>
                             <label for="sound" class="checkbox">음향</label>
                         </div>
                     </div>
@@ -68,7 +88,7 @@
                     <div class="itemTitle">
                         <div class="item">경력 사항</div>
                         <div>
-                            <input style="width :300px;" type="text" name="career" id="" value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerPeriod}">
+                            <input style="width :300px;" type="text" name="career" id="" value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}">
                             <%-- <input type="text" name="careerCompanyDepartment" id="" value="${freelancer.careerCompanyDepartment}">
                             <input type="text" name="careerCompanyPosition" id="" value="${freelancer.careerCompanyPosition}">
                             <input type="text" name="careerCompanyRegion" id="" value="${freelancer.careerCompanyRegion}">
@@ -78,7 +98,7 @@
                     <div class="itemTitle">
                         <div class="item">자격증</div>
                         <div>
-                            <input style="width :300px;" type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}">
+                            <input style="width :300px;" type="text" name="license" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}">
 
                         </div>
                     </div>
@@ -92,17 +112,16 @@
                     <div class="itemTitle">
                         <div class="item">수익금 출금 은행</div>
                         <div>
-                            <select name="" id="bankName">
-                                <option value="">전체</option>
-                                <option value="">신한</option>
-                                <option value="">국민</option>
-                                <option value="">우리</option>
-                                <option value="">기업</option>
-                            </select>
-                            <input type="text" value="${freelancer.bankAccountNumber}"name="" id="account">
+                            <select name="bankCode">
+                            <c:forEach var="list" items="${bankList}">
+                                <option value="${list.bankCode}" 
+                                <c:if test ="${freelancer.bankCode eq list.bankCode}">selected="selected"</c:if>>${list.bankName}</option>
+                            </c:forEach> 
+                            </select> 
+                            <input type="text" value="${freelancer.bankAccountNumber}"name="bankAccountNumber" id="account">
                         </div>
                     </div>
-                    <div class="itemTitle">
+                    <div class="itemTitle"> 
                         <div class="item">자기소개</div>
                         <div>
                             <%-- <input type="text" name="freelancerIntro" id="freelancerIntro" class="input" >  --%>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.manager.freelancer.freelancer.model.vo.Bank;
 import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.freelancer.model.vo.Portfolio;
@@ -31,9 +32,12 @@ public interface FreeLancerService {
 	//전문자 정보 수정
 	int updateFreelancerInfo(Freelancer inputFreelancer);
 
+
+	// 은행 목록 가져오기
+	List<Bank> getBankList();
+
 	// 포트폴리오 등록
 	int addPortfolio(Portfolio inputPortfolio, List<MultipartFile> imageList, String webPath, String folderPath);
-
 	
 	
 
