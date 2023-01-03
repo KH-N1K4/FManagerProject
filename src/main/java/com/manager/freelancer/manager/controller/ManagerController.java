@@ -1,6 +1,7 @@
 package com.manager.freelancer.manager.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
+import com.manager.freelancer.manager.model.vo.ReviewReport;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 import com.manager.freelancer.manager.model.vo.TradeReport;
 
@@ -466,11 +468,20 @@ public class ManagerController {
 	}
 	
 	
-
-//	@GetMapping("/manager/reviewList")
-//	public String managerReview() {
-//		return "/manager/reviewList";
-//	}
+	
+	
+	//===============================================================
+	
+	// 리뷰 목록
+	@GetMapping("/manager/reviewList")
+	public String managerReview(Model model, 
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+		
+		List<ReviewReport> reviewReport = service.selectReviewReportList(cp);
+		model.addAttribute("reviewReport",reviewReport);
+		
+		return "/manager/reviewList";
+	}
 	
 	
 	

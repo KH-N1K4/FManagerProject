@@ -14,6 +14,7 @@ import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
+import com.manager.freelancer.manager.model.vo.ReviewReport;
 import com.manager.freelancer.manager.model.vo.Settlement;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 import com.manager.freelancer.manager.model.vo.TradeReport;
@@ -538,8 +539,32 @@ public class ManagerDAO {
 		return sqlSession.selectList("managerMapper.selectReportStatusList", map, rowBounds);
 	}
 
+	/** 거래 신고 상세보기
+	 * @param tradeReportNo
+	 * @return
+	 */
 	public TradeReport tradeReportDetail(int tradeReportNo) {
 		return sqlSession.selectOne("managerMapper.tradeReportDetail",tradeReportNo);
+	}
+
+	/** 리뷰 신고 수
+	 * @return
+	 */
+	public int getReviewReportListCount() {
+		return sqlSession.selectOne("managerMapper.getReviewReportListCount");
+	}
+
+	/** 리뷰 신고 목록
+	 * @param pagination
+	 * @return
+	 */
+	public List<ReviewReport> selectReviewReportList(Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("managerMapper.selectReviewReportList", null, rowBounds);
 	}
 
 	

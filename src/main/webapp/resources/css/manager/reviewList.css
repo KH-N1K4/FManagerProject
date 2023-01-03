@@ -44,17 +44,20 @@
     width: 100px;
 }
 .review-content{
-    width: 750px;
+    width: 650px;
 }
 
 
 .review-writer{
-    width: 150px;
+    width: 130px;
 }
 
 
 .review-delete{
-    width: 100px;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
 }
 
 /* 테이블 값 부분 */
@@ -62,16 +65,23 @@
    /* display: flex; */
     /* align-items: center;
     justify-content: center; */
-    padding: 10px 0;
+    padding: 20px 0;
     height: 15px;
 }
 
 .review-delete > span{
     display: inline-block;
     width: 100px;
+    height: 30px;
+    line-height: 30px;
     text-align: center;
     color: white;
-    background-color: rgb(33, 138, 33);
-    border-radius: 15px;
-
+    border-radius: 5px;
+    margin-left: 5px;
+}
+.deleteBtn{
+    background-color: black;
+}
+.holdBtn{
+    background-color: gray;
 }

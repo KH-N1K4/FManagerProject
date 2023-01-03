@@ -128,6 +128,14 @@
 		<result property="tradeReportMemberName" column="TRADE_REPORT_MEMBER_NAME" />
 		<result property="tradeReportedMemberName" column="TRADE_REPORTED_MEMBER_NAME" />
 	</resultMap>
+	
+	<resultMap type="com.manager.freelancer.manager.model.vo.ReviewReport" id="manager_reviewReport_rm">
+		<id property="reviewReportNo" column="REPORT_NO" />
+		<result property="reviewNo" column="REVIEW_NO" />
+		<result property="reviewDeleteFlag" column="REVIEW_DEL_FL" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="memberName" column="MEMBER_NAME" />
+	</resultMap>
 
 
 	<!-- 프리랜서 등급 조회 -->
@@ -892,9 +900,20 @@
 	
 	
 	
+	<!-- 리뷰 신고 수 -->
+	<select id="getReviewReportListCount" resultType="_int">
+	SELECT COUNT(*) FROM REPORT
+	</select>	
 	
 	
-	
+	<!-- 리뷰 신고 목록 -->
+	<select id="selectReviewReportList" resultMap="manager_reviewReport_rm">
+	SELECT REPORT_NO, REVIEW_NO, REPORT_DEL_FL, MEMBER_NO, MEMBER_NAME
+	FROM REPORT 
+	JOIN REVIEW USING (REVIEW_NO)
+	JOIN TRADE ON (TRADE_NO=REVIEW_NO)
+	JOIN MEMBER USING (MEMBER_NO)
+	</select>
 
 </mapper>
 

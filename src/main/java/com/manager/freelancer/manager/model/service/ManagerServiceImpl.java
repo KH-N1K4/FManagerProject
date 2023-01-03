@@ -16,6 +16,7 @@ import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
+import com.manager.freelancer.manager.model.vo.ReviewReport;
 import com.manager.freelancer.manager.model.vo.Settlement;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 import com.manager.freelancer.manager.model.vo.TradeReport;
@@ -597,7 +598,16 @@ public class ManagerServiceImpl implements ManagerService {
 		return tradeReport;
 	}
 	
-	
+	// 리뷰 신고 목록
+	@Override
+	public List<ReviewReport> selectReviewReportList(int cp) {
+		
+		int listCount = dao.getReviewReportListCount();
+		Pagination pagination = new Pagination(listCount, cp);
+		List<ReviewReport> reviewReport = dao.selectReviewReportList(pagination);
+		
+		return reviewReport;
+	}
 	
 	
 	

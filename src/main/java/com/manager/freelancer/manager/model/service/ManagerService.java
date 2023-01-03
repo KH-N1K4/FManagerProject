@@ -8,6 +8,7 @@ import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
+import com.manager.freelancer.manager.model.vo.ReviewReport;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
 import com.manager.freelancer.manager.model.vo.TradeReport;
 
@@ -213,6 +214,12 @@ public interface ManagerService {
 	 * @return
 	 */
 	TradeReport tradeReportDetail(int tradeReportNo);
+
+	/** 리뷰 신고 목록
+	 * @param cp 
+	 * @return
+	 */
+	List<ReviewReport> selectReviewReportList(int cp);
 
 	
 
