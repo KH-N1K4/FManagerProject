@@ -67,7 +67,7 @@
             <table cellspacing="0" class="tbl_lst_type">	
               <caption><span class="blind">등급 안내</span></caption>				
               <colgroup>
-                <col width="100"><col width="*"><col width="100"><col width="100"><col width="100">
+                <col width="150"><col width="*"><col width="150"><col width="150"><col width="150">
               </colgroup>
               <thead>
                 <tr>
