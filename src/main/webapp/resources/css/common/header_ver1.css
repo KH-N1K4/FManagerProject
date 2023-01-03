@@ -67,16 +67,31 @@ body{
 
 .header-top{
     position: absolute;
-
     right:0;
     top:20px;
+    display: flex;
+    flex-direction: row;
 }
 
 .header-top>span{
     margin:0 20px;
-
+    display: block;
     cursor: pointer;
     color:#538126;
+}
+.header-top a{
+    display: block;
+    height: 30px;
+    line-height: 40px;
+}
+/* 프로필 */
+.label{
+    display: block;
+    height: 30px;
+    line-height: 40px;
+}
+.profileArea{
+    margin-left: 5px;
 }
 
 /* nav */
@@ -183,7 +198,8 @@ label[for='header-menu-toggle']:hover{
     width: 100px;
     height: 80px;
     margin-top:5px;
-    right:0;
+    right:30px;
+    top: 30px;
     border: 1px solid black;
 }
 

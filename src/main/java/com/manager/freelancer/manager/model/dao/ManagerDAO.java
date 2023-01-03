@@ -566,7 +566,55 @@ public class ManagerDAO {
 		
 		return sqlSession.selectList("managerMapper.selectReviewReportList", null, rowBounds);
 	}
+ 
+	/** 리뷰 상세
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public ReviewReport reviewReportDetail(int reviewReportNo) {
+		return sqlSession.selectOne("managerMapper.reviewReportDetail", reviewReportNo);
+	}
 
+	/** 리뷰 삭제
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public int managerReviewDelete(int reviewReportNo) {
+		return sqlSession.update("managerMapper.managerReviewDelete",reviewReportNo);
+	}
+
+	/** 리뷰 상태 삭제완료
+	 * @param reviewReportNo
+	 */
+	public int updateReviewStatusD(int reviewNo) {
+		return sqlSession.update("managerMapper.updateReviewStatusD",reviewNo);
+	}
+
+	/** 리뷰 보류
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public int managerReviewDelete2(int reviewReportNo) {
+		return sqlSession.delete("managerMapper.managerReviewDelete2",reviewReportNo);
+	}
+
+	/** 리뷰 상태 게시
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public int updateReviewStatus(int reviewNo) {
+		return sqlSession.update("managerMapper.updateReviewStatus",reviewNo);
+	}
+
+	/** 리뷰 번호 얻어 오기
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public int getReviewNo(int reviewReportNo) {
+		return sqlSession.selectOne("managerMapper.getReviewNo",reviewReportNo);
+	}
+
+	
 	
 	
 
