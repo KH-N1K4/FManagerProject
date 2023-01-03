@@ -200,7 +200,7 @@ textarea:focus{
 
 
 .modal_major {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -212,7 +212,7 @@ textarea:focus{
     background-color: rgba(0, 0, 0, 0.4);
 }
 .modal_career {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -237,7 +237,7 @@ textarea:focus{
     z-index:4;
   } */
   .modal_license{
-	position:absolute;
+	position:fixed;
 	top:0;
     left:0;
 

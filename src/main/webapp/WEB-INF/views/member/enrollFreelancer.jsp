@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,10 +18,12 @@
 
     <div class="main">
 
-        <form method ="post" action="/member/freelancer/enrollFreelancerSignUp" id="registerFrm">
+        <form method ="post" action="/member/freelancer/enrollFreelancerSignUp" id="registerFrm" onsubmit="checkInput();">
             <span id="title">전문가 등록</span>
+            
+            <span style="color:red;">*</span> 항목은 필수 항목입니다.
             <div>
-                <div class="item">지역</div>
+                <div class="item"><span style="color:red;">*</span>지역</div>
                 <div>
                     <select name="regionNo" id="area" class="select">
                         <option value="">전체</option>
@@ -45,7 +48,7 @@
                 </div>
             </div>
             <div>
-                <div class="item">전문 분야</div>
+                <div class="item"><span style="color:red;">*</span>전문 분야</div>
                 <div>
                     <input type="checkbox" name="freelancerField" id="design" value="1">
                     <label for="design" class="checkbox">
@@ -70,9 +73,14 @@
                 </div>
             </div>
             <div>
-                <div class="item">기간</div>
+                <div class="item"><span style="color:red;">*</span>기간</div>
                 <div>
-                    <input type="text" name="freelancerCont" id="freelancerCont" class="number"> 년
+               		<select  name="freelancerCont" id="freelancerCont" class="number">
+                		<c:forEach var="cont" begin="0" end="60">
+                			<option value="${cont }">${cont }</option>
+                		</c:forEach>
+                	</select>년
+                    <!-- <input type="text" name="freelancerCont" id="freelancerCont" class="number"> 년 -->
                 </div>
             </div>
             <div>
@@ -94,14 +102,24 @@
                 </div>
             </div>
             <div>
-                <div class="item">연락 가능 시간</div>
+                <div class="item"><span style="color:red;">*</span>연락 가능 시간</div>
                 <div>
-                    <input type="text" name="contactTime1" id="contactTime1" class="number"> 시 ~
-                    <input type="text" name="contactTime2" id="contactTime2" class="number"> 시
+                	<select name="contactTime1" id="contactTime1" class="number">
+                		<c:forEach var="hour1" begin="0" end="24">
+                			<option value="${hour1 }">${hour1 }</option>
+                		</c:forEach>
+                	</select>시 ~
+                	<select name="contactTime2" id="contactTime2" class="number">
+                		<c:forEach var="hour2" begin="0" end="24">
+                			<option value="${hour2 }">${hour2 }</option>
+                		</c:forEach>
+                	</select>시
+                    <!-- <input type="text" name="contactTime1" id="contactTime1" class="number"> 시 ~
+                    <input type="text" name="contactTime2" id="contactTime2" class="number"> 시 -->
                 </div>
             </div>
             <div>
-                <div class="item">수익금 입금 계좌</div>
+                <div class="item"><span style="color:red;">*</span>수익금 입금 계좌</div>
                 <div>
                     <select name="bankCode" id="bankCode" class="select">
                         <option value="0">전체</option>
@@ -114,7 +132,7 @@
                 </div>
             </div>
             <div>
-                <div class="item">자기소개</div>
+                <div class="item"><span style="color:red;">*</span>자기소개</div>
                 <div>
                     <textarea name="freelancerIntro" id="freelancerIntro" cols="66" rows="10"></textarea>
                 </div>

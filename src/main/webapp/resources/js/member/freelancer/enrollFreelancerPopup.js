@@ -3,6 +3,8 @@ const body1 = document.getElementsByClassName('modal_body')[0];
 const body2 = document.getElementsByClassName('modal_body')[1];
 const body3 = document.getElementsByClassName('modal_body')[2];
 
+const body=document.querySelector("body");
+
 const modalClose1 = document.getElementsByClassName('modal_close1')[0];
 const modalClose2 = document.getElementsByClassName('modal_close2')[0];
 const modalClose3 = document.getElementsByClassName('modal_close3')[0];
@@ -13,7 +15,6 @@ const modal2 = document.querySelector('.modal_career');
 const modal3 = document.querySelector('.modal_license');
 
 
-// const btnOpenPopup = document.querySelector('#licensePopup');
 const btnOpenPopup1 = document.getElementById('majorPopup');
 const btnOpenPopup2 = document.getElementById('careerPopup');
 const btnOpenPopup3 = document.getElementById('licensePopup');
@@ -23,8 +24,9 @@ btnOpenPopup1.addEventListener('click', () => {
   modal1.classList.toggle('show');
   modal1.style.display = 'block'; 
   if (modal1.classList.contains('show')) {
-    body1.style.display = 'block';
-    // body1.style.overflow='hidden';
+     body1.style.display = 'block';
+     body.style.overflow='hidden';
+     
   }
 });
 
@@ -32,6 +34,7 @@ modalClose1.addEventListener('click', () => {
   // modal1.classList.toggle('show');
 
 modal1.style.display = 'none';
+body.style.overflow='visible';
   // if (modal1.classList.contains('show')) {
   //   body1.style.display = 'none';
   // }
@@ -44,12 +47,14 @@ btnOpenPopup2.addEventListener('click', () => {
 
   if (modal2.classList.contains('show')) {
     body2.style.display = 'block';
+    body.style.overflow='hidden';
   }
 });
 modalClose2.addEventListener('click', () => {
   // modal2.classList.toggle('show');
  
   modal2.style.display = 'none';
+  body.style.overflow='visible';
 // modal2.style.backgroundColor='transparent';
 
   // if (modal2.classList.contains('show')) {
@@ -64,11 +69,13 @@ btnOpenPopup3.addEventListener('click', () => {
 
   if (modal3.classList.contains('show')) {
     body3.style.display = 'block';
+    body.style.overflow='hidden';
   }
 });
 modalClose3.addEventListener('click', () => {
   // modal3.classList.toggle('show');
   modal3.style.display = 'none';
+  body.style.overflow='visible';
   // modal3.style.backgroundColor='transparent';
 
   // if (modal3.classList.contains('show')) {
@@ -237,4 +244,47 @@ sendContent3.addEventListener("click", function(){
     modal3.style.display="none"
 });
 
+const checkObj={"area":false,
+                "freelancerField":false,
+                "freelancerCont":false,
+                "contactTime1":false,
+                "contactTime2":false,
+                "bankCode":false,
+                "bankAccountNumber":false,
+                "freelancerIntro":false
+            };
 
+  document.getElementById("registerFrm").addEventListener("submit",function(event){
+
+    for(key in checkObj){
+        let str;
+
+        if(!checkObj[key]){
+            switch(key){
+                case "memberEmail": str="이메일이 유효하지 않습니다."; break;
+                case "memberPw": str="비밀번호가 유효하지 않습니다."; break;
+                case "memberPwConfirm": str="비밀번호 확인이 유효하지 않습니다."; break;
+                case "memberNickname": str="닉네임이 유효하지 않습니다."; break;
+                case "memberTel": str="전화번호 유효하지 않습니다."; break;
+                case "authKey": str="인증이 완료되지 않았습니다."; break;
+            }
+
+            alert(str); // 대화상자 출력 
+            // 유효하지 않은 입력으로 포커스 이동 
+            document.getElementById(key).focus();
+            
+            event.preventDefault(); // 제출 이벤트 제거 
+            return; // 함수 종료
+        }
+    }
+
+})
+          
+
+const area=document.getElementById("area").value;
+
+function checkInput(){
+    if(area==''){
+      alert("area");
+    }
+}
