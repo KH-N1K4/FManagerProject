@@ -8,9 +8,7 @@
  <section class="sideMenu">
     <div class="aside">
       <a class="myProject_User_side" href="/member/myInfo">내 정보</a>
-      
-      <!-- 전문가인 경우만 보이게 수정하기 -->
-      
+  
        <c:if test="${loginMember.freelancerFL=='Y'}">
       		<a class="myProject_User_side" href="/member/freelancer/freelancerInfo">전문가 정보</a>
        </c:if>
