@@ -614,6 +614,49 @@ public class ManagerDAO {
 		return sqlSession.selectOne("managerMapper.getReviewNo",reviewReportNo);
 	}
 
+	/** 검색 일치 서비스 수 조회
+	 * @param pm
+	 * @return
+	 */
+	public int getServiceListCount(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getServiceListCount3",pm);
+	}
+
+	/** 검색 일치 서비스 목록 조회
+	 * @param pagination
+	 * @param pm
+	 * @return
+	 */
+	public List<FreelancerService> selectServiceList(Pagination pagination, Map<String, Object> pm) {
+
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("managerMapper.selectServiceList3", pm, rowBounds);
+	}
+
+	/**검색 일치 프로젝트 의뢰 수
+	 * @param pm
+	 * @return
+	 */
+	public int getRequestCount(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getRequestCount3",pm);
+	}
+
+	/**검색 일치 프로젝트 의뢰 목록 조회
+	 * @param pagination
+	 * @param pm
+	 * @return
+	 */
+	public List<ProjectRequest> selectRequestList(Pagination pagination, Map<String, Object> pm) {
+int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("managerMapper.selectRequestList3", pm, rowBounds);
+	}
+
 	
 	
 	

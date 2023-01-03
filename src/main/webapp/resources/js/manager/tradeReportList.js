@@ -167,6 +167,35 @@ function selectStatusChange() {
                     pagination.append(li5);
 
                 }
+
+
+
+                document.getElementById("inputStatus").value=status;
+                document.getElementById("inputType").value=type;
+
+                /* 회원 번호 선택 시 숫자만 보내기 */
+                const inquirySearchFrm = document.getElementById("inquirySearch");
+                if(inquirySearchFrm != null){
+                    inquirySearchFrm.addEventListener("submit",e=>{
+                        
+                        const select = document.getElementById("search-key");
+                        const input = document.getElementById("search-query");
+
+                        if (select.options[select.selectedIndex].value == 'tn' || select.options[select.selectedIndex].value == 'rn'){
+                            const regEx = /[0-9]/g;
+                            if(!regEx.test(input.value)){
+                                input.value="";
+                                alert('숫자만 입력해주세요.')
+                                e.preventDefault();
+                            }
+
+                        }
+
+                    });
+                }
+
+
+
             }
         }
 
@@ -206,3 +235,25 @@ function selectStatusChange() {
 
     }
 })();
+
+
+/* 회원 번호 선택 시 숫자만 보내기 */
+const inquirySearchFrm = document.getElementById("inquirySearch");
+if(inquirySearchFrm != null){
+    inquirySearchFrm.addEventListener("submit",e=>{
+        
+        const select = document.getElementById("search-key");
+        const input = document.getElementById("search-query");
+
+        if (select.options[select.selectedIndex].value == 'tn' || select.options[select.selectedIndex].value == 'rn'){
+            const regEx = /[0-9]/g;
+            if(!regEx.test(input.value)){
+                input.value="";
+                alert('숫자만 입력해주세요.')
+                e.preventDefault();
+            }
+
+        }
+
+    });
+}

@@ -1,4 +1,6 @@
 
+
+
 deleteService();
 
 
@@ -9,6 +11,25 @@ function selectChange() {
     const serviceTable = document.querySelector('#service-list-table');
     const pagination = document.querySelector(".pagination");
     console.log(status);
+
+    if (document.getElementById("search-key") != null) { // 검색창이 존재할 때
+        const params = new URL(location.href).searchParams;
+        // 주소에서 쿼리스트링만 분리한 객체
+        
+        document.getElementById("search-query").value="";
+        const key = params.get("key");
+        
+        const option = document.querySelectorAll("#search-key > option");
+        for (let op of option) {
+
+            // option의 value와 key가 일치할 때
+            if (op.value == key) {
+                // op.setAttribute("selected", true)
+                op.selected = false;
+            }
+        }
+        
+    }
 
     $.ajax({
         url: '/manager/serviceType',
@@ -29,8 +50,11 @@ function selectChange() {
                 for (b of before) {
                     b.remove();
                 }
+                if(document.querySelector(".pagination")!=null){
 
-                document.querySelector(".pagination").innerHTML = "";
+                    document.querySelector(".pagination").innerHTML = "";
+                }
+
 
                 if (map.serviceList.length==0) {
                     const table = document.createElement("div");
@@ -127,7 +151,28 @@ function selectChange() {
 
                 }
 
+                document.getElementById("inputStatus").value=status;
 
+                /* 회원 번호 선택 시 숫자만 보내기 */
+                const serviceSearchFrm = document.getElementById("serviceSearch");
+                if(serviceSearchFrm != null){
+                    serviceSearchFrm.addEventListener("submit",e=>{
+                        
+                        const select = document.getElementById("search-key");
+                        const input = document.getElementById("search-query");
+
+                        if (select.options[select.selectedIndex].value == 'no'){
+                            const regEx = /[0-9]/g;
+                            if(!regEx.test(input.value)){
+                                input.value="";
+                                alert('숫자만 입력해주세요.')
+                                e.preventDefault();
+                            }
+
+                        }
+
+                    });
+                }
 
 
 
@@ -183,3 +228,54 @@ function deleteService() {
 }
 
 
+
+/* 회원 번호 선택 시 숫자만 보내기 */
+const serviceSearchFrm = document.getElementById("serviceSearch");
+if(serviceSearchFrm != null){
+    serviceSearchFrm.addEventListener("submit",e=>{
+        
+        const select = document.getElementById("search-key");
+        const input = document.getElementById("search-query");
+
+        if (select.options[select.selectedIndex].value == 'no'){
+            const regEx = /[0-9]/g;
+            if(!regEx.test(input.value)){
+                input.value="";
+                alert('숫자만 입력해주세요.')
+                e.preventDefault();
+            }
+
+        }
+
+    });
+}
+
+/* 검색 결과 남겨 놓기 */
+(() => {
+    const select = document.getElementById("search-key");
+    const input = document.getElementById("search-query");
+    const option = document.querySelectorAll("#search-key > option");
+
+    if (select != null) { // 검색창이 존재할 때
+        const params = new URL(location.href).searchParams;
+        // 주소에서 쿼리스트링만 분리한 객체
+        
+        const key = params.get("key");
+        const query = params.get("query");
+        
+        // input에 이전 검색어를 값으로 추가
+        input.value = query;
+        
+        // select에서 이전 검색한 key의 값과 일치하는 option태그에
+        // selected 속성 추가
+        for (let op of option) {
+            
+            // option의 value와 key가 일치할 때
+            if (op.value == key) {
+                // op.setAttribute("selected", true)
+                op.selected = true;
+            }
+        }
+
+    }
+})();

@@ -43,6 +43,3 @@ document.getElementById("commentBtn").addEventListener("click",()=>{
 
 });
 
-
-
-

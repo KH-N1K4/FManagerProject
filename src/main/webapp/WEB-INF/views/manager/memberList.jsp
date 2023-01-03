@@ -88,12 +88,12 @@
        </div>
 		
 		
-		<c:if test="${not empty memberList}">
 		<!-- pagination -->
 		<div class="pagination-area">
 
 
 				<ul class="pagination">
+		<c:if test="${not empty memberList}">
 
 					<!-- 첫 페이지로 이동 -->
 					<li><a href="/manager/memberList?cp=1${sURL}">&lt;&lt;</a></li>
@@ -131,10 +131,10 @@
 
 					<!-- 끝 페이지로 이동 -->
 					<li><a href="/manager/memberList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+			</c:if>
 
 				</ul>
 			</div>
-			</c:if>
 		
 		<!-- 검색창 -->
 			<form action="/manager/memberList" method="get" id="memberSearch" onsubmit="return true">

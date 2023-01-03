@@ -50,7 +50,7 @@ function selectChange() {
                 if(document.querySelector('.pagination')!=null){
 
                     document.querySelector('.pagination').innerHTML = "";
-                }
+                } 
 
                 
                 if (document.getElementById("search-key") != null) { // 검색창이 존재할 때
@@ -123,6 +123,7 @@ function selectChange() {
                     deleteMember();
 
                     /* 페이징 */
+
 
                 const li1 = document.createElement("li");
                 const a1 = document.createElement("a");

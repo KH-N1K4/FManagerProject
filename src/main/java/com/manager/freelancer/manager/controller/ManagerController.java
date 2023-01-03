@@ -97,10 +97,18 @@ public class ManagerController {
 	// 서비스 등록 내역 관리
 	@GetMapping("/manager/serviceList")
 	public String managerServiceList(Model model,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> pm,
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status) {
 
-		Map<String, Object> map = service.selectServiceList(cp);
-		model.addAttribute("map", map);
+		if (pm.get("key") == null) {
+			Map<String, Object> map = service.selectServiceList(cp);
+			model.addAttribute("map", map);
+		} else {
+			pm.put("status", status);
+			Map<String, Object> map = service.selectServiceList(pm,cp);
+			model.addAttribute("map", map);
+		}
 
 		return "/manager/serviceList";
 	}
@@ -265,14 +273,22 @@ public class ManagerController {
 	// 프로젝트 의뢰 목록
 	@GetMapping("/manager/projectRequestList")
 	public String managerprojectRequestList(Model model,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> pm,
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status) {
 
-		Map<String, Object> map = service.managerprojectRequestList(cp);
-		model.addAttribute("map", map);
+		if (pm.get("key") == null) {
+			Map<String, Object> map = service.managerprojectRequestList(cp);
+			model.addAttribute("map", map);
+		} else {
+			pm.put("status", status);
+			Map<String, Object> map = service.managerprojectRequestList(pm,cp);
+			model.addAttribute("map", map);
+		}
 
 		return "/manager/projectRequestList";
 	}
-
+	
 	// 프로젝트 의뢰 상태
 	@GetMapping("/manager/requestType")
 	@ResponseBody
@@ -415,7 +431,7 @@ public class ManagerController {
 	@GetMapping("/manager/tradeReportList")
 	public String managerTradeReport(Model model,
 			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
-			@RequestParam(value = "value", required = false, defaultValue = "0") int value,
+			@RequestParam(value = "type", required = false, defaultValue = "0") int type,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			@RequestParam Map<String, Object> pm) {
 
@@ -426,7 +442,7 @@ public class ManagerController {
 			model.addAttribute("map", map);
 		} else {
 			pm.put("status", status);
-			pm.put("value", value);
+			pm.put("type", type);
 			Map<String, Object> map = service.selectMemberTradeList(pm, cp);
 			model.addAttribute("map", map);
 		}
