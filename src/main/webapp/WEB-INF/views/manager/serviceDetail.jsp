@@ -138,9 +138,9 @@
         
         <div class="detailInner">
         
-	        <%-- <c:forEach var="imageFile" items="${freelancerService.ServiceImageFileList }">
-	                	<img alt="" src="" style="width:100%;">
-	        </c:forEach> --%>
+	        <c:forEach var="imageFile" items="${freelancerService.serviceImageFileList }">
+	                	<img src="${imageFile.imageFilePath }" style="width:100%;">
+	        </c:forEach>
 
         </div>
         

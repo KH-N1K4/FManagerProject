@@ -455,7 +455,10 @@ public class ManagerServiceImpl implements ManagerService {
 	// 프로젝트 의뢰 상세보기
 	@Override
 	public ProjectRequest managerRequestDetail(int projectRequestNo) {
-		return dao.managerRequestDetail(projectRequestNo);
+		
+		ProjectRequest projectRequest = dao.managerRequestDetail(projectRequestNo);
+		
+		return projectRequest;
 	}
 	
 	// 프로젝트 의뢰 승인

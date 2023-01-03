@@ -42,9 +42,9 @@
 		<result property="subCategoryName" column="SUB_CATEGORY_NAME" />
 		<result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />
 		
-		<collection property="ServiceImageFileList" 
+		<collection property="serviceImageFileList" 
 	      javaType="java.util.ArrayList" ofType="com.manager.freelancer.manager.model.vo.ServiceImageFile"
-	      select="selectImageFileList"
+	      select="selectImageFileListService"
 	      column="SERVICE_NO"/>
 	</resultMap>
 	
@@ -88,7 +88,21 @@
 		<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD" />
 		<result property="MemberNo" column="MEMBER_NO" />
 		<result property="MemberName" column="MEMBER_NAME" />
+		<result property="requestFilePath" column="REQUEST_FILE_PATH" />
+	
+	<collection property="requestImageFileList" 
+	      javaType="java.util.ArrayList" ofType="com.manager.freelancer.manager.model.vo.RequestImageFile"
+	      select="selectImageFileListProject"
+	      column="PROJECT_REQUEST_NO"/>
 	</resultMap>
+	
+	      
+	 <resultMap type="com.manager.freelancer.manager.model.vo.RequestImageFile" id="imageFile_rm2">
+      <id property="imageFileNo" column="REQUEST_FILE_NO"/>
+      <result property="imageFilePath" column="REQUEST_FILE_PATH"/>
+      <result property="requestFileOrder" column="REQUEST_FILE_ORDER"/>
+      <result property="projectRequestNo" column="PROJECT_REQUEST_NO"/>
+   </resultMap>
 	
 	<resultMap type="com.manager.freelancer.manager.model.vo.MemberReport" id="manager_memberReport_rm">
 		<id property="memberReportNo" column="MEMBER_REPORT_NO" />
@@ -336,7 +350,7 @@
 	</select>
 	
 	<!-- 서비스 이미지 리스트 -->
-	<select id="selectImageFileList" resultMap="imageFile_rm">
+	<select id="selectImageFileListService" resultMap="imageFile_rm">
 		SELECT * FROM SERVICE_FILE
 		WHERE SERVICE_NO=#{serviceNo}
 	</select>
@@ -580,6 +594,13 @@
 		WHERE RUM = 1
 		AND PROJECT_REQUEST_DEL_FL='N'
 		AND PROJECT_REQUEST_NO=#{projectRequestNo}
+	</select>
+	
+	
+	<!-- 의뢰 이미지 리스트 -->
+	<select id="selectImageFileListProject" resultMap="imageFile_rm2">
+		SELECT * FROM REQUEST_FILE
+		WHERE PROJECT_REQUEST_NO=#{projectRequestNo}
 	</select>
 
 	<!-- 프로젝트 의뢰 승인 -->
