@@ -235,6 +235,26 @@ tbody a{
   color:white;
 }
 
+.service_name_area{
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.serviceName{
+  width: 100%;
+  position:absolute;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  text-align: start;
+}
+
+.serviceNameAtag{
+  color: black;
+  font-weight: bold;
+}
 
 
 /* 화살표 */
