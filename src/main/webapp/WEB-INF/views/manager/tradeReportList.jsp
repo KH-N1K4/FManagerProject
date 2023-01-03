@@ -62,8 +62,8 @@
             <!-- 테이블 내용 -->
             <c:choose>   
                 <c:when test="${empty tradeReportList}">
-                    <div class="question-list-table-content">
-                        <div class="contentList">신고 내역이 존재하지 않습니다.</div>
+                    <div class="question-list-table-content center">
+                    신고 내역이 존재하지 않습니다.
                     </div>
                 </c:when>
                 <c:otherwise>
@@ -132,6 +132,7 @@
                         </select> 
                         <input type="text" name="query" id="search-query" placeholder=" 검색어를 입력해주세요" >  
                         <input type="hidden" name="status" id="inputStatus">
+                        <input type="hidden" name="type" id="inputType">
                         <button>검색</button>
                     </form>
 

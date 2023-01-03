@@ -102,7 +102,6 @@ function selectChange() {
                         }
                         if (trade.workStatus == 4) {
                             const btn = document.createElement("a");
-                            btn.classList.add("btn");
                             btn.classList.add("calBtn");
                             btn.append(document.createTextNode("정산"));
                             child8.append(btn);
@@ -178,6 +177,7 @@ function selectChange() {
 
                 refund();
                 tradeInfo();
+                calculate();
 
             }
 
@@ -453,7 +453,6 @@ function calculate() {
                                 }
                                 if (trade.workStatus == 4) {
                                     const btn = document.createElement("a");
-                                    btn.classList.add("btn");
                                     btn.classList.add("calBtn");
                                     btn.append(document.createTextNode("정산"));
                                     child8.append(btn);
