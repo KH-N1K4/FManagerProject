@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 import com.manager.freelancer.myProject.model.service.MyProjectFreelancerService;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 import com.manager.freelancer.member.model.vo.Member;
 
@@ -256,8 +257,13 @@ public class MyProjectFreelancerController {
 	
 	//등급관리 페이지
 	@GetMapping("/member/myProject/freelancer/myProjectGrade")
-	public String myProjectGrade() {
+	public String myProjectGrade(HttpSession session,
+			@SessionAttribute("loginMember") Member loginMember,Model model) {
 		
+		myProjectFreelancer freelancerGrade =service.selectMyProjectGrade(loginMember.getMemberNo());
+		List<myProjectFreelancer> BasicGrade =service.selectBasicGrade();
+		model.addAttribute("freelancerGrade",freelancerGrade);
+		model.addAttribute("BasicGrade",BasicGrade);
 		return "myProject/myProject_freelancer/myProjectGrade";
 	}
 

@@ -92,11 +92,14 @@ public class MessageController {
         String pattern = ".+.(jpg|png|gif|bmp|JPG|PNG|BMP|GIF|jfif)"; // 이미지
         String patternFile = ".+.(xls|xlsx|txt|html|htm|pdf|mp4|mpeg|mpg|avi|pptx|hwp|docx|doc|ppt)"; //파일 업로드
         for(int i = 0; i < roomList.size(); i++) {
-        	if(Pattern.matches(pattern, roomList.get(i).getLastMessage())) {
-        		roomList.get(i).setLastMessage("사진");
-        	}
-        	if(Pattern.matches(patternFile, roomList.get(i).getLastMessage())) {
-        		roomList.get(i).setLastMessage("파일");
+        	
+        	if(roomList.get(i).getLastMessage() != null) {
+        		if(Pattern.matches(pattern, roomList.get(i).getLastMessage())) {
+            		roomList.get(i).setLastMessage("사진");
+            	}
+            	if(Pattern.matches(patternFile, roomList.get(i).getLastMessage())) {
+            		roomList.get(i).setLastMessage("파일");
+            	}
         	}
         	
         }
@@ -121,11 +124,14 @@ public class MessageController {
         String pattern = ".+.(jpg|png|gif|bmp|JPG|PNG|BMP|GIF|jfif)"; // 이미지
         String patternFile = ".+.(xls|xlsx|txt|html|htm|pdf|mp4|mpeg|mpg|avi|pptx|hwp|docx|doc|ppt)"; //파일 업로드
         for(int i = 0; i < roomList.size(); i++) {
-        	if(Pattern.matches(pattern, roomList.get(i).getLastMessage())) {
-        		roomList.get(i).setLastMessage("사진");
-        	}
-        	if(Pattern.matches(patternFile, roomList.get(i).getLastMessage())) {
-        		roomList.get(i).setLastMessage("파일");
+        	
+        	if(roomList.get(i).getLastMessage() != null) {
+        		if(Pattern.matches(pattern, roomList.get(i).getLastMessage())) {
+            		roomList.get(i).setLastMessage("사진");
+            	}
+            	if(Pattern.matches(patternFile, roomList.get(i).getLastMessage())) {
+            		roomList.get(i).setLastMessage("파일");
+            	}
         	}
         	
         }

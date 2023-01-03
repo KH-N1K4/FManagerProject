@@ -73,6 +73,25 @@ main{
   font-weight: bold;
 }
 
+.myGradeBox{
+  display: flex;
+  width: auto;
+  flex-direction: row;  
+}
+.myGradeBox > span{
+  font-size: 20px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  /* font-weight: bold; */
+  align-items: center;
+  margin: 0px 7px;
+}
+
+.myGradeBox h1{
+  margin: 0px 7px;
+}
+
 .topBox{
   display: flex;
   flex-direction: row;
@@ -92,12 +111,19 @@ main{
 .leftContentTop{
   width: 100%;
   height: 49%;
+  flex-direction: column;
   display: flex;
   border: 1px solid rgb(176, 168, 168);
 }
 
 .leftContentTop h2{
   margin: 10px 0px 0px 10px;
+}
+
+.leftContentTop > div{
+    display: flex;
+    align-items: center;
+    margin: 10px 0px 0px 20px;
 }
 
 .leftContentbottom h2{
@@ -108,7 +134,14 @@ main{
   width: 100%;
   height: 49%;
   display: flex;
+  flex-direction: column;
   border: 1px solid rgb(176, 168, 168);
+}
+
+.leftContentbottom > div{
+  display: flex;
+  align-items: center;
+  margin: 10px 0px 0px 20px;
 }
 
 .rightBox{
@@ -139,6 +172,9 @@ main{
 }
 .barValue{
   width: 10%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 5px;
 }
 .progress {
   appearance: none;
@@ -159,4 +195,62 @@ main{
   margin-left: 10px !important;
   margin: 20px 0;
 }
+
+
+
+/* 등급 안내 */
+table, th, td {
+  border: 1px solid #c6c6c9; 
+}
+
+caption {
+  display: none;
+}
+
+table {
+  border-collapse: separate;
+  margin-top: 30px;
+}
+table {
+  border-style: none; 
+  text-indent: initial;
+  /* border-collapse:collapse; */ 
+  width:100%;
+}
+
+.tbl_lst_type {
+  width: 930px;
+  font-size: 16px;
+  table-layout: fixed;
+}
+
+tbody{
+  border: 0px;
+  vertical-align: middle;
+  width:930px;
+}
+
+tbody tr{
+  display: table;
+  width:930px;
+}
+tbody th:nth-of-type(1){
+  width: 150px;
+}
+tbody td:nth-of-type(1){
+}
+tbody td:nth-of-type(2){
+  width: 150px;
+}
+tbody td:nth-of-type(3){
+  width: 150px;
+}
+tbody td:nth-of-type(4){
+  width: 150px;
+}
+
+.tc {
+  text-align: center;
+}
+
 
