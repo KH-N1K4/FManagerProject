@@ -14,6 +14,8 @@
         width: 1200px;
         margin: auto;
     }
+
+    
     .expertPage{
         margin-bottom: 20px;
     }
@@ -53,6 +55,26 @@
         font-weight: bold;
     }
 
+    #goToList{
+        width: 1100px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 200px;
+    }
+    #goToList button{
+        width: 300px;
+        height: 60px;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        border: 1px solid black;
+        cursor: pointer;
+        font-size: 18px;
+    } 
+
+
     </style>
 </head>
 <body>
@@ -61,6 +83,7 @@
     
 
        <div class="main">
+
         
 
         <div class="detailHeader">
@@ -121,6 +144,9 @@
 
         </div>
         
+        <div id="goToList">
+            <button id="goToListbtn">목록으로</button>
+        </div>
         
 
     </div>
@@ -130,7 +156,7 @@
     
     
      <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    
+    <script src="/resources/js/manager/serviceDetail.js"></script>
      
      <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
