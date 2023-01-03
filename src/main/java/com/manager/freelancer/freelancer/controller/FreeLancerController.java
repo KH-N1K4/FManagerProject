@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.manager.freelancer.freelancer.model.service.FreeLancerService;
+import com.manager.freelancer.freelancer.model.vo.Bank;
 import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.freelancer.model.vo.Portfolio;
@@ -48,15 +49,10 @@ public class FreeLancerController {
 			
 			List<Region> regionList = service.getRegionList();
 			model.addAttribute("regionList",regionList);
-			
-//			System.out.println(regionList);
-			
+						
 			List<Portfolio> portfolioList = service.getPortfolioList(inputFreelancer);
 			model.addAttribute("portfolioList" ,portfolioList);
 
-//			List<Field> fieldList = service.getFieldList(inputFreelancer);  // Field vo도만듬..
-//			model.addAttribute("fieldList",fieldList);
-			
 			return "member/freelancer/freelancerInfo";
 		}
 		// 전문가 정보 수정 페이지로 이동
@@ -73,6 +69,9 @@ public class FreeLancerController {
 			List<Region> regionList = service.getRegionList();
 			model.addAttribute("regionList", regionList);
 			
+			List<Bank> bankList = service.getBankList();
+			model.addAttribute("bankList", bankList);
+			
 			return "/member/freelancer/updateFreelancerInfo";
 		}
 		
@@ -81,18 +80,31 @@ public class FreeLancerController {
 		public String updateFreelancerInfo(Model model,
 				Freelancer inputFreelancer, // input 값
 				@SessionAttribute("loginMember") Member loginMember,
-				String career,
+				String career, String license, 
+				int bankCode,
+				String bankAccountNumber,
 				RedirectAttributes ra) {
 			String message = null;
 			int result = 0;
 
 			inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 회원번호 세팅
 			inputFreelancer.setCareer(career);
-//			int freelancerNo = loginMember.getMemberNo(); // 0101 테스트! 회원번호->포트폴리오 조회하기 -> 실패
-//			Freelancer freelancer = service.freelancerInfo(loginMember.getMemberNo());
-//			model.addAttribute("freelancer", freelancer);
+			inputFreelancer.setLicense(license);
+			
+			List<Field> fieldList = service.getFieldList(inputFreelancer);
+			model.addAttribute("fieldList", fieldList);
+			
+//			if(!inputFreelancer.getFreelancerField().equals(fieldList))
+			
 			List<Region> regionList = service.getRegionList();
 			model.addAttribute("regionList", regionList);
+			
+			List<Bank> bankList = service.getBankList();
+			model.addAttribute("bankList", bankList);
+
+			inputFreelancer.setBankCode(bankCode);
+			Long num = Long.parseLong(bankAccountNumber); // int자료형길이 초과 10자 -> long
+			inputFreelancer.setBankAccountNumber(num);
 			
 			result = service.updateFreelancerInfo(inputFreelancer);
 
@@ -181,7 +193,6 @@ public class FreeLancerController {
 			String webPath = "/resources/images/freelancerPortfolioImage/"; // 만들어야함
 			String folderPath = session.getServletContext().getRealPath(webPath);
 			
-			inputPortfolio.setFreelancerNo(loginMember.getMemberNo());
 			int result = 0;
 			
 			result =  service.addPortfolio(inputPortfolio, imageList, webPath, folderPath);

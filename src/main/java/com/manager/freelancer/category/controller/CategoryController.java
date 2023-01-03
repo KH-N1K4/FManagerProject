@@ -20,6 +20,7 @@ import com.manager.freelancer.category.model.service.CategoryService;
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Category;
 import com.manager.freelancer.category.model.vo.Service;
+import com.manager.freelancer.category.model.vo.Trade;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 
@@ -272,14 +273,53 @@ public class CategoryController {
 			@SessionAttribute(value="loginMember", required = false) Member loginMember,
 			@RequestParam("serviceTitle") String serviceTitle,@RequestParam String serviceSummary,@RequestParam String servicePhoto
 			,@RequestParam String servicePrice) {	
+		
+		System.out.println(serviceNo);
 
-		model.addAttribute(serviceNo);
-		model.addAttribute(serviceTitle);
-		model.addAttribute(serviceSummary);
-		model.addAttribute(servicePhoto);
-		model.addAttribute(servicePrice);
+		model.addAttribute("serviceNo",serviceNo);
+		model.addAttribute("serviceTitle",serviceTitle);
+		model.addAttribute("serviceSummary",serviceSummary);
+		model.addAttribute("servicePhoto",servicePhoto);
+		model.addAttribute("servicePrice",servicePrice);
 		
 		return "/myProject/paying";
+	}
+	
+	
+	@PostMapping("/service/payComplete/{serviceNo}")
+	@ResponseBody
+	public int tradeComplete(@PathVariable("serviceNo") int serviceNo, Model model,
+			@SessionAttribute(value="loginMember", required = false) Member loginMember,
+			@RequestParam("tradeRequest") String tradeRequest
+			) {	
+		
+		Trade temp = new Trade();
+		
+		
+		temp.setServiceNo(serviceNo);
+		temp.setMemberNo(loginMember.getMemberNo());
+		temp.setTradeRequest(tradeRequest);
+		
+		
+		int tradeNo=service.tradeComplete(temp);
+		
+		System.out.println("tradeNo:"+tradeNo);
+				
+		return tradeNo;
+	}
+	
+	@GetMapping("/service/payComplete/{tradeNo}")
+	public String payComplete(@PathVariable("tradeNo") int tradeNo, Model model,
+			@SessionAttribute(value="loginMember", required = false) Member loginMember
+			) {	
+		
+		Map<String,Integer> map=new HashMap<String, Integer>();
+		
+		map.put("tradeNo", tradeNo);
+	
+		model.addAttribute(tradeNo);
+		
+		return "/myProject/paying_complete";
 	}
 	
 	

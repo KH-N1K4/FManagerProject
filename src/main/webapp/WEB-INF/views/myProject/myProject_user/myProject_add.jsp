@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>myProject_add</title>
 
-  <link rel="stylesheet" href="/resources/css/myProject/myProject_add.css">
+  <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_add.css">
 </head>
 <body>
   <main>
@@ -44,8 +44,8 @@
                   <div class="list_title"><span>카테고리</span></div>
                   <div class="list_content">
                     <div class="selectbox">
-                      <select  id = "srchOption1" class="srchOption box" name="srchOption1" >
-                        <option value="0" selected="">전체</option>
+                      <select  id = "srchOption1" class="srchOption box" name="mainCategoryNo" >
+                        <option value="" selected="">전체</option>
                         <c:if test="${not empty maincategory}">
                           <c:forEach items="${maincategory}" var="mainVar">
                             <option value="${mainVar.mainCategoryNo}">${mainVar.mainCategoryName}</option>
@@ -54,8 +54,8 @@
                       </select>
                     </div>
                     <div class="selectbox"> 
-                      <select  id = "srchOption3" class="srchOption box" name="thirdCategoryNo" >
-                        <option value="0" selected="">전체</option>
+                      <select  id = "srchOption3" class="srchOption box" name="thirdCategoryNo" required>
+                        <option value="" selected="" disabled>전체</option>
                         <c:if test="${not empty category}">
                           <c:forEach items="${category}" var="cateVar">
                             <option value="${cateVar.thirdCategoryNo}" mainNo="${cateVar.mainCategoryNo}">${cateVar.thirdCategoryName}</option>
@@ -68,31 +68,36 @@
                 <br>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>제목</span></div>
-                  <div class="list_content"><input type="text" class="inputBoxSize box" name="projectRequestTitle"></div>
+                  <div class="list_content">
+                    <input type="text" class="inputBoxSize box" name="projectRequestTitle" id="projectRequestTitle">
+                  </div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>의뢰 한줄요약</span></div>
                   <div class="list_content">
-                    <textarea class="projectRequestOnecontent projectRequestContent box" name="projectRequestSummary"></textarea>
+                    <textarea class="projectRequestOnecontent projectRequestContent box" name="projectRequestSummary" id="projectRequestSummary"></textarea>
                   </div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>의뢰사항</span></div>
                   <div class="list_content">
-                    <textarea class="projectRequestTotalContent projectRequestContent box" name="projectRequestContent"></textarea>
+                    <textarea class="projectRequestTotalContent projectRequestContent box" name="projectRequestContent" id="projectRequestContent"></textarea>
                   </div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>첨부파일</span></div>
-                  <div class="list_content"><input type = "file" name="myProjectFile"></div>
+                  <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile"></div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>예산</span></div>
-                  <div class="list_content"><input type="number" id="budget" class="budget box" name="projectRequestBudget" placeholder="예산 금액" maxlength="30" autocomplete="off" value=""><span>원</span></div>
+                  <div class="list_content">
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+                          class="budget box" name="projectRequestBudget" placeholder="예산 금액" maxlength="30" autocomplete="off" value="" id="bBudget"><span>원</span>
+                  </div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
@@ -132,6 +137,12 @@
 
  
   <!-- **************************************footer*************************************-->
+  <script>
+    var maincategoryList1 = "${maincategoryList}";
+    var categoryList1 = "${categoryList}";
+    var list = JSON.parse('${GsoncategoryList}');
+    const listSize = "${categoryList.size()}";
+  </script>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

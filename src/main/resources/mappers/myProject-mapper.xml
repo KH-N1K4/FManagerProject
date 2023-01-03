@@ -5,22 +5,23 @@
   	<resultMap type="myProject" id="myProject_rm">
   		
   		<id property="projectRequestNo" column="PROJECT_REQUEST_NO"/>
-  			
-		<result property="projectRequestTitle" column="PROJECT_REQUEST_TITLE" />	
-		<result property="projectRequestSummary" column="PROJECT_REQUEST_SUMMARY" />	
-		<result property="projectRequestContent" column="PROJECT_REQUEST_CONTENT" />	
-		<result property="projectRequestBudget" column="PROJECT_REQUEST_BUDGET" />	
-		<result property="projectRecruitDate" column="REQUEST_RECRUIT_DATE" />	
-		<result property="projectWorkDate" column="REQUEST_WORK_DATE" />	
-		<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD" />	
-		<result property="projectCreateDate" column="PROJECT_REQUEST_CREATE_DATE" />	
-		<result property="memberNo" column="MEMBER_NO" />	
-		<result property="projectRequestStatus" column="PROJECT_REQUEST_STATUS" />	
+  		
+  		<!-- 내 프로젝트 의뢰 -->	
+		<result property="projectRequestTitle" column="PROJECT_REQUEST_TITLE" />	            <!-- 프로젝트 제목 -->
+		<result property="projectRequestSummary" column="PROJECT_REQUEST_SUMMARY" />	        <!-- 프로젝트 의뢰 한줄 요약 -->
+		<result property="projectRequestContent" column="PROJECT_REQUEST_CONTENT" />	        <!-- 프로젝트 의뢰사항 --> 
+		<result property="projectRequestBudget" column="PROJECT_REQUEST_BUDGET" />	            <!-- 프로젝트 예산 -->
+		<result property="projectRecruitDate" column="REQUEST_RECRUIT_DATE" />	                <!-- 프로젝트 모집 마감일 -->
+		<result property="projectWorkDate" column="REQUEST_WORK_DATE" />	                    <!-- 프로젝트 작업 마감일 -->
+		<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD" />	                <!-- 프로젝트 작업 기간 -->
+		<result property="projectCreateDate" column="PROJECT_REQUEST_CREATE_DATE" />	        <!-- 프로젝트 의뢰 등록일 -->
+		<result property="memberNo" column="MEMBER_NO" />	                                    <!-- 회원 번호 -->
+		<result property="projectRequestStatus" column="PROJECT_REQUEST_STATUS" />	            <!-- 프로젝트 의뢰 상태 -->
 		
 		<!-- 프로젝트 의뢰 첨부 파일 -->
-		<result property="requestFileNo" column="REQUEST_FILE_NO" />	
-		<result property="requestFilePath" column="REQUEST_FILE_PATH" />	
-		<result property="requestFileOrder" column="REQUEST_FILE_ORDER" />
+		<result property="requestFileNo" column="REQUEST_FILE_NO" />	                        <!-- 프로젝트 첨부 파일 번호  -->
+		<result property="requestFilePath" column="REQUEST_FILE_PATH" />	                    <!-- 프로젝트 첨부 파일 경로 -->
+		<result property="requestFileOrder" column="REQUEST_FILE_ORDER" />                      <!-- 프로젝트 첨부 파일 순서 -->
 		
 		 <!-- 카테고리 -->
         <result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />							<!-- 메인 1카테고리 -->
@@ -29,6 +30,17 @@
         <result property="subCategoryName" column="SUB_CATEGORY_NAME" />					    <!-- 메인 2카테고리 이름  -->
         <result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />					    <!-- 메인 3카테고리 -->	
         <result property="thirdCategoryName" column="THIRD_CATEGORY_NAME" />					<!-- 메인 3카테고리 이름-->
+		
+		<!-- 프로젝트 제안 -->
+		<result property="proposalNo" column="PROJECT_PROPOSAL_NO" />	                        <!-- 프로젝트 제안 번호 -->
+		<result property="proposalAdoptStatus" column="PROPOSAL_ADOPT_STATUS" />	            <!-- 프로젝트 채택 상태 -->
+		<result property="proposalPrice" column="PROPOSAL_PRICE" />                             <!-- 프로젝트 제안 가격 -->
+		<result property="proposalEditNum" column="PROPOSAL_EDIT_NUM" />                        <!-- 프로젝트 수정 횟수 -->
+		<result property="proposalCreateDate" column="PROPOSAL_CREATE_DATE" />                  <!-- 프로젝트 제안 등록일 -->
+		<result property="freelancerNo" column="FREELANCER_NO" />                               <!-- 프리랜서 번호 -->
+		<result property="freelancerName" column="FREELANCER_NAME" />                           <!-- 프리랜서 이름 -->
+		<result property="gradeNo" column="GRADE_NO" />                                         <!-- 프리랜서 등급 -->
+		<result property="gradeName" column="GRADE_NAME" />                                     <!-- 프리랜서 등급명 -->
 		
   	</resultMap>
   	
@@ -48,36 +60,39 @@
     <!-- 나의 프로젝트 페이지 카운트 -->
   	<select id="getMyProjectListCount" resultType="_int">
     	SELECT COUNT(*) 
-		FROM (SELECT * FROM PROJECT_REQUEST
-		      LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO) 
-		      LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
-		      LEFT JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
-		      WHERE REQUEST_FILE_ORDER = 1)
+		FROM PROJECT_REQUEST 
+		JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
-		<if test="mainCategoryNo != 0">
+	<!-- 	<if test="mainCategoryNo != 0">
 			AND MAIN_CATEGORY_NO = #{mainCategoryNo}
-		</if>
+		</if> -->
     </select>
 
 	<!-- 내 프로젝트 조회하기 --> 
 	<select id="selectMyProject" parameterType="java.util.HashMap" resultMap="myProject_rm">
 		SELECT PROJECT_REQUEST_NO, PROJECT_REQUEST_TITLE, PROJECT_REQUEST_SUMMARY,
-		       PROJECT_REQUEST_CONTENT, PROJECT_REQUEST_BUDGET, REQUEST_RECRUIT_DATE,
-		       REQUEST_WORK_DATE, PROJECT_WORK_PERIOD, PROJECT_REQUEST_CREATE_DATE,
-		       CASE WHEN PROJECT_REQUEST_STATUS = 1 THEN '승인 대기 중'
-				    WHEN PROJECT_REQUEST_STATUS = 2 THEN '모집 중'
-				    WHEN PROJECT_REQUEST_STATUS = 3 THEN '미승인'
-				    WHEN PROJECT_REQUEST_STATUS = 4 THEN '모집 마감'
-			   END AS PROJECT_REQUEST_STATUS, REQUEST_FILE_NO, REQUEST_FILE_PATH
-		FROM (SELECT * FROM PROJECT_REQUEST
-		      LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO) 
-		      LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
-		      LEFT JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
-		      WHERE REQUEST_FILE_ORDER = 1)
+       		   PROJECT_REQUEST_CONTENT, PROJECT_REQUEST_BUDGET, 
+       		   TO_CHAR(REQUEST_RECRUIT_DATE, 'YYYY-MM-DD') REQUEST_RECRUIT_DATE,
+       		   TO_CHAR(PROJECT_REQUEST_CREATE_DATE, 'YYYY-MM-DD')PROJECT_REQUEST_CREATE_DATE,
+               REQUEST_WORK_DATE, PROJECT_WORK_PERIOD, SUB_CATEGORY_NO,SUB_CATEGORY_NAME,
+               THIRD_CATEGORY_NO,THIRD_CATEGORY_NAME, MAIN_CATEGORY_NO,MAIN_CATEGORY_NAME,  
+       	   CASE WHEN PROJECT_REQUEST_STATUS = 1 THEN '승인 대기 중'
+        	    WHEN PROJECT_REQUEST_STATUS = 2 THEN '모집 중'
+                WHEN PROJECT_REQUEST_STATUS = 3 THEN '미승인'
+                WHEN PROJECT_REQUEST_STATUS = 4 THEN '모집 마감'
+            END AS PROJECT_REQUEST_STATUS,
+                REQUEST_FILE_NO, REQUEST_FILE_PATH       
+		FROM PROJECT_REQUEST
+		JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
-	    <if test="mainCategoryNo != 0">
+	   <!--  <if test="mainCategoryNo != 0">
 			AND MAIN_CATEGORY_NO = #{mainCategoryNo}
-		</if> 
+		</if>  -->
 	</select>
 	
 	<!-- 내 프로젝트 등록하기 -->
@@ -104,6 +119,40 @@
 		</foreach>
 	</insert>
 
+	<!-- 받은 제안 카운트 -->
+	<select id="getProposalCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM PROJECT_PROPOSAL
+	     JOIN PROJECT_REQUEST USING(PROJECT_REQUEST_NO)
+	     JOIN "MEMBER" ON(PROJECT_PROPOSAL.FREELANCER_NO=MEMBER.MEMBER_NO)
+	     JOIN FREELANCER USING(FREELANCER_NO)
+	     JOIN GRADE USING(GRADE_NO)
+	     LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+	     LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+	     LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+	WHERE MEMBER.MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 받은 제안 리스트 조회 -->
+	<select id="selectProposalList" parameterType="java.util.HashMap" resultMap="myProject_rm">
+	SELECT PROJECT_PROPOSAL_NO,PROJECT_REQUEST_TITLE, MEMBER_NAME AS FREELANCER_NAME,
+	       GRADE_NO, GRADE_NAME, PROPOSAL_PRICE, PROPOSAL_EDIT_NUM,
+	       CASE WHEN PROPOSAL_ADOPT_STATUS = 1 THEN '대기 중'
+	            WHEN PROPOSAL_ADOPT_STATUS = 2 THEN '채택'
+				WHEN PROPOSAL_ADOPT_STATUS = 3 THEN '모집마감'
+		   END AS PROPOSAL_ADOPT_STATUS,
+	       MAIN_CATEGORY_NO,MAIN_CATEGORY_NAME,SUB_CATEGORY_NO,SUB_CATEGORY_NAME,THIRD_CATEGORY_NO,
+	       THIRD_CATEGORY_NAME
+	FROM PROJECT_PROPOSAL
+	JOIN PROJECT_REQUEST USING(PROJECT_REQUEST_NO)
+	JOIN "MEMBER" ON(PROJECT_PROPOSAL.FREELANCER_NO=MEMBER.MEMBER_NO)
+	JOIN FREELANCER USING(FREELANCER_NO)
+	JOIN GRADE USING(GRADE_NO)
+	LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+	LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+	LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+	WHERE MEMBER.MEMBER_NO = #{memberNo}
+	</select>
   	
 </mapper>
 	

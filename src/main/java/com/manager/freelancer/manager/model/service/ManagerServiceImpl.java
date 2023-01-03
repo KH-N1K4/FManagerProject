@@ -16,8 +16,10 @@ import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
+import com.manager.freelancer.manager.model.vo.ReviewReport;
 import com.manager.freelancer.manager.model.vo.Settlement;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
+import com.manager.freelancer.manager.model.vo.TradeReport;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 
 @Service
@@ -453,7 +455,10 @@ public class ManagerServiceImpl implements ManagerService {
 	// 프로젝트 의뢰 상세보기
 	@Override
 	public ProjectRequest managerRequestDetail(int projectRequestNo) {
-		return dao.managerRequestDetail(projectRequestNo);
+		
+		ProjectRequest projectRequest = dao.managerRequestDetail(projectRequestNo);
+		
+		return projectRequest;
 	}
 	
 	// 프로젝트 의뢰 승인
@@ -513,19 +518,135 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	
+	// 거래 신고 내역 조회
+	@Override
+	public Map<String, Object> selectMemberTradeList(int status, int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int listCount = dao.getMemberTradeListCount(status);
+		Pagination pagination = new Pagination(listCount, cp);
+
+		List<TradeReport> tradeReportList = dao.selectMemberTradeList(status, pagination);
+		
+		if(tradeReportList!=null) {
+			for(TradeReport t: tradeReportList) {
+				if(t.getTradeReportTypeNo()==1) t.setTradeReportTypeName("거래 신고");
+				else t.setTradeReportTypeName("주문 취소");
+			} 
+		}
+		
+		
+		map.put("pagination", pagination);
+		map.put("tradeReportList", tradeReportList);
+
+		return map;
+	}
 	
 	
+	// 검색 일치 거래 신고 내역 조회
+	@Override
+	public Map<String, Object> selectMemberTradeList(Map<String, Object> pm, int cp) {
+		int listCount = dao.getMemberTradeListCount(pm);
+		Pagination pagination = new Pagination(listCount, cp);
+		List<TradeReport> tradeReportList = dao.selectMemberTradeList(pagination, pm);
+		
+		if(tradeReportList!=null) {
+			for(TradeReport t: tradeReportList) {
+				if(t.getTradeReportTypeNo()==1) t.setTradeReportTypeName("거래 신고");
+				else t.setTradeReportTypeName("주문 취소");
+			} 
+		}
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("tradeReportList", tradeReportList);
+
+		return map;
+	}
 	
 	
+	// 상태별 거래 신고 조회
+	@Override
+	public Map<String, Object> selectReportStatusList(Map<String, Object> map, int cp) {
+		
+		int listCount = dao.getReportStatusListCount(map);
+		Pagination pagination = new Pagination(listCount, cp);
+		List<TradeReport> tradeReportList = dao.selectReportStatusList(pagination, map);
+		
+		if(tradeReportList!=null) {
+			for(TradeReport t: tradeReportList) {
+				if(t.getTradeReportTypeNo()==1) t.setTradeReportTypeName("거래 신고");
+				else t.setTradeReportTypeName("주문 취소");
+			} 
+		}
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("pagination", pagination);
+		resultMap.put("tradeReportList", tradeReportList);
+		
+		return resultMap;
+	}
 	
 	
+	// 거래 신고 상세 보기
+	@Override
+	public TradeReport tradeReportDetail(int tradeReportNo) {
+		
+		TradeReport tradeReport = dao.tradeReportDetail(tradeReportNo);
+				
+		if(tradeReport.getTradeReportTypeNo()==1) tradeReport.setTradeReportTypeName("거래 신고");
+		else tradeReport.setTradeReportTypeName("주문 취소");		
+		
+		return tradeReport;
+	}
 	
+	// 리뷰 신고 목록
+	@Override
+	public Map<String, Object> selectReviewReportList(int cp) {
+		
+		int listCount = dao.getReviewReportListCount();
+		Pagination pagination = new Pagination(listCount, cp);
+		List<ReviewReport> reviewReportList = dao.selectReviewReportList(pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("reviewReportList", reviewReportList);
+		
+		return map;
+	}
 	
+	// 리뷰 상세
+	@Override
+	public ReviewReport reviewReportDetail(int reviewReportNo) {
+		return dao.reviewReportDetail(reviewReportNo);
+	}
 	
+	// 리뷰 삭제
+	@Override
+	public int managerReviewDelete(int reviewReportNo) {
+		
+		int reviewNo = dao.getReviewNo(reviewReportNo);
+		
+		int result = dao.managerReviewDelete(reviewReportNo);
+		
+		if(result>0) result = dao.updateReviewStatusD(reviewNo);
+		
+		return result;
+	}
 	
-	
-	
-	
+	// 리뷰 보류
+	@Override
+	public int managerReviewDelete2(int reviewReportNo) {
+		
+		int reviewNo = dao.getReviewNo(reviewReportNo);
+
+		int result = dao.managerReviewDelete2(reviewReportNo);
+		
+		if (result>0) result = dao.updateReviewStatus(reviewNo);
+		
+		return result;
+	}
 	
 
 }

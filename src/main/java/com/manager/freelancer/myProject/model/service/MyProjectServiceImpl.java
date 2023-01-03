@@ -137,4 +137,23 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		return 0;
 	}
 
+	// 받은 제안 조회 
+	@Override
+	public Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo) {
+		
+		int listCount = dao.getProposalCount( memberNo, mainCategoryNo);
+		
+		Pagination pagination = new Pagination(listCount,cp); 
+		
+		List<MyProject> proposal = dao.selectProposal(memberNo,mainCategoryNo,pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("proposal",proposal);
+		map.put("listCount",listCount);
+		
+		return map;
+	}
+
 }

@@ -14,8 +14,10 @@ import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
+import com.manager.freelancer.manager.model.vo.ReviewReport;
 import com.manager.freelancer.manager.model.vo.Settlement;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
+import com.manager.freelancer.manager.model.vo.TradeReport;
 
 @Repository
 public class ManagerDAO {
@@ -474,6 +476,145 @@ public class ManagerDAO {
 		return sqlSession.update("managerMapper.insertReportRequest",map);
 	}
 
+	/** 거래 신고 수
+	 * @param status
+	 * @return
+	 */
+	public int getMemberTradeListCount(int status) {
+		return sqlSession.selectOne("managerMapper.getMemberTradeListCount",status);
+	}
+
+	/** 거래 신고 내역 조회
+	 * @param status
+	 * @param pagination
+	 * @return
+	 */
+	public List<TradeReport> selectMemberTradeList(int status, Pagination pagination) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectMemberTradeList", status, rowBounds);
+	}
+
+	/** 검색 일치 거래 신고 수
+	 * @param pm
+	 * @return
+	 */
+	public int getMemberTradeListCount(Map<String, Object> pm) {
+		return sqlSession.selectOne("managerMapper.getMemberTradeListCount2",pm);
+	}
+
+	/** 검색 일치 거래 신고 내역 조회
+	 * @param pagination
+	 * @param pm
+	 * @return
+	 */
+	public List<TradeReport> selectMemberTradeList(Pagination pagination, Map<String, Object> pm) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectMemberTradeList2", pm, rowBounds);
+	}
+
+	/** 상태별 거래 신고 수
+	 * @param map
+	 * @return
+	 */
+	public int getReportStatusListCount(Map<String, Object> map) {
+		return sqlSession.selectOne("managerMapper.getReportStatusListCount",map);
+	}
+
+	/** 상태별 거래 신고 조회
+	 * @param pagination
+	 * @param map
+	 * @return
+	 */
+	public List<TradeReport> selectReportStatusList(Pagination pagination, Map<String, Object> map) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+
+		return sqlSession.selectList("managerMapper.selectReportStatusList", map, rowBounds);
+	}
+
+	/** 거래 신고 상세보기
+	 * @param tradeReportNo
+	 * @return
+	 */
+	public TradeReport tradeReportDetail(int tradeReportNo) {
+		return sqlSession.selectOne("managerMapper.tradeReportDetail",tradeReportNo);
+	}
+
+	/** 리뷰 신고 수
+	 * @return
+	 */
+	public int getReviewReportListCount() {
+		return sqlSession.selectOne("managerMapper.getReviewReportListCount");
+	}
+
+	/** 리뷰 신고 목록
+	 * @param pagination
+	 * @return
+	 */
+	public List<ReviewReport> selectReviewReportList(Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("managerMapper.selectReviewReportList", null, rowBounds);
+	}
+ 
+	/** 리뷰 상세
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public ReviewReport reviewReportDetail(int reviewReportNo) {
+		return sqlSession.selectOne("managerMapper.reviewReportDetail", reviewReportNo);
+	}
+
+	/** 리뷰 삭제
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public int managerReviewDelete(int reviewReportNo) {
+		return sqlSession.update("managerMapper.managerReviewDelete",reviewReportNo);
+	}
+
+	/** 리뷰 상태 삭제완료
+	 * @param reviewReportNo
+	 */
+	public int updateReviewStatusD(int reviewNo) {
+		return sqlSession.update("managerMapper.updateReviewStatusD",reviewNo);
+	}
+
+	/** 리뷰 보류
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public int managerReviewDelete2(int reviewReportNo) {
+		return sqlSession.delete("managerMapper.managerReviewDelete2",reviewReportNo);
+	}
+
+	/** 리뷰 상태 게시
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public int updateReviewStatus(int reviewNo) {
+		return sqlSession.update("managerMapper.updateReviewStatus",reviewNo);
+	}
+
+	/** 리뷰 번호 얻어 오기
+	 * @param reviewReportNo
+	 * @return
+	 */
+	public int getReviewNo(int reviewReportNo) {
+		return sqlSession.selectOne("managerMapper.getReviewNo",reviewReportNo);
+	}
+
+	
 	
 	
 

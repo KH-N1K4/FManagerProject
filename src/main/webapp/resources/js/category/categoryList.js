@@ -84,7 +84,7 @@ for(let each of select){
             url:"/selectCategoryList",
             method:"GET",
             data:{"order": index.value, "budget":budget.value, "grade":grade.value,
-            "mainCategoryNo":location.href.split('/')[(location.href.split('/').length-1)]},
+            "mainCategoryNo":location.href.split('/')[(location.href.split('/').length-2)]},
             success:CategoryList=>{
                 
                 category(CategoryList)
@@ -125,7 +125,7 @@ function category(CategoryList){
         // cif2.test="ㅇㅇㅇㅇ"; // 로그인된 멤버가 있을 때
 
         // const cif3=document.createElement("c:if");
-        // cif3.test=(content.likeCheckFL=="N"); // 로그인된 멤버가 있을 때+찜하지 않았을 때 
+        // cif3.test='content.likeCheckFL=="N"'; // 로그인된 멤버가 있을 때+찜하지 않았을 때 
 
         // const emptyheart=document.createElement("i");
         // emptyheart.classList.add("fa-regular");

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
-
+<c:set var="myProject" value="${myProject}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>myProject_UserPage</title>
 
-  <link rel="stylesheet" href="/resources/css/myProject/myProject_UserPage.css">
+  <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_UserPage.css">
   
 </head>
 <body>
@@ -62,70 +62,102 @@
             <%-- container_header 끝 --%>
 
             <!-- 프로젝트 의뢰 1번 -->
-            <div class="myProject_content">
-              <a class="myProject_link" href="">
-              
-                <%-- 서비스 사진 --%>
-                <div class="projuctContent_image">
-                  <img  src="/resources/images/projectImage01.PNG">
-                </div>
-                <%-- 서비스 사진 --%>
-                
-                ${map}
-                <div class="projuctContent_info">
+            <c:if test="${not empty myProject}">
+              <c:forEach items="${myProject}" var="myProject">
+                  <div class="myProject_content">
+                    <a class="myProject_link" href="">
+                    
+                      <%-- 서비스 사진 --%>
+                      <div class="projuctContent_image">
+                        <img  src="/resources/files/myProjectRequest/${myProject.requestFilePath}">
+                      </div>
+                      <%-- 서비스 사진 --%>
+                      <div class="projuctContent_info">
 
-                  <%-- 서비스 제목 --%>
-                  <div class="info_title">
-                    <span>로고 디자인 제작 요청</span>
+                        <%-- 서비스 제목 --%>
+                        <div class="info_title">
+                          <span>${myProject.projectRequestTitle}</span>
+                        </div>
+                        <%-- 서비스 제목 --%>
+
+                        <diV class="info_content">
+                          <div class="info_content_left">
+                            <div class="info_content_list">
+                              <div class="list_title"><span>모집분야</span></div>
+                              <div class="list_content">
+                                <div class="main1category"><span>${myProject.mainCategoryName}</span></div>
+                                <span>></span>
+                                <div class="main3category"><span>${myProject.thirdCategoryName}</span></div>
+                              </div>
+                            </div>
+                            <div class="info_content_list">
+                              <div class="list_title"><span>예산</span></div>
+                              <div class="list_content">
+                                <span>${myProject.projectRequestBudget}</span>
+                              </div>
+                            </div>
+                            <div class="info_content_list">
+                              <div class="list_title"><span>모집마감일</span></div>
+                              <div class="list_content">
+                                <span>${myProject.projectRecruitDate}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <%-- 승인 상태 --%>
+                          <div class="info_content_right">
+                            <div class="signState">
+                              <span>${myProject.projectRequestStatus}</span>
+                            </div>
+                          </div>
+                          <%-- 승인 상태 --%>
+                        </diV>
+                      </div>
+                    </a>
                   </div>
-                  <%-- 서비스 제목 --%>
+              </c:forEach>
+            </c:if>
+            <!-- 프로젝트 1번 -->
+            <c:if test="${listCount != 0}">
+                
+                <div class="pagination-area">
 
 
-
-                  <diV class="info_content">
-                    <div class="info_content_left">
-                      <div class="info_content_list">
-                        <div class="list_title"><span>모집분야</span></div>
-                        <div class="list_content">
-                          <div class="main1category"><span>${maincategory}</span></div>
-                          <span>></span>
-                          <div class="main3category"><span>브랜드 디자인·가이드</span></div>
-                        </div>
-                      </div>
-                      <div class="info_content_list">
-                        <div class="list_title"><span>예산</span></div>
-                        <div class="list_content">
-                          <span>1000원</span>
-                        </div>
-                      </div>
-                      <div class="info_content_list">
-                        <div class="list_title"><span>모집마감일</span></div>
-                        <div class="list_content">
-                          <span>2022.02.01</span>
-                        </div>
-                      </div>
-                    </div>
-                    <%-- 승인 상태 --%>
-                    <div class="info_content_right">
-                      <div class="signState">
-                        <span>승인 대기중</span>
-                      </div>
-                    </div>
-                    <%-- 승인 상태 --%>
-                  </diV>
+                    <ul class="pagination">
+                    
+                        <!-- 첫 페이지로 이동 -->
+                        <li><a href="/member/myProject/myRequestList?cp=1${sURL}">&lt;&lt;</a></li>
+        
+                        <!-- 이전 목록 마지막 번호로 이동 -->
+                        <li><a href="/member/myProject/myRequestList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+        
+            
+                        <!-- 특정 페이지로 이동 -->
+                        <c:forEach var="countPage" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                        <c:choose>
+                            <c:when test="${countPage== pagination.currentPage}">
+                            <!-- 현재 페이지인 경우 -->
+                            <li><a class="current">${countPage}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                            <!-- 현재 페이지를 제외한 나머지 -->
+                            <li><a href="/member/myProject/myRequestList?cp=${countPage}${sURL}">${countPage}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                        </c:forEach>
+                        <!-- 다음 목록 시작 번호로 이동 -->
+                        <li><a href="/member/myProject/myRequestList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+        
+                        <!-- 끝 페이지로 이동 -->
+                        <li><a href="/member/myProject/myRequestList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+        
+                    </ul>
                 </div>
-              </a>
-            </div>
+            </c:if>
           </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
-
-    1. 현재 페이지에서 필요한 테이블 
-      - 프로젝트  / 프로젝트 첨부 / 카테고리 1
-    2. 조회해야 하는 것 
-     ${myProject}
 
   </main>
   <!-- **************************************footer*************************************-->

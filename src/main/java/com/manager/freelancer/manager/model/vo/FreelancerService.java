@@ -34,6 +34,6 @@ public class FreelancerService {
 	private String freelancerName;
 	private String freelancerImage;
 	
-	List<ServiceImageFile> ServiceImageFileList;
+	List<ServiceImageFile> serviceImageFileList;
 
 }

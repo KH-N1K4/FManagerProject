@@ -1,6 +1,7 @@
 package com.manager.freelancer.manager.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,11 @@ import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
 import com.manager.freelancer.manager.model.vo.MemberReport;
 import com.manager.freelancer.manager.model.vo.ProjectRequest;
+import com.manager.freelancer.manager.model.vo.ReviewReport;
 import com.manager.freelancer.manager.model.vo.TradeInfo;
+import com.manager.freelancer.manager.model.vo.TradeReport;
 
-@SessionAttributes({"loginMember"})
+@SessionAttributes({ "loginMember" })
 @Controller
 public class ManagerController {
 
@@ -338,12 +341,13 @@ public class ManagerController {
 
 		return "redirect:/manager/projectRequestList";
 	}
-	
-	//=======================================================
-	
+
+	// =======================================================
+
 	// 회원 신고 목록 조회
 	@GetMapping("/manager/memberReportList")
-	public String managerMemberReport(Model model, @RequestParam(value = "status", required = false, defaultValue = "0") int status,
+	public String managerMemberReport(Model model,
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			@RequestParam Map<String, Object> pm) {
 
@@ -358,25 +362,24 @@ public class ManagerController {
 
 		return "/manager/memberReportList";
 	}
-	
-	//회원 신고 상세보기
+
+	// 회원 신고 상세보기
 	@GetMapping("/manager/memberReportDetail/{memberReportNo}")
-	public String managerMemberReportDetail(
-			@PathVariable(value="memberReportNo") int memberReportNo, Model model,
+	public String managerMemberReportDetail(@PathVariable(value = "memberReportNo") int memberReportNo, Model model,
 			@SessionAttribute("loginMember") com.manager.freelancer.member.model.vo.Member loginMember) {
-		
+
 		MemberReport memberReport = service.memberReportDetail(memberReportNo);
-		
-		model.addAttribute("memberReport",memberReport);
-		model.addAttribute("loginMember",loginMember);
-		
+
+		model.addAttribute("memberReport", memberReport);
+		model.addAttribute("loginMember", loginMember);
+
 		return "/manager/memberReportDetail";
 	}
-	
+
 	// 상태별 회원 신고 내역
 	@GetMapping("/manager/memberReportType")
 	@ResponseBody
-	public Map<String, Object> memberReportType(Model model, 
+	public Map<String, Object> memberReportType(Model model,
 			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
 
@@ -384,45 +387,151 @@ public class ManagerController {
 
 		map = service.selectMemberReportList(status, cp);
 		model.addAttribute("map", map);
-		
+
 		return map;
 	}
-	
-	
+
 	// 신고 내역 답변 등록
 	@PostMapping("/manager/memberReportRequest")
 	@ResponseBody
-	public int memberReportRequest(Model model, 
+	public int memberReportRequest(Model model,
 			@RequestParam(value = "memberReportNo", required = false) int memberReportNo,
 			@RequestParam(value = "memberReportRequest", required = false) String memberReportRequest,
 			@SessionAttribute("loginMember") com.manager.freelancer.member.model.vo.Member loginMember) {
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberReportNo", memberReportNo);
 		map.put("memberReportRequest", memberReportRequest);
 		map.put("loginMember", loginMember);
-		
+
 		int result = service.insertReportRequest(map);
-		
+
 		return result;
 	}
-	
-	
-	
-	
 
+	// ===============================================================
+
+	// 거래 신고 내역 목록
+	@GetMapping("/manager/tradeReportList")
+	public String managerTradeReport(Model model,
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "value", required = false, defaultValue = "0") int value,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam Map<String, Object> pm) {
+
+		System.out.println(status);
+
+		if (pm.get("key") == null) {
+			Map<String, Object> map = service.selectMemberTradeList(status, cp);
+			model.addAttribute("map", map);
+		} else {
+			pm.put("status", status);
+			pm.put("value", value);
+			Map<String, Object> map = service.selectMemberTradeList(pm, cp);
+			model.addAttribute("map", map);
+		}
+
+		return "/manager/tradeReportList";
+	}
+
+	// 상태별 ajax
+	@GetMapping("/manager/tradeReportStatus")
+	@ResponseBody
+	public Map<String, Object> tradeReportStatus(Model model,
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "type", required = false, defaultValue = "0") int type,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", status);
+		map.put("type", type);
+
+		Map<String, Object> resultMap = service.selectReportStatusList(map, cp);
+		model.addAttribute("resultMap", resultMap);
+
+		return resultMap;
+	}
+
+	// 거래 신고 상세 보기
+	@GetMapping("/manager/tradeReportDetail/{tradeReportNo}")
+	public String managerTradeReportDetail(@PathVariable(value = "tradeReportNo") int tradeReportNo, Model model,
+			@SessionAttribute("loginMember") com.manager.freelancer.member.model.vo.Member loginMember) {
+
+		TradeReport tradeReport = service.tradeReportDetail(tradeReportNo);
+
+		model.addAttribute("tradeReport", tradeReport);
+		model.addAttribute("loginMember", loginMember);
+
+		return "/manager/tradeReportDetail";
+	}
+
+	// ===============================================================
+
+	// 리뷰 목록
 	@GetMapping("/manager/reviewList")
-	public String managerReview() {
+	public String managerReview(Model model, @RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+
+		Map<String, Object> map = service.selectReviewReportList(cp);
+		model.addAttribute("map", map);
+
+		return "/manager/reviewList";
+	}
+
+	// 리뷰 상세 ajax
+	@GetMapping("/manager/reviewReportDetail")
+	@ResponseBody
+	public ReviewReport reviewReportDetail(Model model,
+			@RequestParam(value = "reviewReportNo", required = false) int reviewReportNo) {
+		
+		ReviewReport reviewReport = service.reviewReportDetail(reviewReportNo);
+
+		model.addAttribute("reviewReport", reviewReport);
+
+		return reviewReport;
+	}
+	
+	// 리뷰 삭제
+	@GetMapping("/manager/reviewReport/{reviewReportNo}/delete")
+	public String managerReviewDelete(@PathVariable("reviewReportNo") int reviewReportNo, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+		
+		int result = service.managerReviewDelete(reviewReportNo);
+		
+		if(result>0) {
+			Map<String, Object> map = service.selectReviewReportList(cp);
+			model.addAttribute("map", map);
+		}
+		
+		return "/manager/reviewList";
+	}
+	
+	// 리뷰 보류
+	@GetMapping("/manager/reviewReport/{reviewReportNo}/hold")
+	public String managerReviewHold(@PathVariable("reviewReportNo") int reviewReportNo, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+		
+		int result = service.managerReviewDelete2(reviewReportNo);
+		
+		if(result>0) {
+			Map<String, Object> map = service.selectReviewReportList(cp);
+			model.addAttribute("map", map);
+		}
+		
 		return "/manager/reviewList";
 	}
 	
 	
 	
 	
-	@GetMapping("/manager/tradeReportList")
-	public String managerTradeReport() {
-		return "/manager/tradeReportList";
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

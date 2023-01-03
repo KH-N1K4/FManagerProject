@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.manager.freelancer.common.Util;
 import com.manager.freelancer.freelancer.model.dao.FreeLancerDAO;
+import com.manager.freelancer.freelancer.model.vo.Bank;
 import com.manager.freelancer.freelancer.model.vo.Career;
 import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
@@ -151,12 +152,19 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 		// TODO Auto-generated method stub
 		return dao.getFieldList(inputFreelancer);
 	}
+	
+	@Override
+	public List<Bank> getBankList() {
+		// TODO Auto-generated method stub
+		return dao.getBankList();
+	}
 	 
 	
 	@Override
 	public int updateFreelancerInfo(Freelancer inputFreelancer) {
 
 		int result = dao.updateFreelancerInfo(inputFreelancer);
+		
 		
 		if(inputFreelancer.getCareer()!=null) { // 수정하기의 경력사항 input값에 값이 담겨있다면
 			String[] splitCareer = inputFreelancer.getCareer().split("/");
@@ -165,10 +173,30 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 			temp1Career.setCareerCompanyDepartment(splitCareer[1]);
 			temp1Career.setCareerCompanyPosition(splitCareer[2]);
 			temp1Career.setCareerCompanyRegion(splitCareer[3]);
-			temp1Career.setCareerCompantPeriod(splitCareer[4]);
+			temp1Career.setCareerCompanyPeriod(splitCareer[4]);
 			temp1Career.setFreelancerNo(inputFreelancer.getFreelancerNo());
 			
 			result = dao.updateFreelancerCareer(temp1Career);
+		}
+		if(inputFreelancer.getLicense()!=null) {
+			String[] splitLicense = inputFreelancer.getLicense().split("/");
+			License temp2License = new License();
+			temp2License.setLicenseName(splitLicense[0]);
+			temp2License.setLicenseDate(splitLicense[1]);
+			temp2License.setLicenseAgency(splitLicense[2]);
+			temp2License.setFreelancerNo(inputFreelancer.getFreelancerNo());
+			
+			result = dao.updatefreelancerLicense(temp2License);
+		}
+//			int inputBankCode = inputFreelancer.getBankCode();
+//			long inputBankAccount = inputFreelancer.getBankAccountNumber();
+//		if(inputBankCode != 0 && inputBankAccount != 0) {
+//			//조건문 수정 필요
+//			
+//					
+//		}
+		if(result > 0 ) {
+		result = dao.updateFreelancerBank(inputFreelancer);
 		}
 		
 		return result;
@@ -180,42 +208,6 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 
 		int portfolioNo = dao.addPortfolio(inputPortfolio);
 		
-		// 이미지 삽입
-		//  포트폴리오 번호
-		if(portfolioNo > 0) {
-			List<PortfolioImage> portfolioImageList = new ArrayList<PortfolioImage>();
-			List<String> reNameList = new ArrayList<String>();
-			
-			// imageList : 파일이 담겨있는 리스트
-			// portfolioImageList : DB에 삽입할 이미지 정보만 담기
-			
-			// imageList에 담겨잇는 파일 중 실제로 업로드될 파일만 분류하는 작업 진행
-			for(int i = 0 ; i < imageList.size(); i++) {
-				if(imageList.get(i).getSize() > 0) {
-					PortfolioImage portfolioImage = new PortfolioImage();
-					
-					portfolioImage.setPotfolioImagePath(webPath);
-					
-					String reNameImage = Util.fileRename(imageList.get(i).getOriginalFilename());
-					portfolioImage.setPotfolioImagePath(reNameImage);
-					portfolioImage.setFreelancerNo(portfolioNo);
-					portfolioImage.setPortfolioImageOrder(i);
-					
-					
-					portfolioImageList.add(portfolioImage);
-					reNameList.add(reNameImage);
-				}
-			}//for문
-			//비어있지 않다면
-			if(!imageList.isEmpty()) {
-				
-				int result = dao.insertPortfolioImageList(imageList);
-				
-				if(result == imageList.size()) {
-					
-				}
-			}
-		}
 		
 		return portfolioNo;
 	}
