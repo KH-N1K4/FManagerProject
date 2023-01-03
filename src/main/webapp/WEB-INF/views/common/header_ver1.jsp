@@ -38,23 +38,41 @@
 
                     <%-- 로그인 O인 경우 --%>
                     <c:otherwise>
-                    	<span><a href="/manager/memberList">관리자</a></span>
-                    	<span><a href="/member/enrollFreelancer">전문가 등록</a></span>
-                     	<span><a href="/member/myProject/myRequestList">내프로젝트</a></span>
-                    
-                        <label for="header-menu-toggle">
-                            ${loginMember.memberNickname}
-                            <i class="fa-solid fa-caret-down"></i>
-                        </label>
+                        <c:if test="${sessionScope.loginMember.authority==1}">
+                            <%-- <span><a href="/manager/memberList">관리자</a></span> --%>
+                            <span><a href="/member/enrollFreelancer">전문가 등록</a></span>
+                            <span><a href="/member/myProject/myRequestList">내프로젝트</a></span>
                         
-                        <a><img style="width: 32px; height: 32px; border-radius:100%; border:1px solid black;" src="${loginMember.memberProfile}"></a>
+                            <label for="header-menu-toggle" class="label">
+                                ${loginMember.memberNickname}
+                                <i class="fa-solid fa-caret-down"></i>
+                            </label>
+                            
+                            <a><img class="profileArea" style="width: 32px; height: 32px; border-radius:100%; border:1px solid black;" src="${loginMember.memberProfile}"></a>
 
-                        <input type="checkbox" id="header-menu-toggle">
+                            <input type="checkbox" id="header-menu-toggle">
 
-                        <div id="header-menu">
-                            <a href="/member/myInfo">내정보</a>
-                            <a href="/member/logout">로그아웃</a>
-                        </div>
+                            <div id="header-menu">
+                                <a href="/member/myInfo">내정보</a>
+                                <a href="/member/logout">로그아웃</a>
+                            </div>
+                        </c:if>
+                        <c:if test="${sessionScope.loginMember.authority==2}">
+                            <span><a href="/manager/memberList">관리자 페이지</a></span>
+                            <label for="header-menu-toggle" class="label">
+                                ${loginMember.memberNickname}
+                                <i class="fa-solid fa-caret-down"></i>
+                            </label>
+                            
+                            <a><img class="profileArea" style="width: 32px; height: 32px; border-radius:100%; border:1px solid black;" src="${loginMember.memberProfile}"></a>
+
+                            <input type="checkbox" id="header-menu-toggle">
+
+                            <div id="header-menu">
+                                <a href="/member/myInfo">내정보</a>
+                                <a href="/member/logout">로그아웃</a>
+                            </div>
+                        </c:if>
                     </c:otherwise>
                 
                 </c:choose>

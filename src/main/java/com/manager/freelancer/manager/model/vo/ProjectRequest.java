@@ -1,5 +1,7 @@
 package com.manager.freelancer.manager.model.vo;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,5 +23,8 @@ public class ProjectRequest {
 	private int projectWorkPeriod;
 	private int MemberNo;
 	private String MemberName;
+	private String requestFilePath;
+	
+	List<RequestImageFile> requestImageFileList;
 
 }
