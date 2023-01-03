@@ -12,6 +12,7 @@ import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Category;
 import com.manager.freelancer.category.model.vo.ImageFile;
 import com.manager.freelancer.category.model.vo.Service;
+import com.manager.freelancer.category.model.vo.Trade;
 import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 
@@ -101,6 +102,15 @@ public class CategoryDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		return sqlSession.selectList("categoryMapper.serviceList",null,rowBounds);
+	}
+
+	public int tradeComplete(Trade temp) {
+		
+		int result=sqlSession.insert("categoryMapper.tradeComplete",temp);
+		
+		if(result>0) result=temp.getTradeNo();
+		
+		return result;
 	}
 
 	

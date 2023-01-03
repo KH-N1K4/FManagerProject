@@ -13,20 +13,13 @@
 </head>
 <body>
     
-    <div id="header">
-        <div id="header1">
-
-            <div id="logo"><img src="../../resources/images/final_logo.png" alt=""></div>
-
-        </div>     
-    </div>
-
+     <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
 
 
     <div id="payingMain">
 
         <div id="payingTitle">결제 완료</div>
-        <form action="">
+        <div action="">
 
         <div id="serviceSection">
         <div id="servicePhoto"></div>
@@ -42,10 +35,10 @@
         <textarea name="" id="" cols="30" rows="10" placeholder="요청사항" readonly></textarea>
         <div id="btnSection">
 
-            <button id="paymentBtn">구매 목록</button>
-            <button id="paymentCancel">메인으로</button>
+            <a id="paymentBtn" href="/member/myProject/myPurchaseList">구매 목록</a>
+            <a id="paymentCancel" href="/">메인으로</a>
         </div>
-        </form>
+        </div>
     </div>
 
     

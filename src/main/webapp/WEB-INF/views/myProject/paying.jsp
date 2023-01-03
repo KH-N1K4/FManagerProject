@@ -19,10 +19,8 @@
     <div id="payingMain">
 	
         <div id="payingTitle">결제 중...</div>
-        <form action="/">
-		
-		
-		
+        <form>
+
         <div id="serviceSection">
         <div id="servicePhoto"> <img src="${param.servicePhoto }" style="width:100%;"> </div>
         <div>
@@ -34,16 +32,30 @@
         </div>
         </div>
 
-        <textarea name="" id="" cols="30" rows="10" placeholder="요청사항"></textarea>
+        <textarea name="tradeRequest" id="tradeRequest" cols="30" rows="10" placeholder="요청사항"></textarea>
         <div id="btnSection">
 
-            <button id="paymentBtn">결제</button>
-            <button id="paymentCancel">취소</button>
+            <a id="paymentBtn" onclick="iamport()" >결제</a>
+            <a id="paymentCancel" href="/service/${param.serviceNo }">취소</a>
         </div>
         </form>
     </div>
 
+
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+ 
+     <script>
+        
+        const memberNo="${loginMember.memberNo}";
+        const serviceNo="${param.serviceNo}";
+        
+        const memberEmail="${loginMember.memberEmail}"; 
+
+     
+    </script>	
     
+     <script src="/resources/js/category/pay.js"></script>
 
 </body>
 </html>
