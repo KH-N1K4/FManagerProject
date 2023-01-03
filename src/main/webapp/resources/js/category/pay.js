@@ -3,6 +3,7 @@
 const title=document.getElementById("serviceContent").children[0].innerText;
 const cost=document.getElementById("serviceCost").children[0].innerText;
 const tradeRequest=document.getElementsByName("tradeRequest")[0];
+const serviceCost=document.getElementById("serviceCost").children[0];
 
 
       function iamport(){
@@ -33,9 +34,8 @@ const tradeRequest=document.getElementsByName("tradeRequest")[0];
                     dataType: 'json',
                     data: {
                         imp_uid : rsp.imp_uid,
-                        "serviceNo":serviceNo,
-                        "memberNo":memberNo
-                        ,"tradeRequest":tradeRequest.value
+                        "tradeRequest":tradeRequest.value,
+                         "servicePrice":serviceCost.innerText
                     },success:(result)=>{
 
                       console.log(result);
