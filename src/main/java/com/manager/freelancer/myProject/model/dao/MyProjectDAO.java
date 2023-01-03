@@ -34,12 +34,13 @@ public class MyProjectDAO {
 	 * @return
 	 */
 	public int getMyProjectListCount(int memberNo, int mainCategoryNo) {
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); 
 		map.put("mainCategoryNo", mainCategoryNo);
 		
 		int result = sqlSession.selectOne("myProjectMapper.getMyProjectListCount", map);
-		System.out.println("result="+result);
+		
 		return result;
 	}
 
@@ -50,12 +51,14 @@ public class MyProjectDAO {
 	 * @return
 	 */
 	public List<MyProject> selectMyProject(int memberNo, int mainCategoryNo, Pagination pagination) {
+		
 		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
 	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); //로그인 세션 회원 번호
 		map.put("mainCategoryNo", mainCategoryNo); //카테고리별 서비스 들고오기
-		return sqlSession.selectList("myProjectMapper.selectMyProject", map,rowBounds);
+		
+		return sqlSession.selectList("myProjectMapper.selectMyProject", map, rowBounds);
 	}
  
 	/** 메인3 카테고리 들고오기
@@ -87,6 +90,39 @@ public class MyProjectDAO {
 	 */
 	public int insertProjectFileList(List<RequestFile> projectFileList) {
 		return sqlSession.insert("myProjectMapper.insertFileImageList", projectFileList);
+	}
+
+	/** 받은 제안 카운트 
+	 * @param memberNo
+	 * @param mainCategoryNo
+	 * @return
+	 */
+	public int getProposalCount(int memberNo, int mainCategoryNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("mainCategoryNo", mainCategoryNo);
+		
+		return sqlSession.selectOne("myProjectMapper.getProposalCount", map);
+	}
+
+	/** 받은 제안 조회 
+	 * @param memberNo
+	 * @param mainCategoryNo
+	 * @param pagination
+	 * @return
+	 */
+	public List<MyProject> selectProposal(int memberNo, int mainCategoryNo, Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); 
+	    
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+	    
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); //로그인 세션 회원 번호
+		map.put("mainCategoryNo", mainCategoryNo); //카테고리별 서비스 들고오기
+		
+		return sqlSession.selectList("myProjectMapper.selectProposalList", map, rowBounds);
 	}
 
 

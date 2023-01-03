@@ -95,24 +95,21 @@
 				</div>
 				<hr>
 				<br>
-
 				<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////a -->
 
 				<c:if test="${not empty managerInquiry.inquiryRequest}">
                         <!-- 댓글 남기기 -->
                         <section id="comment">
-                            <c:choose>
-                                <c:when test="${loginMember.memberProfile == null}">
+                                <c:if test="${managerInquiry.managerProfile == null}">
                                     <a href="/member/myInfo"><img src="/resources/images/관리자 프로필.PNG" class="myProfile"></a>
-                                </c:when>
-                                <c:when test="${loginMember.memberProfile != null}">
-                                    <a href="/member/myInfo"><img src="${loginMember.memberProfile}" class="myProfile"></a>
-                                </c:when>
-                            </c:choose>
+                                </c:if>
+                                <c:if test="${managerInquiry.managerProfile != null}">
+                                    <a href="/member/myInfo"><img src="${managerInquiry.managerProfile}" class="myProfile"></a>
+                                </c:if>
                             <table>
                                 <tr>
                                     <th class="writer">작성자</th>
-                                    <td class="writerContent">${managerInquiry.inquiryRequestWriter}</td>
+                                    <td class="writerContent">${managerInquiry.managerNickname}</td>
                                 </tr>
                                 <tr>
                                     <th>답변 내용</th>

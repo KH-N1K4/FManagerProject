@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>myProject_UserPage</title>
 
-  <link rel="stylesheet" href="/resources/css/myProject/myProject_UserPage.css">
+  <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_UserPage.css">
   
 </head>
 <body>
@@ -62,11 +62,6 @@
             <%-- container_header 끝 --%>
 
             <!-- 프로젝트 의뢰 1번 -->
-            <c:if test="${empty myProject}">
-                <div class="myProject_content">
-                    <span>프로젝트가 존재하지 않습니다.</span>
-                </div>
-            </c:if>
             <c:if test="${not empty myProject}">
               <c:forEach items="${myProject}" var="myProject">
                   <div class="myProject_content">
@@ -81,7 +76,7 @@
 
                         <%-- 서비스 제목 --%>
                         <div class="info_title">
-                          <div>${myProject.projectRequestTitle}</div>
+                          <span>${myProject.projectRequestTitle}</span>
                         </div>
                         <%-- 서비스 제목 --%>
 
@@ -130,10 +125,10 @@
                     <ul class="pagination">
                     
                         <!-- 첫 페이지로 이동 -->
-                        <li><a href="/member/myProject/freelancer/myService?cp=1${sURL}">&lt;&lt;</a></li>
+                        <li><a href="/member/myProject/myRequestList?cp=1${sURL}">&lt;&lt;</a></li>
         
                         <!-- 이전 목록 마지막 번호로 이동 -->
-                        <li><a href="/member/myProject/freelancer/myService?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+                        <li><a href="/member/myProject/myRequestList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
         
             
                         <!-- 특정 페이지로 이동 -->
@@ -145,15 +140,15 @@
                             </c:when>
                             <c:otherwise>
                             <!-- 현재 페이지를 제외한 나머지 -->
-                            <li><a href="/member/myProject/freelancer/myService?cp=${countPage}${sURL}">${countPage}</a></li>
+                            <li><a href="/member/myProject/myRequestList?cp=${countPage}${sURL}">${countPage}</a></li>
                             </c:otherwise>
                         </c:choose>
                         </c:forEach>
                         <!-- 다음 목록 시작 번호로 이동 -->
-                        <li><a href="/member/myProject/freelancer/myService?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+                        <li><a href="/member/myProject/myRequestList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
         
                         <!-- 끝 페이지로 이동 -->
-                        <li><a href="/member/myProject/freelancer/myService?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                        <li><a href="/member/myProject/myRequestList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
         
                     </ul>
                 </div>

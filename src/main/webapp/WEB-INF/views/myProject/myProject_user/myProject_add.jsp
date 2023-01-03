@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>myProject_add</title>
 
-  <link rel="stylesheet" href="/resources/css/myProject/myProject_add.css">
+  <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_add.css">
 </head>
 <body>
   <main>
@@ -96,7 +96,7 @@
                   <div class="list_title"><span>예산</span></div>
                   <div class="list_content">
                     <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
-                          class="budget box" name="projectRequestBudget" placeholder="예산 금액" maxlength="30" autocomplete="off" value="" id="budget"><span>원</span>
+                          class="budget box" name="projectRequestBudget" placeholder="예산 금액" maxlength="30" autocomplete="off" value="" id="bBudget"><span>원</span>
                   </div>
                 </div>
                 <br>
