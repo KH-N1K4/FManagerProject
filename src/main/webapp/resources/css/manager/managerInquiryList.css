@@ -1,8 +1,8 @@
 .main {
 	width: 1100px;
-	min-height: 500px;
+	min-height: 450px;
 	max-height: 1400px;
-	margin: 0 auto;
+	margin: 0 auto 50px auto;
 }
 
 #question-list-title-area{
@@ -47,12 +47,10 @@
 /* 컬럼명들 */
 .question-num{
     width: 200px;
-    font-size: 18px;
 }
 
 .question-title{
     width: 500px;
-    font-size: 18px;
 }
 .question-title a{
    text-decoration: none;
@@ -60,13 +58,11 @@
 }
 .question-date{
     width: 200px;
-    font-size: 18px;
 }
 
 .question-status{
     width: 200px;
     text-align: center;
-    font-size: 18px;
 }
 /* ================================ */
 
@@ -77,8 +73,9 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     padding-left: 20px;
+    margin-bottom:10px;
 }
 
 .question-list-table-content{
@@ -93,23 +90,27 @@
 .question-answer{
     display: inline-block;
     width: 100px;
-    height: 24px;
+    height: 30px;
+    line-height: 30px;
     text-align: center;
     color: white;
     border-radius: 5px;
-    font-size: 15px;
-    background-color: #538126
+    font-size: 16px;
+    background-color: black;
+    
+    
 }
 
 /* 상태 표시 - 대기중  */
 .question-wating{
     display: inline-block;
     width: 100px;
-    height: 24px;
+    height: 30px;
+    line-height: 30px;
     text-align: center;
     color: white;
     border-radius: 5px;
-    font-size: 15px;
+    font-size: 16px;
     background-color: rgb(165, 173, 165);
 
 }
@@ -141,49 +142,51 @@
 
 .current {
     font-weight: bold;
-    background-color: #538126;
+    background-color: black;
     border-radius: 50%;
     color: white !important;
     letter-spacing: 0 !important;
 }
 /* ================================ */
 
-
-/* ================================ */
 /* 하단 검색 창  */
 #inquirySearch{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px 0;
+    text-align: center;
+	width: 500px;
+	height: 30px;
+	margin: 50px auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+#inquirySearch * {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 /* 하단 검색창 selectBox */
 #inquirySearch select{
-    width: 150px;
-    height: 45px;
+    width: 140px;
+	height: 30px;
 }
 /* 하단 검색창 input */
 #inquirySearch input{
-    width: 300px;
-    height: 39px;
-    margin-left: 10px;
+    flex-grow: 1;
+	margin: 0 10px;
+	padding-left: 10px;
+	height: 30px;
 }
 
 /* 하단 검색창 button */
 #inquirySearch button{
     width: 100px;
-    height: 45px;
-    margin-left: 10px;
-    background-color: #538126;
-    color: #fff;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-}
-#search-key{
-    font-size: 17px;
-    text-align-last: center;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: black;
+	border: none;
+	color: white;
+	cursor: pointer;
 }
 /* ================================ */
 

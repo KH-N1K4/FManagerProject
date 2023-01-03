@@ -38,16 +38,17 @@
 
                     <%-- 로그인 O인 경우 --%>
                     <c:otherwise>
+                        
                     	<span><a href="/manager/memberList">관리자</a></span>
                     	<span><a href="/member/enrollFreelancer">전문가 등록</a></span>
                      	<span><a href="/member/myProject/myRequestList">내프로젝트</a></span>
                     
-                        <label for="header-menu-toggle">
+                        <label for="header-menu-toggle" class="label">
                             ${loginMember.memberNickname}
                             <i class="fa-solid fa-caret-down"></i>
                         </label>
                         
-                        <a><img style="width: 32px; height: 32px; border-radius:100%; border:1px solid black;" src="${loginMember.memberProfile}"></a>
+                        <a><img class="profileArea" style="width: 32px; height: 32px; border-radius:100%; border:1px solid black;" src="${loginMember.memberProfile}"></a>
 
                         <input type="checkbox" id="header-menu-toggle">
 

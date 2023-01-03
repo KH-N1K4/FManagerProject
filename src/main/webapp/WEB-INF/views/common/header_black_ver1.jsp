@@ -11,9 +11,8 @@
 
          
             <div class="header-top">
-                <span>서비스 등록</span>
-                <span>내역 게시판</span>
-                <a href="/"><span>홈으로</span></a>
+                <a href="/member/logout"><span>로그아웃</span></a>
+                <a href="/"><span>메인 페이지</span></a>
 
             </div>
 
@@ -25,13 +24,13 @@
     <div id="nav">
         <ul>
             <li><a href="/manager/memberList">회원 관리</a></li>
-            <li><a href="/manager/memberReportList">회원 신고 관리</a></li>
-            <li><a href="/manager/tradeList">구매내역 관리</a></li>
-            <li><a href="/manager/tradeReportList">거래 신고 관리</a></li>
-            <li><a href="/manager/reviewList">리뷰 관리</a></li>
-            <li><a href="/manager/serviceList">서비스 관리</a></li>
-            <li><a href="/manager/projectRequestList">프로젝트 의뢰 관리</a></li>
-            <li><a href="/manager/managerInquiryList">이용문의 관리</a></li>
+            <li><a href="/manager/memberReportList">회원 신고</a></li>
+            <li><a href="/manager/tradeList">계좌</a></li>
+            <li><a href="/manager/tradeReportList">거래 신고</a></li>
+            <li><a href="/manager/reviewList">리뷰 신고</a></li>
+            <li><a href="/manager/serviceList">서비스</a></li>
+            <li><a href="/manager/projectRequestList">프로젝트 의뢰</a></li>
+            <li><a href="/manager/managerInquiryList">이용문의</a></li>
         </ul>
 
     </div>

@@ -101,14 +101,14 @@
 
 .manager-option > a{
     display: inline-block;
-    width: 70px;
-    height: 25px;
-    line-height:25px;
+    width: 100px;
+    height: 30px;
+    line-height:30px;
     text-align: center;
     color: white;
     background-color: black;
     border-radius: 5px;
-    font-size: 15px;
+    font-size: 16px;
     cursor:pointer;
 	text-decoration: none;
 }
