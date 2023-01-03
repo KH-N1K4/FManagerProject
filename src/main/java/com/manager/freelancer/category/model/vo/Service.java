@@ -39,6 +39,7 @@ public class Service {
 	private String likeCheckFL;
 	
 	private List<ImageFile> imageFileList;
+	private List<Review> reviewList;
 	
 	
 }

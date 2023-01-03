@@ -41,12 +41,13 @@
 	      <result property="careerCompanyDepartment" column="CAREER_DEPARTMENT"/>
 	      <result property="careerCompanyPosition" column="CAREER_POSITION"/>
 	      <result property="careerCompanyRegion" column="CAREER_REGION"/>
-	      <result property="careerPeriod" column="CAREER_PERIOD"/>
+	      <result property="careerCompanyPeriod" column="CAREER_PERIOD"/>
 	      
 	      <result property="licenseName" column="LICENSE_NAME"/>
 	      <result property="licenseDate" column="LICENSE_DATE"/>
 	      <result property="licenseAgency" column="LICENSE_AGENCY"/>
 	      
+	      <result property="bankCode" column="BANK_CODE"/>
 	      <result property="bankName" column="BANK_NAME"/>
 	      <result property="bankAccountNumber" column="ACCOUNT_NO"/>
 	      
@@ -124,6 +125,10 @@
     		SELECT REGION_NO as regionNumber,REGION_NAME as regionName from REGION
     	</select>	
     	
+    	<select id="getBankList" resultType="com.manager.freelancer.freelancer.model.vo.Bank">
+    		SELECT BANK_CODE as bankCode, BANK_NAME as bankName from BANK
+    	</select>
+    	
     	<select id="getPortfolioList" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio">
     		SELECT PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent
     		FROM  PORTFOLIO
@@ -157,6 +162,12 @@
     		WHERE FREELANCER_NO = #{freelancerNo}
     	</update>
     	
+    	<delete id="updateFreelancerField" parameterType="Freelancer">
+    		DELETE FROM FIELD 
+    		WHERE FREELANCER_NO = #{freelancerNo}
+    		
+    	</delete>
+    	
     	
     	<update id="updateFreelancerCareer" parameterType="Freelancer">
     		UPDATE CAREER SET
@@ -164,10 +175,25 @@
     		CAREER_DEPARTMENT = #{careerCompanyDepartment},
     		CAREER_POSITION = #{careerCompanyPosition},
     		CAREER_REGION = #{careerCompanyRegion},
-    		CAREER_PERIOD = #{careerPeriod}
+    		CAREER_PERIOD = #{careerCompanyPeriod}
     		WHERE FREELANCER_NO = #{freelancerNo}
     	</update>
     	
+    	
+    	<update id="updateFreelancerLicense" parameterType="Freelancer">
+    		UPDATE LICENSE SET
+    		LICENSE_NAME = #{licenseName},
+    		LICENSE_DATE = #{licenseDate},
+    		LICENSE_AGENCY = #{licenseAgency}
+    		WHERE FREELANCER_NO = #{freelancerNo}
+    	</update>
+    	
+    	<update id="updateFreelancerBank" parameterType="Freelancer">
+    		UPDATE FREELANCER_ACCOUNT SET
+   			BANK_CODE = #{bankCode},
+   			ACCOUNT_NO = #{bankAccountNumber}
+   			WHERE FREELANCER_NO = #{freelancerNo}
+    	</update>
     	
     	
     	
@@ -177,7 +203,7 @@
     			SELECT SEQ_PORTFOLIO_NO.NEXTVAL FROM DUAL
     		</selectKey>
     		INSERT INTO PORTFOLIO VALUES
-    		(SEQ_PORTFOLIO_NO.NEXTVAL,#{portfolioTitle}, #{portfolioContent}, #{portfolioFilePath},#{freelancerNo})
+    		(SEQ_PORTFOLIO_NO.NEXTVAL,#{portfolioTitle}, #{portfolioContent},#{portfolioThumbnail},#{freelancerNo}, #{portfolioFilePath})
     	</insert>
     	
     	

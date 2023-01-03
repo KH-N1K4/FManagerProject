@@ -42,10 +42,10 @@
 	      column="SERVICE_NO"/> 
 	      
 	      
-	     <!--  <collection property="commentList" 
-	      javaType="java.util.ArrayList" ofType="Comment"
-	      select="selectCommentList"
-	      column="BOARD_NO"/> -->
+	      <collection property="reviewList" 
+	      javaType="java.util.ArrayList" ofType="Review"
+	      select="selectReviewList"
+	      column="SERVICE_NO"/>
 	      
 	      
     </resultMap>
@@ -54,6 +54,21 @@
   <resultMap type="ImageFile" id="imageFile_rm">
       <id property="imageFileNo" column="REQUEST_FILE_NO"/>
       <result property="imageFilePath" column="REQUEST_FILE_PATH"/>
+      
+      <result property="serviceNo" column="SERVICE_NO"/>
+   </resultMap>
+   
+  <resultMap type="Review" id="review_rm">
+      <id property="reviewNo" column="REVIEW_NO"/>
+      <result property="reviewContent" column="REVIEW_CONTENT"/>
+      <result property="reviewFilePath" column="REVIEW_IMAGE"/>
+      <result property="reviewPoint" column="REVIEW_POINT"/>
+      <result property="freelancerName" column="FREELANCER_NAME"/>
+      <result property="memberName" column="MEMBER_NAME"/>
+      <result property="reviewCreateTime" column="REVIEW_CREATE_TIME"/>
+      <result property="reviewCommentCreateTime" column="REVIEW_COMMENT_CREATE_TIME"/>
+      
+      <result property="reviewStatus" column="REVIEW_STATUS"/>
       
       <result property="serviceNo" column="SERVICE_NO"/>
    </resultMap>
@@ -165,6 +180,20 @@
 	<select id="selectImageFileList" resultMap="imageFile_rm">
 	
 		SELECT * FROM SERVICE_FILE
+		WHERE SERVICE_NO=#{serviceNo}
+		 
+	</select>
+	
+	<select id="selectReviewList" resultMap="review_rm">
+	
+		SELECT (SELECT MEMBER_NAME  FROM "MEMBER" WHERE MEMBER_NO=TRADE.MEMBER_NO) MEMBER_NAME
+	,(SELECT MEMBER_PROFILE  FROM "MEMBER" WHERE MEMBER_NO=TRADE.MEMBER_NO) MEMBER_PROFILE
+		,REVIEW_CONTENT,REVIEW_IMAGE, REVIEW_POINT, REVIEW_CREATE_TIME
+		,(SELECT MEMBER_NAME  FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) FREELANCER_NAME, REVIEW_COMMENT_CONTENT, REVIEW_COMMENT_CREATE_TIME 
+		FROM REVIEW
+		LEFT JOIN REVIEW_COMMENT ON(REVIEW_NO=REVIEW_COMMENT_NO)
+		JOIN TRADE ON(REVIEW_NO=TRADE_NO)
+		JOIN SERVICE USING(SERVICE_NO) 
 		WHERE SERVICE_NO=#{serviceNo}
 		 
 	</select>

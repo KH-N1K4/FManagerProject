@@ -94,7 +94,7 @@
                     <div class="itemTitle">
                         <div class="item">경력 사항</div>
                         <div>
-                            <input type="text" name="" id=""value="${freelancer.careerCompanyName},${freelancer.careerCompanyDepartment},${freelancer.careerCompanyPosition},${freelancer.careerCompanyRegion},${freelancer.careerPeriod}">
+                            <input type="text" name="" id=""value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}">
                             <%-- <input type="text" name="" id="" value="${freelancer.careerCompanyDepartment}">
                             <input type="text" name="" id="" value="${freelancer.careerCompanyPosition}">
                             <input type="text" name="" id="" value="${freelancer.careerCompanyRegion}">
@@ -105,7 +105,7 @@
                     <div class="itemTitle">
                         <div class="item">자격증</div>
                         <div>
-                            <input type="text" name="" id="" value="${freelancer.licenseName},${freelancer.licenseDate},${freelancer.licenseAgency}">
+                            <input type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}">
 
                         
                         </div>

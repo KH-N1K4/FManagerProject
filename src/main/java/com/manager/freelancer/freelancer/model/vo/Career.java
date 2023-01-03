@@ -22,7 +22,7 @@ private String career; // input값 전체 받을 부분
 	private String careerCompanyPeriod1; 			// 근무기간(년)
 	private String careerCompanyPeriod2; 			// 근무기간(월)
 	
-	private String careerCompantPeriod; // 년(update용)
+	private String careerCompanyPeriod; // 년(update용)
 	
 	private int freelancerNo; 				// 프리랜서 번호
 
