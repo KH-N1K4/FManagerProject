@@ -53,6 +53,7 @@ public class FreelancerService {//지윤
 	
 	private int workStatus;       			//<result property="workStatus" column="WORK_STATUS"/><!-- 2:정산 완료 3:주문취소 -->
 	private String workStatusString;       			//<result property="workStatusString" column="WORK_STATUS_STRING"/>	
+	private String tradeRequestString;       			//서비스 요청사항
 	
 	//거래신고 테이블
 	private int tradeReportNo;				//TRADE_REPORT_NO 거래 신고 번호 SEQUENCE: SEQ_TRADE_REPORT_NO

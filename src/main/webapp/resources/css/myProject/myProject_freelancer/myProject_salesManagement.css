@@ -156,6 +156,11 @@ tbody{
   width:930px;
 }
 
+thead th:nth-of-type(2) > strong{
+  width: 0px;
+  font-size: 0;
+}
+
 tbody tr{
   display: table;
   width:930px;
@@ -164,21 +169,25 @@ tbody td:nth-of-type(1){
   width: 40px;
 }
 tbody td:nth-of-type(2){
-  width: 100px;
+  width: 0px;
+  font-size: 0;
 }
 tbody td:nth-of-type(3){
   padding-left: 15px;
 }
 tbody td:nth-of-type(4){
-  width: 100px;
+  width: 135px;
 }
 tbody td:nth-of-type(5){
   width: 95px;
 }
 tbody td:nth-of-type(6){
-  width: 95px;
+  width: 80px;
 }
 tbody td:nth-of-type(7){
+  width: 80px;
+}
+tbody td:nth-of-type(8){
   width: 180px;
 }
 
@@ -196,7 +205,7 @@ tbody td:nth-of-type(7){
 }
 
 .tbl_lst_type th strong{
-  font-size: 20px;
+  font-size: 18px;
 }
 
 table th {
@@ -251,7 +260,45 @@ tbody a{
   color:white;
 }
 
-/* 모달 */
+.suggestion_name_area{
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.suggestionName{
+  width: 100%;
+  position:absolute;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  text-align: start;
+}
+
+.client_tradeRequest{
+  width: 135px;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.clientTradeRequest{
+  cursor: pointer;
+  width: 100%;
+  position:absolute;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  text-align: start;
+}
+.suggestionNameAtag{
+  color: black;
+  font-weight: bold;
+}
+
+/* 신고하기 모달 */
 .reportModal {
   position: absolute;
   top: 0;
@@ -328,4 +375,47 @@ tbody a{
   border-radius: 10%;
   color: #73358C !important;
   letter-spacing: 0 !important;
+}
+
+
+/* 모달 */
+.clientTradeRequestModal {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index:100;
+}
+
+.clientTradeRequestModal.show {
+  display: block;
+}
+
+.clientTradeRequestModal_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  padding: 40px;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+  
+  z-index:100;
+}
+
+.clientTradeRequestModal_body>span{
+	position:absolute;
+	right:20px;
+	top:20px;
+	cursor:pointer;
 }

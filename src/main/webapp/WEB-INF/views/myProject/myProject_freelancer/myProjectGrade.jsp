@@ -33,10 +33,29 @@
           </div>
           <div class="topBox">
             <div class="leftBox">
-              <div class="leftContentTop"></div>
-              <div class="leftContentbottom"></div>
+              <div class="leftContentTop">
+                <h2>누적 판매 건수</h2>
+              </div>
+              <div class="leftContentbottom">
+                <h2>누적 판매 금액</h2>
+              </div>
             </div>
             <div class="rightBox">
+              <div class="satisfaction">
+                <div class="barTitle">만족도</div>
+                <progress class="progress" id="satisfactionBar" value="50" min="0" max="100"></progress>
+                <div class="barValue"></div>
+              </div>
+              <div class="responseRate">
+                <div class="barTitle">메세지 응답률</div>
+                <progress class="progress" id="responseRateBar" value="50" min="0" max="100"></progress>
+                <div class="barValue"></div>
+              </div>
+              <div class="WorkdayRate">
+                <div class="barTitle">작업일 준수율</div>
+                <progress class="progress" id="WorkdayRateBar" value="50" min="0" max="100"></progress>
+                <div class="barValue"></div>
+              </div>
             </div>
           </div>
           <div id="selectBox">

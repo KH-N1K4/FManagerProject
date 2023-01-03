@@ -75,6 +75,16 @@ font-size: 20px;
     outline: 1px solid #538126;
 }
 
+#srchOption1{
+    width: 130px;
+    height: 30px;
+    border-radius: 3%;
+    border: 1px solid #c6c6c9;
+    margin-right: 10px;
+    margin-left: 30px;
+}
+
+
 
 /* 내용 */
 #contentSection{

@@ -38,6 +38,8 @@
 	      
 	      <result property="workStatus" column="WORK_STATUS"/>										<!-- 2:정산 완료 3:주문취소 -->
 	      <result property="workStatusString" column="WORK_STATUS_STRING"/>				<!-- 2:정산 완료 3:주문취소 -->
+	      
+	      <result property="tradeRequestString" column="TRADE_REQUEST"/>				<!-- 2:정산 완료 3:주문취소 -->
      	  
      	  <!-- 거래신고 테이블 -->
      	  <result property="tradeReportNo" column="TRADE_REPORT_NO"/>							<!-- 거래 신고 번호 SEQUENCE: SEQ_TRADE_REPORT_NO -->
@@ -251,7 +253,7 @@
 			JOIN (SELECT MEMBER_NO,MEMBER_NICKNAME,MEMBER_NAME FROM "MEMBER") USING(MEMBER_NO)
 			JOIN "SETTLEMENT" USING(TRADE_NO)
 			LEFT JOIN TRADE_REPORT USING(TRADE_NO) WHERE REPORT_PERSON = FREELANCER_NO OR REPORT_PERSON IS null)
-		WHERE FREELANCER_NO = 30
+		WHERE FREELANCER_NO = #{memberNo}
 		AND PAYMENT_TYPE = 1
 		AND (TRADE_REPORT_TYPE_NO IS NULL OR TRADE_REPORT_TYPE_NO = 1)
 		<if test="mainCategoryNo != 0">
@@ -350,7 +352,7 @@
 		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		LEFT JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)) p
 		WHERE FREELANCER_NO = #{memberNo}
-		AND REQUEST_FILE_ORDER = 1
+		AND REQUEST_FILE_ORDER = 0
 		<if test="mainCategoryNo != 0">
 				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
 		</if>
@@ -371,7 +373,7 @@
 		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		LEFT JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)) p
 		WHERE FREELANCER_NO = #{memberNo}
-		AND REQUEST_FILE_ORDER = 1
+		AND REQUEST_FILE_ORDER = 0
 		<if test="mainCategoryNo != 0">
 				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
 		</if>
@@ -514,7 +516,7 @@
 				</if>
 				) p
 			</select>
-			
+			<!-- 서비스 문의 들고 오기 페이지 처리-->
 			<select id="getmyServiceInquiryListCount" parameterType="java.util.HashMap" resultType="_int">
 			SELECT COUNT(*) 
 			FROM (SELECT * FROM SERVICE_INQUIRY
@@ -541,7 +543,7 @@
 			</if>
 			ORDER BY SERVICE_INQUIRY_CREATE_DATE
 			</select>
-			
+			<!-- 서비스 문의 들고 오기 -->
 			<select id="myServiceInquiryList" parameterType="java.util.HashMap" resultMap="fService_rm">
 			SELECT s.* ,TO_CHAR(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD') SERVICE_INQUIRY_DATE_STRING
 			FROM (SELECT * FROM SERVICE_INQUIRY
