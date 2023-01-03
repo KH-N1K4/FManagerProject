@@ -600,13 +600,17 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	// 리뷰 신고 목록
 	@Override
-	public List<ReviewReport> selectReviewReportList(int cp) {
+	public Map<String, Object> selectReviewReportList(int cp) {
 		
 		int listCount = dao.getReviewReportListCount();
 		Pagination pagination = new Pagination(listCount, cp);
-		List<ReviewReport> reviewReport = dao.selectReviewReportList(pagination);
+		List<ReviewReport> reviewReportList = dao.selectReviewReportList(pagination);
 		
-		return reviewReport;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("reviewReportList", reviewReportList);
+		
+		return map;
 	}
 	
 	

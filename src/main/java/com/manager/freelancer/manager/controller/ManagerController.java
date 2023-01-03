@@ -477,8 +477,8 @@ public class ManagerController {
 	public String managerReview(Model model, 
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
 		
-		List<ReviewReport> reviewReport = service.selectReviewReportList(cp);
-		model.addAttribute("reviewReport",reviewReport);
+		Map<String, Object> map = service.selectReviewReportList(cp);
+		model.addAttribute("map",map);
 		
 		return "/manager/reviewList";
 	}

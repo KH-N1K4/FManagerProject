@@ -219,7 +219,7 @@ public interface ManagerService {
 	 * @param cp 
 	 * @return
 	 */
-	List<ReviewReport> selectReviewReportList(int cp);
+	Map<String, Object> selectReviewReportList(int cp);
 
 	
 
