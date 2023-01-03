@@ -39,7 +39,7 @@ public class Freelancer {
 	private String careerCompanyDepartment; // 근무부서
 	private String careerCompanyPosition; 	// 직위
 	private String careerCompanyRegion; 	// 근무지
-	private String careerPeriod; 			// 근무기간
+	private String careerCompanyPeriod; 			// 근무기간
 	
 	// 자격증 부분
 	private String license; // input값전체 받을 부분
@@ -49,8 +49,8 @@ public class Freelancer {
 	private String licenseDate;				// 자격증 발급일
 	private String licenseAgency;			// 자격증 발급 기관
 	
-	private String bankName; // 은행 이름
 	private int bankCode; // 은행 이름
+	private String bankName; // 은행 이름
 	private long bankAccountNumber; // 은행 계좌번호
 	
 	//프리랜서 전문분야
@@ -61,4 +61,5 @@ public class Freelancer {
 	private String portfolioTitle;
 	private String portfolioContent;
 	private String portfolioFilePath;
+	private String portfolioThumbnail;
 }

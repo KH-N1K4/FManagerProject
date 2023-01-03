@@ -9,5 +9,6 @@ public class Portfolio {
 	private String portfolioTitle;
 	private String portfolioContent;
 	private String portfolioFilePath;
+	private String portfolioThumbnail;
 	private int freelancerNo;
 }

@@ -28,8 +28,18 @@
             <div id="item">첨부파일</div> 
             <div>
                 <label for="image-input">파일 선택</label>
-                <input type="file" name="portfolioContent" id="image-input" accept="image/*">
+                <input type="file" name="portfolioFilePath" id="image-input" accept="image/*">
                 <%-- <input type="text" name="portfolioFilePath"> --%> <%-- 테스트 --%>
+            </div>
+        </div>
+        <div class="itemArea">
+            <div id="item">썸네일파일</div> 
+            <div>
+                <label for="image-input">파일 선택</label>
+                <input type="file" name="portfolioThumbnail" id="image-input" accept="image/*">
+                <%-- <input type="text" name="portfolioFilePath"> --%> <%-- 테스트 --%>
+                <%-- <input type="file" name="portfolioFilePath">
+                <input type="file" name="portfolioThumbnail"> --%>
             </div>
         </div>
         <div>
