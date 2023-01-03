@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.manager.freelancer.category.model.dao.CategoryDAO;
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Service;
+import com.manager.freelancer.category.model.vo.Trade;
 import com.manager.freelancer.manager.model.vo.Pagination;
 
 @org.springframework.stereotype.Service
@@ -112,6 +113,11 @@ public class CategoryServiceImpl implements CategoryService{
 		return boardListmap;
 		
 		
+	}
+
+	@Override
+	public int tradeComplete(Trade temp) {
+		return dao.tradeComplete(temp);
 	}
 
 	

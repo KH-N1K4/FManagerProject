@@ -83,13 +83,14 @@
 							
 						</c:when> 
 						<c:otherwise>
-							<form action="/service/payment/${fService.serviceNo }">
+							<form action="/service/payment/${fService.serviceNo }" method="POST">
+								<input type="hidden" name="serviceNo" value="${fService.serviceNo }">
 								<input type="hidden" name="serviceTitle" value="${fService.serviceTitle }">
 								<input type="hidden" name="serviceSummary" value="${fService.serviceSummary }">
 								<input type="hidden" name="servicePhoto" value="${fService.requestFilePath }">
 								<input type="hidden" name="servicePrice" value="${fService.servicePrice }">
 							
-								<button id="buyBtn">구매하기</a>
+								<button id="buyBtn">구매하기</button>
 							</form>
 							
 						</c:otherwise>
@@ -134,6 +135,9 @@
         
         const memberNo="${loginMember.memberNo}";
         const serviceNo="${fService.serviceNo}";
+        
+        const memberEmail="${loginMember.memberEmail}"; 
+
      
     </script>	
      <script src="/resources/js/category/modal.js"></script>

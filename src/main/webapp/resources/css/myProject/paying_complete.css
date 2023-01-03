@@ -51,7 +51,7 @@
 
 
 /* 요청사항 부분 */
-#payingMain>form>textarea{
+#payingMain>div>textarea{
     width: 1100px;
     height: 300px;
 
@@ -62,7 +62,7 @@
     
 }
 
-#payingMain>form>textarea::placeholder{
+#payingMain>div>textarea::placeholder{
     color:#538126;
     font-size: 17px;
     font-weight: bold;
@@ -89,6 +89,7 @@
     border-radius: 5px;
     color:white;
     font-weight: bold;
+    text-align:center;
 
 }
 
@@ -103,4 +104,5 @@
     background-color: white;
     color:#538126;
     font-weight: bold;
+    text-align:center;
 }
