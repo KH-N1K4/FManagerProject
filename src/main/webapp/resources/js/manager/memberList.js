@@ -47,7 +47,10 @@ function selectChange() {
                 for (b of before) {
                     b.remove();
                 }
-                document.querySelector('.pagination').innerHTML = "";
+                if(document.querySelector('.pagination')!=null){
+
+                    document.querySelector('.pagination').innerHTML = "";
+                }
 
                 
                 if (document.getElementById("search-key") != null) { // 검색창이 존재할 때
@@ -68,59 +71,59 @@ function selectChange() {
                     }
                     
                 }
-                
 
                 
-                for (member of map.memberList) {
-                    const table = document.createElement("div");
-                    table.classList.add('member-manage-table-content');
+                if(map.memberList!=null){
 
-                    const child1 = document.createElement("div");
-                    child1.classList.add('member-num');
-                    child1.append(document.createTextNode(member.memberNo));
+                    for (member of map.memberList) {
+                        const table = document.createElement("div");
+                        table.classList.add('member-manage-table-content');
+    
+                        const child1 = document.createElement("div");
+                        child1.classList.add('member-num');
+                        child1.append(document.createTextNode(member.memberNo));
+    
+                        const child2 = document.createElement("div");
+                        child2.classList.add('member-name');
+                        const child2a = document.createElement("a");
+                        child2a.classList.add('infoBtn');
+                        child2a.append(document.createTextNode(member.memberName));
+                        child2.append(child2a);
+    
+                        const child3 = document.createElement("div");
+                        child3.classList.add('member-division');
+                        child3.append(document.createTextNode(member.memberType));
+    
+                        const child4 = document.createElement("div");
+                        child4.classList.add('member-grade');
+                        child4.append(document.createTextNode(member.freelancerGrade));
+    
+                        const child5 = document.createElement("div");
+                        child5.classList.add('member-enrollDate');
+                        child5.append(document.createTextNode(member.memberEnrollDate));
+    
+                        const child6 = document.createElement("div");
+                        child6.classList.add('member-delete');
+                        const child6a = document.createElement("a");
+                        child6a.classList.add('deleteBtn');
+                        child6a.append(document.createTextNode("탈퇴"));
+                        child6.append(child6a);
+    
+                        table.append(child1);
+                        table.append(child2);
+                        table.append(child3);
+                        table.append(child4);
+                        table.append(child5);
+                        table.append(child6);
+                        memberTable.append(table);
+    
+                    }
+    
+                    modalShow();
+                    deleteMember();
 
-                    const child2 = document.createElement("div");
-                    child2.classList.add('member-name');
-                    const child2a = document.createElement("a");
-                    child2a.classList.add('infoBtn');
-                    child2a.append(document.createTextNode(member.memberName));
-                    child2.append(child2a);
+                    /* 페이징 */
 
-                    const child3 = document.createElement("div");
-                    child3.classList.add('member-division');
-                    child3.append(document.createTextNode(member.memberType));
-
-                    const child4 = document.createElement("div");
-                    child4.classList.add('member-grade');
-                    child4.append(document.createTextNode(member.freelancerGrade));
-
-                    const child5 = document.createElement("div");
-                    child5.classList.add('member-enrollDate');
-                    child5.append(document.createTextNode(member.memberEnrollDate));
-
-                    const child6 = document.createElement("div");
-                    child6.classList.add('member-delete');
-                    const child6a = document.createElement("a");
-                    child6a.classList.add('deleteBtn');
-                    child6a.append(document.createTextNode("탈퇴"));
-                    child6.append(child6a);
-
-                    table.append(child1);
-                    table.append(child2);
-                    table.append(child3);
-                    table.append(child4);
-                    table.append(child5);
-                    table.append(child6);
-                    memberTable.append(table);
-
-                }
-
-                modalShow();
-                deleteMember();
-
-                console.log(map.pagination);
-
-                /* 페이징 */
                 const li1 = document.createElement("li");
                 const a1 = document.createElement("a");
                 a1.setAttribute('href', "/manager/memberList?cp=1"+"&value="+value);
@@ -167,10 +170,32 @@ function selectChange() {
                 a5.appendChild(document.createTextNode(">>"));
                 li5.append(a5);
                 pagination.append(li5);
-                
+
+                }
 
                 
                 document.getElementById("inputValue").value=value;
+
+                /* 회원 번호 선택 시 숫자만 보내기 */
+                const memberSearchFrm = document.getElementById("memberSearch");
+                if(memberSearchFrm != null){
+                    memberSearchFrm.addEventListener("submit",e=>{
+                        
+                        const select = document.getElementById("search-key");
+                        const input = document.getElementById("search-query");
+
+                        if (select.options[select.selectedIndex].value == 'no'){
+                            const regEx = /[0-9]/g;
+                            if(!regEx.test(input.value)){
+                                input.value="";
+                                alert('숫자만 입력해주세요.')
+                                e.preventDefault();
+                            }
+
+                        }
+
+                    });
+                }
 
                  
                 
@@ -327,3 +352,30 @@ function modalShow() {
 
     }
 })();
+
+
+
+/* 회원 번호 선택 시 숫자만 보내기 */
+const memberSearchFrm = document.getElementById("memberSearch");
+if(memberSearchFrm != null){
+    memberSearchFrm.addEventListener("submit",e=>{
+        
+        const select = document.getElementById("search-key");
+        const input = document.getElementById("search-query");
+
+        if (select.options[select.selectedIndex].value == 'no'){
+            const regEx = /[0-9]/g;
+            if(!regEx.test(input.value)){
+                input.value="";
+                alert('숫자만 입력해주세요.')
+                e.preventDefault();
+            }
+
+        }
+
+    });
+}
+
+
+
+

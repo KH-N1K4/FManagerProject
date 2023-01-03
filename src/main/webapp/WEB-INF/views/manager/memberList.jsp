@@ -88,7 +88,7 @@
        </div>
 		
 		
-		
+		<c:if test="${not empty memberList}">
 		<!-- pagination -->
 		<div class="pagination-area">
 
@@ -134,6 +134,7 @@
 
 				</ul>
 			</div>
+			</c:if>
 		
 		<!-- 검색창 -->
 			<form action="/manager/memberList" method="get" id="memberSearch" onsubmit="return true">
