@@ -439,44 +439,43 @@
   	
   	<!-- 수익 정산 내역 리스트 -->
   	<select id="selectMyProfitEachList" parameterType="java.util.HashMap" resultMap="profit_rm">
-  	SELECT  p.*,TO_CHAR(PAYMENT_DATE,'YYYY-MM-DD hh:mm') PAYMENT_DATE_STRING,
-		TO_CHAR((PAYMENT_PRICE), 'FM999,999,999,999') PAYMENT_PRICE_STRING,
-		TO_CHAR((SERVICE_PRICE), 'FM999,999,999,999') SERVICE_PRICE_STRING,
-		ROWNUM NUM
-			FROM (SELECT * FROM SETTLEMENT
-					JOIN TRADE USING(TRADE_NO)
-					JOIN SERVICE USING(SERVICE_NO)
-					WHERE FREELANCER_NO = #{memberNo}
-					AND WORK_STATUS IN (3)      
-					AND PAYMENT_TYPE IN (3)
-					AND USER_NO = #{memberNo}  
-					<if test="startDate neq ''">
-						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
-					</if>  
-					<if test="endtDate neq ''">
-						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
-					</if>  
-					<if test="startDate neq '' and endtDate neq ''">
-						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
-					</if>      
-					UNION 
-					SELECT * FROM SETTLEMENT
-					JOIN TRADE USING(TRADE_NO)
-					JOIN SERVICE USING(SERVICE_NO)
-					WHERE FREELANCER_NO  =#{memberNo}
-					AND WORK_STATUS IN (2)    
-					AND PAYMENT_TYPE IN (2)
-					<if test="startDate neq ''">
-						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
-					</if>  
-					<if test="endtDate neq ''">
-						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
-					</if>  
-					<if test="startDate neq '' and endtDate neq ''">
-						 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
-					</if>
-					) p 
-				ORDER BY PAYMENT_DATE
+  	SELECT t.*,ROWNUM NUM FROM (SELECT  p.*,TO_CHAR(PAYMENT_DATE,'YYYY-MM-DD hh:mm') PAYMENT_DATE_STRING,
+			TO_CHAR((PAYMENT_PRICE), 'FM999,999,999,999') PAYMENT_PRICE_STRING,
+			TO_CHAR((SERVICE_PRICE), 'FM999,999,999,999') SERVICE_PRICE_STRING
+				FROM (SELECT * FROM SETTLEMENT
+						JOIN TRADE USING(TRADE_NO)
+						JOIN SERVICE USING(SERVICE_NO)
+						WHERE FREELANCER_NO = #{memberNo}
+						AND WORK_STATUS IN (3)      
+						AND PAYMENT_TYPE IN (3)
+						AND USER_NO = #{memberNo}  
+						<if test="startDate neq ''">
+							 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
+						</if>  
+						<if test="endtDate neq ''">
+							 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
+						</if>  
+						<if test="startDate neq '' and endtDate neq ''">
+							 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
+						</if>      
+						UNION 
+						SELECT * FROM SETTLEMENT
+						JOIN TRADE USING(TRADE_NO)
+						JOIN SERVICE USING(SERVICE_NO)
+						WHERE FREELANCER_NO  =#{memberNo}
+						AND WORK_STATUS IN (2)    
+						AND PAYMENT_TYPE IN (2)
+						<if test="startDate neq ''">
+							 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{startDate}
+						</if>  
+						<if test="endtDate neq ''">
+							 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{endtDate}
+						</if>  
+						<if test="startDate neq '' and endtDate neq ''">
+							 AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{startDate} AND #{endtDate}
+						</if>
+						) p 
+					ORDER BY PAYMENT_DATE) t
   	</select>
   	
   	<!-- 수익 정산 내역 페이지 처리 -->
