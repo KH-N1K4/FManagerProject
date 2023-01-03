@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<c:set var="proposal" value="${proposal}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -9,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>myProject_suggestion</title>
 
-  <link rel="stylesheet" href="/resources/css/myProject/myProject_suggestion.css">
+  <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_suggestion.css">
   
 </head>
 <body>
@@ -50,16 +52,16 @@
             <div class="tableArea">
               <div id="tableContent">
                 <table cellspacing="0" class="tbl_lst_type">	
-                  <caption><span class="blind">받은 제안 정보</span></caption>				
+                  <caption><span class="blind">받은 제안 정보</span></caption>
                   <colgroup>
-                    <col width="40"><col width="*"><col width="100"><col width="81"><col width="81"><col width="86"><col width="86"><col width="85">
+                    <col width="50"><col width="*"><col width="95"><col width="95"><col width="95"><col width="95"><col width="95"><col width="95">
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" class="frst"><strong class="line_n">번호</strong></th>
                       <th scope="col" class=""><strong class="line_r">프로젝트명</strong></th>   
                       <th scope="col" class=""><strong class="line_r">전문가</strong></th>  
-                      <th scope="col" class=""><strong class="line_n">번호</strong></th>
+                      <th scope="col" class=""><strong class="line_n">등급</strong></th>
                       <th scope="col" class=""><strong class="line_n">금액</strong></th>
                       <th scope="col" class=""><strong class="line_n">수정횟수</strong></th>
                       <th scope="col" class=""><strong class="line_n">상태</strong></th>
@@ -67,74 +69,76 @@
                     </tr>
                   </thead>
                   <tbody id = "selecttbody">
-                    <tr class="suggestionTable" suggestionNumeber="">
-                      <td class="tc">
-                        <span class="num">1</span>
-                      </td>
-                      <td class="tl">
-                        <div class="suggestion_name_area td_link">
-                          <a href="#" id="suggestionName" class="suggestionName">로고 디자인 제작 요청</a>
-<%--                           <a href="#" id="suggestionName${}" class="suggestionName" suggestionName="">로고 디자인 제작 요청</a> --%>
-                        </div>
-                      </td>
-                      <td  class="tc">
-                        <div class="expert_name_area td_link">
-                          <a href="#" id="expertName" class="expertName" expertName="">홍길동</a>
-<%--                           <a href="#" id="expertName${}" class="expertName" expertName="">홍길동</a> --%>
-                        </div>
-                      </td>
-                      <td class="tc">                  
-                        <span class="text">Level1</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">100,000원</span>
-                      </td>
-                      <td class="tc">
-                        <span class="num">3</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">구매완료</span>
-                      </td>
-                      <td class="tc">
-                        <a href="#" id="chooseBtn" title="" class="chooseBtn btn_type"><span>채택</span></a>
-<%--                         <a href="#" id="chooseBtn" title="${}" class="chooseBtn btn_type"><span>채택</span></a> --%>
-                      </td>                
-                    </tr>
-                    <tr class="suggestionTable" suggestionNumeber="">
-                      <td class="tc">
-                        <span class="num">2</span>
-                      </td>
-                      <td class="tl">
-                        <div class="suggestion_name_area td_link">
-                          <a href="#" id="suggestionName" class="suggestionName" suggestionName="">프리랜서 마켓 웹사이트 제작 요청</a>
-<%--                           <a href="#" id="suggestionName${}" class="suggestionName" suggestionName="">프리랜서 마켓 웹사이트 제작 요청</a> --%>
-                        </div>
-                      </td>
-                      <td  class="tc">
-                        <div class="expert_name_area td_link">
-                          <a href="#" id="expertName" class="expertName" expertName="">김이듀</a>
-<%--                           <a href="#" id="expertName${}" class="expertName" expertName="">김이듀</a> --%>
-                        </div>
-                      </td>
-                      <td class="tc">                  
-                        <span class="text">Level3</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">250,000원</span>
-                      </td>
-                      <td class="tc">
-                        <span class="num">5</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">채택마감</span><!-- 채택마감일 때 비활성 -->
-                      </td>
-                      <td class="tc">
-                        <a href="#" id="chooseBtn" title="" class="chooseBtn btn_type"><span>채택</span></a>
-<%--                         <a href="#" id="chooseBtn" title="${}" class="chooseBtn btn_type"><span>채택</span></a> --%>
-                      </td>                
-                    </tr>
+                      <c:if test="${empty proposal}">
+                        <tr class="suggestionTable" suggestionNumeber="">
+                          <td colspan="8"> 받은 제안이 없습니다. </td>
+                        </tr>
+                      </c:if>
+                      <c:if test="${not empty proposal}">
+                        <c:forEach items="${proposal}" var="proposal">
+                              <tr class="suggestionTable" id="suggestionTable">
+                                <td class="tc">
+                                  <span class="num">${proposal.proposalNo}</span>
+                                </td>
+                                <td class="tl">
+                                  <div class="suggestion_name_area td_link">
+                                    <a href="#" id="suggestionName" class="suggestionName">${proposal.projectRequestTitle}</a>
+                                  </div>
+                                </td>
+                                <td  class="tc">
+                                  <div class="expert_name_area td_link">
+                                    <a href="#" id="expertName" class="expertName" expertName="">${proposal.freelancerName}</a>
+                                  </div>
+                                </td>
+                                <td class="tc">                  
+                                  <span class="text">${proposal.gradeName}</span>
+                                </td>
+                                <td class="tc">
+                                  <span class="text">${proposal.proposalPrice}원</span>
+                                </td>
+                                <td class="tc">
+                                  <span class="num">${proposal.proposalEditNum}/5</span>
+                                </td>
+                                <td class="tc" id="proposalStatus">
+                                  <span class="text">${proposal.proposalAdoptStatus}</span>
+                                </td>
+                                <td class="tc">
+                                  <button id="chooseBtn" title="" class="chooseBtn btn_type">채택</button>
+                                </td>                
+                              </tr>
+                        </c:forEach>
+                      </c:if>
                   </tbody>
                 </table>
+
+                <c:if test="${listCount != 0}">
+                  <div class="pagination-area">
+                    <ul class="pagination">
+                        <!-- 첫 페이지로 이동 -->
+                        <li><a href="/member/myProject/myReceiveList?cp=1${sURL}">&lt;&lt;</a></li>
+                        <!-- 이전 목록 마지막 번호로 이동 -->
+                        <li><a href="/member/myProject/myReceiveList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+                        <!-- 특정 페이지로 이동 -->
+                        <c:forEach var="countPage" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                        <c:choose>
+                            <c:when test="${countPage== pagination.currentPage}">
+                            <!-- 현재 페이지인 경우 -->
+                            <li><a class="current">${countPage}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                            <!-- 현재 페이지를 제외한 나머지 -->
+                            <li><a href="/member/myProject/myReceiveList?cp=${countPage}${sURL}">${countPage}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                        </c:forEach>
+                        <!-- 다음 목록 시작 번호로 이동 -->
+                        <li><a href="/member/myProject/myReceiveList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+                        <!-- 끝 페이지로 이동 -->
+                        <li><a href="/member/myProject/myReceiveList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                    </ul>
+                  </div>
+                </c:if>
+
               </div>
             </div>
           </div>
@@ -147,7 +151,14 @@
   
   <!-- **************************************footer*************************************-->
 
-	  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+  
+    <script>
+        var memberNo = '${loginMember.memberNo}';
+        var proposalAdoptStatus = '${proposal.proposalAdoptStatus}';
+    </script>
 
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="/resources/js/myProject/myProject_user/myProjectSuggestion.js"></script> 
 </body>
 </html>

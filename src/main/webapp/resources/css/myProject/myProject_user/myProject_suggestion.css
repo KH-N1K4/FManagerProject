@@ -95,9 +95,10 @@ caption {
 table {
   border-collapse: separate;
   border-spacing: 0 10px;
+  border-bottom: 1px solid #f2f3f7;
+  padding: 20px 0px;
 }
 table {
-  border-style: none; 
   text-indent: initial;
   /* border-collapse:collapse; */ 
   width:100%;
@@ -114,36 +115,36 @@ tbody{
   padding-top: 10px;
   border: 0px;
   vertical-align: middle;
-  width:930px;
+  width: 930px;
 }
 
 tbody tr{
   display: table;
-  width:930px;
+  width: 930px;
 }
 tbody td:nth-of-type(1){
-  width: 40px;
+  width: 50px;
 }
 tbody td:nth-of-type(2){
-  padding-left: 15px;
+  text-align: center;
 }
 tbody td:nth-of-type(3){
-  width: 100px;
+  width: 95px;
 }
 tbody td:nth-of-type(4){
-  width: 81px;
+  width: 95px;
 }
 tbody td:nth-of-type(5){
-  width: 81px;
+  width: 95px;
 }
 tbody td:nth-of-type(6){
-  width: 86px;
+  width: 95px;
 }
 tbody td:nth-of-type(7){
-  width: 86px;
+  width: 95px;
 }
 tbody td:nth-of-type(8){
-  width: 85px;
+  width: 95px;
 }
 
 .tc {
@@ -157,8 +158,63 @@ tbody td:nth-of-type(8){
 .td_link > a{
   text-decoration: none;
   cursor: pointer;
+  color: black;
 }
 
 .tbl_lst_type th strong{
   font-size: 20px;
 }
+
+th{
+  height: 80px;
+  border-top:1px solid #f2f3f7;
+}
+
+#chooseBtn{
+  width: 60px;
+  height: 25px;
+  background-color: #538126;
+  border-radius: 5px;
+  border: 1px solid #538126;
+  color: aliceblue;
+  cursor: pointer;
+}
+
+
+/* ========================== */
+/* 페이지 처리 */
+.pagination{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 9px;
+  padding: 0;
+}
+
+.pagination li{
+  width: 20px;
+  margin: 0 5px;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.pagination a{
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: #666;
+}
+
+.current{
+  font-weight: bold;
+  border:1px solid #73358C;
+  border-radius: 10%;
+  color: #73358C !important;
+  letter-spacing: 0 !important;
+}
+/* ========================== */

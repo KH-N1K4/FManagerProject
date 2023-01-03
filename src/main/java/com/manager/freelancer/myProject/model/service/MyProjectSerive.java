@@ -48,6 +48,6 @@ public interface MyProjectSerive {
 	 * @param myProject
 	 * @return
 	 */
-	Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo, MyProject myProject);
+	Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo);
 
 }

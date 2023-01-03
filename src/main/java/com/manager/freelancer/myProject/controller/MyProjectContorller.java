@@ -96,25 +96,37 @@ public class MyProjectContorller {
 	//------------------------------------------------------------------------
 	// 받은 제안 페이지 이동 
 	@GetMapping("/member/myProject/myReceiveList")
-	public String myRequestInsert(Model model, MyProject myProject,
+	public String myRequestInsert(Model model,
 								  @RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
 								  @SessionAttribute("loginMember") Member loginMember,
 								  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
 		
 		
-//		List<MyProject> maincategoryList = service.selectmaincategoryList();
-//		
-//		Map<String, Object> map = service.selectProposal(loginMember.getMemberNo(),cp,mainCategoryNo, myProject);
-//		
-//		model.addAttribute("maincategoryList",maincategoryList);
-//		model.addAttribute("myProject",map.get("myProject"));
-//		model.addAttribute("pagination",map.get("pagination"));
-//		model.addAttribute("listCount",map.get("listCount"));
-//		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
+		List<MyProject> maincategoryList = service.selectmaincategoryList();
+		
+		Map<String, Object> map = service.selectProposal(loginMember.getMemberNo(), cp, mainCategoryNo);
+		
+		model.addAttribute("maincategoryList",maincategoryList);
+		model.addAttribute("proposal",map.get("proposal"));
+		model.addAttribute("pagination",map.get("pagination"));
+		model.addAttribute("listCount",map.get("listCount"));
+		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
+		
 		
 		return "myProject/myProject_user/myProject_suggestion";
 	}
 	//------------------------------------------------------------------------
+	
+//	@GetMapping("/member/myProject/myReceiveList")
+//	public String changeStatus() {
+//		
+//		
+//		
+//		
+//		return "redirect: /member/myProject/myReceiveList";
+//	}
+//	
+	
 	
 
 	// 구매 관리 이동

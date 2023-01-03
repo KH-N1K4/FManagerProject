@@ -56,11 +56,11 @@
 
                     <div class="content">
                         <c:choose>
-                            <c:when test="${userInquiry.memberProfile == null}">
+                            <c:when test="${loginMember.memberProfile == null}">
                                 <a href="/member/myInfo"><img src="/resources/images/프로필.PNG" class="myProfile"></a>
                             </c:when>
-                            <c:when test="${userInquiry.memberProfile != null}">
-                                <a href="/member/myInfo"><img src="${userInquiry.memberProfile}" class="myProfile"></a>
+                            <c:when test="${loginMember.memberProfile != null}">
+                                <a href="/member/myInfo"><img src="${loginMember.memberProfile}" class="myProfile"></a>
                             </c:when>
                         </c:choose>
                         <table>
