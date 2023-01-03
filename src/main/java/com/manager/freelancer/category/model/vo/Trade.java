@@ -17,7 +17,7 @@ public class Trade {
 	private String serviceTitle;		//SERVICE_TITLE 서비스 제목
 	private String serviceSummary;		//SERVICE_SUMMARY 서비스 한 줄 요약
 	private String serviceContent;		//SERNICE_CONTENT 서비스 내용
-	private int servicePrice;			//SERVICE_PRICE 서비스 가격
+	private String servicePrice;			//SERVICE_PRICE 서비스 가격
 	private String requestFilePath;	
 	
 	

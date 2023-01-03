@@ -286,11 +286,12 @@ public class CategoryController {
 	}
 	
 	
+	// 카카오 페이 결제 ajax
 	@PostMapping("/service/payComplete/{serviceNo}")
 	@ResponseBody
 	public int tradeComplete(@PathVariable("serviceNo") int serviceNo, Model model,
 			@SessionAttribute(value="loginMember", required = false) Member loginMember,
-			@RequestParam("tradeRequest") String tradeRequest
+			@RequestParam("tradeRequest") String tradeRequest, @RequestParam("servicePrice") String servicePrice
 			) {	
 		
 		Trade temp = new Trade();
@@ -299,6 +300,7 @@ public class CategoryController {
 		temp.setServiceNo(serviceNo);
 		temp.setMemberNo(loginMember.getMemberNo());
 		temp.setTradeRequest(tradeRequest);
+		temp.setServicePrice(servicePrice);
 		
 		
 		int tradeNo=service.tradeComplete(temp);
@@ -308,6 +310,7 @@ public class CategoryController {
 		return tradeNo;
 	}
 	
+	// 결제 완료 페이지 이동
 	@GetMapping("/service/payComplete/{tradeNo}")
 	public String payComplete(@PathVariable("tradeNo") int tradeNo, Model model,
 			@SessionAttribute(value="loginMember", required = false) Member loginMember
