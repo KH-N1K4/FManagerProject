@@ -1,18 +1,21 @@
 .modalMain{
-    width: 450px;
+    width: 720px;
     margin: auto;
+    height: 650px;
+    overflow-y:auto;
+    max-height: 650px;
 }
 
 .x{
-    margin-left: 450px;
+    margin-left: 700px;
     cursor: pointer;
 }
 
 
 
-.tradeInfoArea{
-    width: 350px;
-    height: 190px;
+.reviewArea{
+    width: 600px;
+    height: 550px;
     background-color: rgb(233, 233, 233);
     display: flex;
     flex-direction: column;
@@ -20,81 +23,34 @@
     margin-bottom: 10px;
     padding: 30px;
 }
-.tradeInfoArea>div{
-    display: flex;
-    flex-direction: row;
+
+.contentArea{
+    margin-right: 30px;
 }
 
-
-
-
-
-
-.infoTitle{
+.title{
+    padding: 30px;
+    font-weight: bold;
     width: 100px;
-    text-align: left;
-    margin: 0 20px 20px 50px;
-    line-height: 30px;
-    font-weight: bold;
 }
-.infoTitle + div{
-    width: 130px;
-    height: 30px;
-    background-color: rgb(212, 212, 212);
-    padding-left: 10px;
-    line-height: 30px;
+.content{
+    padding: 30px;
+    width: 350px;
 }
-.bold{
-    font-weight: bold;
-}
-
-.selectPercent{
+.reviewArea>div{
     display: flex;
     flex-direction: row;
-    margin-top: 30px;
-    width: 400px;
-    height: 30px;
-}
-.refundPercent{
-    margin-left: 60px;
-    line-height: 30px;
-    font-weight: bold;
-}
-#selectRefundPercent{
-    margin-left: 20px;
-    width: 100px;
-    height: 30px;
-    padding-left: 10px;
-    
 }
 
+.image{
+    padding: 30px;
+    width: 350px;
+    height: 350px;
 
-.btnArea{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
-.modalBtn{
-    width: 180px;
-    height: 50px;
-    font-size: 20px;
-    text-align: center;
-    background-color: black;
-    color: white;
-    margin-top: 50px;
-    border-radius: 5px;
-    cursor: pointer;
+.review-image{
+    width: 350px;
 }
 
 
 
-
-#refundFrm{
-    margin: auto;
-    width: 380px;
-    display: none;
-    padding-top: 5px;
-}
-#refundFrm.show{
-    display: block;
-}

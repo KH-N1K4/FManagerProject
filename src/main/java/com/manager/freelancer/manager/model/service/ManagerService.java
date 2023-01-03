@@ -221,6 +221,24 @@ public interface ManagerService {
 	 */
 	Map<String, Object> selectReviewReportList(int cp);
 
+	/** 리뷰 상세보기
+	 * @param reviewReportNo
+	 * @return
+	 */
+	ReviewReport reviewReportDetail(int reviewReportNo);
+
+	/** 리뷰 삭제
+	 * @param reviewReportNo
+	 * @return
+	 */
+	int managerReviewDelete(int reviewReportNo);
+ 
+	/** 리뷰 보류
+	 * @param reviewReportNo
+	 * @return
+	 */
+	int managerReviewDelete2(int reviewReportNo);
+
 	
 
 	

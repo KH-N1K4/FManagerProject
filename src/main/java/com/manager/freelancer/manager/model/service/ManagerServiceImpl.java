@@ -613,8 +613,37 @@ public class ManagerServiceImpl implements ManagerService {
 		return map;
 	}
 	
+	// 리뷰 상세
+	@Override
+	public ReviewReport reviewReportDetail(int reviewReportNo) {
+		return dao.reviewReportDetail(reviewReportNo);
+	}
 	
+	// 리뷰 삭제
+	@Override
+	public int managerReviewDelete(int reviewReportNo) {
+		
+		int reviewNo = dao.getReviewNo(reviewReportNo);
+		
+		int result = dao.managerReviewDelete(reviewReportNo);
+		
+		if(result>0) result = dao.updateReviewStatusD(reviewNo);
+		
+		return result;
+	}
 	
+	// 리뷰 보류
+	@Override
+	public int managerReviewDelete2(int reviewReportNo) {
+		
+		int reviewNo = dao.getReviewNo(reviewReportNo);
+
+		int result = dao.managerReviewDelete2(reviewReportNo);
+		
+		if (result>0) result = dao.updateReviewStatus(reviewNo);
+		
+		return result;
+	}
 	
 
 }

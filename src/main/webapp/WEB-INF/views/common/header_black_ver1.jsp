@@ -7,7 +7,7 @@
     <div id="header">
         <div id="header1">
 
-            <a id="logo" href="/manager/memberList"><img src="../resources/images/final_logo_black.png" alt=""></a>
+            <a id="logo" href="/manager/memberList"><img src="/resources/images/final_logo_black.png" alt=""></a>
 
          
             <div class="header-top">
