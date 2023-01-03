@@ -165,7 +165,7 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		
 		int listCount = dao.getSalesListCount(memberNo,freelancerFL,searchInput, mainCategoryNo);
 		
-		Pagination pagination = new Pagination(listCount,cp); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
+		Pagination pagination = new Pagination(listCount,cp,15,5); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
 		List<FreelancerService> salesList = dao.selectSalesList(memberNo,freelancerFL,searchInput, mainCategoryNo,pagination);
 		
 		Map<String, Object> map = new HashMap<String, Object>();

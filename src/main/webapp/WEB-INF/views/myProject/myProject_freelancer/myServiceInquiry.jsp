@@ -100,7 +100,7 @@
                           <td class="tl">
                             <div class="service_name_area td_link">
                               <c:choose>
-                                <c:when test="${inquiry.serviceDelFL eq 'N' && inquiry.serviceStatus == 2}"><a href="#" id="serviceName" class="serviceName" serviceName="">${inquiry.serviceTitle}</a></c:when>
+                                <c:when test="${inquiry.serviceDelFL eq 'N' && inquiry.serviceStatus == 2}"><a href="/category/${inquiry.mainCategoryNo}/${inquiry.subCategoryNo}/${inquiry.thirdCategoryNo}/${inquiry.serviceNo}" id="serviceName" class="serviceName serviceNameAtag" serviceName="" target="_blank">${inquiry.serviceTitle}</a></c:when>
                                 <c:otherwise><span id="serviceName" class="serviceName noSalesSevice" serviceName="">${inquiry.serviceTitle}</span></c:otherwise>
                               </c:choose>
                             </div>

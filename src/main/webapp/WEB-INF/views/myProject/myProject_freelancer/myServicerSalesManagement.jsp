@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>salesManagement</title>
+  <title>판매내역</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/myProject_freelancer/myProject_salesManagement.css">
 
@@ -85,13 +85,14 @@
                 <table cellspacing="0" class="tbl_lst_type">	
                   <caption><span class="blind">판매 서비스 관리</span></caption>				
                   <colgroup>
-                    <col width="40"><col width="100"><col width="*"><col width="100"><col width="95"><col width="95"><col width="180">
+                    <col width="40"><col width="0"><col width="*"><col width="130"><col width="95"><col width="80"><col width="80"><col width="180">
                   </colgroup>
                   <thead>
                     <tr>
                       <th scope="col" class="frst"><strong class="line_n">번호</strong></th>
                       <th scope="col" class=""><strong class="line_n">거래번호</strong></th>
                       <th scope="col" class=""><strong class="line_r">서비스명</strong></th>   
+                      <th scope="col" class=""><strong class="line_r">요청사항</strong></th>   
                       <th scope="col" class=""><strong class="line_r">의뢰인</strong></th>  
                       <th scope="col" class=""><strong class="line_n">수정횟수</strong></th>
                       <th scope="col" class=""><strong class="line_n">작업상태</strong></th>
@@ -112,10 +113,15 @@
                           <td class="tl">
                             <div class="suggestion_name_area td_link">
                               <c:choose>
-                                <c:when test="${sales.serviceDelFL eq 'N' && sales.serviceStatus == 2}"><a href="#" id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</a></c:when>
-                                <c:otherwise><span id="suggestionName" class="suggestionName" suggestionName="">${sales.serviceTitle}</span></c:otherwise>
+                                <c:when test="${sales.serviceDelFL eq 'N' && sales.serviceStatus == 2}"><a href="/category/${sales.mainCategoryNo}/${sales.subCategoryNo}/${sales.thirdCategoryNo}/${sales.serviceNo}" id="suggestionName" class="suggestionName suggestionNameAtag" suggestionName="" target="_blank">${sales.serviceTitle}</a></c:when>
+                                <c:otherwise><span id="suggestionName" class="suggestionName suggestionNameNo" suggestionName="">${sales.serviceTitle}</span></c:otherwise>
                               </c:choose>
                               
+                            </div>
+                          </td>
+                          <td  class="tl">
+                            <div class="client_tradeRequest td_link">
+                              <span id="clientTradeRequest" class="clientTradeRequest" expertName="" title="${sales.tradeNo}">${sales.tradeRequestString}</span>
                             </div>
                           </td>
                           <td  class="tc">
@@ -134,10 +140,12 @@
                               </c:choose>
                             
                           </td>
-                          <td class="tc">
+                          <td class="tc" id="tdBtn${sales.tradeNo}">
                             <c:choose>
                               <c:when test="${sales.freelancerFLString eq '진행 중' && (sales.workStatus != 2 && sales.workStatus != 3)}">
-                                <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
+                                <c:if test="${sales.workCount ge 1}">
+                                  <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
+                                </c:if>
                                 <c:if test="${sales.workCount le sales.serviceEditNum}">
                                   <a href="#" id="sendBtn${sales.tradeNo}" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>
                                 </c:if>
@@ -199,6 +207,9 @@
         <!-- sideMenu를 제외한 메인 내용 -->
         <div class="reportModal">
           <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myprojectSales_reportModal.jsp" /> 
+        </div>
+        <div class="clientTradeRequestModal">
+          <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myprojectSales_clientTradeRequestModal.jsp" /> 
         </div>
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
