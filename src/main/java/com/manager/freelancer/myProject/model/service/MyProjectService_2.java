@@ -31,4 +31,10 @@ public interface MyProjectService_2 {
 	 */
 	Map<String, Object> selectPurchaseList(Map<String, Object> option, int cp);
 
+	/** 회원 작업 완료
+	 * @param tradeNo
+	 * @return
+	 */
+	int memberDone(int tradeNo);
+
 }

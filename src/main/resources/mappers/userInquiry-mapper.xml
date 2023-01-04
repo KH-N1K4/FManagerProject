@@ -68,7 +68,7 @@
   	</select>
   	
   	<!-- 1. 특정 게시판의 전체 게시글 수 조회 (관리자) -->
-  	<select id="getListCount_manager" parameterType="_int" resultType="_int">
+  	<select id="getListCount_manager" resultType="_int">
   		SELECT COUNT(*) FROM USER_INQUIRY
   	</select>
   	
@@ -91,7 +91,7 @@
   			   MEMBER_NICKNAME
 		FROM USER_INQUIRY 
 		JOIN MEMBER USING(MEMBER_NO)
-		ORDER BY USER_INQUIRY_NO
+		ORDER BY USER_INQUIRY_CREATE_DATE DESC
   	</select>
   	
   	
@@ -266,25 +266,32 @@
   	
   	<!-- 이용문의 내역 조회 (진행상태 변경 시) 리스트 카운트 -->
   	<select id="getStatusListCount" parameterType="java.util.HashMap" resultType="_int">
-  		SELECT USER_INQUIRY_NO, USER_INQUIRY_TITLE, USER_INQUIRY_CREATE_DATE,
-	   CASE WHEN USER_INQUIRY_REQUEST IS NULL THEN '답변 대기'
-	        WHEN USER_INQUIRY_REQUEST IS NOT NULL THEN '답변 완료'
-	  END AS USER_INQUIRY_REQUEST_STATUS      
-FROM USER_INQUIRY
-WHERE MEMBER_NO = #{memberNo}
-  		
+  		SELECT COUNT(*) 
+		FROM USER_INQUIRY
+		WHERE MEMBER_NO = #{memberNo}
+			<if test='optionVal eq "1"'>
+				AND USER_INQUIRY_REQUEST IS NOT NULL
+			</if>
+			<if test='optionVal eq "2"'>
+				AND USER_INQUIRY_REQUEST IS NULL
+			</if>
   	</select>
   	
   	<!-- 이용문의 내역 조회 (진행상태 변경 시) -->
-  	<select id="userStatusList" parameterType="java.util.HashMap">
-  		SELECT USER_INQUIRY_NO, USER_INQUIRY_TITLE, USER_INQUIRY_CREATE_DATE,
-	   		   CASE WHEN USER_INQUIRY_REQUEST IS NULL THEN '답변 대기'
-	                WHEN USER_INQUIRY_REQUEST IS NOT NULL THEN '답변 완료'
-	            END AS USER_INQUIRY_REQUEST_STATUS      
+  	<select id="userStatusList" parameterType="java.util.HashMap" resultMap="userInquiry_rm">
+	  	SELECT USER_INQUIRY_NO, USER_INQUIRY_TITLE, USER_INQUIRY_REQUEST,
+	  		   TO_CHAR(USER_INQUIRY_CREATE_DATE, 'YYYY-MM-DD'),
+		   CASE WHEN USER_INQUIRY_REQUEST IS NULL THEN '답변 대기'
+		        WHEN USER_INQUIRY_REQUEST IS NOT NULL THEN '답변 완료'
+		   END AS USER_INQUIRY_REQUEST_STATUS     
 		FROM USER_INQUIRY
-        WHERE MEMBER_NO = #{memberNo}
-        WHERE USER_INQUIRY_REQUEST_STATUS = '답변대기'
-  		
+		WHERE MEMBER_NO = #{memberNo}
+			<if test='optionVal eq "1"'>
+				AND USER_INQUIRY_REQUEST IS NOT NULL
+			</if>
+			<if test='optionVal eq "2"'>
+				AND USER_INQUIRY_REQUEST IS NULL
+			</if>
   	</select>
   
 </mapper>

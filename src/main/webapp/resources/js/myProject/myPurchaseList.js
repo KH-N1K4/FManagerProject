@@ -27,151 +27,7 @@ $(document).ready(function(){
     $('#searchInput').val('');
   });
   
-  
-  $('#searchInput').keyup(function(){
-    var txt = $(this).val();
-    if(txt != ''){  //빈줄이 아니면 
-        $('#searchboxInclude').children().remove();
-  
-        list.forEach(function(arg){
-          if($("#selectType").val() == arg.mainCategoryNo){
-            if(arg.serviceTitle.indexOf(txt) > -1 ){
-              $('#searchboxInclude').append(
-                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-              );		
-            }
-          }
-          if($("#selectType").val()==0){
-            if(arg.serviceTitle.indexOf(txt) > -1 ){
-              $('#searchboxInclude').append(
-                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-              );		
-            }
-          }
-  
-        });
-        $('#searchboxInclude').children().each(function(){ //자동완성 div 각각 클릭시
-            $(this).click(function(){
-                $('#searchInput').val($(this).text());
-                $('#searchboxInclude').children().remove();	
-            });
-        });			
-    } else {
-        $('#searchboxInclude').children().remove();
-  
-        /* list.forEach(function(arg){
-          $('#searchboxInclude').append(
-            $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-          );		
-      
-        }); */
-        list.forEach(function(arg){
-          if($("#selectType").val() == arg.mainCategoryNo){
-            if(arg.serviceTitle.indexOf(txt) > -1 ){
-              $('#searchboxInclude').append(
-                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-              );		
-            }
-          }
-          if($("#selectType").val()==0){
-            if(arg.serviceTitle.indexOf(txt) > -1 ){
-              $('#searchboxInclude').append(
-                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-              );		
-            }
-          }
-  
-        });
-      
-        $('#searchboxInclude').children().each(function(){
-          $(this).click(function(){
-            $('#searchInput').val($(this).text());
-            $('#searchboxInclude').children().remove();	
-          });
-        });
-    }  
-  });
-  
-  
-  /* 입력창 포커스시 서비스명 다 출력 */
-  $('#searchInput').click(function(){
-    var txt = $(this).val();
-    if(txt != ''){  //빈줄이 아니면 
-        $('#searchboxInclude').children().remove();
-  
-        /* list.forEach(function(arg){
-            if(arg.serviceTitle.indexOf(txt) > -1 ){
-                $('#searchboxInclude').append(
-                    $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-                );		
-            }
-        }); */
-        list.forEach(function(arg){
-          if($("#selectType").val() == arg.mainCategoryNo){
-            if(arg.serviceTitle.indexOf(txt) > -1 ){
-              $('#searchboxInclude').append(
-                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-              );		
-            }
-          }
-          if($("#selectType").val()==0){
-            if(arg.serviceTitle.indexOf(txt) > -1 ){
-              $('#searchboxInclude').append(
-                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-              );		
-            }
-          }
-  
-        });
-        $('#searchboxInclude').children().each(function(){ //자동완성 div 각각 클릭시
-            $(this).click(function(){
-                $('#searchInput').val($(this).text());
-                $('#searchboxInclude').children().remove();	
-            });
-        });			
-    } else {
-        $('#searchboxInclude').children().remove();
-  
-        /* list.forEach(function(arg){
-          $('#searchboxInclude').append(
-            $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-          );		
-      
-        }); */
-        list.forEach(function(arg){
-          if($("#selectType").val() == arg.mainCategoryNo){
-            if(arg.serviceTitle.indexOf(txt) > -1 ){
-              $('#searchboxInclude').append(
-                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-              );		
-            }
-          }
-          if($("#selectType").val()==0){
-            if(arg.serviceTitle.indexOf(txt) > -1 ){
-              $('#searchboxInclude').append(
-                  $('<div>').text(arg.serviceTitle).attr({'key':arg.serviceNo})
-              );		
-            }
-          }
-  
-        });
-      
-        $('#searchboxInclude').children().each(function(){
-          $(this).click(function(){
-            $('#searchInput').val($(this).text());
-            $('#searchboxInclude').children().remove();	
-          });
-        });
-    } 
-  
-  });
-  
-  /* 입력창 포커스아웃시 제거 안됨*/
-  $('#searchboxRelative').mouseleave(function(){
-    
-    $('#searchboxInclude').children().remove();
-  
-  });
+
   
   
   $('.noSalesSevice').click(function(){
@@ -179,3 +35,48 @@ $(document).ready(function(){
     alert('판매 중인 서비스가 아닙니다.');
   
   });
+
+
+/* 완료버튼 */
+const finishBtn = document.querySelectorAll(".finishBtn");
+for(f of finishBtn){
+  f.addEventListener("click",e=>{
+    
+    if(confirm('작업 완료?')){
+      
+      const tradeNo = e.target.id;
+  
+      $.ajax({
+        url:'/myProject/memberDone',
+        data: {'tradeNo':tradeNo},
+        success: (result)=>{
+          if(result>0){
+            
+          }
+  
+  
+        }
+  
+      });
+
+    }
+
+  });
+}
+
+/* 취소 모달 */
+
+
+
+
+
+
+/* 신고 모달 */
+
+
+
+
+
+
+/* 리뷰 모달 */
+

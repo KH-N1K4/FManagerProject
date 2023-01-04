@@ -9,8 +9,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.manager.freelancer.customerCenter.model.vo.Pagination;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
+import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.member.model.vo.Member;
 
 @Repository
@@ -32,7 +32,6 @@ public class ManagerInquiryDAO {
 	 */
 	public List<UserInquiry> selectManagerInquiryList(Pagination pagination) {
 		
-		// RowBounds 객체(마이 바티스)
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());

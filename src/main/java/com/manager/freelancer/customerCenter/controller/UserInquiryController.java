@@ -1,6 +1,7 @@
 package com.manager.freelancer.customerCenter.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
 import com.manager.freelancer.customerCenter.model.service.UserInquiryService;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.member.model.vo.Member;
@@ -116,21 +119,21 @@ public class UserInquiryController {
 	}
 	
 	// 이용문의 내역 조회 (진행상태 변경 시)
-	@GetMapping("")
-	public String selectChangeStatus(@SessionAttribute("loginMember") Member loginMember, Model model,
+	@GetMapping("/member/statusType")
+	@ResponseBody
+	public Map<String, Object> selectChangeStatus(@SessionAttribute("loginMember") Member loginMember, Model model,
 									 @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
-		                        	 @RequestParam Map<String,Object> pm,
-		                        	 @RequestParam(value="inquiryStatus") String inquiryStatus,
-		                        	 UserInquiry userInquiry) {
+									 @RequestParam String optionVal) {
+		
+		System.out.println(optionVal+"***********");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = service.selectChangeStatus(loginMember.getMemberNo(), optionVal ,cp);
+		
+		model.addAttribute("map", map);
 		
 		
-		Map<String, Object> map = service.selectChangeStatus(loginMember.getMemberNo(), inquiryStatus ,cp);
-		
-		
-		model.addAttribute("pagination",map.get("pagination"));
-		model.addAttribute("listCount",map.get("listCount"));
-		
-		return null;
+		return map;
 	}
 	
 

@@ -20,6 +20,16 @@
     <c:if test="${not empty param.key}">
         <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
     </c:if>
+    <c:forEach var="inputValue" items="${param.value}">
+        <c:choose>
+            <c:when test="${inputValue == '1'}">
+                <c:set var="inputValue1" value="selected" />
+            </c:when>
+            <c:when test="${inputValue == '2'}">
+                <c:set var="inputValue2" value="selected" />
+            </c:when>
+        </c:choose>
+    </c:forEach>
 
     <section class="content">
         <div class="mainArea">
@@ -40,8 +50,8 @@
                             <div>진행 상태
                                 <select name="inquiryStatus" id="processStatus" onchange="selectChange()">
                                     <option value="0">전체</option> 
-                                    <option value="1">답변 완료</option> 
-                                    <option value="2">답변 대기중</option> 
+                                    <option value="1" ${inputValue1}>답변 완료</option> 
+                                    <option value="2" ${inputValue2}>답변 대기</option> 
                                 </select>
                             </div>
                         </form>
@@ -49,7 +59,7 @@
 
                     <hr>
 
-                    <table>
+                    <table id="table">
                         <tr>
                             <th style="width:100px">번호</th>
                             <th style="width:470px">제목</th>
@@ -86,10 +96,10 @@
                     </table>
                     <hr>
                 </div>
-                    <c:if test="${not empty userInquiryList}">
+                    
                     <div class="pagination-area">
                         <ul class="pagination">
-                        
+                        <c:if test="${not empty userInquiryList}">
                             <!-- 첫 페이지로 이동 -->
                             <li><a href="/userInquiryList?cp=1${sURL}">&lt;&lt;</a></li>
 
@@ -114,10 +124,10 @@
 
                             <!-- 끝 페이지로 이동 -->
                             <li><a href="/userInquiryList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
-
+                        </c:if>
                         </ul>
                     </div>
-                    </c:if>
+                    
                     <form action="/userInquiryList" id="inquirySearch" method="get"> 
                         <select name="key" id="search-key">
                             <option value="t">제목</option> 
@@ -139,7 +149,7 @@
          var sURL = "${sURL}";
          var userInquiryTitle = "${userinquiry.userInquiryTitle}";
          var userInquiryCreateDate = "${userinquiry.userInquiryCreateDate}";
-         var userInquiryCreateDate = "${userinquiry.inquiryRequest == null}";
+         var inquiryRequest = "${userinquiry.inquiryRequest}";
     
     </script>
 

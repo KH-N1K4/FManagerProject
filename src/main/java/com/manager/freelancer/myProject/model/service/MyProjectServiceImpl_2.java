@@ -65,7 +65,11 @@ public class MyProjectServiceImpl_2 implements MyProjectService_2{
 		return resultMap;
 	}
 	
-	
+	// 회원 작업 완료
+	@Override
+	public int memberDone(int tradeNo) {
+		return dao.memberDone(tradeNo);
+	}
 	
 	
 	

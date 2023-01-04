@@ -7,7 +7,8 @@
 		<result property="serviceTitle" column="SERVICE_TITLE" />
 		<result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />
 		<result property="paymentDate" column="PAYMENT_DATE" />
-		<result property="paymentPrice" column="PAYMENT_PRICE" />
+		<result property="paymentPrice" column="PAYMENT_PRICE" />		
+		<result property="paymentType" column="PAYMENT_TYPE" />
 	</resultMap>
 	
 	<resultMap type="myProjectTrade" id="myProjectTrade_rm">
@@ -15,12 +16,21 @@
 		<result property="memberDoneFL" column="MEMBER_DONE_FL" />
 		<result property="freelancerDoneFL" column="FREELANCER_DONE_FL" />
 		<result property="serviceNo" column="SERVICE_NO" />
+		<result property="serviceTitle" column="SERVICE_TITLE" />
 		<result property="memberNo" column="MEMBER_NO" />
 		<result property="freelancerNo" column="FREELANCER_NO" />
+		<result property="freelancerName" column="FREELANCER_NAME" />
 		<result property="workNo" column="WORK_NO" />
 		<result property="workSendDate" column="WORK_SEND_DATE" />
+		<result property="workProgress" column="WORK_PROGRESS" />
+		<result property="workStatus" column="WORK_STATUS" />
 		<result property="workCount" column="WORK_COUNT" />
 		<result property="serviceEditNum" column="SERVICE_EDIT_NUM" />
+		<result property="seviceDeleteFlag" column="SERVICE_DEL_FL" />
+		<result property="serviceStatus" column="SERVICE_STATUS" />
+		<result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />
+		<result property="subCategoryNo" column="SUB_CATEGORY_NO" />
+		<result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />
 	</resultMap>
 	
 	
@@ -54,7 +64,9 @@
   <!-- 결제 내역 조회 -->
   <select id="selectPaymentList" resultMap="payment_rm">
   SELECT USER_NO AS MEMBER_NO, SERVICE_TITLE, 
-	MAIN_CATEGORY_NAME, TO_CHAR(PAYMENT_DATE, 'YYYY"-"MM"-"DD') PAYMENT_DATE, PAYMENT_PRICE
+	MAIN_CATEGORY_NAME, TO_CHAR(PAYMENT_DATE, 'YYYY"-"MM"-"DD') PAYMENT_DATE, PAYMENT_PRICE,
+	CASE WHEN PAYMENT_TYPE=1 THEN '구매'
+	     WHEN PAYMENT_TYPE=3 THEN '환불' END AS PAYMENT_TYPE
 	FROM SETTLEMENT
 	JOIN TRADE USING (TRADE_NO)
 	JOIN SERVICE USING (SERVICE_NO)
@@ -62,7 +74,6 @@
 	JOIN SUB_CATEGORY USING (SUB_CATEGORY_NO)
 	JOIN MAIN_CATEGORY USING (MAIN_CATEGORY_NO)
 	WHERE USER_NO=#{loginMemberNo}
-	AND PAYMENT_TYPE=1
 	<if test='type!=0'>
 		AND MAIN_CATEGORY_NO = #{type}
 	</if>
@@ -79,14 +90,71 @@
   
   <!-- 구매 내역 수 -->
   <select id="getPurchaseListCount" resultType="_int">
-  
+  SELECT COUNT(*) FROM TRADE 
+	JOIN SERVICE USING (SERVICE_NO)
+	JOIN SETTLEMENT ON (TRADE.TRADE_NO=SETTLEMENT.TRADE_NO)
+	JOIN CATEGORY USING (THIRD_CATEGORY_NO)
+	JOIN SUB_CATEGORY USING (SUB_CATEGORY_NO)
+	JOIN MAIN_CATEGORY USING (MAIN_CATEGORY_NO)
+	WHERE MEMBER_NO=#{loginMemberNo}
+	<if test='type!=0'>
+		AND MAIN_CATEGORY_NO = #{type}
+	</if>
+	<if test='searchDate1 neq "" and searchDate2 neq ""' >
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{searchDate1} AND #{searchDate2}
+	</if>
+	<if test="searchDate1 neq ''">
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{searchDate1}
+	</if>
+	<if test="searchDate2 neq ''">
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
+	</if>
+	<if test='searchInput != null and searchInput != ""'>
+		AND SERVICE_TITLE LIKE '%${searchInput}%'
+	</if>
   </select>
   
   <!-- 구매 내역 목록 -->
   <select id="selectPurchaseList" resultMap="myProjectTrade_rm">
-  
+  SELECT TRADE.TRADE_NO, SERVICE_NO, SERVICE_TITLE, SERVICE_STATUS, SERVICE_DEL_FL,
+	(SELECT COUNT(*) FROM WORK WHERE WORK.TRADE_NO=TRADE.TRADE_NO) WORK_COUNT,
+	SERVICE_EDIT_NUM, MEMBER_DONE_FL, FREELANCER_DONE_FL, 
+	MAIN_CATEGORY_NO, SUB_CATEGORY_NO, THIRD_CATEGORY_NO, FREELANCER_NO,
+	WORK_STATUS, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) FREELANCER_NAME,
+	CASE WHEN MEMBER_DONE_FL=2 OR WORK_STATUS=2 OR WORK_STATUS=4 THEN '작업 완료' 
+		 WHEN WORK_STATUS=3 THEN '주문 취소'
+		 ELSE '진행중' END AS WORK_PROGRESS
+	FROM TRADE 
+	JOIN SERVICE USING (SERVICE_NO)
+	JOIN SETTLEMENT ON (TRADE.TRADE_NO=SETTLEMENT.TRADE_NO)
+	JOIN CATEGORY USING (THIRD_CATEGORY_NO)
+	JOIN SUB_CATEGORY USING (SUB_CATEGORY_NO)
+	JOIN MAIN_CATEGORY USING (MAIN_CATEGORY_NO)
+	WHERE MEMBER_NO=#{loginMemberNo}
+	AND PAYMENT_TYPE=1
+	<if test='type!=0'>
+		AND MAIN_CATEGORY_NO = #{type}
+	</if>
+	<if test='searchDate1 neq "" and searchDate2 neq ""' >
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{searchDate1} AND #{searchDate2}
+	</if>
+	<if test="searchDate1 neq ''">
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{searchDate1}
+	</if>
+	<if test="searchDate2 neq ''">
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
+	</if>
+	<if test='searchInput != null and searchInput != ""'>
+		AND SERVICE_TITLE LIKE '%${searchInput}%'
+	</if>
   </select>
   
+  
+  <!-- 회원 작업 완료 -->
+  <update id="memberDone">
+  	UPDATE TRADE SET MEMBER_DONE_FL=2
+  	WHERE TRADE_NO=#{tradeNo}
+  </update>
   
   
   	
