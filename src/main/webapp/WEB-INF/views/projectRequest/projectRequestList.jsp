@@ -4,6 +4,7 @@
 <c:set var="maincategory" value="${category.mainCategotyList}"/>
 <c:set var="subcategory" value="${category.subCategotyList}"/>
 <c:set var="thirdcategory" value="${category.categotyList}"/>
+<c:set var="projectRequest" value="${category.projectRequestList}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -23,14 +24,14 @@
             <!-- 사이드 메뉴 -->
             <div class="sideMenu">
                 <c:forEach var="mainVar" items="${maincategory}">
-                    <div class="design" id="main${mainVar.mainCategotyNo}">${mainVar.mainCategotyName}</div>
+                    <div class="design" id="main${mainVar.mainCategotyNo}"><a href="/projectRequest/requestList/${mainVar.mainCategotyNo}">${mainVar.mainCategotyName}</a></div>
                     <c:forEach var="subVar" items="${subcategory}">
                         <c:if test="${mainVar.mainCategotyNo eq subVar.mainCategotyNo}">
-                            <div class="subCategori" id="sub${subVar.subCategoryNo}"><a href="">${subVar.subCategoryName}</a><button class="detailMenu">▼</button></div>
-                            <div class="sub${subVar.subCategoryNo}Box subMenu">
+                            <div class="subCategori" id="sub${subVar.subCategoryNo}"><a href="/projectRequest/requestList/${mainVar.mainCategotyNo}/${subVar.subCategoryNo}">${subVar.subCategoryName}</a><button class="detailMenu" title="${subVar.subCategoryNo}">▼</button></div>
+                            <div class="subMenu" id="sub${subVar.subCategoryNo}Box">
                                 <c:forEach var="categoryVar" items="${thirdcategory}">
                                     <c:if test="${subVar.subCategoryNo eq categoryVar.subCategoryNo}">
-                                        <div id="category${categoryVar.thirdCategotyNo}"><a href="">${categoryVar.thirdCategotyName}</a></div>
+                                        <div id="category${categoryVar.thirdCategotyNo}"><a href="/projectRequest/requestList/${mainVar.mainCategotyNo}/${subVar.subCategoryNo}/${categoryVar.thirdCategotyNo}">${categoryVar.thirdCategotyName}</a></div>
                                     </c:if>
                                 </c:forEach>
                             </div>
@@ -59,24 +60,22 @@
                    
 
                     <select name="" id="listOrder">
-                        <option value="">최신순</option>
-                        <option value="">마감 임박순</option>
+                        <option value="0">최신순</option>
+                        <option value="1">마감 임박순</option>
                     </select>
                 </form>
 
                 <div id="imageContent">
-                
-                <c:forEach var="i" begin="0" end="20" step="1">
-                	<a href="/projectRequest/requestList/1/1/1/1">
+                <c:forEach var="projectRequestVar" items="${projectRequest}">
+                	<a href="/projectRequest/requestList/${projectRequestVar.mainCategotyNo}/${projectRequestVar.subCategoryNo}/${projectRequestVar.thirdCategotyNo}/${projectRequestVar.thirdCategotyNo}/${projectRequestVar.projectRequestNo}">
 	                    <div id="image">
-	                        <div><img src="/정채연.jfif"></div>
+	                        <div><img src="${projectRequestVar.projectRequestfile}"></div>
 	                        <!-- 하트버튼 추가 예정 -->
-	                        <span>프로스튜디오</span><br>
-	                        <span>개인 프로필 사진 촬영하기</span><br>
-	                        <span>가격: 140,000원</span>
+	                        <span>${projectRequestVar.projectRequestTitle}</span><br>
+	                        <span>${projectRequestVar.projectRequestSummary}</span><br>
+	                        <span>가격: ${projectRequestVar.projectRequestBudgetString}원</span>
 	                    </div>
-                    </a>
-                    
+                    </a> 
               </c:forEach>
                 </div>    
             </div>
@@ -91,7 +90,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 
-    <!-- <script src="/resources/js/category/projectRequest.js"></script> -->
+    <script src="/resources/js/category/projectRequest.js"></script>
     
 </body>
 </html>

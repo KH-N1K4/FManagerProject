@@ -37,5 +37,12 @@ public class ProjectRequestDAO {
 		
 		return sqlSession.selectList("myProjectRequest.getMainCategotyList");
 	}
+
+	/**모든 프로젝트 다 들고 오기
+	 * @return
+	 */
+	public List<myProjectFreelancerRequest> getProjectRequestList() {
+		return sqlSession.selectList("myProjectRequest.getProjectRequestList");
+	}
 	
 }

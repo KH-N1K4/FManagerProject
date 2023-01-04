@@ -24,10 +24,9 @@ public class ProjectRequestController {
 		model.addAttribute("category", map);
 		return "/projectRequest/projectRequestList";
 	}
+	
 	@GetMapping("/projectRequest/requestList/1/1/1/1")
 	public String projectRequest() {
-		
-		
 		
 		return "/projectRequest/projectRequestDetail";
 	}

@@ -32,7 +32,7 @@
 			<result property="proposalCreateDate" column="PROPOSAL_CREATE_DATE"/>											<!-- 프로젝트 제안 등록일 -->
 			<result property="freelancerNo" column="FREELANCER_NO"/>																	<!-- 프리랜서 번호(FK) -->
 		</resultMap>
-		
+		<!-- 카태고리 들고오기 -->
 		<select id="getCategotyList" resultMap="request_rm">
 			SELECT * 
 			FROM CATEGORY
@@ -44,6 +44,34 @@
 		<select id="getSubCategotyList" resultMap="request_rm">
 			SELECT * 
 			FROM SUB_CATEGORY
+		</select>
+		
+		<!-- 프로젝트 의뢰 들고 오기 -->
+		<select id="getProjectRequestList" resultMap="request_rm">
+			SELECT p.*,TO_CHAR(PROJECT_REQUEST_BUDGET, 'FM999,999,999,999') PROJECT_REQUEST_BUDGET_STRING
+			FROM (SELECT * FROM PROJECT_REQUEST p
+				JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
+				JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+				JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+				JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+				WHERE PROJECT_REQUEST_STATUS = 2) p
+			WHERE REQUEST_FILE_ORDER =0
+			AND PROJECT_REQUEST_DEL_FL ='N'
+			<if test="mainCategoryNo !='' and mainCategoryNo!=null and mainCategoryNo != 0">
+				 AND MAIN_CATEGORY_NO = #{mainCategoryNo}
+			</if>
+			<if test="subCategoryNo !='' and subCategoryNo!=null and subCategoryNo != 0">
+				 AND SUB_CATEGORY_NO = #{subCategoryNo}
+			</if>
+			<if test="thirdCategotyNo !='' and thirdCategotyNo!=null and thirdCategotyNo != 0">
+				 AND THIRD_CATEGORY_NO = #{thirdCategotyNo}
+			</if>
+			<if test="listOrder == 1">
+				 ORDER BY REQUEST_RECRUIT_DATE---------마감임박순
+			</if>
+			<if test="listOrder == 0">
+				 ORDER BY PROJECT_REQUEST_CREATE_DATE DESC---------최신순
+			</if>
 		</select>
 	
 </mapper>

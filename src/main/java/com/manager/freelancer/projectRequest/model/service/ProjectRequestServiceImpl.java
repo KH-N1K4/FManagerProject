@@ -26,10 +26,12 @@ public class ProjectRequestServiceImpl implements ProjectRequestSerivce{
 		List<myProjectFreelancerRequest> categotyList = dao.getCategotyList();
 		List<myProjectFreelancerRequest> subCategotyList = dao.getSubCategotyList();
 		List<myProjectFreelancerRequest> mainCategotyList = dao.getMainCategotyList();
+		List<myProjectFreelancerRequest> projectRequestList = dao.getProjectRequestList();
 		
 		map.put("categotyList",categotyList);
 		map.put("subCategotyList",subCategotyList);
 		map.put("mainCategotyList",mainCategotyList);
+		map.put("projectRequestList",projectRequestList);
 		return map;
 	}
 }
