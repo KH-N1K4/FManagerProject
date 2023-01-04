@@ -7,9 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.manager.freelancer.customerCenter.model.vo.Pagination;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.dao.ManagerInquiryDAO;
+import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.member.model.vo.Member;
 
 @Service

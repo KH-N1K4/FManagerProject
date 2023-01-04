@@ -21,6 +21,16 @@
     <c:if test="${not empty param.key}">
         <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
     </c:if>
+    <c:forEach var="inputValue" items="${param.value}">
+        <c:choose>
+            <c:when test="${inputValue == '1'}">
+                <c:set var="inputValue1" value="selected" />
+            </c:when>
+            <c:when test="${inputValue == '2'}">
+                <c:set var="inputValue2" value="selected" />
+            </c:when>
+        </c:choose>
+    </c:forEach>
 
     <div class="main">
 
@@ -28,10 +38,10 @@
 
 			<span id="question-list-title">문의 내역 </span> 
 			<span class="select-area"> 
-				<select class="select-area-input" name="selectStatus" id="selectStatus" onchange="selectChange()">
-					<option value="">진행상태</option>
-					<option value="">답변 대기</option>
-					<option value="">답변 완료</option>
+				<select class="select-area-input" name="inquiryStatus" id="processStatus" onchange="selectChange()">
+					<option value="0">전체</option> 
+                    <option value="1" ${inputValue1}>답변 완료</option> 
+                    <option value="2" ${inputValue2}>답변 대기</option> 
 				</select>
 			</span>
 
@@ -71,49 +81,58 @@
                         </div>
                     </c:forEach>
                 </c:otherwise>
-            </c:choose>    
+            </c:choose>  
 
-        
-        </div> <!-- buy-table -->
+    pagination.prevPage =${pagination.prevPage}
+    pagination.startPage = ${pagination.startPage}
+    pagination.endPage = ${pagination.endPage}    
+    pagination.currentPage = ${pagination.currentPage}
+    pagination.nextPage = ${pagination.nextPage}
+    =pagination.maxPage = ${pagination.maxPage}
+
+
+
+        </div> 
         <div class="pagination-area">
-                        <ul class="pagination">
-                        
-                            <!-- 첫 페이지로 이동 -->
-                            <li><a href="/manager/managerInquiryList?cp=1${sURL}">&lt;&lt;</a></li>
+            <ul class="pagination">
+                <c:if test="${not empty managerInquiryList}">
+                <!-- 첫 페이지로 이동 -->
+                <li><a href="/manager/managerInquiryList?cp=1${sURL}">&lt;&lt;</a></li>
 
-                            <!-- 이전 목록 마지막 번호로 이동 -->
-                            <li><a href="/manager/managerInquiryList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+                <!-- 이전 목록 마지막 번호로 이동 -->
+                <li><a href="/manager/managerInquiryList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
 
-                                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
-                                    <c:choose>
-                                        <c:when test="${i == pagination.currentPage}">
-                                            <%-- 현재 보고있는 페이지 --%>
-                                            <li><a class="current">${i}</a></li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <%-- 현재 페이지를 제외한 나머지  --%>
-                                            <li><a href="/manager/managerInquiryList?cp=${i}${sURL}">${i}</a></li>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                            
-                            <!-- 다음 목록 시작 번호로 이동 -->
-                            <li><a href="/manager/managerInquiryList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+                    <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                        <c:choose>
+                            <c:when test="${i == pagination.currentPage}">
+                                <%-- 현재 보고있는 페이지 --%>
+                                <li><a class="current">${i}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <%-- 현재 페이지를 제외한 나머지  --%>
+                                <li><a href="/manager/managerInquiryList?cp=${i}${sURL}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                
+                <!-- 다음 목록 시작 번호로 이동 -->
+                <li><a href="/manager/managerInquiryList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
 
-                            <!-- 끝 페이지로 이동 -->
-                            <li><a href="/manager/managerInquiryList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                <!-- 끝 페이지로 이동 -->
+                <li><a href="/manager/managerInquiryList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                </c:if>
+            </ul>
+        </div>
 
-                        </ul>
-                    </div>
-                    <form action="/manager/managerInquiryList" id="inquirySearch" method="get"> 
-                        <select name="key" id="search-key">
-                            <option value="t">제목</option> 
-                            <option value="c">내용</option> 
-                            <option value="tc">제목+내용</option> 
-                        </select> 
-                        <input type="text" name="query" id="search-query" placeholder=" 검색어를 입력해주세요" >  
-                        <button>검색</button>
-                    </form>
+        <form action="/manager/managerInquiryList" id="inquirySearch" method="get"> 
+            <select name="key" id="search-key">
+                <option value="t">제목</option> 
+                <option value="c">내용</option> 
+                <option value="tc">제목+내용</option> 
+            </select> 
+            <input type="text" name="query" id="search-query" placeholder=" 검색어를 입력해주세요" >  
+            <button>검색</button>
+        </form>
 
     </div> <!-- main -->
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
