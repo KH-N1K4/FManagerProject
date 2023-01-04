@@ -379,5 +379,10 @@
 			
 		INSERT INTO TRADE VALUES(#{tradeNo}, DEFAULT, DEFAULT, #{serviceNo}, #{memberNo}, #{tradeRequest})
 	</insert>
+	
+	<insert id="insertSettlement" parameterType="Trade" >
+			
+		INSERT INTO SETTLEMENT VALUES(SEQ_SETTLEMENT_NO.NEXTVAL, 1, #{memberNo}, 1, SYSDATE, #{servicePrice},  #{tradeNo})
+	</insert>
  	
  </mapper>
