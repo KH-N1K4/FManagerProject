@@ -95,13 +95,13 @@ public class CategoryDAO {
 	}
 	
 	
-	public List<Service> serviceList(Pagination pagination) {
+	public List<Service> serviceList(Pagination pagination, Map<String, Integer> map) {
 		
 		int offset=(pagination.getCurrentPage()-1)*pagination.getLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		return sqlSession.selectList("categoryMapper.serviceList",null,rowBounds);
+		return sqlSession.selectList("categoryMapper.serviceList",map,rowBounds);
 	}
 
 	public int tradeComplete(Trade temp) {

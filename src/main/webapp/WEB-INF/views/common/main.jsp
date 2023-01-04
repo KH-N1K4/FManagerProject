@@ -28,33 +28,7 @@
             <div class="mainContent">
                 <div id="imageContent">
                 	 <c:forEach var="service" items="${serviceList }" > 
-	                	<%-- <a href="/service/${service.serviceNo}">
-		                    <div id="image">
-		                        <div><img src="${service.requestFilePath }">
-		                         <span class="like-area">
-	                        		<c:if test="${empty loginMember }">
-	                        			<i class="fa-regular fa-heart boardLike" ></i> 
-	                        		</c:if>
-	                        		<c:if test="${not empty loginMember }">
-		                        		<c:if test="${service.likeCheckFL=='N'}">
-				                            <i class="fa-regular fa-heart boardLike" id="${service.serviceNo }"></i>
-				                        </c:if>
-				                        <c:if test="${service.likeCheckFL=='Y'}">
-				                            <i class="fa-solid fa-heart boardLike" id="${service.serviceNo }"></i>
-				                        </c:if>
-	                        		</c:if>
-	                        	</span>
-		                        
-		                        </div>
-		                        <!-- 하트버튼 추가 예정 -->
-		                        <span>${service.serviceTitle }</span>
-		                        <span>${service.serviceSummary }</span>
-		                        <span>가격: ${service.servicePrice }원</span>
-		                    </div>
-	                    </a> --%>
-	                    
 	                    <div>
-                	<%-- <a href="/category/${service.mainCategoryNo}/${service.subCategoryNo }/${service.thirdCategoryNo }/${service.serviceNo }"> --%>
 	                 
 	                    <div id="image">
 	                        <div><img src="${service.requestFilePath }">
