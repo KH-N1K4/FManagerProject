@@ -19,12 +19,12 @@ public class ManagerFilter implements Filter{
 	
 	public void init(FilterConfig fConfig) throws ServletException {
 		// 필터 생성 시 수행
-		System.out.println("로그인 필터 생성");
+		System.out.println("관리자 로그인 필터 생성");
 	}
 
 	public void destroy() {
 		// 서버 실행 중 필터 내용 변경 시 수행 후 init() 다시 수행
-		System.out.println("로그인 필터 파괴");
+		System.out.println("관리자 로그인 필터 파괴");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -42,6 +42,9 @@ public class ManagerFilter implements Filter{
 			resp.sendRedirect("/"); // 메인페이지로 redirect
 		} else { // 로그인 O 상태 
 			// 연결된 다음 필터로 이동(없으면 Servlet / JSP로 이동)
+			if(session.getAttribute("authority").equals("1")) {
+				resp.sendRedirect("/"); // 메인페이지로 redirect
+			}
 			chain.doFilter(request, response);			
 		}
 		
