@@ -116,11 +116,11 @@ public class UserInquiryDAO {
 	 * @param inquiryStatus
 	 * @return
 	 */
-	public int getStatusListCount(int memberNo, String inquiryStatus) {
+	public int getStatusListCount(int memberNo, String optionVal) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo);
-		map.put("inquiryStatus", inquiryStatus);
+		map.put("optionVal", optionVal);
 		
 		return sqlSession.selectOne("inquiryMapper.getStatusListCount",map);
 	}
@@ -130,10 +130,11 @@ public class UserInquiryDAO {
 	 * @param pagination
 	 * @param memberNo
 	 * @param inquiryStatus
-	 * @return
+	 * @return map
 	 */
-	public List<UserInquiry> userStatusList(Pagination pagination, int memberNo, String inquiryStatus) {
+	public List<UserInquiry> userStatusList(Pagination pagination, int memberNo, String optionVal) {
 		
+		System.out.println("optionVal="+optionVal);
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
@@ -141,7 +142,7 @@ public class UserInquiryDAO {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("memberNo", memberNo);
-		map.put("inquiryStatus", inquiryStatus);
+		map.put("optionVal", optionVal);
 		
 		return sqlSession.selectList("inquiryMapper.userStatusList",map,rowBounds);
 	}

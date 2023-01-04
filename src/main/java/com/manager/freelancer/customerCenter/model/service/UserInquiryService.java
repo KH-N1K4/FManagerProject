@@ -49,7 +49,7 @@ public interface UserInquiryService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectChangeStatus(int memberNo, String inquiryStatus, int cp);
+	Map<String, Object> selectChangeStatus(int memberNo, String optionVal, int cp);
 
 
 
