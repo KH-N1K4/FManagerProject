@@ -28,12 +28,19 @@
     background-color: lightcoral;
     margin:20px;
 }
+#writerPhoto > img{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: lightcoral;
+}
 
 #writerName{
     position:relative;
-    top:-140px;
+    top:-120px;
     font-weight: bold;
     font-size: 20px;
+   
 }
 
 #portfolioSection{
@@ -50,6 +57,12 @@
 }
 
 .portfolioPhoto{
+    width: 800px;
+    height: 800px;
+    background-color: aliceblue;
+    margin:auto;
+}
+.portfolioPhoto > img{
     width: 800px;
     height: 800px;
     background-color: aliceblue;

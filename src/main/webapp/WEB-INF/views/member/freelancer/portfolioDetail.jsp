@@ -24,16 +24,20 @@
         <button id="">x</button>
 
         <div id="writerInfo">
-            <div id="writerPhoto"></div>
-            <div id="writerName">전문가 이름</div>
+            <div id="writerPhoto">
+            <img src="${portfolio.memberProfile}" alt="">
+            </div>
+            <div id="writerName">${portfolio.memberName}</div>
         </div>
 
         <div id="portfolioSection">
-            <div id="portfolioTitle">포트폴리오 제목</div>
-            <div id="portfolioContent">포트폴리오 내용</div>
+            <div id="portfolioTitle">${portfolio.portfolioTitle}</div>
+            <div id="portfolioContent">${portfolio.portfolioContent}</div>
 
 
-            <div class="portfolioPhoto"></div>
+            <div class="portfolioPhoto">
+            <img src="${portfolio.portfolioFilePath}" alt="">
+            </div>
 
         </div>
 
