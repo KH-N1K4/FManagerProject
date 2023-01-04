@@ -3,16 +3,19 @@ package com.manager.freelancer.freelancer.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,7 +27,9 @@ import com.manager.freelancer.freelancer.model.vo.Portfolio;
 import com.manager.freelancer.freelancer.model.vo.Region;
 import com.manager.freelancer.member.model.vo.Member;
 
+
 @Controller
+@SessionAttributes({"loginMember"})
 public class FreeLancerController {
 	
 	@Autowired
@@ -131,7 +136,7 @@ public class FreeLancerController {
 				String[] freelancerField , RedirectAttributes ra,
 				@RequestHeader(value="referer") String referer,
 				int bankCode,
-				String bankAccountNumber3
+				String bankAccountNumber
 				) {
 
 		
@@ -146,8 +151,9 @@ public class FreeLancerController {
 		inputFreelancer.setCareer(career);
 		inputFreelancer.setLicense(license);
 		
+		// input의 은행, 계좌번호
 		inputFreelancer.setBankCode(bankCode);
-		Long num = Long.parseLong(bankAccountNumber3); // int자료형길이 초과 10자 -> long
+		Long num = Long.parseLong(bankAccountNumber); // int자료형길이 초과 10자 -> long
 		inputFreelancer.setBankAccountNumber(num);
 		
 		
@@ -160,6 +166,7 @@ public class FreeLancerController {
 			if(result > 0) {
 				path="/";
 				message="전문가등록성공";
+				loginMember.setFreelancerFL("Y");
 				
 			} else {
 				path=referer;
@@ -181,21 +188,26 @@ public class FreeLancerController {
 		@PostMapping("/member/freelancer/modal/addPortfolio")
 		public String addPortfolio(Model model, 
 				@SessionAttribute("loginMember") Member loginMember,
+				@RequestParam(value="portfolioFile", required = false) List<MultipartFile> portfolioFilePath,
 				Freelancer inputFreelancer, Portfolio inputPortfolio,
-				@RequestParam(value="images", required = false) List<MultipartFile> imageList,
-				HttpSession session,RedirectAttributes ra) {
+				HttpServletRequest req,RedirectAttributes ra)throws Exception {
 			
 			String message = null;
 			String path = null;
-			
-			inputPortfolio.setFreelancerNo(loginMember.getMemberNo());
-			
-			String webPath = "/resources/images/freelancerPortfolioImage/"; // 만들어야함
-			String folderPath = session.getServletContext().getRealPath(webPath);
-			
 			int result = 0;
+
+			inputPortfolio.setFreelancerNo(loginMember.getMemberNo());
+
+			String webPath = "/resources/images/freelancerPortfolioImage/"; // 만들어야함
+			String folderPath = req.getSession().getServletContext().getRealPath(webPath);
+
+			result =  service.addPortfolio(inputPortfolio, webPath, folderPath,portfolioFilePath);
+
+
 			
-			result =  service.addPortfolio(inputPortfolio, imageList, webPath, folderPath);
+			
+			
+			
 			
 			if(result > 0) {
 				message = "포트폴리오가 성공적으로  등록되었습니다.";
@@ -208,5 +220,25 @@ public class FreeLancerController {
 			return "/member/freelancer/modal/addPortfolio";
 		}
 		
+		
+		//포트폴리오 상세 페이지로 이동
+		@GetMapping("/portfolioDetail/{portfolioNo}")
+		public String portfolioDetail(@PathVariable(value="portfolioNo") int portfolioNo,
+			Model model, @SessionAttribute("loginMember") Member loginMember
+			) {
+			// 포트폴리오 번호, 회원번호, 포트폴리오내용=portfolio
+			
+			Portfolio portfolio = new Portfolio();
+			
+			portfolio.setFreelancerNo(loginMember.getMemberNo());
+			
+			portfolio = service.viewPortfolioDetail(portfolio);
+			
+//			portfolio.setPortfolioNo(portfolioNo);
+			
+			model.addAttribute("portfolio", portfolio);
+			
+			return "/member/freelancer/portfolioDetail";
+		}
 		
 }

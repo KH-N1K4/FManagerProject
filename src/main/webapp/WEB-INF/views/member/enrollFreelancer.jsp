@@ -128,7 +128,9 @@
                         <option value="3">우리</option>
                         <option value="4">기업</option>
                     </select>
+
                     <input type="text" name="bankAccountNumber3" id="bankAccountNumber" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
                 </div>
             </div>
             <div>

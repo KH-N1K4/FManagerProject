@@ -74,16 +74,16 @@ public class FreeLancerDAO {
 
 
 	public List<Portfolio> getPortfolioList(Freelancer inputFreelancer) {
-		// TODO Auto-generated method stub
+
 		return sqlSession.selectList("freelancerMapper.getPortfolioList", inputFreelancer);
 	}
 	public List<Field> getFieldList(Freelancer inputFreelancer) {
-		// TODO Auto-generated method stub
+
 		return sqlSession.selectList("freelancerMapper.getFieldList", inputFreelancer);
 	}
 	
 	public List<Bank> getBankList() {
-		// TODO Auto-generated method stub
+
 		return sqlSession.selectList("freelancerMapper.getBankList");
 	}
 
@@ -105,26 +105,25 @@ public class FreeLancerDAO {
 	}
 	// 전문가 정보 수정(은행)
 	public int updateFreelancerBank(Freelancer inputFreelancer) {
-		// TODO Auto-generated method stub
+
 		return sqlSession.update("freelancerMapper.updateFreelancerBank", inputFreelancer);
 	}
 
 	// 포트폴리오 등록
 	public int addPortfolio(Portfolio inputPortfolio) {
-		// TODO Auto-generated method stub
+
 		return sqlSession.insert("freelancerMapper.addPortfolio", inputPortfolio);
 	}
 
 
-	// 포트폴리오등록시 이미지 삽입
-	public int insertPortfolioImageList(List<MultipartFile> imageList) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert("freelancerMapper.insertPortfolioImageList", imageList);
-	}
-
 	public int updateFreelancerField(Freelancer inputFreelancer) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.delete("freelancerMapper.updateFreelancerField",inputFreelancer);
+	}
+	// 포트폴리오 상세조회
+	public Portfolio viewPortfolioDetail(Portfolio portfolio) {
+		
+		return sqlSession.selectOne("freelancerMapper.viewPortfolioDetail", portfolio);
 	}
 
 
