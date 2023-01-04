@@ -10,6 +10,7 @@ import com.manager.freelancer.category.model.dao.CategoryDAO;
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.category.model.vo.Trade;
+import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.manager.model.vo.Pagination;
 
 @org.springframework.stereotype.Service
@@ -65,9 +66,28 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public List<Service> selectCategoryList(Map map) {
+	public Map<String, Object> selectCategoryList(Map map) {
 		
-		return dao.selectCategoryList(map);
+		// 1. 특정 게시판의 전체 게시글 수 조회(단, 삭제 제외)
+		int listCount=dao.getListCount(map);
+		
+		// 2. 전체 게시글 수 + cp(현재 페이지)를 이용해서 
+		// 페이징 처리 객체 생성 
+		Pagination pagination =new Pagination(listCount, (int) map.get("cp"));
+		
+		// 3. 페이징 처리 객체를 이용해서 게시글 목록 조회
+		List<Service> serviceList=dao.selectCategoryList(pagination,map);
+		
+		Map<String, Object> resultMap=new HashMap<String, Object>();
+		resultMap.put("pagination", pagination);
+		resultMap.put("serviceList",serviceList);
+		//System.out.println(serviceList);
+		
+		return resultMap;
+		
+		
+		
+		//return dao.selectCategoryList(map);
 	}
 
 	@Override
@@ -118,6 +138,11 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public int tradeComplete(Trade temp) {
 		return dao.tradeComplete(temp);
+	}
+
+	@Override
+	public Freelancer freelancerDetail(int freelancerNo) {
+		return dao.freelancerDetail(freelancerNo);
 	}
 
 	

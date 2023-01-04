@@ -92,9 +92,11 @@
             </div>
 	
         </div>
-    </section>
-    
-    <div class="pagination-area">
+        
+        
+        
+        
+        <div class="pagination-area">
 
 
                 <ul class="pagination">
@@ -129,6 +131,9 @@
 
                 </ul>
             </div>
+    </section>
+    
+    
     
 
 
