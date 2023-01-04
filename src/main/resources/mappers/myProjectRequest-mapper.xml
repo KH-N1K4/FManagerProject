@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myProjectRequest">
+	
+  	<resultMap type="myProjectFreelancerService" id="category_rm">
+     	  <!-- 카테고리 -->
+	      <result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />								<!-- 메인 1카테고리 -->
+	      <result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />						<!-- 메인 1카테고리 이름 -->
+	      <result property="subCategoryNo" column="SUB_CATEGORY_NO" />									<!-- 메인 2카테고리 -->
+	      <result property="subCategoryName" column="SUB_CATEGORY_NAME" />							<!-- 메인 2카테고리 이름  -->
+	      <result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />							<!-- 메인 3카테고리 -->	
+	      <result property="thirdCategoryName" column="THIRD_CATEGORY_NAME" />					<!-- 메인 3카테고리 이름-->
+				
+    </resultMap>
+		
+		<!-- 프로젝트 의뢰 -->
+		<resultMap type="myProjectFreelancerRequest" id="request_rm">												<!-- 프로젝트 의뢰하기 SEQ_PROJECT_REQUEST_NO-->
+			<id property="projectRequestNo" column="PROJECT_REQUEST_NO"/>											<!-- 프로젝트 의뢰 번호 -->
+			<result property="projectRequestTitle" column="PROJECT_REQUEST_TITLE"/>						<!-- 프로젝트 의뢰 제목 -->
+			<result property="projectRequestSummary" column="PROJECT_REQUEST_SUMMARY"/>				<!-- 프로젝트 의뢰 요약 -->
+			<result property="projectRequestContent" column="PROJECT_REQUEST_CONTENT"/>				<!-- 프로젝트 의뢰 사항 -->
+			<result property="projectRequestBudget" column="PROJECT_REQUEST_BUDGET"/>					<!-- 프로젝트 의뢰 예산 -->
+			<result property="projectRequestBudgetString" column="PROJECT_REQUEST_BUDGET_STRING"/>					<!-- 프로젝트 의뢰 예산 -->
+			<result property="projectRecruitDate" column="REQUEST_RECRUIT_DATE"/>							<!-- 프로젝트 모집 마감일 -->
+			<result property="projectWorkDate" column="REQUEST_WORK_DATE"/>										<!-- 프로젝트 작업 마감일 -->
+			<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD "/>							<!-- 프로젝트 작업기간 -->
+			<result property="projectCreateDate" column="PROJECT_REQUEST_CREATE_DATE"/>				<!-- 프로젝트 의뢰 등록일 -->
+			<result property="mainCategotyNo" column="MAIN_CATEGORY_NO"/>											<!-- 카테고리1 번호(FK) -->
+			<result property="mainCategotyName" column="MAIN_CATEGORY_NAME"/>											<!-- 카테고리1 번호(FK) -->
+			<result property="subCategoryNo" column="SUB_CATEGORY_NO" />									<!-- 메인 2카테고리 -->
+	    <result property="subCategoryName" column="SUB_CATEGORY_NAME" />
+			<result property="thirdCategotyNo" column="THIRD_CATEGORY_NO"/>										<!-- 카테고리3 번호(FK) -->
+			<result property="thirdCategotyName" column="THIRD_CATEGORY_NAME"/>										<!-- 카테고리3 번호(FK) -->
+			<result property="projectRequestfile" column="REQUEST_FILE_PATH"/>										<!-- 이미지 경로 -->
+			
+			<result property="clientNo" column="MEMBER_NO"/>																					<!-- 회원 번호(FK)-의뢰인 회원번호 -->
+			<result property="proposalNo" column="PROJECT_PROPOSAL_NO"/>															<!-- 프로젝트 제안 번호 SEQUENCE :SEQ_PROJECT_PROPOSAL_NO -->
+			<result property="proposalAdoptStatus" column="PROPOSAL_ADOPT_STATUS"/>										<!-- 프로젝트 채택 상태 1:대기중 2:채택 3: 모집마감 -->
+			<result property="proposalAdoptStatusString" column="PROPOSAL_ADOPT_STATUS_STRING"/>			<!-- 프로젝트 채택 상태 1:대기중 2:채택 3: 모집마감 -->
+			<result property="proposalPrice" column="PROPOSAL_PRICE"/>																<!-- 프로젝트 제안 가격 -->
+			<result property="proposalPriceString" column="PROPOSAL_PRICE_STRING"/>										<!-- 프로젝트 제안 가격 -->
+			<result property="proposalEditNum" column="PROPOSAL_EDIT_NUM"/>														<!-- 프로젝트 수정 횟수 -->
+			<result property="proposalCreateDate" column="PROPOSAL_CREATE_DATE"/>											<!-- 프로젝트 제안 등록일 -->
+			<result property="freelancerNo" column="FREELANCER_NO"/>																	<!-- 프리랜서 번호(FK) -->
+		</resultMap>
+		
+	
+</mapper>
