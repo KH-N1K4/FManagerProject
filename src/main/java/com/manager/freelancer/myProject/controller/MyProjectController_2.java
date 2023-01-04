@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.service.MyProjectService_2;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.myProjectTrade;
 
 @Controller
 @SessionAttributes({"loginMember"})
@@ -55,7 +56,7 @@ public class MyProjectController_2 {
 	@GetMapping("/member/myProject/myPurchaseList")
 	public String purchaseList(Model model, @SessionAttribute("loginMember") Member loginMember,
 			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
-			@RequestParam(value="searchInput",required=false) String searchInput,
+			@RequestParam(value="searchInput",required=false, defaultValue = "") String searchInput,
 			@RequestParam(value="type" , required = false, defaultValue = "0") int type,
 			@RequestParam(value="searchDate1" , required = false, defaultValue = "") String searchDate1,
 			@RequestParam(value="searchDate2" , required = false, defaultValue = "") String searchDate2) {
@@ -74,6 +75,12 @@ public class MyProjectController_2 {
 		option.put("searchInput", searchInput);
 		
 		Map<String, Object> resultMap = service.selectPurchaseList(option, cp);
+		
+		model.addAttribute("resultMap",resultMap);
+		model.addAttribute("type", type);
+		model.addAttribute("searchDate1", searchDate1);
+		model.addAttribute("searchDate2", searchDate2);
+		model.addAttribute("searchInput", searchInput);
 		
 		
 		return "myProject/myPurchaseList";

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<c:set var="purchaseList" value="${resultMap.purchaseList}"/>
+<c:set var="pagination" value="${resultMap.pagination}"/>
+<c:set var="i" value="0"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -35,7 +38,7 @@
                   <!-- 상단 내프로젝트 페이지 제목 -->
                   <!-- 상단 selectbox -->
                   <div class="selectbox">
-                    <select  id = "selectType" class="srchOption box" name="type" title="">
+                    <select  id = "selectType" class="srchOption box" name="type" title="${type}">
                       <option value="0" selected>카테고리 선택</option>
                       <option value="1">디자인</option>
                       <option value="2">IT·프로그래밍</option>
@@ -45,13 +48,13 @@
                     </select>
                   </div>
                   <div class="selectbox">
-                    <input type="date" class="startDate box" name="searchDate1" id="searchDate1">- 
+                    <input type="date" class="startDate box" name="searchDate1" id="searchDate1" title="${searchDate1}">- 
                   </div>
                   <div class="selectbox">
-                    <input type="date" class="endtDate box" name="searchDate2" id="searchDate2">
+                    <input type="date" class="endtDate box" name="searchDate2" id="searchDate2" title="${searchDate2}">
                   </div>
                   <div class="searchbox" id="searchboxRelative">
-                    <input type="text" class="searchInput" name="searchInput" id="searchInput" placeholder="상품명" maxlength="50" autocomplete="off" value="">
+                    <input type="text" class="searchInput" name="searchInput" id="searchInput" placeholder="상품명" maxlength="50" autocomplete="off" <c:if test="${not empty searchInput}">value="${searchInput}"</c:if>>
                     <div id="searchboxInclude"></div>
                   </div>
                   <!-- 상단 selectbox -->
@@ -80,45 +83,119 @@
                     </tr>
                   </thead>
                   <tbody id = "selecttbody">
-                    <c:if test="${empty myPurchaseList}">
+
+
+                    <c:if test="${empty purchaseList}">
                       <tr class="suggestionTable" suggestionNumeber="">
                         <td colspan="6" style="text-align:center;"> 구매한 서비스가 없습니다. </td>
                       </tr>
                     </c:if>
-                    <c:if test="${empty myPurchaseList}">
-                      <tr class="suggestionTable" suggestionNumeber="">
-                        <td class="tc">
-                          <span class="num">1</span>
-                        </td>
-                        <td class="tl">
-                          <div class="suggestion_name_area td_link">
-                            <a href="#" id="suggestionName" class="suggestionName" suggestionName="">로고 디자인 제작</a>
-                          </div>
-                        </td>
-                        <td  class="tc">
-                          <div class="expert_name_area td_link">
-                            <a href="#" id="expertName" class="expertName" expertName="">홍길동</a>
-                          </div>
-                        </td>
-                        <td class="tc">
-                          <span class="num">1/3</span>
-                        </td>
-                        <td class="tc">
-                          <span class="text">진행중</span>
-                        </td>
-                        <td class="tc">
-                          <a href="#" id="finishBtn" title="" class="finishBtn btn_type"><span>완료</span></a>
-                          <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type"><span>취소</span></a>
-                          <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
-                        </td>                
-                      </tr>
+
+
+                    <c:if test="${not empty purchaseList}">
+                      <c:forEach var="purchase" items="${purchaseList}">
+                        <tr class="suggestionTable" suggestionNumeber="">
+                          <td class="tc">
+                            <span class="num">${i=i+1}</span>
+                          </td>
+                          <td class="tl">
+                            <div class="suggestion_name_area td_link">
+                              <c:choose>
+                                <c:when test="${purchase.seviceDeleteFlag eq 'N' && purchase.serviceStatus == 2}"><a href="/category/${purchase.mainCategoryNo}/${purchase.subCategoryNo}/${purchase.thirdCategoryNo}/${purchase.serviceNo}" id="serviceName" class="serviceName serviceNameAtag" serviceName="" target="_blank">${purchase.serviceTitle}</a></c:when>
+                                <c:otherwise><span id="serviceName" class="serviceName noSalesSevice" serviceName="">${purchase.serviceTitle}</span></c:otherwise>
+                              </c:choose>
+                            </div>
+                          </td>
+                          <td  class="tc">
+                            <div class="expert_name_area td_link">
+                              <a href="#" id="expertName" class="expertName" expertName="">${purchase.freelancerName}</a>
+                            </div>
+                          </td>
+                          <td class="tc">
+                            <span class="num">
+                              <c:choose>
+                                <c:when test="${purchase.workCount}>${purchase.serviceEditNum}">${purchase.serviceEditNum}/${purchase.serviceEditNum}</c:when>
+                                <c:otherwise>${purchase.workCount}/${purchase.serviceEditNum}</c:otherwise>
+                              </c:choose>
+                              </span>
+                          </td>
+                          <td class="tc">
+                            <span class="text">${purchase.workProgress}</span>
+                          </td>
+                          <td class="tc">
+                            <c:if test="${purchase.workCount==0 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">
+                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type"><span>취소</span></a>
+                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
+                            </c:if>
+                            <c:if test="${purchase.workCount>=1 && purchase.memberDoneFL==1}">
+                              <a href="#" id="finishBtn" title="" class="finishBtn btn_type"><span>완료</span></a>
+                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type"><span>취소</span></a>
+                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
+                            </c:if>
+                            <c:if test="${(purchase.workStatus==2 || purchase.workStatus==4) && purchase.memberDoneFL==2}">
+                              <a href="#" id="reviewCreateBtn" title="" class="reviewCreateBtn"><span>리뷰하기</span></a>
+                            </c:if>
+
+                          </td>                
+                        </tr>
+                      </c:forEach>
                     </c:if>
                     
+
+
                   </tbody>
                 </table>
               </div>
+
             </div>
           </div>
+              <!-- pagination -->
+          <div class="pagination-area">
+
+
+              <ul class="pagination">
+              <c:if test="${not empty purchaseList}">
+
+                <!-- 첫 페이지로 이동 -->
+                <li><a href="/manager/purchaseList?cp=1${sURL}">&lt;&lt;</a></li>
+
+                <!-- 이전 목록 마지막 번호로 이동 -->
+                <li><a href="/manager/purchaseList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+
+
+
+                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1" >
+                
+                  <!-- 특정 페이지로 이동 -->
+                  <c:choose>
+                  
+                    <c:when test="${i==pagination.currentPage}">
+                      <!-- 현재 보고있는 페이지 -->
+                      <li>
+                        <a class="current">${i}</a>
+                      </li>
+                    </c:when>
+                    
+                    <c:otherwise>
+                      <!-- 현재 페이지를 제외한 나머지 -->
+                      <li><a href="/manager/purchaseList?cp=${i}${sURL}">${i}</a></li>
+                    </c:otherwise>
+                  
+                  </c:choose>
+                  
+                </c:forEach>
+                
+                
+                
+                <!-- 다음 목록 시작 번호로 이동 -->
+                <li><a href="/manager/purchaseList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+
+                <!-- 끝 페이지로 이동 -->
+                <li><a href="/manager/purchaseList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                </c:if>
+
+              </ul>
+            </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
         <div class="modal">
@@ -131,13 +208,7 @@
   <!-- **************************************footer*************************************-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <!-- **************************************footer*************************************-->
-  <script>
-    var list = JSON.parse('${inputMyService}');
-    /* var saleslist = JSON.parse('${GsonsalesList}'); */
-    var loginMemberName = '${loginMember.memberName}';
-    var loginMemberNo = '${loginMember.memberNo}';
-  </script>
-
+  
   <!-- jQuery  -->
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
