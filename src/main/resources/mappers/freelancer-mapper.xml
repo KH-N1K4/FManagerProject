@@ -51,9 +51,11 @@
 	      <result property="bankName" column="BANK_NAME"/>
 	      <result property="bankAccountNumber" column="ACCOUNT_NO"/>
 	      
+	      <result property="portfolioNo" column="PORTFOLIO_NO"/>
 	      <result property="portfolioTitle" column="PORTFOLIO_TITLE"/>
 	      <result property="portfolioContent" column="PORTFOLIO_CONTENT"/>
 	      <result property="portfolioFilePath" column="PORTFOLIO_FILE_PATH"/>
+	      <result property="portfolioThumbnail" column="PORTFOLIO_THUMBNAIL"/>
     	</resultMap>
 	
     	<insert id="enrollFreelancer" parameterType = "Freelancer">
@@ -130,7 +132,7 @@
     	</select>
     	
     	<select id="getPortfolioList" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio">
-    		SELECT PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent
+    		SELECT PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent, PORTFOLIO_THUMBNAIL as portfolioThumbnail
     		FROM  PORTFOLIO
     		WHERE FREELANCER_NO = #{freelancerNo}
     	</select>
@@ -197,20 +199,23 @@
     	
     	
     	
+    	
+    	
     	<!-- 포트폴리오 등록 -->
     	<insert id="addPortfolio"  parameterType = "Freelancer" useGeneratedKeys="true">
     		<selectKey keyProperty="portfolioNo" resultType="_int" order="BEFORE">
     			SELECT SEQ_PORTFOLIO_NO.NEXTVAL FROM DUAL
     		</selectKey>
     		INSERT INTO PORTFOLIO VALUES
-    		(SEQ_PORTFOLIO_NO.NEXTVAL,#{portfolioTitle}, #{portfolioContent},#{portfolioThumbnail},#{freelancerNo}, #{portfolioFilePath})
+    		(SEQ_PORTFOLIO_NO.NEXTVAL,#{portfolioTitle}, #{portfolioContent},#{portfolioFilePath},#{freelancerNo}, #{portfolioThumbnail})
     	</insert>
     	
     	
-    	<!-- 포트폴리오 첨부파일 삽입 -->
-    	<insert id ="insertPortfolioImageList" parameterType="list">
-    		INSERT INTO PORTFOLIO_FILE
+    	<!-- 포트폴리오 상세 조회 -->
+    	<select id="viewPortfolioDetail" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio" >
+    		SELECT PORTFOLIO_NO,PORTFOLIO_TITLE, PORTFOLIO_CONTENT, PORTFOLIO_FILE_PATH, PORTFOLIO_THUMBNAIL
+			FROM PORTFOLIO 
+			WHERE FREELANCER_NO = #{freelancerNo}
     		
-    	
-    	</insert>
+    	</select>
 </mapper>

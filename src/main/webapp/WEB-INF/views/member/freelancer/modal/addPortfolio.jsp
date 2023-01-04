@@ -9,52 +9,45 @@
     <link rel="stylesheet" href="/resources/css/freelancer/portfolio.css">
 </head>
 <body>
-    <form action="/member/freelancer/modal/addPortfolio" method="POST">
+    <form action="/member/freelancer/modal/addPortfolio" method="POST" enctype="multipart/form-data">
 
         <div id="content">포트폴리오 추가</div>
         <div class="itemArea">
             <div id="item">제목</div> 
             <div>
-                <input type="text" name="portfolioTitle" id="portfolioTitle">
+                <input type="text" name="portfolioTitle" id="portfolioTitle" required>
             </div>
         </div>
         <div class="itemArea">
             <div id="item">상세 설명</div> 
             <div>
-                <textarea name="portfolioContent" id="portfolioContent" cols="50" rows="10"></textarea>
-            </div>
-        </div>
-        <div class="itemArea">
-            <div id="item">첨부파일</div> 
-            <div>
-                <label for="image-input">파일 선택</label>
-                <input type="file" name="portfolioFilePath" id="image-input" accept="image/*">
-                <%-- <input type="text" name="portfolioFilePath"> --%> <%-- 테스트 --%>
+                <textarea name="portfolioContent" id="portfolioContent" cols="50" rows="10" required></textarea>
             </div>
         </div>
         <div class="itemArea">
             <div id="item">썸네일파일</div> 
             <div>
-                <label for="image-input">파일 선택</label>
-                <input type="file" name="portfolioThumbnail" id="image-input" accept="image/*">
-                <%-- <input type="text" name="portfolioFilePath"> --%> <%-- 테스트 --%>
-                <%-- <input type="file" name="portfolioFilePath">
-                <input type="file" name="portfolioThumbnail"> --%>
+                <label for="image-input1" >파일 선택</label>
+                <input type="file" name="portfolioFile" id="image-input1" accept="image/*" required>
+                <%-- <input type="file" required> --%>
+                <span id="fileName1">선택된 파일없음</span>
+                
+            </div>
+        </div>
+        <div class="itemArea">
+            <div id="item">첨부파일</div> 
+            <div>
+                <label for="image-input2">파일 선택</label>
+                <input type="file" name="portfolioFile" id="image-input2" accept="image/*" required>
+                <span id="fileName2">선택된 파일없음</span>
+            
             </div>
         </div>
         <div>
             <button>등록</button>
         </div>
     </form>
-    
+        <script src="/resources/js/member/freelancer/addPortfolio.js"></script>
+
 </body>
 </html>
-
-<c:if test="${not empty message}">
-        <script>
-         alert("${message}");
-        </script>
-
-        <%-- message 1회 출력 후 모든 scope 삭제 --%>
-        <c:remove var="message"/>
-</c:if>

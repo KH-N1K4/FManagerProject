@@ -132,14 +132,14 @@
                 <div id="serviceArea">
                     <c:if test = "${not empty portfolioList}">
                         <c:forEach var="portfolio" items="${portfolioList}">
-                        <span>
+                        <a href="/portfolioDetail/${portfolio.portfolioNo}">
                         
                             <span class="service">
-                            <span><img src="/resources/images/무파마.jpg"></span>
+                            <span><img  style="width: 100%; height:100%; background-color:skyblue;"src="${portfolio.portfolioThumbnail}"></span>
                             ${portfolio.portfolioTitle}<br>${portfolio.portfolioContent}
                             </span>
                             
-                        </span>
+                        </a>
                         </c:forEach>
                     </c:if>
                     <c:if test ="${empty portfolioList}">

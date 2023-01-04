@@ -110,7 +110,7 @@
                         <option value="3">우리</option>
                         <option value="4">기업</option>
                     </select>
-                    <input type="text" name="bankAccountNumber3" id="bankAccountNumber">
+                    <input type="text" name="bankAccountNumber" id="bankAccountNumber">
                 </div>
             </div>
             <div>
