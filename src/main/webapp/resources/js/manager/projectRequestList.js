@@ -154,9 +154,9 @@ function selectChange() {
                 document.getElementById("inputStatus").value=status;
 
                 /* 회원 번호 선택 시 숫자만 보내기 */
-                const serviceSearchFrm = document.getElementById("serviceSearch");
-                if(serviceSearchFrm != null){
-                    serviceSearchFrm.addEventListener("submit",e=>{
+                const requestSearchFrm = document.getElementById("requestSearch");
+                if(requestSearchFrm != null){
+                    requestSearchFrm.addEventListener("submit",e=>{
                         
                         const select = document.getElementById("search-key");
                         const input = document.getElementById("search-query");
@@ -231,9 +231,9 @@ function deleteService() {
 
 
 /* 회원 번호 선택 시 숫자만 보내기 */
-const serviceSearchFrm = document.getElementById("serviceSearch");
-if(serviceSearchFrm != null){
-    serviceSearchFrm.addEventListener("submit",e=>{
+const requestSearchFrm = document.getElementById("requestSearch");
+if(requestSearchFrm != null){
+    requestSearchFrm.addEventListener("submit",e=>{
         
         const select = document.getElementById("search-key");
         const input = document.getElementById("search-query");
