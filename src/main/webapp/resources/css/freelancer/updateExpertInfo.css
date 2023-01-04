@@ -127,3 +127,131 @@ input[type="checkbox"]{
     color:white;
     font-weight: bold;
 }
+
+
+/* 모달창 관련 css */
+.modal_career {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+/* .modal_license {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index:4;
+  } */
+  .modal_license{
+	position:absolute;
+	top:0;
+    left:0;
+
+	width:100%;
+	height:100%;
+	
+	display:none;
+
+	background:rgba(0,0,0,0.4);
+    z-index: 2;
+}
+
+  .modal_license.show {
+    display: block;
+  }
+
+  .modal_body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+  /*   width: 400px;
+    height: 600px; */
+
+    padding: 40px;
+
+   /*  text-align: center; */
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+    
+    z-index:100;
+  }
+  
+  
+  
+.modal_body>span{
+position:absolute;
+right:20px;
+top:20px;
+cursor:pointer;
+}
+
+
+
+.addContent{
+	margin:3px;
+	background-color:lightgray;
+	
+    width: 250px;
+    font-size: 16px;
+    padding: 3px;
+    border-radius: 5px;
+    border: none;
+}
+
+.newOne{
+	/* display: inline-block; */
+	display:inline-box;
+	position:relative;
+	width:250px;
+}
+
+.xbtn{
+	position:absolute;
+	right:8px;
+	top:4px;
+}
+
+
+select{
+    border: 1px solid #538126;
+    box-sizing: border-box;
+    padding: 12px 13px;
+    font-weight: 400;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    position: relative;
+    top: -3px;
+}
+
+#sendContent1, #sendContent2, #sendContent3{
+    width: 150px;
+    padding:8px 0;
+    font-size: 16px;
+    background-color: #538126;
+    border:1px solid white;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    /* 1228 모달창 button 가운데로 옮김. */
+    margin-left: 50px;
+
+}

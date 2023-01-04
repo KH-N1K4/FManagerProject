@@ -81,7 +81,7 @@ public class CategoryServiceImpl implements CategoryService{
 		Pagination pagination =new Pagination(listCount, map.get("cp"));
 		
 		// 3. 페이징 처리 객체를 이용해서 게시글 목록 조회
-		List<Service> serviceList=dao.serviceList(pagination);
+		List<Service> serviceList=dao.serviceList(pagination,map);
 		
 		Map<String, Object> resultMap=new HashMap<String, Object>();
 		resultMap.put("pagination", pagination);

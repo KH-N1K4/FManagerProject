@@ -17,6 +17,7 @@ import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.dao.MyProjectFreelancerDAO;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
@@ -350,6 +351,22 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		map.put("listCount",listCount);
 		
 		return map;
+	}
+
+	/**
+	 *나의 등급 조건 들고 오기
+	 */
+	@Override
+	public myProjectFreelancer selectMyProjectGrade(int memberNo) {
+		return dao.selectMyProjectGrade(memberNo);
+	}
+
+	/**
+	 *프매니저 사이트 등급 조건 들고 오기
+	 */
+	@Override
+	public List<myProjectFreelancer> selectBasicGrade() {
+		return dao.selectBasicGrade();
 	}
 
 	
