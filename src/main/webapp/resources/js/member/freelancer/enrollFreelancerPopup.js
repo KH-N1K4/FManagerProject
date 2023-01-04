@@ -20,9 +20,13 @@ const btnOpenPopup2 = document.getElementById('careerPopup');
 const btnOpenPopup3 = document.getElementById('licensePopup');
 
 //------------------------------------------------------------------
+
+
 btnOpenPopup1.addEventListener('click', () => {
+
   modal1.classList.toggle('show');
-  modal1.style.display = 'block'; 
+  modal1.style.display = 'block';   
+  result1[0].focus();
   if (modal1.classList.contains('show')) {
      body1.style.display = 'block';
      body.style.overflow='hidden';
@@ -31,20 +35,21 @@ btnOpenPopup1.addEventListener('click', () => {
 });
 
 modalClose1.addEventListener('click', () => {
-  // modal1.classList.toggle('show');
 
-modal1.style.display = 'none';
-body.style.overflow='visible';
-  // if (modal1.classList.contains('show')) {
-  //   body1.style.display = 'none';
-  // }
+    modal1.style.display = 'none';
+    body.style.overflow='visible';
+
+    result1[0].value="";
+    result1[1].value="";
+    result1[2].value="졸업";
+
 });
 //------------------------------------------------------------------
 
 btnOpenPopup2.addEventListener('click', () => {
   modal2.classList.toggle('show');
   modal2.style.display = 'block';
-
+  result2[0].focus();
   if (modal2.classList.contains('show')) {
     body2.style.display = 'block';
     body.style.overflow='hidden';
@@ -55,18 +60,21 @@ modalClose2.addEventListener('click', () => {
  
   modal2.style.display = 'none';
   body.style.overflow='visible';
-// modal2.style.backgroundColor='transparent';
 
-  // if (modal2.classList.contains('show')) {
-  //   body2.style.display = 'none';
-  // }
+  result2[0].value="";
+    result2[1].value="";
+    result2[2].value="";
+    result2[3].value="";
+    careerCompanyPeriod1.value="-1";
+    careerCompanyPeriod1.value="-1";
+
 });
 //------------------------------------------------------------------
 
 btnOpenPopup3.addEventListener('click', () => {
   modal3.classList.toggle('show');
   modal3.style.display = 'block';
-
+  result3[0].focus();
   if (modal3.classList.contains('show')) {
     body3.style.display = 'block';
     body.style.overflow='hidden';
@@ -76,6 +84,10 @@ modalClose3.addEventListener('click', () => {
   // modal3.classList.toggle('show');
   modal3.style.display = 'none';
   body.style.overflow='visible';
+
+  result3[0].value="";
+  result3[1].value="";
+  result3[2].value="";
   // modal3.style.backgroundColor='transparent';
 
   // if (modal3.classList.contains('show')) {
@@ -103,46 +115,43 @@ const sendContent1 = document.getElementById('sendContent1');
 // const allOptions = Array.from(select.options).map(option => option.value);
 
 
-sendContent1.addEventListener('click',function() {
-
-  // const test1 = $("#graduateStatus option:selected").text()
-  // // console.log($(".graduateStatus option:selected").text());
-  // document.getElementById('majorStatus').value = $("#graduateStatus option:selected").val(); // input hidden값
-  // for(let i = 0; i < result1.length-1; i++) {
-  //   licenseInput1.value += result1[i].value +',';
-  // }
+sendContent1.addEventListener('click',function(e) {
 
 
-  const newOne=document.createElement("div");
-  newOne.classList.add("newOne");
-
-   const newText=document.createElement("input");
-   const xBtn=document.createElement("span");
-   xBtn.classList.add("xbtn");
-   xBtn.innerHTML="&times;";
+  if(result1[0].value.trim().length==0||result1[1].value.trim().length==0){
+    alert("값을 모두 입력해주세요");
+  }else{
+    const newOne=document.createElement("div");
+    newOne.classList.add("newOne");
   
-   newText.name="major";
-   newText.classList.add("addContent");
-   newText.value=result1[0].value+"/"+result1[1].value+"/"+result1[2].value;
-   newOne.append(newText);
-   newOne.append(xBtn);
-   majorInput1.parentElement.append(newOne);
+     const newText=document.createElement("input");
+     const xBtn=document.createElement("span");
+     xBtn.classList.add("xbtn");
+     xBtn.innerHTML="&times;";
+    
+     newText.name="major";
+     newText.classList.add("addContent");
+     newText.value=result1[0].value+"/"+result1[1].value+"/"+result1[2].value;
+     newOne.append(newText);
+     newOne.append(xBtn);
+     majorInput1.parentElement.append(newOne);
+  
+     result1[0].value="";
+     result1[1].value="";
+     result1[2].value="졸업";
 
-
-    // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
+     
+ // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
     xBtn.addEventListener("click",function(){
     // 클릭된 X버튼의 부모 요소(div.row)를 삭제 
     // 요소.remove() : 해당 요소를 제거 
     this.parentElement.remove();
-})
-
-   if(select1.value==0){
-    alert("다시 선택");
-    // 이거 어떻게 막지..
-   }
-  //licenseInput1.value += test1;
-
+  
+  })
+  
   modal1.style.display='none';
+  body.style.overflow='visible';
+  }
 });
 
 
@@ -150,56 +159,57 @@ sendContent1.addEventListener('click',function() {
 const result2 = document.getElementsByClassName('input2');
 const careerInput2 = document.getElementById('careerPopup');
 const sendContent2 = document.getElementById('sendContent2');
+const careerCompanyPeriod1 = document.getElementById('careerCompanyPeriod1');
+const careerCompanyPeriod2 = document.getElementById('careerCompanyPeriod2');
 
 
 
 sendContent2.addEventListener('click',function() {
-  const test2 = $("#careerCompanyPeriod1 option:selected").text();
-  const test3 = $("#careerCompanyPeriod2 option:selected").text();
   
-  // for(let i = 0; i < result2.length-2; i++) {
-  //   careerInput2.value += result2[i].value +',';
-  // }
-  // careerInput2.value += test2+" ";  // ?년 [4]
-  // careerInput2.value += test3;     // ?개월 [5]
+    if(result2[0].value.trim().length==0||result2[1].value.trim().length==0
+    ||result2[2].value.trim().length==0||result2[3].value.trim().length==0
+    ||careerCompanyPeriod1.value==-1||careerCompanyPeriod2.value==-1){
+      alert("값을 모두 입력해주세요");
+    }else{
+      const newOne=document.createElement("div");
+      newOne.classList.add("newOne");
+      
+      const newText=document.createElement("input");
+      const xBtn=document.createElement("span");
+      xBtn.classList.add("xbtn");
+      xBtn.innerHTML="&times;";
+      
+      newText.name="career";
+      newText.classList.add("addContent");
+      
+      
+      newText.value=result2[0].value+"/"+result2[1].value+"/"+result2[2].value+"/"+result2[3].value+"/"
+      +careerCompanyPeriod1.value+"년"+careerCompanyPeriod2.value+"개월";
+      
+      
+      newOne.append(newText);
+      newOne.append(xBtn);
+      careerInput2.parentElement.append(newOne);
 
+      result2[0].value="";
+      result2[1].value="";
+      result2[2].value="";
+      result2[3].value="";
+      careerCompanyPeriod1.value="-1";
+      careerCompanyPeriod1.value="-1";
+      
+      
+      // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
+      xBtn.addEventListener("click",function(){
+        // 클릭된 X버튼의 부모 요소(div.row)를 삭제 
+        // 요소.remove() : 해당 요소를 제거 
+        this.parentElement.remove();
+      })
+      modal2.style.display='none';
+      body.style.overflow='visible';
 
-  // if(licenseInput2.value.trim().length != 0){
-    //   freelancerCont.value += 
-    //   licenseInput2.value.split(',')[4].split('년')[0];
-    
-    // }
-    
-    
-    
-    
-    const newOne=document.createElement("div");
-    newOne.classList.add("newOne");
-    
-    const newText=document.createElement("input");
-    const xBtn=document.createElement("span");
-    xBtn.classList.add("xbtn");
-    xBtn.innerHTML="&times;";
-    
-    newText.name="career";
-    newText.classList.add("addContent");
-    
-    
-    newText.value=result2[0].value+"/"+result2[1].value+"/"+result2[2].value+"/"+result2[3].value+"/"+test2+test3;
-    
-    
-    newOne.append(newText);
-    newOne.append(xBtn);
-    careerInput2.parentElement.append(newOne);
-    
-    
-    // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
-    xBtn.addEventListener("click",function(){
-      // 클릭된 X버튼의 부모 요소(div.row)를 삭제 
-      // 요소.remove() : 해당 요소를 제거 
-      this.parentElement.remove();
-    })
-    modal2.style.display='none';
+    }
+
   });
 
 const result3 = document.getElementsByClassName("input3"); // 모달창의 input들
@@ -217,61 +227,84 @@ sendContent3.addEventListener("click", function(){
     //licenseInput3.value += result3[2].value;
     // document.getElementById("licensePopup").value = result.value;
 
-
-    const newOne=document.createElement("div");
-    newOne.classList.add("newOne");
-  
-     const newText=document.createElement("input");
-     const xBtn=document.createElement("span");
-     xBtn.classList.add("xbtn");
-     xBtn.innerHTML="&times;";
+    if(result3[0].value.trim().length==0||result3[1].value.trim().length==0
+    ||result3[2].value.trim().length==0){
+      alert("값을 모두 입력해주세요");
+    }else{
+      const newOne=document.createElement("div");
+      newOne.classList.add("newOne");
     
-     newText.name="license";
-     newText.classList.add("addContent");
-    newText.value=result3[0].value+"/"+result3[1].value+"/"+result3[2].value;
-     newOne.append(newText);
-     newOne.append(xBtn);
-     licenseInput3.parentElement.append(newOne);
-  
-  
-      // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
-      xBtn.addEventListener("click",function(){
-      // 클릭된 X버튼의 부모 요소(div.row)를 삭제 
-      // 요소.remove() : 해당 요소를 제거 
-      this.parentElement.remove();
-  })
+       const newText=document.createElement("input");
+       const xBtn=document.createElement("span");
+       xBtn.classList.add("xbtn");
+       xBtn.innerHTML="&times;";
+      
+       newText.name="license";
+       newText.classList.add("addContent");
+      newText.value=result3[0].value+"/"+result3[1].value+"/"+result3[2].value;
+       newOne.append(newText);
+       newOne.append(xBtn);
+       licenseInput3.parentElement.append(newOne);
+    
 
-    modal3.style.display="none"
+
+     result3[0].value="";
+     result3[1].value="";
+     result3[2].value="";
+
+    
+        // span에 click 이벤트 동작 추가(동적 요소에 이벤트 추가)
+        xBtn.addEventListener("click",function(){
+        // 클릭된 X버튼의 부모 요소(div.row)를 삭제 
+        // 요소.remove() : 해당 요소를 제거 
+        this.parentElement.remove();
+    })
+  
+      modal3.style.display="none"
+      body.style.overflow='visible';
+
+    }
 });
 
 const checkObj={"area":false,
                 "freelancerField":false,
-                "freelancerCont":false,
-                "contactTime1":false,
-                "contactTime2":false,
                 "bankCode":false,
                 "bankAccountNumber":false,
-                "freelancerIntro":false
             };
 
+
+
+
+  const freelancerField=document.getElementsByName("freelancerField");
   document.getElementById("registerFrm").addEventListener("submit",function(event){
+
+
+    for(let field of freelancerField){
+        if(field.checked==true){
+          checkObj.freelancerField=true;
+          break;
+        }else{
+          checkObj.freelancerField=false;
+        }
+    }
+
 
     for(key in checkObj){
         let str;
 
         if(!checkObj[key]){
             switch(key){
-                case "memberEmail": str="이메일이 유효하지 않습니다."; break;
-                case "memberPw": str="비밀번호가 유효하지 않습니다."; break;
-                case "memberPwConfirm": str="비밀번호 확인이 유효하지 않습니다."; break;
-                case "memberNickname": str="닉네임이 유효하지 않습니다."; break;
-                case "memberTel": str="전화번호 유효하지 않습니다."; break;
-                case "authKey": str="인증이 완료되지 않았습니다."; break;
+                case "area": str="지역을 선택해주세요"; break;
+                case "freelancerField": str="관심분야를 선택해주세요"; break;
+                case "bankCode": str="은행을 선택해주세요"; break;
+                case "bankAccountNumber": str="계좌번호가 유효하지 않습니다."; break;
             }
 
             alert(str); // 대화상자 출력 
             // 유효하지 않은 입력으로 포커스 이동 
-            document.getElementById(key).focus();
+            if(key!="freelancerField"){
+              document.getElementById(key).focus();
+            }
             
             event.preventDefault(); // 제출 이벤트 제거 
             return; // 함수 종료
@@ -279,12 +312,42 @@ const checkObj={"area":false,
     }
 
 })
-          
 
-const area=document.getElementById("area").value;
+const area=document.getElementById("area");
 
-function checkInput(){
-    if(area==''){
-      alert("area");
+area.addEventListener("change",()=>{
+  if(area.value==0){
+    checkObj.area=false;
+  }else{
+    checkObj.area=true;
+  }
+});
+
+
+const bankCode=document.getElementById("bankCode");
+const bankAccountNumber=document.getElementById("bankAccountNumber");
+
+bankCode.addEventListener("change",()=>{
+  if(bankCode.value==0){
+    checkObj.bankCode=false;
+  }else{
+    checkObj.bankCode=true;
+  }
+});
+
+bankAccountNumber.addEventListener("keydown",function(){
+    // 문자가 입력되지 않은 경우 
+    if(bankAccountNumber.value.trim().length==0){
+        checkObj.bankAccountNumber=false;
+        return;
     }
-}
+
+    // 전화번호 정규 표현식 검사
+    const regEx=/^\d{12,14}$/;
+
+    if(regEx.test(bankAccountNumber.value)){ // 유효한 경우
+        checkObj.bankAccountNumber=true;
+    }else{
+        checkObj.bankAccountNumber=false;
+    }
+});

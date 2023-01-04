@@ -35,7 +35,8 @@
             <div class="item">근무기간</div>
             <div>
                 <select name="careerCompanyPeriod1" id="careerCompanyPeriod1" class="input2">
-                    <option value="0">년</option>
+                    <option value="-1">년</option>
+                    <option value="0">0년</option>
                     <option value="1">1년</option>
                     <option value="2">2년</option>
                     <option value="3">3년</option>
@@ -49,7 +50,8 @@
                     <option value="11">11년</option>
                 </select>
                 <select name="careerCompanyPeriod2" id="careerCompanyPeriod2" class="input2">
-                    <option value="0">개월</option>
+                    <option value="-1">개월</option>
+                    <option value="0">0개월</option>
                     <option value="1">1개월</option>
                     <option value="2">2개월</option>
                     <option value="3">3개월</option>

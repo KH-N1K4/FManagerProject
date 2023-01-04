@@ -18,7 +18,7 @@
 
     <div class="main">
 
-        <form method ="post" action="/member/freelancer/enrollFreelancerSignUp" id="registerFrm" onsubmit="checkInput();">
+        <form method ="post" action="/member/freelancer/enrollFreelancerSignUp" id="registerFrm">
             <span id="title">전문가 등록</span>
             
             <span style="color:red;">*</span> 항목은 필수 항목입니다.
@@ -26,7 +26,7 @@
                 <div class="item"><span style="color:red;">*</span>지역</div>
                 <div>
                     <select name="regionNo" id="area" class="select">
-                        <option value="">전체</option>
+                        <option value="0">전체</option>
                         <option value="1">서울</option>
                         <option value="2">경기</option>
                         <option value="3">부산</option>
@@ -84,21 +84,21 @@
                 </div>
             </div>
             <div>
-                <div class="item">학력/전공</div>
+                <div class="item additional">학력/전공 &nbsp;<span id="majorPopup" class="modal" >+</span></div> 
                 <div>
-                    <input type="text" id="majorPopup" class="modal">
+                   <!--  <input type="text" id="majorPopup" class="modal" autocomplete="off" readonly size="1" placeholder="+"> -->
                 </div>
             </div>
             <div>
-                <div class="item">경력 사항</div>
+                <div class="item additional">경력 사항 &nbsp;<span id="careerPopup" class="modal" >+</span></div>
                 <div>
-                    <input type="text" id="careerPopup" class="modal">
+                   <!--  <input type="text" id="careerPopup" class="modal" autocomplete="off" readonly> -->
                 </div>
             </div>
             <div>
-                <div class="item">자격증</div>
+                <div class="item additional">자격증 &nbsp;<span id="licensePopup" class="modal" >+</span></div>
                 <div>
-                    <input type="text" id="licensePopup" class="modal">
+                   <!--  <input type="text" id="licensePopup" class="modal" autocomplete="off" readonly> -->
                 </div>
             </div>
             <div>
@@ -128,18 +128,18 @@
                         <option value="3">우리</option>
                         <option value="4">기업</option>
                     </select>
-                    <input type="text" name="bankAccountNumber3" id="bankAccountNumber">
+                    <input type="text" name="bankAccountNumber3" id="bankAccountNumber" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
             </div>
             <div>
                 <div class="item"><span style="color:red;">*</span>자기소개</div>
                 <div>
-                    <textarea name="freelancerIntro" id="freelancerIntro" cols="66" rows="10"></textarea>
+                    <textarea name="freelancerIntro" id="freelancerIntro" cols="66" rows="10" required></textarea>
                 </div>
             </div>
             
             <div id="btnArea">
-                <button id="signUpBtn">가입</button>
+                <button id="signUpBtn">등록</button>
             </div>
 
 

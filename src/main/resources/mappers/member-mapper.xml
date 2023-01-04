@@ -79,7 +79,8 @@
  		UPDATE "MEMBER" SET
  		MEMBER_NICKNAME=#{memberNickname},
  		MEMBER_TEL=#{memberTel},
- 		MEMBER_JOB=#{memberJob}
+ 		MEMBER_JOB=#{memberJob},
+ 		MEMBER_PROFILE='/resources/images/프로필.PNG'
  		WHERE MEMBER_NO=#{memberNo}
    </update>
    

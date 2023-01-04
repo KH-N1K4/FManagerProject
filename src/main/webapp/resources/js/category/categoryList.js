@@ -84,7 +84,9 @@ for(let each of select){
             url:"/selectCategoryList",
             method:"GET",
             data:{"order": index.value, "budget":budget.value, "grade":grade.value,
-            "mainCategoryNo":location.href.split('/')[(location.href.split('/').length-2)]},
+            "mainCategoryNo":location.href.split('/')[(location.href.split('/').length-2)],
+            "thirdCategoryNo":location.href.split('/')[(location.href.split('/').length-1)]
+        },
             success:CategoryList=>{
                 
                 category(CategoryList)
