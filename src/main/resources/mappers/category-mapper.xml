@@ -109,29 +109,46 @@
     
     
     
-    	<resultMap type="Service" id="service_rm">
-    	 <id property="serviceNo" column="SERVICE_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
+    
+    
+  <resultMap type="Freelancer1" id="freelancer1_rm">
+    	 <id property="freelancerNo" column="FREELANCER_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
     		   		
-	      <result property="serviceTitle" column="SERVICE_TITLE" />								<!-- 서비스 제목 -->							
-	      <result property="serviceSummary" column="SERVICE_SUMMARY" />						<!-- 서비스 한 줄 요약 -->
-	      <result property="serviceContent" column="SERNICE_CONTENT" />						<!-- 서비스 내용 -->
-	      <result property="requestFilePath" column="REQUEST_FILE_PATH" />		<!-- 서비스 작업 일수 -->
+	      <result property="gradeName" column="GRADE_NAME" />								<!-- 서비스 제목 -->							
+	      <result property="freelancerField" column="FREELANCER_FIELD" />						<!-- 서비스 한 줄 요약 -->
 	     
-	      <result property="serviceDeleteFL" column="SERVICE_DEL_FL" />				
+	      <result property="freelancerIntro" column="FREELANCER_INTRO" />						<!-- 서비스 내용 -->
+	     
+	      <result property="freelancerCont" column="FREELACER_CONT" />		<!-- 서비스 작업 일수 -->
+	      <result property="regionName" column="REGION_NAME" />				
+	      
+	      
+	      
+	      <result property="major" column="MAJOR" />				
+	      <result property="career" column="CAREER" />				
+	      <result property="license" column="LICENSE" />				
    
 	      
-	      <collection property="imageFileList" 
-	      javaType="java.util.ArrayList" ofType="ImageFile"
-	      select="selectImageFileList"
-	      column="SERVICE_NO"/> 
+	      <collection property="portfolioList" 
+	      javaType="java.util.ArrayList" ofType="Portfolio"
+	      select="selectPortfolioList"
+	      column="FREELANCER_NO"/> 
 	      
 	      
-	      <collection property="reviewList" 
-	      javaType="java.util.ArrayList" ofType="Review"
-	      select="selectReviewList"
-	      column="SERVICE_NO"/>
+	    <!--   <collection property="fServiceList" 
+	      javaType="java.util.ArrayList" ofType="FService"
+	      select="selecFServiceList"
+	      column="FREELANCER_NO"/> -->
 	      
 	      
+    </resultMap>
+    
+    <resultMap  type="Portfolio" id="portfolio_rm">
+    	  <id property="portfolioNo" column="PORTFOLIO_NO"/>
+	      <result property="portfolioTitle" column="PORTFOLIO_TITLE"/>
+	      <result property="portfolioContent" column="PORTFOLIO_CONTENT"/>
+	      <result property="portfolioFilePath" column="PORTFOLIO_FILE_PATH"/>
+	      <result property="portfolioThumbnail" column="PORTFOLIO_THUMBNAIL"/>
     </resultMap>
     
     
