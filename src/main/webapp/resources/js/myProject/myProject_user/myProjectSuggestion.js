@@ -21,9 +21,9 @@ document.getElementById("chooseBtn").addEventListener("click", e=>{
                     const th = document.createElement("th");
                     const span = document.createElement("span");
                     th.setAttribute("class","tc");
-                    th.setAttribute("id","proposalStatus");
+                    // th.setAttribute("id","proposalStatus");
                     span.setAttribute("class","text");
-                    span.innerText = 'proposalAdoptStatus'; 
+                    // span.innerText = 'proposalAdoptStatus'; 
                     suggestionTable.append("th");
                     th.append("span");
                 }

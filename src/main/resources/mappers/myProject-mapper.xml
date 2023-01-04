@@ -110,7 +110,7 @@
 	<!-- 내 프로젝트 등록하기 (첨부파일) -->
 	<insert id="insertFileImageList" parameterType="list">
 		INSERT INTO REQUEST_FILE 
-		SELECT SEQ_PROJECT_REQUEST_NO.NEXTVAL REQUEST_FILE_NO, A.* FROM
+		SELECT SEQ_REQUEST_FILE_NO.NEXTVAL REQUEST_FILE_NO, A.* FROM
 		<foreach collection="list" item="img" open="(" close=") A" separator="UNION ALL">
 			SELECT #{img.requestFilePath} REQUEST_FILE_PATH, 
 				   #{img.requestFileOrder} REQUEST_FILE_ORDER,

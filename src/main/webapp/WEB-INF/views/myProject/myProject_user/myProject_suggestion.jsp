@@ -155,7 +155,7 @@
   
     <script>
         var memberNo = '${loginMember.memberNo}';
-        var proposalAdoptStatus = '${proposal.proposalAdoptStatus}';
+        var proposalAdoptStatus = '${proposal[0].proposalAdoptStatus}';
     </script>
 
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
