@@ -26,7 +26,7 @@
                     <div class="design" id="main${mainVar.mainCategotyNo}">${mainVar.mainCategotyName}</div>
                     <c:forEach var="subVar" items="${subcategory}">
                         <c:if test="${mainVar.mainCategotyNo eq subVar.mainCategotyNo}">
-                            <div class="subCategori" id="sub${subVar.subCategoryNo}"><a href="">${subVar.subCategoryName}</a><button>▼</button></div>
+                            <div class="subCategori" id="sub${subVar.subCategoryNo}"><a href="">${subVar.subCategoryName}</a><button class="detailMenu">▼</button></div>
                             <div class="sub${subVar.subCategoryNo}Box subMenu">
                                 <c:forEach var="categoryVar" items="${thirdcategory}">
                                     <c:if test="${subVar.subCategoryNo eq categoryVar.subCategoryNo}">
@@ -87,6 +87,11 @@
 
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+
+    <!-- <script src="/resources/js/category/projectRequest.js"></script> -->
     
 </body>
 </html>
