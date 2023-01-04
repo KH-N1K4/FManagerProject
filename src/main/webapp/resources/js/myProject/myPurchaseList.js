@@ -51,14 +51,14 @@ for(f of finishBtn){
         data: {'tradeNo':tradeNo},
         success: (result)=>{
           if(result>0){
-  
+            
           }
   
   
         }
   
       });
-      
+
     }
 
   });
