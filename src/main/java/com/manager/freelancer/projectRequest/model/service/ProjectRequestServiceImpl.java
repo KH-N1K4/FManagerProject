@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.manager.freelancer.myProject.model.vo.Pagination;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
 import com.manager.freelancer.projectRequest.model.dao.ProjectRequestDAO;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
@@ -19,19 +20,23 @@ public class ProjectRequestServiceImpl implements ProjectRequestSerivce{
 	private ProjectRequestDAO dao;
 
 	@Override
-	public Map<String, Object> getCategotyList() {
+	public Map<String, Object> getCategotyList(int cp, int mainCategotyNo, int subCategoryNo, int thirdCategotyNo) {
+		int listCount = dao.getProjectRequestListCount(mainCategotyNo,subCategoryNo,thirdCategotyNo);
+		
+		Pagination pagination = new Pagination(listCount,cp,20,10);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		 
 		List<myProjectFreelancerRequest> categotyList = dao.getCategotyList();
 		List<myProjectFreelancerRequest> subCategotyList = dao.getSubCategotyList();
 		List<myProjectFreelancerRequest> mainCategotyList = dao.getMainCategotyList();
-		List<myProjectFreelancerRequest> projectRequestList = dao.getProjectRequestList();
+		List<myProjectFreelancerRequest> projectRequestList = dao.getProjectRequestList(pagination,mainCategotyNo,subCategoryNo,thirdCategotyNo);
 		
 		map.put("categotyList",categotyList);
 		map.put("subCategotyList",subCategotyList);
 		map.put("mainCategotyList",mainCategotyList);
 		map.put("projectRequestList",projectRequestList);
+		map.put("pagination",pagination);
 		return map;
 	}
 }

@@ -30,7 +30,6 @@
     font-weight: bold;
     border-bottom: 2px solid #538126; 
 }
-
 .design a{
     width: 100%;
     font-size: 23px !important;
@@ -81,10 +80,10 @@
 .thirdCategory{
 	margin-left:10px;
 }
-
 .subMenu{
     display: none;
 }
+
 
 /* 서비스 이미지 영역 */
 #imageContent{
@@ -114,6 +113,7 @@
 	
 	
 	display: block;
+   
 }
 
 .like-area>i{
