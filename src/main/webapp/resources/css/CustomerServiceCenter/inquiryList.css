@@ -32,6 +32,12 @@
     font-weight: bold;
     font-size: 22px;
 }
+#inquiry a:hover{
+    color: #538126;
+}
+#inquiryList a:hover{
+    color: #538126;
+}
 /*  --------------사이드 메뉴  --------------*/
 
 /* ///////////////// ////////////////////////////*/
@@ -40,6 +46,7 @@
 #inquirySubmit{
     width: 800px;
     margin-top: 50px;
+    margin-bottom: 100px;
 }
 
 /* 문의하기 페이지 제목 */
@@ -49,12 +56,15 @@
 
 /* 문의 유형 */
 #division{
-    width: 150px;
+    width: 130px;
     height: 30px;
     margin-left: 20px;
     margin-bottom: 10px;
     border-radius: 5px;
     text-align-last: center;
+}
+#division:hover{
+    border: 1px solid #538126;
 }
 
 /* ----------------------테이블 폼---------------------- */
@@ -63,7 +73,7 @@ table{
     margin: 0 auto;
 }
 table th{
-    border-bottom: 1px solid #538126;
+    border-bottom:  1px solid #c6c6c9;
     height: 50px;
 }
 table td{
@@ -118,14 +128,21 @@ table a{
 
 /* 하단 검색창 selectBox */
 #inquirySearch select{
-    width: 150px;
+    width: 100px;
     height: 45px;
+}
+#inquirySearch select:hover{
+    border: 1px solid #538126;
 }
 /* 하단 검색창 input */
 #inquirySearch input{
-    width: 300px;
+    width: 250px;
     height: 39px;
     margin-left: 10px;
+    padding-left: 15px;
+}
+#inquirySearch input:hover{
+    border: 1px solid #538126;
 }
 
 /* 하단 검색창 button */
@@ -134,16 +151,20 @@ table a{
     height: 45px;
     margin-left: 10px;
     background-color: #538126;
+    border-radius: 5px;
+    border: 1px solid #538126;
     color: #fff;
-    font-size: 17px;
-    border: none;
+    font-size: 15px;
     cursor: pointer;
 }
+#inquirySearch button:hover{
+    background-color: #4a7222;
+    font-size: 16px;
+}
 #search-key{
-    font-size: 17px;
+    font-size: 15px;
     text-align-last: center;
 }
-
 
 
 
@@ -156,7 +177,8 @@ table a{
     text-align: center;
     color: white;
     border-radius: 5px;
-    font-size: 17px;
+    line-height: 25px;
+    font-size: 15px;
     background-color: #538126
 }
 
@@ -166,9 +188,10 @@ table a{
     width: 100px;
     height: 24px;
     text-align: center;
+    line-height: 25px;
     color: white;
     border-radius: 5px;
-    font-size: 17px;
+    font-size: 15px;
     background-color: rgb(165, 173, 165);
 
 }
