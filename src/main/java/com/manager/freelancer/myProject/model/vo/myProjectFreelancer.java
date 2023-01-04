@@ -20,7 +20,10 @@ public class myProjectFreelancer {
 	private int gradeNo;					//GRADE_NO 등급 번호(FK)
 	
 	private String gradeName;				//GRADE_NAME 등급 이름
-	private int gradeSatisfaction;			//SATISFACTION 만족도
+	private float gradeSatisfaction;			//SATISFACTION 만족도
 	private int gradeInquityRate;			//INQUIRY_RATE 메세지 응답률
 	private int gradeCompletionRate;		//COMPLETION_RATE 작업일 준수율
+	private int gradeSaleProceeds;			//SALE_PROCEEDS 누적 판매 금액
+	private String gradeSaleProceedsString;			//SALE_PROCEEDS 누적 판매 금액
+	private int gradeSaleCount;				//SALE_COUNT 누적 판매 건수
 }

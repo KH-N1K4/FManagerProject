@@ -424,6 +424,9 @@ chattingSock.onmessage = function(e) {
           ul.append(liDay);
       }
     }
+		if(num ==0){
+			ul.append(liDay);
+		}
     num = num+1;
 	
 		// 메세지 만들어서 출력하기

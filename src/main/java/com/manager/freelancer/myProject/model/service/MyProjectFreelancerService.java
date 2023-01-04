@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 
 public interface MyProjectFreelancerService {
@@ -124,6 +125,17 @@ public interface MyProjectFreelancerService {
 	 */
 	Map<String, Object> myServiceInquiry(int memberNo, int cp, String startDate, String endtDate, int mainCategoryNo,
 			String searchInput);
+
+	/**나의 등급 조건들고 오기
+	 * @param memberNo
+	 * @return
+	 */
+	myProjectFreelancer selectMyProjectGrade(int memberNo);
+
+	/**프매니저 사이트 등급 조건 들고 오기
+	 * @return
+	 */
+	List<myProjectFreelancer> selectBasicGrade();
 
 
 

@@ -10,6 +10,6 @@
             <a class="myProject_User_side" href="/member/myProject/freelancer/myServiceInquiry">서비스 문의 내역</a>
             <a class="myProject_User_side" href="/member/myProject/freelancer/profitManagerment">수익 관리</a>
             <a class="myProject_User_side" href="/member/myProject/freelancer/myProjectGrade">등급 관리</a>
-            <a class="myProject_User_side" href="">프리랜서 클럽</a>
+            <a class="myProject_User_side" href="/member/myProject/freelancer/freelancerClub">프리랜서 클럽</a>
           </div>
     </section>
