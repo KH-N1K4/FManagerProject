@@ -118,7 +118,7 @@
                                     <td>${userInquiry.inquiryRequestDate}</td>
                                 </tr>
                                 <tr>
-                                    <th>답변</th>
+                                    <th>답변 내용</th>
                                     <td class="textArea">${userInquiry.inquiryRequest}</td>
                                 </tr>
                             </table>

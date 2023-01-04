@@ -129,16 +129,4 @@ public class MyProjectContorller {
 	
 	
 
-	// 구매 관리 이동
-	@GetMapping("/member/myProject/myPurchaseList")
-	public String myPurchaseList() {
-		return "myProject/myPurchaseList";
-	}
-	
-//	// 결제내역이동
-//	@GetMapping("/member/myProject/paymentList")
-//	public String paymentList() {
-//		return "myProject/paymentList";
-//	}
-	
 }
