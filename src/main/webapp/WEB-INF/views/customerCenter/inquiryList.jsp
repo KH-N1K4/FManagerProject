@@ -16,9 +16,8 @@
 
     <jsp:include page="/WEB-INF/views/common/header_black_ver2 customer.jsp"/>
 
-     <%-- 검색을 진행한 경우 --%>
+    <%-- 검색을 진행한 경우 --%>
     <c:if test="${not empty param.key}">
-        <%-- /board/1?cp=3&key=t&query=테스트 --%>
         <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
     </c:if>
 
@@ -61,7 +60,7 @@
                             <c:when test="${empty userInquiryList}">
                                 <!-- 게시글 목록 조회 결과가 비어있다면 -->
                                 <tr>
-                                    <th colspan="6"> 게시글이 존재하지 않습니다 .</th>
+                                    <td colspan="6"> 게시글이 존재하지 않습니다 .</td>
                                 </tr>
                             </c:when>
                             <c:otherwise>
@@ -87,7 +86,7 @@
                     </table>
                     <hr>
                 </div>
-
+                    <c:if test="${not empty userInquiryList}">
                     <div class="pagination-area">
                         <ul class="pagination">
                         
@@ -118,13 +117,14 @@
 
                         </ul>
                     </div>
+                    </c:if>
                     <form action="/userInquiryList" id="inquirySearch" method="get"> 
                         <select name="key" id="search-key">
                             <option value="t">제목</option> 
                             <option value="c">내용</option> 
                             <option value="tc">제목+내용</option> 
                         </select> 
-                        <input type="text" name="query" id="search-query" placeholder=" 검색어를 입력해주세요" >  
+                        <input type="text" name="query" id="search-query" placeholder=" 검색어를 입력해주세요" <c:if test="${not empty param.key}">value='${param.query}'</c:if>>  
                         <button>검색</button>
                     </form>
             </div>

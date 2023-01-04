@@ -10,12 +10,21 @@ for(var i=1; i<=12; i++){
   console.log(num +":"+agodate+","+i);
   const year =agodate.getFullYear();
   const months =agodate.getMonth()+1;
-  const agodate2 = year+"-"+months;
+  var agodate2 ='';
+  if(months < 10){
+    agodate2= year+"-0"+months;
+    //agodate2= year+"-"+(("00"+months.toString()).slice(-2));
+  }else{
+    agodate2= year+"-"+months;
+  }
+
   console.log(num +":"+agodate2+","+i);
   arr[num] = agodate2;
   var booleanVal = false;
   profitList.forEach(function(arg){
+    console.log(num +":"+arg.paymentPrice+","+arg.paymentDateString);
     if(arg.paymentDateString == agodate2){
+      console.log(num +":"+arg.paymentPrice+","+arg.paymentDateString);
       arrProfit[num] = arg.paymentPrice;
       booleanVal = true;
     };
