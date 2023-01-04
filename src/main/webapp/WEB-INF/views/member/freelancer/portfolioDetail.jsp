@@ -3,25 +3,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>포트폴리오 모달</title>
-
     <link rel="stylesheet" href="/resources/css/freelancer/portfolioDetail.css">
 
 
-    
-</head>
-<body>
 
 
 
-    <div id="portfolioDetailMain">
-        <button id="">x</button>
+
+    <div class="modal_body">
+        <button class="modal_close2">x</button>
 
         <div id="writerInfo">
             <div id="writerPhoto">
@@ -45,7 +35,3 @@
 
     </div>
     
-    <script src="/resources/js/member/freelancer/portfolioDetail.js"></script>
-
-</body>
-</html>

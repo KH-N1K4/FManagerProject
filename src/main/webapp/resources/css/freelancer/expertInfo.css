@@ -85,7 +85,7 @@ input{
 
 /* �옄湲� �냼媛� */
 textarea{
-    border: none;
+    /* border: none; */
     font-size: 15px;
     padding: 5px 20px 20px 5px;
     position: relative;
@@ -96,7 +96,7 @@ textarea{
     resize:none;
 }
 textarea:focus{
-    border: none;
+    /* border: none; */
     outline: none;
 }
 
@@ -155,7 +155,7 @@ input[type="checkbox"]{
     flex-direction: row;
     justify-content: space-between;
 }
-#add{
+#addPortfolioPopupBtn{
     font-size: 20px;
     font-weight: bold;
     text-decoration: none;
@@ -169,4 +169,51 @@ input[type="checkbox"]{
     background-color: darkseagreen;
     margin-right: 20px;
     margin-bottom: 40px;
+}
+
+.modal_body{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 400px;
+    height: 600px;
+
+    padding: 40px;
+
+   /*  text-align: center; */
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+    
+    z-index:100;
+}
+
+
+.modal_addPortfolio{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal_portfolioDetail{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
 }
