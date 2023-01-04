@@ -188,7 +188,7 @@ main{
 }
 .progress::-webkit-progress-value{
   border-radius:10px;
-  background: #538126;
+  background: #f9e13a;
 }
 
 .rightBox > div{
@@ -200,11 +200,20 @@ main{
 
 /* 등급 안내 */
 table, th, td {
-  border: 1px solid #c6c6c9; 
+  border: 1px solid #dfdfe6;
+  height: 90px; 
+}
+
+thead th {
+  background-color: #d6e8fb47;
 }
 
 caption {
-  display: none;
+  text-align:start;
+  font-size: 25px;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-bottom: 5px;
 }
 
 table {

@@ -266,5 +266,13 @@ public class MyProjectFreelancerController {
 		model.addAttribute("BasicGrade",BasicGrade);
 		return "myProject/myProject_freelancer/myProjectGrade";
 	}
+	
+	
+	//프리랜서 클럽 페이지(지도 api)
+	@GetMapping("/member/myProject/freelancer/freelancerClub")
+	public String freelancerClub() {
+		
+		return "myProject/myProject_freelancer/myProject_freelancerClub";
+	}
 
 }
