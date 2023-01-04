@@ -1,4 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="paymentList" value="${resultMap.paymentList}"/>
+<c:set var="pagination" value="${resultMap.pagination}"/>
+<c:set var="i" value="0"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,58 +14,18 @@
   <title>결제 내역</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/paymentList.css">
-  <style>
-    body{
-        margin:0;
-    }
-
-    #logo{
-        width: 200px;
-        height: 100px; 
-        position: absolute;
-        left: 60px;
-        top:40px;
-        /* border:1px solid black; */
-    }
-
-    #header{
-        background-color: #538126;
-    }
-
-    #logo>img{
-        width: 100%;
-    }
-
-    #header1{
-        width: 1200px;
-        height: 160px;
-        margin:auto;
-        position: relative;    
-    }
-
-    .header-top{
-        position: absolute;
-        right:0;
-        top:20px;
-        align-items: center;
-        display: flex;
-    }
-    
-    .header-top span{
-        margin:0 12px;
-        cursor: pointer;
-        color:white !important;
-    }
-    .header-top img{
-        border-radius: 45%;
-    }
-
-</style>
+  
 </head>
 <body>
 
   <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
-
+  <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+            <c:if test="${parameter.key != 'cp'}">
+                <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+            </c:if>
+        </c:forEach>
+    </c:if>
   <main>
     <!-- hearder -->
     <!-- <div id="header">
@@ -84,61 +50,110 @@
         <section class="mainContent">
           <div class="container">
               <div class="container_header">
+                <form action="/member/myProject/paymentList" method="GET" id="searchFrm">
                   <!-- 상단 내프로젝트 페이지 제목 -->
-                  <div class="container_title"><span>결제 내역</span>
+                  <div class="container_title"><span class="title">결제 내역</span>
                     <span>
-                      <select name="" id="">
-                        <option value="0" selected="">전체</option>
+                      <select class="selectType" name="type" id="selectType" title="${type}">
+                        <option value="0">카테고리 선택</option>
                         <option value="1">디자인</option>
                         <option value="2">IT·프로그래밍</option>
                         <option value="3">영상</option>
                         <option value="4">사진</option>
                         <option value="5">음향</option>
                       </select>
-                      <input type="date">
-                      <input type="date">
+                      <input type="date" name="searchDate1" id="searchDate1" title="${searchDate1}"> -
+                      <input type="date" name="searchDate2" id="searchDate2" title="${searchDate2}">
+                      <button class="dateSearchBtn">검색</button>
                     </span>
                   
                   </div>
                   <!--------------------------------->
+                </form>
               </div>
             
               <table>
-                <tr>
+                <tr class="tableHeader">
                     <th style="width: 100px;">번호</th>
-                    <th style="width: 100px;">구분</th>
-                    <th style="width: 700px;">서비스명</th>
+                    <th style="width: 150px;">카테고리</th>
+                    <th style="width: 600px;">서비스명</th>
                     <th style="width: 100px;">날짜</th>
-                    <th style="width: 100px;">금액</th>
+                    <th style="width: 150px;">금액</th>
                 </tr>
-                <tr>
-                  <td>1</td>
-                  <td>구분</td>
-                  <td>서비스명서비스명</td>
-                  <td>12/20</td>
-                  <td>50000</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>구분</td>
-                  <td>서비스명서비스명</td>
-                  <td>12/20</td>
-                  <td>50000</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>구분</td>
-                  <td>서비스명서비스명</td>
-                  <td>12/20</td>
-                  <td>50000</td>
-                </tr>
+                <c:if test="${not empty paymentList}">
+				          <c:forEach var="payment" items="${paymentList}">
+                    <tr>
+                      <td>${i=i+1}</td>
+                      <td>${payment.mainCategoryName}</td>
+                      <td>${payment.serviceTitle}</td>
+                      <td>${payment.paymentDate}</td>
+                      <td><fmt:formatNumber value="${payment.paymentPrice}" /></td>
+                    </tr>
+                  </c:forEach>
+                </c:if>
+                <c:if test="${empty paymentList}">
+                  <tr>
+                    <td colspan="5"> 구매 내역이 존재하지 않습니다.
+                  </tr>
+                </c:if>
+
                 
               </table>
+
             
                 
             </div>
+              <!-- pagination -->
+          <div class="pagination-area">
+
+
+              <ul class="pagination">
+              <c:if test="${not empty paymentList}">
+
+                <!-- 첫 페이지로 이동 -->
+                <li><a href="/manager/paymentList?cp=1${sURL}">&lt;&lt;</a></li>
+
+                <!-- 이전 목록 마지막 번호로 이동 -->
+                <li><a href="/manager/paymentList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+
+
+
+                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1" >
+                
+                  <!-- 특정 페이지로 이동 -->
+                  <c:choose>
+                  
+                    <c:when test="${i==pagination.currentPage}">
+                      <!-- 현재 보고있는 페이지 -->
+                      <li>
+                        <a class="current">${i}</a>
+                      </li>
+                    </c:when>
+                    
+                    <c:otherwise>
+                      <!-- 현재 페이지를 제외한 나머지 -->
+                      <li><a href="/manager/paymentList?cp=${i}${sURL}">${i}</a></li>
+                    </c:otherwise>
+                  
+                  </c:choose>
+                  
+                </c:forEach>
+                
+                
+                
+                <!-- 다음 목록 시작 번호로 이동 -->
+                <li><a href="/manager/paymentList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+
+                <!-- 끝 페이지로 이동 -->
+                <li><a href="/manager/paymentList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                </c:if>
+
+              </ul>
+            </div>
           
           </div>
+
+          
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
     </div>
@@ -148,5 +163,8 @@
   <!-- **************************************footer*************************************-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <!-- **************************************footer*************************************-->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+  <script src="/resources/js/myProject/paymentList.js"></script>
 </body>
 </html>

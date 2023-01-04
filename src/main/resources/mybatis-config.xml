@@ -21,15 +21,31 @@
 
 		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
 		<typeAlias type="com.manager.freelancer.member.model.vo.Member" alias="Member"/>
+		
+		
 		<typeAlias type="com.manager.freelancer.manager.model.vo.Member" alias="Member2"/>
 		<typeAlias type="com.manager.freelancer.manager.model.vo.FreelancerService" alias="ManagerService"/>
 		<typeAlias type="com.manager.freelancer.manager.model.vo.Settlement" alias="Settlement"/>
 		<typeAlias type="com.manager.freelancer.manager.model.vo.ReviewReport" alias="ReviewReport"/>
 		<typeAlias type="com.manager.freelancer.manager.model.vo.ProjectRequest" alias="ProjectRequest"/>
-		<typeAlias type="com.manager.freelancer.category.model.vo.MainCategory" alias="MainCategory"/>
+		<typeAlias type="com.manager.freelancer.manager.model.vo.ServiceImageFile" alias="ServiceImageFile"/>
+		<typeAlias type="com.manager.freelancer.manager.model.vo.TradeInfo" alias="TradeInfo"/>
+		<typeAlias type="com.manager.freelancer.manager.model.vo.RequestImageFile" alias="RequestImageFile"/>
+		<typeAlias type="com.manager.freelancer.manager.model.vo.MemberReport" alias="MemberReport"/>
+		<typeAlias type="com.manager.freelancer.manager.model.vo.MemberReportImage" alias="MemberReportImage"/>
+		<typeAlias type="com.manager.freelancer.manager.model.vo.TradeReport" alias="TradeReport"/>
+		
+		
+		
+		
+		
 		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
-		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Freelancer" alias="Freelancer"/>
+		
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiry" alias="UserInquiry"/>
+		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiryImage" alias="UserInquiryImage"/>
+		
+		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Freelancer" alias="Freelancer"/>
+		
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.FreelancerService" alias="myProjectFreelancerService"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectFreelancer" alias="myProjectFreelancer"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.MyProject" alias="MyProject"/>
@@ -38,13 +54,16 @@
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectGrade" alias="myProjectGrade"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry" alias="myProjectServiceInquiry"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectTrade" alias="myProjectTrade"/>
-		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiryImage" alias="UserInquiryImage"/>
+		<typeAlias type="com.manager.freelancer.myProject.model.vo.MyProjectPayment" alias="MyProjectPayment"/>
+		
 	
+		<typeAlias type="com.manager.freelancer.category.model.vo.MainCategory" alias="MainCategory"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.Review" alias="Review"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.Service" alias="Service"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.Trade" alias="Trade"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.ImageFile" alias="ImageFile"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.AskService" alias="AskService"/>
+		
 		<typeAlias type="com.manager.freelancer.common.message.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.manager.freelancer.common.message.model.vo.ChattingRoom" alias="ChattingRoom"/>
 
@@ -58,6 +77,7 @@
 		<mapper resource="/mappers/manager-mapper.xml"/>
 		<mapper resource="/mappers/freelancer-mapper.xml"/>
 		<mapper resource="/mappers/myProject-mapper.xml"/>
+		<mapper resource="/mappers/myProject-mapper2.xml"/>
 		<mapper resource="/mappers/myProjectFreelancerService-mapper.xml"/>
 		<mapper resource="/mappers/userInquiry-mapper.xml"/>
 		<mapper resource="/mappers/category-mapper.xml"/>

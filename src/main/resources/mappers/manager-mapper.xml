@@ -43,13 +43,13 @@
 		<result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />
 		
 		<collection property="serviceImageFileList" 
-	      javaType="java.util.ArrayList" ofType="com.manager.freelancer.manager.model.vo.ServiceImageFile"
+	      javaType="java.util.ArrayList" ofType="ServiceImageFile"
 	      select="selectImageFileListService"
 	      column="SERVICE_NO"/>
 	</resultMap>
 	
 	      
-	 <resultMap type="com.manager.freelancer.manager.model.vo.ServiceImageFile" id="imageFile_rm">
+	 <resultMap type="ServiceImageFile" id="imageFile_rm">
       <id property="imageFileNo" column="REQUEST_FILE_NO"/>
       <result property="imageFilePath" column="REQUEST_FILE_PATH"/>
       <result property="serviceNo" column="SERVICE_NO"/>
@@ -66,7 +66,7 @@
 		<result property="userName" column="USER_NAME" />
 	</resultMap>
 	
-	<resultMap type="com.manager.freelancer.manager.model.vo.TradeInfo" id="manager_tradeInfo_rm">
+	<resultMap type="TradeInfo" id="manager_tradeInfo_rm">
 		<id property="tradeNo" column="TRADE_NO" />
 		<result property="tradeDate" column="TRADE_DATE" />
 		<result property="workPeriod" column="SERVICE_WORK_PERIOD" />
@@ -76,7 +76,7 @@
 	</resultMap>
 	
 	
-	<resultMap type="com.manager.freelancer.manager.model.vo.ProjectRequest" id="manager_projectRequest_rm">
+	<resultMap type="ProjectRequest" id="manager_projectRequest_rm">
 		<id property="projectRequestNo" column="PROJECT_REQUEST_NO" />
 		<result property="projectRequestTitle" column="PROJECT_REQUEST_TITLE" />
 		<result property="projectRequestSummary" column="PROJECT_REQUEST_SUMMARY" />
@@ -91,20 +91,20 @@
 		<result property="requestFilePath" column="REQUEST_FILE_PATH" />
 	
 	<collection property="requestImageFileList" 
-	      javaType="java.util.ArrayList" ofType="com.manager.freelancer.manager.model.vo.RequestImageFile"
+	      javaType="java.util.ArrayList" ofType="RequestImageFile"
 	      select="selectImageFileListProject"
 	      column="PROJECT_REQUEST_NO"/>
 	</resultMap>
 	
 	      
-	 <resultMap type="com.manager.freelancer.manager.model.vo.RequestImageFile" id="imageFile_rm2">
+	 <resultMap type="RequestImageFile" id="imageFile_rm2">
       <id property="imageFileNo" column="REQUEST_FILE_NO"/>
       <result property="imageFilePath" column="REQUEST_FILE_PATH"/>
       <result property="requestFileOrder" column="REQUEST_FILE_ORDER"/>
       <result property="projectRequestNo" column="PROJECT_REQUEST_NO"/>
    </resultMap>
 	
-	<resultMap type="com.manager.freelancer.manager.model.vo.MemberReport" id="manager_memberReport_rm">
+	<resultMap type="MemberReport" id="manager_memberReport_rm">
 		<id property="memberReportNo" column="MEMBER_REPORT_NO" />
 		<result property="memberReportTitle" column="MEMBER_REPORT_TITLE" />
 		<result property="memberReportContent" column="MEMBER_REPORT_CONTENT" />
@@ -118,18 +118,18 @@
 		<result property="memberReportAnswerMemberNo" column="MEMBER_REPORT_ANSWER_MEMBER_NO" />
 	
 		<collection property="reportImageFileList" javaType="java.util.ArrayList" 
-	  	select="selectReportImageList" ofType="com.manager.freelancer.manager.model.vo.MemberReportImage" column="MEMBER_REPORT_NO"/>
+	  	select="selectReportImageList" ofType="MemberReportImage" column="MEMBER_REPORT_NO"/>
   	</resultMap>
   	
   	
-	 <resultMap type="com.manager.freelancer.manager.model.vo.MemberReportImage" id="reportImageFile_rm">
+	 <resultMap type="MemberReportImage" id="reportImageFile_rm">
       <id property="memberReportFileNo" column="MEMBER_REPORT_FILE_NO"/>
       <result property="memberReportFilePath" column="MEMBER_REPORT_FILE_PATH"/>
       <result property="memberReportFileOrder" column="MEMBER_REPORT_FILE_ORDER"/>
       <result property="memberReportNo" column="MEMBER_REPORT_NO"/>
    </resultMap>
    
-	<resultMap type="com.manager.freelancer.manager.model.vo.TradeReport" id="manager_tradeReport_rm">
+	<resultMap type="TradeReport" id="manager_tradeReport_rm">
 		<id property="tradeReportNo" column="TRADE_REPORT_NO" />
 		<result property="tradeNo" column="TRADE_NO" />
 		<result property="tradeReportMemberNo" column="TRADE_REPORT_MEMBER_NO" />

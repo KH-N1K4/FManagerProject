@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="myProjectMapper2">
+	
+	<resultMap type="MyProjectPayment" id="payment_rm">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="serviceTitle" column="SERVICE_TITLE" />
+		<result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />
+		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="paymentPrice" column="PAYMENT_PRICE" />
+	</resultMap>
+	
+	
+	
+	<!-- 결제 내역 수 -->
+	<select id="getPaymentListCount" resultType="_int">
+	SELECT COUNT(*) FROM SETTLEMENT 
+	JOIN TRADE USING (TRADE_NO)
+	JOIN SERVICE USING (SERVICE_NO)
+	JOIN CATEGORY USING (THIRD_CATEGORY_NO)
+	JOIN SUB_CATEGORY USING (SUB_CATEGORY_NO)
+	JOIN MAIN_CATEGORY USING (MAIN_CATEGORY_NO)
+	WHERE USER_NO=#{loginMemberNo}
+	AND PAYMENT_TYPE=1
+	<if test='type!=0'>
+		AND MAIN_CATEGORY_NO = #{type}
+	</if>
+	<if test='searchDate1 neq "" and searchDate neq ""' >
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{searchDate1} AND #{searchDate2}
+	</if>
+	<if test="searchDate1 neq ''">
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{searchDate1}
+	</if>
+	<if test="searchDate2 neq ''">
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
+	</if>
+	</select>
+  	
+  <!-- 결제 내역 조회 -->
+  <select id="selectPaymentList" resultMap="payment_rm">
+  SELECT USER_NO AS MEMBER_NO, SERVICE_TITLE, 
+	MAIN_CATEGORY_NAME, TO_CHAR(PAYMENT_DATE, 'YYYY"-"MM"-"DD') PAYMENT_DATE, PAYMENT_PRICE
+	FROM SETTLEMENT
+	JOIN TRADE USING (TRADE_NO)
+	JOIN SERVICE USING (SERVICE_NO)
+	JOIN CATEGORY USING (THIRD_CATEGORY_NO)
+	JOIN SUB_CATEGORY USING (SUB_CATEGORY_NO)
+	JOIN MAIN_CATEGORY USING (MAIN_CATEGORY_NO)
+	WHERE USER_NO=#{loginMemberNo}
+	AND PAYMENT_TYPE=1
+	<if test='type!=0'>
+		AND MAIN_CATEGORY_NO = #{type}
+	</if>
+	<if test='searchDate1 neq "" and searchDate2 neq ""' >
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{searchDate1} AND #{searchDate2}
+	</if>
+	<if test="searchDate1 neq ''">
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{searchDate1}
+	</if>
+	<if test="searchDate2 neq ''">
+		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
+	</if>
+  </select>
+  	
+</mapper>
+	
