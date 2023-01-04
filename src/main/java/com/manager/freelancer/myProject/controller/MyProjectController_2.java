@@ -46,5 +46,19 @@ public class MyProjectController_2 {
 		
 		return "myProject/paymentList";
 	}
+	
+	// 구매 관리 이동
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

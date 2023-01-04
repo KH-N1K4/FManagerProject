@@ -83,6 +83,7 @@ main{
   border-radius: 3%;
   border: 1px solid #c6c6c9;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .searchInput{
@@ -90,7 +91,7 @@ main{
   height:30px;
   border-radius: 3%;
   border: 1px solid #c6c6c9;
-  margin-left: 30px;
+  margin-left: 15px;
   margin-right: 10px;
 }
 
