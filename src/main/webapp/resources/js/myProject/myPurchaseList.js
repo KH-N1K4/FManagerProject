@@ -35,3 +35,48 @@ $(document).ready(function(){
     alert('판매 중인 서비스가 아닙니다.');
   
   });
+
+
+/* 완료버튼 */
+const finishBtn = document.querySelectorAll(".finishBtn");
+for(f of finishBtn){
+  f.addEventListener("click",e=>{
+    
+    if(confirm('작업 완료?')){
+      
+      const tradeNo = e.target.id;
+  
+      $.ajax({
+        url:'/myProject/memberDone',
+        data: {'tradeNo':tradeNo},
+        success: (result)=>{
+          if(result>0){
+  
+          }
+  
+  
+        }
+  
+      });
+      
+    }
+
+  });
+}
+
+/* 취소 모달 */
+
+
+
+
+
+
+/* 신고 모달 */
+
+
+
+
+
+
+/* 리뷰 모달 */
+

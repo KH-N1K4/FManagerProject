@@ -51,8 +51,6 @@ public class MyProjectController_2 {
 	}
 	
 	// 구매 관리 이동
-	
-	
 	@GetMapping("/member/myProject/myPurchaseList")
 	public String purchaseList(Model model, @SessionAttribute("loginMember") Member loginMember,
 			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
@@ -86,7 +84,24 @@ public class MyProjectController_2 {
 		return "myProject/myPurchaseList";
 	}
 	
-	
+	// 회원 작업 완료 버튼 누르면
+	@GetMapping("/myProject/memberDone/{tradeNo}")
+	public String memberDone(Model model, @SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
+			@RequestParam(value="searchInput",required=false, defaultValue = "") String searchInput,
+			@RequestParam(value="type" , required = false, defaultValue = "0") int type,
+			@RequestParam(value="searchDate1" , required = false, defaultValue = "") String searchDate1,
+			@RequestParam(value="searchDate2" , required = false, defaultValue = "") String searchDate2,
+			@RequestParam int tradeNo) {
+		
+		int result = service.memberDone(tradeNo);
+		
+		if(result>0) {
+			
+		}
+		
+		return "redirect:";
+	}
 	
 	
 	

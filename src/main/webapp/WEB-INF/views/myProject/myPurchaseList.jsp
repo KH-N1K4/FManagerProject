@@ -124,16 +124,16 @@
                           </td>
                           <td class="tc">
                             <c:if test="${purchase.workCount==0 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">
-                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type"><span>취소</span></a>
-                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
+                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
+                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type">신고</a>
                             </c:if>
                             <c:if test="${purchase.workCount>=1 && purchase.memberDoneFL==1}">
-                              <a href="#" id="finishBtn" title="" class="finishBtn btn_type"><span>완료</span></a>
-                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type"><span>취소</span></a>
-                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
+                              <a id="${purchase.tradeNo}" title="" class="finishBtn btn_type">완료</a>
+                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
+                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type">신고</a>
                             </c:if>
                             <c:if test="${(purchase.workStatus==2 || purchase.workStatus==4) && purchase.memberDoneFL==2}">
-                              <a href="#" id="reviewCreateBtn" title="" class="reviewCreateBtn"><span>리뷰하기</span></a>
+                              <a href="#" id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
                             </c:if>
 
                           </td>                
