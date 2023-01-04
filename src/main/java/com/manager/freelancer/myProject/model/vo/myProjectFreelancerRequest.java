@@ -25,6 +25,8 @@ public class myProjectFreelancerRequest {//지윤
 	private String mainCategotyName;			//MAIN_CATEGORY_NAME
 	private int thirdCategotyNo;				//THIRD_CATEGORY_NO 카테고리3 번호(FK)
 	private String thirdCategotyName;			//THIRD_CATEGORY_NAME 
+	private int subCategoryNo;				//
+	private String subCategoryName;			//
 	private int clientNo;						//MEMBER_NO 회원 번호(FK)-의뢰인 회원번호
 	private String projectRequestfile;						//MEMBER_NO 회원 번호(FK)-의뢰인 회원번호
 	
