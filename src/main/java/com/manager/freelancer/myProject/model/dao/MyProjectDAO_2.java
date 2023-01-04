@@ -80,4 +80,8 @@ public class MyProjectDAO_2 {
 		return sqlSession.selectList("myProjectMapper2.selectPurchaseList", option, rowBounds);
 	}
 
+	public int memberDone(int tradeNo) {
+		return sqlSession.update("myProjectMapper2.memberDone",tradeNo);
+	}
+
 }

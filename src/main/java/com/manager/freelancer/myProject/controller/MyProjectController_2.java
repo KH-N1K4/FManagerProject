@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -86,6 +87,7 @@ public class MyProjectController_2 {
 	
 	// 회원 작업 완료 버튼 누르면
 	@GetMapping("/myProject/memberDone/{tradeNo}")
+	@ResponseBody
 	public String memberDone(Model model, @SessionAttribute("loginMember") Member loginMember,
 			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
 			@RequestParam(value="searchInput",required=false, defaultValue = "") String searchInput,
@@ -97,6 +99,20 @@ public class MyProjectController_2 {
 		int result = service.memberDone(tradeNo);
 		
 		if(result>0) {
+			List<FreelancerService> maincategoryList = service.selectmaincategoryList();
+			
+			model.addAttribute("maincategoryList",maincategoryList);
+			model.addAttribute("mainCategoryNoInput",type);
+			
+			int loginMemberNo = loginMember.getMemberNo();
+			Map<String, Object> option = new HashMap<String, Object>();
+			option.put("loginMemberNo", loginMemberNo);
+			option.put("type", type);
+			option.put("searchDate1", searchDate1);
+			option.put("searchDate2", searchDate2);
+			option.put("searchInput", searchInput);
+			
+			Map<String, Object> resultMap = service.selectPurchaseList(option, cp);
 			
 		}
 		

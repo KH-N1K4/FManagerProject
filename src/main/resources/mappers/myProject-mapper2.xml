@@ -150,6 +150,12 @@
   </select>
   
   
+  <!-- 회원 작업 완료 -->
+  <update id="memberDone">
+  	UPDATE TRADE SET MEMBER_DONE_FL=2
+  	WHERE TRADE_NO=#{tradeNo}
+  </update>
+  
   
   	
 </mapper>
