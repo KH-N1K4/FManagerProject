@@ -135,10 +135,10 @@ public class MyProjectContorller {
 		return "myProject/myPurchaseList";
 	}
 	
-	// 결제내역이동
-	@GetMapping("/member/myProject/paymentList")
-	public String paymentList() {
-		return "myProject/paymentList";
-	}
+//	// 결제내역이동
+//	@GetMapping("/member/myProject/paymentList")
+//	public String paymentList() {
+//		return "myProject/paymentList";
+//	}
 	
 }

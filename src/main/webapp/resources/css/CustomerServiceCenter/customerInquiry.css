@@ -28,6 +28,13 @@
     font-weight: bold;
     font-size: 22px;
 }
+#inquiry a:hover{
+    color: #538126;
+}
+#inquiryList a:hover{
+    color: #538126;
+}
+
 /*  --------------사이드 메뉴  --------------*/
 
 /* 메인 영역 */
@@ -49,8 +56,9 @@
 
 /* 문의하기 설명 */
 #tltleInfo{
-    font-size: 18px;
+    font-size: 17px;
     color: #538126;
+    padding-left: 10px;
 }
 
 /* 각 문의하기 작성소제목 */
@@ -110,6 +118,11 @@
     color: #fff;
     font-size: 18px;
 }
+.inquiryInsert:hover{
+    background-color: #3d5f1b;
+    cursor: pointer;
+    font-size: 19px;
+}
 
 #goToMain{
     margin-left: 10px;
@@ -124,6 +137,14 @@
     font-size: 18px;
     text-align: center;
     line-height: 50px;
+}
+
+#goToMain:hover{
+    background-color:  #3d5f1b;
+    font-size: 19px;
+    cursor: pointer;
+    color: #fff;
+
 }
 
 /* --------------------------- */
