@@ -17,7 +17,7 @@ const originalImage=profileImage.getAttribute("src");
 if(imageInput!=null){
 
     // 해당 화면 진입시 프로필 이미지 상태를 저장(initCheck)
-    if(profileImage.getAttribute("src")=="/resources/images/루피.jpg"){
+    if(profileImage.getAttribute("src")=="/resources/images/프로필.jpg"){
         initCheck=false;
     }else{
         initCheck=true;
@@ -74,7 +74,7 @@ if(imageInput!=null){
     deleteImage.addEventListener("click",event=>{
 
        
-        profileImage.setAttribute("src","/resources/images/루피.png");
+        profileImage.setAttribute("src","/resources/images/프로필.PNG");
         imageInput.value="";
         deleteCheck=0;
 
@@ -109,15 +109,27 @@ function profileValidate(){
 // 변수명.key 또는 변수명["key"]를 이용하면 객체 속성 접근 가능
 const checkObj={
                 "memberNickname":true,
-                "memberTel":true
+                "memberTel":true,
+                "interest":false
             };
 
 
 
+
+
+const memberInterest=document.getElementsByName("memberInterest");
+
 // 내정보 수정 양식이 제출 되었을 때 
 document.getElementsByName("myPage-frm")[0].addEventListener("submit",function(event){
 
-
+    for(let interest of memberInterest){
+        if(interest.checked==true){
+          checkObj.interest=true;
+          break;
+        }else{
+          checkObj.interest=false;
+        }
+    }
    
     for(key in checkObj){
         let str;
@@ -126,11 +138,16 @@ document.getElementsByName("myPage-frm")[0].addEventListener("submit",function(e
             switch(key){
                 case "memberNickname": str="닉네임이 유효하지 않습니다."; break;
                 case "memberTel": str="전화번호 유효하지 않습니다."; break;
+                case "interest": str="관심사는 하나 이상 선택해야합니다."; break;
             }
 
             alert(str); // 대화상자 출력 
             // 유효하지 않은 입력으로 포커스 이동 
-            document.getElementById(key).focus();
+
+            if(key!="interest"){
+                document.getElementById(key).focus();
+
+            }
             
             event.preventDefault(); // 제출 이벤트 제거 
             return; // 함수 종료

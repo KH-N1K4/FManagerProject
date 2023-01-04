@@ -28,7 +28,7 @@
                     <div id="content">
                         <div class="profile-image-area">
                            <c:if test="${empty loginMember.memberProfile}">
-		                        <img id="profile-image" src="/resources/images/루피.jpg">
+		                        <img id="profile-image" src="/resources/images/프로필.PNG">
 		                    </c:if>
 		                    <c:if test="${not empty loginMember.memberProfile}">
 		                        <img id="profile-image" src="${loginMember.memberProfile}">
