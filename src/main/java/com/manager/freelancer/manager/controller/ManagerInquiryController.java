@@ -9,12 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
@@ -78,20 +76,24 @@ public class ManagerInquiryController {
 		return new Gson().toJson(result);
 	}
 	
-//	// 진행 상태 별 조회 ajax
-//	@GetMapping("/manager/inquiryStatus")
-//	@ResponseBody
-//	public Map<String, Object> managerServiceType(Model model,
-//			@RequestParam String value,
-//			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
-//
-//		Map<String, Object> map = new HashMap<String, Object>();
-//
-//		map = service.selectInquiryStatusList(value, cp);
-//		model.addAttribute("map", map);
-//
-//		return map;
-//	}
+	
+	// 관리자 진행상태 별 이용문의 조회 
+	@GetMapping("/manager/statusType")
+	@ResponseBody
+	public Map<String, Object> selectChangeStatusManager(Model model,@RequestParam String optionVal,
+														 @RequestParam(value="cp", required=false, defaultValue = "1") int cp){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = service.selectChangeStatusManager(optionVal,cp);
+				
+		model.addAttribute("map",map);
+		
+		
+		return map;
+	}
+	
+	
 	
 
 }

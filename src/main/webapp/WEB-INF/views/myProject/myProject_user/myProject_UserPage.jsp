@@ -69,7 +69,7 @@
                     
                       <%-- 서비스 사진 --%>
                       <div class="projuctContent_image">
-                        <img  src="/resources/files/myProjectRequest/${myProject.requestFilePath}">
+                        <img  src="${myProject.requestFilePath}">
                       </div>
                       <%-- 서비스 사진 --%>
                       <div class="projuctContent_info">

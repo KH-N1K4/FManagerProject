@@ -144,13 +144,12 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
     <script>
-         var userInquiryNo = "${userinquiry.userInquiryNo}";
-         var currentPage = "${pagination.currentPage}";
-         var sURL = "${sURL}";
-         var userInquiryTitle = "${userinquiry.userInquiryTitle}";
-         var userInquiryCreateDate = "${userinquiry.userInquiryCreateDate}";
-         var inquiryRequest = "${userinquiry.inquiryRequest}";
-    
+            var userInquiryNo = "${userinquiry.userInquiryNo}";
+            var currentPage = "${pagination.currentPage}";
+            var sURL = "${sURL}";
+            var userInquiryTitle = "${userinquiry.userInquiryTitle}";
+            var userInquiryCreateDate = "${userinquiry.userInquiryCreateDate}";
+            var inquiryRequest = "${userinquiry.inquiryRequest}";
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

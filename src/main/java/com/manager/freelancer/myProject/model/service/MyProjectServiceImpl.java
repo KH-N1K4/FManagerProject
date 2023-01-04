@@ -98,7 +98,7 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 					img.setRequestFilePath(webPath);
 
 					String reNameImg = Util.fileRename(myProjectFile.get(i).getOriginalFilename());
-					img.setRequestFilePath(reNameImg);
+					img.setRequestFilePath(webPath+reNameImg);
 					img.setProjectRequestNo(projectNo); // 첨부된 게시글 번호
 					img.setRequestFileOrder(i); // 이미지 순서
 

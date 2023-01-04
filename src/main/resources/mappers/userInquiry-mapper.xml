@@ -293,5 +293,39 @@
 				AND USER_INQUIRY_REQUEST IS NULL
 			</if>
   	</select>
+  	
+  	<!-- 관리자 진행상태별 이용문의 조회수 카운트(Ajax) -->
+  	<select id="getStatusListCount_manager" parameterType="java.util.HashMap" resultType="_int">
+  		SELECT COUNT(*) 
+		FROM USER_INQUIRY
+			<if test='optionVal eq "1"'>
+				WHERE USER_INQUIRY_REQUEST IS NOT NULL
+			</if>
+			<if test='optionVal eq "2"'>
+				WHERE USER_INQUIRY_REQUEST IS NULL
+			</if>
+  	</select>
+  	
+  	<!-- 관리자 진행상태별 이용문의 조회(Ajax) -->
+  	<select id="selectChangeStatusManager" parameterType="java.util.HashMap" resultMap="userInquiry_rm">
+	  	SELECT USER_INQUIRY_NO, USER_INQUIRY_TITLE, USER_INQUIRY_REQUEST,
+	  		   TO_CHAR(USER_INQUIRY_CREATE_DATE, 'YYYY-MM-DD') USER_INQUIRY_CREATE_DATE,
+		   CASE WHEN USER_INQUIRY_REQUEST IS NULL THEN '답변 대기'
+		        WHEN USER_INQUIRY_REQUEST IS NOT NULL THEN '답변 완료'
+		   END AS USER_INQUIRY_REQUEST_STATUS     
+		FROM USER_INQUIRY
+			<if test='optionVal eq "1"'>
+				WHERE USER_INQUIRY_REQUEST IS NOT NULL
+				ORDER BY USER_INQUIRY_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "2"'>
+				WHERE USER_INQUIRY_REQUEST IS NULL
+				ORDER BY USER_INQUIRY_CREATE_DATE DESC
+			</if>
+  	</select>
+  	
+  	
+  	
+  	
   
 </mapper>
