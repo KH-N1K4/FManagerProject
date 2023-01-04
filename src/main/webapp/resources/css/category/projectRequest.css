@@ -22,7 +22,7 @@
 }
 
 /*  --------------사이드 메뉴  --------------*/
-#design{
+.design{
     width: 150px;
     text-align: center;
     margin: 50px 20px 0px 0px;
@@ -30,7 +30,7 @@
     font-weight: bold;
     border-bottom: 2px solid #538126; 
 }
-#subCategori{
+.subCategori{
     width: 150px;
     margin: 25px 0 10px 0;
     position: relative;

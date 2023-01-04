@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<c:set var="purchaseList" value="${resultMap.purchaseList}"/>
+<c:set var="pagination" value="${resultMap.pagination}"/>
+<c:set var="i" value="0"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,56 +13,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>myPurchaseList</title>
 
-  <link rel="stylesheet" href="/resources/css/header.css">
-  <link rel="stylesheet" href="/resources/css/footer.css">
   <link rel="stylesheet" href="/resources/css/myProject/myProject_myPurchaseList.css">
-  <style>
-    body{
-        margin:0;
-    }
-
-    #logo{
-        width: 200px;
-        height: 100px; 
-        position: absolute;
-        left: 60px;
-        top:40px;
-        /* border:1px solid black; */
-    }
-
-    #header{
-        background-color: #538126;
-    }
-
-    #logo>img{
-        width: 100%;
-    }
-
-    #header1{
-        width: 1200px;
-        height: 160px;
-        margin:auto;
-        position: relative;    
-    }
-
-    .header-top{
-        position: absolute;
-        right:0;
-        top:20px;
-        align-items: center;
-        display: flex;
-    }
-    
-    .header-top span{
-        margin:0 12px;
-        cursor: pointer;
-        color:white !important;
-    }
-    .header-top img{
-        border-radius: 45%;
-    }
-
-</style>
+  
 </head>
 <body>
   <main>
@@ -83,8 +38,8 @@
                   <!-- 상단 내프로젝트 페이지 제목 -->
                   <!-- 상단 selectbox -->
                   <div class="selectbox">
-                    <select  id = "srchOption" class="srchOption box" name="srchOption" >
-                      <option value="0" selected="">전체</option>
+                    <select  id = "selectType" class="srchOption box" name="type" title="${type}">
+                      <option value="0" selected>카테고리 선택</option>
                       <option value="1">디자인</option>
                       <option value="2">IT·프로그래밍</option>
                       <option value="3">영상</option>
@@ -93,13 +48,14 @@
                     </select>
                   </div>
                   <div class="selectbox">
-                    <input type="date" class="startDate box" name="startDate" id="startDate">
+                    <input type="date" class="startDate box" name="searchDate1" id="searchDate1" title="${searchDate1}">- 
                   </div>
                   <div class="selectbox">
-                    <input type="date" class="endtDate box" name="endtDate" id="endtDate">
+                    <input type="date" class="endtDate box" name="searchDate2" id="searchDate2" title="${searchDate2}">
                   </div>
-                  <div class="searchbox">
-                    <input type="text" class="searchInput" name="searchInput" id="searchInput" placeholder="상품명" maxlength="50" autocomplete="off" value="">
+                  <div class="searchbox" id="searchboxRelative">
+                    <input type="text" class="searchInput" name="searchInput" id="searchInput" placeholder="상품명" maxlength="50" autocomplete="off" <c:if test="${not empty searchInput}">value="${searchInput}"</c:if>>
+                    <div id="searchboxInclude"></div>
                   </div>
                   <!-- 상단 selectbox -->
                   <div class="buttonArea">
@@ -112,7 +68,6 @@
             <div class="tableArea">
               <div id="tableContent">
                 <table cellspacing="0" class="tbl_lst_type">	
-                  <caption><span class="blind">받은 제안 정보</span></caption>				
                   <colgroup>
                     <col width="40"><col width="*"><col width="100"><col width="95"><col width="95"><col width="180">
                   </colgroup>
@@ -120,7 +75,7 @@
                     <tr>
                       <th scope="col" class="frst"><strong class="line_n">번호</strong></th>
                       <th scope="col" class=""><strong class="line_r">서비스명</strong></th>   
-                      <th scope="col" class=""><strong class="line_r">전문가</strong></th>  
+                      <th scope="col" class=""><strong class="line_r">프리랜서</strong></th>  
                       <th scope="col" class=""><strong class="line_n">수정횟수</strong></th>
                       <th scope="col" class=""><strong class="line_n">작업상태</strong></th>
                       <!-- 작업 상태가 진행중일때 버튼으로 쓰일 컬럼들 -->
@@ -128,84 +83,119 @@
                     </tr>
                   </thead>
                   <tbody id = "selecttbody">
-                    <tr class="suggestionTable" suggestionNumeber="">
-                      <td class="tc">
-                        <span class="num">1</span>
-                      </td>
-                      <td class="tl">
-                        <div class="suggestion_name_area td_link">
-                          <a href="#" id="suggestionName" class="suggestionName" suggestionName="">로고 디자인 제작</a>
-                        </div>
-                      </td>
-                      <td  class="tc">
-                        <div class="expert_name_area td_link">
-                          <a href="#" id="expertName" class="expertName" expertName="">홍길동</a>
-                        </div>
-                      </td>
-                      <td class="tc">
-                        <span class="num">1/3</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">진행중</span>
-                      </td>
-                      <td class="tc">
-                        <a href="#" id="finishBtn" title="" class="finishBtn btn_type"><span>완료</span></a>
-                        <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type"><span>최소</span></a>
-                        <a href="#" id="reportBtn" title="" class="reportBtn btn_type"><span>신고</span></a>
-                      </td>                
-                    </tr>
-                    <tr class="suggestionTable" suggestionNumeber="">
-                      <td class="tc">
-                        <span class="num">2</span>
-                      </td>
-                      <td class="tl">
-                        <div class="suggestion_name_area td_link">
-                          <a href="#" id="suggestionName" class="suggestionName" suggestionName="">프리랜서 마켓 웹사이트 제작</a>
-                        </div>
-                      </td>
-                      <td  class="tc">
-                        <div class="expert_name_area td_link">
-                          <a href="#" id="expertName" class="expertName" expertName="">김이듀</a>
-                        </div>
-                      </td>
-                      <td class="tc">
-                        <span class="num">1/5</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">완료</span>
-                      </td>
-                      <td class="tc">
-                        <a id="reviewBtn" title="" class="reviewBtn oneBtn_type"><span>리뷰하기</span></a>
-                      </td>                
-                    </tr>
-                    <tr class="suggestionTable" suggestionNumeber="">
-                      <td class="tc">
-                        <span class="num">3</span>
-                      </td>
-                      <td class="tl">
-                        <div class="suggestion_name_area td_link">
-                          <a href="#" id="suggestionName" class="suggestionName" suggestionName="">웨딩 촬영 디자인</a>
-                        </div>
-                      </td>
-                      <td  class="tc">
-                        <div class="expert_name_area td_link">
-                          <a href="#" id="expertName" class="expertName" expertName="">최사진</a>
-                        </div>
-                      </td>
-                      <td class="tc">
-                        <span class="num">1/4</span>
-                      </td>
-                      <td class="tc">
-                        <span class="text">주문 취소</span>
-                      </td>
-                      <td class="tc">
-                      </td>                
-                    </tr>
+
+
+                    <c:if test="${empty purchaseList}">
+                      <tr class="suggestionTable" suggestionNumeber="">
+                        <td colspan="6" style="text-align:center;"> 구매한 서비스가 없습니다. </td>
+                      </tr>
+                    </c:if>
+
+
+                    <c:if test="${not empty purchaseList}">
+                      <c:forEach var="purchase" items="${purchaseList}">
+                        <tr class="suggestionTable" suggestionNumeber="">
+                          <td class="tc">
+                            <span class="num">${i=i+1}</span>
+                          </td>
+                          <td class="tl">
+                            <div class="suggestion_name_area td_link">
+                              <c:choose>
+                                <c:when test="${purchase.seviceDeleteFlag eq 'N' && purchase.serviceStatus == 2}"><a href="/category/${purchase.mainCategoryNo}/${purchase.subCategoryNo}/${purchase.thirdCategoryNo}/${purchase.serviceNo}" id="serviceName" class="serviceName serviceNameAtag" serviceName="" target="_blank">${purchase.serviceTitle}</a></c:when>
+                                <c:otherwise><span id="serviceName" class="serviceName noSalesSevice" serviceName="">${purchase.serviceTitle}</span></c:otherwise>
+                              </c:choose>
+                            </div>
+                          </td>
+                          <td  class="tc">
+                            <div class="expert_name_area td_link">
+                              <a href="#" id="expertName" class="expertName" expertName="">${purchase.freelancerName}</a>
+                            </div>
+                          </td>
+                          <td class="tc">
+                            <span class="num">
+                              <c:choose>
+                                <c:when test="${purchase.workCount}>${purchase.serviceEditNum}">${purchase.serviceEditNum}/${purchase.serviceEditNum}</c:when>
+                                <c:otherwise>${purchase.workCount}/${purchase.serviceEditNum}</c:otherwise>
+                              </c:choose>
+                              </span>
+                          </td>
+                          <td class="tc">
+                            <span class="text">${purchase.workProgress}</span>
+                          </td>
+                          <td class="tc">
+                            <c:if test="${purchase.workCount==0 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">
+                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
+                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type">신고</a>
+                            </c:if>
+                            <c:if test="${purchase.workCount>=1 && purchase.memberDoneFL==1}">
+                              <a id="${purchase.tradeNo}" title="" class="finishBtn btn_type">완료</a>
+                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
+                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type">신고</a>
+                            </c:if>
+                            <c:if test="${(purchase.workStatus==2 || purchase.workStatus==4) && purchase.memberDoneFL==2}">
+                              <a href="#" id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
+                            </c:if>
+
+                          </td>                
+                        </tr>
+                      </c:forEach>
+                    </c:if>
+                    
+
+
                   </tbody>
                 </table>
               </div>
+
             </div>
           </div>
+              <!-- pagination -->
+          <div class="pagination-area">
+
+
+              <ul class="pagination">
+              <c:if test="${not empty purchaseList}">
+
+                <!-- 첫 페이지로 이동 -->
+                <li><a href="/manager/purchaseList?cp=1${sURL}">&lt;&lt;</a></li>
+
+                <!-- 이전 목록 마지막 번호로 이동 -->
+                <li><a href="/manager/purchaseList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+
+
+
+                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1" >
+                
+                  <!-- 특정 페이지로 이동 -->
+                  <c:choose>
+                  
+                    <c:when test="${i==pagination.currentPage}">
+                      <!-- 현재 보고있는 페이지 -->
+                      <li>
+                        <a class="current">${i}</a>
+                      </li>
+                    </c:when>
+                    
+                    <c:otherwise>
+                      <!-- 현재 페이지를 제외한 나머지 -->
+                      <li><a href="/manager/purchaseList?cp=${i}${sURL}">${i}</a></li>
+                    </c:otherwise>
+                  
+                  </c:choose>
+                  
+                </c:forEach>
+                
+                
+                
+                <!-- 다음 목록 시작 번호로 이동 -->
+                <li><a href="/manager/purchaseList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+
+                <!-- 끝 페이지로 이동 -->
+                <li><a href="/manager/purchaseList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                </c:if>
+
+              </ul>
+            </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
         <div class="modal">
@@ -218,6 +208,7 @@
   <!-- **************************************footer*************************************-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   <!-- **************************************footer*************************************-->
+  
   <!-- jQuery  -->
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 

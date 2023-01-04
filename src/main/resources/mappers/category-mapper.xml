@@ -106,6 +106,53 @@
 	      <result property="tradeRequest" column="TRADE_REQUEST" />				
 	     
     </resultMap>
+    
+    
+    
+    
+    
+  <resultMap type="Freelancer1" id="freelancer1_rm">
+    	 <id property="freelancerNo" column="FREELANCER_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
+    		   		
+	      <result property="gradeName" column="GRADE_NAME" />								<!-- 서비스 제목 -->							
+	      <result property="freelancerField" column="FREELANCER_FIELD" />						<!-- 서비스 한 줄 요약 -->
+	     
+	      <result property="freelancerIntro" column="FREELANCER_INTRO" />						<!-- 서비스 내용 -->
+	     
+	      <result property="freelancerCont" column="FREELACER_CONT" />		<!-- 서비스 작업 일수 -->
+	      <result property="regionName" column="REGION_NAME" />				
+	      
+	      
+	      
+	      <result property="major" column="MAJOR" />				
+	      <result property="career" column="CAREER" />				
+	      <result property="license" column="LICENSE" />				
+   
+	      
+	      <collection property="portfolioList" 
+	      javaType="java.util.ArrayList" ofType="Portfolio"
+	      select="selectPortfolioList"
+	      column="FREELANCER_NO"/> 
+	      
+	      
+	    <!--   <collection property="fServiceList" 
+	      javaType="java.util.ArrayList" ofType="FService"
+	      select="selecFServiceList"
+	      column="FREELANCER_NO"/> -->
+	      
+	      
+    </resultMap>
+    
+    <resultMap  type="Portfolio" id="portfolio_rm">
+    	  <id property="portfolioNo" column="PORTFOLIO_NO"/>
+	      <result property="portfolioTitle" column="PORTFOLIO_TITLE"/>
+	      <result property="portfolioContent" column="PORTFOLIO_CONTENT"/>
+	      <result property="portfolioFilePath" column="PORTFOLIO_FILE_PATH"/>
+	      <result property="portfolioThumbnail" column="PORTFOLIO_THUMBNAIL"/>
+    </resultMap>
+    
+    
+
 
   <select id="selectMainCategoryList" resultType="map">
  	SELECT * FROM MAIN_CATEGORY
@@ -149,13 +196,14 @@
 		FROM SERVICE_FILE s) USING(SERVICE_NO)
 		WHERE RUM = 1
 		AND MAIN_CATEGORY_NO=#{mainCategoryNo}
-		<if test='thirdCategoryNo!=null'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
+		<if test='thirdCategoryNo!=0'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
 		AND SERVICE_DEL_FL='N'
 		AND SERVICE_STATUS=2
+		ORDER BY 1 DESC
  </select>
  	
  	
- 	
+ 	<!-- 서비스 상세보기 -->
  	<select id="viewService" resultMap="service_rm">
 		SELECT SERVICE_NO,
 		FREELANCER_NO, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_NAME,
@@ -177,6 +225,7 @@
 		AND SERVICE_NO=#{serviceNo}
 	</select> 
 	
+	<!-- 서비스 이미지 조회 -->
 	<select id="selectImageFileList" resultMap="imageFile_rm">
 	
 		SELECT * FROM SERVICE_FILE
@@ -184,6 +233,7 @@
 		 
 	</select>
 	
+	<!-- 서비스 리뷰 조회 -->
 	<select id="selectReviewList" resultMap="review_rm">
 	
 		SELECT (SELECT MEMBER_NAME  FROM "MEMBER" WHERE MEMBER_NO=TRADE.MEMBER_NO) MEMBER_NAME
@@ -195,21 +245,26 @@
 		JOIN TRADE ON(REVIEW_NO=TRADE_NO)
 		JOIN SERVICE USING(SERVICE_NO) 
 		WHERE SERVICE_NO=#{serviceNo}
+		ORDER BY 1 DESC
 		 
 	</select>
 	
+	
+	<!-- 서비스 문의  -->
 	<insert id="askService">
 		INSERT INTO SERVICE_INQUIRY
 		VALUES(SEQ_SERVICE_INQUIRY_NO.NEXTVAL,#{serviceInquiryContent},DEFAULT, #{memberNo}, #{serviceNo} )
 	
 	</insert>
 	
+	<!-- 서비스 중단 -->
 	<update id="pauseService">
 		UPDATE SERVICE SET SERVICE_DEL_FL='Y'
 		WHERE SERVICE_NO=#{serviceNo}
 	
 	</update>
 	
+	<!-- 서비스 문의 보기 -->
 	<select id="selectSendSuggesion" resultMap="askService_rm">
 		SELECT SERVICE_NO, MEMBER_NO,SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY, SERVICE_INQUIRY_NO 
 		FROM SERVICE_INQUIRY 
@@ -219,7 +274,7 @@
 	</select>
 	
 	
-	<select id="selectSendSuggesionContent" resultMap="askService_rm">
+	<!-- <select id="selectSendSuggesionContent" resultMap="askService_rm">
 			SELECT *
 			FROM (
 			   SELECT SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY,
@@ -230,25 +285,27 @@
 				WHERE SERVICE_INQUIRY_NO=#{serviceInquiryNo}
 			) 
 			WHERE RNUM =1
-	</select>
+	</select> -->
 	
 	
 	
 	
 	
 	
-	
+	<!-- ajax 찜하기 체크 -->
 	<select id="serviceLikeCheck" resultType="_int">
 	 SELECT COUNT(*) FROM "LIKE"
 	 WHERE SERVICE_NO=#{serviceNo}
 	 AND MEMBER_NO=#{memberNo}
 	</select>
 	
+	<!-- ajax 찜하기 + -->
 	  <insert id="serviceLikeUp">
 	  	INSERT INTO "LIKE"
 	  	VALUES(#{serviceNo},#{memberNo})
 	  </insert>
 	  
+	  <!-- ajax 찜하기 - -->
 		<delete id="serviceLikeDown">
 	  	DELETE FROM "LIKE"
 			WHERE SERVICE_NO=#{serviceNo}
@@ -299,8 +356,9 @@
 		JOIN FREELANCER USING(FREELANCER_NO)
 		WHERE RUM = 1
 		AND MAIN_CATEGORY_NO=#{mainCategoryNo}
-		<!-- AND SERVICE_DEL_FL='N' -->
-		<!-- AND SERVICE_STATUS=2 -->
+		<if test="thirdCategoryNo!=0">AND THIRD_CATEGORY_NO=#{thirdCategoryNo}</if>
+		AND SERVICE_DEL_FL='N'
+		AND SERVICE_STATUS=2
 		<choose>
 			<when test="budget==0"></when>
 			<when test="budget==1"><![CDATA[AND SERVICE_PRICE < 10000]]> </when>
@@ -320,12 +378,12 @@
 			<otherwise>AND GRADE_NO=2</otherwise>
 		</choose>
 		
-		<if test='order==0'>
-			ORDER BY 1
-		</if>
-		<if test='order==1'>
-			ORDER BY 1 DESC
-		</if>
+		
+		<choose>
+			<when test="order==1">ORDER BY 1</when>
+			<otherwise>ORDER BY 1 DESC</otherwise>
+		</choose>
+		
 	
 	</select>
 	
@@ -371,7 +429,7 @@
 		AND SERVICE_DEL_FL='N'
 		AND SERVICE_STATUS=2 
 		<if test='mainCategoryNo!=null'> AND MAIN_CATEGORY_NO=#{mainCategoryNo} </if>
-		<if test='thirdCategoryNo!=null'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
+		<if test='thirdCategoryNo!=0'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
 
 	
 	</select>

@@ -12,5 +12,6 @@ public class MyProjectPayment {
 	private String mainCategoryName;
 	private String paymentDate;
 	private int paymentPrice;
+	private String paymentType;
 
 }

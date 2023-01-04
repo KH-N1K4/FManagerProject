@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="maincategory" value="${category.mainCategotyList}"/>
+<c:set var="subcategory" value="${category.subCategotyList}"/>
+<c:set var="thirdcategory" value="${category.categotyList}"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,11 +22,21 @@
         <div class="mainArea">
             <!-- 사이드 메뉴 -->
             <div class="sideMenu">
-                <div id="design">IT·프로그래밍</div>
-                <div id="subCategori"><a href="">UX기획</a><button>▼</button></div>
-                <div id="subCategori"><a href="">웹</a><button>▼</button></div>
-                <div id="subCategori"><a href="">커머스</a><button>▼</button></div>
-                <div id="subCategori"><a href="">모바일</a><button>▼</button></div>
+                <c:forEach var="mainVar" items="${maincategory}">
+                    <div class="design" id="main${mainVar.mainCategotyNo}">${mainVar.mainCategotyName}</div>
+                    <c:forEach var="subVar" items="${subcategory}">
+                        <c:if test="${mainVar.mainCategotyNo eq subVar.mainCategotyNo}">
+                            <div class="subCategori" id="sub${subVar.subCategoryNo}"><a href="">${subVar.subCategoryName}</a><button>▼</button></div>
+                            <div class="sub${subVar.subCategoryNo}Box subMenu">
+                                <c:forEach var="categoryVar" items="${thirdcategory}">
+                                    <c:if test="${subVar.subCategoryNo eq categoryVar.subCategoryNo}">
+                                        <div id="category${categoryVar.thirdCategotyNo}"><a href="">${categoryVar.thirdCategotyName}</a></div>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </c:forEach>
             </div>
 
             <!-- 메인 콘텐츠 영역 -->
