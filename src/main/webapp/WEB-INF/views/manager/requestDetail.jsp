@@ -122,7 +122,7 @@
         <div class="detailInner">
         
 	        <c:forEach var="imageFile" items="${projectRequest.requestImageFileList }">
-	                	<img src="${imageFile.imageFilePath }" style="width:100%;">
+                <img src="/resources/images/${imageFile.imageFilePath }" style="width:100%;">
 	        </c:forEach>
 
         </div>

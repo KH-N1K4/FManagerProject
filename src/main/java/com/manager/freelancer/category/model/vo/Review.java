@@ -13,9 +13,9 @@ public class Review {
 	private int reviewPoint;
 	private String freelancerName;
 	private String memberName;
-	private int reviewCommentContent;
-	private int reviewCreateTime;
-	private int reviewCommentCreateTime;
+	private String reviewCommentContent;
+	private String reviewCreateTime;
+	private String reviewCommentCreateTime;
 	
 	private int serviceNo;
 	

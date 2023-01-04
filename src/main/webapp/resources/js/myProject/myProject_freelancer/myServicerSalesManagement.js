@@ -259,6 +259,21 @@ $('.sendBtn').click(function(){
               
             } 
           });
+
+          /* <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a> */
+          const a = document.createElement("a");
+          a.setAttribute("href", "#");
+          a.setAttribute("id", "finishBtn"+tradeNoValue);
+          a.setAttribute("title", tradeNoValue);
+          a.classList.add("finishBtn");
+          a.classList.add("btn_type");
+
+          const span = document.createElement("span");
+          span.innerText ='완료';
+
+          a.append(span);
+
+          document.getElementById('tdBtn'+tradeNoValue).prepend(a);
           
         }
     },
@@ -304,4 +319,42 @@ $('.finishBtn').click(function(){
 });
 
 
+/* 판매중이 아닌 서비스 클릭 시 */
+$('.suggestionNameNo').click(function(){
+
+  alert('판매 중인 서비스가 아닙니다.');
+
+});
+
+/* 요청사항 모달 */
+//const body = document.querySelector('body');
+const clientTradeRequestModal = document.querySelector('.clientTradeRequestModal');
+const clientTradeRequestModalClose = document.querySelector('.clientTradeRequestModal_close');
+$('.clientTradeRequest').click(function(){
+  /* 요청사항에 들어갈 값들 */
+  const tradeNoValue = this.title;
+  document.querySelector('#tradeRequestTradeNo').value = tradeNoValue;
+
+  saleslist.forEach(function(arg,i){
+    if(arg.tradeNo == tradeNoValue){
+      document.querySelector('#tradeRequestServiceTitle').value = arg.serviceTitle;
+      document.querySelector('#tradeRequestMemberName').value = arg.memberName;
+      document.querySelector('#tradeRequestContent').value = arg.tradeRequestString.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');;
+    } 
+  });
+  /*  요청사항에 들어갈 값들  */
+  clientTradeRequestModal.classList.toggle('show');
+  if (clientTradeRequestModal.classList.contains('show')) {
+    body.style.overflow = 'hidden';
+  }
+
+});
+
+clientTradeRequestModalClose.addEventListener('click', () => {
+  clientTradeRequestModal.classList.toggle('show');
+
+  if (clientTradeRequestModal.classList.contains('show')) {
+    body.style.overflow = 'hidden';
+  }
+});
 

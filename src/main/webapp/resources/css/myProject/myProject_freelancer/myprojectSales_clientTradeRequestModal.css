@@ -1,0 +1,51 @@
+.clientTradeRequestDiv{
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+
+.clientTradeRequestDiv_list{
+  display: flex;
+  flex-direction: row;
+}
+
+.clientTradeRequest > .title{
+  padding-bottom:5px;
+}
+
+.clientTradeRequest > .title > span{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.clientTradeRequestDiv_list .list_title{
+  margin-right: 20px;
+  width: 80px;
+}
+
+.clientTradeRequestDiv_list .list_title > span{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.clientTradeRequestDiv_list{
+  margin: 20px 0px;
+}
+
+.tradeRequestBox{
+  width: 350px;
+  height: 30px;
+  border: 1px solid #c6c6c9;
+}
+
+.clientTradeRequestTotalContent{
+  min-height: 200px !important;
+  overflow-y: auto;
+  overflow-x:hidden;
+  resize: none;
+}
+
+
+.readonly:focus{
+  outline: none;
+}

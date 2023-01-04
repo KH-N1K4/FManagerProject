@@ -108,7 +108,12 @@ public class CategoryDAO {
 		
 		int result=sqlSession.insert("categoryMapper.tradeComplete",temp);
 		
-		if(result>0) result=temp.getTradeNo();
+		if(result>0) {
+			result=sqlSession.insert("categoryMapper.insertSettlement",temp);
+		}
+			
+			
+			result=temp.getTradeNo();
 		
 		return result;
 	}

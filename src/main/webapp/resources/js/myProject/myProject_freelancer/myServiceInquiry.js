@@ -170,3 +170,10 @@ $('#searchboxRelative').mouseleave(function(){
   $('#searchboxInclude').children().remove();
 
 });
+
+
+$('.noSalesSevice').click(function(){
+
+  alert('판매 중인 서비스가 아닙니다.');
+
+});

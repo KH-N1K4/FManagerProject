@@ -60,7 +60,7 @@
                             <div>
                                 <div id="serviceTitle">
                                     <c:choose>
-                                        <c:when test="${service.serviceDelFL eq 'N' && service.serviceStatus == 2}"><a href="#" id="serviceName" class="serviceName" suggestionName="">
+                                        <c:when test="${service.serviceDelFL eq 'N' && service.serviceStatus == 2}"><a href="/category/${service.mainCategoryNo}/${service.subCategoryNo}/${service.thirdCategoryNo}/${service.serviceNo}" id="serviceName" class="serviceName" suggestionName="" target="_blank">
                                             ${service.serviceTitle}
                                         </a></c:when>
                                         <c:otherwise><span id="serviceName" class="serviceName" suggestionName="">${service.serviceTitle}</span></c:otherwise>
