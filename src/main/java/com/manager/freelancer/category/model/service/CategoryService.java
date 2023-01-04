@@ -8,6 +8,7 @@ import com.manager.freelancer.category.model.vo.Category;
 import com.manager.freelancer.category.model.vo.ImageFile;
 import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.category.model.vo.Trade;
+import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 
 public interface CategoryService {
@@ -35,7 +36,7 @@ public interface CategoryService {
 
 	
 	// ajax
-	List<Service> selectCategoryList(Map map);
+	Map<String, Object> selectCategoryList(Map map);
 
 	// 카테고리 조회
 	Map selectBoardList(Map<String, Integer> map);
@@ -45,6 +46,8 @@ public interface CategoryService {
 
 	// 거래 완료 ajax
 	int tradeComplete(Trade temp);
+
+	Freelancer freelancerDetail(int freelancerNo);
 	
 
 }
