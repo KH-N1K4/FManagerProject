@@ -2,17 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="myProjectRequest">
 	
-  	<resultMap type="myProjectFreelancerService" id="category_rm">
-     	  <!-- 카테고리 -->
-	      <result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />								<!-- 메인 1카테고리 -->
-	      <result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />						<!-- 메인 1카테고리 이름 -->
-	      <result property="subCategoryNo" column="SUB_CATEGORY_NO" />									<!-- 메인 2카테고리 -->
-	      <result property="subCategoryName" column="SUB_CATEGORY_NAME" />							<!-- 메인 2카테고리 이름  -->
-	      <result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />							<!-- 메인 3카테고리 -->	
-	      <result property="thirdCategoryName" column="THIRD_CATEGORY_NAME" />					<!-- 메인 3카테고리 이름-->
-				
-    </resultMap>
-		
 		<!-- 프로젝트 의뢰 -->
 		<resultMap type="myProjectFreelancerRequest" id="request_rm">												<!-- 프로젝트 의뢰하기 SEQ_PROJECT_REQUEST_NO-->
 			<id property="projectRequestNo" column="PROJECT_REQUEST_NO"/>											<!-- 프로젝트 의뢰 번호 -->
@@ -44,5 +33,17 @@
 			<result property="freelancerNo" column="FREELANCER_NO"/>																	<!-- 프리랜서 번호(FK) -->
 		</resultMap>
 		
+		<select id="getCategotyList" resultMap="request_rm">
+			SELECT * 
+			FROM CATEGORY
+		</select>
+		<select id="getMainCategotyList" resultMap="request_rm">
+			SELECT * 
+			FROM MAIN_CATEGORY
+		</select>
+		<select id="getSubCategotyList" resultMap="request_rm">
+			SELECT * 
+			FROM SUB_CATEGORY
+		</select>
 	
 </mapper>
