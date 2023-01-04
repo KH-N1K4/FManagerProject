@@ -63,6 +63,9 @@
 		<typeAlias type="com.manager.freelancer.category.model.vo.Trade" alias="Trade"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.ImageFile" alias="ImageFile"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.AskService" alias="AskService"/>
+		<typeAlias type="com.manager.freelancer.category.model.vo.Freelancer1" alias="Freelancer1"/>
+		<typeAlias type="com.manager.freelancer.category.model.vo.FService" alias="FService"/>
+		<typeAlias type="com.manager.freelancer.category.model.vo.Portfolio" alias="Portfolio"/>
 		
 		<typeAlias type="com.manager.freelancer.common.message.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.manager.freelancer.common.message.model.vo.ChattingRoom" alias="ChattingRoom"/>
