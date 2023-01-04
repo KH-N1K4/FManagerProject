@@ -71,33 +71,25 @@ public class ManagerInquiryServiceImpl implements ManagerInquiryService{
 			return dao.updateComment(userInquiryNo,inputComment,loginMember);
 		}
 
-//		@Override
-//		public Map<String, Object> selectInquiryStatusList(String value, int cp) {
-//			Map<String, Object> map = new HashMap<String, Object>();
-//
-//			int listCount = dao.getListCount(value);
-//			Pagination pagination = new Pagination(listCount, cp);
-//
-//			List<UserInquiry> managerInquiryList = dao.selectManagerInquiryList(value, pagination);
-//
-//			if (managerInquiryList != null) {
-//				for (UserInquiry m : managerInquiryList) {
-//					if (m.getInquiryRequest() == null) {
-//						m.setInquiryStatus("답변 대기 중");
-//					} else {
-//						m.setInquiryStatus("답변 완료");
-//					}
-//				}
-//
-//			}
-//			map.put("pagination", pagination);
-//			map.put("managerInquiryList", managerInquiryList);
-//
-//			return map;
-//		}
 		
-		
+		// 관리자 진행상태 별 이용문의 조회
+		@Override
+		public Map<String, Object> selectChangeStatusManager(String optionVal, int cp) {
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			int listCount = dao.getStatusListCount(optionVal);
+			Pagination pagination = new Pagination(listCount, cp);
+			
+			List<UserInquiry> managerInquiryList = dao.selectChangeStatusManager(optionVal, pagination);
+			
+			map.put("pagination", pagination);
+			map.put("managerInquiryList", managerInquiryList);
+			
+			return map;
+		}
 
+		
 	
 	
 	
