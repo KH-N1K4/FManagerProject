@@ -55,11 +55,9 @@ public class UserInquiryController {
 			String webPath = "/resources/images/customerCenterImage/";
 			String folderPath = sessoin.getServletContext().getRealPath(webPath);
 			
-			System.out.println(userInquiry);
 			
 			// 이용문의 등록 서비스 
 			int userInquiryNo = service.userInquiryInsert(userInquiry,imageList, webPath,folderPath);
-			System.out.println(userInquiryNo);
 			
 			if(userInquiryNo > 0){ 
 				
@@ -116,5 +114,24 @@ public class UserInquiryController {
 		
 		return "customerCenter/inquiryDetail";
 	}
+	
+	// 이용문의 내역 조회 (진행상태 변경 시)
+	@GetMapping("")
+	public String selectChangeStatus(@SessionAttribute("loginMember") Member loginMember, Model model,
+									 @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+		                        	 @RequestParam Map<String,Object> pm,
+		                        	 @RequestParam(value="inquiryStatus") String inquiryStatus,
+		                        	 UserInquiry userInquiry) {
+		
+		
+		Map<String, Object> map = service.selectChangeStatus(loginMember.getMemberNo(), inquiryStatus ,cp);
+		
+		
+		model.addAttribute("pagination",map.get("pagination"));
+		model.addAttribute("listCount",map.get("listCount"));
+		
+		return null;
+	}
+	
 
 }

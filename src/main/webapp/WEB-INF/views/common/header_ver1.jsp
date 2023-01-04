@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
  <link rel="stylesheet" href="/resources/css/common/header_ver1.css">
-
+    
 <div id="header">
         <div id="header1">
 
@@ -70,7 +70,7 @@
 
                             <div id="header-menu">
                                 <a href="/member/myInfo">내정보</a>
-                                <a href="/member/logout">로그아웃</a>
+                                <a class="logout" href="/member/logout">로그아웃</a>
                             </div>
                         </c:if>
                     </c:otherwise>
@@ -99,3 +99,5 @@
     
       
     </div>
+    
+    <script src="/resources/js/common/logout.js"></script>

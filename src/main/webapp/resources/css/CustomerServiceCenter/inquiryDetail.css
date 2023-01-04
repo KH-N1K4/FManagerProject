@@ -38,6 +38,12 @@
     font-weight: bold;
     font-size: 22px;
 }
+#inquiry a:hover{
+    color: #538126;
+}
+#inquiryList a:hover{
+    color: #538126;
+}
 
 /* ///////////////// ////////////////////////////*/
 
@@ -89,7 +95,8 @@ table th{
     text-align: center;
     color: white;
     border-radius: 5px;
-    font-size: 15px;
+    line-height: 25px;
+    font-size: 14px;
     background-color: #538126
 }
 
@@ -99,19 +106,14 @@ table th{
     width: 100px;
     height: 24px;
     text-align: center;
+    line-height: 25px;
     color: white;
     border-radius: 5px;
-    font-size: 15px;
+    font-size: 14px;
     background-color: rgb(165, 173, 165);
 
 }
 /* ================================ */
-
-
-
-
-
-
 
 
 
@@ -162,6 +164,7 @@ table th{
     margin-bottom: 20px;
 }
 
+/* ============================= */
 /* 목록으로 버튼 */
 #goToList{
     width: 700px;
@@ -177,5 +180,9 @@ table th{
     border-radius: 5px;
     border: 1px solid #538126;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
+} 
+#goToList button:hover{
+    background-color: #4c7722;
+    font-size: 17px;
 } 

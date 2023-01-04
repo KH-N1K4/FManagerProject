@@ -38,7 +38,7 @@
                     <section class="formBox">
                         <form action="/userInquiryList" id="selectForm"> 
                             <div>진행 상태
-                                <select name="inquiryTypeNo" id="division">
+                                <select name="inquiryStatus" id="processStatus" onchange="selectChange()">
                                     <option value="0">전체</option> 
                                     <option value="1">답변 완료</option> 
                                     <option value="2">답변 대기중</option> 
@@ -59,17 +59,17 @@
                         <c:choose>
                             <c:when test="${empty userInquiryList}">
                                 <!-- 게시글 목록 조회 결과가 비어있다면 -->
-                                <tr>
+                                <tr class="contentArea">
                                     <td colspan="6"> 게시글이 존재하지 않습니다 .</td>
                                 </tr>
                             </c:when>
                             <c:otherwise>
                                 <c:forEach var="userinquiry" items="${userInquiryList}">
-                                    <tr>
+                                    <tr class="contentArea">
                                         <td>${userinquiry.userInquiryNo}</td>
                                         <td><a href="/userInquiryDetail/${userinquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${userinquiry.userInquiryTitle}</a></td>
                                         <td>${userinquiry.userInquiryCreateDate}</td>
-                                        <td>
+                                        <td><%-- <span class="question-answer">${userinquiry.inquiryStatus}</span> --%>
                                             <c:choose>
                                                 <c:when test="${userinquiry.inquiryRequest == null}">
                                                     <span class="question-wating">답변 대기</span>
@@ -132,6 +132,18 @@
         </div>
     </section>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    
+    <script>
+         var userInquiryNo = "${userinquiry.userInquiryNo}";
+         var currentPage = "${pagination.currentPage}";
+         var sURL = "${sURL}";
+         var userInquiryTitle = "${userinquiry.userInquiryTitle}";
+         var userInquiryCreateDate = "${userinquiry.userInquiryCreateDate}";
+         var userInquiryCreateDate = "${userinquiry.inquiryRequest == null}";
+    
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="/resources/js/customerCenter/inquiryList.js"></script>
 </body>
 </html>
