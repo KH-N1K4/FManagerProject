@@ -35,8 +35,8 @@
                   <!-- 상단 내프로젝트 페이지 제목 -->
                   <!-- 상단 selectbox -->
                   <div class="selectbox">
-                    <select  id = "selectType" class="srchOption box" name="type" >
-                      <option value="0">카테고리 선택</option>
+                    <select  id = "selectType" class="srchOption box" name="type" title="">
+                      <option value="0" selected>카테고리 선택</option>
                       <option value="1">디자인</option>
                       <option value="2">IT·프로그래밍</option>
                       <option value="3">영상</option>

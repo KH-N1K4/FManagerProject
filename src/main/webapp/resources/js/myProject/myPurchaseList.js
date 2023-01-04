@@ -9,15 +9,17 @@ document.getElementById("searchDate2").setAttribute("max", today);
 $(document).ready(function(){
     /* 옵션 선택값으로 세팅 */
     var selectType = document.getElementById("selectType").title;
-    $("#selectType").val(selectType).prop('selected', true);
+    if(selectType!=""){
+      $("#selectType").val(selectType);
+    }
   
     /* 옵션 선택값으로 세팅 */
     var searchDate1 = document.getElementById("searchDate1").title;
-    $("#searchDate1").val(searchDate1).prop('selected', true);
+    $("#searchDate1").val(searchDate1);
   
     /* 옵션 선택값으로 세팅 */
     var searchDate2 = document.getElementById("searchDate2").title;
-    $("#searchDate2").val(searchDate2).prop('selected', true);
+    $("#searchDate2").val(searchDate2);
   
   });
 

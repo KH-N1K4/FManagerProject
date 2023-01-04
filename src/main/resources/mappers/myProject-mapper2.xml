@@ -10,6 +10,21 @@
 		<result property="paymentPrice" column="PAYMENT_PRICE" />
 	</resultMap>
 	
+	<resultMap type="myProjectTrade" id="myProjectTrade_rm">
+		<id property="tradeNo" column="TRADE_NO"/>
+		<result property="memberDoneFL" column="MEMBER_DONE_FL" />
+		<result property="freelancerDoneFL" column="FREELANCER_DONE_FL" />
+		<result property="serviceNo" column="SERVICE_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="freelancerNo" column="FREELANCER_NO" />
+		<result property="workNo" column="WORK_NO" />
+		<result property="workSendDate" column="WORK_SEND_DATE" />
+		<result property="workCount" column="WORK_COUNT" />
+		<result property="serviceEditNum" column="SERVICE_EDIT_NUM" />
+	</resultMap>
+	
+	
+	
 	
 	
 	<!-- 결제 내역 수 -->
@@ -61,6 +76,19 @@
 		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
 	</if>
   </select>
+  
+  <!-- 구매 내역 수 -->
+  <select id="getPurchaseListCount" resultType="_int">
+  
+  </select>
+  
+  <!-- 구매 내역 목록 -->
+  <select id="selectPurchaseList" resultMap="myProjectTrade_rm">
+  
+  </select>
+  
+  
+  
   	
 </mapper>
 	
