@@ -1,6 +1,7 @@
 package com.manager.freelancer.myProject.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -117,15 +119,22 @@ public class MyProjectContorller {
 	}
 	//------------------------------------------------------------------------
 	
-//	@GetMapping("/member/myProject/myReceiveList")
-//	public String changeStatus() {
-//		
-//		
-//		
-//		
-//		return "redirect: /member/myProject/myReceiveList";
-//	}
-//	
+	
+	// 내 프로젝트 조회 ajax
+	@GetMapping("/member/categoryTypeSelect")
+	@ResponseBody
+	public Map<String, Object> categoryTypeSelect(Model model, @RequestParam String optionVal, @SessionAttribute("loginMember") Member loginMember,
+												  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = service.categoryTypeSelect(optionVal,cp, loginMember.getMemberNo());
+		
+		model.addAttribute("map", map);
+		
+		return map;
+	}
+	
 	
 	
 

@@ -95,15 +95,19 @@
 .myProject_content{
   padding: 34px 0;
   border-bottom: 1px solid #f2f3f7;
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  color: black;
 }
 
-.myProject_link{
+/* .myProject_link{
   display: flex;
   flex-direction: row;
   text-decoration: none;
   cursor: pointer;
   color: black;
-}
+} */
 .projuctContent_image{
   margin-right: 30px;
 }

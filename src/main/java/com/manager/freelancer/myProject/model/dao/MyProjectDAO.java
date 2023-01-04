@@ -125,6 +125,37 @@ public class MyProjectDAO {
 		return sqlSession.selectList("myProjectMapper.selectProposalList", map, rowBounds);
 	}
 
+	/** 내 프로젝트 조회 ajax 카운트
+	 * @param optionVal
+	 * @return
+	 */
+	public int getChangeTypeCount(String optionVal, int memberNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("mainCategoryNo", optionVal);
+		return sqlSession.selectOne("myProjectMapper.getChangeTypeCount", map);
+	}
+
+	/** 내 프로젝트 조회 ajax 조회
+	 * @param optionVal
+	 * @param pagination
+	 * @return
+	 */
+	public List<MyProject> categoryTypeSelect(String optionVal, Pagination pagination,int memberNo) {
+		
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); 
+	    
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("mainCategoryNo", optionVal);
+		
+		return sqlSession.selectList("myProjectMapper.categoryTypeSelect", map, rowBounds);
+
+	}
+
 
 	
 }

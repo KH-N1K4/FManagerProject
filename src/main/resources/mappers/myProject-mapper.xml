@@ -153,6 +153,73 @@
 	LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 	WHERE MEMBER.MEMBER_NO = #{memberNo}
 	</select>
+	
+	<!-- 내 프로젝트 조회 ajax 카운트 -->
+  	<select id="getChangeTypeCount" parameterType="java.util.HashMap" resultType="_int">
+  		SELECT COUNT(*) 
+		FROM PROJECT_REQUEST 
+		JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		WHERE MEMBER_NO = #{memberNo}
+		<choose>
+			<when test='optionVal eq "1"'>
+				AND MAIN_CATEGORY_NO = 1
+			</when>
+			<when test='optionVal eq "2"'>
+				AND MAIN_CATEGORY_NO = 2
+			</when>
+			<when test='optionVal eq "3"'>
+				AND MAIN_CATEGORY_NO = 3
+			</when>
+			<when test='optionVal eq "4"'>
+				AND MAIN_CATEGORY_NO = 4
+			</when>
+			<when test='optionVal eq "5"'>
+				AND MAIN_CATEGORY_NO = 5
+			</when>
+		</choose>
+  	</select>
+  	
+  	<!-- 내 프로젝트 조회 ajax 조회 -->
+  	<select id="categoryTypeSelect" parameterType="java.util.HashMap" resultMap="myProject_rm">
+	  	SELECT PROJECT_REQUEST_NO, PROJECT_REQUEST_TITLE, PROJECT_REQUEST_SUMMARY,
+       		   PROJECT_REQUEST_CONTENT, PROJECT_REQUEST_BUDGET, 
+       		   TO_CHAR(REQUEST_RECRUIT_DATE, 'YYYY-MM-DD') REQUEST_RECRUIT_DATE,
+       		   TO_CHAR(PROJECT_REQUEST_CREATE_DATE, 'YYYY-MM-DD')PROJECT_REQUEST_CREATE_DATE,
+               REQUEST_WORK_DATE, PROJECT_WORK_PERIOD, SUB_CATEGORY_NO,SUB_CATEGORY_NAME,
+               THIRD_CATEGORY_NO,THIRD_CATEGORY_NAME, MAIN_CATEGORY_NO,MAIN_CATEGORY_NAME,  
+       	   CASE WHEN PROJECT_REQUEST_STATUS = 1 THEN '승인 대기 중'
+        	    WHEN PROJECT_REQUEST_STATUS = 2 THEN '모집 중'
+                WHEN PROJECT_REQUEST_STATUS = 3 THEN '미승인'
+                WHEN PROJECT_REQUEST_STATUS = 4 THEN '모집 마감'
+            END AS PROJECT_REQUEST_STATUS,
+                REQUEST_FILE_NO, REQUEST_FILE_PATH       
+		FROM PROJECT_REQUEST
+		JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		WHERE MEMBER_NO = #{memberNo}
+		<choose>
+			<when test='optionVal eq "1"'>
+				AND MAIN_CATEGORY_NO = 1
+			</when>
+			<when test='optionVal eq "2"'>
+				AND MAIN_CATEGORY_NO = 2
+			</when>
+			<when test='optionVal eq "3"'>
+				AND MAIN_CATEGORY_NO = 3
+			</when>
+			<when test='optionVal eq "4"'>
+				AND MAIN_CATEGORY_NO = 4
+			</when>
+			<when test='optionVal eq "5"'>
+				AND MAIN_CATEGORY_NO = 5
+			</when>
+		</choose>
+  	</select>
+	
   	
 </mapper>
 	
