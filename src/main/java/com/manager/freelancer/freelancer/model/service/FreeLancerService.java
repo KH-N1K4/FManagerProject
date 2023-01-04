@@ -37,7 +37,10 @@ public interface FreeLancerService {
 	List<Bank> getBankList();
 
 	// 포트폴리오 등록
-	int addPortfolio(Portfolio inputPortfolio, List<MultipartFile> imageList, String webPath, String folderPath);
+	int addPortfolio(Portfolio inputPortfolio, String webPath, String folderPath, List<MultipartFile> portfolioFilePath) throws Exception;
+
+	// 포트폴리오 상세보기
+	Portfolio viewPortfolioDetail(Portfolio portfolio);
 	
 	
 

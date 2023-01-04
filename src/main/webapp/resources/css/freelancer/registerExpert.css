@@ -40,7 +40,7 @@
 }
 
 
-input[type="text"]{
+input[type="text"],input[type="date"]{
     border: 1px solid #538126;
     box-sizing: border-box;
     padding: 12px 13px;
@@ -155,7 +155,15 @@ input[type="checkbox"]:checked + label span::after {
 	width: 587px;
 } */
 .modal{
-	width: 587px;
+	
+	color:red;
+	font-size:20px;
+	cursor:pointer;
+	
+}
+
+.additional{
+	margin:50px 0;
 }
 
 
@@ -191,16 +199,23 @@ textarea:focus{
     font-weight: bold;
     
     /* 1228 버튼 위치 이동 */
-    margin-right : 300px
+    margin-right : 300px;
+    
+    margin-top:20px;
+    margin-bottom:50px;
+    
     
 }
 
 
 
-
+.majorPopup{
+	color:red;
+	background-color:lightgray;
+}
 
 .modal_major {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -212,7 +227,7 @@ textarea:focus{
     background-color: rgba(0, 0, 0, 0.4);
 }
 .modal_career {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -237,7 +252,7 @@ textarea:focus{
     z-index:4;
   } */
   .modal_license{
-	position:absolute;
+	position:fixed;
 	top:0;
     left:0;
 

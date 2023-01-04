@@ -10,6 +10,8 @@
     <title>전문가수정하기</title>
 
     <link rel="stylesheet" href="/resources/css/freelancer/updateExpertInfo.css">
+    <%-- <link rel="stylesheet" href="/resources/css/freelancer/registerExpert.css"> --%>
+
 
 </head>
 <body>
@@ -88,7 +90,7 @@
                     <div class="itemTitle">
                         <div class="item">경력 사항</div>
                         <div>
-                            <input style="width :300px;" type="text" name="career" id="" value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}">
+                            <input style="width :300px;" type="text" name="career" id="careerPopup" class="modal" value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}">
                             <%-- <input type="text" name="careerCompanyDepartment" id="" value="${freelancer.careerCompanyDepartment}">
                             <input type="text" name="careerCompanyPosition" id="" value="${freelancer.careerCompanyPosition}">
                             <input type="text" name="careerCompanyRegion" id="" value="${freelancer.careerCompanyRegion}">
@@ -98,7 +100,7 @@
                     <div class="itemTitle">
                         <div class="item">자격증</div>
                         <div>
-                            <input style="width :300px;" type="text" name="license" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}">
+                            <input style="width :300px;" type="text" name="license" id="licensePopup" class="modal" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}">
 
                         </div>
                     </div>
@@ -135,6 +137,19 @@
                 </div>
             </form>
         </section>
+
+        <%-- <div class="modal_license">
+                <jsp:include page="/WEB-INF/views/member/freelancer/modal/license.jsp" /> 
+        </div>
+        <div class="modal_career">
+                <jsp:include page="/WEB-INF/views/member/freelancer/modal/career.jsp" /> 
+        </div> --%>
+
     </div>
+
+    <%-- <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script src="/resources/js/member/freelancer/updateFreelancerInfo.js"></script>  --%>
+
 </body>
 </html>

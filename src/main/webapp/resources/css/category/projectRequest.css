@@ -32,16 +32,26 @@
 }
 #subCategori{
     width: 150px;
-    margin: 20px 0;
+    margin: 25px 0 10px 0;
     position: relative;
+    font-weight:bold;
 }
-.sideMenu a{
+
+
+.sideMenu a:not(.highlight){
     text-decoration: none;
     font-size: 15px;
     color: gray;
     width: 120px;
 }
 .sideMenu a:hover{
+    text-decoration: none;
+    font-size: 15px;
+    color: #538126;
+    width: 120px;
+}
+
+.highlight{
     text-decoration: none;
     font-size: 15px;
     color: #538126;
@@ -59,6 +69,10 @@
     color: #538126;
     position: absolute;
     right: 0;
+}
+
+.thirdCategory{
+	margin-left:10px;
 }
 
 

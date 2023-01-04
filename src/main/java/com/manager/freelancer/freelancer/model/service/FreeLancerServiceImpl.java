@@ -1,11 +1,14 @@
 package com.manager.freelancer.freelancer.model.service;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +24,7 @@ import com.manager.freelancer.freelancer.model.vo.Major;
 import com.manager.freelancer.freelancer.model.vo.Portfolio;
 import com.manager.freelancer.freelancer.model.vo.PortfolioImage;
 import com.manager.freelancer.freelancer.model.vo.Region;
+import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 @Service
 public class FreeLancerServiceImpl implements FreeLancerService{
@@ -28,6 +32,7 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 	@Autowired
 	private FreeLancerDAO dao;
 
+	
 	@Transactional
 	@Override
 	public int enrollFreelancerSignup(Freelancer inputFreelancer) {
@@ -105,6 +110,9 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 				
 				String[] singleCareer=splitLicense[i].split("/");
 				License temp3 = new License();
+				
+//				SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd");
+//				System.out.println(singleCareer[1]);
 				temp3.setLicenseName(singleCareer[0]);
 				temp3.setLicenseDate(singleCareer[1]);
 				temp3.setLicenseAgency(singleCareer[2]);
@@ -117,12 +125,26 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 		
 		
 		// result = frelancerNo
+		String freelancerFieldList = inputFreelancer.getFreelancerField();
+		if(freelancerFieldList !=null) {
+			String[] freelancerField = freelancerFieldList.split(",");
 
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("freelancerNo", inputFreelancer.getFreelancerNo()+""); // "" > String형으로 바꿔주기위해
+
+			for(int i =0; i<freelancerField.length; i++) {
+				map.put("freelancerField",  freelancerField[i]);
+
+				result = dao.insertFreelancerField(map);
+			}
+
+		}
 		
 		// Member 프리랜서_FL N-> Y로 변경
 		result = dao.updateFreelancerFlag(inputFreelancer);
 		
-	
+		// 프리랜서 계좌등록(insert)
+		result = dao.insertFreelancerAccount(inputFreelancer);
 		
 
 	
@@ -181,6 +203,7 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 		if(inputFreelancer.getLicense()!=null) {
 			String[] splitLicense = inputFreelancer.getLicense().split("/");
 			License temp2License = new License();
+		
 			temp2License.setLicenseName(splitLicense[0]);
 			temp2License.setLicenseDate(splitLicense[1]);
 			temp2License.setLicenseAgency(splitLicense[2]);
@@ -203,15 +226,48 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 	}
 	
 	// 포트폴리오 등록
+	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int addPortfolio(Portfolio inputPortfolio, List<MultipartFile> imageList, String webPath, String folderPath) {
-
-		int portfolioNo = dao.addPortfolio(inputPortfolio);
+	public int addPortfolio(Portfolio inputPortfolio, String webPath, String folderPath, List<MultipartFile> portfolioFilePath) throws Exception {
+		
+		inputPortfolio.setPortfolioContent(Util.newLineHandling(inputPortfolio.getPortfolioContent())); 
 		
 		
-		return portfolioNo;
+		List<String> reNameList = new ArrayList<String>();
+		for(int i=0 ; i<portfolioFilePath.size() ; i ++) {
+			if(portfolioFilePath.get(i).getSize() > 0) {
+				if(i ==0) {
+					inputPortfolio.setPortfolioThumbnail(webPath);
+					String reName = Util.fileRename(portfolioFilePath.get(i).getOriginalFilename());
+					inputPortfolio.setPortfolioThumbnail(webPath+reName);
+					reNameList.add(reName); // 변경파일명 리스트에 추가
+				}else {
+					inputPortfolio.setPortfolioFilePath(webPath);
+					String reName = Util.fileRename(portfolioFilePath.get(i).getOriginalFilename());
+					inputPortfolio.setPortfolioFilePath(webPath+reName);
+					reNameList.add(reName); // 변경파일명 리스트에 추가
+				}
+			}
+		}
+		
+		int result = dao.addPortfolio(inputPortfolio);
+		if(result>0) {
+			// 파일 변환 작업
+			for(int i=0 ; i<portfolioFilePath.size() ; i++) {
+					
+				// 실제 파일로 변환
+				portfolioFilePath.get(i).transferTo(new File(folderPath + reNameList.get(i)));    
+			}
+		}
+		return result;
 	}
 	
+	//포트폴리오 상세보기
+	@Override
+	public Portfolio viewPortfolioDetail(Portfolio portfolio) {
+		
+		return dao.viewPortfolioDetail(portfolio);
+	}
 
 	
 }

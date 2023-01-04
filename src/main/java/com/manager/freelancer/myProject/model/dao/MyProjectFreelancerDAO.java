@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
@@ -281,6 +282,22 @@ public class MyProjectFreelancerDAO {
 		map.put("mainCategoryNo",mainCategoryNo);
 		map.put("searchInput", searchInput);
 		return sqlSession.selectList("myProjectFreelancerSerive.myServiceInquiryList", map, rowBounds);
+	}
+
+	/**나의 등급 조건 들고오기
+	 * @param memberNo
+	 * @return
+	 */
+	public myProjectFreelancer selectMyProjectGrade(int memberNo) {
+		
+		return (myProjectFreelancer) sqlSession.selectOne("myProjectFreelancerSerive.selectMyProjectGrade", memberNo);
+	}
+
+	/**프매니저 사이트 등급 조건 들고 오기
+	 * @return
+	 */
+	public List<myProjectFreelancer> selectBasicGrade() {
+		return sqlSession.selectList("myProjectFreelancerSerive.selectBasicGrade");
 	}
 
 

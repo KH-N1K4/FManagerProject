@@ -45,6 +45,12 @@ textarea{
 #image-input {
     display: none;
 }
+#image-input1 {
+    display: none;
+}
+#image-input2 {
+    display: none;
+}
 label{
     width: 140px;
     height: 33px;
