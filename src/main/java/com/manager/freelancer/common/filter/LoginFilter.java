@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.manager.freelancer.member.model.vo.Member;
+
 
 //필터 등록 + 필터링 할 주소 매핑 
 @WebFilter(filterName="loginFilter",
@@ -42,12 +44,12 @@ public class LoginFilter implements Filter {
 		// -> session에 loginMember가 있는지 확
 		
 		HttpSession session=req.getSession();
-		
 		if(session.getAttribute("loginMember")==null) {// 로그인 X
 			
 			resp.sendRedirect("/");
 			
 		}else { // 로그인O
+			
 			// 연결된 다음 필터로 이동 
 			chain.doFilter(request, response);
 		}

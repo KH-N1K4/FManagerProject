@@ -32,7 +32,7 @@ import com.manager.freelancer.member.model.service.MemberService;
 import com.manager.freelancer.member.model.vo.Member;
 
 @Controller
-@SessionAttributes({"loginMember","authority"})
+@SessionAttributes({"loginMember"})
 public class MemberController {
 	
 	@Autowired
@@ -105,7 +105,6 @@ public class MemberController {
 			
 			// 로그인 성공시 loginMember를 세션에 추가
 			model.addAttribute("loginMember",loginMember);
-			model.addAttribute("authority",loginMember.getAuthority());
 			
 			// **********************************************
 			// 쿠키 생성

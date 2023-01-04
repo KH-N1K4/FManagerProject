@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.manager.freelancer.member.model.vo.Member;
+
 @WebFilter(filterName="managerFilter", // 필터 이름, 필터가 여러 개 존재할 때 순서 지정 시 사용
 			urlPatterns = {"/manager/*"} ) // 필터링한 요청 주소(패턴 가능)
 public class ManagerFilter implements Filter{
@@ -42,10 +44,12 @@ public class ManagerFilter implements Filter{
 			resp.sendRedirect("/"); // 메인페이지로 redirect
 		} else { // 로그인 O 상태 
 			// 연결된 다음 필터로 이동(없으면 Servlet / JSP로 이동)
-			if(session.getAttribute("authority").equals("1")) {
-				resp.sendRedirect("/"); // 메인페이지로 redirect
+			if(((Member)session.getAttribute("loginMember")).getAuthority()==1) {
+				resp.sendRedirect("/");
+			} else {
+				chain.doFilter(request, response);			
+				
 			}
-			chain.doFilter(request, response);			
 		}
 		
 	}
