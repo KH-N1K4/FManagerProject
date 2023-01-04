@@ -1,5 +1,6 @@
 package com.manager.freelancer.customerCenter.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -107,6 +108,42 @@ public class UserInquiryDAO {
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		return sqlSession.selectList("inquiryMapper.selectInquiryList_search", pm, rowBounds);
+	}
+
+
+	/** 이용문의 내역 조회 (진행상태 변경 시) 리스트 카운트
+	 * @param memberNo
+	 * @param inquiryStatus
+	 * @return
+	 */
+	public int getStatusListCount(int memberNo, String inquiryStatus) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("inquiryStatus", inquiryStatus);
+		
+		return sqlSession.selectOne("inquiryMapper.getStatusListCount",map);
+	}
+
+
+	/** 이용문의 내역 조회 (진행상태 변경 시)
+	 * @param pagination
+	 * @param memberNo
+	 * @param inquiryStatus
+	 * @return
+	 */
+	public List<UserInquiry> userStatusList(Pagination pagination, int memberNo, String inquiryStatus) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("memberNo", memberNo);
+		map.put("inquiryStatus", inquiryStatus);
+		
+		return sqlSession.selectList("inquiryMapper.userStatusList",map,rowBounds);
 	}
 
 	
