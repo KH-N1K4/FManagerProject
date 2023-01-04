@@ -52,9 +52,16 @@
     text-decoration: none;
     color: grey;
     margin-right: 19.2px;
-    margin-top: 50px;
 }
 
+
+/* #imageContent a{
+    text-decoration: none;
+    color: grey;
+    margin-right: 25px;
+    margin-bottom: 50px;
+}
+ */
 /* pagination */
 .pagination {
 	list-style: none;
@@ -154,10 +161,4 @@ a{
     color: grey;
 }
 
-#imageContent a{
-    text-decoration: none;
-    color: grey;
-    margin-right: 25px;
-    margin-bottom: 50px;
-}
 

@@ -56,7 +56,7 @@
                 <div class="expertPage">
                     <div class="expertPhoto"><img alt="" src="${fService.memberProfile }" style="width:100%;"></div>
                     <div class="expertContent">
-                        <div class="expertName"><a href="/category/viewFreelancerDetail">${fService.memberName }</a></div>
+                        <div class="expertName"><a href="/service/freelancerDetail/${fService.freelancerNo}">${fService.memberName }</a></div>
                         <div class="responseInfo">
                             <span>응답시간<span>00</span></span>
                             <span>응답률<span>00</span></span>
