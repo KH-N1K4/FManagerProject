@@ -125,7 +125,6 @@ public class UserInquiryController {
 									 @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
 									 @RequestParam String optionVal) {
 		
-		System.out.println(optionVal+"***********");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map = service.selectChangeStatus(loginMember.getMemberNo(), optionVal ,cp);

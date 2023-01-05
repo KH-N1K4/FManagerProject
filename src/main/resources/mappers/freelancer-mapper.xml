@@ -132,7 +132,7 @@
     	</select>
     	
     	<select id="getPortfolioList" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio">
-    		SELECT PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent, PORTFOLIO_THUMBNAIL as portfolioThumbnail
+    		SELECT PORTFOLIO_NO as portfolioNo, PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent, PORTFOLIO_THUMBNAIL as portfolioThumbnail
     		FROM  PORTFOLIO
     		WHERE FREELANCER_NO = #{freelancerNo}
     	</select>
@@ -212,10 +212,14 @@
     	
     	
     	<!-- 포트폴리오 상세 조회 -->
-    	<select id="viewPortfolioDetail" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio" >
-    		SELECT PORTFOLIO_NO,PORTFOLIO_TITLE, PORTFOLIO_CONTENT, PORTFOLIO_FILE_PATH, PORTFOLIO_THUMBNAIL
-			FROM PORTFOLIO 
-			WHERE FREELANCER_NO = #{freelancerNo}
+    	<select id="viewPortfolioDetail" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio">
     		
+    		SELECT PORTFOLIO_NO as portfolioNo ,PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent, 
+    		PORTFOLIO_FILE_PATH as portfolioFilePath, PORTFOLIO_THUMBNAIL as portfolioThumbnail, MEMBER_NO as memberNo, MEMBER_NAME as memberName, 
+    		MEMBER_PROFILE as memberProfile
+			FROM PORTFOLIO P 
+			JOIN MEMBER M ON(P.FREELANCER_NO = M.MEMBER_NO) 
+			WHERE FREELANCER_NO = #{freelancerNo}
+			AND PORTFOLIO_NO = #{portfolioNo}
     	</select>
 </mapper>

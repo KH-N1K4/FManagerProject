@@ -1,4 +1,4 @@
-#portfolioDetailMain{
+.modal_body{
     width: 1100px;
     height: 1000px;
     border:1px solid black;
@@ -6,7 +6,7 @@
     position: relative;
 }
 
-#portfolioDetailMain>button:first-child{
+.modal_body>button:first-child{
     position: absolute;
     right: 10px;
     top:5px;
@@ -28,12 +28,19 @@
     background-color: lightcoral;
     margin:20px;
 }
+#writerPhoto > img{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: lightcoral;
+}
 
 #writerName{
     position:relative;
-    top:-140px;
+    top:-120px;
     font-weight: bold;
     font-size: 20px;
+   
 }
 
 #portfolioSection{
@@ -46,10 +53,16 @@
 
 #portfolioContent{
     font-size: 16px;
-    margin:20px 0;
+    /* margin:20px 0; */
 }
 
 .portfolioPhoto{
+    width: 800px;
+    height: 800px;
+    background-color: aliceblue;
+    margin:auto;
+}
+.portfolioPhoto > img{
     width: 800px;
     height: 800px;
     background-color: aliceblue;

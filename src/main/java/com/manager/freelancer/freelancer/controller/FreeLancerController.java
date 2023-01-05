@@ -221,17 +221,19 @@ public class FreeLancerController {
 		}
 		
 		
+		
+		
 		//포트폴리오 상세 페이지로 이동
 		@GetMapping("/portfolioDetail/{portfolioNo}")
 		public String portfolioDetail(@PathVariable(value="portfolioNo") int portfolioNo,
 			Model model, @SessionAttribute("loginMember") Member loginMember
 			) {
-			// 포트폴리오 번호, 회원번호, 포트폴리오내용=portfolio
+			// 포트폴리오 번호, 회원번호, 포트폴리오 제목 포트폴리오내용, =portfolio 
 			
 			Portfolio portfolio = new Portfolio();
 			
 			portfolio.setFreelancerNo(loginMember.getMemberNo());
-			
+			portfolio.setPortfolioNo(portfolioNo);
 			portfolio = service.viewPortfolioDetail(portfolio);
 			
 //			portfolio.setPortfolioNo(portfolioNo);

@@ -83,14 +83,6 @@
                 </c:otherwise>
             </c:choose>  
 
-    pagination.prevPage =${pagination.prevPage}
-    pagination.startPage = ${pagination.startPage}
-    pagination.endPage = ${pagination.endPage}    
-    pagination.currentPage = ${pagination.currentPage}
-    pagination.nextPage = ${pagination.nextPage}
-    =pagination.maxPage = ${pagination.maxPage}
-
-
 
         </div> 
         <div class="pagination-area">
@@ -138,6 +130,6 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <%-- <script src="/resources/js/manager/managerInquiryList.js"></script>  --%>
+    <script src="/resources/js/manager/managerInquiryList.js"></script> 
 </body>
 </html>

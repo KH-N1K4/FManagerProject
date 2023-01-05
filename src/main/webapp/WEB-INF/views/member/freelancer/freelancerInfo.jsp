@@ -127,16 +127,16 @@
                 </div>
                 <div id="addArea">
                     <div class="item">포트폴리오</div>
-                    <div><a href="/member/freelancer/modal/addPortfolio" id="add">추가하기</a></div>
+                    <div><a  id="addPortfolioPopupBtn">추가하기</a></div>
                 </div>
                 <div id="serviceArea">
                     <c:if test = "${not empty portfolioList}">
                         <c:forEach var="portfolio" items="${portfolioList}">
-                        <a href="/portfolioDetail/${portfolio.portfolioNo}">
+                        <a href="/portfolioDetail/${portfolio.portfolioNo}" id="portfolioDetailPopupBtn">
                         
                             <span class="service">
                             <span><img  style="width: 100%; height:100%; background-color:skyblue;"src="${portfolio.portfolioThumbnail}"></span>
-                            ${portfolio.portfolioTitle}<br>${portfolio.portfolioContent}
+                                ${portfolio.portfolioTitle}<br>${portfolio.portfolioContent}
                             </span>
                             
                         </a>
@@ -146,10 +146,19 @@
                         <div>포트폴리오가 존재하지 않습니다!!</div>
                     
                     </c:if>
-                   
-                </div>
                 
+                </div>
+            <div class="modal_addPortfolio">
+                    <jsp:include page="/WEB-INF/views/member/freelancer/modal/addPortfolio.jsp" /> 
+            </div>
+            <div class="modal_portfolioDetail">
+                    <jsp:include page="/WEB-INF/views/member/freelancer/portfolioDetail.jsp" /> 
+            </div>
+
+
             </section>
     </div>
+        <script src="/resources/js/member/freelancer/freelancerInfo.js"></script> 
+
 </body>
 </html>
