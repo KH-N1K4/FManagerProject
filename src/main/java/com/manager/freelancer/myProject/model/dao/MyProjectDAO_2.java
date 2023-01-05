@@ -12,6 +12,7 @@ import com.manager.freelancer.customerCenter.model.vo.Pagination;
 import com.manager.freelancer.myProject.model.vo.TradeReport;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.MyProjectPayment;
+import com.manager.freelancer.myProject.model.vo.Review;
 import com.manager.freelancer.myProject.model.vo.myProjectTrade;
 
 @Repository
@@ -111,6 +112,22 @@ public class MyProjectDAO_2 {
 	 */
 	public int insertTradeReportCancel(TradeReport inputTradeReport) {
 		return sqlSession.insert("myProjectMapper2.insertTradeReportCancel",inputTradeReport);
+	}
+
+	/** 리뷰 등록하기
+	 * @param inputReview
+	 * @return
+	 */
+	public int insertReview(Review inputReview) {
+		return sqlSession.insert("myProjectMapper2.insertReview",inputReview);
+	}
+
+	/** 리뷰 수 얻기
+	 * @param inputReview
+	 * @return
+	 */
+	public int getReviewCount(Review inputReview) {
+		return sqlSession.selectOne("myProjectMapper2.getReviewCount",inputReview);
 	}
 
 }

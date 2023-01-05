@@ -37,5 +37,7 @@ public class myProjectTrade {
 	private int subCategoryNo;
 	private int thirdCategoryNo;
 	
+	private int reviewCount;
+	
 	
 }

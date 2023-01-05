@@ -8,7 +8,7 @@
 
     <div class="cancelModal_body">
       <span class="cancelModal_close">x</span>
-      <form action="/member/myProject/tradeReportCancel" method="POST" id="tradeReportFrm"  enctype="multipart/form-data">
+      <form action="/member/myProject/tradeReportCancel" method="POST" id="tradeReportCancelFrm"  enctype="multipart/form-data">
       <div class="myprojectCancel">
           <div class="title"><span>취소하기</span></div>
           <div class="myprojectCancel_list">
@@ -23,7 +23,7 @@
           </div>
           <div class="myprojectCancel_list">
             <div class="list_title2"><span>취소사유</span></div>
-            <div class="list_content"><textarea id="reportContent" class="myprojectReportTotalContent ReportBox" name="reportContent" required></textarea></div>
+            <div class="list_content"><textarea id="reportContent2" class="myprojectReportTotalContent ReportBox" name="reportContent" required></textarea></div>
           </div>
           <div class="myprojectCancel_list">
             <div class="list_title2"><span>취소/환불 규정</span></div>
@@ -47,7 +47,7 @@
           </div>
           <div class="myprojectReport_list" id="fileadd">
             <div class="list_title2"><span>첨부파일</span></div>
-            <div class="list_content fileRemove"><input type = "file" name="reportFilePath" id="reportFilePath"  accept="image/*"></div>
+            <div class="list_content fileRemove"><input type = "file" name="reportFilePath" id="reportFilePath2"  accept="image/*"></div>
           </div>
           <div class="btnDiv" ><button id="ajaxReview">취소하기</button></div>
           </form>

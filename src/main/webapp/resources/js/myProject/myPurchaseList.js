@@ -252,15 +252,15 @@ for(f of finishBtn){
 
               const li2 = document.createElement("li");
               const a2 = document.createElement("a");
-              a2.setAttribute("href", "/member/myProject/myPurchaseList?cp=" + map.pagination.prevPage + "&type=" + type+ "&searchDate1=" + searchDate1+ "&searchDate2=" + searchDate2+ "&searchInput=" + searchInput);
+              a2.setAttribute("href", "/member/myProject/myPurchaseList?cp=" + resultMap.pagination.prevPage + "&type=" + type+ "&searchDate1=" + searchDate1+ "&searchDate2=" + searchDate2+ "&searchInput=" + searchInput);
               a2.appendChild(document.createTextNode("<"));
               li2.append(a2);
               pagination.append(li2);
 
               /* 숫자가 안나와 */
-              for (i = map.pagination.startPage; i <= map.pagination.endPage; i++) {
+              for (i = resultMap.pagination.startPage; i <= resultMap.pagination.endPage; i++) {
                   const li3 = document.createElement("li");
-                  if (i == map.pagination.currentPage) {
+                  if (i == resultMap.pagination.currentPage) {
                       const a3 = document.createElement("a");
                       a3.classList.add("current");
                       a3.appendChild(document.createTextNode(i));
@@ -278,14 +278,14 @@ for(f of finishBtn){
 
               const li4 = document.createElement("li");
               const a4 = document.createElement("a");
-              a4.setAttribute("href", "/member/myProject/myPurchaseList?cp=" + map.pagination.nextPage + "&type=" + type+ "&searchDate1=" + searchDate1+ "&searchDate2=" + searchDate2+ "&searchInput=" + searchInput);
+              a4.setAttribute("href", "/member/myProject/myPurchaseList?cp=" + resultMap.pagination.nextPage + "&type=" + type+ "&searchDate1=" + searchDate1+ "&searchDate2=" + searchDate2+ "&searchInput=" + searchInput);
               a4.appendChild(document.createTextNode(">"));
               li4.append(a4);
               pagination.append(li4);
 
               const li5 = document.createElement("li");
               const a5 = document.createElement("a");
-              a5.setAttribute("href", "/member/myProject/myPurchaseList?cp=" + map.pagination.maxPage + "&type=" + type+ "&searchDate1=" + searchDate1+ "&searchDate2=" + searchDate2+ "&searchInput=" + searchInput);
+              a5.setAttribute("href", "/member/myProject/myPurchaseList?cp=" + resultMap.pagination.maxPage + "&type=" + type+ "&searchDate1=" + searchDate1+ "&searchDate2=" + searchDate2+ "&searchInput=" + searchInput);
               a5.appendChild(document.createTextNode(">>"));
               li5.append(a5);
               pagination.append(li5);
@@ -328,8 +328,8 @@ function cancelModal(){
       cancelModalClose.addEventListener("click",()=>{
         if (cancelModal.classList.contains('show')) {
           cancelModal.classList.remove('show');
-          document.getElementById("reportContent").value="";
-          document.getElementById("reportFilePath").value="";
+          document.getElementById("reportContent2").value="";
+          document.getElementById("reportFilePath2").value="";
         }
 
         if (!cancelModal.classList.contains('show')) {
@@ -406,9 +406,17 @@ function reviewModal(){
         body.style.overflow = 'hidden';
       }
 
+      document.getElementById("serviceTitle3").value= e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.children[0].children[0].innerText;
+      document.getElementById("tradeNo3").value=e.target.parentElement.nextElementSibling.value;
+
+
       reviewModalClose.addEventListener("click",()=>{
         if (reviewModal.classList.contains('show')) {
           reviewModal.classList.remove('show');
+
+          document.getElementById("reviewContent").value="";
+          document.getElementById("reviewFilePath").value="";
+          document.getElementById("reviewPoint").value=1;
         }
 
         if (!reviewModal.classList.contains('show')) {
@@ -430,6 +438,27 @@ const tradeReportFrm = document.getElementById("tradeReportFrm");
 tradeReportFrm.addEventListener("submit",e=>{
 
   if(!confirm('해당 거래를 신고하시겠습니까?')){
+    
+    e.preventDefault();
+  }
+
+});
+
+/* 취소 버튼 누를 때 */
+const tradeReportCancelFrm = document.getElementById("tradeReportCancelFrm");
+tradeReportCancelFrm.addEventListener("submit",e=>{
+
+  if(!confirm('해당 거래를 취소하시겠습니까?')){
+    
+    e.preventDefault();
+  }
+
+});
+
+const reviewfrm = document.getElementById("reviewfrm");
+reviewfrm.addEventListener("submit",e=>{
+
+  if(!confirm('리뷰를 등록하시겠습니까?')){
     
     e.preventDefault();
   }

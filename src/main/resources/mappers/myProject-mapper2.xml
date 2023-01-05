@@ -32,6 +32,7 @@
 		<result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />
 		<result property="subCategoryNo" column="SUB_CATEGORY_NO" />
 		<result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />
+		<result property="reviewCount" column="REVIEW_COUNT" />
 	</resultMap>
 	
 	
@@ -183,6 +184,17 @@
   	DEFAULT, #{filePath}, #{tradeNo}, DEFAULT, 2)
   </insert>
   
+  <!-- 리뷰 등록하기 -->
+  <insert id="insertReview">
+  	INSERT INTO REVIEW VALUES(
+  	#{tradeNo},#{reviewContent},#{filePath},DEFAULT,#{reviewPoint},DEFAULT )
+  </insert>
+  
+  <!-- 리뷰 수 얻기 -->
+  <select id="getReviewCount" resultType="_int">
+  	SELECT COUNT(*) FROM REVIEW
+  	WHERE REVIEW_NO=#{tradeNo}
+  </select>
   	
 </mapper>
 	

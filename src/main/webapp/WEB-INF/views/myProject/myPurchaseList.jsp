@@ -4,6 +4,7 @@
 <c:set var="purchaseList" value="${resultMap.purchaseList}"/>
 <c:set var="pagination" value="${resultMap.pagination}"/>
 <c:set var="loginMember" value="${sessionScope.loginMember}"/>
+<c:set var="message" value="${message}"/>
 <c:set var="i" value="0"/>
 
 <!DOCTYPE html>
@@ -227,6 +228,14 @@
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
   </main>
+  <c:if test="${not empty message}">
+        <script>
+        alert("${message}");
+        </script>
+
+        <%-- message 1회 출력 후 삭제 --%>
+        <c:remove var="message"/>
+     </c:if>
 
   <!-- **************************************footer*************************************-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

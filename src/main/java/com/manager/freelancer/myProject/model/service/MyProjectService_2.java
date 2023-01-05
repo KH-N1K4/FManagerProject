@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.manager.freelancer.myProject.model.vo.TradeReport;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.Review;
 
 public interface MyProjectService_2 {
 
@@ -59,5 +60,14 @@ public interface MyProjectService_2 {
 	 */
 	int insertTradeReportCancel(TradeReport inputTradeReport, String webPath, String realPath,
 			MultipartFile reportFile) throws IOException;
+
+	/** 리뷰 등록
+	 * @param inputReview
+	 * @param webPath
+	 * @param realPath
+	 * @param reviewFile
+	 * @return
+	 */
+	int insertReview(Review inputReview, String webPath, String realPath, MultipartFile reviewFile) throws IOException;
 
 }

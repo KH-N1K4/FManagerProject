@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.service.MyProjectService_2;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.Review;
 import com.manager.freelancer.myProject.model.vo.TradeReport;
 import com.manager.freelancer.myProject.model.vo.myProjectTrade;
 
@@ -234,7 +235,54 @@ public class MyProjectController_2 {
 	
 	
 	// 리뷰하기
-	
+	@PostMapping("/member/myProject/review")
+	public String myProjectReview(Model model, @SessionAttribute("loginMember") Member loginMember,
+			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
+			@RequestParam(value="searchInput",required=false, defaultValue = "") String searchInput,
+			@RequestParam(value="type" , required = false, defaultValue = "0") int type,
+			@RequestParam(value="searchDate1" , required = false, defaultValue = "") String searchDate1,
+			@RequestParam(value="searchDate2" , required = false, defaultValue = "") String searchDate2,
+			@RequestParam(value="reviewFilePath", required = false, defaultValue = "") MultipartFile reviewFile,
+			RedirectAttributes ra, /* 메세지 전달용 */
+			HttpServletRequest req, /* 저장할 서버 경로 */
+			Review inputReview) throws IOException {
+		
+		String webPath = "/resources/files/review/";
+		// 실제 파일이 저장된 컴퓨터 상의 절대 경로
+		String realPath = req.getSession().getServletContext().getRealPath(webPath);
+		
+		
+		int result = service.insertReview(inputReview,webPath, realPath, reviewFile);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		String message = null;
+		int loginMemberNo = loginMember.getMemberNo();
+		Map<String, Object> option = new HashMap<String, Object>();
+		option.put("loginMemberNo", loginMemberNo);
+		option.put("type", type);
+		option.put("searchDate1", searchDate1);
+		option.put("searchDate2", searchDate2);
+		option.put("searchInput", searchInput);
+		
+		resultMap = service.selectPurchaseList(option, cp);
+		
+		model.addAttribute("resultMap",resultMap);
+		model.addAttribute("type", type);
+		model.addAttribute("searchDate1", searchDate1);
+		model.addAttribute("searchDate2", searchDate2);
+		model.addAttribute("searchInput", searchInput);
+		
+		if(result>0) {
+			message = "리뷰 등록";
+		} else {
+			message = "리뷰가 이미 존재합니다.";
+			
+		}
+		ra.addFlashAttribute("message", message);
+		
+		return "myProject/myPurchaseList";
+	}
 	
 	
 	
