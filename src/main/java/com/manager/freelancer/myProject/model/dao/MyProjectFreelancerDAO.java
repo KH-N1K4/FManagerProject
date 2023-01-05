@@ -300,6 +300,36 @@ public class MyProjectFreelancerDAO {
 		return sqlSession.selectList("myProjectFreelancerSerive.selectBasicGrade");
 	}
 
+	/**전체 등급 조건 들고 오기
+	 * @return
+	 */
+	public List<myProjectFreelancer> selectFreelancerListALL() {
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyProjectGrade");
+	}
+
+	/**프리랜서 등급 상승 
+	 * @param seccessMember
+	 * @return
+	 */
+	public int LevelUPSchedulingUpdate(List<String> temp, int i) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("inputFreelance", temp);
+		map.put("FreelanceLeverNo", i);
+		return sqlSession.update("myProjectFreelancerSerive.LevelUPSchedulingUpdate", map);
+	}
+
+	/**프리랜서 등급 하락
+	 * @param downMember
+	 * @return
+	 */
+	public int LevelDownSchedulingUpdate(List<String> temp, int i) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("inputFreelance", temp);
+		map.put("FreelanceLeverNo", i);
+		return sqlSession.update("myProjectFreelancerSerive.LevelDownSchedulingUpdate", map);
+	}
+
+	
 
 	
 }

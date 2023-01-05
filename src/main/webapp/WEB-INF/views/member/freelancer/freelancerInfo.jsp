@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%-- <c:set var="freelancerIntro" value="${freelancer.freelancerIntro}"/> --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +28,7 @@
                     <div>
                         <div class="item">자기소개</div>
                         <div>
-                            <input type="text" name="" id="" class="input" value="${freelancer.freelancerIntro}" readonly> 
+                            <input type="text" name="" id="" class="input" value="${freelancer1.freelancerIntro}" readonly> 
                         </div>
                     </div>
                     <div class="itemTitle">
@@ -43,7 +44,7 @@
                             </select>  --%>
 
                             <%-- <c:if test ="${freelancer.regionNo eq list.regionNumber}"></c:if> --%>
-                            <input type="text" value="${freelancer.regionName}"> 
+                            <input type="text" value="${freelancer1.regionName}"> 
 
                                 
                         
@@ -53,7 +54,7 @@
                     <div class="itemTitle">
                         <div class="item">전문 분야</div>
                         <div>
-                            <c:forEach var="field" items="${fn:split(freelancer.mainCategoryNo,',') }">
+                            <c:forEach var="field" items="${fn:split(freelancer1.freelancerField,',') }">
                                 <c:choose>
                                     <c:when test="${field == 1}">
                                         <c:set var="field1" value="checked"/>
@@ -88,13 +89,14 @@
                     <div class="itemTitle">
                         <div class="item">기간</div>
                         <div>
-                            <input type="text" name="" id="" value="${freelancer.freelancerCont}"class="number"> 년
+                            <input type="text" name="" id="" value="${freelancer1.freelancerPeriod}"class="number"> 년
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">경력 사항</div>
                         <div>
                             <input type="text" name="" id=""value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}">
+                            <input type="text" value="${careerList[0].careerCompanyName}">
                             <%-- <input type="text" name="" id="" value="${freelancer.careerCompanyDepartment}">
                             <input type="text" name="" id="" value="${freelancer.careerCompanyPosition}">
                             <input type="text" name="" id="" value="${freelancer.careerCompanyRegion}">
@@ -105,38 +107,41 @@
                     <div class="itemTitle">
                         <div class="item">자격증</div>
                         <div>
-                            <input type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}">
-
+                            <c:forEach var ="license" items="${licenseList}">
+                                <%-- <input type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}"> --%>
+                                <input type="text" name="" id="" value="${license[0]}">
+                            </c:forEach>
+                    <%-- <fmt:formatDate value="${regDate}" pattern="yyyy-MM-dd HH:mm:ss"/> --%>
                         
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">연락 가능 시간</div>
                         <div>
-                            <input type="text" name="" id="" class="number" value="${freelancer.contactTime1}"> 시 ~ <input type="text" name="" id="" class="number" value="${freelancer.contactTime2}"> 시
+                            <input type="text" name="" id="" class="number" value="${freelancer1.contactTime1}"> 시 ~ <input type="text" name="" id="" class="number" value="${freelancer1.contactTime2}"> 시
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">수익금 출금 은행</div>
                         <div>
-                            <input type="text" value="${freelancer.bankName}"> 
+                            <input type="text" value="${freelancer1.bankName}"> 
 
-                            <input type="text" value="${freelancer.bankAccountNumber}"name="" id="account">
+                            <input type="text" value="${freelancer1.bankAccountNo}"name="" id="account">
                         </div>
                     </div>
                 </div>
                 <div id="addArea">
                     <div class="item">포트폴리오</div>
-                    <div><a href="/member/freelancer/modal/addPortfolio" id="add">추가하기</a></div>
+                    <div><a  id="addPortfolioPopupBtn">추가하기</a></div>
                 </div>
                 <div id="serviceArea">
                     <c:if test = "${not empty portfolioList}">
                         <c:forEach var="portfolio" items="${portfolioList}">
-                        <a href="/portfolioDetail/${portfolio.portfolioNo}">
+                        <a href="/portfolioDetail/${portfolio.portfolioNo}" id="portfolioDetailPopupBtn">
                         
                             <span class="service">
                             <span><img  style="width: 100%; height:100%; background-color:skyblue;"src="${portfolio.portfolioThumbnail}"></span>
-                            ${portfolio.portfolioTitle}<br>${portfolio.portfolioContent}
+                                ${portfolio.portfolioTitle}<br>${portfolio.portfolioContent}
                             </span>
                             
                         </a>
@@ -146,10 +151,19 @@
                         <div>포트폴리오가 존재하지 않습니다!!</div>
                     
                     </c:if>
-                   
-                </div>
                 
+                </div>
+            <div class="modal_addPortfolio">
+                    <jsp:include page="/WEB-INF/views/member/freelancer/modal/addPortfolio.jsp" /> 
+            </div>
+            <div class="modal_portfolioDetail">
+                    <jsp:include page="/WEB-INF/views/member/freelancer/portfolioDetail.jsp" /> 
+            </div>
+
+
             </section>
     </div>
+        <script src="/resources/js/member/freelancer/freelancerInfo.js"></script> 
+
 </body>
 </html>

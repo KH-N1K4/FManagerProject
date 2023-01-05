@@ -137,6 +137,24 @@ public interface MyProjectFreelancerService {
 	 */
 	List<myProjectFreelancer> selectBasicGrade();
 
+	/**전체 등급 조건들고 오기
+	 * @param memberNo
+	 * @return
+	 */
+	List<myProjectFreelancer> selectFreelancerListALL();
+
+	/**프리랜서 등급 상승
+	 * @param seccessMember
+	 * @return
+	 */
+	int LevelUPSchedulingUpdate(List<myProjectFreelancer> seccessMember);
+
+	/**프리랜서 등급 하락
+	 * @param downMember
+	 * @return
+	 */
+	int LevelDownSchedulingUpdate(List<myProjectFreelancer> downMember);
+
 
 
 }

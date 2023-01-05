@@ -58,6 +58,132 @@
 	      <result property="portfolioThumbnail" column="PORTFOLIO_THUMBNAIL"/>
     	</resultMap>
 	
+		<!-- 연수 -->
+		<resultMap type="Freelancer1" id="freelancer1_rm">
+    	 <id property="freelancerNo" column="FREELANCER_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
+    		   		
+	      <result property="freelancerName" column="FREELANCER_NAME" />								<!-- 서비스 제목 -->							
+	      <result property="gradeName" column="GRADE_NAME" />								<!-- 서비스 제목 -->							
+	      <result property="freelancerField" column="FREELANCER_FIELD" />						<!-- 서비스 한 줄 요약 -->
+	     
+	      <result property="freelancerIntro" column="FREELANCER_INTRODUCTION" />						<!-- 서비스 내용 -->
+	     
+	      <result property="freelancerPeriod" column="FREELANCER_PERIOD" />		<!-- 서비스 작업 일수 -->
+	      <result property="regionName" column="REGION_NAME" />				
+	      <result property="contactTime1" column="FREE_CONTACT_TIME1" />
+	      <result property="contactTime2" column="FREE_CONTACT_TIME2" />
+	      
+	      <result property="bankName" column = "BANK_NAME"/>
+	      <result property="bankCode" column = "BANK_CODE"/>
+	      <result property="bankAccountNo" column = "ACCOUNT_NO"/>
+	      
+	      <result property="major" column="MAJOR" />				
+	      <result property="career" column="CAREER" />				
+	      <result property="license" column="LICENSE" />				
+   
+	      
+	      <collection property="careerList" 
+	      javaType="java.util.ArrayList" ofType="Career"
+	      select="selectCareerList"
+	      column="FREELANCER_NO"/> 
+	      
+	      <collection property="licenseList" 
+	      javaType="java.util.ArrayList" ofType="License"
+	      select="selectLicenseList"
+	      column="FREELANCER_NO"/> 
+	      
+	      <collection property="majorList" 
+	      javaType="java.util.ArrayList" ofType="Major"
+	      select="selectMajorList"
+	      column="FREELANCER_NO"/> 
+	      
+	      <collection property="portfolioList" 
+	      javaType="java.util.ArrayList" ofType="Portfolio"
+	      select="selectPortfolioList"
+	      column="FREELANCER_NO"/> 
+	     
+	      
+	      
+    </resultMap>
+    
+    <resultMap  type="License" id="license_rm">
+    	  <id property="licenseNo" column="LICENSE_NO"/>
+	      <result property="licenseName" column="LICENSE_NAME"/>
+	      <result property="licenseDate" column="LICENSE_DATE"/>
+	      <result property="licenseAgency" column="LICENSE_AGENCY"/>
+    </resultMap>
+    
+    <resultMap  type="Major" id="major_rm">
+    	  <id property="majorNo" column="MAJOR_NO"/>
+	      <result property="majorAcademyName" column="MAJOR_ACADEMY_NAME"/>
+	      <result property="majorName" column="MAJOR_NAME"/>
+	      <result property="majorGraduateStatus" column="MAJOR_GRADUATE_STATUS"/>
+    </resultMap>
+    
+    <resultMap  type="Portfolio" id="portfolio_rm">
+    	  <id property="portfolioNo" column="PORTFOLIO_NO"/>
+	      <result property="portfolioTitle" column="PORTFOLIO_TITLE"/>
+	      <result property="portfolioContent" column="PORTFOLIO_CONTENT"/>
+	      <result property="portfolioFilePath" column="PORTFOLIO_FILE_PATH"/>
+	      <result property="portfolioThumbnail" column="PORTFOLIO_THUMBNAIL"/>
+    </resultMap>
+    
+    
+    
+    <resultMap  type="Career" id="career_rm">
+    	  <id property="careerNo" column="CAREER_NO"/>
+	      <result property="careerCompanyName" column="CAREER_COMPANY"/>
+	      <result property="careerCompanyDepartment" column="CAREER_DEPARTMENT"/>
+	      <result property="careerCompanyPosition" column="CAREER_POSITION"/>
+	      <result property="careerCompanyRegion" column="CAREER_REGION"/>
+	      <result property="careerCompanyPeriod1" column="CAREER_PERIOD"/>
+    </resultMap>
+	
+	<!-- 전문가정보 조회(연수) -->
+	<select id="freelancerInfo1" resultMap="freelancer1_rm">
+		SELECT R.FREELANCER_NO ,MEMBER_NAME AS FREELANCER_NAME, MEMBER_PROFILE,
+		GRADE_NAME,
+		(SELECT LISTAGG(MAIN_CATEGORY_NO, ',')
+			WITHIN GROUP (ORDER BY MAIN_CATEGORY_NO)
+			FROM(SELECT DISTINCT MAIN_CATEGORY_NO
+				FROM FIELD I
+				WHERE FREELANCER_NO = #{freelancerNo}) ) FREELANCER_FIELD,
+				 FREE_CONTACT_TIME1, FREE_CONTACT_TIME2,
+				 FREELANCER_INTRODUCTION,
+				 FREELANCER_PERIOD,
+				 REGION_NAME,
+				 ACCOUNT_NO, BANK_NAME
+		FROM FREELANCER R
+		JOIN "MEMBER" ON(FREELANCER_NO=MEMBER_NO)
+		JOIN GRADE USING(GRADE_NO)
+		JOIN REGION USING(REGION_NO)
+		JOIN FREELANCER_ACCOUNT A ON(A.FREELANCER_NO = R.FREELANCER_NO)
+		JOIN BANK USING(BANK_CODE)
+		WHERE R.FREELANCER_NO =#{freelancerNo}
+	
+	</select>
+	 <select id="selectCareerList" resultMap="career_rm">
+		SELECT * FROM CAREER
+		WHERE FREELANCER_NO=#{freelancerNo}
+	</select>
+	<select id="selectMajorList" resultMap="major_rm">
+		SELECT * FROM CAREER 
+		WHERE FREELANCER_NO=#{freelancerNo}
+	</select>
+	<select id="selectLicenseList" resultMap="license_rm">
+		SELECT * FROM CAREER 
+		WHERE FREELANCER_NO=#{freelancerNo}
+	</select>
+	<select id="selectPortfolioList" resultMap="portfolio_rm">
+		SELECT * FROM PORTFOLIO
+		WHERE FREELANCER_NO=#{freelancerNo}
+	</select>
+	
+	
+	
+	
+	
+	
     	<insert id="enrollFreelancer" parameterType = "Freelancer">
     		INSERT INTO "FREELANCER"
     		VALUES(#{freelancerNo}, #{freelancerCont}, #{contactTime1}, #{contactTime2}, #{freelancerIntro},#{regionNo} ,DEFAULT)
@@ -132,7 +258,7 @@
     	</select>
     	
     	<select id="getPortfolioList" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio">
-    		SELECT PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent, PORTFOLIO_THUMBNAIL as portfolioThumbnail
+    		SELECT PORTFOLIO_NO as portfolioNo, PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent, PORTFOLIO_THUMBNAIL as portfolioThumbnail
     		FROM  PORTFOLIO
     		WHERE FREELANCER_NO = #{freelancerNo}
     	</select>
@@ -212,10 +338,14 @@
     	
     	
     	<!-- 포트폴리오 상세 조회 -->
-    	<select id="viewPortfolioDetail" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio" >
-    		SELECT PORTFOLIO_NO,PORTFOLIO_TITLE, PORTFOLIO_CONTENT, PORTFOLIO_FILE_PATH, PORTFOLIO_THUMBNAIL
-			FROM PORTFOLIO 
-			WHERE FREELANCER_NO = #{freelancerNo}
+    	<select id="viewPortfolioDetail" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio">
     		
+    		SELECT PORTFOLIO_NO as portfolioNo ,PORTFOLIO_TITLE as portfolioTitle, PORTFOLIO_CONTENT as portfolioContent, 
+    		PORTFOLIO_FILE_PATH as portfolioFilePath, PORTFOLIO_THUMBNAIL as portfolioThumbnail, MEMBER_NO as memberNo, MEMBER_NAME as memberName, 
+    		MEMBER_PROFILE as memberProfile
+			FROM PORTFOLIO P 
+			JOIN MEMBER M ON(P.FREELANCER_NO = M.MEMBER_NO) 
+			WHERE FREELANCER_NO = #{freelancerNo}
+			AND PORTFOLIO_NO = #{portfolioNo}
     	</select>
 </mapper>

@@ -2,6 +2,9 @@ package com.manager.freelancer.category.model.vo;
 
 import java.util.List;
 
+import com.manager.freelancer.freelancer.model.vo.Career;
+import com.manager.freelancer.freelancer.model.vo.License;
+import com.manager.freelancer.freelancer.model.vo.Major;
 import com.manager.freelancer.freelancer.model.vo.Portfolio;
 
 import lombok.Getter;
@@ -14,6 +17,7 @@ import lombok.ToString;
 public class Freelancer1 {
 
 	private int freelancerNo; 				// 프리랜서 번호
+	private String freelancerName; 				// 프리랜서 번호
 	
 	private int gradeNo;					// 등급번호
 	private String gradeName;				
@@ -24,9 +28,14 @@ public class Freelancer1 {
 		
 	private String freelancerIntro;			// 자기소개
 	
-	private int freelancerCont; 			// 총 경력기간
+	private int freelancerPeriod; 			// 총 경력기간
 	private int regionNo;					// 지역이름(번호)
 	private String regionName;
+	private String memberProfile;
+	
+	private int bankCode;
+	private long bankAccountNo;
+	private String bankName;
 	
 	//학력 전공부분
 	private String major; // input값 전체 받을 부분
@@ -41,5 +50,8 @@ public class Freelancer1 {
 	//프리랜서 전문분야
 
 	private List<Portfolio> portfolioList;
-	private List<FService> fServiceList;
+	private List<FService> fserviceList;
+	private List<Career> careerList;
+	private List<Major> majorList;
+	private List<License> licenseList;
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Category;
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.category.model.vo.ImageFile;
 import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.category.model.vo.Trade;
@@ -119,13 +120,13 @@ public class CategoryDAO {
 		}
 			
 			
-			result=temp.getTradeNo();
+		result=temp.getTradeNo();
 		
 		return result;
 	}
 
-	public Freelancer freelancerDetail(int freelancerNo) {
-		return sqlSession.selectOne("freelancerMapper.freelancerInfo", freelancerNo);
+	public Freelancer1 freelancerDetail(int freelancerNo) {
+		return sqlSession.selectOne("categoryMapper.freelancerInfo", freelancerNo);
 	}
 
 	

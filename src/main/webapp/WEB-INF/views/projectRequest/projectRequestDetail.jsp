@@ -35,10 +35,7 @@
         <div class="detailContent">
 
             <ul>
-                <li>서비스 설명</li>
-                <li>포트폴리오</li>
-                <li>취소/환불</li>
-                <li>서비스 평가</li>
+                <li>의뢰사항</li>
             </ul>
 
         </div>

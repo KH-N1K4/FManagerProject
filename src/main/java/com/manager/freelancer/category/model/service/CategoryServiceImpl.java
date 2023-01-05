@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.manager.freelancer.category.model.dao.CategoryDAO;
 import com.manager.freelancer.category.model.vo.AskService;
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.category.model.vo.Trade;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
@@ -141,7 +142,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public Freelancer freelancerDetail(int freelancerNo) {
+	public Freelancer1 freelancerDetail(int freelancerNo) {
 		return dao.freelancerDetail(freelancerNo);
 	}
 

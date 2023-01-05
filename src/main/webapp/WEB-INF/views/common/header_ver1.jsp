@@ -94,7 +94,7 @@
                 
                 
                 
-                 <div class="nav-project"><a href="/projectRequest/requestList">프로젝트 의뢰</a></div>
+                 <div class="nav-project"><a href="/projectRequest/requestList/0/0/0">프로젝트 의뢰</a></div>
             </ul>
     
       

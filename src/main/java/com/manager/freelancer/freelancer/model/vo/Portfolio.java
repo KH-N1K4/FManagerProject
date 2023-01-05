@@ -11,4 +11,9 @@ public class Portfolio {
 	private String portfolioFilePath;
 	private String portfolioThumbnail;
 	private int freelancerNo;
+	
+	// 포트폴리오 상세조회용
+	private int memberNo;
+	private String memberName;
+	private String memberProfile;
 }

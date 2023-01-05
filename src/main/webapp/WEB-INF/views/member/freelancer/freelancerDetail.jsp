@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,45 +20,74 @@
   
 
     <div class="main">
-      
+     ${freelancer }
 
         <div id="expertDetailTitle">판매자 정보</div>
         <div class="expertSummary">
-            <div class="expertPhoto"></div>
-            <div class="expertName">김금쪽</div>
+            <div class="expertPhoto"><img alt="" src="${freelancer.memberProfile }"> </div>
+            <div class="expertName">${freelancer.freelancerName }</div>
             <div class="expertOther">
                 <div>총 작업수 <span>00</span></div>
-                <div>등급 <span>00</span></div>
-                <div>전문분야 <span>00</span></div>
+                <div>등급 <span>${freelancer.gradeName }</span></div>
+                <div>전문분야 
+                <c:forEach var="interest" items="${fn:split(freelancer.freelancerField,',') }" >
+				            	<c:choose>
+									<c:when test="${interest == 1}">
+										<span class="interest">디자인</span>
+									</c:when>
+									<c:when test="${interest == 2}">
+										<span class="interest">IT.프로그래밍</span>
+									</c:when>
+									<c:when test="${interest == 3}">
+										<span class="interest">영상</span>
+									</c:when>
+									<c:when test="${interest == 4}">
+										<span class="interest">사진</span>
+									</c:when>
+									<c:when test="${interest == 5}">
+										<span class="interest">음향</span>
+									</c:when>
+								</c:choose>
+				            </c:forEach>
+                </div>
             </div>
         </div>
 
         <div class="expertIntroduceTitle">자기소개</div>
-        <div class="expertIntroduce"></div>
+        <div class="expertIntroduce">
+        ${freelancer.freelancerIntro }
+        </div>
+        
+        ${freelancer.careerList }
+        ${freelancer.majorList }
+        ${freelancer.licenseList }
 
         <div class="portfolioTitle">포트폴리오</div>
         <div class="portfolioSection">
-            <a href="">
-                <div class="portfolioPhoto"></div>
-            </a>
+        	<c:forEach var="portfolio" items="${freelancer.portfolioList }">
+	        	<a href="">
+	                <div class="portfolioPhoto"> <img alt="" src="${portfolio.portfolioThumbnail }" style="width:100%;"> </div>
+	            </a>
+        	</c:forEach>  
         </div>
-
         <div class="serviceTitle">서비스들</div>
         <div class="serviceSection">
-            <a href="">
-                <div class="serviceOne">
-                    <div class="servicePhoto"></div>
-                    <div class="serviceOneTitle">서비스 제목1</div>
-                    <div class="serviceSubTitle">서비스 부제목1</div>
-                    <div class="serviceOther">
-                        <div>평점 ★<span> 4.7</span></div>
-                        <div>리뷰수 <span>00</span></div>
-                        <div>판매수 <span>00</span></div>
-                    </div>
-                </div>
-            </a>
-
+        	 <c:forEach var="service" items="${freelancer.fserviceList}">
+	        	 <a href="/service/${service.serviceNo }">
+	                <div class="serviceOne">
+	                    <div class="servicePhoto"><img alt="" src="${service.requestFilePath }" style="width:100%;"> </div>
+	                    <div class="serviceOneTitle">${service.serviceTitle}</div>
+	                    <div class="serviceSubTitle">${service.serviceSummary}</div>
+	                    <div class="serviceOther">
+	                        <div>평점 ★<span> 4.7</span></div>
+	                        <div>리뷰수 <span>${service.reviewCount}</span></div>
+	                        <div>판매수 <span>${service.sellCount}</span></div>
+	                    </div>
+	                </div>
+	            </a>
+        	</c:forEach>   
     	</div>
+    </div>
 
      <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
