@@ -13,7 +13,8 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
+    <%-- <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/> --%>
+    <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
     <!-- 화면 크기 width: 1200px로 고정 -->
     <c:if test="${not empty param}">
         <c:forEach var="parameter" items="${param}">

@@ -18,7 +18,8 @@
 </head>
 <body>
 
-  <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
+ <%--  <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/> --%>
+ <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
   <c:if test="${not empty param}">
         <c:forEach var="parameter" items="${param}">
             <c:if test="${parameter.key != 'cp'}">
