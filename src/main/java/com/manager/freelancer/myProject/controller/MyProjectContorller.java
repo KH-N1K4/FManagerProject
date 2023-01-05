@@ -81,19 +81,28 @@ public class MyProjectContorller {
 								  HttpServletRequest req, RedirectAttributes ra, Model model, MyProject myProject) throws IOException {
 	
 		String webPath = "/resources/files/myProjectRequest/";
+		String message = null;
+		String path = null;
 		
 		// 실제 파일이 저장된 컴퓨터 상의 절대 경로
 		String filePath = req.getSession().getServletContext().getRealPath(webPath);
 				
 		int result = service.insertMyProject(webPath, filePath, myProjectFile, loginMember,myProject );
 		
-		String message = null;
-		if(result > 0)	message = "프로젝트가 등록되었습니다.";
-		else			message = "프로젝트 등록 실패";
 		
+		if(result > 0){
+			System.out.println("성공:" +result);
+			path = "/member/myProject/myRequestList";
+			message = "프로젝트가 등록되었습니다.";
+		} else {
+			System.out.println("실패:" +result);
+			path = referer;
+			message = "프로젝트 등록 실패";
+		}
+			
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect: /member/myProject/myRequestInsert";
+		return "redirect:"+path;
 	}
 	//------------------------------------------------------------------------
 	// 받은 제안 페이지 이동 

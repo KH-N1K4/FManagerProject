@@ -71,7 +71,7 @@
 			                        <img  src="${myProject.requestFilePath}">
 			                      </div>
 			                      <%-- 서비스 사진 --%>
-			                      
+                            
 			                      <div class="projuctContent_info">
 			
 				                        <%-- 서비스 제목 --%>

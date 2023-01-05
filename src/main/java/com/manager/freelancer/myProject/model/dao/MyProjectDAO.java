@@ -81,6 +81,7 @@ public class MyProjectDAO {
 		
 		sqlSession.insert("myProjectMapper.insertMyProject",map);
 		int projectNum = (int)map.get("projectRequestNo");
+		
 		return projectNum;
 	}
 	

@@ -134,7 +134,7 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		} 
 		
 		
-		return 0;
+		return projectNo;
 	}
 
 	// 받은 제안 조회 
