@@ -47,6 +47,7 @@ function selectChange() {
                 for (b of before) {
                     b.remove();
                 }
+                
                 if(document.querySelector('.pagination')!=null){
 
                     document.querySelector('.pagination').innerHTML = "";

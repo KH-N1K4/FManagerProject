@@ -13,11 +13,11 @@ $(document).ready(function(){
 
   /* 옵션 선택값으로 세팅 */
   var startDate = document.getElementById("startDate").title;
-  $("#startDate").val(startDate).prop('selected', true);
+  $("#startDate").val(startDate);
 
   /* 옵션 선택값으로 세팅 */
   var endtDate = document.getElementById("endtDate").title;
-  $("#endtDate").val(endtDate).prop('selected', true);
+  $("#endtDate").val(endtDate);
 
 });
 

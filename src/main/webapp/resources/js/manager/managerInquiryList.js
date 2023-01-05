@@ -1,145 +1,163 @@
-/* 회원 구분 select */
-function selectChange() {
-    const selectStatus = document.getElementById("selectStatus")
-    const value = (selectStatus.options[selectStatus.selectedIndex].value);
 
-    const inquiryTable = document.querySelector('question-list-table');
+function selectChange() {
+
+    // 페이징 처리 구역 
     const pagination = document.querySelector(".pagination");
-    console.log(value);
-   
+    // 게시글 내용 영역
+    const contentArea = document.querySelectorAll(".question-list-table-content");
+    // 진행상태 select
+    const processStatus = document.getElementById("processStatus");
+    // 진행상태 selectBox value
+    const optionVal = (processStatus.options[processStatus.selectedIndex].value);
+
+    const table = document.getElementById("question-list-table");
+
     $.ajax({
-        url: '/manager/inquiryStatus',
+        url: '/manager/statusType',
         type: 'GET',
-        data: { 'value': value },
+        data: { 'optionVal': optionVal },
         success: (map) => {
             if (map != null) {
 
-                const options=selectStatus.childNodes;
-                for(o of options){
-                    if(o.value==value){
+                // selectBox가 체크가 되었을 때
+                const options = processStatus.childNodes;
+                for (o of options) {
+                    if (o.value == optionVal) {
                         o.setAttribute("selected", true);
                     }
                 }
-                const before = document.querySelectorAll('.question-list-table-content');
-                for (b of before) {
+                // 기존의 테이블 지워주기
+                for (b of contentArea) {
+                    console.log(b);
                     b.remove();
                 }
-                document.querySelector('.pagination').innerHTML = "";
+                //완료!!
+                if (document.querySelector('.pagination') != null) {
 
-
-                        // <div class="question-list-table-content">
-                        //     <div class="question-num">${managerInquiry.userInquiryNo}</div>
-                        
-                        //     <div class="question-title"><a href="/managerInquiryDetail/${managerInquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${managerInquiry.userInquiryTitle}</a></div>
-                        //     <div class="question-date">${managerInquiry.userInquiryCreateDate}</div>
-                        //     <div class="question-status">
-                        //     <c:choose>
-                        //         <c:when test="${managerInquiry.inquiryRequest == null}">
-                        //             <span class="question-wating">답변 대기</span>
-                        //         </c:when>
-                        //         <c:when test="${managerInquiry.inquiryRequest != null}">
-                        //             <span class="question-answer">답변 완료</span>
-                        //         </c:when>
-                        //     </c:choose>
-                        //     </div>
-                        // </div>
-
-
-                
-                for (inquiry of map.managerInquiryList) {
-                    const table = document.createElement("div");
-                    table.classList.add('question-list-table-content');
-
-                    const child1 = document.createElement("div");
-                    child1.classList.add('question-num');
-                    child1.append(document.createTextNode(managerInquiry.userInquiryNo));
-
-                    const child2 = document.createElement("div");
-                    child2.classList.add('question-title');
-                    const child2a = document.createElement("a");
-                    child2a.setAttribute("href", "/managerInquiryDetail/${managerInquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}");
-                    child2a.append(document.createTextNode(managerInquiry.userInquiryTitle));
-                    child2.append(child2a);
-
-                    const child3 = document.createElement("div");
-                    child3.classList.add('question-date');
-                    child3.append(document.createTextNode(managerInquiry.userInquiryCreateDate));
-
-                    const child4 = document.createElement("div");
-                    child4.classList.add('question-status');
-                    child4.append(document.createTextNode(managerInquiry.inquiryRequest));
-
-                    
-
-                    table.append(child1);
-                    table.append(child2);
-                    table.append(child3);
-                    table.append(child4);
-                    inquiryTable.append(table);
+                    document.querySelector('.pagination').innerHTML = "";
 
                 }
 
-                /* 페이징 */
-                const li1 = document.createElement("li");
-                const a1 = document.createElement("a");
-                a1.setAttribute('href', "/manager/memberList?cp=1${sURL}");
-                a1.appendChild(document.createTextNode("<<"));
-                li1.append(a1);
-                pagination.append(li1);
+                if (map.managerInquiryList.length != 0) { // 게시글이 존재할 때
+                
+                    console.log('아????')    
+                    console.log(map.managerInquiryList)
+                    console.log(map.managerInquiryList.length)
+                    for (managerInquiry of map.managerInquiryList) {
 
-                const li2 = document.createElement("li");
-                const a2 = document.createElement("a");
-                a2.setAttribute("href", "/manager/memberList?cp=${pagination.prevPage}${sURL}");
-                a2.appendChild(document.createTextNode("<"));
-                li2.append(a2);
-                pagination.append(li2);
+                        const div = document.createElement("div");
+                        div.setAttribute("class", "question-list-table-content");
+                        table.append(div);
 
-                /* 숫자가 안나와 */
-                for (i = map.pagination.startPage; i <= map.pagination.endPage; i++) {
-                    const li3 = document.createElement("li");
-                    if (i == map.pagination.currentPage) {
-                        const a3 = document.createElement("a");
-                        a3.classList.add("current");
-                        a3.appendChild(document.createTextNode(i));
-                        li3.append(a3);
-                        pagination.append(li3);
+                        const child1 = document.createElement("div");
+                        child1.setAttribute("class", "question-num");
+                        child1.innerText = managerInquiry.userInquiryNo;
+                        div.append(child1);
 
-                    } else {
-                        const a3 = document.createElement("a");
-                        a3.setAttribute("href", "/manager/memberList?cp=${i}${sURL}");
-                        a3.appendChild(document.createTextNode(i));
-                        li3.append(a3);
-                        pagination.append(li3);
+                        const child2 = document.createElement("div");
+                        child2.setAttribute("class", "question-title");
+                        const a = document.createElement("a");
+                        a.setAttribute('href', "/managerInquiryDetail/" + managerInquiry.userInquiryNo + "?cp=" + map.pagination.currentPage + "&optionVal=" + optionVal);
+                        a.innerText = managerInquiry.userInquiryTitle;
+                        child2.append(a);
+                        div.append(child2);
+
+                        const child3 = document.createElement("div");
+                        child3.setAttribute("class", "question-date");
+                        child3.innerText = managerInquiry.userInquiryCreateDate;
+                        div.append(child3);
+
+
+                        if (managerInquiry.inquiryRequest == null) {  // 답변이 없을 때
+
+                            const child4 = document.createElement("div");
+                            child4.setAttribute("class", "question-status");
+                            const span = document.createElement("span");
+                            span.setAttribute("class", "question-wating");
+                            span.innerText = '답변 대기';
+                            child4.append(span);
+                            div.append(child4);
+
+                        } else { // 답변이 있을 때
+
+                            const child4 = document.createElement("div");
+                            child4.setAttribute("class", "question-status");
+                            const span = document.createElement("span");
+                            span.setAttribute("class", "question-answer");
+                            span.innerText = '답변 완료';
+                            child4.append(span);
+                            div.append(child4);
+                        }
+
                     }
-                }
 
-                const li4 = document.createElement("li");
-                const a4 = document.createElement("a");
-                a4.setAttribute("href", "/manager/memberList?cp=${pagination.nextPage}${sURL}");
-                a4.appendChild(document.createTextNode(">"));
-                li4.append(a4);
-                pagination.append(li4);
-
-                const li5 = document.createElement("li");
-                const a5 = document.createElement("a");
-                a5.setAttribute("href", "/manager/memberList?cp=${pagination.maxPage}${sURL}");
-                a5.appendChild(document.createTextNode(">>"));
-                li5.append(a5);
-                pagination.append(li5);
-                
-
-                
-                document.getElementById("inputValue").value=value;
-
-                 
-                
-            }
-        }
-    });
+                        // 페이징
+                        const li1 = document.createElement("li");
+                        const a1 = document.createElement("a");
+                        a1.setAttribute('href', "/manager/managerInquiryList?cp=1" + "&optionVal=" + optionVal);
+                        a1.appendChild(document.createTextNode("<<"));
+                        li1.append(a1);
+                        pagination.append(li1);
 
 
+                        const li2 = document.createElement("li");
+                        const a2 = document.createElement("a");
+                        a2.setAttribute("href", "/manager/managerInquiryList?cp=" + map.pagination.prevPage + "&optionVal=" + optionVal);
+                        a2.appendChild(document.createTextNode("<"));
+                        li2.append(a2);
+                        pagination.append(li2);
+
+                        console.log("startPage" + map.pagination.startPage);
+                        console.log("endPage" + map.pagination.endPage);
+
+                        /* 숫자가 안나와 */
+                        for (i = map.pagination.startPage; i <= map.pagination.endPage; i++) {
+                            const li3 = document.createElement("li");
+                            if (i == map.pagination.currentPage) {
+                                const a3 = document.createElement("a");
+                                a3.classList.add("current");
+                                a3.appendChild(document.createTextNode(i));
+                                li3.append(a3);
+                                pagination.append(li3);
+
+                            } else {
+                                const a3 = document.createElement("a");
+                                a3.setAttribute("href", "/manager/managerInquiryList?cp=" + i + "&optionVal=" + optionVal);
+                                a3.appendChild(document.createTextNode(i));
+                                li3.append(a3);
+                                pagination.append(li3);
+                            }
+                        }
+
+                        const li4 = document.createElement("li");
+                        const a4 = document.createElement("a");
+                        a4.setAttribute("href", "/manager/managerInquiryList?cp=" + "&optionVal=" + optionVal);
+                        a4.appendChild(document.createTextNode(">"));
+                        li4.append(a4);
+                        pagination.append(li4);
+
+                        const li5 = document.createElement("li");
+                        const a5 = document.createElement("a");
+                        a5.setAttribute("href", "/manager/managerInquiryList?cp=" + "&optionVal=" + optionVal);
+                        a5.appendChild(document.createTextNode(">>"));
+                        li5.append(a5);
+                        pagination.append(li5);
+
+                    } else { // 게시글이 없을 때
+                    
+                        const div = document.createElement("div");
+                        div.setAttribute("class", "contentList");
+                        div.innerText = '게시글이 존재하지 않습니다.';
+                        table.append(div);
+                    }
+
+            }    
+
+
+        }    
+
+    })
 
 
 
-
-};
+}

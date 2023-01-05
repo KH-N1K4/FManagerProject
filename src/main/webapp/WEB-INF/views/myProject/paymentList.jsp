@@ -52,7 +52,7 @@
               <div class="container_header">
                 <form action="/member/myProject/paymentList" method="GET" id="searchFrm">
                   <!-- 상단 내프로젝트 페이지 제목 -->
-                  <div class="container_title"><span class="title">결제 내역</span>
+                  <div class="container_title"><span class="title" style="margin-left: 20px;">결제 내역</span>
                     <span>
                       <select class="selectType" name="type" id="selectType" title="${type}">
                         <option value="0">카테고리 선택</option>
@@ -75,7 +75,7 @@
               <table>
                 <tr class="tableHeader">
                     <th style="width: 100px;">번호</th>
-                    <th style="width: 150px;">카테고리</th>
+                    <th style="width: 150px;">구분</th>
                     <th style="width: 600px;">서비스명</th>
                     <th style="width: 100px;">날짜</th>
                     <th style="width: 150px;">금액</th>
@@ -84,7 +84,7 @@
 				          <c:forEach var="payment" items="${paymentList}">
                     <tr>
                       <td>${i=i+1}</td>
-                      <td>${payment.mainCategoryName}</td>
+                      <td>${payment.paymentType}</td>
                       <td>${payment.serviceTitle}</td>
                       <td>${payment.paymentDate}</td>
                       <td><fmt:formatNumber value="${payment.paymentPrice}" /></td>

@@ -106,6 +106,108 @@
 	      <result property="tradeRequest" column="TRADE_REQUEST" />				
 	     
     </resultMap>
+    
+    
+    
+    
+    
+  <resultMap type="Freelancer1" id="freelancer1_rm">
+    	 <id property="freelancerNo" column="FREELANCER_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
+    		   		
+	      <result property="freelancerName" column="FREELANCER_NAME" />								<!-- 서비스 제목 -->							
+	      <result property="gradeName" column="GRADE_NAME" />								<!-- 서비스 제목 -->							
+	      <result property="freelancerField" column="FREELANCER_FIELD" />						<!-- 서비스 한 줄 요약 -->
+	     
+	      <result property="freelancerIntro" column="FREELANCER_INTRODUCTION" />						<!-- 서비스 내용 -->
+	     
+	      <result property="freelancerPeriod" column="FREELANCER_PERIOD" />		<!-- 서비스 작업 일수 -->
+	      <result property="regionName" column="REGION_NAME" />				
+	      
+	      
+	      
+	      <result property="major" column="MAJOR" />				
+	      <result property="career" column="CAREER" />				
+	      <result property="license" column="LICENSE" />				
+   
+	      
+	      <collection property="careerList" 
+	      javaType="java.util.ArrayList" ofType="Career"
+	      select="selectCareerList"
+	      column="FREELANCER_NO"/> 
+	      
+	      <collection property="licenseList" 
+	      javaType="java.util.ArrayList" ofType="License"
+	      select="selectLicenseList"
+	      column="FREELANCER_NO"/> 
+	      
+	      <collection property="majorList" 
+	      javaType="java.util.ArrayList" ofType="Major"
+	      select="selectMajorList"
+	      column="FREELANCER_NO"/> 
+	      
+	      <collection property="portfolioList" 
+	      javaType="java.util.ArrayList" ofType="Portfolio"
+	      select="selectPortfolioList"
+	      column="FREELANCER_NO"/> 
+	      
+	      
+	       <collection property="fserviceList" 
+	      javaType="java.util.ArrayList" ofType="FService"
+	      select="selectFServiceList"
+	      column="FREELANCER_NO"/>
+	      
+	      
+    </resultMap>
+    
+    
+    
+    <resultMap  type="License" id="license_rm">
+    	  <id property="licenseNo" column="LICENSE_NO"/>
+	      <result property="licenseName" column="LICENSE_NAME"/>
+	      <result property="licenseDate" column="LICENSE_DATE"/>
+	      <result property="licenseAgency" column="LICENSE_AGENCY"/>
+    </resultMap>
+    
+    <resultMap  type="Major" id="major_rm">
+    	  <id property="majorNo" column="MAJOR_NO"/>
+	      <result property="majorAcademyName" column="MAJOR_ACADEMY_NAME"/>
+	      <result property="majorName" column="MAJOR_NAME"/>
+	      <result property="majorGraduateStatus" column="MAJOR_GRADUATE_STATUS"/>
+    </resultMap>
+    
+    <resultMap  type="Portfolio" id="portfolio_rm">
+    	  <id property="portfolioNo" column="PORTFOLIO_NO"/>
+	      <result property="portfolioTitle" column="PORTFOLIO_TITLE"/>
+	      <result property="portfolioContent" column="PORTFOLIO_CONTENT"/>
+	      <result property="portfolioFilePath" column="PORTFOLIO_FILE_PATH"/>
+	      <result property="portfolioThumbnail" column="PORTFOLIO_THUMBNAIL"/>
+    </resultMap>
+    
+    
+    
+    <resultMap  type="Career" id="career_rm">
+    	  <id property="careerNo" column="CAREER_NO"/>
+	      <result property="careerCompanyName" column="CAREER_COMPANY"/>
+	      <result property="careerCompanyDepartment" column="CAREER_DEPARTMENT"/>
+	      <result property="careerCompanyPosition" column="CAREER_POSITION"/>
+	      <result property="careerCompanyRegion" column="CAREER_REGION"/>
+	      <result property="careerCompanyPeriod1" column="CAREER_PERIOD"/>
+    </resultMap>
+    
+    <resultMap  type="FService" id="fservice_rm">
+    	 <id property="serviceNo" column="SERVICE_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
+    		   		
+	      <result property="serviceTitle" column="SERVICE_TITLE" />								<!-- 서비스 제목 -->							
+	      <result property="serviceSummary" column="SERVICE_SUMMARY" />
+    	  <result property="requestFilePath" column="REQUEST_FILE_PATH" />	
+    	  <result property="serviceDeleteFL" column="SERVICE_DEL_FL" />	
+    	  <!-- <result property="reviewCount" column="REVIEW_COUNT" />	
+    	  <result property="sellCount" column="SELL_COUNT" />	
+    	  <result property="servicePoint" column="SERVICE_POINT" />	 -->
+    </resultMap>
+    
+	
+
 
   <select id="selectMainCategoryList" resultType="map">
  	SELECT * FROM MAIN_CATEGORY
@@ -149,13 +251,14 @@
 		FROM SERVICE_FILE s) USING(SERVICE_NO)
 		WHERE RUM = 1
 		AND MAIN_CATEGORY_NO=#{mainCategoryNo}
-		<if test='thirdCategoryNo!=null'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
+		<if test='thirdCategoryNo!=0'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
 		AND SERVICE_DEL_FL='N'
 		AND SERVICE_STATUS=2
+		ORDER BY 1 DESC
  </select>
  	
  	
- 	
+ 	<!-- 서비스 상세보기 -->
  	<select id="viewService" resultMap="service_rm">
 		SELECT SERVICE_NO,
 		FREELANCER_NO, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_NAME,
@@ -177,6 +280,7 @@
 		AND SERVICE_NO=#{serviceNo}
 	</select> 
 	
+	<!-- 서비스 이미지 조회 -->
 	<select id="selectImageFileList" resultMap="imageFile_rm">
 	
 		SELECT * FROM SERVICE_FILE
@@ -184,6 +288,7 @@
 		 
 	</select>
 	
+	<!-- 서비스 리뷰 조회 -->
 	<select id="selectReviewList" resultMap="review_rm">
 	
 		SELECT (SELECT MEMBER_NAME  FROM "MEMBER" WHERE MEMBER_NO=TRADE.MEMBER_NO) MEMBER_NAME
@@ -195,21 +300,26 @@
 		JOIN TRADE ON(REVIEW_NO=TRADE_NO)
 		JOIN SERVICE USING(SERVICE_NO) 
 		WHERE SERVICE_NO=#{serviceNo}
+		ORDER BY 1 DESC
 		 
 	</select>
 	
+	
+	<!-- 서비스 문의  -->
 	<insert id="askService">
 		INSERT INTO SERVICE_INQUIRY
 		VALUES(SEQ_SERVICE_INQUIRY_NO.NEXTVAL,#{serviceInquiryContent},DEFAULT, #{memberNo}, #{serviceNo} )
 	
 	</insert>
 	
+	<!-- 서비스 중단 -->
 	<update id="pauseService">
 		UPDATE SERVICE SET SERVICE_DEL_FL='Y'
 		WHERE SERVICE_NO=#{serviceNo}
 	
 	</update>
 	
+	<!-- 서비스 문의 보기 -->
 	<select id="selectSendSuggesion" resultMap="askService_rm">
 		SELECT SERVICE_NO, MEMBER_NO,SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY, SERVICE_INQUIRY_NO 
 		FROM SERVICE_INQUIRY 
@@ -219,7 +329,7 @@
 	</select>
 	
 	
-	<select id="selectSendSuggesionContent" resultMap="askService_rm">
+	<!-- <select id="selectSendSuggesionContent" resultMap="askService_rm">
 			SELECT *
 			FROM (
 			   SELECT SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY,
@@ -230,25 +340,27 @@
 				WHERE SERVICE_INQUIRY_NO=#{serviceInquiryNo}
 			) 
 			WHERE RNUM =1
-	</select>
+	</select> -->
 	
 	
 	
 	
 	
 	
-	
+	<!-- ajax 찜하기 체크 -->
 	<select id="serviceLikeCheck" resultType="_int">
 	 SELECT COUNT(*) FROM "LIKE"
 	 WHERE SERVICE_NO=#{serviceNo}
 	 AND MEMBER_NO=#{memberNo}
 	</select>
 	
+	<!-- ajax 찜하기 + -->
 	  <insert id="serviceLikeUp">
 	  	INSERT INTO "LIKE"
 	  	VALUES(#{serviceNo},#{memberNo})
 	  </insert>
 	  
+	  <!-- ajax 찜하기 - -->
 		<delete id="serviceLikeDown">
 	  	DELETE FROM "LIKE"
 			WHERE SERVICE_NO=#{serviceNo}
@@ -299,8 +411,9 @@
 		JOIN FREELANCER USING(FREELANCER_NO)
 		WHERE RUM = 1
 		AND MAIN_CATEGORY_NO=#{mainCategoryNo}
-		<!-- AND SERVICE_DEL_FL='N' -->
-		<!-- AND SERVICE_STATUS=2 -->
+		<if test="thirdCategoryNo!=0">AND THIRD_CATEGORY_NO=#{thirdCategoryNo}</if>
+		AND SERVICE_DEL_FL='N'
+		AND SERVICE_STATUS=2
 		<choose>
 			<when test="budget==0"></when>
 			<when test="budget==1"><![CDATA[AND SERVICE_PRICE < 10000]]> </when>
@@ -320,12 +433,12 @@
 			<otherwise>AND GRADE_NO=2</otherwise>
 		</choose>
 		
-		<if test='order==0'>
-			ORDER BY 1
-		</if>
-		<if test='order==1'>
-			ORDER BY 1 DESC
-		</if>
+		
+		<choose>
+			<when test="order==1">ORDER BY 1</when>
+			<otherwise>ORDER BY 1 DESC</otherwise>
+		</choose>
+		
 	
 	</select>
 	
@@ -371,7 +484,7 @@
 		AND SERVICE_DEL_FL='N'
 		AND SERVICE_STATUS=2 
 		<if test='mainCategoryNo!=null'> AND MAIN_CATEGORY_NO=#{mainCategoryNo} </if>
-		<if test='thirdCategoryNo!=null'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
+		<if test='thirdCategoryNo!=0'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
 
 	
 	</select>
@@ -390,5 +503,59 @@
 			
 		INSERT INTO SETTLEMENT VALUES(SEQ_SETTLEMENT_NO.NEXTVAL, 1, #{memberNo}, 1, SYSDATE, #{servicePrice},  #{tradeNo})
 	</insert>
+	
+	
+	<select id="freelancerInfo" resultMap="freelancer1_rm">
+		SELECT FREELANCER_NO ,MEMBER_NAME AS FREELANCER_NAME, MEMBER_PROFILE,
+		GRADE_NAME,
+		(SELECT LISTAGG(MAIN_CATEGORY_NO, ',')
+			WITHIN GROUP (ORDER BY MAIN_CATEGORY_NO)
+			FROM(SELECT DISTINCT MAIN_CATEGORY_NO
+				FROM FIELD I
+				WHERE FREELANCER_NO = 30) ) FREELANCER_FIELD,
+				 FREE_CONTACT_TIME1, FREE_CONTACT_TIME2,
+				 FREELANCER_INTRODUCTION,
+				 FREELANCER_PERIOD,
+				 REGION_NAME
+		FROM FREELANCER 
+		JOIN "MEMBER" ON(FREELANCER_NO=MEMBER_NO)
+		JOIN GRADE USING(GRADE_NO)
+		JOIN REGION USING(REGION_NO)
+		WHERE FREELANCER_NO =#{freelancerNo}
+	
+	</select>
+	
+	<select id="selectFServiceList" resultMap="fservice_rm">
+
+		SELECT SERVICE_NO,SERVICE_TITLE,SERVICE_SUMMARY,SERVICE_PRICE,REQUEST_FILE_PATH
+		FROM (SELECT * 
+			FROM SERVICE
+			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
+		LEFT JOIN (SELECT s.*,
+		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
+		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		WHERE RUM = 1
+		AND SERVICE_DEL_FL='N'
+		AND SERVICE_STATUS=2
+		AND FREELANCER_NO=#{freelancerNo}
+	</select>
+    <select id="selectCareerList" resultMap="career_rm">
+		SELECT * FROM CAREER
+		WHERE FREELANCER_NO=#{freelancerNo}
+	</select>
+	<select id="selectMajorList" resultMap="major_rm">
+		SELECT * FROM CAREER 
+		WHERE FREELANCER_NO=#{freelancerNo}
+	</select>
+	<select id="selectLicenseList" resultMap="license_rm">
+		SELECT * FROM CAREER 
+		WHERE FREELANCER_NO=#{freelancerNo}
+	</select>
+	<select id="selectPortfolioList" resultMap="portfolio_rm">
+		SELECT * FROM PORTFOLIO
+		WHERE FREELANCER_NO=#{freelancerNo}
+	</select>
+	
  	
  </mapper>

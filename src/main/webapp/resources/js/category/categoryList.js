@@ -70,15 +70,17 @@ const budget=document.getElementById("budget");
 const grade=document.getElementById("grade");
 
 const select=document.getElementsByClassName("select");
-
+const pagination = document.querySelector(".pagination");
 for(let each of select){
     each.addEventListener("change",function(){
         //alert("순서"+index.value+"예산"+budget.value+"전문가등급"+grade.value)
 
         // 비동기로 카테고리 리스트 조회
         const imageContent=document.getElementById("imageContent");
+       
         // 리스트 이전 내용 삭제 
         imageContent.innerHTML="";
+        pagination.innerHTML="";
     
         $.ajax({
             url:"/selectCategoryList",
@@ -87,9 +89,9 @@ for(let each of select){
             "mainCategoryNo":location.href.split('/')[(location.href.split('/').length-2)],
             "thirdCategoryNo":location.href.split('/')[(location.href.split('/').length-1)]
         },
-            success:CategoryList=>{
+            success:(map)=>{
                 
-                category(CategoryList)
+                category(map)
             },
             error:()=>{
                 console.log("조회 실패");
@@ -101,12 +103,11 @@ for(let each of select){
 
 
 
-function category(CategoryList){
-
-    console.log(CategoryList);
+function category(map){
 
     
-    for(let content of CategoryList){
+    
+    for(let content of map.serviceList){
         const bigdiv=document.createElement("div");
 
         const div=document.createElement("div"); 
@@ -179,6 +180,69 @@ function category(CategoryList){
         bigdiv.append(div);
 
         imageContent.append(bigdiv);
+
+        
+        
+        
+        
+        
+    }
+    /* 페이징 */
+
+
+    const li1 = document.createElement("li");
+    const a1 = document.createElement("a");
+  //   a1.setAttribute('href', "/manager/memberList?cp=1"+"&value="+value);
+    a1.setAttribute('href', "/manager/memberList?cp=1");
+    a1.appendChild(document.createTextNode("<<"));
+    li1.append(a1);
+    pagination.append(li1);
+
+    const li2 = document.createElement("li");
+    const a2 = document.createElement("a");
+  //   a2.setAttribute("href", "/manager/memberList?cp=" + map.pagination.prevPage+"&value="+value);
+    a2.setAttribute("href", "/manager/memberList?cp=" + map.pagination.prevPage);
+    a2.appendChild(document.createTextNode("<"));
+    li2.append(a2);
+    pagination.append(li2);
+
+    /* 숫자가 안나와 */
+    for (i = map.pagination.startPage; i <= map.pagination.endPage; i++) {
+        const li3 = document.createElement("li");
+        if (i == map.pagination.currentPage) {
+            const a3 = document.createElement("a");
+            a3.classList.add("current");
+            a3.appendChild(document.createTextNode(i));
+            li3.append(a3);
+            pagination.append(li3);
+
+        } else {
+            const a3 = document.createElement("a");
+          //   a3.setAttribute("href", "/manager/memberList?cp=" + i+"&value="+value);
+            a3.setAttribute("href", "/manager/memberList?cp=" + i);
+            a3.appendChild(document.createTextNode(i));
+            li3.append(a3);
+            pagination.append(li3);
+        }
     }
 
+    const li4 = document.createElement("li");
+    const a4 = document.createElement("a");
+  //   a4.setAttribute("href", "/manager/memberList?cp=" + map.pagination.nextPage+"&value="+value);
+    a4.setAttribute("href", "/manager/memberList?cp=" + map.pagination.nextPage);
+    a4.appendChild(document.createTextNode(">"));
+    li4.append(a4);
+    pagination.append(li4);
+
+    const li5 = document.createElement("li");
+    const a5 = document.createElement("a");
+  //   a5.setAttribute("href", "/manager/memberList?cp=" + map.pagination.maxPage+"&value="+value);
+    a5.setAttribute("href", "/manager/memberList?cp=" + map.pagination.maxPage);
+    a5.appendChild(document.createTextNode(">>"));
+    li5.append(a5);
+    pagination.append(li5);
+
 }
+
+
+

@@ -156,6 +156,29 @@ public class UserInquiryServiceImpl implements UserInquiryService {
 	}
 
 
+	// 진행상태 변경에 따른 목록 조회 
+	@Override
+	public Map<String, Object> selectChangeStatus(int memberNo, String optionVal, int cp) {
+			
+
+			// 1. 특정 게시판의 전체 게시글 수 조회 
+			int listCount = dao.getStatusListCount(memberNo,optionVal);
+			
+			// 2. 전체 게시글 수 + cp(현재 페이지) 이용해서 페이징 처리 객체 생성
+			Pagination pagination = new Pagination(listCount, cp);
+			
+			// 3. 페이징 처리객체를 이용해서 게시글 목록 조회 
+			List<UserInquiry> inquiryList = dao.userStatusList(pagination,memberNo,optionVal);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+
+			map.put("pagination", pagination);
+			map.put("inquiryList", inquiryList);
+			
+			return map;
+}
+
+
 	
 
 	

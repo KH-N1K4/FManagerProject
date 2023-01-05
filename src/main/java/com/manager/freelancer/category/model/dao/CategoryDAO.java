@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Category;
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.category.model.vo.ImageFile;
 import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.category.model.vo.Trade;
+import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 
@@ -72,8 +74,13 @@ public class CategoryDAO {
 
 	
 //	ajax 분류에 따라 조회되게
-	public List<Service> selectCategoryList(Map map) {
-		return sqlSession.selectList("categoryMapper.selectCategoryList",map);
+	public List<Service> selectCategoryList(Pagination pagination, Map map) {
+		
+		int offset=(pagination.getCurrentPage()-1)*pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("categoryMapper.selectCategoryList",map,rowBounds);
 	}
 	
 	
@@ -113,9 +120,13 @@ public class CategoryDAO {
 		}
 			
 			
-			result=temp.getTradeNo();
+		result=temp.getTradeNo();
 		
 		return result;
+	}
+
+	public Freelancer1 freelancerDetail(int freelancerNo) {
+		return sqlSession.selectOne("categoryMapper.freelancerInfo", freelancerNo);
 	}
 
 	

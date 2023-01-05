@@ -43,6 +43,14 @@ public interface UserInquiryService {
 	 */
 	Map<String, Object> selectInquiryList(Map<String, Object> pm, int cp);
 
+	/** 진행상태 변경에 따른 목록 조회 
+	 * @param memberNo
+	 * @param inquiryStatus
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectChangeStatus(int memberNo, String optionVal, int cp);
+
 
 
 }

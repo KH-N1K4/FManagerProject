@@ -9,8 +9,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.manager.freelancer.customerCenter.model.vo.Pagination;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
+import com.manager.freelancer.manager.model.vo.Pagination;
 import com.manager.freelancer.member.model.vo.Member;
 
 @Repository
@@ -32,12 +32,11 @@ public class ManagerInquiryDAO {
 	 */
 	public List<UserInquiry> selectManagerInquiryList(Pagination pagination) {
 		
-		// RowBounds 객체(마이 바티스)
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
-		return sqlSession.selectList("inquiryMapper.selectInquiryList_manager", rowBounds);
+		return sqlSession.selectList("inquiryMapper.selectInquiryList_manager",0, rowBounds);
 	}
 
 	
@@ -87,30 +86,30 @@ public class ManagerInquiryDAO {
 		return result;
 	}
 
-	
-	
-	
-	
-	
-//	/** ajax 실험 중 
-//	 * @param value
-//	 * @return
-//	 */
-//	public int getListCount(String value) {
-//		return sqlSession.selectOne("inquiryMapper.getMemberListCount", value);
-//	}
-//
-//	/** ajax 실험 중 
-//	 * @param value
-//	 * @param pagination
-//	 * @return
-//	 */
-//	public List<UserInquiry> selectManagerInquiryList(String value, Pagination pagination) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	/** 관리자 진행상태별 이용문의 조회수 카운트(Ajax)
+	 * @param optionVal
+	 * @return
+	 */
+	public int getStatusListCount(String optionVal) {
+		System.out.println("COUNT optionVal="+optionVal);
+		return sqlSession.selectOne("inquiryMapper.getStatusListCount_manager", optionVal);
+	}
 
-	
+	/** 관리자 진행상태별 이용문의 조회(Ajax)
+	 * @param optionVal
+	 * @param pagination
+	 * @return
+	 */
+	public List<UserInquiry> selectChangeStatusManager(String optionVal, Pagination pagination) {
+		
+		System.out.println("LIST optionVal="+optionVal);
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("inquiryMapper.selectChangeStatusManager", optionVal ,rowBounds);
+	}
+
 	
 	
 	

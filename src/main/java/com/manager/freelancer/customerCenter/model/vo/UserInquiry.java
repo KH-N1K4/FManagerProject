@@ -15,7 +15,7 @@ public class UserInquiry {
 	private String userInquiryTitle;                // 이용문의 제목 
 	private String userInquiryContent;              // 이용문의 내용
 	private String inquiryRequest;                  // 이용문의 답변
-	private String inquiryStatus;                   // 이용문의 답변
+	private String inquiryStatus;                   // 이용문의 답변 상태 
 	private String userInquiryCreateDate;           // 이용문의 작성 날짜 
 	private String inquiryRequestDate;              // 이용문의 답변 작성 날짜 
 	private int memberNo;                           // 회원 번호 

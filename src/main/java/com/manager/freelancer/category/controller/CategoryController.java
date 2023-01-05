@@ -19,8 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.manager.freelancer.category.model.service.CategoryService;
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Category;
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.category.model.vo.Trade;
+import com.manager.freelancer.freelancer.model.vo.Freelancer;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 
@@ -37,9 +39,7 @@ public class CategoryController {
 			@SessionAttribute(value="loginMember",required=false) Member loginMember) {
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
-		
-		
-		
+
 		map.put("cp", cp);
 		if(loginMember!=null) {
 			map.put("memberNo", loginMember.getMemberNo());
@@ -60,25 +60,25 @@ public class CategoryController {
 	
 	
 	// 메인 카테고리 목록 조회
-	@GetMapping("/category/{mainCategoryNo}/0")
-	public String mainCategory(@PathVariable("mainCategoryNo") int mainCategoryNo, Model model,
-			@SessionAttribute(value="loginMember",required=false) Member loginMember,@RequestParam(value="cp", required=false, defaultValue="1") int cp) {
-		
-		
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		
-		if(loginMember!=null) {
-			
-			map.put("memberNo", loginMember.getMemberNo());
-		}
-		map.put("mainCategoryNo", mainCategoryNo);
-		map.put("cp", cp);
-		Map<String, Object> map2=service.selectBoardList(map);
-		
-		model.addAttribute("map",map2);
-			
-		return "/category/categoryList";
-	}
+//	@GetMapping("/category/{mainCategoryNo}/0")
+//	public String mainCategory(@PathVariable("mainCategoryNo") int mainCategoryNo, Model model,
+//			@SessionAttribute(value="loginMember",required=false) Member loginMember,@RequestParam(value="cp", required=false, defaultValue="1") int cp) {
+//		
+//		
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+//		
+//		if(loginMember!=null) {
+//			
+//			map.put("memberNo", loginMember.getMemberNo());
+//		}
+//		map.put("mainCategoryNo", mainCategoryNo);
+//		map.put("cp", cp);
+//		Map<String, Object> map2=service.selectBoardList(map);
+//		
+//		model.addAttribute("map",map2);
+//			
+//		return "/category/categoryList";
+//	}
 	
 	
 	// 세부 카테고리 목록 조회
@@ -93,6 +93,8 @@ public class CategoryController {
 			
 			map.put("memberNo", loginMember.getMemberNo());
 		}
+		
+		System.out.println(thirdCategoryNo);
 		map.put("mainCategoryNo", mainCategoryNo);
 		map.put("thirdCategoryNo", thirdCategoryNo);
 		map.put("cp", cp);
@@ -108,11 +110,12 @@ public class CategoryController {
 	
 	@GetMapping("/selectCategoryList")
 	@ResponseBody
-	public List<Service> selectCategoryList(@RequestParam(required = false) String order,@RequestParam String mainCategoryNo, 
+	public Map<String, Object> selectCategoryList(@RequestParam(required = false) String order,@RequestParam String mainCategoryNo, 
+			@RequestParam String thirdCategoryNo, 
 			@RequestParam(required = false) String budget,@RequestParam(required = false) String grade, 
 			Model model,@RequestParam(value="cp", required=false, defaultValue="1") int cp){
 		
-		Map<String, String> map=new HashMap<String, String>();
+		Map<String, Object> map=new HashMap<String, Object>();
 		
 		System.out.println("순서 : "+order+"예산 : "+budget+"전문가등급 : "+grade);
 		
@@ -120,11 +123,17 @@ public class CategoryController {
 		map.put("budget", budget);
 		map.put("grade", grade);
 		map.put("mainCategoryNo", mainCategoryNo);
+		map.put("thirdCategoryNo", thirdCategoryNo);
+		map.put("cp", cp);
 		
 		
 		
-		List<Service> serviceList=service.selectCategoryList(map);
+		Map<String, Object> serviceList=service.selectCategoryList(map);
 		
+		
+//		Map<String, Object> resultMap=new HashMap<String, Object>();
+//		
+//		resultMap.put("serviceList", serviceList);
 			
 		return serviceList;
 	
@@ -323,6 +332,19 @@ public class CategoryController {
 		model.addAttribute(tradeNo);
 		
 		return "/myProject/paying_complete";
+	}
+	
+	@GetMapping("/service/freelancerDetail/{freelancerNo}")
+	public String freelancerDetail(@PathVariable("freelancerNo") int freelancerNo, Model model) {
+		
+		
+		Freelancer1 freelancer =service.freelancerDetail(freelancerNo);
+		
+		System.out.println(freelancer);
+		
+		model.addAttribute("freelancer",freelancer);
+		
+		return "/member/freelancer/freelancerDetail";
 	}
 	
 	

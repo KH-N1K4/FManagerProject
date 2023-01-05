@@ -45,6 +45,10 @@
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiryImage" alias="UserInquiryImage"/>
 		
 		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Freelancer" alias="Freelancer"/>
+		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Portfolio" alias="Portfolio"/>
+		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Career" alias="Career"/>
+		<typeAlias type="com.manager.freelancer.freelancer.model.vo.Major" alias="Major"/>
+		<typeAlias type="com.manager.freelancer.freelancer.model.vo.License" alias="License"/>
 		
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.FreelancerService" alias="myProjectFreelancerService"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectFreelancer" alias="myProjectFreelancer"/>
@@ -63,6 +67,8 @@
 		<typeAlias type="com.manager.freelancer.category.model.vo.Trade" alias="Trade"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.ImageFile" alias="ImageFile"/>
 		<typeAlias type="com.manager.freelancer.category.model.vo.AskService" alias="AskService"/>
+		<typeAlias type="com.manager.freelancer.category.model.vo.Freelancer1" alias="Freelancer1"/>
+		<typeAlias type="com.manager.freelancer.category.model.vo.FService" alias="FService"/>
 		
 		<typeAlias type="com.manager.freelancer.common.message.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.manager.freelancer.common.message.model.vo.ChattingRoom" alias="ChattingRoom"/>
@@ -82,6 +88,7 @@
 		<mapper resource="/mappers/userInquiry-mapper.xml"/>
 		<mapper resource="/mappers/category-mapper.xml"/>
 		<mapper resource="/mappers/message-mapper.xml"/>
+		<mapper resource="/mappers/myProjectRequest-mapper.xml"/>
 
 	</mappers>
 	
