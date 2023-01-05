@@ -103,5 +103,22 @@ public class ProjectRequestDAO {
 
 		return sqlSession.selectOne("myProjectRequest.selectFreelancerInfo",freelancerNo);
 	}
+
+	/**프로젝트 상세 페이지에서 제안하기 버튼(모달)
+	 * @param requestNO
+	 * @param proposalpriceInput
+	 * @param proposaleditInput
+	 * @param proposalMemberNo
+	 * @return
+	 */
+	public int requestDetailSubmit(int requestNO, int proposalpriceInput, int proposaleditInput,
+			int proposalMemberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("requestNO",requestNO);
+		map.put("proposalpriceInput",proposalpriceInput);
+		map.put("proposaleditInput",proposaleditInput);
+		map.put("proposalMemberNo",proposalMemberNo);
+		return sqlSession.insert("myProjectRequest.requestDetailSubmit",map);
+	}
 	
 }

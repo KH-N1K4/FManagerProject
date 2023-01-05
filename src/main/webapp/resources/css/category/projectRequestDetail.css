@@ -123,6 +123,9 @@ a{
     height: 700px;
     border:1px solid black;
 }
+.detailInner > div{
+    margin-top: 100px;
+}
 
 
 .modal{

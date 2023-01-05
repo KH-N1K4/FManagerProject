@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <c:set var="requestfileList" value="${userRequest.requestfileList}"/>
 <c:set var="proposalList" value="${userRequest.proposalList}"/>
 
@@ -18,7 +18,7 @@
     <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
 
        <div class="main">
-        <div><a href="">디자인</a>><a href="">디자인 상세</a></div>
+        <div><a href="/projectRequest/requestList/${userRequest.mainCategoryNo}/0/0">${userRequest.mainCategoryName}</a>><a href="/projectRequest/requestList/${userRequest.mainCategoryNo}/${userRequest.subCategoryNo}/0">${userRequest.subCategoryName}</a></div>
 
         <div class="detailHeader">
             <div class="requestPhoto"><img src="${userRequest.requestfileList[0].requestFilePath}"></div>
@@ -56,7 +56,9 @@
 
         </div>
 
-        <div class="detailInner"></div>
+        <div class="detailInner">
+            <div>${userRequest.projectRequestContent}</div>
+        </div>
 
         <div class="requestModal">
             <jsp:include page="/WEB-INF/views/projectRequest/modal/requestModal.jsp" /> 
@@ -66,18 +68,21 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <!-- **************************************footer*************************************-->
     <script>
-        var proposalListJson = JSON.parse('${userRequest.proposalList}');
+        var proposalList = JSON.parse('${proposalListJson}');
         var loginMemberNickname = '${loginMember.memberNickname}';
         var loginMemberNo = '${loginMember.memberNo}';
         var loginMemberProfile = '${loginMember.memberProfile}';
         var freelancerFL = '${loginMember.freelancerFL}';
-        var freelancerGrade = '${freelancerGrade}';
+        var freelancerSalesCount = '${freelancerSalesCount}';
+        var freelancerInfo = '${freelancerInfo}';
+        var requestNoVar = '${userRequest.projectRequestNo}';
     </script>
     <!-- jQuery  -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 
     <script src="/resources/js/category/projectRequestDetail.js"></script>
+    <script src="/resources/js/category/modal/requsetModal.js"></script>
     
 </body>
 </html>

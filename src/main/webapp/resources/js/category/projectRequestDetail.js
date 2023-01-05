@@ -4,7 +4,7 @@ const modalClose = document.querySelector('.requestModal_close');
 
 document.getElementById('requestBtn').addEventListener("click", function () {
   var booleanVar = false;
-  proposalListJson.forEach(function(arg){
+  proposalList.forEach(function(arg){
     if(arg.freelancerNo == loginMemberNo){
       booleanVar = true;
       console.log(arg.freelancerNo);

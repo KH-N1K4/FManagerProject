@@ -260,24 +260,29 @@ $('.sendBtn').click(function(){
               if(arg.workCount > arg.serviceEditNum){
                 $('#sendBtn'+arg.tradeNo).remove();
               }
+
+              if(arg.workCount == 1){
+                /* <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a> */
+                const a = document.createElement("a");
+                a.setAttribute("href", "#");
+                a.setAttribute("id", "finishBtn"+tradeNoValue);
+                a.setAttribute("title", tradeNoValue);
+                a.classList.add("finishBtn");
+                a.classList.add("btn_type");
+
+                const span = document.createElement("span");
+                span.innerText ='완료';
+
+                a.append(span);
+
+                document.getElementById('tdBtn'+tradeNoValue).prepend(a);
+              }
               
             } 
           });
 
-          /* <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a> */
-          const a = document.createElement("a");
-          a.setAttribute("href", "#");
-          a.setAttribute("id", "finishBtn"+tradeNoValue);
-          a.setAttribute("title", tradeNoValue);
-          a.classList.add("finishBtn");
-          a.classList.add("btn_type");
-
-          const span = document.createElement("span");
-          span.innerText ='완료';
-
-          a.append(span);
-
-          document.getElementById('tdBtn'+tradeNoValue).prepend(a);
+          
+          
           
         }
     },

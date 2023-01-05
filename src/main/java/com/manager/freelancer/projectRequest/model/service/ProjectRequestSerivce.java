@@ -35,4 +35,13 @@ public interface ProjectRequestSerivce {
 	 */
 	myProjectFreelancer selectFreelancerInfo(int memberNo);
 
+	/**프로젝트 상세 페이지에서 제안하기 버튼(모달)
+	 * @param requestNO
+	 * @param proposalpriceInput
+	 * @param proposaleditInput
+	 * @param proposalMemberNo
+	 * @return
+	 */
+	String requestDetailSubmit(int requestNO, int proposalpriceInput, int proposaleditInput, int proposalMemberNo);
+
 }

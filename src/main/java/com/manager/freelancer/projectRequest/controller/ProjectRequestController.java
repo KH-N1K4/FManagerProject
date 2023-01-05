@@ -8,11 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.google.gson.Gson;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.service.MyProjectFreelancerService;
+import com.manager.freelancer.myProject.model.vo.MyProject;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
 import com.manager.freelancer.projectRequest.model.service.ProjectRequestSerivce;
@@ -83,10 +87,29 @@ public class ProjectRequestController {
 			freelancerInfo =service.selectFreelancerInfo(loginMember.getMemberNo()); //등급이랑 전문분야
 		}
 		myProjectFreelancerRequest userRequest = service.selectUserRequest(projectRequestNo);
+		List<MyProject> proposalList =userRequest.getProposalList();
+		List<MyProjectFreelancerService> fieldList =freelancerInfo.getFieldList();
 		model.addAttribute("userRequest", userRequest);
+		model.addAttribute("proposalListJson", new Gson().toJson(proposalList));
 		model.addAttribute("freelancerSalesCount", freelancerSalesCount);
 		model.addAttribute("freelancerInfo", freelancerInfo);
+		model.addAttribute("fieldList", fieldList);
+		model.addAttribute("fieldListJson", new Gson().toJson(fieldList));
 		return "/projectRequest/projectRequestDetail";
 	}
 
+	//프로젝트 상세 페이지에서 제안하기 버튼(모달)
+	@PostMapping("/requestDetailSubmit")
+	@ResponseBody
+	public String requestDetailSubmit(
+			@RequestParam(value="requestNO") int requestNO,
+			@RequestParam(value="proposalpriceInput") int proposalpriceInput,
+			@RequestParam(value="proposaleditInput") int proposaleditInput,
+			@RequestParam(value="proposalMemberNo") int proposalMemberNo
+			) throws Exception{
+			
+		String message = service.requestDetailSubmit(requestNO,proposalpriceInput,proposaleditInput,proposalMemberNo);
+			
+		return new Gson().toJson(message);
+	}
 }

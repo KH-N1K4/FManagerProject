@@ -69,4 +69,20 @@ public class ProjectRequestServiceImpl implements ProjectRequestSerivce{
 		
 		return  dao.selectFreelancerInfo(memberNo);
 	}
+
+	/**프로젝트 상세 페이지에서 제안하기 버튼(모달)
+	 *
+	 */
+	@Override
+	public String requestDetailSubmit(int requestNO, int proposalpriceInput, int proposaleditInput,
+			int proposalMemberNo) {
+		int result = dao.requestDetailSubmit(requestNO,proposalpriceInput,proposaleditInput,proposalMemberNo);
+		String message = "";
+		if(result>0) {
+			message = "제안하기 등록되었습니다.";
+		}else {
+			message = "제안하기 등록되지 않았습니다.";
+		}
+		return message;
+	}
 }
