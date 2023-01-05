@@ -161,7 +161,8 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 	}
 	@Override
 	public Freelancer1 freelancerInfo1(int freelancerNo) {
-		// TODO Auto-generated method stub
+
+		
 		return dao.freelancerInfo1(freelancerNo);
 	}
 	
