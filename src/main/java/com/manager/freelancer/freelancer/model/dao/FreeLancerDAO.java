@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.freelancer.model.vo.Bank;
 import com.manager.freelancer.freelancer.model.vo.Career;
 import com.manager.freelancer.freelancer.model.vo.Field;
@@ -33,7 +34,11 @@ public class FreeLancerDAO {
 
 			return sqlSession.selectOne("freelancerMapper.freelancerInfo", freelancerNo);
 		}
-	
+	// 전문가 정보 조회(연수)
+	public Freelancer1 freelancerInfo1(int freelancerNo) {
+
+		return sqlSession.selectOne("freelancerMapper.freelancerInfo1", freelancerNo);
+	}
 
 	public int enrollFreelancerMajor(Major temp1) {
 		
@@ -125,6 +130,8 @@ public class FreeLancerDAO {
 		
 		return sqlSession.selectOne("freelancerMapper.viewPortfolioDetail", portfolio);
 	}
+
+	
 
 
 

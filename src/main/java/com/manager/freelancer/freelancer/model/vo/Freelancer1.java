@@ -1,4 +1,4 @@
-package com.manager.freelancer.category.model.vo;
+package com.manager.freelancer.freelancer.model.vo;
 
 import java.util.List;
 
@@ -49,7 +49,6 @@ public class Freelancer1 {
 	//프리랜서 전문분야
 
 	private List<Portfolio> portfolioList;
-	private List<FService> fserviceList;
 	private List<Career> careerList;
 	private List<Major> majorList;
 	private List<License> licenseList;

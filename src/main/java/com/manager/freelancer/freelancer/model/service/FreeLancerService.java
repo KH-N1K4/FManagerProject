@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.freelancer.model.vo.Bank;
 import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
@@ -19,6 +20,9 @@ public interface FreeLancerService {
 //	// 전문가 정보 조회
 	Freelancer freelancerInfo(int freelancerNo);
 	
+	// 전문가정보조회1(연수)
+	Freelancer1 freelancerInfo1(int freelancerNo);
+
 	// 지역목록
 	List<Region> getRegionList();
 	
@@ -41,6 +45,8 @@ public interface FreeLancerService {
 
 	// 포트폴리오 상세보기
 	Portfolio viewPortfolioDetail(Portfolio portfolio);
+
+
 	
 	
 
