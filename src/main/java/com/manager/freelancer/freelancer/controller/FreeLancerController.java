@@ -24,6 +24,7 @@ import com.manager.freelancer.freelancer.model.service.FreeLancerService;
 import com.manager.freelancer.freelancer.model.vo.Bank;
 import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
+import com.manager.freelancer.freelancer.model.vo.License;
 import com.manager.freelancer.freelancer.model.vo.Portfolio;
 import com.manager.freelancer.freelancer.model.vo.Region;
 import com.manager.freelancer.member.model.vo.Member;
@@ -54,7 +55,9 @@ public class FreeLancerController {
 //			model.addAttribute("freelancer", freelancer); 
 			
 			Freelancer1  freelancer1 = service.freelancerInfo1(loginMember.getMemberNo());
+	
 			model.addAttribute("freelancer1",freelancer1);
+			
 			
 			List<Region> regionList = service.getRegionList();
 			model.addAttribute("regionList",regionList);

@@ -95,15 +95,20 @@
 .myProject_content{
   padding: 34px 0;
   border-bottom: 1px solid #f2f3f7;
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  color: black;
+  justify-content: center;
 }
 
-.myProject_link{
+/* .myProject_link{
   display: flex;
   flex-direction: row;
   text-decoration: none;
   cursor: pointer;
   color: black;
-}
+} */
 .projuctContent_image{
   margin-right: 30px;
 }
@@ -121,9 +126,13 @@
   justify-content: space-between;
 }
 
+/* 내 프로젝트 제목 */
 .info_title{
   font-weight: bold;
   font-size: 20px;
+}
+.info_title a{
+  color: black;
 }
 
 .info_content{

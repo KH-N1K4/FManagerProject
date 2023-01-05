@@ -1,16 +1,22 @@
 package com.manager.freelancer.myProject.model.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.manager.freelancer.common.Util;
 import com.manager.freelancer.customerCenter.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.TradeReport;
 import com.manager.freelancer.myProject.model.dao.MyProjectDAO_2;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.MyProjectPayment;
+import com.manager.freelancer.myProject.model.vo.Review;
 import com.manager.freelancer.myProject.model.vo.myProjectTrade;
 
 @Service
@@ -72,6 +78,158 @@ public class MyProjectServiceImpl_2 implements MyProjectService_2{
 	}
 	
 	
+	// 거래 신고하기
+	@Override
+	public int insertTradeReport(TradeReport inputTradeReport, String webPath, String realPath, MultipartFile reportFile) throws IOException {
+		
+		
+		inputTradeReport.setReportContent(Util.newLineHandling(inputTradeReport.getReportContent()));
+		
+		// 실패를 대비해서 이전 이미지 경로 저장
+		//String temp = reportFile;
+		
+		// 중복 파일명 업로드를 대비하기 위해서 파일명 변경
+		String rename = null;
+		String reportFilePath = "";
+		
+		if(reportFile.getSize() == 0) { // 업로드된 파일이 없는 경우
+			inputTradeReport.setFilePath(reportFilePath);
+		}else { // 업로드된 파일이 있을 경우
+			
+			// 원본파일명을 이용해서 새로운 파일명 생성
+			rename = Util.fileRename( reportFile.getOriginalFilename() );
+			
+			reportFilePath = (webPath + rename);
+			// /resources/images/memberProfile/변경된파일명
+			inputTradeReport.setFilePath(reportFilePath);
+		}
+		
+		int reportedPersonNo = dao.selectReportedPerson(inputTradeReport);
+		inputTradeReport.setReportedPersonNo(reportedPersonNo);
+		
+		int result = dao.insertTradeReport(inputTradeReport);
+		if(result>0) {
+			
+			if (rename != null) {
+				// 변경된 이미지명이 있다 == 새로운 파일이 업로드 되었다
+				
+				reportFile.transferTo(new File(realPath + rename));
+				// 메모리에 임시 저장된 파일을 지정된 경로에 파일 형태로 변환
+				// == 서버 파일 업로드
+			}
+		}
+		return result;
+	}
+	
+	
+	// 주문 취소하기
+	@Override
+	public int insertTradeReportCancel(TradeReport inputTradeReport, String webPath, String realPath,
+			MultipartFile reportFile) throws IOException {
+		
+		inputTradeReport.setReportContent(Util.newLineHandling(inputTradeReport.getReportContent()));
+		
+		// 실패를 대비해서 이전 이미지 경로 저장
+		//String temp = reportFile;
+		
+		// 중복 파일명 업로드를 대비하기 위해서 파일명 변경
+		String rename = null;
+		String reportFilePath = "";
+		
+		if(reportFile.getSize() == 0) { // 업로드된 파일이 없는 경우
+			inputTradeReport.setFilePath(reportFilePath);
+		}else { // 업로드된 파일이 있을 경우
+			
+			// 원본파일명을 이용해서 새로운 파일명 생성
+			rename = Util.fileRename( reportFile.getOriginalFilename() );
+			
+			reportFilePath = (webPath + rename);
+			// /resources/images/memberProfile/변경된파일명
+			inputTradeReport.setFilePath(reportFilePath);
+		}
+		
+		int reportedPersonNo = dao.selectReportedPerson(inputTradeReport);
+		inputTradeReport.setReportedPersonNo(reportedPersonNo);
+		
+		int result=dao.insertTradeReportCancel(inputTradeReport);
+		if(result>0) {
+			
+			if (rename != null) {
+				// 변경된 이미지명이 있다 == 새로운 파일이 업로드 되었다
+				
+				reportFile.transferTo(new File(realPath + rename));
+				// 메모리에 임시 저장된 파일을 지정된 경로에 파일 형태로 변환
+				// == 서버 파일 업로드
+			}
+		}
+		
+		return result;
+	}
+	
+	
+	// 리뷰등록
+	@Override
+	public int insertReview(Review inputReview, String webPath, String realPath, MultipartFile reviewFile)  throws IOException{
+		
+		int reviewCount = dao.getReviewCount(inputReview);
+		int result=0;
+		
+		if(reviewCount==0) {
+			
+			inputReview.setReviewContent(Util.newLineHandling(inputReview.getReviewContent()));
+			
+			// 실패를 대비해서 이전 이미지 경로 저장
+			//String temp = reportFile;
+			
+			// 중복 파일명 업로드를 대비하기 위해서 파일명 변경
+			String rename = null;
+			String reportFilePath = "";
+			
+			if(reviewFile.getSize() == 0) { // 업로드된 파일이 없는 경우
+				inputReview.setFilePath(reportFilePath);
+			}else { // 업로드된 파일이 있을 경우
+				
+				// 원본파일명을 이용해서 새로운 파일명 생성
+				rename = Util.fileRename( reviewFile.getOriginalFilename() );
+				
+				reportFilePath = (webPath + rename);
+				// /resources/images/memberProfile/변경된파일명
+				inputReview.setFilePath(reportFilePath);
+			}
+			
+			result=dao.insertReview(inputReview);
+			if(result>0) {
+				
+				if (rename != null) {
+					// 변경된 이미지명이 있다 == 새로운 파일이 업로드 되었다
+					
+					reviewFile.transferTo(new File(realPath + rename));
+					// 메모리에 임시 저장된 파일을 지정된 경로에 파일 형태로 변환
+					// == 서버 파일 업로드
+				}
+			}
+			
+		}
+		
+		
+		return result;
+		
+	}
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

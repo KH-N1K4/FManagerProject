@@ -95,23 +95,24 @@
                     <div class="itemTitle">
                         <div class="item">경력 사항</div>
                         <div>
-                            <input type="text" name="" id=""value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}">
-                            <input type="text" value="${careerList[0].careerCompanyName}">
-                            <%-- <input type="text" name="" id="" value="${freelancer.careerCompanyDepartment}">
-                            <input type="text" name="" id="" value="${freelancer.careerCompanyPosition}">
-                            <input type="text" name="" id="" value="${freelancer.careerCompanyRegion}">
-                            <input type="text" name="" id="" value="${freelancer.careerPeriod}"> --%>
+                            <%-- <input type="text" name="" id=""value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}"> --%>
+                            
+                            <c:forEach var ="career" items="${freelancer1.careerList}">
+                                <%-- <input type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}"> --%>
+                                <input type="text" name="" id="" value="${career.careerCompanyName}/${career.careerCompanyDepartment}/${career.careerCompanyPosition}/${career.careerCompanyRegion}/${career.careerCompanyPeriod1}">
+                            </c:forEach>
+                        
                         
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">자격증</div>
                         <div>
-                            <c:forEach var ="license" items="${licenseList}">
-                                <%-- <input type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}"> --%>
-                                <input type="text" name="" id="" value="${license[0]}">
+                            <c:forEach var ="license" items="${freelancer1.licenseList}">
+                        
+                                <input type="text" name="" id="" value="${license.licenseName}/${license.licenseDate}/${license.licenseAgency}">
+
                             </c:forEach>
-                    <%-- <fmt:formatDate value="${regDate}" pattern="yyyy-MM-dd HH:mm:ss"/> --%>
                         
                         </div>
                     </div>
