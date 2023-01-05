@@ -130,7 +130,7 @@ public interface MyProjectFreelancerService {
 	 * @param memberNo
 	 * @return
 	 */
-	myProjectFreelancer selectMyProjectGrade(int memberNo);
+	myProjectFreelancer selectMyProjectGrade(int memberNo,int typeVal);
 
 	/**프매니저 사이트 등급 조건 들고 오기
 	 * @return
@@ -141,7 +141,7 @@ public interface MyProjectFreelancerService {
 	 * @param memberNo
 	 * @return
 	 */
-	List<myProjectFreelancer> selectFreelancerListALL();
+	List<myProjectFreelancer> selectFreelancerListALL(int typeVal);
 
 	/**프리랜서 등급 상승
 	 * @param seccessMember

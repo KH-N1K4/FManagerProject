@@ -357,8 +357,8 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 	 *나의 등급 조건 들고 오기
 	 */
 	@Override
-	public myProjectFreelancer selectMyProjectGrade(int memberNo) {
-		return dao.selectMyProjectGrade(memberNo);
+	public myProjectFreelancer selectMyProjectGrade(int memberNo,int typeVal) {
+		return dao.selectMyProjectGrade(memberNo,typeVal);
 	}
 
 	/**
@@ -373,9 +373,9 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 	 * 전체 등급 조건 들고 오기
 	 */
 	@Override
-	public List<myProjectFreelancer> selectFreelancerListALL() {
+	public List<myProjectFreelancer> selectFreelancerListALL(int typeVal) {
 	
-		return dao.selectFreelancerListALL();
+		return dao.selectFreelancerListALL(typeVal);
 	}
 
 	/**

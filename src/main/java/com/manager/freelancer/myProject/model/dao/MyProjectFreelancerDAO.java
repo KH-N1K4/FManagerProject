@@ -288,9 +288,11 @@ public class MyProjectFreelancerDAO {
 	 * @param memberNo
 	 * @return
 	 */
-	public myProjectFreelancer selectMyProjectGrade(int memberNo) {
-		
-		return (myProjectFreelancer) sqlSession.selectOne("myProjectFreelancerSerive.selectMyProjectGrade", memberNo);
+	public myProjectFreelancer selectMyProjectGrade(int memberNo,int typeVal) {///
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("typeVal", typeVal);
+		return (myProjectFreelancer) sqlSession.selectOne("myProjectFreelancerSerive.selectMyProjectGrade", map);
 	}
 
 	/**프매니저 사이트 등급 조건 들고 오기
@@ -303,8 +305,11 @@ public class MyProjectFreelancerDAO {
 	/**전체 등급 조건 들고 오기
 	 * @return
 	 */
-	public List<myProjectFreelancer> selectFreelancerListALL() {
-		return sqlSession.selectList("myProjectFreelancerSerive.selectMyProjectGrade");
+	public List<myProjectFreelancer> selectFreelancerListALL(int typeVal) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", 0); 
+		map.put("typeVal", typeVal);
+		return sqlSession.selectList("myProjectFreelancerSerive.selectMyProjectGrade",map);
 	}
 
 	/**프리랜서 등급 상승 

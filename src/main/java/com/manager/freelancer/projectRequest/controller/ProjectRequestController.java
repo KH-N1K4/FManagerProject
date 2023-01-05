@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.manager.freelancer.member.model.vo.Member;
+import com.manager.freelancer.myProject.model.service.MyProjectFreelancerService;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
 import com.manager.freelancer.projectRequest.model.service.ProjectRequestSerivce;
 
@@ -74,8 +76,16 @@ public class ProjectRequestController {
 	public String projectRequest(@SessionAttribute(value="loginMember",required=false) Member loginMember,
 			@PathVariable("projectRequestNo") int projectRequestNo, Model model) {
 		
+		myProjectFreelancer freelancerSalesCount = new myProjectFreelancer();
+		myProjectFreelancer freelancerInfo = new myProjectFreelancer();
+		if(loginMember != null) {
+			freelancerSalesCount =service.selectMyProjectGrade(loginMember.getMemberNo()); //판매 건수
+			freelancerInfo =service.selectFreelancerInfo(loginMember.getMemberNo()); //등급이랑 전문분야
+		}
 		myProjectFreelancerRequest userRequest = service.selectUserRequest(projectRequestNo);
 		model.addAttribute("userRequest", userRequest);
+		model.addAttribute("freelancerSalesCount", freelancerSalesCount);
+		model.addAttribute("freelancerInfo", freelancerInfo);
 		return "/projectRequest/projectRequestDetail";
 	}
 

@@ -10,8 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.myProject.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
 
+/**
+ * @author USER
+ *
+ */
 @Repository
 public class ProjectRequestDAO {
 	
@@ -80,6 +85,23 @@ public class ProjectRequestDAO {
 	public myProjectFreelancerRequest selectUserRequest(int projectRequestNo) {
 	
 		return sqlSession.selectOne("myProjectRequest.selectUserRequest",projectRequestNo);
+	}
+
+	/**프리랜서 판매건수 들고 옴
+	 * @param memberNo
+	 * @return
+	 */
+	public myProjectFreelancer selectMyProjectGrade(int memberNo) {
+		return sqlSession.selectOne("myProjectFreelancerSerive.selectFreelancerSalesCoount",memberNo);
+	}
+
+	/**프리랜서 정보 들고 오기
+	 * @param memberNo
+	 * @return
+	 */
+	public myProjectFreelancer selectFreelancerInfo(int freelancerNo) {
+
+		return sqlSession.selectOne("myProjectRequest.selectFreelancerInfo",freelancerNo);
 	}
 	
 }

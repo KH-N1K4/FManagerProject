@@ -215,6 +215,8 @@ $('.reportBtn').click(function(){
     modal.classList.toggle('show');
     if (modal.classList.contains('show')) {
       body.style.overflow = 'hidden';
+    }else{
+      body.style.overflow = 'auto';
     }
 });
 
@@ -223,6 +225,8 @@ modalClose.addEventListener('click', () => {
 
   if (modal.classList.contains('show')) {
     body.style.overflow = 'hidden';
+  }else{
+    body.style.overflow = 'auto';
   }
 });
 
@@ -346,6 +350,8 @@ $('.clientTradeRequest').click(function(){
   clientTradeRequestModal.classList.toggle('show');
   if (clientTradeRequestModal.classList.contains('show')) {
     body.style.overflow = 'hidden';
+  }else{
+    body.style.overflow = 'auto';
   }
 
 });
@@ -355,6 +361,8 @@ clientTradeRequestModalClose.addEventListener('click', () => {
 
   if (clientTradeRequestModal.classList.contains('show')) {
     body.style.overflow = 'hidden';
+  }else{
+    body.style.overflow = 'auto';
   }
 });
 

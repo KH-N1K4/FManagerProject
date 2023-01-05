@@ -1,5 +1,9 @@
 package com.manager.freelancer.myProject.model.vo;
 
+import java.util.List;
+
+import com.manager.freelancer.myProject.model.service.MyProjectFreelancerService;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,4 +30,7 @@ public class myProjectFreelancer {
 	private int gradeSaleProceeds;			//SALE_PROCEEDS 누적 판매 금액
 	private String gradeSaleProceedsString;			//SALE_PROCEEDS 누적 판매 금액
 	private int gradeSaleCount;				//SALE_COUNT 누적 판매 건수
+	//private int typeVal;				//SALE_COUNT 누적 판매 건수
+
+	private List<MyProjectFreelancerService> fieldList;
 }

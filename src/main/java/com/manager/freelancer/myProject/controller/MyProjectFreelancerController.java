@@ -173,6 +173,34 @@ public class MyProjectFreelancerController {
 		return new Gson().toJson(message);
 	}
 	
+	
+	/* --거래 테이블에서 의뢰인,프리랜서 둘다 작업 완료가 되면 정산 내역 테이블 같은 거래 번호일 떄 작업 상태 마감으로 변경 해주는 트리거 2개 
+		--DROP TRIGGER DONEFL_WORK_STATUS;
+		CREATE OR REPLACE TRIGGER DONEFL_WORK_STATUS
+		AFTER 
+		UPDATE OF MEMBER_DONE_FL,FREELANCER_DONE_FL ON TRADE
+		FOR EACH ROW
+		WHEN (OLD.FREELANCER_DONE_FL = 2 AND NEW.MEMBER_DONE_FL = 2)
+		--WHEN (OLD.MEMBER_DONE_FL = 2 AND NEW.FREELANCER_DONE_FL = 2)
+		BEGIN
+			  UPDATE SETTLEMENT
+			  SET WORK_STATUS = 4   --마감
+			  WHERE TRADE_NO =:OLD.TRADE_NO;
+		END;
+		
+		----------------------------------------------------------------------------
+		CREATE OR REPLACE TRIGGER DONEFL_WORK_STATUS2
+		AFTER 
+		UPDATE OF MEMBER_DONE_FL,FREELANCER_DONE_FL ON TRADE
+		FOR EACH ROW
+		WHEN (OLD.MEMBER_DONE_FL = 2 AND NEW.FREELANCER_DONE_FL = 2)
+		BEGIN
+			  UPDATE SETTLEMENT
+			  SET WORK_STATUS = 4   --마감
+			  WHERE TRADE_NO =:OLD.TRADE_NO;
+		END;
+	   */
+	
 	//작업완료하기 Ajax  --- 거래테이블에서 의뢰자,프리랜서 작업상태가 두개 다 완료이면 정산 내역 테이블에 마감 상태로 상태값 변함
 	//트리거 작성 완성해놓음 --트리거 이름:  DONEFL_WORK_STATUS /DONEFL_WORK_STATUS2
 	@PostMapping("/finishSubmit")
@@ -260,7 +288,7 @@ public class MyProjectFreelancerController {
 	public String myProjectGrade(HttpSession session,
 			@SessionAttribute("loginMember") Member loginMember,Model model) {
 		
-		myProjectFreelancer freelancerGrade =service.selectMyProjectGrade(loginMember.getMemberNo());
+		myProjectFreelancer freelancerGrade =service.selectMyProjectGrade(loginMember.getMemberNo(), 1); //타입: 1 프리랜서용(스케줄러용은 2번)
 		List<myProjectFreelancer> BasicGrade =service.selectBasicGrade();
 		model.addAttribute("freelancerGrade",freelancerGrade);
 		model.addAttribute("BasicGrade",BasicGrade);

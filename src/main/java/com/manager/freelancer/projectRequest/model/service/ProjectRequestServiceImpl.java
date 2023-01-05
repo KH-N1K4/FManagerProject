@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manager.freelancer.myProject.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
 import com.manager.freelancer.projectRequest.model.dao.ProjectRequestDAO;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
@@ -50,5 +51,22 @@ public class ProjectRequestServiceImpl implements ProjectRequestSerivce{
 	public myProjectFreelancerRequest selectUserRequest(int projectRequestNo) {
 		
 		return dao.selectUserRequest(projectRequestNo);
+	}
+
+	/**
+	 *프로젝트 의뢰 페이지에서 제안하면 프리랜서 판매건수 들고 옴
+	 */
+	@Override
+	public myProjectFreelancer selectMyProjectGrade(int memberNo) {
+		return dao.selectMyProjectGrade(memberNo);
+	}
+
+	/**
+	 *프로젝트 의뢰 페이지에서 제안하면 프리랜서 본인 정보
+	 */
+	@Override
+	public myProjectFreelancer selectFreelancerInfo(int memberNo) {
+		
+		return  dao.selectFreelancerInfo(memberNo);
 	}
 }

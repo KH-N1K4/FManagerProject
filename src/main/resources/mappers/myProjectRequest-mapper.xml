@@ -11,8 +11,10 @@
 			<result property="projectRequestBudget" column="PROJECT_REQUEST_BUDGET"/>					<!-- 프로젝트 의뢰 예산 -->
 			<result property="projectRequestBudgetString" column="PROJECT_REQUEST_BUDGET_STRING"/>					<!-- 프로젝트 의뢰 예산 -->
 			<result property="projectRecruitDate" column="REQUEST_RECRUIT_DATE"/>							<!-- 프로젝트 모집 마감일 -->
+			<result property="projectRecruitDateString" column="REQUEST_RECRUIT_DATE_STRING"/>							<!-- 프로젝트 모집 마감일 -->
 			<result property="projectWorkDate" column="REQUEST_WORK_DATE"/>										<!-- 프로젝트 작업 마감일 -->
-			<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD "/>							<!-- 프로젝트 작업기간 -->
+			<result property="projectWorkDateString" column="REQUEST_WORK_DATE_STRING"/>										<!-- 프로젝트 작업 마감일 -->
+			<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD"/>							<!-- 프로젝트 작업기간 -->
 			<result property="projectCreateDate" column="PROJECT_REQUEST_CREATE_DATE"/>				<!-- 프로젝트 의뢰 등록일 -->
 			<result property="mainCategoryNo" column="MAIN_CATEGORY_NO"/>											<!-- 카테고리1 번호(FK) -->
 			<result property="mainCategoryName" column="MAIN_CATEGORY_NAME"/>											<!-- 카테고리1 번호(FK) -->
@@ -32,10 +34,16 @@
 			<result property="proposalCreateDate" column="PROPOSAL_CREATE_DATE"/>											<!-- 프로젝트 제안 등록일 -->
 			<result property="freelancerNo" column="FREELANCER_NO"/>																	<!-- 프리랜서 번호(FK) -->
 			<result property="memberNo" column="MEMBER_NO"/>		
+			<result property="memberNickName" column="MEMBER_NICKNAME"/>		
 			
 			<collection property="requestfileList" 
 	      javaType="java.util.ArrayList" ofType="RequestFile"
 	      select="selectRequestFileList"
+	      column="PROJECT_REQUEST_NO"/> 
+	      
+	    <collection property="proposalList" 
+	      javaType="java.util.ArrayList" ofType="MyProject"
+	      select="selectProposalList"
 	      column="PROJECT_REQUEST_NO"/> 
 	      													
 		</resultMap>
@@ -45,6 +53,36 @@
 			<result property="projectRequestNo" column="PROJECT_REQUEST_NO"/>	
 			<result property="requestFilePath" column="REQUEST_FILE_PATH"/>	
 			<result property="requestFileOrder" column="REQUEST_FILE_ORDER"/>		
+		</resultMap>
+		
+		<resultMap type="MyProject" id="MyProject">	
+			<id property="proposalNo" column="PROJECT_PROPOSAL_NO"/>	
+			<result property="freelancerNo" column="FREELANCER_NO"/>	
+			<result property="projectRequestNo" column="PROJECT_REQUEST_NO"/>	
+		</resultMap>
+		
+		<!-- 등급 -->
+		<resultMap type="myProjectFreelancer" id="freelancer_rm">
+			<id property="freelancerNo" column="FREELANCER_NO"/>	
+			<result property="gradeNo" column="GRADE_NO"/>
+			<result property="gradeName" column="GRADE_NAME"/>
+			<result property="gradeSatisfaction" column="SATISFACTION"/>
+			<result property="gradeInquityRate" column="INQUIRY_RATE"/>
+			<result property="gradeCompletionRate" column="COMPLETION_RATE"/>
+			<result property="gradeSaleProceeds" column="SALE_PROCEEDS"/>
+			<result property="gradeSaleProceedsString" column="SALE_PROCEEDS_STRING"/>
+			<result property="gradeSaleCount" column="SALE_COUNT"/>
+			
+				<collection property="fieldList" 
+	      javaType="java.util.ArrayList" ofType="myProjectFreelancerService"
+	      select="selectfieldList"
+	      column="FREELANCER_NO"/> 
+		</resultMap>
+		
+		<resultMap type="myProjectFreelancerService" id="field_rm">	
+			<id property="freelancerNo" column="FREELANCER_NO"/>	
+			<result property="mainCategoryNo" column="MAIN_CATEGORY_NO"/>	
+			<result property="mainCategoryName" column="MAIN_CATEGORY_NAME"/>	
 		</resultMap>
 		
 		<!-- 카태고리 들고오기 -->
@@ -123,7 +161,9 @@
 		</select>
 		
 		<select id="selectUserRequest" resultMap="request_rm">
-		SELECT p.*,TO_CHAR(PROJECT_REQUEST_BUDGET, 'FM999,999,999,999') PROJECT_REQUEST_BUDGET_STRING 
+		SELECT p.*,TO_CHAR(PROJECT_REQUEST_BUDGET, 'FM999,999,999,999') PROJECT_REQUEST_BUDGET_STRING,
+		to_char(REQUEST_RECRUIT_DATE,'YYYY-MM-DD') REQUEST_RECRUIT_DATE_STRING,
+		to_char(REQUEST_WORK_DATE,'YYYY-MM-DD') REQUEST_WORK_DATE_STRING 
 		FROM (SELECT * FROM PROJECT_REQUEST JOIN "MEMBER" USING(MEMBER_NO)) p
 		WHERE PROJECT_REQUEST_NO=#{projectRequestNo}
 		</select>
@@ -133,5 +173,26 @@
 		FROM REQUEST_FILE
 		WHERE PROJECT_REQUEST_NO=#{projectRequestNo}
 		</select>
+		
+		<select id="selectProposalList" resultMap="MyProject">
+		SELECT *
+		FROM PROJECT_PROPOSAL
+		WHERE PROJECT_REQUEST_NO=#{projectRequestNo}
+		</select>
+		
+		<select id="selectFreelancerInfo" resultMap="freelancer_rm">
+		SELECT FREELANCER_NO,GRADE_NO,GRADE_NAME
+		FROM FREELANCER 
+		JOIN GRADE USING(GRADE_NO)
+		WHERE FREELANCER_NO = #{freelancerNo}
+		</select>
+		
+		<select id="selectfieldList" resultMap="field_rm">
+		SELECT *
+		FROM FIELD
+		JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		WHERE FREELANCER_NO = #{freelancerNo}
+		</select>
+		
 	
 </mapper>
