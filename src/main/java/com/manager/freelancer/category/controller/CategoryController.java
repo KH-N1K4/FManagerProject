@@ -174,8 +174,6 @@ public class CategoryController {
 			}
 		}
 		
-		
-		
 		model.addAttribute("fService",fService);
 		
 		
@@ -265,12 +263,37 @@ public class CategoryController {
 	
 	
 	@GetMapping("/service/{serviceNo}")
-	public String viewService2(@PathVariable("serviceNo") int serviceNo, Model model) {	
+	public String viewService2(@PathVariable("serviceNo") int serviceNo, Model model,
+			@SessionAttribute(value="loginMember",required = false) Member loginMember) {	
+	
 		
 		// 게시글 상세조회 서비스 호출 
 		Service fService=service.viewService(serviceNo);
 		
 		
+		// + 좋아요 수, 좋아요 여부
+		if(fService!=null) {
+			
+			// BOARD_LIKE 테이블에 
+			// 게시글번호, 로그인한 회원번호가 일치하는 행이 있는지 확인 
+			if(loginMember!=null) { // 로그인 상태인 경우 
+				
+				Map<String, Object> map=new HashMap<String, Object>();
+				
+				map.put("serviceNo", fService.getServiceNo());
+				map.put("memberNo", loginMember.getMemberNo());
+				
+				
+				int result=service.serviceLikeCheck(map);
+				
+				if(result>0) {
+					model.addAttribute("likeCheck","on");
+				}
+				
+				
+			}
+		}
+				
 		model.addAttribute("fService",fService);
 		
 		
