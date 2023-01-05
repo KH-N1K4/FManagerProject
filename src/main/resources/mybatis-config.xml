@@ -59,6 +59,7 @@
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry" alias="myProjectServiceInquiry"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.myProjectTrade" alias="myProjectTrade"/>
 		<typeAlias type="com.manager.freelancer.myProject.model.vo.MyProjectPayment" alias="MyProjectPayment"/>
+		<typeAlias type="com.manager.freelancer.myProject.model.vo.RequestFile" alias="RequestFile"/>
 		
 	
 		<typeAlias type="com.manager.freelancer.category.model.vo.MainCategory" alias="MainCategory"/>

@@ -369,5 +369,76 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		return dao.selectBasicGrade();
 	}
 
+	/**
+	 * 전체 등급 조건 들고 오기
+	 */
+	@Override
+	public List<myProjectFreelancer> selectFreelancerListALL() {
+	
+		return dao.selectFreelancerListALL();
+	}
+
+	/**
+	 * 프리랜서 등급 상승
+	 */
+	@Override
+	public int LevelUPSchedulingUpdate(List<myProjectFreelancer> seccessMember) {
+		System.out.println(seccessMember);
+		int result =0;
+		
+		for(int i=2; i<=4; i++) {
+			List<String> temp = new ArrayList<String>();
+				
+			for(myProjectFreelancer mem :seccessMember) {
+				System.out.println(mem.getGradeNo());
+				System.out.println(i);
+				if(mem.getGradeNo() == i) {
+					temp.add(mem.getFreelancerNo() + "");
+				}
+			}
+		
+			System.out.println(temp);
+			System.out.println(temp.size());
+			if(temp.size() != 0 ) {
+				 result = dao.LevelUPSchedulingUpdate(temp,i);
+			}
+			
+		}
+		
+			
+		return result;
+	}
+
+	/**
+	 * 프리랜서 등급 하락
+	 */
+	@Override
+	public int LevelDownSchedulingUpdate(List<myProjectFreelancer> downMember) {
+		System.out.println(downMember);
+		int result =0;
+		
+		for(int i=1; i<4; i++) {
+			List<String> temp = new ArrayList<String>();
+				
+			for(myProjectFreelancer mem :downMember) {
+				System.out.println(mem.getGradeNo());
+				System.out.println(i);
+				if(mem.getGradeNo() == i) {
+					temp.add(mem.getFreelancerNo() + "");
+				}
+			}
+		
+			System.out.println(temp);
+			System.out.println(temp.size());
+			if(temp.size() != 0 ) {
+				 result = dao.LevelDownSchedulingUpdate(temp,i);
+			}
+			
+		}
+		
+			
+		return result;
+	}
+
 	
 }
