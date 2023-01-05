@@ -6,8 +6,8 @@
 
     
 
-    <div class="modal_body">
-      <span class="modal_close">x</span>
+    <div class="reviewModal_body">
+      <span class="reviewModal_close">x</span>
       <div class="myprojectReview">
         <form action ="" class="myprojectReviewfrm" method="get" name="myprojectReviewfrm" id="myprojectReviewfrm">
           <div class="title"><span>리뷰하기</span></div>

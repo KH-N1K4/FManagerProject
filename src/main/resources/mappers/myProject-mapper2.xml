@@ -18,6 +18,7 @@
 		<result property="serviceNo" column="SERVICE_NO" />
 		<result property="serviceTitle" column="SERVICE_TITLE" />
 		<result property="memberNo" column="MEMBER_NO" />
+		<result property="memberName" column="MEMBER_NAME" />
 		<result property="freelancerNo" column="FREELANCER_NO" />
 		<result property="freelancerName" column="FREELANCER_NAME" />
 		<result property="workNo" column="WORK_NO" />
@@ -123,7 +124,8 @@
 	WORK_STATUS, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) FREELANCER_NAME,
 	CASE WHEN MEMBER_DONE_FL=2 OR WORK_STATUS=2 OR WORK_STATUS=4 THEN '작업 완료' 
 		 WHEN WORK_STATUS=3 THEN '주문 취소'
-		 ELSE '진행중' END AS WORK_PROGRESS
+		 ELSE '진행중' END AS WORK_PROGRESS,
+	(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=#{loginMemberNo}) AS MEMBER_NAME
 	FROM TRADE 
 	JOIN SERVICE USING (SERVICE_NO)
 	JOIN SETTLEMENT ON (TRADE.TRADE_NO=SETTLEMENT.TRADE_NO)

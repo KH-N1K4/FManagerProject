@@ -86,9 +86,9 @@ public class MyProjectController_2 {
 	}
 	
 	// 회원 작업 완료 버튼 누르면
-	@GetMapping("/myProject/memberDone/{tradeNo}")
+	@GetMapping("/myProject/memberDone")
 	@ResponseBody
-	public String memberDone(Model model, @SessionAttribute("loginMember") Member loginMember,
+	public Map<String, Object> memberDone(Model model, @SessionAttribute("loginMember") Member loginMember,
 			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
 			@RequestParam(value="searchInput",required=false, defaultValue = "") String searchInput,
 			@RequestParam(value="type" , required = false, defaultValue = "0") int type,
@@ -97,6 +97,8 @@ public class MyProjectController_2 {
 			@RequestParam int tradeNo) {
 		
 		int result = service.memberDone(tradeNo);
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		if(result>0) {
 			List<FreelancerService> maincategoryList = service.selectmaincategoryList();
@@ -112,11 +114,16 @@ public class MyProjectController_2 {
 			option.put("searchDate2", searchDate2);
 			option.put("searchInput", searchInput);
 			
-			Map<String, Object> resultMap = service.selectPurchaseList(option, cp);
+			resultMap = service.selectPurchaseList(option, cp);
+			resultMap.put("type", type);
+			resultMap.put("searchDate1", searchDate1);
+			resultMap.put("searchDate2", searchDate2);
+			resultMap.put("searchInput", searchInput);
+			model.addAttribute("resultMap",resultMap);
 			
 		}
 		
-		return "redirect:";
+		return resultMap;
 	}
 	
 	

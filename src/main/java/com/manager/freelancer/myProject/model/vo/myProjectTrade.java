@@ -17,6 +17,7 @@ public class myProjectTrade {
 	private int serviceNo;			//SERVICE_NO 서비스 번호(FK)
 	private String serviceTitle;
 	private int memberNo;			//MEMBER_NO 회원 번호-의뢰인(FK)
+	private String memberName;			//MEMBER_NO 회원 번호-의뢰인(FK)
 	private int freelancerNo;
 	private String freelancerName;
 	

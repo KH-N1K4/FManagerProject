@@ -80,6 +80,10 @@ public class MyProjectDAO_2 {
 		return sqlSession.selectList("myProjectMapper2.selectPurchaseList", option, rowBounds);
 	}
 
+	/** 회원 작업 완료
+	 * @param tradeNo
+	 * @return
+	 */
 	public int memberDone(int tradeNo) {
 		return sqlSession.update("myProjectMapper2.memberDone",tradeNo);
 	}
