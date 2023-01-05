@@ -20,7 +20,6 @@
   
 
     <div class="main">
-     ${freelancer }
 
         <div id="expertDetailTitle">판매자 정보</div>
         <div class="expertSummary">
@@ -58,15 +57,44 @@
         ${freelancer.freelancerIntro }
         </div>
         
-        ${freelancer.careerList }
-        ${freelancer.majorList }
-        ${freelancer.licenseList }
+        <c:if test="${not empty freelancer.careerList}">
+        <h4>경력</h4>
+	       <c:forEach var="career1" items="${freelancer.careerList }">
+	       	<span class="plus">${career1.careerCompanyName }/${career1.careerCompanyDepartment }/
+	       	${career1.careerCompanyPosition }/${career1.careerCompanyRegion }/${career1.careerCompanyPeriod1 }</span>
+	       </c:forEach>
+        </c:if>
+        
+        <c:if test="${not empty freelancer.majorList}">
+        <h4>학력</h4>
+	       <c:forEach var="major" items="${freelancer.majorList }">
+	       	<span class="plus">${major.majorAcademyName }/${major.majorName }/
+	       	${major.majorGraduateStatus }</span>
+	       </c:forEach>
+        </c:if>
+        
+        <c:if test="${not empty freelancer.licenseList}">
+        <h4>자격증</h4>
+	       <c:forEach var="license" items="${freelancer.licenseList }">
+	       	<span class="plus">${license.licenseName }/${license.licenseDate }/
+	       	${license.licenseAgency }</span>
+	       </c:forEach>
+        </c:if>
+       
+       
 
         <div class="portfolioTitle">포트폴리오</div>
         <div class="portfolioSection">
         	<c:forEach var="portfolio" items="${freelancer.portfolioList }">
-	        	<a href="">
-	                <div class="portfolioPhoto"> <img alt="" src="${portfolio.portfolioThumbnail }" style="width:100%;"> </div>
+	        	<a>
+	                <div class="portfolioPhoto"> 
+		                <img alt="" src="${portfolio.portfolioThumbnail }" style="width:100%;"> 
+		            	<span class="hidden">${portfolio.portfolioTitle }</span>
+		            	<span class="hidden">${portfolio.portfolioContent }</span>
+		            	<span class="hidden">${portfolio.portfolioThumbnail }</span>
+		            	<span class="hidden">${portfolio.portfolioFilePath }</span>
+	            	</div>
+	            
 	            </a>
         	</c:forEach>  
         </div>
@@ -88,8 +116,14 @@
         	</c:forEach>   
     	</div>
     </div>
+    
+     <div class="modal_portfolioDetail">
+             <jsp:include page="/WEB-INF/views/member/freelancer/portfolioDetail.jsp" /> 
+     </div>
 
      <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+     
+      <script src="/resources/js/category/portfolioModal.js"></script> 
 
 </body>
 </html>
