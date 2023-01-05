@@ -20,7 +20,7 @@ public class LevelUPScheduling {
 	
 	private Logger logger = LoggerFactory.getLogger(LevelUPScheduling.class);
 	
-	@Scheduled(cron = "0 0 0 0 1-12/6 *") // 6개월 자동 등업 스케줄러
+	@Scheduled(cron = "0 0 0 1 1-12/6 *") // 6개월 자동 등업 스케줄러
 	 public void updateLevelUPMember() { 
 	 
 		logger.debug("*** : " + "스케줄러 시작 ");
