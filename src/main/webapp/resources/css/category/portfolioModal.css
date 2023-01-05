@@ -1,0 +1,71 @@
+.modal_body{
+    width: 800px;
+    height: 600px;
+    border:1px solid black;
+    position: relative;
+    overflow:scroll;
+    z-index:10;
+}
+
+.modal_body>button:first-child{
+    position: absolute;
+    right: 10px;
+    top:5px;
+}
+
+#writerInfo{
+    width: 100%;
+    height: 200px;
+    position: relative;
+}
+#writerInfo>div{
+    display: inline-block;
+}
+
+#writerPhoto{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: lightcoral;
+    margin:20px;
+}
+#writerPhoto > img{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: lightcoral;
+}
+
+#writerName{
+    position:relative;
+    top:-120px;
+    font-weight: bold;
+    font-size: 20px;
+   
+}
+
+#portfolioSection{
+    margin:10px 30px;
+}
+
+#portfolioTitle{
+    font-size: 25px;
+}
+
+#portfolioContent{
+    font-size: 16px;
+    /* margin:20px 0; */
+}
+
+.portfolioPhoto1{
+    width: 800px;
+    height: 800px;
+    background-color: aliceblue;
+    margin:auto;
+}
+.portfolioPhoto1 > img{
+    width: 800px;
+    height: 800px;
+    background-color: aliceblue;
+    margin:auto;
+}

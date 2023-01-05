@@ -166,9 +166,9 @@
     
     <resultMap  type="Major" id="major_rm">
     	  <id property="majorNo" column="MAJOR_NO"/>
-	      <result property="majorAcademyName" column="MAJOR_ACADEMY_NAME"/>
+	      <result property="majorAcademyName" column="ACADEMY_NAME"/>
 	      <result property="majorName" column="MAJOR_NAME"/>
-	      <result property="majorGraduateStatus" column="MAJOR_GRADUATE_STATUS"/>
+	      <result property="majorGraduateStatus" column="GRADUATE_STATUS"/>
     </resultMap>
     
     <resultMap  type="Portfolio" id="portfolio_rm">
@@ -541,12 +541,12 @@
 		SELECT * FROM CAREER
 		WHERE FREELANCER_NO=#{freelancerNo}
 	</select>
-	<select id="selectMajorList" resultMap="major_rm">
-		SELECT * FROM CAREER 
+	<select id="selectLicenseList" resultMap="license_rm">
+		SELECT * FROM LICENSE 
 		WHERE FREELANCER_NO=#{freelancerNo}
 	</select>
-	<select id="selectLicenseList" resultMap="license_rm">
-		SELECT * FROM CAREER 
+	<select id="selectMajorList" resultMap="major_rm">
+		SELECT * FROM MAJOR 
 		WHERE FREELANCER_NO=#{freelancerNo}
 	</select>
 	<select id="selectPortfolioList" resultMap="portfolio_rm">
