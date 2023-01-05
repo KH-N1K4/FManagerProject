@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.manager.freelancer.category.model.service.CategoryService;
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Category;
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.category.model.vo.Trade;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
@@ -337,9 +338,11 @@ public class CategoryController {
 	public String freelancerDetail(@PathVariable("freelancerNo") int freelancerNo, Model model) {
 		
 		
-		Freelancer freelancer =service.freelancerDetail(freelancerNo);
+		Freelancer1 freelancer =service.freelancerDetail(freelancerNo);
 		
-		model.addAttribute(freelancer);
+		System.out.println(freelancer);
+		
+		model.addAttribute("freelancer",freelancer);
 		
 		return "/member/freelancer/freelancerDetail";
 	}

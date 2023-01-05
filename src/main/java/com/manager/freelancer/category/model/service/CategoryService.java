@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Category;
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.category.model.vo.ImageFile;
 import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.category.model.vo.Trade;
@@ -47,7 +48,7 @@ public interface CategoryService {
 	// 거래 완료 ajax
 	int tradeComplete(Trade temp);
 
-	Freelancer freelancerDetail(int freelancerNo);
+	Freelancer1 freelancerDetail(int freelancerNo);
 	
 
 }
