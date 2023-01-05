@@ -31,6 +31,7 @@ public class Freelancer1 {
 	private int freelancerPeriod; 			// 총 경력기간
 	private int regionNo;					// 지역이름(번호)
 	private String regionName;
+	private String memberProfile;
 	
 	private int bankCode;
 	private long bankAccountNo;
