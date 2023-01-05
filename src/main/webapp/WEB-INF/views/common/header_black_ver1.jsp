@@ -29,7 +29,7 @@
             <li><a href="/manager/tradeReportList">거래 신고</a></li>
             <li><a href="/manager/reviewList">리뷰 신고</a></li>
             <li><a href="/manager/serviceList">서비스</a></li>
-            <li><a href="/manager/projectRequestList/0/0/0">프로젝트 의뢰</a></li>
+            <li><a href="/manager/projectRequestList">프로젝트 의뢰</a></li>
             <li><a href="/manager/managerInquiryList">이용문의</a></li>
         </ul>
 
