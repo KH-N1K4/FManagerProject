@@ -99,6 +99,7 @@
   flex-direction: row;
   text-decoration: none;
   color: black;
+  justify-content: center;
 }
 
 /* .myProject_link{
@@ -125,9 +126,13 @@
   justify-content: space-between;
 }
 
+/* 내 프로젝트 제목 */
 .info_title{
   font-weight: bold;
   font-size: 20px;
+}
+.info_title a{
+  color: black;
 }
 
 .info_content{

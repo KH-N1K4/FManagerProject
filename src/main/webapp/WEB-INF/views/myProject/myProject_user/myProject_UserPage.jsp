@@ -60,7 +60,7 @@
 
             </div>
             <%-- container_header 끝 --%>
-
+            <section class="contain">
             <!-- 프로젝트 의뢰 1번 -->
             <c:if test="${not empty myProject}">
 	              <c:forEach items="${myProject}" var="myProject">
@@ -126,6 +126,7 @@
             <c:if test="${empty myProject}"> 
                 <div class="myProject_content">등록된 프로젝트가 없습니다.</div>
             </c:if>
+            </section>
             <!-- 프로젝트 1번 -->
 
             <c:if test="${listCount != 0}">

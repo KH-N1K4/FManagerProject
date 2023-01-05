@@ -125,7 +125,8 @@ public class MyProjectContorller {
 	@ResponseBody
 	public Map<String, Object> categoryTypeSelect(Model model, @RequestParam String optionVal, @SessionAttribute("loginMember") Member loginMember,
 												  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
-		
+			
+		System.out.println(optionVal);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map = service.categoryTypeSelect(optionVal,cp, loginMember.getMemberNo());

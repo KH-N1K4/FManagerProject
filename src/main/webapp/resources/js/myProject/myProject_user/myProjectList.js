@@ -5,7 +5,7 @@ function selectChange(){
     // 페이지 처리 구역 
         const pagination = document.querySelector(".pagination");
     // 생성할 구역을 포함하는 div
-        const container = document.querySelector(".container");
+        const container = document.querySelector(".contain");
     // 생성할 구역 
         const content = document.querySelectorAll(".myProject_content");
     // 카테고리 selectBox
@@ -22,6 +22,7 @@ function selectChange(){
 
                 if (map != null) {
 
+                    console.log(optionVal);
                     // select check 값 얻어오기
                     const options = srchOption.childNodes;
                     for (o of options) {
@@ -42,7 +43,7 @@ function selectChange(){
     
                     }
 
-                    if( map.myProject != null){  // 게시글이 존재할 때
+                    if( map.myProject.length != 0){  // 게시글이 존재할 때
 
                         for (myProject of map.myProject) {
 
@@ -192,8 +193,6 @@ function selectChange(){
                         li2.append(a2);
                         pagination.append(li2);
 
-                        console.log("startPage" + map.pagination.startPage);
-                        console.log("endPage" + map.pagination.endPage);
 
                         /* 숫자가 안나와 */
                         for (i = map.pagination.startPage; i <= map.pagination.endPage; i++) {

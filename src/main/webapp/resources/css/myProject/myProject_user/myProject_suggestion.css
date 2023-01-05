@@ -218,3 +218,8 @@ th{
   letter-spacing: 0 !important;
 }
 /* ========================== */
+
+
+.suggestionTable td{  
+  text-align: center;
+}

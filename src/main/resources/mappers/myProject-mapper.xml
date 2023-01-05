@@ -65,9 +65,7 @@
 		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
-	<!-- 	<if test="mainCategoryNo != 0">
-			AND MAIN_CATEGORY_NO = #{mainCategoryNo}
-		</if> -->
+		ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
     </select>
 
 	<!-- 내 프로젝트 조회하기 --> 
@@ -90,9 +88,7 @@
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
-	   <!--  <if test="mainCategoryNo != 0">
-			AND MAIN_CATEGORY_NO = #{mainCategoryNo}
-		</if>  -->
+		ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
 	</select>
 	
 	<!-- 내 프로젝트 등록하기 -->
@@ -162,23 +158,29 @@
 		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
-		<choose>
-			<when test='optionVal eq "1"'>
+			<if test='optionVal eq "0"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "1"'>
 				AND MAIN_CATEGORY_NO = 1
-			</when>
-			<when test='optionVal eq "2"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "2"'>
 				AND MAIN_CATEGORY_NO = 2
-			</when>
-			<when test='optionVal eq "3"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "3"'>
 				AND MAIN_CATEGORY_NO = 3
-			</when>
-			<when test='optionVal eq "4"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "4"'>
 				AND MAIN_CATEGORY_NO = 4
-			</when>
-			<when test='optionVal eq "5"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "5"'>
 				AND MAIN_CATEGORY_NO = 5
-			</when>
-		</choose>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
   	</select>
   	
   	<!-- 내 프로젝트 조회 ajax 조회 -->
@@ -201,23 +203,29 @@
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
-		<choose>
-			<when test='optionVal eq "1"'>
+			<if test='optionVal eq "0"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "1"'>
 				AND MAIN_CATEGORY_NO = 1
-			</when>
-			<when test='optionVal eq "2"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "2"'>
 				AND MAIN_CATEGORY_NO = 2
-			</when>
-			<when test='optionVal eq "3"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "3"'>
 				AND MAIN_CATEGORY_NO = 3
-			</when>
-			<when test='optionVal eq "4"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "4"'>
 				AND MAIN_CATEGORY_NO = 4
-			</when>
-			<when test='optionVal eq "5"'>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
+			<if test='optionVal eq "5"'>
 				AND MAIN_CATEGORY_NO = 5
-			</when>
-		</choose>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
+			</if>
   	</select>
 	
   	

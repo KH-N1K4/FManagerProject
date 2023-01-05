@@ -130,11 +130,15 @@ public class MyProjectDAO {
 	 * @return
 	 */
 	public int getChangeTypeCount(String optionVal, int memberNo) {
-		
+		System.out.println("count optionVal = "+ optionVal);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); 
-		map.put("mainCategoryNo", optionVal);
-		return sqlSession.selectOne("myProjectMapper.getChangeTypeCount", map);
+		map.put("optionVal", optionVal);
+		
+		int result = sqlSession.selectOne("myProjectMapper.getChangeTypeCount", map);
+		
+		System.out.println("result"+result);
+		return result;
 	}
 
 	/** 내 프로젝트 조회 ajax 조회
@@ -144,13 +148,14 @@ public class MyProjectDAO {
 	 */
 	public List<MyProject> categoryTypeSelect(String optionVal, Pagination pagination,int memberNo) {
 		
+		System.out.println("select optionVal = "+ optionVal);
 		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); 
 	    
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); 
-		map.put("mainCategoryNo", optionVal);
+		map.put("optionVal", optionVal);
 		
 		return sqlSession.selectList("myProjectMapper.categoryTypeSelect", map, rowBounds);
 
