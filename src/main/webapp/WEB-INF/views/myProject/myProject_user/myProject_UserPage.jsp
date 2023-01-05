@@ -17,7 +17,8 @@
 <body>
   <main>
     <!-- hearder -->
-	  <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
+	  <%-- <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/> --%>
+	  <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
 
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 

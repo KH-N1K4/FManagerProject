@@ -19,7 +19,8 @@
 <body>
   <main>
     <!-- hearder salesList-->
-    <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
+    <%-- <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/> --%>
+     <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
     <!-- hearder -->
     <c:if test="${not empty param}">
         <c:forEach var="parameter" items="${param}">

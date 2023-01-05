@@ -113,7 +113,8 @@ public class CategoryController {
 	public Map<String, Object> selectCategoryList(@RequestParam(required = false) String order,@RequestParam String mainCategoryNo, 
 			@RequestParam String thirdCategoryNo, 
 			@RequestParam(required = false) String budget,@RequestParam(required = false) String grade, 
-			Model model,@RequestParam(value="cp", required=false, defaultValue="1") int cp){
+			Model model,@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+			@SessionAttribute(value="loginMember",required = false) Member loginMember){
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		
@@ -125,6 +126,7 @@ public class CategoryController {
 		map.put("mainCategoryNo", mainCategoryNo);
 		map.put("thirdCategoryNo", thirdCategoryNo);
 		map.put("cp", cp);
+		map.put("memberNo", loginMember.getMemberNo());
 		
 		
 		
