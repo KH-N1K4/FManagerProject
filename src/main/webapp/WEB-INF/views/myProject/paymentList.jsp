@@ -111,10 +111,10 @@
               <c:if test="${not empty paymentList}">
 
                 <!-- 첫 페이지로 이동 -->
-                <li><a href="/manager/paymentList?cp=1${sURL}">&lt;&lt;</a></li>
+                <li><a href="/member/myProject/paymentList?cp=1${sURL}">&lt;&lt;</a></li>
 
                 <!-- 이전 목록 마지막 번호로 이동 -->
-                <li><a href="/manager/paymentList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+                <li><a href="/member/myProject/paymentList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
 
 
 
@@ -132,7 +132,7 @@
                     
                     <c:otherwise>
                       <!-- 현재 페이지를 제외한 나머지 -->
-                      <li><a href="/manager/paymentList?cp=${i}${sURL}">${i}</a></li>
+                      <li><a href="/member/myProject/paymentList?cp=${i}${sURL}">${i}</a></li>
                     </c:otherwise>
                   
                   </c:choose>
@@ -142,10 +142,10 @@
                 
                 
                 <!-- 다음 목록 시작 번호로 이동 -->
-                <li><a href="/manager/paymentList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+                <li><a href="/member/myProject/paymentList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
 
                 <!-- 끝 페이지로 이동 -->
-                <li><a href="/manager/paymentList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                <li><a href="/member/myProject/paymentList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
                 </c:if>
 
               </ul>

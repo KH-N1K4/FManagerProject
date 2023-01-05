@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <c:set var="purchaseList" value="${resultMap.purchaseList}"/>
 <c:set var="pagination" value="${resultMap.pagination}"/>
+<c:set var="loginMember" value="${sessionScope.loginMember}"/>
+<c:set var="message" value="${message}"/>
 <c:set var="i" value="0"/>
 
 <!DOCTYPE html>
@@ -16,10 +18,19 @@
   <link rel="stylesheet" href="/resources/css/myProject/myProject_myPurchaseList.css">
   
 </head>
-<body>
+<body id="mainBody">
   <main>
     <!-- hearder -->
     <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
+
+    <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+            <c:if test="${parameter.key != 'cp'}">
+                <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+            </c:if>
+        </c:forEach>
+    </c:if>
+
     <!-- hearder -->
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
@@ -39,7 +50,7 @@
                   <!-- 상단 selectbox -->
                   <div class="selectbox">
                     <select  id = "selectType" class="srchOption box" name="type" title="${type}">
-                      <option value="0" selected>카테고리 선택</option>
+                      <option value="0">카테고리 선택</option>
                       <option value="1">디자인</option>
                       <option value="2">IT·프로그래밍</option>
                       <option value="3">영상</option>
@@ -124,19 +135,22 @@
                           </td>
                           <td class="tc">
                             <c:if test="${purchase.workCount==0 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">
-                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
-                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type">신고</a>
+                              <a id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
+                              <a id="reportBtn" title="" class="reportBtn btn_type">신고</a>
                             </c:if>
                             <c:if test="${purchase.workCount>=1 && purchase.memberDoneFL==1}">
                               <a id="${purchase.tradeNo}" title="" class="finishBtn btn_type">완료</a>
-                              <a href="#" id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
-                              <a href="#" id="reportBtn" title="" class="reportBtn btn_type">신고</a>
+                              <a id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
+                              <a id="reportBtn" title="" class="reportBtn btn_type">신고</a>
                             </c:if>
                             <c:if test="${(purchase.workStatus==2 || purchase.workStatus==4) && purchase.memberDoneFL==2}">
-                              <a href="#" id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
+                              <a id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
                             </c:if>
 
-                          </td>                
+                          </td>
+                          <input type="hidden" id="hiddenTradeNo" value="${purchase.tradeNo}">                
+                          <input type="hidden" id="hiddenMemberName" value="${purchase.memberName}">                
+                          <input type="hidden" id="hiddenMemberNo" value="${purchase.memberNo}">                
                         </tr>
                       </c:forEach>
                     </c:if>
@@ -149,6 +163,18 @@
 
             </div>
           </div>
+
+          <div class="report-modal">
+            <jsp:include page="/WEB-INF/views/myProject/modal/myproject_report.jsp" /> 
+          </div>
+          <div class="cancel-modal">
+            <jsp:include page="/WEB-INF/views/myProject/modal/myproject_cancel.jsp" /> 
+          </div>
+          <div class="review-modal">
+            <jsp:include page="/WEB-INF/views/myProject/modal/myproject_review.jsp" /> 
+          </div>
+
+
               <!-- pagination -->
           <div class="pagination-area">
 
@@ -157,10 +183,10 @@
               <c:if test="${not empty purchaseList}">
 
                 <!-- 첫 페이지로 이동 -->
-                <li><a href="/manager/purchaseList?cp=1${sURL}">&lt;&lt;</a></li>
+                <li><a href="/member/myProject/myPurchaseList?cp=1${sURL}">&lt;&lt;</a></li>
 
                 <!-- 이전 목록 마지막 번호로 이동 -->
-                <li><a href="/manager/purchaseList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+                <li><a href="/member/myProject/myPurchaseList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
 
 
 
@@ -178,7 +204,7 @@
                     
                     <c:otherwise>
                       <!-- 현재 페이지를 제외한 나머지 -->
-                      <li><a href="/manager/purchaseList?cp=${i}${sURL}">${i}</a></li>
+                      <li><a href="/member/myProject/myPurchaseList?cp=${i}${sURL}">${i}</a></li>
                     </c:otherwise>
                   
                   </c:choose>
@@ -188,22 +214,28 @@
                 
                 
                 <!-- 다음 목록 시작 번호로 이동 -->
-                <li><a href="/manager/purchaseList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+                <li><a href="/member/myProject/myPurchaseList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
 
                 <!-- 끝 페이지로 이동 -->
-                <li><a href="/manager/purchaseList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                <li><a href="/member/myProject/myPurchaseList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
                 </c:if>
 
               </ul>
             </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
-        <div class="modal">
-          <jsp:include page="/WEB-INF/views/myProject/modal/myproject_review.jsp" /> 
-        </div>
+       
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
   </main>
+  <c:if test="${not empty message}">
+        <script>
+        alert("${message}");
+        </script>
+
+        <%-- message 1회 출력 후 삭제 --%>
+        <c:remove var="message"/>
+     </c:if>
 
   <!-- **************************************footer*************************************-->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -211,7 +243,7 @@
   
   <!-- jQuery  -->
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
+  
   <script src="/resources/js/myProject/myPurchaseList.js"></script>
 </body>
 </html>
