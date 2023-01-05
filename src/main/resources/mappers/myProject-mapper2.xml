@@ -173,7 +173,14 @@
   	INSERT INTO TRADE_REPORT VALUES(
   	SEQ_TRADE_REPORT_NO.NEXTVAL, #{reportPersonNo}, #{reportedPersonNo},#{reportContent},
   	DEFAULT, #{filePath}, #{tradeNo}, DEFAULT, 1)
+  </insert>
   
+  
+  <!-- 주문 취소하기 -->
+  <insert id="insertTradeReportCancel">
+  	INSERT INTO TRADE_REPORT VALUES(
+  	SEQ_TRADE_REPORT_NO.NEXTVAL, #{reportPersonNo}, #{reportedPersonNo},#{reportContent},
+  	DEFAULT, #{filePath}, #{tradeNo}, DEFAULT, 2)
   </insert>
   
   	

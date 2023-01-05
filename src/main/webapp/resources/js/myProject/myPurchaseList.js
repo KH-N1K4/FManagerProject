@@ -319,9 +319,17 @@ function cancelModal(){
         body.style.overflow = 'hidden';
       }
 
+      document.getElementById("serviceTitle2").value= e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.children[0].children[0].innerText;
+      document.getElementById("tradeNo2").value=e.target.parentElement.nextElementSibling.value;
+      document.getElementById("memberName2").value=e.target.parentElement.nextElementSibling.nextElementSibling.value;
+      document.getElementById("memberNo2").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.value;
+
+
       cancelModalClose.addEventListener("click",()=>{
         if (cancelModal.classList.contains('show')) {
           cancelModal.classList.remove('show');
+          document.getElementById("reportContent").value="";
+          document.getElementById("reportFilePath").value="";
         }
 
         if (!cancelModal.classList.contains('show')) {

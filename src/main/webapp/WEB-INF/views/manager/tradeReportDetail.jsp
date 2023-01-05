@@ -70,9 +70,9 @@
                                 <div class="img-box">
                                     <div class="boardImg">
                                         <label for="img1">
-                                            <img class="preview" src="/resources/images/${tradeReport.tradeReportFilePath}">
+                                            <img class="preview" src="${tradeReport.tradeReportFilePath}">
                                         </label>
-                                        <a href="/resources/images/${tradeReport.tradeReportFilePath}" download="/resources/images/${tradeReport.tradeReportFilePath}">다운로드</a>
+                                        <a href="/resources/images/${tradeReport.tradeReportFilePath}" download="${tradeReport.tradeReportFilePath}">다운로드</a>
                                     </div>
                                 </div>    
 							</td>

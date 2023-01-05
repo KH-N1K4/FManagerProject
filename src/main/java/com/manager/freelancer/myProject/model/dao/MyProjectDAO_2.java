@@ -104,5 +104,13 @@ public class MyProjectDAO_2 {
 	public int selectReportedPerson(TradeReport inputTradeReport) {
 		return sqlSession.selectOne("myProjectMapper2.selectReportedPerson",inputTradeReport);
 	}
+ 
+	/** 주문 취소하기
+	 * @param inputTradeReport
+	 * @return
+	 */
+	public int insertTradeReportCancel(TradeReport inputTradeReport) {
+		return sqlSession.insert("myProjectMapper2.insertTradeReportCancel",inputTradeReport);
+	}
 
 }

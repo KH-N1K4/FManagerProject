@@ -8,18 +8,18 @@
 
     <div class="cancelModal_body">
       <span class="cancelModal_close">x</span>
-      <form action="/member/myProject/tradeReportCancel" method="POST" id="tradeReportFrm">
+      <form action="/member/myProject/tradeReportCancel" method="POST" id="tradeReportFrm"  enctype="multipart/form-data">
       <div class="myprojectCancel">
           <div class="title"><span>취소하기</span></div>
           <div class="myprojectCancel_list">
             <div class="list_title2"><span>서비스명</span></div>
-            <div class="list_content"><input id="serviceTitle" type="text" class="ReportBox readonly" name="serviceTitle" readonly></div>
+            <div class="list_content"><input id="serviceTitle2" type="text" class="ReportBox readonly" name="serviceTitle" readonly></div>
           </div>
-          <input id="tradeNo" type="hidden" class="ReportBox readonly" name="tradeNo" readonly>
-          <input id="memberNo" type="hidden" class="ReportBox readonly" name="reportPersonNo" readonly>
+          <input id="tradeNo2" type="hidden" class="ReportBox readonly" name="tradeNo" readonly>
+          <input id="memberNo2" type="hidden" class="ReportBox readonly" name="reportPersonNo" readonly>
           <div class="myprojectCancel_list">
             <div class="list_title2"><span>신고자</span></div>
-            <div class="list_content"><input id="memberName" type="text" class="ReportBox readonly" name="reportPersonName" readonly></div>
+            <div class="list_content"><input id="memberName2" type="text" class="ReportBox readonly" name="reportPersonName" readonly></div>
           </div>
           <div class="myprojectCancel_list">
             <div class="list_title2"><span>취소사유</span></div>
@@ -47,7 +47,7 @@
           </div>
           <div class="myprojectReport_list" id="fileadd">
             <div class="list_title2"><span>첨부파일</span></div>
-            <div class="list_content fileRemove"><input type = "file" name="reportFilePath" id="reportFilePath"></div>
+            <div class="list_content fileRemove"><input type = "file" name="reportFilePath" id="reportFilePath"  accept="image/*"></div>
           </div>
           <div class="btnDiv" ><button id="ajaxReview">취소하기</button></div>
           </form>

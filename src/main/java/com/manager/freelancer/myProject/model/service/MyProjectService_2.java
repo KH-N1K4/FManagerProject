@@ -48,6 +48,16 @@ public interface MyProjectService_2 {
 	 * @param reportFile 
 	 * @return
 	 */
-	int insertTradeReport(TradeReport inputTradeReport, String webPath, String filePath, MultipartFile reportFile) throws IOException ;
+	int insertTradeReport(TradeReport inputTradeReport, String webPath, String realPath, MultipartFile reportFile) throws IOException ;
+
+	/** 주문 취소하기
+	 * @param inputTradeReport
+	 * @param webPath
+	 * @param filePath
+	 * @param reportFile
+	 * @return
+	 */
+	int insertTradeReportCancel(TradeReport inputTradeReport, String webPath, String realPath,
+			MultipartFile reportFile) throws IOException;
 
 }
