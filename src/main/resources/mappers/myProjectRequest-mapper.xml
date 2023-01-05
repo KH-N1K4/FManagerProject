@@ -14,12 +14,12 @@
 			<result property="projectWorkDate" column="REQUEST_WORK_DATE"/>										<!-- 프로젝트 작업 마감일 -->
 			<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD "/>							<!-- 프로젝트 작업기간 -->
 			<result property="projectCreateDate" column="PROJECT_REQUEST_CREATE_DATE"/>				<!-- 프로젝트 의뢰 등록일 -->
-			<result property="mainCategotyNo" column="MAIN_CATEGORY_NO"/>											<!-- 카테고리1 번호(FK) -->
-			<result property="mainCategotyName" column="MAIN_CATEGORY_NAME"/>											<!-- 카테고리1 번호(FK) -->
+			<result property="mainCategoryNo" column="MAIN_CATEGORY_NO"/>											<!-- 카테고리1 번호(FK) -->
+			<result property="mainCategoryName" column="MAIN_CATEGORY_NAME"/>											<!-- 카테고리1 번호(FK) -->
 			<result property="subCategoryNo" column="SUB_CATEGORY_NO" />									<!-- 메인 2카테고리 -->
 	    <result property="subCategoryName" column="SUB_CATEGORY_NAME" />
-			<result property="thirdCategotyNo" column="THIRD_CATEGORY_NO"/>										<!-- 카테고리3 번호(FK) -->
-			<result property="thirdCategotyName" column="THIRD_CATEGORY_NAME"/>										<!-- 카테고리3 번호(FK) -->
+			<result property="thirdCategoryNo" column="THIRD_CATEGORY_NO"/>										<!-- 카테고리3 번호(FK) -->
+			<result property="thirdCategoryName" column="THIRD_CATEGORY_NAME"/>										<!-- 카테고리3 번호(FK) -->
 			<result property="projectRequestfile" column="REQUEST_FILE_PATH"/>										<!-- 이미지 경로 -->
 			
 			<result property="clientNo" column="MEMBER_NO"/>																					<!-- 회원 번호(FK)-의뢰인 회원번호 -->
@@ -31,17 +31,32 @@
 			<result property="proposalEditNum" column="PROPOSAL_EDIT_NUM"/>														<!-- 프로젝트 수정 횟수 -->
 			<result property="proposalCreateDate" column="PROPOSAL_CREATE_DATE"/>											<!-- 프로젝트 제안 등록일 -->
 			<result property="freelancerNo" column="FREELANCER_NO"/>																	<!-- 프리랜서 번호(FK) -->
+			<result property="memberNo" column="MEMBER_NO"/>		
+			
+			<collection property="requestfileList" 
+	      javaType="java.util.ArrayList" ofType="RequestFile"
+	      select="selectRequestFileList"
+	      column="PROJECT_REQUEST_NO"/> 
+	      													
 		</resultMap>
+		
+		<resultMap type="RequestFile" id="RequestFile">	
+			<id property="requestFileNo" column="REQUEST_FILE_NO"/>	
+			<result property="projectRequestNo" column="PROJECT_REQUEST_NO"/>	
+			<result property="requestFilePath" column="REQUEST_FILE_PATH"/>	
+			<result property="requestFileOrder" column="REQUEST_FILE_ORDER"/>		
+		</resultMap>
+		
 		<!-- 카태고리 들고오기 -->
-		<select id="getCategotyList" resultMap="request_rm">
+		<select id="getCategoryList" resultMap="request_rm">
 			SELECT * 
 			FROM CATEGORY
 		</select>
-		<select id="getMainCategotyList" resultMap="request_rm">
+		<select id="getMainCategoryList" resultMap="request_rm">
 			SELECT * 
 			FROM MAIN_CATEGORY
 		</select>
-		<select id="getSubCategotyList" resultMap="request_rm">
+		<select id="getSubCategoryList" resultMap="request_rm">
 			SELECT * 
 			FROM SUB_CATEGORY
 		</select>
@@ -53,7 +68,10 @@
 				JOIN CATEGORY USING(THIRD_CATEGORY_NO)
 				JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 				JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
-				WHERE PROJECT_REQUEST_STATUS = 2) p
+				JOIN "MEMBER" USING(MEMBER_NO)
+				WHERE PROJECT_REQUEST_STATUS = 2
+				AND MEMBER_DELETE_FL = 'N'
+				ORDER BY PROJECT_REQUEST_NO) p
 			WHERE REQUEST_FILE_ORDER =0
 			AND PROJECT_REQUEST_DEL_FL ='N'
 			<if test="mainCategoryNo !='' and mainCategoryNo!=null and mainCategoryNo != 0">
@@ -62,8 +80,8 @@
 			<if test="subCategoryNo !='' and subCategoryNo!=null and subCategoryNo != 0">
 				 AND SUB_CATEGORY_NO = #{subCategoryNo}
 			</if>
-			<if test="thirdCategotyNo !='' and thirdCategotyNo!=null and thirdCategotyNo != 0">
-				 AND THIRD_CATEGORY_NO = #{thirdCategotyNo}
+			<if test="thirdCategoryNo !='' and thirdCategoryNo!=null and thirdCategoryNo != 0">
+				 AND THIRD_CATEGORY_NO = #{thirdCategoryNo}
 			</if>
 			<if test="listOrder == 1">
 				 ORDER BY REQUEST_RECRUIT_DATE---------마감임박순
@@ -81,7 +99,10 @@
 				JOIN CATEGORY USING(THIRD_CATEGORY_NO)
 				JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 				JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
-				WHERE PROJECT_REQUEST_STATUS = 2) p
+				JOIN "MEMBER" USING(MEMBER_NO)
+				WHERE PROJECT_REQUEST_STATUS = 2
+				AND MEMBER_DELETE_FL = 'N'
+				ORDER BY PROJECT_REQUEST_NO) p
 			WHERE REQUEST_FILE_ORDER =0
 			AND PROJECT_REQUEST_DEL_FL ='N'
 			<if test="mainCategoryNo !='' and mainCategoryNo!=null and mainCategoryNo != 0">
@@ -90,8 +111,8 @@
 			<if test="subCategoryNo !='' and subCategoryNo!=null and subCategoryNo != 0">
 				 AND SUB_CATEGORY_NO = #{subCategoryNo}
 			</if>
-			<if test="thirdCategotyNo !='' and thirdCategotyNo!=null and thirdCategotyNo != 0">
-				 AND THIRD_CATEGORY_NO = #{thirdCategotyNo}
+			<if test="thirdCategoryNo !='' and thirdCategoryNo!=null and thirdCategoryNo != 0">
+				 AND THIRD_CATEGORY_NO = #{thirdCategoryNo}
 			</if>
 			<if test="listOrder == 1">
 				 ORDER BY REQUEST_RECRUIT_DATE---------마감임박순
@@ -99,6 +120,18 @@
 			<if test="listOrder == 0">
 				 ORDER BY PROJECT_REQUEST_CREATE_DATE DESC---------최신순
 			</if>
+		</select>
+		
+		<select id="selectUserRequest" resultMap="request_rm">
+		SELECT p.*,TO_CHAR(PROJECT_REQUEST_BUDGET, 'FM999,999,999,999') PROJECT_REQUEST_BUDGET_STRING 
+		FROM (SELECT * FROM PROJECT_REQUEST JOIN "MEMBER" USING(MEMBER_NO)) p
+		WHERE PROJECT_REQUEST_NO=#{projectRequestNo}
+		</select>
+		
+		<select id="selectRequestFileList" resultMap="RequestFile">
+		SELECT *
+		FROM REQUEST_FILE
+		WHERE PROJECT_REQUEST_NO=#{projectRequestNo}
 		</select>
 	
 </mapper>

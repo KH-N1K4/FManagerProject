@@ -686,7 +686,7 @@
 						      WHERE (CLIENT_NO=FREELANCER_NO)))
 						      RIGHT JOIN (SELECT * FROM SERVICE_INQUIRY JOIN SERVICE USING(SERVICE_NO)) USING(SERVICE_INQUIRY_NO)) 
 					GROUP BY FREELANCER_NO) USING(FREELANCER_NO)) USING(FREELANCER_NO)
-					<if test="memberNo != 0 or memberNo != null">
+					<if test="memberNo != 0 and memberNo != null">
 					WHERE FREELANCER_NO = #{memberNo}
 					</if>
 			</select>
@@ -696,4 +696,26 @@
 			TO_CHAR(SALE_PROCEEDS, 'FM999,999,999,999') SALE_PROCEEDS_STRING,SALE_COUNT 
 			FROM GRADE
 			</select>
+			
+			<!-- 프리랜서 등업 상승 스케줄러 작업 -->
+	   	<update id="LevelUPSchedulingUpdate">
+	   	UPDATE "FREELANCER" SET
+	   	GRADE_NO = #{FreelanceLeverNo}
+	   	WHERE FREELANCER_NO IN 
+	   	<foreach collection="inputFreelance" item="no"
+	      open=" (" separator="," close=") ">
+	        #{no}
+	  	</foreach>
+	   	</update>
+   	
+   		<!-- 프리랜서 등업 상승 스케줄러 작업 -->
+	   	<update id="LevelDownSchedulingUpdate">
+	   	UPDATE "FREELANCER" SET
+	   	GRADE_NO = #{FreelanceLeverNo}
+	   	WHERE FREELANCER_NO IN 
+	   	<foreach collection="inputFreelance" item="no"
+	      open=" (" separator="," close=") ">
+	        #{no}
+	  	</foreach>
+	   	</update>
 </mapper>

@@ -21,56 +21,65 @@ public class ProjectRequestDAO {
 	/**세번 째 카테고리 들고오기 
 	 * @return
 	 */
-	public List<myProjectFreelancerRequest> getCategotyList() {
+	public List<myProjectFreelancerRequest> getCategoryList() {
 		
-		return sqlSession.selectList("myProjectRequest.getCategotyList");
+		return sqlSession.selectList("myProjectRequest.getCategoryList");
 	}
 	
 	/**두번 째 카테고리 들고오기 
 	 * @return
 	 */
-	public List<myProjectFreelancerRequest> getSubCategotyList() {
+	public List<myProjectFreelancerRequest> getSubCategoryList() {
 		
-		return sqlSession.selectList("myProjectRequest.getSubCategotyList");
+		return sqlSession.selectList("myProjectRequest.getSubCategoryList");
 	}
 	
 	/**메인 카테고리 들고오기
 	 * @return
 	 */
-	public List<myProjectFreelancerRequest> getMainCategotyList() {
+	public List<myProjectFreelancerRequest> getMainCategoryList() {
 		
-		return sqlSession.selectList("myProjectRequest.getMainCategotyList");
+		return sqlSession.selectList("myProjectRequest.getMainCategoryList");
 	}
 
 	/**모든 프로젝트 다 들고 오기
 	 * @param pagination 
-	 * @param thirdCategotyNo 
+	 * @param thirdCategoryNo 
 	 * @param subCategoryNo 
-	 * @param mainCategotyNo 
+	 * @param mainCategoryNo 
 	 * @return
 	 */
-	public List<myProjectFreelancerRequest> getProjectRequestList(Pagination pagination, int mainCategotyNo, int subCategoryNo, int thirdCategotyNo) {
+	public List<myProjectFreelancerRequest> getProjectRequestList(Pagination pagination, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo) {
 		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
 	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 	    Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("thirdCategotyNo",thirdCategotyNo);
+	    map.put("thirdCategoryNo",thirdCategoryNo);
 		map.put("subCategoryNo",subCategoryNo);
-		map.put("mainCategotyNo",mainCategotyNo);
+		map.put("mainCategoryNo",mainCategoryNo);
 		return sqlSession.selectList("myProjectRequest.getProjectRequestList",map,rowBounds);
 	}
 
 	/**모든 프로젝트 다 들고 오기 페이지
-	 * @param thirdCategotyNo 
+	 * @param thirdCategoryNo 
 	 * @param subCategoryNo 
-	 * @param mainCategotyNo 
+	 * @param mainCategoryNo 
 	 * @return
 	 */
-	public int getProjectRequestListCount(int mainCategotyNo, int subCategoryNo, int thirdCategotyNo) {
+	public int getProjectRequestListCount(int mainCategoryNo, int subCategoryNo, int thirdCategoryNo) {
 		Map<String, Object> map = new HashMap<String, Object>();
-	    map.put("thirdCategotyNo",thirdCategotyNo);
+	    map.put("thirdCategoryNo",thirdCategoryNo);
 		map.put("subCategoryNo",subCategoryNo);
-		map.put("mainCategotyNo",mainCategotyNo);
+		map.put("mainCategoryNo",mainCategoryNo);
 		return sqlSession.selectOne("myProjectRequest.getProjectRequestListCount",map);
+	}
+
+	/**프로젝트 의뢰 상세보기
+	 * @param serviceNo
+	 * @return
+	 */
+	public myProjectFreelancerRequest selectUserRequest(int projectRequestNo) {
+	
+		return sqlSession.selectOne("myProjectRequest.selectUserRequest",projectRequestNo);
 	}
 	
 }

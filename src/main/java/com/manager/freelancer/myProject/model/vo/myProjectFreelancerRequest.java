@@ -1,5 +1,8 @@
 package com.manager.freelancer.myProject.model.vo;
 
+import java.util.List;
+
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,10 +24,10 @@ public class myProjectFreelancerRequest {//지윤
 	private String projectWorkDate;				//REQUEST_WORK_DATE 프로젝트 작업 마감일
 	private int projectWorkPeriod;				//PROJECT_WORK_PERIOD 프로젝트 작업기간
 	private String projectCreateDate;			//PROJECT_REQUEST_CREATE_DATE 프로젝트 의뢰 등록일
-	private int mainCategotyNo;					//MAIN_CATEGORY_NO 카테고리1 번호(FK)
-	private String mainCategotyName;			//MAIN_CATEGORY_NAME
-	private int thirdCategotyNo;				//THIRD_CATEGORY_NO 카테고리3 번호(FK)
-	private String thirdCategotyName;			//THIRD_CATEGORY_NAME 
+	private int mainCategoryNo;					//MAIN_CATEGORY_NO 카테고리1 번호(FK)
+	private String mainCategoryName;			//MAIN_CATEGORY_NAME
+	private int thirdCategoryNo;				//THIRD_CATEGORY_NO 카테고리3 번호(FK)
+	private String thirdCategoryName;			//THIRD_CATEGORY_NAME 
 	private int subCategoryNo;				//
 	private String subCategoryName;			//
 	private int clientNo;						//MEMBER_NO 회원 번호(FK)-의뢰인 회원번호
@@ -38,6 +41,7 @@ public class myProjectFreelancerRequest {//지윤
 	private int proposalEditNum;				//PROPOSAL_EDIT_NUM 프로젝트 수정 횟수
 	private String proposalCreateDate;			//PROPOSAL_CREATE_DATE 프로젝트 제안 등록일
 	private int freelancerNo;					//FREELANCER_NO 프리랜서 번호(FK)
+	private int memberNo;					//FREELANCER_NO 프리랜서 번호(FK)
 	
-	
+	private List<RequestFile> requestfileList;
 }

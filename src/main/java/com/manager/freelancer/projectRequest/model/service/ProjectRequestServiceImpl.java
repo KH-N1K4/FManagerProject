@@ -19,24 +19,36 @@ public class ProjectRequestServiceImpl implements ProjectRequestSerivce{
 	@Autowired
 	private ProjectRequestDAO dao;
 
+	/**
+	 *프로젝트 목록 조회
+	 */
 	@Override
-	public Map<String, Object> getCategotyList(int cp, int mainCategotyNo, int subCategoryNo, int thirdCategotyNo) {
-		int listCount = dao.getProjectRequestListCount(mainCategotyNo,subCategoryNo,thirdCategotyNo);
+	public Map<String, Object> getCategotyList(int cp, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo) {
+		int listCount = dao.getProjectRequestListCount(mainCategoryNo,subCategoryNo,thirdCategoryNo);
 		
 		Pagination pagination = new Pagination(listCount,cp,20,10);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		 
-		List<myProjectFreelancerRequest> categotyList = dao.getCategotyList();
-		List<myProjectFreelancerRequest> subCategotyList = dao.getSubCategotyList();
-		List<myProjectFreelancerRequest> mainCategotyList = dao.getMainCategotyList();
-		List<myProjectFreelancerRequest> projectRequestList = dao.getProjectRequestList(pagination,mainCategotyNo,subCategoryNo,thirdCategotyNo);
+		List<myProjectFreelancerRequest> categoryList = dao.getCategoryList();
+		List<myProjectFreelancerRequest> subCategoryList = dao.getSubCategoryList();
+		List<myProjectFreelancerRequest> mainCategoryList = dao.getMainCategoryList();
+		List<myProjectFreelancerRequest> projectRequestList = dao.getProjectRequestList(pagination,mainCategoryNo,subCategoryNo,thirdCategoryNo);
 		
-		map.put("categotyList",categotyList);
-		map.put("subCategotyList",subCategotyList);
-		map.put("mainCategotyList",mainCategotyList);
+		map.put("categoryList",categoryList);
+		map.put("subCategoryList",subCategoryList);
+		map.put("mainCategoryList",mainCategoryList);
 		map.put("projectRequestList",projectRequestList);
 		map.put("pagination",pagination);
 		return map;
+	}
+
+	/**
+	 *프로젝트 의뢰 상세보기
+	 */
+	@Override
+	public myProjectFreelancerRequest selectUserRequest(int projectRequestNo) {
+		
+		return dao.selectUserRequest(projectRequestNo);
 	}
 }
