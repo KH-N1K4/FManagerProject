@@ -1,8 +1,12 @@
 package com.manager.freelancer.myProject.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.manager.freelancer.myProject.model.vo.TradeReport;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 
 public interface MyProjectService_2 {
@@ -36,5 +40,14 @@ public interface MyProjectService_2 {
 	 * @return
 	 */
 	int memberDone(int tradeNo);
+
+	/** 거래 신고하기
+	 * @param inputTradeReport
+	 * @param filePath 
+	 * @param webPath 
+	 * @param reportFile 
+	 * @return
+	 */
+	int insertTradeReport(TradeReport inputTradeReport, String webPath, String filePath, MultipartFile reportFile) throws IOException ;
 
 }

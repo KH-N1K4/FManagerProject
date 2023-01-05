@@ -125,7 +125,8 @@
 	CASE WHEN MEMBER_DONE_FL=2 OR WORK_STATUS=2 OR WORK_STATUS=4 THEN '작업 완료' 
 		 WHEN WORK_STATUS=3 THEN '주문 취소'
 		 ELSE '진행중' END AS WORK_PROGRESS,
-	(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=#{loginMemberNo}) AS MEMBER_NAME
+	(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=#{loginMemberNo}) AS MEMBER_NAME,
+	(SELECT MEMBER_NO FROM MEMBER WHERE MEMBER_NO=#{loginMemberNo}) AS MEMBER_NO
 	FROM TRADE 
 	JOIN SERVICE USING (SERVICE_NO)
 	JOIN SETTLEMENT ON (TRADE.TRADE_NO=SETTLEMENT.TRADE_NO)
@@ -158,6 +159,22 @@
   	WHERE TRADE_NO=#{tradeNo}
   </update>
   
+  <!-- 거래 신고 서비스 프리랜서 번호 -->
+  <select id="selectReportedPerson" resultType="_int">
+  	SELECT FREELANCER_NO  
+		FROM TRADE
+		JOIN SERVICE USING (SERVICE_NO)
+		JOIN MEMBER ON (MEMBER.MEMBER_NO=SERVICE.FREELANCER_NO)
+		WHERE TRADE_NO=#{tradeNo}
+  </select>
+  
+  <!-- 거래 신고하기 -->
+  <insert id="insertTradeReport">
+  	INSERT INTO TRADE_REPORT VALUES(
+  	SEQ_TRADE_REPORT_NO.NEXTVAL, #{reportPersonNo}, #{reportedPersonNo},#{reportContent},
+  	DEFAULT, #{filePath}, #{tradeNo}, DEFAULT, 1)
+  
+  </insert>
   
   	
 </mapper>

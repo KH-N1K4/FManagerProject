@@ -411,3 +411,22 @@ tbody a{
 .cancel-modal.show{
 	display: block;
 }
+
+.cancelModal_body {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	padding: 40px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 10px;
+	box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	transform: translateX(-50%) translateY(-50%);
+	z-index: 100;
+}
+
+.cancelModal_body>span{
+	position:absolute;
+	right:20px;
+	top:20px;
+	cursor:pointer;
+}

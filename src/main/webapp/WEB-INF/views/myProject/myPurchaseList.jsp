@@ -149,6 +149,7 @@
                           </td>
                           <input type="hidden" id="hiddenTradeNo" value="${purchase.tradeNo}">                
                           <input type="hidden" id="hiddenMemberName" value="${purchase.memberName}">                
+                          <input type="hidden" id="hiddenMemberNo" value="${purchase.memberNo}">                
                         </tr>
                       </c:forEach>
                     </c:if>

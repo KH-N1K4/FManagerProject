@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.customerCenter.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.TradeReport;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.MyProjectPayment;
 import com.manager.freelancer.myProject.model.vo.myProjectTrade;
@@ -86,6 +87,22 @@ public class MyProjectDAO_2 {
 	 */
 	public int memberDone(int tradeNo) {
 		return sqlSession.update("myProjectMapper2.memberDone",tradeNo);
+	}
+
+	/** 거래 신고하기
+	 * @param inputTradeReport
+	 * @return
+	 */
+	public int insertTradeReport(TradeReport inputTradeReport) {
+		return sqlSession.insert("myProjectMapper2.insertTradeReport",inputTradeReport);
+	}
+
+	/** 거래 서비스 프리랜서 번호
+	 * @param inputTradeReport
+	 * @return
+	 */
+	public int selectReportedPerson(TradeReport inputTradeReport) {
+		return sqlSession.selectOne("myProjectMapper2.selectReportedPerson",inputTradeReport);
 	}
 
 }

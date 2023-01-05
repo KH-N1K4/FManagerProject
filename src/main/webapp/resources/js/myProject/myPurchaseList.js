@@ -62,7 +62,7 @@ for(f of finishBtn){
       const tradeNo = e.target.id;
   
       $.ajax({
-        url:'/myProject/memberDone',
+        url:'/member/myProject/memberDone',
         data: {'tradeNo':tradeNo},
         success: (resultMap)=>{
           if(resultMap!=null){
@@ -228,6 +228,12 @@ for(f of finishBtn){
                 memberName.setAttribute("value",purchase.memberName);
                 tr.append(memberName);
 
+                const memberNo = document.createElement("input");
+                memberNo.setAttribute("type","hidden");
+                memberNo.setAttribute("id","hiddenMemberNo");
+                memberNo.setAttribute("value",purchase.memberNo);
+                tr.append(memberNo);
+
                 selecttbody.append(tr);
 
               }
@@ -350,12 +356,15 @@ function reportModal(){
       document.getElementById("serviceTitle").value= e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.children[0].children[0].innerText;
       document.getElementById("tradeNo").value=e.target.parentElement.nextElementSibling.value;
       document.getElementById("memberName").value=e.target.parentElement.nextElementSibling.nextElementSibling.value;
+      document.getElementById("memberNo").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.value;
 
 
 
       reportModalClose.addEventListener("click",()=>{
         if (reportModal.classList.contains('show')) {
           reportModal.classList.remove('show');
+          document.getElementById("reportContent").value="";
+          document.getElementById("reportFilePath").value="";
         }
 
         if (!reportModal.classList.contains('show')) {
@@ -403,3 +412,22 @@ function reviewModal(){
   }
 
 }
+
+
+
+
+
+/* 신고 버튼 누를 때 */
+const tradeReportFrm = document.getElementById("tradeReportFrm");
+tradeReportFrm.addEventListener("submit",e=>{
+
+  if(!confirm('해당 거래를 신고하시겠습니까?')){
+    
+    e.preventDefault();
+  }
+
+});
+
+
+
+

@@ -1,13 +1,17 @@
 package com.manager.freelancer.myProject.model.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.manager.freelancer.common.Util;
 import com.manager.freelancer.customerCenter.model.vo.Pagination;
+import com.manager.freelancer.myProject.model.vo.TradeReport;
 import com.manager.freelancer.myProject.model.dao.MyProjectDAO_2;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.MyProjectPayment;
@@ -72,6 +76,53 @@ public class MyProjectServiceImpl_2 implements MyProjectService_2{
 	}
 	
 	
+	// 거래 신고하기
+	@Override
+	public int insertTradeReport(TradeReport inputTradeReport, String webPath, String filePath, MultipartFile reportFile) throws IOException {
+		
+		
+		inputTradeReport.setReportContent(Util.newLineHandling(inputTradeReport.getReportContent()));
+		
+		// 실패를 대비해서 이전 이미지 경로 저장
+		//String temp = reportFile;
+		
+		// 중복 파일명 업로드를 대비하기 위해서 파일명 변경
+		String rename = null;
+		String reportFilePath = null;
+		
+		if(reportFile == null) { // 업로드된 파일이 없는 경우
+			reportFilePath = null;
+		}else { // 업로드된 파일이 있을 경우
+			
+			// 원본파일명을 이용해서 새로운 파일명 생성
+			rename = Util.fileRename( reportFile.getOriginalFilename() );
+			
+			reportFilePath = (webPath + rename);
+			// /resources/images/memberProfile/변경된파일명
+			inputTradeReport.setFilePath(reportFilePath);
+		}
+		
+		int reportedPersonNo = dao.selectReportedPerson(inputTradeReport);
+		inputTradeReport.setReportedPersonNo(reportedPersonNo);
+		
+		return dao.insertTradeReport(inputTradeReport);
+	}
+	
 	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
