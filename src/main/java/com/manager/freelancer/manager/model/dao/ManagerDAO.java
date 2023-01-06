@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.vo.FreelancerService;
 import com.manager.freelancer.manager.model.vo.Member;
@@ -655,6 +657,22 @@ int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		
 		return sqlSession.selectList("managerMapper.selectRequestList3", pm, rowBounds);
+	}
+
+	/** 프리랜서 여부 찾기
+	 * @param memberNo
+	 * @return
+	 */
+	public String getFreelancerFlag(int memberNo) {
+		return sqlSession.selectOne("managerMapper.getFreelancerFlag",memberNo);
+	}
+
+	/** 프리랜서 상세 보기
+	 * @param memberNo
+	 * @return
+	 */
+	public Freelancer1 freelancerDetail(int freelancerNo) {
+		return sqlSession.selectOne("categoryMapper.freelancerInfo", freelancerNo);
 	}
 
 	
