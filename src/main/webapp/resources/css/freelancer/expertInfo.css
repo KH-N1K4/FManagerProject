@@ -66,7 +66,13 @@ font-size: 20px;
 
 input{
     height: 25px;
+    width: 50px;
+    border: 1px solid #538126;
+    /* border-radius: 10px; */
+    text-align: center;
 }
+
+
 /* �닔�젙�븯湲� */
 #updateArea{
     display: flex;
@@ -85,6 +91,7 @@ input{
 
 /* �옄湲� �냼媛� */
 textarea{
+    width: 100%;
     /* border: none; */
     font-size: 15px;
     padding: 5px 20px 20px 5px;
@@ -99,6 +106,18 @@ textarea:focus{
     /* border: none; */
     outline: none;
 }
+
+#career{
+    width: 250px;
+    margin-top: 5px;
+    /* text-align: left; */
+}
+
+#license{
+    width: 250px;
+    margin-top: 5px;
+}
+
 
 
 /* 吏��뿭 */
@@ -125,11 +144,16 @@ textarea:focus{
 input[type="checkbox"]{
     position: relative;
     top: -6px;
+    left: -20px;
+    margin-right: -10px;
 }
+
+
 .checkbox{
     position: relative;
     top: -12px;
-    margin-right: 20px;
+    left: -20px;
+    margin-right: 15px;
 }
 
 /* 湲곌컙 */
@@ -145,7 +169,7 @@ input[type="checkbox"]{
     top: 0px;
 }
 #account{
-    width: 400px;
+    width: 200px;
     margin-bottom: 100px;
 }
 
@@ -155,6 +179,8 @@ input[type="checkbox"]{
     flex-direction: row;
     justify-content: space-between;
 }
+
+/* ---------------------------------------------------------------------------------------- */
 #addPortfolioPopupBtn{
     font-size: 20px;
     font-weight: bold;
@@ -166,9 +192,30 @@ input[type="checkbox"]{
     display: inline-block;
     width: 200px;
     height: 270px;
-    background-color: darkseagreen;
+    /* background-color: darkseagreen; */
     margin-right: 20px;
     margin-bottom: 40px;
+}
+
+.portfolio-title-area{
+    display: inline-block;
+    width: 200px;
+    font-weight: bold;
+    /* text-overflow: ellipsis;
+    overflow: hidden; */
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap; 
+}
+
+.portfolio-content-area{
+    display: inline-block;
+    width: 200px;
+    overflow:hidden; 
+    text-overflow:ellipsis; 
+    white-space:nowrap; 
+    
+
 }
 
 .modal_body{
@@ -216,4 +263,71 @@ input[type="checkbox"]{
     display: none;
 
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hidden{
+	display:none;
+}
+
+.modal_close2{
+    width: 100px;
+}
+
+.portfolioSection{
+    position: relative;
+}
+/*
+/* .portfolioOption1{
+    position: absolute;
+    display: inline-block;
+    background-color: red;
+    width: 50px;
+    height: 20px;
+    /* font-size: 25px;
+    vertical-align: middle; 
+    text-align: center;
+    
+    right: 0px;
+}
+
+/* .portfolioOption2{
+    position: absolute;
+    background-color: skyblue;
+    width: 50px;
+    text-align: center;
+    top: 50px;
+    right: 0px;
+} 
+ */
+
+ #portfolio-toggle{
+    display: none;
+ }
+ /* 체크박스 다음 div */
+#portfolio-toggle + div{
+    display:none;
+    background-color: red;
+ }
+
+/* 체크박스가 체크된 경우 다음 div */
+#portfolio-toggle:checked  + div{ display:block; }
+
+#portfolio-menu{
+    position:absolute;
+
+    z-index: 500;
+    width: 100px;
+    height: 80px;
+    margin-top:5px;
+    right:30px;
+    top: 30px;
+    border: 1px solid black;
+}
+
+#portfolio-menu>a{
+
+    display:flex;
+    height:50%;
+    justify-content: center;
+    align-items: center;
 }
