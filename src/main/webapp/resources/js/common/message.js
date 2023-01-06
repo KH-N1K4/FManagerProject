@@ -12,6 +12,10 @@ let selectClientFreeContactTime;
 // /chattingSock 이라는 요청 주소로 통신할 수 있는  WebSocket 객체 생성
 let chattingSock;
 
+//메세지창 들어가기전에 입력 누르면 메세지창을 눌러주세요 경고창 나오게
+let checkAddRoomVar = false;
+
+
 if(loginMemberNo != ""){
   console.log(loginMemberNo);
 	chattingSock = new SockJS("/chattingSock");
@@ -59,7 +63,7 @@ const roomListAddEvent = () => {
 	
 	for(let item of chattingItemList){
 		item.addEventListener("click", e => {
-	
+			checkAddRoomVar= true;// 입력버튼 활성화
 			// 클릭한 채팅방의 번호 얻어오기
 			const id = item.getAttribute("id");
 			const arr = id.split("-");
@@ -184,6 +188,7 @@ const selectChattingFn = () => {
 					
 				}
 
+
 				// 내가 작성한 메세지인 경우
 				if(loginMemberNo == msg.senderNo){ 
 					li.classList.add("my-chat");
@@ -199,7 +204,7 @@ const selectChattingFn = () => {
 					}
 					
 					
-				}else{ // 상대가 작성한 메세지인 경우
+				}else{ // 상대가 작성한 메세지인 경우dateBox
 					li.classList.add("target-chat");
 
 					// 상대 프로필
@@ -214,19 +219,22 @@ const selectChattingFn = () => {
 					b.innerText = selectClientNickName; // 전역변수
 
 					const br = document.createElement("br");
-
+//--------------------수정해야할 부분----------------------------
 					div.append(b, br);
+					const dateBox = document.createElement("div");
+					dateBox.classList.add("target-dateBox");
 					if(regEx.test(msg.chatMessage)){
-						div.append(imgContent);
+						dateBox.append(imgContent);
 					}else{
 						if(regEx2.test(msg.chatMessage)){
-							div.append(aContent);
+							dateBox.append(aContent);
 						}else{
-							div.append(p);
+							dateBox.append(p);
 						}
 						
 					}
-					div.append(span);
+					dateBox.append(span);
+					div.append(dateBox);
 					li.append(img,div);
 
 				}
@@ -370,37 +378,43 @@ const selectRoomList = () => {
 // 채팅 입력
 const send = document.getElementById("send");
 
+	
 const sendMessage = () => {
-	const inputChatting = document.getElementById("inputChatting");
+		const inputChatting = document.getElementById("inputChatting");
+		if(checkAddRoomVar){
+			if (inputChatting.value.trim().length == 0) {
+				alert("채팅을 입력해주세요.");
+				inputChatting.value = "";
+			} else {
+				var obj = {
+					"senderNo": loginMemberNo,
+					"clientNo": selectClientNo,
+					"chatRoomNo": selectChatRoomNo,
+					"chatMessage": inputChatting.value,
+				};
+				console.log(obj)
 
-	if (inputChatting.value.trim().length == 0) {
-		alert("채팅을 입력해주세요.");
-		inputChatting.value = "";
-	} else {
-		var obj = {
-			"senderNo": loginMemberNo,
-			"clientNo": selectClientNo,
-			"chatRoomNo": selectChatRoomNo,
-			"chatMessage": inputChatting.value,
-		};
-		console.log(obj)
+				// JSON.stringify() : 자바스크립트 객체를 JSON 문자열로 변환
+				chattingSock.send(JSON.stringify(obj));
 
-		// JSON.stringify() : 자바스크립트 객체를 JSON 문자열로 변환
-		chattingSock.send(JSON.stringify(obj));
-
-		inputChatting.value = "";
-	}
+				inputChatting.value = "";
+			}
+		}else{
+			alert("채팅방을 먼저 선택해주세요.");
+		}
 }
 
-// 엔터 == 제출
-// 쉬프트 + 엔터 == 줄바꿈
-inputChatting.addEventListener("keyup", e => {
-	if(e.key == "Enter"){ 
-		if (!e.shiftKey) {
-			sendMessage();
+	// 엔터 == 제출
+	// 쉬프트 + 엔터 == 줄바꿈
+	inputChatting.addEventListener("keyup", e => {
+		if(e.key == "Enter"){ 
+			if (!e.shiftKey) {
+				sendMessage();
+			}
 		}
-	}
-})
+	})
+
+
 
 
 
@@ -503,16 +517,20 @@ chattingSock.onmessage = function(e) {
 			const br = document.createElement("br");
 	
 			div.append(b, br);
+			const dateBox = document.createElement("div");
+			dateBox.classList.add("target-dateBox");
 			if(regEx.test(msg.chatMessage)){
-				div.append(imgContent);
+				dateBox.append(imgContent);
 			}else{
 				if(regEx2.test(msg.chatMessage)){
-					div.append(aContent);
+					dateBox.append(aContent);
 				}else{
-					div.append(p);
+					dateBox.append(p);
 				}
+						
 			}
-			div.append(span);
+			dateBox.append(span);
+			div.append(dateBox);
 			li.append(img,div);
 	
 		}
@@ -528,6 +546,7 @@ chattingSock.onmessage = function(e) {
 
 //나가기 버튼 누르면 실행
 $('#outbtnID').click(function(){
+	checkAddRoomVar =false;
   $.ajax({
     url : "/chatting/updateOutFL",
     data : {"chatRoomNo" : selectChatRoomNo, "memberNo" : loginMemberNo},
@@ -557,58 +576,63 @@ $('#outbtnID').click(function(){
 });
 
 
-
+	
 document.getElementById('img0').addEventListener("change", event => {
+		if(checkAddRoomVar){
+			// event.target.files : 선택된 파일의 정보가 배열 형태로 반환
+			if (event.target.files[0] != undefined) { // 선택된 파일이 있을 경우
 
-	// event.target.files : 선택된 파일의 정보가 배열 형태로 반환
-	if (event.target.files[0] != undefined) { // 선택된 파일이 있을 경우
+					const reader = new FileReader(); // 파일을 읽는 객체
 
-			const reader = new FileReader(); // 파일을 읽는 객체
+					reader.readAsDataURL(event.target.files[0]);
+					// 지정된 input type="file"의 파일을 읽어와
+					// URL 형태로 저장
+					console.log(event.target.files[0])
+					reader.onload = e => { // 파일을 다 읽어온 후
+							// e.target == reader
+							// e.target.result == 읽어온 파일 URL
+							/* document.getElementsByClassName('preview')[0].innerText =event.target.files[0].name; */
 
-			reader.readAsDataURL(event.target.files[0]);
-			// 지정된 input type="file"의 파일을 읽어와
-			// URL 형태로 저장
-			console.log(event.target.files[0])
-			reader.onload = e => { // 파일을 다 읽어온 후
-					// e.target == reader
-					// e.target.result == 읽어온 파일 URL
-					/* document.getElementsByClassName('preview')[0].innerText =event.target.files[0].name; */
+							const formData = new FormData();
+							formData.append("img0", event.target.files[0]);
 
-					const formData = new FormData();
-					formData.append("img0", event.target.files[0]);
-
-					$.ajax({
-        
-						url: "/chatting/updatefiles",
-						data : formData,
-						type: "POST", 
-						processData : false,
-						contentType: false,
-						cache: false,
-						dataType: "JSON",
-						success : rename => {
-							console.log(rename);
-							var obj = {
-								"senderNo": loginMemberNo,
-								"clientNo": selectClientNo,
-								"chatRoomNo": selectChatRoomNo,
-								"chatMessage": rename
-							};
-							console.log(obj)
-					
-							// JSON.stringify() : 자바스크립트 객체를 JSON 문자열로 변환
-							chattingSock.send(JSON.stringify(obj));
-						}
+							$.ajax({
+						
+								url: "/chatting/updatefiles",
+								data : formData,
+								type: "POST", 
+								processData : false,
+								contentType: false,
+								cache: false,
+								dataType: "JSON",
+								success : rename => {
+									console.log(rename);
+									var obj = {
+										"senderNo": loginMemberNo,
+										"clientNo": selectClientNo,
+										"chatRoomNo": selectChatRoomNo,
+										"chatMessage": rename
+									};
+									console.log(obj)
+							
+									// JSON.stringify() : 자바스크립트 객체를 JSON 문자열로 변환
+									chattingSock.send(JSON.stringify(obj));
+								}
 
 
-					});
-					
+							});
+							
 
-					
+							
+					}
+
+			} else { // 취소를 누를 경우
+					// 미리보기 지우기
+					document.getElementsByClassName('preview')[0].innerText ='';
 			}
-
-	} else { // 취소를 누를 경우
-			// 미리보기 지우기
-			document.getElementsByClassName('preview')[0].innerText ='';
-	}
+		}else{
+			alert("메세지창을 먼저 선택해주세요.");
+		}
 });
+
+

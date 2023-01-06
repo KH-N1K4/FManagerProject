@@ -231,7 +231,9 @@
     margin: 7px 0;
 }
 
-
+.target-dateBox{
+    display: flex;
+}
 
 /* 메세지 입력창  */
 #messageInput{

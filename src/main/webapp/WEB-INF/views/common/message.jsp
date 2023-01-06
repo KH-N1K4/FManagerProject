@@ -66,7 +66,7 @@
 						<img src="/resources/images/user.png">
 						<div>
 							<b>이번유저</b>	<br>
-                            <div>
+                            <div class="target-dateBox">
                                 <p class="chat">
                                     안녕하세요?? 반갑습니다.<br>
                                     ㅎㅎㅎㅎㅎ
