@@ -10,8 +10,13 @@
 }
 
 #signInLogo{
-    margin-top: 100px;
-    width: 400px;
+    margin: 100px auto 40px auto;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+}
+.realLogo{
+    width: 230px;
 }
 
 #signInMain input:not(:last-child){

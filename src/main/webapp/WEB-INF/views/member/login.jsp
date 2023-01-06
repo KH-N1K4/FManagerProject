@@ -17,9 +17,9 @@
 
 <div id="signInMain">
         <form action="/member/login" method="POST">
-
-       <img src="/resources/images/final_logo_color.png" id="signInLogo">
-
+        <div id="signInLogo">
+       <img src="/resources/images/final_logo_color.png" class="realLogo">
+        </div>
        <input type="text" placeholder="이메일" name="memberEmail" required value="${cookie.saveId.value}"><br>
        <input type="password" placeholder="비밀번호" name="memberPw" required><br>
        
