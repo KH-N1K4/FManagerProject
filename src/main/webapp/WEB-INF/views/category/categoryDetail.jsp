@@ -204,7 +204,16 @@
 							
 							</c:if>
 					    </div>
-					
+					  <c:if test="${loginMember.memberNo==fService.freelancerNo }">
+							<c:if test="${empty review.reviewCommentContent}">
+							    <div class="reviewResponse">
+							        <div class="writeResponse">
+							           <textarea rows="5" cols="100"></textarea><button class="writeComment">답글 남기기</button>
+							        </div>
+							
+							    </div>
+							</c:if>
+						</c:if>
 						<c:if test="${not empty review.reviewCommentContent}">
 						    <div class="reviewResponse">
 						        <div> <span class="freelancerName">프리랜서 이름 </span><span class="createTime">2022.01.02</span> </div>
@@ -213,7 +222,7 @@
 						        </div>
 						
 						    </div>
-						    </c:if>
+						</c:if>
 			        </div>
 			        
 			   </c:forEach>

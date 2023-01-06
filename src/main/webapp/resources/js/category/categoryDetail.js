@@ -69,18 +69,22 @@ const reportReview=document.getElementsByClassName("reportReview");
 
 for(let report of reportReview){
     report.addEventListener("click",()=>{
-        $.ajax({
-            url:"/reportReview",
-            data:{"reviewNo":report.parentElement.id},
-            type:"GET",
-            success:(result)=>{ 
-                if(result>0){ // 성공
-                    report.parentElement.parentElement.parentElement.children[1].innerText="신고된 리뷰입니다.";
-                    alert("신고가 접수되었습니다.")
-                }else{ // 실패 
-                    console.log("신고 실패");
-                }
-            },error:()=>{console.log("신고 에러");}
-        });
+        if(confirm("해당 리뷰를 신고하시겠습니까?")){
+            $.ajax({
+                url:"/reportReview",
+                data:{"reviewNo":report.parentElement.id},
+                type:"GET",
+                success:(result)=>{ 
+                    if(result>0){ // 성공
+                        report.parentElement.parentElement.parentElement.children[1].innerText="신고된 리뷰입니다.";
+                        alert("신고가 접수되었습니다.")
+                    }else{ // 실패 
+                        console.log("신고 실패");
+                    }
+                },error:()=>{console.log("신고 에러");}
+            });
+        }else{
+            alert("신고가 취소되었습니다.");
+        }
     })
 }
