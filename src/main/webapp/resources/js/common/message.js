@@ -109,6 +109,7 @@ const roomListAddEvent = () => {
       
 			// 비동기로 메세지 목록을 조회하는 함수 호출
 			selectChattingFn();
+			document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight; // 스크롤 제일 밑으로
 		});
 	}
 }
@@ -219,7 +220,7 @@ const selectChattingFn = () => {
 					b.innerText = selectClientNickName; // 전역변수
 
 					const br = document.createElement("br");
-//--------------------수정해야할 부분----------------------------
+
 					div.append(b, br);
 					const dateBox = document.createElement("div");
 					dateBox.classList.add("target-dateBox");
@@ -241,9 +242,9 @@ const selectChattingFn = () => {
 
 				ul.append(li);
 
-				document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight; // 스크롤 제일 밑으로
-
+			
 			}
+			document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight; // 스크롤 제일 밑으로
 
 		},
 		error : () => {console.log("에러");}
@@ -536,8 +537,9 @@ chattingSock.onmessage = function(e) {
 		}
 	
 		ul.append(li)
-		document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;// 스크롤 제일 밑으로
+		
 	}
+	document.getElementById('chatBox').scrollTop = document.getElementById('chatBox').scrollHeight;// 스크롤 제일 밑으로
 	console.log(selectClientNo);
 	console.log(loginMemberNo);
 	
