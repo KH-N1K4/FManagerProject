@@ -145,6 +145,36 @@ public class MyProjectContorller {
 		return map;
 	}
 	
+	//------------------------------------------------------------------------
+	
+	// 프로젝트 받은 제안 조회 ajax
+	@GetMapping("/member/categoryTypeSelect_suggest")
+	@ResponseBody
+	public Map<String, Object> categoryTypeSelect_suggest(Model model,@RequestParam String optionVal,
+														  @SessionAttribute("loginMember") Member loginMember,
+														  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp){
+		
+		System.out.println(optionVal);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = service.categoryTypeSelect_suggest(optionVal,cp, loginMember.getMemberNo());
+		
+		model.addAttribute("map", map);
+		
+		return map;
+	}
+	
+	
+	// 프로젝트 채택 및 결제 모달창 이동
+	@GetMapping("/member/suggestion_selectionPay")
+	public String selectionPay() {
+		
+		
+		return "myProject/myProject_user/suggestion_modal";
+	}
+	
+
+	
 	
 	
 

@@ -36,7 +36,7 @@
                 <!-- 상단 내프로젝트 페이지 제목 -->
                 <!-- 상단 selectbox -->
                 <div class="selectbox">
-                  <select  id = "srchOption" class="srchOption" name="srchOption" >
+                  <select  id = "srchOption" class="srchOption" name="srchOption" onchange="selectChange()">
                     <option value="0" selected="">전체</option>
                     <option value="1">디자인</option>
                     <option value="2">IT·프로그래밍</option>
@@ -70,40 +70,40 @@
                   </thead>
                   <tbody id = "selecttbody">
                       <c:if test="${empty proposal}">
-                        <tr class="suggestionTable" suggestionNumeber="">
+                        <tr class="suggestionTable" >
                           <td colspan="8"> 받은 제안이 없습니다. </td>
                         </tr>
                       </c:if>
                       <c:if test="${not empty proposal}">
                         <c:forEach items="${proposal}" var="proposal">
                               <tr class="suggestionTable" id="suggestionTable">
-                                <td class="tc">
+                                <td class="tc">                       
                                   <span class="num">${proposal.proposalNo}</span>
                                 </td>
-                                <td class="tl">
+                                <td class="tl">                           <%-- td 2 --%>
                                   <div class="suggestion_name_area td_link">
                                     <a href="#" id="suggestionName" class="suggestionName">${proposal.projectRequestTitle}</a>
                                   </div>
                                 </td>
-                                <td  class="tc">
+                                <td  class="tc">                        <%-- td 3 --%>
                                   <div class="expert_name_area td_link">
                                     <a href="#" id="expertName" class="expertName" expertName="">${proposal.freelancerName}</a>
                                   </div>
                                 </td>
-                                <td class="tc">                  
+                                <td class="tc">                        <%-- td 4--%>
                                   <span class="text">${proposal.gradeName}</span>
                                 </td>
-                                <td class="tc">
+                                <td class="tc">                          <%-- td 5 --%>
                                   <span class="text">${proposal.proposalPrice}원</span>
                                 </td>
-                                <td class="tc">
+                                <td class="tc">                          <%-- td 6 --%>
                                   <span class="num">${proposal.proposalEditNum}/5</span>
                                 </td>
-                                <td class="tc" id="proposalStatus">
+                                <td class="tc" id="proposalStatus">       <%-- td 7 --%>
                                   <span class="text">${proposal.proposalAdoptStatus}</span>
                                 </td>
-                                <td class="tc">
-                                  <button id="chooseBtn" title="" class="chooseBtn btn_type">채택</button>
+                                <td class="tc">                            <%-- td 8 --%>
+                                  <a href="/member/suggestion_selectionPay"><button id="chooseBtn" title="" class="chooseBtn btn_type">채택</button></a>
                                 </td>                
                               </tr>
                         </c:forEach>
