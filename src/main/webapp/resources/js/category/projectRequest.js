@@ -1,3 +1,10 @@
+$(document).ready(function(){
+  const suvMenuSelect = location.pathname.split('/')[4];
+  if(suvMenuSelect != 0){
+    document.getElementById('sub'+suvMenuSelect+'Box').classList.toggle('subMenu');
+  }
+})
+
 $('.detailMenu').click(function(){
   console.log(document.getElementById('sub'+this.title+'Box'));
   console.log('sub'+this.title+'Box');
@@ -7,10 +14,7 @@ const imageContent = document.getElementById('imageContent');
 const pagination = document.getElementsByClassName('pagination')[0];
 const paginationArea = document.getElementsByClassName('pagination-area')[0];
 
-function addNum() {
-
-}
-
+//location.pathname.split('/')[4];
 
 $("#listOrder").change(function(){
 
