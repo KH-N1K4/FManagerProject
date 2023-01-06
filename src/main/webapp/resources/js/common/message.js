@@ -171,7 +171,12 @@ const selectChattingFn = () => {
 					if(regEx2.test(msg.chatMessage)){
 						aContent.classList.add("aContent");
 						aContent.setAttribute("href", msg.chatMessage);
-						aContent.innerHTML="파일 다운"
+
+						var arSplitUrl = msg.chatMessage.split("/");
+						var nArLength = arSplitUrl.length;
+						var arFileName = arSplitUrl[nArLength-1];   // 나누어진 배열의 맨 끝이 파일명이다
+						//var arSplitFileName = arFileName.split(".");   // 파일명을 다시 "." 로 나누면 파일이름과 확장자로 나뉜다
+						aContent.innerHTML="파일 다운:" + arFileName;
 					}else{
 						p.classList.add("chat");
 						p.innerHTML = msg.chatMessage; // br태그 해석을 위해 innerHTML
@@ -451,7 +456,12 @@ chattingSock.onmessage = function(e) {
 			if(regEx2.test(msg.chatMessage)){
 				aContent.classList.add("aContent");
 				aContent.setAttribute("href", msg.chatMessage);
-				aContent.innerHTML="파일 다운"
+
+				var arSplitUrl = msg.chatMessage.split("/");
+				var nArLength = arSplitUrl.length;
+				var arFileName = arSplitUrl[nArLength-1];   // 나누어진 배열의 맨 끝이 파일명이다
+				//var arSplitFileName = arFileName.split(".");   // 파일명을 다시 "." 로 나누면 파일이름과 확장자로 나뉜다
+				aContent.innerHTML="파일 다운:" + arFileName;
 			}else{
 				p.classList.add("chat");
 				p.innerHTML = msg.chatMessage; // br태그 해석을 위해 innerHTML
