@@ -64,7 +64,7 @@ font-size: 20px;
 #agree{
     margin-left: 130px;
 }
-label{
+#agree ~label{
     font-size: 20px;
     font-weight: bold;
 }

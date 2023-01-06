@@ -56,14 +56,20 @@ public class ManagerController {
 	}
 
 	// 회원 상세조회
-	@GetMapping("/manager/memberDetail")
-	@ResponseBody
-	public Member managerMemberDetail(@RequestParam int memberNo) {
+	@GetMapping("/manager/memberDetail/{memberNo}")
+	public String managerMemberDetail(@PathVariable("memberNo") int memberNo, Model model) {
 
-		Member member = service.selectMemberDetail(memberNo);
+		Map<String,Object> map = service.selectMemberDetail(memberNo);
+		if(map.get("member") ==null) {
+			model.addAttribute("map", map);
+			return "/manager/freelancerDetail" ;
+		} else {
+			model.addAttribute("map", map);
+			return "/manager/memberDetail";
+		}
 
-		return member;
 	}
+	
 
 	// 회원 유형별 목록 조회 ajax
 	@GetMapping("/manager/memberType")

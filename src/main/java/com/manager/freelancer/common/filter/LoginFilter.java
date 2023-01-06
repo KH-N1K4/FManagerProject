@@ -17,7 +17,7 @@ import com.manager.freelancer.member.model.vo.Member;
 
 //필터 등록 + 필터링 할 주소 매핑 
 @WebFilter(filterName="loginFilter",
-			urlPatterns= {"/member/myInfo/*", "/member/logOut","/member/myProject/*"})
+			urlPatterns= {"/member/myInfo/*", "/member/logout","/member/myProject/*"})
 public class LoginFilter implements Filter {
 
 	

@@ -126,7 +126,10 @@ public class CategoryController {
 		map.put("mainCategoryNo", mainCategoryNo);
 		map.put("thirdCategoryNo", thirdCategoryNo);
 		map.put("cp", cp);
-		map.put("memberNo", loginMember.getMemberNo());
+		if(loginMember!=null) {
+			map.put("memberNo", loginMember.getMemberNo());
+			
+		}
 		
 		
 		
@@ -372,6 +375,14 @@ public class CategoryController {
 		return "/member/freelancer/freelancerDetail";
 	}
 	
+	
+	@GetMapping("/reportReview")
+	@ResponseBody
+	private int reportReview(@RequestParam int reviewNo) {
+		
+		return service.reportReview(reviewNo);
+		
+	}
 	
 
 

@@ -51,42 +51,42 @@
             <div class="mainContent">
                 <form action="" id="inquirySubmit">
                     <span>예산</span>
-                    <select name="" id="budget"> 
-                        <option value="">예산</option>
-                        <option value="">1만원 미만</option>
-                        <option value="">1만원 - 5만원 이하</option>
-                        <option value="">5만원 - 10만원 이하</option>
-                        <option value="">10만원 - 20만원 이하</option>
-                        <option value="">20만원 - 30만원 이하</option>
-                        <option value="">30만원 - 50만원 이하</option>
-                        <option value="">50만원 - 70만원 이하</option>
-                        <option value="">70만원 - 100만원 이하</option>
-                        <option value="">100만원 초과</option>
+                    <select name="budget" id="budget"> 
+                        <option value="0.0" selected>예산</option>
+                        <option value="0.1">1만원 이하</option>
+                        <option value="1.5">1만원 - 5만원 이하</option>
+                        <option value="5.10">5만원 - 10만원 이하</option>
+                        <option value="10.20">10만원 - 20만원 이하</option>
+                        <option value="20.30">20만원 - 30만원 이하</option>
+                        <option value="30.50">30만원 - 50만원 이하</option>
+                        <option value="50.70">50만원 - 70만원 이하</option>
+                        <option value="70.100">70만원 - 100만원 이하</option>
+                        <option value="0.100">100만원 초과</option>
                     </select>
 
                    
 
-                    <select name="" id="listOrder">
-                        <option value="0">최신순</option>
+                    <select name="listOrder" id="listOrder">
+                        <option value="0" selected>최신순</option>
                         <option value="1">마감 임박순</option>
                     </select>
                 </form>
 
                 <div id="imageContent">
-                <c:forEach var="projectRequestVar" items="${projectRequest}">
-                    <div class="box">
-                        <div id="image">
-                            <div><img src="${projectRequestVar.projectRequestfile}">
+                    <c:forEach var="projectRequestVar" items="${projectRequest}">
+                        <div class="box">
+                            <div id="image">
+                                <div><img src="${projectRequestVar.projectRequestfile}">
+                                </div>
+                                <a href="/projectRequest/projectRequestDetail/${projectRequestVar.projectRequestNo}" class="imageTitle">
+                                    <div class="projectRequestTitle">${projectRequestVar.projectRequestTitle}</div>
+                                    <span class="imageOthers">${projectRequestVar.projectRequestSummary}</span>
+                                    <span class="imageOthers">가격: ${projectRequestVar.projectRequestBudgetString}원</span>
+                                </a>
                             </div>
-                            <a href="/projectRequest/projectRequestDetail/${projectRequestVar.projectRequestNo}" class="imageTitle">
-                                <div class="projectRequestTitle">${projectRequestVar.projectRequestTitle}</div>
-                                <span class="imageOthers">${projectRequestVar.projectRequestSummary}</span>
-                                <span class="imageOthers">가격: ${projectRequestVar.projectRequestBudgetString}원</span>
-                            </a>
+                        <!-- </a> -->
                         </div>
-                    <!-- </a> -->
-                    </div>
-                </c:forEach>
+                    </c:forEach>
                 </div>    
             </div>
 
@@ -99,10 +99,10 @@
                     <ul class="pagination">
                     
                         <!-- 첫 페이지로 이동 -->
-                        <li><a href="/projectRequest/requestList/${mainVar.mainCategoryNo}/${subVar.subCategoryNo}/${categoryVar.thirdCategoryNo}?cp=1${sURL}">&lt;&lt;</a></li>
+                        <li><a href="/projectRequest/requestList/${mainCategoryNo}/${subCategoryNo}/${thirdCategoryNo}?cp=1${sURL}">&lt;&lt;</a></li>
         
                         <!-- 이전 목록 마지막 번호로 이동 -->
-                        <li><a href="/projectRequest/requestList/${mainVar.mainCategoryNo}/${subVar.subCategoryNo}/${categoryVar.thirdCategoryNo}?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+                        <li><a href="/projectRequest/requestList/${mainCategoryNo}/${subCategoryNo}/${thirdCategoryNo}?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
         
             
                         <!-- 특정 페이지로 이동 -->
@@ -114,15 +114,15 @@
                             </c:when>
                             <c:otherwise>
                             <!-- 현재 페이지를 제외한 나머지 -->
-                            <li><a href="/projectRequest/requestList/${mainVar.mainCategoryNo}/${subVar.subCategoryNo}/${categoryVar.thirdCategoryNo}?cp=${i}${sURL}">${i}</a></li>
+                            <li><a href="/projectRequest/requestList/${mainCategoryNo}/${subCategoryNo}/${thirdCategoryNo}?cp=${i}${sURL}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
                         </c:forEach>
                         <!-- 다음 목록 시작 번호로 이동 -->
-                        <li><a href="/projectRequest/requestList/${mainVar.mainCategoryNo}/${subVar.subCategoryNo}/${categoryVar.thirdCategoryNo}?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+                        <li><a href="/projectRequest/requestList/${mainCategoryNo}/${subCategoryNo}/${thirdCategoryNo}?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
         
                         <!-- 끝 페이지로 이동 -->
-                        <li><a href="/projectRequest/requestList/${mainVar.mainCategoryNo}/${subVar.subCategoryNo}/${categoryVar.thirdCategoryNo}?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                        <li><a href="/projectRequest/requestList/${mainCategoryNo}/${subCategoryNo}/${thirdCategoryNo}?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
         
                     </ul>
                 </div>
@@ -132,7 +132,11 @@
 
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
+    <script>
+        var mainCategoryNo = '${mainCategoryNo}';
+        var subCategoryNo = '${subCategoryNo}';
+        var thirdCategoryNo = '${thirdCategoryNo}';
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 

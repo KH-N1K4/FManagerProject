@@ -129,6 +129,14 @@ public class CategoryDAO {
 		return sqlSession.selectOne("categoryMapper.freelancerInfo", freelancerNo);
 	}
 
+	public int reportReview(int reviewNo) {
+		return sqlSession.insert("categoryMapper.reportReview", reviewNo);
+	}
+
+	public int updateReviewStatus(int reviewNo) {
+		return sqlSession.update("categoryMapper.updateReviewStatus", reviewNo);
+	}
+
 	
 
 	

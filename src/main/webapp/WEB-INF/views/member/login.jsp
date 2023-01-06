@@ -36,7 +36,7 @@
        </label>
        
        
-       <a href="">아이디/비밀번호 찾기</a><br>
+       <a href="/member/findPw">비밀번호 찾기</a><br>
        
        <button id="signInBtn">로그인</button>
 
