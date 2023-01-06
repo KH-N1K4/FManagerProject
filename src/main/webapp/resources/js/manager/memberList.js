@@ -88,6 +88,8 @@ function selectChange() {
                         child2.classList.add('member-name');
                         const child2a = document.createElement("a");
                         child2a.classList.add('infoBtn');
+                        child2a.setAttribute("href","/manager/memberDetail/"+member.memberNo);
+                        child2a.setAttribute("target","_blank");
                         child2a.append(document.createTextNode(member.memberName));
                         child2.append(child2a);
     

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>헤더</title>
+    <title>프리랜서 정보</title>
 
 
     <link rel="stylesheet" href="/resources/css/freelancer/expertDetail.css">
@@ -16,11 +16,11 @@
 <body>
     
     
-    <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp" />
 
   
 
-    <div class="main">
+    <div class="main" style="width:1200px; margin:auto;">
 
         <div id="expertDetailTitle">판매자 정보</div>
         <div class="expertSummary">
