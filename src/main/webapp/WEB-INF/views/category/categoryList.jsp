@@ -21,6 +21,7 @@
 
     <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
 
+
     <section class="content">
         <div class="mainArea">
             <!-- 사이드 메뉴 -->
@@ -58,6 +59,7 @@
                 
                 <div id="imageContent">
                 <c:forEach var="service" items="${serviceList }">
+                
                 	<div>
                 	<%-- <a href="/category/${service.mainCategoryNo}/${service.subCategoryNo }/${service.thirdCategoryNo }/${service.serviceNo }"> --%>
 	                 
