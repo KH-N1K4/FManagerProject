@@ -217,14 +217,23 @@
 		WHERE FREELANCER_NO = #{freelancerNo}
 		</select>
 		
+		<!-- 제안하기 -->
 		<insert id="requestDetailSubmit">
 		INSERT INTO "PROJECT_PROPOSAL"
 		VALUES(SEQ_PROJECT_PROPOSAL_NO.NEXTVAL,DEFAULT,#{proposalpriceInput},#{proposaleditInput},DEFAULT,#{requestNO},#{proposalMemberNo})
 		</insert>
 		
+		<!-- 의뢰 중지 -->
 		<update id="requestStopSubmit">
 		UPDATE "PROJECT_REQUEST" SET
       PROJECT_REQUEST_DEL_FL = 'Y'
       WHERE PROJECT_REQUEST_NO = #{requestNO}
+		</update>
+		
+		<!-- 제안하기 모집마감으로 상태값 변경 -->
+		<update id="requestStopStatus">
+		UPDATE "PROJECT_PROPOSAL" SET
+		PROPOSAL_ADOPT_STATUS = 3
+		WHERE PROJECT_REQUEST_NO =#{requestNO}
 		</update>
 </mapper>

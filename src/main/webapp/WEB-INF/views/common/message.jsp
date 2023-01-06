@@ -66,11 +66,13 @@
 						<img src="/resources/images/user.png">
 						<div>
 							<b>이번유저</b>	<br>
-							<p class="chat">
-								안녕하세요?? 반갑습니다.<br>
-								ㅎㅎㅎㅎㅎ
-							</p>
-							<span class="chatDate">14:05</span>
+                            <div>
+                                <p class="chat">
+                                    안녕하세요?? 반갑습니다.<br>
+                                    ㅎㅎㅎㅎㅎ
+                                </p>
+                                <span class="chatDate">14:05</span>
+                            </div>
 						</div>
 					</li> --%>
 				</ul>
