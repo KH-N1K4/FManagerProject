@@ -310,3 +310,7 @@ h3{
     top: 20px;
 	
 }
+
+.writeResponse{
+	display:flex;
+}
