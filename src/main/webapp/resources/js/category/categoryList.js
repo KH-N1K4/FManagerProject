@@ -141,6 +141,8 @@ function category(map){
             likeSpan.append(fullheart);
         }else if(content.likeCheckFL=='N'){
             likeSpan.append(emptyheart);
+        }else{
+            likeSpan.append(emptyheart);
         }
 
         div1.append(img);

@@ -35,7 +35,9 @@
 	                    		<span><a href="/member/enrollFreelancer">전문가 등록</a></span>
 	                    	</c:if>
                             <span><a href="/member/myProject/myRequestList">내프로젝트</a></span>
-                        
+                       		
+                       		<span><a href="/member/message/chatting">메세지</a></span>
+                            
                             <label for="header-menu-toggle" class="label">
                                 ${loginMember.memberNickname}
                                <!--  <i class="fa-solid fa-caret-down"></i> -->

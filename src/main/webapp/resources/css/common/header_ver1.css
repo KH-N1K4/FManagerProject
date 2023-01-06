@@ -83,6 +83,8 @@ body{
     display: block;
     height: 30px;
     line-height: 40px;
+    color:black;
+    text-decoration:none;
 }
 /* 프로필 */
 .label{
@@ -178,6 +180,7 @@ body{
 /* label 태그 중 for 속성 값이 header-menu-top */
 label[for='header-menu-toggle']{
     cursor:pointer;
+    margin-left:20px;
 }
 
 label[for='header-menu-toggle']:hover{

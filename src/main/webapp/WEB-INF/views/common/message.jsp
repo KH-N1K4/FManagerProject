@@ -53,7 +53,8 @@
                 </c:forEach>
             </ul>
         </div>    
-        <div class="chat chatting-content"> 
+        <!-- <div class="chat chatting-content">  -->
+        <div class="chatting-content"> 
             <!-- 채팅창 -->
             <div id="chatBox" class=""><!-- 스크롤 추가 -->
                 <ul class="display-chatting">
@@ -75,23 +76,31 @@
 				</ul>
             </div>
             <div id="messageInput">
-                <textarea id="inputChatting" rows="3" placeholder="     메세지를 입력해주세요."></textarea>
-                <div id="insert"><button id="send">전송</button></div>
+                <textarea id="inputChatting" rows="3" placeholder="메세지를 입력해주세요."></textarea>
+                <div id="insert">
+                	<button id="send">전송</button>
+                	 <div id="addFile">
+	                    <label for="img0" class="preview">
+	                        첨부파일 전송
+	                    </label>
+	                    <input type="file" id="img0" name="img0">
+                	</div>
+                </div>
             </div>
             <!-- 메세지 입력창 -->
-            <div id="messageButton">
+           <!--  <div id="messageButton">
                 <div id="addFile">
                     <label for="img0" class="preview">
                         첨부파일 전송
                     </label>
                     <input type="file" id="img0" name="img0">
                 </div>
-            </div>
+            </div> -->
         </div>    
         <!-- 오른쪽 전문가 프로필 -->
         <div class="expert">
             <div><img src=""></div>
-            <div><h4><%--전문가 닉네임--%></h4></div>
+            <div><h3><%--전문가 닉네임--%></h3></div>
             <div>
                 <span><%--연락 가능 시간--%></span> <a><%--14:00-18:00--%></a><br>
                 <span><%--회원 등급--%></span>      <a><%--Master--%></a><br>
