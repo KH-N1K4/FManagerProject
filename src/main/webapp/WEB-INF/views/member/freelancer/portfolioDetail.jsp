@@ -17,8 +17,8 @@
         </div> -->
 
         <div id="portfolioSection">
-            <div id="portfolioTitle"></div>
-            <div id="portfolioContent"></div>
+            <div class="portfolioTitle2" id="portfolioTitle"></div>
+            <div class="portfolioContent2" id="portfolioContent"></div>
 
 
             <div>

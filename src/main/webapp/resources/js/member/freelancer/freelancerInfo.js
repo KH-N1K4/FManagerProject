@@ -52,14 +52,16 @@ modalClose2.addEventListener('click', ()=>{
 const clickPortfolio = document.getElementsByClassName("portfolioSection");
 
 
-const title = document.getElementById("portfolioTitle");
-const summary = document.getElementById("portfolioContent");
-const thumb = document.getElementById("portfolioThumb");
-const photo = document.getElementById("portfolioPhoto");
+
 
 for(let portfolio of clickPortfolio){
     portfolio.addEventListener("click", function() {
-
+        const title = document.getElementsByClassName("portfolioTitle2")[0];
+        const summary = document.getElementsByClassName("portfolioContent2")[0];
+        const thumb = document.getElementById("portfolioThumb");
+        const photo = document.getElementById("portfolioPhoto");
+        // console.log(this.children[4].innerText);
+        // console.log(this.children[5].innerText);
         title.innerText=this.children[4].innerHTML;
         summary.innerText=this.children[5].innerHTML;
         thumb.src=this.children[6].innerHTML;
