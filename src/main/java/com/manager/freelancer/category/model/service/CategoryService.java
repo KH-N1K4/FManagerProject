@@ -49,6 +49,10 @@ public interface CategoryService {
 	int tradeComplete(Trade temp);
 
 	Freelancer1 freelancerDetail(int freelancerNo);
+
+	
+	// 리뷰 신고 ajax
+	int reportReview(int reviewNo);
 	
 
 }

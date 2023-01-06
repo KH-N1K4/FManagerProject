@@ -146,6 +146,17 @@ public class CategoryServiceImpl implements CategoryService{
 		return dao.freelancerDetail(freelancerNo);
 	}
 
+	@Override
+	public int reportReview(int reviewNo) {
+		
+		int result=dao.reportReview(reviewNo);
+		if(result>0) {
+			result=dao.updateReviewStatus(reviewNo);
+		}
+		
+		return result;
+	}
+
 	
 
 }

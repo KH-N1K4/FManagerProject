@@ -66,7 +66,7 @@
 				<c:forEach var="member" items="${memberList}">
 					<div class="member-manage-table-content">
 						<div class="member-num">${member.memberNo}</div>
-						<div class="member-name"><a class="infoBtn">${member.memberName}</a></div>
+						<div class="member-name"><a class="infoBtn" href="/manager/memberDetail/${member.memberNo}" target="_blank">${member.memberName}</a></div>
 						<div class="member-division">${member.memberType}</div>
 						<div class="member-grade">${member.freelancerGrade}</div>
 						<div class="member-enrollDate">${member.memberEnrollDate}</div>

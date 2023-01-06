@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.member.model.dao.MemberDAO;
 import com.manager.freelancer.member.model.vo.Member;
+import com.manager.freelancer.member.model.vo.Pagination;
 import com.manager.freelancer.member.model.vo.Util;
 
 
@@ -238,14 +239,44 @@ public class MemberServiceImpl implements MemberService{
 		}
 
 
-
+		// 찜 목록
 		@Override
-		public List<com.manager.freelancer.category.model.vo.Service> selectLikeList(int memberNo) {
+		public Map<String, Object> selectLikeList(int memberNo, int cp) {
 			
-			return dao.selectLikeList(memberNo);
+			int likeListCount = dao.getLikeListCount(memberNo);
+			
+			Pagination pagination = new Pagination(likeListCount, cp);
+			
+			List<com.manager.freelancer.category.model.vo.Service> likeList = dao.selectLikeList(memberNo);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("likeList", likeList);
+			map.put("pagination", pagination);
+			
+			return map;
 		}
 
-
+		// 카테고리 선택 찜 목록
+		@Override
+		public Map<String, Object> selectLikeListType(int memberNo, int cp, int category) {
+			
+			Map<String, Object> option = new HashMap<String, Object>();
+			option.put("memberNo", memberNo);
+			option.put("category", category);
+			
+			int likeListCount = dao.getLikeListCount2(option);
+			
+			Pagination pagination = new Pagination(likeListCount, cp);
+			
+			List<com.manager.freelancer.category.model.vo.Service> likeList = dao.selectLikeList2(option);
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("likeList", likeList);
+			map.put("pagination", pagination);
+			map.put("category", category);
+			
+			return map;
+		}
 
 	
 	

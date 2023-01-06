@@ -376,6 +376,14 @@ public class CategoryController {
 	}
 	
 	
+	@GetMapping("/reportReview")
+	@ResponseBody
+	private int reportReview(@RequestParam int reviewNo) {
+		
+		return service.reportReview(reviewNo);
+		
+	}
+	
 
 
 }

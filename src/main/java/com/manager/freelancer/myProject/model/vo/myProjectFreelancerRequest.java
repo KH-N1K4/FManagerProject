@@ -21,7 +21,9 @@ public class myProjectFreelancerRequest {//지윤
 	private int projectRequestBudget;			//PROJECT_REQUEST_BUDGET 프로젝트 의뢰 예산
 	private String projectRequestBudgetString;			//PROJECT_REQUEST_BUDGET 프로젝트 의뢰 예산
 	private String projectRecruitDate;			//REQUEST_RECRUIT_DATE 프로젝트 모집 마감일
+	private String projectRecruitDateString;			//REQUEST_RECRUIT_DATE 프로젝트 모집 마감일
 	private String projectWorkDate;				//REQUEST_WORK_DATE 프로젝트 작업 마감일
+	private String projectWorkDateString;				//REQUEST_WORK_DATE 프로젝트 작업 마감일
 	private int projectWorkPeriod;				//PROJECT_WORK_PERIOD 프로젝트 작업기간
 	private String projectCreateDate;			//PROJECT_REQUEST_CREATE_DATE 프로젝트 의뢰 등록일
 	private int mainCategoryNo;					//MAIN_CATEGORY_NO 카테고리1 번호(FK)
@@ -31,6 +33,7 @@ public class myProjectFreelancerRequest {//지윤
 	private int subCategoryNo;				//
 	private String subCategoryName;			//
 	private int clientNo;						//MEMBER_NO 회원 번호(FK)-의뢰인 회원번호
+	private String memberNickName;						//MEMBER_NO 회원 번호(FK)-의뢰인 회원번호
 	private String projectRequestfile;						//MEMBER_NO 회원 번호(FK)-의뢰인 회원번호
 	
 	private int proposalNo;						//PROJECT_PROPOSAL_NO 프로젝트 제안 번호 SEQUENCE :SEQ_PROJECT_PROPOSAL_NO
@@ -44,4 +47,5 @@ public class myProjectFreelancerRequest {//지윤
 	private int memberNo;					//FREELANCER_NO 프리랜서 번호(FK)
 	
 	private List<RequestFile> requestfileList;
+	private List<MyProject> proposalList;
 }

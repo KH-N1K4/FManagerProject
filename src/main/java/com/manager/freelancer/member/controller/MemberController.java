@@ -315,15 +315,28 @@ public class MemberController {
 	
 	// 찜목록 이동
 	@GetMapping("/member/myInfo/likeList")
-	public String likeList(@SessionAttribute("loginMember") Member loginMember, Model model) {
+	public String likeList(@SessionAttribute("loginMember") Member loginMember, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
 		
-		List<Service> map=service.selectLikeList(loginMember.getMemberNo());
+		Map<String, Object> map =service.selectLikeList(loginMember.getMemberNo(),cp);
 		
 		model.addAttribute("map",map);
 		
 		return "member/likeList";
 	}
 	
+	//찜 select ajax
+	@GetMapping("/member/myInfo/likeList/type")
+	@ResponseBody
+	public Map<String, Object> likeListType(@SessionAttribute("loginMember") Member loginMember, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value = "category", required = false) int category) {
+		
+		Map<String, Object> map =service.selectLikeListType(loginMember.getMemberNo(),cp,category);
+		
+		
+		return map;
+	}
 	
 	
 	

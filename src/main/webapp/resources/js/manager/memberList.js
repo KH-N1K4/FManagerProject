@@ -1,7 +1,7 @@
 
 
 /* 모달 */
-modalShow();
+// modalShow();
 /* 회원 탈퇴 */
 deleteMember();
 
@@ -88,6 +88,8 @@ function selectChange() {
                         child2.classList.add('member-name');
                         const child2a = document.createElement("a");
                         child2a.classList.add('infoBtn');
+                        child2a.setAttribute("href","/manager/memberDetail/"+member.memberNo);
+                        child2a.setAttribute("target","_blank");
                         child2a.append(document.createTextNode(member.memberName));
                         child2.append(child2a);
     
@@ -120,7 +122,7 @@ function selectChange() {
     
                     }
     
-                    modalShow();
+                    // modalShow();
                     deleteMember();
 
                     /* 페이징 */
@@ -250,7 +252,7 @@ function deleteMember(){
 
 
 /* 모달 함수 */
-function modalShow() {
+/* function modalShow() {
     const btnOpenPopup = document.querySelectorAll('.infoBtn');
     const body = document.querySelector('#mainBody');
     const memberModal = document.querySelector('.member-modal');
@@ -278,6 +280,7 @@ function modalShow() {
                         document.getElementById("memberEmail").value = member.memberEmail
                         document.getElementById("memberTel").value = member.memberTel
                         document.getElementById("memberJob").value = member.memberJob
+                        document.getElementById("profile-image").setAttribute("src",member.memberProfile)
 
                         $("#checkbox > input").prop("checked", false);
 
@@ -296,6 +299,16 @@ function modalShow() {
                             document.getElementById("freeContactTime2").innerText = member.freeContactTime2;
                             document.getElementById("freelancerBankName").value = member.freelancerBankName;
                             document.getElementById("freelancerAccount").value = member.freelancerAccountNo;
+
+                            $("#checkbox > input").prop("checked", false);
+
+                            if (member.memberInterest != null) {
+                                interest = member.memberInterest.split(',');
+                                for (i of interest) {
+                                    document.querySelectorAll("#checkbox > input")[i - 1].checked = true;
+                                }
+                            }
+
                         } else{
                             freelancer.classList.remove('show');
                         }
@@ -321,7 +334,7 @@ function modalShow() {
 
         });
     }
-};
+}; */
 
 
 

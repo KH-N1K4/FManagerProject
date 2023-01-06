@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.manager.model.dao.ManagerDAO;
 import com.manager.freelancer.manager.model.vo.Member;
@@ -61,22 +62,23 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 회원 상세 조회
 	@Override
-	public Member selectMemberDetail(int memberNo) {
+	public Map<String, Object> selectMemberDetail(int memberNo) {
 
-		Member member = dao.selectMemberDetail(memberNo);
-
-		if (member.getFreelancerFlag().equals("Y")) {
-			Member freelancer = dao.selectFreelancerDetail(memberNo);
-			member.setFreeContactTime1(freelancer.getFreeContactTime1());
-			member.setFreeContactTime2(freelancer.getFreeContactTime2());
-			member.setRegionName(freelancer.getRegionName());
-			member.setFreelancerPeriod(freelancer.getFreelancerPeriod());
-			member.setFreelancerIntroduction(freelancer.getFreelancerIntroduction());
-			member.setFreelancerBankName(freelancer.getFreelancerBankName());
-			member.setFreelancerAccountNo(freelancer.getFreelancerAccountNo());
+		// 프리랜서 여부
+		String flag = dao.getFreelancerFlag(memberNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(flag.equals("Y")) { //프리랜서
+			Freelancer1 freelancer1 = dao.freelancerDetail(memberNo);
+			map.put("freelancer", freelancer1);
+			
+		} else { // 일반 회원
+			Member member = dao.selectMemberDetail(memberNo);
+			map.put("member", member);
 		}
 
-		return member;
+		return map;
 	}
 
 	// 회원 유형별 조회 ajax
