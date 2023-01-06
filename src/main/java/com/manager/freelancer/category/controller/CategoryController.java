@@ -126,7 +126,10 @@ public class CategoryController {
 		map.put("mainCategoryNo", mainCategoryNo);
 		map.put("thirdCategoryNo", thirdCategoryNo);
 		map.put("cp", cp);
-		map.put("memberNo", loginMember.getMemberNo());
+		if(loginMember!=null) {
+			map.put("memberNo", loginMember.getMemberNo());
+			
+		}
 		
 		
 		
