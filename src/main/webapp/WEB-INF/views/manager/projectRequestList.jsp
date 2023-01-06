@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/resources/css/manager/projectRequestList.css">
 
 </head>
-<body>
+<body id="mainBody">
 
 	<jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp" />
 
@@ -64,6 +64,7 @@
 			<div class="service-list-table-column">
 				<div class="service-num">번호</div>
 				<div class="service-title">제목</div>
+				<div class="service-name">의뢰인</div>
 				<div class="service-status">상태</div>
 				<div class="service-button"> </div>
 			</div>
@@ -74,6 +75,8 @@
 					<div class="service-list-table-content">
 						<div class="service-num">${request.projectRequestNo}</div>
 						<div class="service-title"><a class="detailBtn" href="/manager/requestDetail/${request.projectRequestNo}">${request.projectRequestTitle}</a></div>
+						<div class="service-name"><a class="infoBtn">${request.memberName}</a></div>
+						<input type="hidden" id="memberNo" value="${request.memberNo}">
 						<div class="service-status">${request.projectRequestStatusString}</div>
 						<div class="service-button">
 							<a class="service-button-value">삭제</a>
@@ -88,7 +91,10 @@
 
 		</div>
 		<!-- buy-table -->
-		
+
+		<div class="member-modal">
+            <jsp:include page="/WEB-INF/views/manager/userProfilePopup.jsp" /> 
+       </div>
 
 		<!-- pagination -->
 		<div class="pagination-area">

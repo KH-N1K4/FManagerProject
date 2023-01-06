@@ -69,7 +69,7 @@
         
 
         <div class="detailHeader">
-            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="" style="height:100%;"></div>
+            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${projectRequest.requestFilePath }" style="height:100%;"></div>
             <div class="serviceContent">
                 <div class="serviceTitle">${projectRequest.projectRequestTitle }</div>
                 <div class="serviceSummary">${projectRequest.projectRequestSummary}</div>
@@ -112,17 +112,13 @@
         
         
         <!-- 서비스 설명 부분 -->
-        <div id="serviceInfo">
-            <div><button>서비스 설명</button></div>
-            <div><button>포트폴리오</button></div>
-            <div><button>취소/환불</button></div>
-            <div><button>서비스 평가</button></div>
-        </div>
         
         <div class="detailInner">
-        
+            <a id="serviceContent"></a>  
+        	<h3>서비스 설명</h3>
+            ${projectRequest.projectRequestContent}
 	        <c:forEach var="imageFile" items="${projectRequest.requestImageFileList }">
-                <img src="/resources/images/${imageFile.imageFilePath }" style="width:100%;">
+                <img src="${imageFile.imageFilePath }" style="width:100%;">
 	        </c:forEach>
 
         </div>
