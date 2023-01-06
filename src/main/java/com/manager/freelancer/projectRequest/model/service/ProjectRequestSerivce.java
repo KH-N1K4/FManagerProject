@@ -13,9 +13,12 @@ public interface ProjectRequestSerivce {
 	 * @param mainCategoryNo
 	 * @param subCategoryNo
 	 * @param thirdCategoryNo
+	 * @param budgetInt1 
+	 * @param budgetInt0 
+	 * @param listOrder 
 	 * @return
 	 */
-	Map<String, Object> getCategotyList(int cp, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo);
+	Map<String, Object> getCategotyList(int cp, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo, int budgetInt0, int budgetInt1, int listOrder);
 
 	/**프로젝트 의뢰 상세보기
 	 * @param serviceNo
@@ -43,5 +46,23 @@ public interface ProjectRequestSerivce {
 	 * @return
 	 */
 	String requestDetailSubmit(int requestNO, int proposalpriceInput, int proposaleditInput, int proposalMemberNo);
+
+	/**프로젝트 상세 페이지에서 판매중지
+	 * @param requestNO
+	 * @return
+	 */
+	String requestStopSubmit(int requestNO);
+
+	/**모집 마감입박순 /최신순
+	 * @param listOrder
+	 * @param thirdCategoryNo 
+	 * @param subCategoryNo 
+	 * @param mainCategoryNo 
+	 * @param cp 
+	 * @param budgetInt1 
+	 * @param budgetInt0 
+	 * @return
+	 */
+	Map<String, Object> listOrderSelect(int listOrder, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo, int cp, int budgetInt0, int budgetInt1);
 
 }

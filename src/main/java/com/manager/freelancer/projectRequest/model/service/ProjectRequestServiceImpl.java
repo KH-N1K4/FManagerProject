@@ -24,8 +24,8 @@ public class ProjectRequestServiceImpl implements ProjectRequestSerivce{
 	 *프로젝트 목록 조회
 	 */
 	@Override
-	public Map<String, Object> getCategotyList(int cp, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo) {
-		int listCount = dao.getProjectRequestListCount(mainCategoryNo,subCategoryNo,thirdCategoryNo);
+	public Map<String, Object> getCategotyList(int cp, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo, int budgetInt0, int budgetInt1, int listOrder) {
+		int listCount = dao.getProjectRequestListCount(mainCategoryNo,subCategoryNo,thirdCategoryNo,budgetInt0,budgetInt1,listOrder);
 		
 		Pagination pagination = new Pagination(listCount,cp,20,10);
 		
@@ -34,13 +34,14 @@ public class ProjectRequestServiceImpl implements ProjectRequestSerivce{
 		List<myProjectFreelancerRequest> categoryList = dao.getCategoryList();
 		List<myProjectFreelancerRequest> subCategoryList = dao.getSubCategoryList();
 		List<myProjectFreelancerRequest> mainCategoryList = dao.getMainCategoryList();
-		List<myProjectFreelancerRequest> projectRequestList = dao.getProjectRequestList(pagination,mainCategoryNo,subCategoryNo,thirdCategoryNo);
+		List<myProjectFreelancerRequest> projectRequestList = dao.getProjectRequestList(pagination,mainCategoryNo,subCategoryNo,thirdCategoryNo,budgetInt0,budgetInt1,listOrder);
 		
 		map.put("categoryList",categoryList);
 		map.put("subCategoryList",subCategoryList);
 		map.put("mainCategoryList",mainCategoryList);
 		map.put("projectRequestList",projectRequestList);
 		map.put("pagination",pagination);
+		map.put("listCount",listCount);
 		return map;
 	}
 
@@ -84,5 +85,38 @@ public class ProjectRequestServiceImpl implements ProjectRequestSerivce{
 			message = "제안하기 등록되지 않았습니다.";
 		}
 		return message;
+	}
+
+	/**
+	 *프로젝트 상세 페이지에서 판매중지
+	 */
+	@Override
+	public String requestStopSubmit(int requestNO) {
+		int result = dao.requestStopSubmit(requestNO);
+		String message = "";
+		if(result>0) {
+			message = "내 의뢰 내리기가 완료되었습니다.";
+		}else {
+			message = "내 의뢰 내리기가 실패했습니다.";
+		}
+		return message;
+	}
+
+	/**
+	 *모집 마감입박순 /최신순
+	 */
+	@Override
+	public Map<String, Object> listOrderSelect(int listOrder, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo,int cp,int budgetInt0, int budgetInt1) {
+		int listCount = dao.listOrderSelectCount(listOrder,mainCategoryNo,subCategoryNo,thirdCategoryNo, budgetInt0, budgetInt1);
+		
+		Pagination pagination = new Pagination(listCount,cp,20,10);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<myProjectFreelancerRequest> resultList = dao.listOrderSelect(pagination,mainCategoryNo,subCategoryNo,thirdCategoryNo,listOrder, budgetInt0, budgetInt1);
+		
+		map.put("resultList",resultList);
+		map.put("pagination",pagination);
+		map.put("listCount",listCount);
+		return map;
 	}
 }

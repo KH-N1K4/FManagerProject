@@ -52,15 +52,21 @@ public class ProjectRequestDAO {
 	 * @param thirdCategoryNo 
 	 * @param subCategoryNo 
 	 * @param mainCategoryNo 
+	 * @param budgetInt1 
+	 * @param budgetInt0 
+	 * @param listOrder 
 	 * @return
 	 */
-	public List<myProjectFreelancerRequest> getProjectRequestList(Pagination pagination, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo) {
+	public List<myProjectFreelancerRequest> getProjectRequestList(Pagination pagination, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo, int budgetInt0, int budgetInt1, int listOrder) {
 		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
 	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("thirdCategoryNo",thirdCategoryNo);
 		map.put("subCategoryNo",subCategoryNo);
 		map.put("mainCategoryNo",mainCategoryNo);
+		map.put("budgetInt0",budgetInt0);
+		map.put("budgetInt1",budgetInt1);
+		map.put("listOrder",listOrder);
 		return sqlSession.selectList("myProjectRequest.getProjectRequestList",map,rowBounds);
 	}
 
@@ -68,13 +74,18 @@ public class ProjectRequestDAO {
 	 * @param thirdCategoryNo 
 	 * @param subCategoryNo 
 	 * @param mainCategoryNo 
+	 * @param budgetInt1 
+	 * @param budgetInt0 
 	 * @return
 	 */
-	public int getProjectRequestListCount(int mainCategoryNo, int subCategoryNo, int thirdCategoryNo) {
+	public int getProjectRequestListCount(int mainCategoryNo, int subCategoryNo, int thirdCategoryNo, int budgetInt0, int budgetInt1,int listOrder) {
 		Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("thirdCategoryNo",thirdCategoryNo);
 		map.put("subCategoryNo",subCategoryNo);
 		map.put("mainCategoryNo",mainCategoryNo);
+		map.put("budgetInt0",budgetInt0);
+		map.put("budgetInt1",budgetInt1);
+		map.put("listOrder",listOrder);
 		return sqlSession.selectOne("myProjectRequest.getProjectRequestListCount",map);
 	}
 
@@ -119,6 +130,56 @@ public class ProjectRequestDAO {
 		map.put("proposaleditInput",proposaleditInput);
 		map.put("proposalMemberNo",proposalMemberNo);
 		return sqlSession.insert("myProjectRequest.requestDetailSubmit",map);
+	}
+
+	/**프로젝트 상세 페이지에서 판매 중지
+	 * @param requestNO
+	 * @return
+	 */
+	public int requestStopSubmit(int requestNO) {
+		return  sqlSession.update("myProjectRequest.requestStopSubmit",requestNO);
+	}
+
+	/**모집 마감입박순 /최신순
+	 * @param listOrder
+	 * @param thirdCategoryNo 
+	 * @param subCategoryNo 
+	 * @param mainCategoryNo 
+	 * @param budgetInt1 
+	 * @param budgetInt0 
+	 * @return
+	 */
+	public List<myProjectFreelancerRequest> listOrderSelect(Pagination pagination, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo,int listOrder, int budgetInt0, int budgetInt1) {
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
+	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+	    Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("thirdCategoryNo",thirdCategoryNo);
+		map.put("subCategoryNo",subCategoryNo);
+		map.put("mainCategoryNo",mainCategoryNo);
+		map.put("listOrder",listOrder);
+		map.put("budgetInt0",budgetInt0);
+		map.put("budgetInt1",budgetInt1);
+		return sqlSession.selectList("myProjectRequest.getProjectRequestList",map,rowBounds);
+	}
+	
+	/**모집 마감입박순 /최신순 페이지
+	 * @param listOrder
+	 * @param mainCategoryNo
+	 * @param subCategoryNo
+	 * @param thirdCategoryNo
+	 * @param budgetInt1 
+	 * @param budgetInt0 
+	 * @return
+	 */
+	public int listOrderSelectCount(int listOrder, int mainCategoryNo, int subCategoryNo, int thirdCategoryNo, int budgetInt0, int budgetInt1) {
+		Map<String, Object> map = new HashMap<String, Object>();
+	    map.put("thirdCategoryNo",thirdCategoryNo);
+		map.put("subCategoryNo",subCategoryNo);
+		map.put("mainCategoryNo",mainCategoryNo);
+		map.put("listOrder",listOrder);
+		map.put("budgetInt0",budgetInt0);
+		map.put("budgetInt1",budgetInt1);
+		return sqlSession.selectOne("myProjectRequest.getProjectRequestListCount",map);
 	}
 	
 }

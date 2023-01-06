@@ -42,10 +42,23 @@
                     <a id="requestBtn" class="BtnTag" href="#">제안하기</a>
                 </c:if>
                 <c:if test="${loginMember.memberNo eq userRequest.memberNo}">
-                    <a id="stopBtn" class="BtnTag"  href="#">판매중지</a>
+                    <div class="buttonBox" id="buttonBox">
+                        <a id="stopBtn" class="BtnTag"  href="#">의뢰중지</a>
+                        <div class="ly_type layerStopRequest" id="layerStopRequest">
+                            <div class="ly_cont">
+                                <p>
+                                내 프로젝트 의뢰 중지를 하시면<em class="c_gn"> 해당 의뢰를 다시 등록</em>하실 수 없습니다.<br>
+                                <strong><span class="c_og">의뢰를 중지</span> 하시겠습니까?</strong>
+                                </p>
+                                <div class="btn">
+                                    <a id="realStopBtn" class="btn_type2 layerStopRequestBtn"  href="#"><span class="_hideLayer">의뢰중지하기</span></a>
+                                    <a href="#" class="btn_type3 _hideLayer"><span class="_hideLayer">취소</span></a>
+                                </div>
+                            </div>
+                            <a href="#" class="clse _hideLayer"><span class="blind">닫기</span></a>
+                        </div>
+                    </div>
                 </c:if>
-                
-               <!--  <button id="buyBtn">구매하기</button> -->
             </div>
         </div>
         <div class="detailContent">

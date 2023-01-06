@@ -114,7 +114,11 @@
 				JOIN "MEMBER" USING(MEMBER_NO)
 				WHERE PROJECT_REQUEST_STATUS = 2
 				AND MEMBER_DELETE_FL = 'N'
-				ORDER BY PROJECT_REQUEST_NO) p
+				<if test="budgetInt1 != 0  and budgetInt1 != null">
+				 AND PROJECT_REQUEST_BUDGET <![CDATA[>=]]> #{budgetInt0}
+					AND PROJECT_REQUEST_BUDGET <![CDATA[<]]> #{budgetInt1}
+				</if>
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC) p
 			WHERE REQUEST_FILE_ORDER =0
 			AND PROJECT_REQUEST_DEL_FL ='N'
 			<if test="mainCategoryNo !='' and mainCategoryNo!=null and mainCategoryNo != 0">
@@ -145,6 +149,10 @@
 				JOIN "MEMBER" USING(MEMBER_NO)
 				WHERE PROJECT_REQUEST_STATUS = 2
 				AND MEMBER_DELETE_FL = 'N'
+				<if test="budgetInt1 != 0 and budgetInt1 != null">
+				 	AND PROJECT_REQUEST_BUDGET <![CDATA[>=]]> #{budgetInt0}
+					AND PROJECT_REQUEST_BUDGET <![CDATA[<]]> #{budgetInt1}
+				</if>
 				ORDER BY PROJECT_REQUEST_NO) p
 			WHERE REQUEST_FILE_ORDER =0
 			AND PROJECT_REQUEST_DEL_FL ='N'
@@ -213,4 +221,10 @@
 		INSERT INTO "PROJECT_PROPOSAL"
 		VALUES(SEQ_PROJECT_PROPOSAL_NO.NEXTVAL,DEFAULT,#{proposalpriceInput},#{proposaleditInput},DEFAULT,#{requestNO},#{proposalMemberNo})
 		</insert>
+		
+		<update id="requestStopSubmit">
+		UPDATE "PROJECT_REQUEST" SET
+      PROJECT_REQUEST_DEL_FL = 'Y'
+      WHERE PROJECT_REQUEST_NO = #{requestNO}
+		</update>
 </mapper>

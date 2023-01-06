@@ -1,5 +1,6 @@
 package com.manager.freelancer.projectRequest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,35 +39,52 @@ public class ProjectRequestController {
 	@GetMapping("/projectRequest/requestList/{mainCategoryNo}/{subCategoryNo}/{thirdCategoryNo}")
 	public String mainProjectRequest(Model model,
 			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
+			@RequestParam(value="listOrder" , required = false, defaultValue = "3") int listOrder,
+			@RequestParam(value="budget" , required = false, defaultValue = "0.0") String budget,
 			@PathVariable(value="mainCategoryNo" , required = false) String mainNo,
 			@PathVariable(value="subCategoryNo" , required = false) String subNo,
-			@PathVariable(value="thirdCategoryNo" , required = false) String thirdNo) {
+			@PathVariable(value="thirdCategoryNo" , required = false) String thirdNo
+			) {
 		
+		int budgetInt0= 0; 
+		int budgetInt1= 0;
+		String[] budgetString;
+		if(!budget.equals("0.0") && !budget.equals("")) {
+			budgetString =budget.split(".");
+			budgetInt0 = Integer.parseInt(budgetString[0]+"000");
+			budgetInt1 = Integer.parseInt(budgetString[1]+"000");
+		}
+		
+		System.out.println(budgetInt0);
+		System.out.println(budgetInt1);
 		
 		int mainCategoryNo;
 		int subCategoryNo;
 		int thirdCategoryNo;
-		if(mainNo == null) {
+		if(mainNo == null && mainNo.equals("")) {
 			mainCategoryNo =0;
 		}else {
 			mainCategoryNo =Integer.parseInt(mainNo);
 		}
 		
-		if(subNo == null) {
+		if(subNo == null && subNo.equals("")) {
 			subCategoryNo =0;
 		}else {
 			subCategoryNo =Integer.parseInt(subNo);
 		}
 		
-		if(thirdNo == null) {
+		if(thirdNo == null && thirdNo.equals("")) {
 			thirdCategoryNo =0;
 		}else {
 			thirdCategoryNo =Integer.parseInt(thirdNo);
 		}
-		Map<String, Object> map = service.getCategotyList(cp,mainCategoryNo,subCategoryNo,thirdCategoryNo);
+		Map<String, Object> map = service.getCategotyList(cp,mainCategoryNo,subCategoryNo,thirdCategoryNo,budgetInt0,budgetInt1,listOrder);
 		model.addAttribute("category", map);
 		model.addAttribute("pagination",map.get("pagination"));
 		model.addAttribute("listCount",map.get("listCount"));
+		model.addAttribute("mainCategoryNo",mainCategoryNo);
+		model.addAttribute("subCategoryNo",subCategoryNo);
+		model.addAttribute("thirdCategoryNo",thirdCategoryNo);
 		return "/projectRequest/projectRequestList";
 	}
 	
@@ -111,5 +129,46 @@ public class ProjectRequestController {
 		String message = service.requestDetailSubmit(requestNO,proposalpriceInput,proposaleditInput,proposalMemberNo);
 			
 		return new Gson().toJson(message);
+	}
+	
+	//프로젝트 상세 페이지에서 판매중지
+	@PostMapping("/requestStopSubmit")
+	@ResponseBody
+	public String requestStopSubmit(
+				@RequestParam(value="requestNO") int requestNO
+				) throws Exception{
+				
+		String message = service.requestStopSubmit(requestNO);
+				
+		return new Gson().toJson(message);
+	}
+	
+	//모집 마감입박순 /최신순
+	@PostMapping("/listOrderSelect")
+	@ResponseBody
+	public String listOrderSelect(
+				@RequestParam(value="listOrder") int listOrder,
+				@RequestParam(value="budget" , required = false, defaultValue = "0.0") String budget,
+				@RequestParam(value="mainCategoryNo") int mainCategoryNo,
+				@RequestParam(value="subCategoryNo") int subCategoryNo,
+				@RequestParam(value="thirdCategoryNo") int thirdCategoryNo,
+				@RequestParam(value="cp" , required = false, defaultValue = "1") int cp
+				) throws Exception{
+		
+		int budgetInt0= 0; 
+		int budgetInt1= 0;
+		String[] budgetString;
+		if(!budget.equals("0.0") && !budget.equals("")) {
+			budgetString =budget.split("\\.");
+			budgetInt0 = Integer.parseInt(budgetString[0]+"0000");
+			budgetInt1 = Integer.parseInt(budgetString[1]+"0000");
+		}
+		
+		System.out.println(budgetInt0);
+		System.out.println(budgetInt1);
+					
+		Map<String, Object> resultList = service.listOrderSelect(listOrder,mainCategoryNo,subCategoryNo,thirdCategoryNo,cp,budgetInt0,budgetInt1);
+					
+		return new Gson().toJson(resultList);
 	}
 }
