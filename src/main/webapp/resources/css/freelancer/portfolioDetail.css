@@ -1,3 +1,4 @@
+/*
 .modal_body{
     width: 1100px;
     height: 1000px;
@@ -53,7 +54,7 @@
 
 #portfolioContent{
     font-size: 16px;
-    /* margin:20px 0; */
+  margin:20px 0;  얘 업어야함
 }
 
 .portfolioPhoto{
@@ -68,3 +69,5 @@
     background-color: aliceblue;
     margin:auto;
 }
+
+*/

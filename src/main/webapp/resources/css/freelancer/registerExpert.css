@@ -125,7 +125,7 @@ input[type="checkbox"]:checked + label span::after {
 
 /* 湲곌컙 */
 .number{
-    width: 70px;
+    /* width: 70px; */
 }
 
 /* ���뻾 */
@@ -333,7 +333,7 @@ select{
     font-weight: 400;
     font-size: 17px;
     border-radius: 5px;
-    padding: 10px 20px;
+    /* padding: 10px 20px; */
     position: relative;
     top: -3px;
 }

@@ -76,5 +76,7 @@
 		<websocket:sockjs/>
 	</websocket:handlers>
 	
+	<resources location="/resources/images/favicon.ico" mapping="/favicon.ico"></resources>
+	
 	
 </beans:beans>
