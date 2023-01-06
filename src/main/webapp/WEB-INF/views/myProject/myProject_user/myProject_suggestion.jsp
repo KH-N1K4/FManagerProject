@@ -15,9 +15,8 @@
   
 </head>
 <body>
-  <main>
+  <main id="mainBody">
     <!-- hearder -->
-  <%--   <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/> --%>
   <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
 
     <!-- hearder -->
@@ -81,36 +80,55 @@
                                 <td class="tc">                       
                                   <span class="num">${proposal.proposalNo}</span>
                                 </td>
-                                <td class="tl">                           <%-- td 2 --%>
+                                <td class="tl">                           
                                   <div class="suggestion_name_area td_link">
                                     <a href="#" id="suggestionName" class="suggestionName">${proposal.projectRequestTitle}</a>
                                   </div>
                                 </td>
-                                <td  class="tc">                        <%-- td 3 --%>
+                                <td  class="tc">                       
                                   <div class="expert_name_area td_link">
                                     <a href="#" id="expertName" class="expertName" expertName="">${proposal.freelancerName}</a>
                                   </div>
                                 </td>
-                                <td class="tc">                        <%-- td 4--%>
+                                <td class="tc">                      
                                   <span class="text">${proposal.gradeName}</span>
                                 </td>
-                                <td class="tc">                          <%-- td 5 --%>
+                                <td class="tc">                         
                                   <span class="text">${proposal.proposalPrice}원</span>
                                 </td>
-                                <td class="tc">                          <%-- td 6 --%>
-                                  <span class="num">${proposal.proposalEditNum}/5</span>
+                                <td class="tc">                        
+                                  <span class="num">${proposal.proposalEditNum}</span>
                                 </td>
-                                <td class="tc" id="proposalStatus">       <%-- td 7 --%>
+                                <td class="tc" id="proposalStatus">    
                                   <span class="text">${proposal.proposalAdoptStatus}</span>
                                 </td>
-                                <td class="tc">                            <%-- td 8 --%>
-                                  <a href="/member/suggestion_selectionPay"><button id="chooseBtn" title="" class="chooseBtn btn_type">채택</button></a>
+                                <td class="tc">                           
+                                    <button id="chooseBtn" class="chooseBtn" title="${proposal.proposalNo}">채택</button>
+
+                                    <div class="hidden" id="projectRequestTitle${proposal.proposalNo}">${proposal.projectRequestTitle}</div>
+                                    <div class="hidden" id="freelancerName${proposal.proposalNo}">${proposal.freelancerName}</div>
+                                    <div class="hidden" id="projectWorkPeriod${proposal.proposalNo}">${proposal.projectWorkPeriod}</div>
+                                    <div class="hidden" id="proposalPrice${proposal.proposalNo}">${proposal.proposalPrice}</div>
+                                    <div class="hidden" id="projectRequestStatus${proposal.proposalNo}">${proposal.projectRequestStatus}</div>
+                                    <div class="hidden" id="proposalEditNum${proposal.proposalNo}">${proposal.proposalEditNum}</div>
+                                    <div class="hidden" id="freelancerNo${proposal.proposalNo}">${proposal.freelancerNo}</div>
+                                    <div class="hidden" id="proposalNo${proposal.proposalNo}">${proposal.proposalNo}</div>
+                                    <div class="hidden" id="memberEmail${proposal.proposalNo}">${loginMember.memberEmail}</div>
+                                    <div class="hidden" id="memberName${proposal.proposalNo}">${loginMember.memberName}</div>
+                                    <div class="hidden" id="memberTel${proposal.proposalNo}">${loginMember.memberTel}</div>
+                                    <div class="hidden" id="projectRequestNo${proposal.proposalNo}">${proposal.projectRequestNo}</div>
+                                    <div class="hidden" id="projectRequestSummary${proposal.proposalNo}">${proposal.projectRequestSummary}</div>
+                                    <div class="hidden" id="projectRequestContent${proposal.proposalNo}">${proposal.projectRequestContent}</div>
+                                    <div class="hidden" id="projectCreateDate${proposal.proposalNo}">${proposal.projectCreateDate}</div>
+                                    <div class="hidden" id="thirdCategoryNo${proposal.proposalNo}">${proposal.thirdCategoryNo}</div>
                                 </td>                
-                              </tr>
+                              </tr> 
                         </c:forEach>
                       </c:if>
                   </tbody>
                 </table>
+
+                  
 
                 <c:if test="${listCount != 0}">
                   <div class="pagination-area">
@@ -145,6 +163,9 @@
           </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
+        <div class="suggestionModal">
+          <jsp:include page="/WEB-INF/views/myProject/myProject_user/suggestion_modal.jsp"/> 
+        </div>
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
   </main>
@@ -159,7 +180,8 @@
         var proposalAdoptStatus = '${proposal[0].proposalAdoptStatus}';
     </script>
 
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-  <script src="/resources/js/myProject/myProject_user/myProjectSuggestion.js"></script> 
+  <script src="/resources/js/myProject/myProject_user/myProject_suggestion.js"></script> 
 </body>
 </html>

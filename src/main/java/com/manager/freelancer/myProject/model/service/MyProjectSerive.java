@@ -63,4 +63,10 @@ public interface MyProjectSerive {
 	 */
 	Map<String, Object> categoryTypeSelect_suggest(String optionVal, int cp, int memberNo);
 
+	/** 받은 제안 채택 및 결제 완료 ajax
+	 * @param myProject
+	 * @return
+	 */
+	int completeSuggetionPay(MyProject myProject);
+
 }

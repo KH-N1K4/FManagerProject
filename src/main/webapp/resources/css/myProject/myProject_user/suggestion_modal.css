@@ -1,68 +1,158 @@
-main{
-  width: 1200px;
-  height: 1000px;
-}
 
-.modal{
-  width: 800px;
-  height: 500px;
-  margin: 300px auto;
-  border: 1px solid black;
-}
 
+/*----------------- 헤더 -----------------*/
 .head{
   width: 800px;
-  height: 100px;
-  background-color: #538126;
+  height: 90px;
+  display: flex;
 }
+
+#title{
+  width: 400px;
+  height: 80px;
+}
+
+h3{
+  width: 400px;
+  margin: 0;
+  font-size: 25px;
+  padding-left: 60px;
+  padding-top: 22px;
+  font-size: 28px;
+  color: white;
+}
+/* ===============삭제 버튼=============== */
+#box{
+  width: 400px;
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
+}
+.deleteBox{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: #538126;
+  border: 3px solid white;
+  border-radius: 50%;
+  margin-top: 15px;
+  margin-right: 18px;
+}
+/* 삭제 버튼 */
+.delete-image {
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: -12px;
+    right: 2px;
+    color: white;
+}
+/* ===============삭제 버튼=============== */
+/*----------------- 헤더 -----------------*/
+
+
+
 
 /*----------------- 바디 -----------------*/
 .body{
   width: 800px;
-  height: 299px;
-  border-bottom: 2px solid #f2f3f7bb;
+  height: 350px;
+  border-bottom: 2px solid #9ea0ac44;
+  background-color: rgb(255, 255, 255);
 }
-#title{
-  width: 730px;
-  height: 59px;
-  padding-top: 40px;
-  padding-left: 70px;
-}
+
 #content{
   width: 800px;
-  height: 200px;
+  height: 150px;
   display: flex;
+  margin-bottom: 10px;
 }
 /*----------------- 바디 -----------------*/
 
-.foot{
-  width: 800px;
-  height: 99px;
-  background-color: white;
-}
-
 #content1{
   width: 200px;
-  height: 170px;
+  height: 180px;
   display: flex;
   justify-content: center;
-  padding-top: 30px;
+  padding-top: 20px;
+  font-size: 20px;
 }
 
 #content2{
-  width: 220px;
-  height: 170px;
-  padding-top: 30px;
+  width: 180px;
+  height: 180px;
+  padding-top: 20px;
+  font-size: 15px;
 }
 
 #content3{
-  width: 380px;
-  height: 170px;
-  display: flex;
-  padding-top: 30px;
+  width: 420px;
+  height: 180px;
+  padding-top: 20px;
+  font-size: 15px;
 }
 
 .text{
   width: 220px;
   height: 40px;
+}
+#text1{
+  width: 350px;
+  height: 40px;
+}
+#text2{
+  width: 350px;
+  height: 40px;
+}
+#text3{
+  width: 350px;
+  height: 40px;
+}
+#text4{
+  width: 350px;
+  height: 40px;
+}
+
+#title2{
+  width: 800px;
+  height: 120px;
+}
+
+#request{
+  width: 740px;
+  height: 30px;
+  margin: 30px 0 10px 0;
+  font-size: 20px;
+  padding-left: 60px;
+}
+#requestBox{
+  padding-left: 55px;
+}
+
+
+
+
+
+.foot{
+  width: 800px;
+  height: 99px;
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  
+}
+
+#payButton{
+  width: 150px;
+  height: 50px;
+  border: 3px solid #538126;
+  border-radius: 20px;
+  background-color: white;
+  font-size: 18px;
+  font-weight: bold;
+  color : rgba(0, 0, 0, 0.87);
+  margin-right: 20px;
+  cursor: pointer;
 }
