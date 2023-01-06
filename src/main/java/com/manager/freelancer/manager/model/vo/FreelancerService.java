@@ -20,6 +20,7 @@ public class FreelancerService {
 	
 	private String requestFilePath;
 	private String serviceSummary;
+	private String serviceContent;
 	private int servicePrice;
 	private int serviceEditNum;
 	private int serviceWorkPeriod;

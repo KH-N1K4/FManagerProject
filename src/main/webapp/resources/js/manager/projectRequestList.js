@@ -1,5 +1,6 @@
 
 deleteService();
+modalShow();
 
 
 /* 옵션 변경 시 */
@@ -81,6 +82,18 @@ function selectChange() {
                         child2a.append(document.createTextNode(request.projectRequestTitle));
                         child2.append(child2a);
 
+                        const child22 = document.createElement("div");
+                        child22.classList.add('service-name');
+                        const child22a = document.createElement("a");
+                        child22a.classList.add('infoBtn');
+                        child22a.append(document.createTextNode(request.memberName));
+                        child22.append(child22a);
+
+                        const child222 = document.createElement("input");
+                        child222.setAttribute("type","hidden");
+                        child222.setAttribute("id","memberNo");
+                        child222.value=request.memberNo;
+
                         const child3 = document.createElement("div");
                         child3.classList.add('service-status');
                         child3.append(document.createTextNode(request.projectRequestStatusString));
@@ -94,12 +107,15 @@ function selectChange() {
 
                         table.append(child1);
                         table.append(child2);
+                        table.append(child22);
+                        table.append(child222);
                         table.append(child3);
                         table.append(child4);
                         serviceTable.append(table);
 
                     }
                     deleteService();
+                    modalShow();
     
                     /* 페이징 */
                     const li1 = document.createElement("li");
@@ -280,3 +296,81 @@ if(requestSearchFrm != null){
 
     }
 })();
+
+
+
+
+
+/* 회원 정보 보기 */
+function modalShow() {
+    const btnOpenPopup = document.querySelectorAll('.infoBtn');
+    const body = document.querySelector('#mainBody');
+    const freelancer = document.querySelector('.freelancerArea');
+    const memberModal = document.querySelector('.member-modal');
+    const modalClose = document.querySelector('.modal_close');
+    for (m of btnOpenPopup) {
+
+        m.addEventListener("click", e => {
+
+            const memberNo = e.target.parentElement.nextElementSibling.value;
+            console.log(memberNo);
+
+            $.ajax({
+                url: '/manager/memberDetail',
+                data: { 'memberNo': memberNo },
+                type: 'GET',
+                success: (member) => {
+                    if (member != null) {
+                        memberModal.classList.toggle('show');
+
+                        if (memberModal.classList.contains('show')) {
+                            body.style.overflow = 'hidden';
+                        }
+                        document.getElementById("memberNickname").value = member.memberNickname
+                        document.getElementById("memberEmail").value = member.memberEmail
+                        document.getElementById("memberTel").value = member.memberTel
+                        document.getElementById("memberJob").value = member.memberJob
+
+                        $("#checkbox > input").prop("checked", false);
+
+                        if (member.memberInterest != null) {
+                            interest = member.memberInterest.split(',');
+                            for (i of interest) {
+                                document.querySelectorAll("#checkbox > input")[i - 1].checked = true;
+                            }
+                        }
+                        if (member.freelancerFlag == 'Y') {
+                            freelancer.classList.add('show');
+                            document.getElementById("freelancerIntroduction").innerText = member.freelancerIntroduction;
+                            document.getElementById("freelancerRegionName").innerText = member.regionName;
+                            document.getElementById("freelancerPeriod").innerText = member.freelancerPeriod;
+                            document.getElementById("freeContactTime1").innerText = member.freeContactTime1;
+                            document.getElementById("freeContactTime2").innerText = member.freeContactTime2;
+                            document.getElementById("freelancerBankName").value = member.freelancerBankName;
+                            document.getElementById("freelancerAccount").value = member.freelancerAccountNo;
+                        } else{
+                            freelancer.classList.remove('show');
+                        }
+
+                    } else {
+                        console.log('오류');
+                    }
+                },
+                error: () => { console.log('에러'); }
+            });
+
+
+
+        });
+        modalClose.addEventListener('click', () => {
+            if (memberModal.classList.contains('show')) {
+                memberModal.classList.remove('show');
+            }
+
+            if (!memberModal.classList.contains('show')) {
+                body.style.overflow = 'visible';
+            }
+
+        });
+    }
+};

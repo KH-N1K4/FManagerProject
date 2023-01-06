@@ -18,6 +18,7 @@
 		<result property="serviceNo" column="SERVICE_NO" />
 		<result property="serviceTitle" column="SERVICE_TITLE" />
 		<result property="memberNo" column="MEMBER_NO" />
+		<result property="memberName" column="MEMBER_NAME" />
 		<result property="freelancerNo" column="FREELANCER_NO" />
 		<result property="freelancerName" column="FREELANCER_NAME" />
 		<result property="workNo" column="WORK_NO" />
@@ -31,6 +32,7 @@
 		<result property="mainCategoryNo" column="MAIN_CATEGORY_NO" />
 		<result property="subCategoryNo" column="SUB_CATEGORY_NO" />
 		<result property="thirdCategoryNo" column="THIRD_CATEGORY_NO" />
+		<result property="reviewCount" column="REVIEW_COUNT" />
 	</resultMap>
 	
 	
@@ -123,7 +125,9 @@
 	WORK_STATUS, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) FREELANCER_NAME,
 	CASE WHEN MEMBER_DONE_FL=2 OR WORK_STATUS=2 OR WORK_STATUS=4 THEN '작업 완료' 
 		 WHEN WORK_STATUS=3 THEN '주문 취소'
-		 ELSE '진행중' END AS WORK_PROGRESS
+		 ELSE '진행중' END AS WORK_PROGRESS,
+	(SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_NO=#{loginMemberNo}) AS MEMBER_NAME,
+	(SELECT MEMBER_NO FROM MEMBER WHERE MEMBER_NO=#{loginMemberNo}) AS MEMBER_NO
 	FROM TRADE 
 	JOIN SERVICE USING (SERVICE_NO)
 	JOIN SETTLEMENT ON (TRADE.TRADE_NO=SETTLEMENT.TRADE_NO)
@@ -156,7 +160,41 @@
   	WHERE TRADE_NO=#{tradeNo}
   </update>
   
+  <!-- 거래 신고 서비스 프리랜서 번호 -->
+  <select id="selectReportedPerson" resultType="_int">
+  	SELECT FREELANCER_NO  
+		FROM TRADE
+		JOIN SERVICE USING (SERVICE_NO)
+		JOIN MEMBER ON (MEMBER.MEMBER_NO=SERVICE.FREELANCER_NO)
+		WHERE TRADE_NO=#{tradeNo}
+  </select>
   
+  <!-- 거래 신고하기 -->
+  <insert id="insertTradeReport">
+  	INSERT INTO TRADE_REPORT VALUES(
+  	SEQ_TRADE_REPORT_NO.NEXTVAL, #{reportPersonNo}, #{reportedPersonNo},#{reportContent},
+  	DEFAULT, #{filePath}, #{tradeNo}, DEFAULT, 1)
+  </insert>
+  
+  
+  <!-- 주문 취소하기 -->
+  <insert id="insertTradeReportCancel">
+  	INSERT INTO TRADE_REPORT VALUES(
+  	SEQ_TRADE_REPORT_NO.NEXTVAL, #{reportPersonNo}, #{reportedPersonNo},#{reportContent},
+  	DEFAULT, #{filePath}, #{tradeNo}, DEFAULT, 2)
+  </insert>
+  
+  <!-- 리뷰 등록하기 -->
+  <insert id="insertReview">
+  	INSERT INTO REVIEW VALUES(
+  	#{tradeNo},#{reviewContent},#{filePath},DEFAULT,#{reviewPoint},DEFAULT )
+  </insert>
+  
+  <!-- 리뷰 수 얻기 -->
+  <select id="getReviewCount" resultType="_int">
+  	SELECT COUNT(*) FROM REVIEW
+  	WHERE REVIEW_NO=#{tradeNo}
+  </select>
   	
 </mapper>
 	
