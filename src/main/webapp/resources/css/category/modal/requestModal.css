@@ -1,0 +1,111 @@
+#requestModalMain{
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 450px;
+}
+
+
+#userSection{
+    display: flex;
+    flex-direction: roe;
+    position: relative;
+    margin:10px 0;
+    border-radius: 5px;
+}
+
+#userSection>div{
+    display: inline-block;
+}
+
+/* 유저 정보 부분 */
+
+#userTitle{
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 280px;
+}
+
+.userContent{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 30px;
+}
+/* 유저 정보 부분 */
+
+/* 사진 */
+#userPhoto{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+#userPhoto > img{
+    display: flex;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.userContent>span:first-child{
+    font-size: 20px;
+}
+
+#requestModalMain textarea{
+    width: 450px;
+}
+#requestModalMain span{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#requestModalMain button{
+    width: 100%;
+    padding: 12px 0;
+    font-size: 16px;
+    background-color: #538126;
+    border:1px solid #538126;
+    border-radius: 5px;
+    color:white;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+/* 요청사항 부분 */
+.proposalContent{
+    max-width: 445px;
+    height: 200px;
+    border:none;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+    margin:20px 0;
+    resize: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.proposalContent > div{
+    padding-left: 30px;
+}
+
+.proposalContent > div:nth-of-type(1){
+   /*  padding-top: 30px; */
+}
+
+.proposalContent input{
+    margin-left: 30px;
+    width: 200px;
+    height: 25px;
+    border-color: #ccc6c6;
+    border-radius: 5%;
+    cursor: pointer;
+}
