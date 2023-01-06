@@ -108,12 +108,13 @@ textarea:focus{
 }
 
 #career{
-    width: 200px;
+    width: 250px;
     margin-top: 5px;
+    /* text-align: left; */
 }
 
 #license{
-    width: 200px;
+    width: 250px;
     margin-top: 5px;
 }
 
@@ -270,4 +271,8 @@ input[type="checkbox"]{
 
 .modal_close2{
     width: 100px;
+}
+
+.portfolioOption{
+    background-color: red;
 }

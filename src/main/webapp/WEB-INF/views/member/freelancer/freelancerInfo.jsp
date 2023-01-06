@@ -152,6 +152,7 @@
                             <span class="service">
                                 <a>
                                     <div class="portfolioSection"> 
+                                        <span class="portfolioOption">···</span>
                                         <img  style="width: 100%; height:100%; background-color:skyblue;" src="${portfolio.portfolioThumbnail}">
                                         <span class="portfolio-title-area" >${portfolio.portfolioTitle}</span>
                                         <br>

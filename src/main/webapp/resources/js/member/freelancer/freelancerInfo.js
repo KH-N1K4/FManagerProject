@@ -22,10 +22,19 @@ btnOpenPopup1.addEventListener('click', () =>{
     }
 })
 
+
 modalClose1.addEventListener('click', ()=>{
 
     modal1.style.display ='none';
     // body.style.overflow='visible';
+    portfolioTitle.value='';
+    portfolioContent.value='';
+    document.getElementById('image-input1').value = null;
+    document.getElementById('image-input2').value = null;
+    fileName1.innerText='선택된 파일없음';
+    fileName2.innerText='선택된 파일없음';
+    
+
 })
 
 // btnOpenPopup2.addEventListener('click', () =>{
@@ -43,10 +52,13 @@ modalClose1.addEventListener('click', ()=>{
 //     }
 // })
 
+
+
 modalClose2.addEventListener('click', ()=>{
 
     modal2.style.display ='none';
-    // body.style.overflow='visible';
+
+    
 })
 
 const clickPortfolio = document.getElementsByClassName("portfolioSection");
@@ -55,7 +67,6 @@ const title = document.getElementsByClassName("portfolioTitle2")[0];
 const summary = document.getElementsByClassName("portfolioContent2")[0];
 const thumb = document.getElementById("portfolioThumb");
 const photo = document.getElementById("portfolioPhoto");
-
 
 for(let portfolio of clickPortfolio){
     portfolio.addEventListener("click", function() {

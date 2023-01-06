@@ -20,7 +20,7 @@
         <div class="itemArea">
             <div id="item">제목</div> 
             <div>
-                <input type="text" name="portfolioTitle" id="portfolioTitle" required>
+                <input style="border : 1px solid black" type="text" name="portfolioTitle" id="portfolioTitle" required>
             </div>
         </div>
         <div class="itemArea">
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div>
-            <button>등록</button>
+            <button id="addButton">등록</button>
         </div>
     </form>
         <script src="/resources/js/member/freelancer/addPortfolio.js"></script>
