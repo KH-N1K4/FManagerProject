@@ -180,7 +180,7 @@ public class MyProjectController_2 {
 		}
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:myProject/myPurchaseList";
+		return "redirect:/member/myProject/myPurchaseList";
 	}
 	
 	
@@ -230,7 +230,7 @@ public class MyProjectController_2 {
 		}
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:myProject/myPurchaseList";
+		return "redirect:/member/myProject/myPurchaseList";
 	}
 	
 	
@@ -281,7 +281,7 @@ public class MyProjectController_2 {
 		}
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:myProject/myPurchaseList";
+		return "redirect:/member/myProject/myPurchaseList";
 	}
 	
 	
