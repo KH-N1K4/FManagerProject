@@ -28,7 +28,7 @@
                     <div>
                         <div class="item">자기소개</div>
                         <div>
-                            <input type="text" name="" id="" class="input" value="${freelancer1.freelancerIntro}" readonly> 
+                            <textarea name="" id="" cols="100" rows="3" style="overflow-y:scroll"  value="" readonly>${freelancer1.freelancerIntro}</textarea>
                         </div>
                     </div>
                     <div class="itemTitle">
@@ -44,7 +44,7 @@
                             </select>  --%>
 
                             <%-- <c:if test ="${freelancer.regionNo eq list.regionNumber}"></c:if> --%>
-                            <input type="text" value="${freelancer1.regionName}"> 
+                            <input type="text" value="${freelancer1.regionName}" readonly> 
 
                                 
                         
@@ -56,40 +56,42 @@
                         <div>
                             <c:forEach var="field" items="${fn:split(freelancer1.freelancerField,',') }">
                                 <c:choose>
+                                    
                                     <c:when test="${field == 1}">
-                                        <c:set var="field1" value="checked"/>
+                                        <c:set var="field1" value="checked "/>
                                     </c:when>
                                     <c:when test="${field == 2}">
-                                        <c:set var="field2" value="checked"/>
+                                        <c:set var="field2" value="checked "/>
                                     </c:when>
                                     <c:when test="${field == 3}">
-                                        <c:set var="field3" value="checked"/>
+                                        <c:set var="field3" value="checked "/>
                                     </c:when>
+                                
                                     <c:when test="${field == 4}">
-                                        <c:set var="field4" value="checked"/>
+                                        <c:set var="field4" value="checked "/>
                                     </c:when>
                                     <c:when test="${field == 5}">
-                                        <c:set var="field5" value="checked"/>
+                                        <c:set var="field5" value="checked "/>
                                     </c:when>               
                                 </c:choose> 
                             </c:forEach>
 
-                            <input type="checkbox" name="mainCategoryNo" id="design" value="1" ${field1}>
+                            <input type="checkbox" name="mainCategoryNo" id="design" value="1" ${field1} disabled>
                             <label for="design" class="checkbox">디자인</label>
-                            <input type="checkbox" name="mainCategoryNo" id="it" value="2" ${field2}>
+                            <input type="checkbox" name="mainCategoryNo" id="it" value="2" ${field2} disabled>
                             <label for="it" class="checkbox">IT.프로그래밍</label>
-                            <input type="checkbox" name="mainCategoryNo" id="video" value="3" ${field3}>
+                            <input type="checkbox" name="mainCategoryNo" id="video" value="3" ${field3} disabled>
                             <label for="video" class="checkbox">영상</label>
-                            <input type="checkbox" name="mainCategoryNo" id="photo" value="4" ${field4}>
+                            <input type="checkbox" name="mainCategoryNo" id="photo" value="4" ${field4} disabled>
                             <label for="photo" class="checkbox">사진</label>
-                            <input type="checkbox" name="mainCategoryNo" id="sound"value="5" ${field5}>
+                            <input type="checkbox" name="mainCategoryNo" id="sound"value="5" ${field5} disabled>
                             <label for="sound" class="checkbox">음향</label>
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">기간</div>
                         <div>
-                            <input type="text" name="" id="" value="${freelancer1.freelancerPeriod}"class="number"> 년
+                            <input type="text" name="" id="" value="${freelancer1.freelancerPeriod}"class="number" readonly> 년
                         </div>
                     </div>
                     <div class="itemTitle">
@@ -99,7 +101,9 @@
                             
                             <c:forEach var ="career" items="${freelancer1.careerList}">
                                 <%-- <input type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}"> --%>
-                                <input type="text" name="" id="" value="${career.careerCompanyName}/${career.careerCompanyDepartment}/${career.careerCompanyPosition}/${career.careerCompanyRegion}/${career.careerCompanyPeriod1}">
+                                <div>
+                                <input type="text" name="" id="career" value="${career.careerCompanyName}/${career.careerCompanyDepartment}/${career.careerCompanyPosition}/${career.careerCompanyRegion}/${career.careerCompanyPeriod1}" readonly>
+                                </div>
                             </c:forEach>
                         
                         
@@ -109,9 +113,9 @@
                         <div class="item">자격증</div>
                         <div>
                             <c:forEach var ="license" items="${freelancer1.licenseList}">
-                        
-                                <input type="text" name="" id="" value="${license.licenseName}/${license.licenseDate}/${license.licenseAgency}">
-
+                            <div>
+                                <input type="text" name="" id="license" value="${license.licenseName}/${license.licenseDate}/${license.licenseAgency}"  readonly>
+                            </div>
                             </c:forEach>
                         
                         </div>
@@ -119,15 +123,14 @@
                     <div class="itemTitle">
                         <div class="item">연락 가능 시간</div>
                         <div>
-                            <input type="text" name="" id="" class="number" value="${freelancer1.contactTime1}"> 시 ~ <input type="text" name="" id="" class="number" value="${freelancer1.contactTime2}"> 시
+                            <input type="text" name="" id="" class="number" value="${freelancer1.contactTime1}" readonly> 시 ~ <input type="text" name="" id="" class="number" value="${freelancer1.contactTime2}" readonly> 시
                         </div>
                     </div>
                     <div class="itemTitle">
                         <div class="item">수익금 출금 은행</div>
                         <div>
-                            <input type="text" value="${freelancer1.bankName}"> 
-
-                            <input type="text" value="${freelancer1.bankAccountNo}"name="" id="account">
+                            <input type="text" value="${freelancer1.bankName}" readonly> 
+                            <input type="text" value="${freelancer1.bankAccountNo}"name="" id="account" readonly>
                         </div>
                     </div>
                 </div>
