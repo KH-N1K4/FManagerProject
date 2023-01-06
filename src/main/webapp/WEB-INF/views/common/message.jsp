@@ -101,6 +101,7 @@
         </div>    
         <!-- 오른쪽 전문가 프로필 -->
         <div class="expert">
+            <a href="#" class="reportBtnClass"></a><!-- /resources/images/bell.png -->
             <div><img src=""></div>
             <div><h3><%--전문가 닉네임--%></h3></div>
             <div>

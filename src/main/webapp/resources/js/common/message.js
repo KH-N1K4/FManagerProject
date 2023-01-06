@@ -89,22 +89,25 @@ const roomListAddEvent = () => {
       /* 채팅 상대방 정보보기 */
       const expert = document.getElementsByClassName('expert')[0];
       document.getElementsByClassName('outbtn')[0].classList.add("show");
-      expert.children[0].children[0].setAttribute("src",selectClientProfile);
-      expert.children[1].children[0].innerText=selectClientNickName;
+			const img10 = document.createElement("img");
+			expert.children[0].append(img10);
+			expert.children[0].children[0].setAttribute("src","/resources/images/bell.png");
+      expert.children[1].children[0].setAttribute("src",selectClientProfile);
+      expert.children[2].children[0].innerText=selectClientNickName;
       selectClientGrade = item.children[1].children[1].id;
       selectClientFreeContactTime = item.children[1].children[2].id;
       if(selectClientGrade !=''){
-        expert.children[2].children[0].innerText='연락 가능한 시간';
-        expert.children[2].children[1].innerText=selectClientFreeContactTime;
-        expert.children[2].children[3].innerText='회원 등급';
-        expert.children[2].children[4].innerText=selectClientGrade;
+        expert.children[3].children[0].innerText='연락 가능한 시간';
+        expert.children[3].children[1].innerText=selectClientFreeContactTime;
+        expert.children[3].children[3].innerText='회원 등급';
+        expert.children[3].children[4].innerText=selectClientGrade;
       }else{
-        expert.children[2].children[0].innerText='';
-        expert.children[2].children[1].innerText='';
-        expert.children[2].children[3].innerText='';
-        expert.children[2].children[4].innerText='';
+        expert.children[3].children[0].innerText='';
+        expert.children[3].children[1].innerText='';
+        expert.children[3].children[3].innerText='';
+        expert.children[3].children[4].innerText='';
       }
-      expert.children[4].id = selectChatRoomNo;
+      expert.children[5].id = selectChatRoomNo;
       /* 채팅 상대방 정보보기 */
       
 			// 비동기로 메세지 목록을 조회하는 함수 호출
@@ -638,3 +641,9 @@ document.getElementById('img0').addEventListener("change", event => {
 });
 
 
+
+$(document).on("click",".reportBtnClass",function(){ 
+	if(checkAddRoomVar){
+		alert('신고');
+	}	
+});
