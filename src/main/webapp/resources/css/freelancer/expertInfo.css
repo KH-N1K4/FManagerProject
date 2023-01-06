@@ -155,6 +155,8 @@ input[type="checkbox"]{
     flex-direction: row;
     justify-content: space-between;
 }
+
+/* ---------------------------------------------------------------------------------------- */
 #addPortfolioPopupBtn{
     font-size: 20px;
     font-weight: bold;
@@ -216,4 +218,8 @@ input[type="checkbox"]{
     display: none;
 
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hidden{
+	display:none;
 }

@@ -136,16 +136,33 @@
                     <div><a  id="addPortfolioPopupBtn">추가하기</a></div>
                 </div>
                 <div id="serviceArea">
-                    <c:if test = "${not empty portfolioList}">
-                        <c:forEach var="portfolio" items="${portfolioList}">
-                        <a href="/portfolioDetail/${portfolio.portfolioNo}" id="portfolioDetailPopupBtn">
-                        
-                            <span class="service">
-                            <span><img  style="width: 100%; height:100%; background-color:skyblue;"src="${portfolio.portfolioThumbnail}"></span>
-                                ${portfolio.portfolioTitle}<br>${portfolio.portfolioContent}
-                            </span>
+                    <c:if test = "${not empty freelancer1.portfolioList}">
+                        <c:forEach var="portfolio" items="${freelancer1.portfolioList}">
+                            <%-- <a href="/portfolioDetail/${portfolio.portfolioNo}" id="portfolioDetailPopupBtn">
                             
-                        </a>
+                                <span class="service">
+                                <span><img  style="width: 100%; height:100%; background-color:skyblue;"src="${portfolio.portfolioThumbnail}"></span>
+                                    ${portfolio.portfolioTitle}<br>${portfolio.portfolioContent}
+                                </span>
+                                
+                            </a> --%>
+                            <span class="service">
+                                <a>
+                                    <div class="portfolioSection"> 
+                                        <span>
+                                        <img  style="width: 100%; height:100%; background-color:skyblue;"src="${portfolio.portfolioThumbnail}">
+                                        </span>
+                                        <span>${portfolio.portfolioTitle}</span>
+                                        <br>
+                                        <span>${portfolio.portfolioContent}</span>
+
+                                        <span class="hidden">${portfolio.portfolioTitle }</span>      <%-- 4 --%>
+		            	                <span class="hidden">${portfolio.portfolioContent }</span>    <%-- 5 --%>
+                                        <span class="hidden">${portfolio.portfolioThumbnail}</span>    <%-- 6 --%>
+		            	                <span class="hidden">${portfolio.portfolioFilePath }</span>    <%-- 7 --%>                              
+                                    </div>
+                                </a>
+                            </span>
                         </c:forEach>
                     </c:if>
                     <c:if test ="${empty portfolioList}">
