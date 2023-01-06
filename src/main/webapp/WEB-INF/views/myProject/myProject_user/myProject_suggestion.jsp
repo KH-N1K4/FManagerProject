@@ -15,9 +15,8 @@
   
 </head>
 <body>
-  <main>
+  <main id="mainBody">
     <!-- hearder -->
-  <%--   <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/> --%>
   <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
 
     <!-- hearder -->
@@ -81,30 +80,48 @@
                                 <td class="tc">                       
                                   <span class="num">${proposal.proposalNo}</span>
                                 </td>
-                                <td class="tl">                           <%-- td 2 --%>
+                                <td class="tl">                           
                                   <div class="suggestion_name_area td_link">
                                     <a href="#" id="suggestionName" class="suggestionName">${proposal.projectRequestTitle}</a>
                                   </div>
                                 </td>
-                                <td  class="tc">                        <%-- td 3 --%>
+                                <td  class="tc">                       
                                   <div class="expert_name_area td_link">
                                     <a href="#" id="expertName" class="expertName" expertName="">${proposal.freelancerName}</a>
                                   </div>
                                 </td>
-                                <td class="tc">                        <%-- td 4--%>
+                                <td class="tc">                      
                                   <span class="text">${proposal.gradeName}</span>
                                 </td>
-                                <td class="tc">                          <%-- td 5 --%>
+                                <td class="tc">                         
                                   <span class="text">${proposal.proposalPrice}원</span>
                                 </td>
-                                <td class="tc">                          <%-- td 6 --%>
+                                <td class="tc">                        
                                   <span class="num">${proposal.proposalEditNum}/5</span>
                                 </td>
-                                <td class="tc" id="proposalStatus">       <%-- td 7 --%>
+                                <td class="tc" id="proposalStatus">    
                                   <span class="text">${proposal.proposalAdoptStatus}</span>
                                 </td>
-                                <td class="tc">                            <%-- td 8 --%>
-                                  <a href="/member/suggestion_selectionPay"><button id="chooseBtn" title="" class="chooseBtn btn_type">채택</button></a>
+                                <td class="tc">                           
+                                  <%-- <a href="/member/suggestion_selectionPay"> --%>
+                                    <button id="chooseBtn${proposal.proposalNo}" title="${proposal.proposalNo}" class="chooseBtn">채택</button>
+                                    
+                                    <div class="hidden" id="projectRequestTitle">${proposal.projectRequestTitle}</div>
+                                    <div class="hidden" id="freelancerName">${proposal.freelancerName}</div>
+                                    <div class="hidden" id="projectWorkPeriod">${proposal.projectWorkPeriod}</div>
+                                    <div class="hidden" id="proposalPrice">${proposal.proposalPrice}</div>
+
+                                    <div class="hidden" id="projectRequestStatus">${proposal.projectRequestStatus}</div>
+                                    <div class="hidden" id="proposalEditNum">${proposal.proposalEditNum}</div>
+                                    <div class="hidden" id="freelancerNo">${proposal.freelancerNo}</div>
+                                    <div class="hidden" id="proposalNo">${proposal.proposalNo}</div>
+
+                                    <div class="hidden" id="memberEmail">${loginMember.memberEmail}</div>
+                                    <div class="hidden" id="memberName">${loginMember.memberName}</div>
+                                    <div class="hidden" id="memberTel">${loginMember.memberTel}</div>
+
+
+                                  <%-- </a> --%>
                                 </td>                
                               </tr>
                         </c:forEach>
@@ -145,6 +162,9 @@
           </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
+        <div class="suggestionModal">
+          <jsp:include page="/WEB-INF/views/myProject/myProject_user/suggestion_modal.jsp"/> 
+        </div>
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
   </main>
@@ -159,7 +179,8 @@
         var proposalAdoptStatus = '${proposal[0].proposalAdoptStatus}';
     </script>
 
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-  <script src="/resources/js/myProject/myProject_user/myProjectSuggestion.js"></script> 
+  <script src="/resources/js/myProject/myProject_user/myProject_suggestion.js"></script> 
 </body>
 </html>

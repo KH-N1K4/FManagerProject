@@ -223,3 +223,49 @@ th{
 .suggestionTable td{  
   text-align: center;
 }
+
+
+
+
+
+
+/* 채택하기 모달 */
+
+.suggestionModal {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index:100;
+}
+.suggestionModal.show {
+  display: block;
+}
+
+.suggestionModal_body {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  padding: 10px 0;  
+
+  background-color: #538126;
+  border-radius: 10px;
+  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+  transform: translateX(-50%) translateY(-50%);
+  
+  z-index:100;
+}
+
+
+
+.hidden{
+  display: none;
+}
