@@ -195,6 +195,7 @@ public class FreeLancerController {
 		@PostMapping("/member/freelancer/modal/addPortfolio")
 		public String addPortfolio(Model model, 
 				@SessionAttribute("loginMember") Member loginMember,
+				@RequestHeader(value="referer") String referer,
 				@RequestParam(value="portfolioFile", required = false) List<MultipartFile> portfolioFilePath,
 				Freelancer inputFreelancer, Portfolio inputPortfolio,
 				HttpServletRequest req,RedirectAttributes ra)throws Exception {
@@ -219,12 +220,14 @@ public class FreeLancerController {
 			if(result > 0) {
 				message = "포트폴리오가 성공적으로  등록되었습니다.";
 			} else {
+				path=referer;
 				message = "포트폴리오가 등록 실패.";
+				
 
 			}
-//			ra.addFlashAttribute("message",message);
+			ra.addFlashAttribute("message",message);
 			
-			return "/member/freelancer/modal/addPortfolio";
+			return "redirect:/member/freelancer/freelancerInfo";
 		}
 		
 		

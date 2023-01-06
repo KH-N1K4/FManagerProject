@@ -168,9 +168,30 @@ input[type="checkbox"]{
     display: inline-block;
     width: 200px;
     height: 270px;
-    background-color: darkseagreen;
+    /* background-color: darkseagreen; */
     margin-right: 20px;
     margin-bottom: 40px;
+}
+
+.portfolio-title-area{
+    display: inline-block;
+    width: 200px;
+    font-weight: bold;
+    /* text-overflow: ellipsis;
+    overflow: hidden; */
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap; 
+}
+
+.portfolio-content-area{
+    display: inline-block;
+    width: 200px;
+    overflow:hidden; 
+    text-overflow:ellipsis; 
+    white-space:nowrap; 
+    
+
 }
 
 .modal_body{
@@ -222,4 +243,8 @@ input[type="checkbox"]{
 
 .hidden{
 	display:none;
+}
+
+.modal_close2{
+    width: 100px;
 }

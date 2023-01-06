@@ -149,13 +149,10 @@
                             <span class="service">
                                 <a>
                                     <div class="portfolioSection"> 
-                                        <span>
-                                        <img  style="width: 100%; height:100%; background-color:skyblue;"src="${portfolio.portfolioThumbnail}">
-                                        </span>
-                                        <span>${portfolio.portfolioTitle}</span>
+                                        <img  style="width: 100%; height:100%; background-color:skyblue;" src="${portfolio.portfolioThumbnail}">
+                                        <span class="portfolio-title-area" >${portfolio.portfolioTitle}</span>
                                         <br>
-                                        <span>${portfolio.portfolioContent}</span>
-
+                                        <span class="portfolio-content-area">${portfolio.portfolioContent}</span>
                                         <span class="hidden">${portfolio.portfolioTitle }</span>      <%-- 4 --%>
 		            	                <span class="hidden">${portfolio.portfolioContent }</span>    <%-- 5 --%>
                                         <span class="hidden">${portfolio.portfolioThumbnail}</span>    <%-- 6 --%>
@@ -185,3 +182,11 @@
 
 </body>
 </html>
+ <c:if test="${not empty message}">
+        <script>
+         alert("${message}");
+        </script>
+
+        <%-- message 1회 출력 후 모든 scope 삭제 --%>
+        <c:remove var="message"/>
+     </c:if>
