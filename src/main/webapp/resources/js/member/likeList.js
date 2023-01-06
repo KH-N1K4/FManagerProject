@@ -115,7 +115,7 @@ function selectChange(){
                         span2.append(document.createTextNode(service.serviceSummary))
                         const span3 = document.createElement("span");
                         span3.classList.add("imageOthers");
-                        span3.append(document.createTextNode("가격: "+service.serviceSummary))
+                        span3.append(document.createTextNode("가격: "+service.servicePrice))
                         a1.append(span2);
                         a1.append(span3);
 
