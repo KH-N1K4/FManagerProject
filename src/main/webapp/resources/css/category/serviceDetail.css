@@ -298,3 +298,15 @@
 h3{
 	margin-top:50px;
 }
+
+.reportReview{
+	background-color:red;
+}
+
+.reportTop{
+	
+    position: absolute;
+    right: 238px;
+    top: 20px;
+	
+}
