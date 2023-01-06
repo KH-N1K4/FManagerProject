@@ -131,15 +131,12 @@ public class MyProjectDAO {
 	 * @return
 	 */
 	public int getChangeTypeCount(String optionVal, int memberNo) {
-		System.out.println("count optionVal = "+ optionVal);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); 
 		map.put("optionVal", optionVal);
 		
-		int result = sqlSession.selectOne("myProjectMapper.getChangeTypeCount", map);
-		
-		System.out.println("result"+result);
-		return result;
+		return sqlSession.selectOne("myProjectMapper.getChangeTypeCount", map);
 	}
 
 	/** 내 프로젝트 조회 ajax 조회
@@ -149,7 +146,6 @@ public class MyProjectDAO {
 	 */
 	public List<MyProject> categoryTypeSelect(String optionVal, Pagination pagination,int memberNo) {
 		
-		System.out.println("select optionVal = "+ optionVal);
 		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); 
 	    
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
@@ -160,6 +156,40 @@ public class MyProjectDAO {
 		
 		return sqlSession.selectList("myProjectMapper.categoryTypeSelect", map, rowBounds);
 
+	}
+
+	/** 내 프로젝트 받은 제안 카운트 ajax  
+	 * @param optionVal
+	 * @param memberNo
+	 * @return
+	 */
+	public int getSuggestTypeCount(String optionVal, int memberNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("memberNo", memberNo); 
+		map.put("optionVal", optionVal);
+		
+		return sqlSession.selectOne("myProjectMapper.getSuggestTypeCount",map);
+	}
+
+	/** 내 프로젝트 받은 제안 조회 ajax
+	 * @param optionVal
+	 * @param pagination
+	 * @param memberNo
+	 * @return
+	 */
+	public List<MyProject> categoryTypeSelect_suggest(String optionVal, Pagination pagination, int memberNo) {
+		
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); 
+	    
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("optionVal", optionVal);
+		
+		return sqlSession.selectList("myProjectMapper.categoryTypeSelect_suggest", map, rowBounds);
 	}
 
 

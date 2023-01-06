@@ -1,0 +1,68 @@
+main{
+  width: 1200px;
+  height: 1000px;
+}
+
+.modal{
+  width: 800px;
+  height: 500px;
+  margin: 300px auto;
+  border: 1px solid black;
+}
+
+.head{
+  width: 800px;
+  height: 100px;
+  background-color: #538126;
+}
+
+/*----------------- 바디 -----------------*/
+.body{
+  width: 800px;
+  height: 299px;
+  border-bottom: 2px solid #f2f3f7bb;
+}
+#title{
+  width: 730px;
+  height: 59px;
+  padding-top: 40px;
+  padding-left: 70px;
+}
+#content{
+  width: 800px;
+  height: 200px;
+  display: flex;
+}
+/*----------------- 바디 -----------------*/
+
+.foot{
+  width: 800px;
+  height: 99px;
+  background-color: white;
+}
+
+#content1{
+  width: 200px;
+  height: 170px;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+#content2{
+  width: 220px;
+  height: 170px;
+  padding-top: 30px;
+}
+
+#content3{
+  width: 380px;
+  height: 170px;
+  display: flex;
+  padding-top: 30px;
+}
+
+.text{
+  width: 220px;
+  height: 40px;
+}
