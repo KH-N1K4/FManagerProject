@@ -24,7 +24,7 @@ public interface ManagerService {
 	 * @param memberNo
 	 * @return
 	 */
-	Member selectMemberDetail(int memberNo);
+	Map<String, Object> selectMemberDetail(int memberNo);
 
 	/** 회원 유형별 조회 ajax
 	 * @param value

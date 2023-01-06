@@ -112,6 +112,10 @@
 							<div></div>
 						</div>
 						<div class="itemTitle free">
+							<div class="item">학력.전공</div>
+							<div></div>
+						</div>
+						<div class="itemTitle free">
 							<div class="item">자격증</div>
 							<div></div>
 						</div>

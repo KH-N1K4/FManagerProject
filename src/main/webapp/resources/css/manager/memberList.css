@@ -199,6 +199,8 @@
 
 .infoBtn {
 	cursor: pointer;
+	text-decoration: none;
+	color: black;
 }
 
 .deleteBtn{

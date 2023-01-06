@@ -16,19 +16,19 @@ import com.manager.freelancer.member.model.vo.Member;
 
 
 //필터 등록 + 필터링 할 주소 매핑 
-@WebFilter(filterName="loginFilter",
-			urlPatterns= {"/member/myInfo/*", "/member/logout","/member/myProject/*"})
-public class LoginFilter implements Filter {
+@WebFilter(filterName="memberFilter",
+			urlPatterns= {"/member/login", "/member/signUp","/member/findPw"})
+public class MemberFilter implements Filter {
 
 	
 	public void init(FilterConfig fConfig) throws ServletException {
 		// 필터 생성 시 수행 
-		System.out.println("로그인 필터 생성");
+		System.out.println("회원 필터 생성");
 	}
 
 	public void destroy() {
 		// 서버 실행 중 필터 내용 변경 시 수행 후 init()다시 수행
-		System.out.println("로그인  필터 파괴");
+		System.out.println("회원  필터 파괴");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -44,7 +44,7 @@ public class LoginFilter implements Filter {
 		// -> session에 loginMember가 있는지 확
 		
 		HttpSession session=req.getSession();
-		if(session.getAttribute("loginMember")==null) {// 로그인 X
+		if(session.getAttribute("loginMember")!=null) {// 로그인 X
 			
 			resp.sendRedirect("/");
 			
