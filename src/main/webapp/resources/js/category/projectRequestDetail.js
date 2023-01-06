@@ -27,6 +27,8 @@ if(document.getElementById('requestBtn') != null){
         }else{
             //proposalListJson.push({"freelancerNo":loginMemberNo});
             /*  요청사항에 들어갈 값들  */
+            document.getElementById('proposalpriceInput').value ='';
+            document.getElementById('proposalEditInput').value ='';
             requestModal.classList.toggle('show');
             if (requestModal.classList.contains('show')) {
               body.style.overflow = 'hidden';

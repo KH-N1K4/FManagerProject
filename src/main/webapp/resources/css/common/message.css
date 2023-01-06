@@ -244,6 +244,7 @@
     width: 474px;
     height: 73px;
     padding: 20px;
+    resize: none;
    /*  border:none; */
 }
 #messageButton{
@@ -333,20 +334,23 @@
 }
 
 
-.expert div:nth-child(4){
+/* .expert div:nth-child(4){
     width: 220px;
     height: 100px;
     margin: 50px 20px;
-}  
+}  */ 
 .expert button{
+    display: flex;
     width: 260px;
     height: 50px;
-    font-size: 16px;
+    font-size: 20px;
     color: white;
-    background-color: green;
+    background-color: #558b32;
     border-radius: 5%;
     border: none;
-    margin-top: 490px;
+    margin: 250px auto 1px;
+    justify-content: center;
+    align-items: center;
 }
 
 .outbtn.show {

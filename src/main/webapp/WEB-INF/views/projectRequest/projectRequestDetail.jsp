@@ -70,6 +70,11 @@
         </div>
 
         <div class="detailInner">
+            <div>
+                <c:forEach items="${userRequest.requestfileList}" var="requestfile">
+                    <div class="requestPhotos"><img src="${requestfile.requestFilePath}"></div>
+                </c:forEach>
+            </div>
             <div>${userRequest.projectRequestContent}</div>
         </div>
 
