@@ -89,6 +89,7 @@
 		<mapper resource="/mappers/myProjectFreelancerService-mapper.xml"/>
 		<mapper resource="/mappers/userInquiry-mapper.xml"/>
 		<mapper resource="/mappers/category-mapper.xml"/>
+		<mapper resource="/mappers/category-mapper2.xml"/>
 		<mapper resource="/mappers/message-mapper.xml"/>
 		<mapper resource="/mappers/myProjectRequest-mapper.xml"/>
 
