@@ -4,6 +4,10 @@
 <%-- <c:set var="freelancerIntro" value="${freelancer.freelancerIntro}"/> --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:set var="portfolioList" value="${freelancer1.portfolioList}"/>
+<c:set var="freelancerNo" value="${freelancer1.freelancerNo}"/>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -152,8 +156,12 @@
                             <span class="service">
                                 <a>
                                     <div class="portfolioSection"> 
-                                        <span class="portfolioOption">···</span>
-                                        <img  style="width: 100%; height:100%; background-color:skyblue;" src="${portfolio.portfolioThumbnail}">
+                                        <input type="checkbox" id="portfolio-toggle" value="···">
+                                        <div id="portfolio-menu">
+                                            <div class= "update-portfolio"><a class="updateBtn">수정</a></div>
+                                            <div class= "delete-portfolio"><a class="deleteBtn">삭제</a></div>
+                                        </div>
+                                        <img  style="width: 200px; height:200px; background-color:skyblue;" src="${portfolio.portfolioThumbnail}">
                                         <span class="portfolio-title-area" >${portfolio.portfolioTitle}</span>
                                         <br>
                                         <span class="portfolio-content-area">${portfolio.portfolioContent}</span>
@@ -182,6 +190,8 @@
 
             </section>
     </div>
+    	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
         <script src="/resources/js/member/freelancer/freelancerInfo.js"></script> 
 
 </body>

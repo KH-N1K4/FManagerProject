@@ -273,6 +273,61 @@ input[type="checkbox"]{
     width: 100px;
 }
 
-.portfolioOption{
+.portfolioSection{
+    position: relative;
+}
+/*
+/* .portfolioOption1{
+    position: absolute;
+    display: inline-block;
     background-color: red;
+    width: 50px;
+    height: 20px;
+    /* font-size: 25px;
+    vertical-align: middle; 
+    text-align: center;
+    
+    right: 0px;
+}
+
+/* .portfolioOption2{
+    position: absolute;
+    background-color: skyblue;
+    width: 50px;
+    text-align: center;
+    top: 50px;
+    right: 0px;
+} 
+ */
+
+ #portfolio-toggle{
+    display: none;
+ }
+ /* 체크박스 다음 div */
+#portfolio-toggle + div{
+    display:none;
+    background-color: red;
+ }
+
+/* 체크박스가 체크된 경우 다음 div */
+#portfolio-toggle:checked  + div{ display:block; }
+
+#portfolio-menu{
+    position:absolute;
+
+    z-index: 500;
+    width: 100px;
+    height: 80px;
+    margin-top:5px;
+    right:30px;
+    top: 30px;
+    border: 1px solid black;
+}
+
+#portfolio-menu>a{
+
+    display:flex;
+    height:50%;
+    justify-content: center;
+    align-items: center;
 }

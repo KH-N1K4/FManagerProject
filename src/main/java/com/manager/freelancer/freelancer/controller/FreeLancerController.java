@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -75,14 +76,17 @@ public class FreeLancerController {
 			Freelancer inputFreelancer = new Freelancer();
 			inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 회원번호 세팅
 			
-			Freelancer freelancer = service.freelancerInfo(loginMember.getMemberNo());
-			model.addAttribute("freelancer", freelancer); 
+//			Freelancer freelancer = service.freelancerInfo(loginMember.getMemberNo());
+//			model.addAttribute("freelancer", freelancer); 
+//			
+//			List<Region> regionList = service.getRegionList();
+//			model.addAttribute("regionList", regionList);
+//			
+//			List<Bank> bankList = service.getBankList();
+//			model.addAttribute("bankList", bankList);
 			
-			List<Region> regionList = service.getRegionList();
-			model.addAttribute("regionList", regionList);
-			
-			List<Bank> bankList = service.getBankList();
-			model.addAttribute("bankList", bankList);
+			Freelancer1  freelancer1 = service.freelancerInfo1(loginMember.getMemberNo());
+			model.addAttribute("freelancer1",freelancer1);
 			
 			return "/member/freelancer/updateFreelancerInfo";
 		}
@@ -230,7 +234,19 @@ public class FreeLancerController {
 			return "redirect:/member/freelancer/freelancerInfo";
 		}
 		
-		
+		// 포트폴리오 삭제
+		@GetMapping("/member/freelancer/deletePortfolio")
+		@ResponseBody
+		public int DeletePortfolio(@RequestParam int freelancerNo,
+				@RequestParam int portfolioNo, 
+				Freelancer1 freelancer1) {
+			System.out.println("d으악"+freelancer1.getFreelancerNo());
+			System.out.println("@@@"+freelancer1.getPortfolioList());
+			
+			int result = service.DeletePortfolio(freelancer1, freelancerNo, portfolioNo);
+			
+			return result;
+		}
 		
 		
 		//포트폴리오 상세 페이지로 이동

@@ -349,4 +349,8 @@
 			WHERE FREELANCER_NO = #{freelancerNo}
 			AND PORTFOLIO_NO = #{portfolioNo}
     	</select>
+    	
+    	<delete id="DeletePortfolio">
+    			DELETE FROM PORTFOLIO WHERE FREELANCER_NO = #{freelancerNo]} AND PORTFOLIO_NO = #{portfolioNo};
+    	</delete>
 </mapper>

@@ -131,6 +131,11 @@ public class FreeLancerDAO {
 		return sqlSession.selectOne("freelancerMapper.viewPortfolioDetail", portfolio);
 	}
 
+	public int DeletePortfolio(Freelancer1 freelancer1, int freelancerNo, int portfolioNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("freelancerMapper.DeletePortfolio",freelancer1);
+	}
+
 	
 
 
