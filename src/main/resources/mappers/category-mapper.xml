@@ -47,6 +47,11 @@
 	      select="selectReviewList"
 	      column="SERVICE_NO"/>
 	      
+	      <collection property="portfolioList" 
+	      javaType="java.util.ArrayList" ofType="Portfolio"
+	      select="selectPortfolioList"
+	      column="FREELANCER_NO"/> 
+	      
 	      
     </resultMap>
     
@@ -66,6 +71,8 @@
       <result property="freelancerName" column="FREELANCER_NAME"/>
       <result property="memberName" column="MEMBER_NAME"/>
       <result property="reviewCreateTime" column="REVIEW_CREATE_TIME"/>
+      
+      <result property="reviewCommentContent" column="REVIEW_COMMENT_CONTENT"/>
       <result property="reviewCommentCreateTime" column="REVIEW_COMMENT_CREATE_TIME"/>
       
       <result property="reviewStatus" column="REVIEW_STATUS"/>
@@ -123,6 +130,7 @@
 	      <result property="freelancerPeriod" column="FREELANCER_PERIOD" />		<!-- 서비스 작업 일수 -->
 	      <result property="regionName" column="REGION_NAME" />				
 	      <result property="memberProfile" column="MEMBER_PROFILE" />				
+	      <result property="saleCount" column="SALE_COUNT" />				
 	      
 	     
 	      
@@ -198,6 +206,7 @@
     	  <result property="requestFilePath" column="REQUEST_FILE_PATH" />	
     	  <result property="serviceDeleteFL" column="SERVICE_DEL_FL" />	
     	   <result property="reviewCount" column="REVIEW_COUNT" />	
+    	   <result property="reviewPoint" column="REVIEW_POINT" />	
     	  <result property="sellCount" column="SELL_COUNT" />	
     	 <!-- <result property="servicePoint" column="SERVICE_POINT" />	 -->
     </resultMap>
@@ -260,7 +269,7 @@
 		FREELANCER_NO, (SELECT MEMBER_NAME FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_NAME,
 	   (SELECT MEMBER_PROFILE FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) MEMBER_PROFILE,
 	   SERVICE_EDIT_NUM,SERVICE_WORK_PERIOD,SERVICE_CREATE_DATE, THIRD_CATEGORY_NAME, SUB_CATEGORY_NAME, MAIN_CATEGORY_NAME,
-		SERVICE_TITLE,SERVICE_SUMMARY,SERVICE_PRICE,SERVICE_DEL_FL,
+		SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE,SERVICE_DEL_FL,
 			THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH,MAIN_CATEGORY_NO
 		FROM (SELECT * 
 			FROM SERVICE
@@ -482,7 +491,7 @@
 		AND SERVICE_DEL_FL='N'
 		AND SERVICE_STATUS=2 
 		<if test='mainCategoryNo!=null'> AND MAIN_CATEGORY_NO=#{mainCategoryNo} </if>
-		<if test='thirdCategoryNo!=0'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
+		<if test='thirdCategoryNo!=null and thirdCategoryNo!=0'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
 
 	
 	</select>
@@ -523,9 +532,33 @@
 	
 	</select>
 	
+	<!-- 프리랜서 판매건수 들고 옴 -->
+	   	<select  id="selectFreelancerSalesCoount" resultType="_int">
+	   	SELECT NVL(SALE_COUNT,0) SALE_COUNT
+			FROM FREELANCER
+			LEFT JOIN (SELECT FREELANCER_NO,COUNT(*) SALE_COUNT
+				FROM (SELECT * FROM SETTLEMENT
+					JOIN TRADE USING(TRADE_NO)
+					JOIN SERVICE USING(SERVICE_NO)
+					--WHERE FREELANCER_NO = 30
+					WHERE  WORK_STATUS IN (3)      
+					AND PAYMENT_TYPE IN (3)
+					AND USER_NO = FREELANCER_NO         
+					UNION
+					SELECT * 
+					FROM SETTLEMENT
+					JOIN TRADE USING(TRADE_NO)
+					JOIN SERVICE USING(SERVICE_NO)
+					--WHERE FREELANCER_NO = 30
+					WHERE WORK_STATUS IN (2)   
+					AND PAYMENT_TYPE IN (2))
+				GROUP BY FREELANCER_NO) USING(FREELANCER_NO)
+			WHERE FREELANCER_NO=#{freelancerNo}
+	   	</select>
+	
 	<select id="selectFServiceList" resultMap="fservice_rm">
 
-		SELECT SERVICE_NO, SERVICE_TITLE ,SERVICE_SUMMARY,SERVICE_PRICE, SELL_COUNT,REVIEW_COUNT, REQUEST_FILE_PATH
+			SELECT SERVICE_NO, SERVICE_TITLE ,SERVICE_SUMMARY,SERVICE_PRICE, SELL_COUNT,REVIEW_COUNT,REVIEW_POINT,REQUEST_FILE_PATH
 		FROM (SELECT SERVICE_NO, SERVICE_TITLE ,SERVICE_SUMMARY,SERVICE_PRICE,FREELANCER_NO,
 		(SELECT COUNT(*) FROM TRADE T
 		WHERE MEMBER_DONE_FL = 2
@@ -533,8 +566,13 @@
 		AND T.SERVICE_NO = S.SERVICE_NO) SELL_COUNT,
 		(SELECT COUNT(*) FROM REVIEW R
 		JOIN TRADE T ON(R.REVIEW_NO  = T.TRADE_NO)
-		WHERE T.SERVICE_NO= S.SERVICE_NO) REVIEW_COUNT
-		FROM SERVICE S)
+		WHERE T.SERVICE_NO= S.SERVICE_NO) REVIEW_COUNT,
+		(SELECT AVG(REVIEW_POINT) FROM REVIEW 
+		JOIN TRADE T ON(TRADE_NO=REVIEW_NO)
+		WHERE T.SERVICE_NO= S.SERVICE_NO) REVIEW_POINT
+		FROM SERVICE S
+		WHERE SERVICE_DEL_FL='N'
+		AND SERVICE_STATUS=2 )
 		LEFT JOIN (SELECT s.*, ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum FROM SERVICE_FILE s) USING(SERVICE_NO)
 		WHERE RUM = 1
 		AND FREELANCER_NO=#{freelancerNo}
@@ -565,6 +603,10 @@
 		UPDATE REVIEW SET REVIEW_STATUS='2' WHERE REVIEW_NO=#{reviewNo}
 	
 	</update>
+	<insert id="writeComment" parameterType="map">
+		INSERT INTO REVIEW_COMMENT VALUES(#{reviewNo},#{reviewContent},DEFAULT)
+	
+	</insert>
 	
  	
  </mapper>

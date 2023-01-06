@@ -22,6 +22,7 @@ public class FService {
 	private String requestFilePath;	
 	
 	
+	private float reviewPoint;
 	private int reviewCount;
 	private int sellCount;
 	private float servicePoint;

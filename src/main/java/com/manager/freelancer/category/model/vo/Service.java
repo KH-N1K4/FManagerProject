@@ -41,6 +41,7 @@ public class Service {
 	
 	private List<ImageFile> imageFileList;
 	private List<Review> reviewList;
+	private List<Portfolio> portfolioList;
 	
 	
 }
