@@ -193,4 +193,10 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		return map;
 	}
 
+	// 받은 제안 채택 및 결제 ajax
+	@Override
+	public int completeSuggetionPay(MyProject myProject) {
+		return 0;
+	}
+
 }

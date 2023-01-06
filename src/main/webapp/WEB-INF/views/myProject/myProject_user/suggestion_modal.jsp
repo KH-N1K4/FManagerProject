@@ -7,6 +7,9 @@
 
   <div class="suggestionModal_body">
           <section class="head">
+            <div id="title">
+              <h3>결제 중...</h3>
+            </div >
             <div id="box">
               <button class="deleteBox">
               <span class="delete-image">&times;</span>
@@ -15,24 +18,32 @@
           </section>
 
           <section class="body">
-            <div id="title">
-              <h3>결제 중...</h3>
-            </div>
-            <div id="content">
-              <div id="content1">채택정보</div>
-              <div id="content2">
-                <div class="text">프로젝트명</div>
-                <div class="text">전문가명</div>
-                <div class="text">작업기간</div>
-                <div class="text">결제금액</div>
+              <div id="content">
+                    <div id="content1">채택정보</div>
+                    <div id="content2">
+                        <div class="text">프로젝트명</div>
+                        <div class="text">전문가명</div>
+                        <div class="text">작업기간</div>
+                        <div class="text">결제금액</div>
+                    </div>
+                    <div id="content3">
+                        <div id="text1"></div>
+                        <div id="text2"></div>
+                        <div id="text3"></div>
+                        <div id="text4"></div>
+                        <div class="hidden" id="varProposalNo"></div>
+                    </div>
               </div>
-              <div id="content3">
-                <div id="text1"></div>
-                <div id="text2"></div>
-                <div id="text3"></div>
-                <div id="text4"></div>
+              <div id="title2">
+                <div id="request">요구사항</div>
+                <div id="requestBox">
+                  <textarea name="tradeRequest" id="tradeRequest" cols="94" rows="7">
+
+  요구사항을 입력해주세요
+                  </textarea>
+                </div>
               </div>
-            </div>
+              
           </section>
 
           <section class="foot">

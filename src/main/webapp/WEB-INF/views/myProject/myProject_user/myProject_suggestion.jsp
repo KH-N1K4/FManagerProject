@@ -97,37 +97,38 @@
                                   <span class="text">${proposal.proposalPrice}원</span>
                                 </td>
                                 <td class="tc">                        
-                                  <span class="num">${proposal.proposalEditNum}/5</span>
+                                  <span class="num">${proposal.proposalEditNum}</span>
                                 </td>
                                 <td class="tc" id="proposalStatus">    
                                   <span class="text">${proposal.proposalAdoptStatus}</span>
                                 </td>
                                 <td class="tc">                           
-                                  <%-- <a href="/member/suggestion_selectionPay"> --%>
-                                    <button id="chooseBtn${proposal.proposalNo}" title="${proposal.proposalNo}" class="chooseBtn">채택</button>
-                                    
-                                    <div class="hidden" id="projectRequestTitle">${proposal.projectRequestTitle}</div>
-                                    <div class="hidden" id="freelancerName">${proposal.freelancerName}</div>
-                                    <div class="hidden" id="projectWorkPeriod">${proposal.projectWorkPeriod}</div>
-                                    <div class="hidden" id="proposalPrice">${proposal.proposalPrice}</div>
+                                    <button id="chooseBtn" class="chooseBtn" title="${proposal.proposalNo}">채택</button>
 
-                                    <div class="hidden" id="projectRequestStatus">${proposal.projectRequestStatus}</div>
-                                    <div class="hidden" id="proposalEditNum">${proposal.proposalEditNum}</div>
-                                    <div class="hidden" id="freelancerNo">${proposal.freelancerNo}</div>
-                                    <div class="hidden" id="proposalNo">${proposal.proposalNo}</div>
-
-                                    <div class="hidden" id="memberEmail">${loginMember.memberEmail}</div>
-                                    <div class="hidden" id="memberName">${loginMember.memberName}</div>
-                                    <div class="hidden" id="memberTel">${loginMember.memberTel}</div>
-
-
-                                  <%-- </a> --%>
+                                    <div class="hidden" id="projectRequestTitle${proposal.proposalNo}">${proposal.projectRequestTitle}</div>
+                                    <div class="hidden" id="freelancerName${proposal.proposalNo}">${proposal.freelancerName}</div>
+                                    <div class="hidden" id="projectWorkPeriod${proposal.proposalNo}">${proposal.projectWorkPeriod}</div>
+                                    <div class="hidden" id="proposalPrice${proposal.proposalNo}">${proposal.proposalPrice}</div>
+                                    <div class="hidden" id="projectRequestStatus${proposal.proposalNo}">${proposal.projectRequestStatus}</div>
+                                    <div class="hidden" id="proposalEditNum${proposal.proposalNo}">${proposal.proposalEditNum}</div>
+                                    <div class="hidden" id="freelancerNo${proposal.proposalNo}">${proposal.freelancerNo}</div>
+                                    <div class="hidden" id="proposalNo${proposal.proposalNo}">${proposal.proposalNo}</div>
+                                    <div class="hidden" id="memberEmail${proposal.proposalNo}">${loginMember.memberEmail}</div>
+                                    <div class="hidden" id="memberName${proposal.proposalNo}">${loginMember.memberName}</div>
+                                    <div class="hidden" id="memberTel${proposal.proposalNo}">${loginMember.memberTel}</div>
+                                    <div class="hidden" id="projectRequestNo${proposal.proposalNo}">${proposal.projectRequestNo}</div>
+                                    <div class="hidden" id="projectRequestSummary${proposal.proposalNo}">${proposal.projectRequestSummary}</div>
+                                    <div class="hidden" id="projectRequestContent${proposal.proposalNo}">${proposal.projectRequestContent}</div>
+                                    <div class="hidden" id="projectCreateDate${proposal.proposalNo}">${proposal.projectCreateDate}</div>
+                                    <div class="hidden" id="thirdCategoryNo${proposal.proposalNo}">${proposal.thirdCategoryNo}</div>
                                 </td>                
-                              </tr>
+                              </tr> 
                         </c:forEach>
                       </c:if>
                   </tbody>
                 </table>
+
+                  
 
                 <c:if test="${listCount != 0}">
                   <div class="pagination-area">

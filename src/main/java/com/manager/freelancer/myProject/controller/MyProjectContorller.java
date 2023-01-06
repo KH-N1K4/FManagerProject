@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -165,12 +166,40 @@ public class MyProjectContorller {
 	}
 	
 	
-	// 프로젝트 채택 및 결제 모달창 이동
-	@GetMapping("/member/suggestion_selectionPay")
-	public String selectionPay() {
+	// 프로젝트 채택 및 결제 후 결제완료 페이지 이동 ajax
+	@PostMapping("/service/payComplete/{proposalNo}")
+	@ResponseBody
+	public int selectionPay(Model model, @SessionAttribute(value="loginMember", required = false) Member loginMember,
+							   @RequestParam String inputRequest, @RequestParam String projectRequestTitle,
+                               @RequestParam String freelancerName,@RequestParam String projectWorkPeriod,
+                               @RequestParam int proposalPrice, @RequestParam String projectRequestStatus,
+                               @RequestParam int proposalEditNum,@RequestParam int freelancerNo,
+                               @RequestParam int proposalNo,@RequestParam int projectRequestNo,
+                               @RequestParam int thirdCategoryNo,@RequestParam String projectRequestSummary,
+                               @RequestParam String projectRequestContent,@RequestParam String projectCreateDate,
+                               MyProject myProject) {
 		
 		
-		return "myProject/myProject_user/suggestion_modal";
+		myProject.setProjectRequestTitle(projectRequestTitle);
+		myProject.setProjectRequestSummary(projectRequestSummary);
+		myProject.setFreelancerName(freelancerName);
+		myProject.setFreelancerNo(freelancerNo);
+		myProject.setProjectWorkPeriod(projectWorkPeriod);
+		myProject.setProposalPrice(proposalPrice);
+		myProject.setProjectRequestStatus(projectRequestStatus);
+		myProject.setProposalEditNum(proposalEditNum);
+		myProject.setProposalNo(proposalNo);
+		myProject.setProjectRequestNo(projectRequestNo);
+		myProject.setThirdCategoryNo(thirdCategoryNo);
+		myProject.setProjectRequestContent(projectRequestContent);
+		myProject.setProjectCreateDate(projectCreateDate);
+		myProject.setTradeRequest(inputRequest);
+		
+		
+		int tradeNo = service.completeSuggetionPay(myProject);
+		
+		
+		return tradeNo;
 	}
 	
 
