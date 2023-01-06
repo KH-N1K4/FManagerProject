@@ -16,6 +16,7 @@ public class Review {
 	private String reviewCommentContent;
 	private String reviewCreateTime;
 	private String reviewCommentCreateTime;
+	private String reviewStatus;
 	
 	private int serviceNo;
 	
