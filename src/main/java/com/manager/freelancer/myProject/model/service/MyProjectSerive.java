@@ -50,4 +50,17 @@ public interface MyProjectSerive {
 	 */
 	Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo);
 
+	/** 내 프로젝트 조회 ajax
+	 * @return
+	 */
+	Map<String, Object> categoryTypeSelect(String optionVal, int cp, int memberNo) ;
+
+	/** 프로젝트 받은 제안 조회 ajax
+	 * @param optionVal
+	 * @param cp
+	 * @param memberNo
+	 * @return
+	 */
+	Map<String, Object> categoryTypeSelect_suggest(String optionVal, int cp, int memberNo);
+
 }

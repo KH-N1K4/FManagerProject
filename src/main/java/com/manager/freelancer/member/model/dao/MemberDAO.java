@@ -103,8 +103,35 @@ public class MemberDAO {
 	}
 
 
-	public List<Service> selectLikeList(int memberNo) {
+	public List<com.manager.freelancer.category.model.vo.Service> selectLikeList(int memberNo) {
 		return sqlSession.selectList("categoryMapper.selectLikeList", memberNo);
+	}
+
+
+	/** 찜 목록 수
+	 * @param memberNo
+	 * @return
+	 */
+	public int getLikeListCount(int memberNo) {
+		return sqlSession.selectOne("categoryMapper2.getLikeListCount", memberNo);
+	}
+
+
+	/** 카테고리 선택 찜 목록 수
+	 * @param option
+	 * @return
+	 */
+	public int getLikeListCount2(Map<String, Object> option) {
+		return sqlSession.selectOne("categoryMapper2.getLikeListCount2", option);
+	}
+
+
+	/** 카테고리 선택 찜 목록
+	 * @param option
+	 * @return
+	 */
+	public List<Service> selectLikeList2(Map<String, Object> option) {
+		return sqlSession.selectList("categoryMapper2.selectLikeList2", option);
 	}
 	
 }

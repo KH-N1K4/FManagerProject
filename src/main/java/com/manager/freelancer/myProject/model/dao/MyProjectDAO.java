@@ -81,6 +81,7 @@ public class MyProjectDAO {
 		
 		sqlSession.insert("myProjectMapper.insertMyProject",map);
 		int projectNum = (int)map.get("projectRequestNo");
+		
 		return projectNum;
 	}
 	
@@ -123,6 +124,72 @@ public class MyProjectDAO {
 		map.put("mainCategoryNo", mainCategoryNo); //카테고리별 서비스 들고오기
 		
 		return sqlSession.selectList("myProjectMapper.selectProposalList", map, rowBounds);
+	}
+
+	/** 내 프로젝트 조회 ajax 카운트
+	 * @param optionVal
+	 * @return
+	 */
+	public int getChangeTypeCount(String optionVal, int memberNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("optionVal", optionVal);
+		
+		return sqlSession.selectOne("myProjectMapper.getChangeTypeCount", map);
+	}
+
+	/** 내 프로젝트 조회 ajax 조회
+	 * @param optionVal
+	 * @param pagination
+	 * @return
+	 */
+	public List<MyProject> categoryTypeSelect(String optionVal, Pagination pagination,int memberNo) {
+		
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); 
+	    
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("optionVal", optionVal);
+		
+		return sqlSession.selectList("myProjectMapper.categoryTypeSelect", map, rowBounds);
+
+	}
+
+	/** 내 프로젝트 받은 제안 카운트 ajax  
+	 * @param optionVal
+	 * @param memberNo
+	 * @return
+	 */
+	public int getSuggestTypeCount(String optionVal, int memberNo) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("memberNo", memberNo); 
+		map.put("optionVal", optionVal);
+		
+		return sqlSession.selectOne("myProjectMapper.getSuggestTypeCount",map);
+	}
+
+	/** 내 프로젝트 받은 제안 조회 ajax
+	 * @param optionVal
+	 * @param pagination
+	 * @param memberNo
+	 * @return
+	 */
+	public List<MyProject> categoryTypeSelect_suggest(String optionVal, Pagination pagination, int memberNo) {
+		
+		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); 
+	    
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo); 
+		map.put("optionVal", optionVal);
+		
+		return sqlSession.selectList("myProjectMapper.categoryTypeSelect_suggest", map, rowBounds);
 	}
 
 

@@ -1,6 +1,7 @@
 package com.manager.freelancer.myProject.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -79,19 +81,28 @@ public class MyProjectContorller {
 								  HttpServletRequest req, RedirectAttributes ra, Model model, MyProject myProject) throws IOException {
 	
 		String webPath = "/resources/files/myProjectRequest/";
+		String message = null;
+		String path = null;
 		
 		// 실제 파일이 저장된 컴퓨터 상의 절대 경로
 		String filePath = req.getSession().getServletContext().getRealPath(webPath);
 				
 		int result = service.insertMyProject(webPath, filePath, myProjectFile, loginMember,myProject );
 		
-		String message = null;
-		if(result > 0)	message = "프로젝트가 등록되었습니다.";
-		else			message = "프로젝트 등록 실패";
 		
+		if(result > 0){
+			System.out.println("성공:" +result);
+			path = "/member/myProject/myRequestList";
+			message = "프로젝트가 등록되었습니다.";
+		} else {
+			System.out.println("실패:" +result);
+			path = referer;
+			message = "프로젝트 등록 실패";
+		}
+			
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect: /member/myProject/myRequestInsert";
+		return "redirect:"+path;
 	}
 	//------------------------------------------------------------------------
 	// 받은 제안 페이지 이동 
@@ -117,15 +128,53 @@ public class MyProjectContorller {
 	}
 	//------------------------------------------------------------------------
 	
-//	@GetMapping("/member/myProject/myReceiveList")
-//	public String changeStatus() {
-//		
-//		
-//		
-//		
-//		return "redirect: /member/myProject/myReceiveList";
-//	}
-//	
+	
+	// 내 프로젝트 조회 ajax
+	@GetMapping("/member/categoryTypeSelect")
+	@ResponseBody
+	public Map<String, Object> categoryTypeSelect(Model model, @RequestParam String optionVal, @SessionAttribute("loginMember") Member loginMember,
+												  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
+			
+		System.out.println(optionVal);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = service.categoryTypeSelect(optionVal,cp, loginMember.getMemberNo());
+		
+		model.addAttribute("map", map);
+		
+		return map;
+	}
+	
+	//------------------------------------------------------------------------
+	
+	// 프로젝트 받은 제안 조회 ajax
+	@GetMapping("/member/categoryTypeSelect_suggest")
+	@ResponseBody
+	public Map<String, Object> categoryTypeSelect_suggest(Model model,@RequestParam String optionVal,
+														  @SessionAttribute("loginMember") Member loginMember,
+														  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp){
+		
+		System.out.println(optionVal);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map = service.categoryTypeSelect_suggest(optionVal,cp, loginMember.getMemberNo());
+		
+		model.addAttribute("map", map);
+		
+		return map;
+	}
+	
+	
+	// 프로젝트 채택 및 결제 모달창 이동
+	@GetMapping("/member/suggestion_selectionPay")
+	public String selectionPay() {
+		
+		
+		return "myProject/myProject_user/suggestion_modal";
+	}
+	
+
+	
 	
 	
 

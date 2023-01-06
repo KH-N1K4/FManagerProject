@@ -65,9 +65,7 @@
 		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
-	<!-- 	<if test="mainCategoryNo != 0">
-			AND MAIN_CATEGORY_NO = #{mainCategoryNo}
-		</if> -->
+		ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
     </select>
 
 	<!-- 내 프로젝트 조회하기 --> 
@@ -90,9 +88,8 @@
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
-	   <!--  <if test="mainCategoryNo != 0">
-			AND MAIN_CATEGORY_NO = #{mainCategoryNo}
-		</if>  -->
+		AND REQUEST_FILE_ORDER = 0
+		ORDER BY PROJECT_REQUEST_NO DESC 
 	</select>
 	
 	<!-- 내 프로젝트 등록하기 -->
@@ -152,7 +149,169 @@
 	LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 	LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 	WHERE MEMBER.MEMBER_NO = #{memberNo}
+	ORDER BY PROJECT_PROPOSAL_NO DESC 
 	</select>
+	
+	<!-- 내 프로젝트 조회 ajax 카운트 -->
+  	<select id="getChangeTypeCount" parameterType="java.util.HashMap" resultType="_int">
+  		SELECT COUNT(*) 
+		FROM PROJECT_REQUEST 
+		JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		WHERE MEMBER_NO = #{memberNo}
+			<if test='optionVal eq "0"'>
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "1"'>
+				AND MAIN_CATEGORY_NO = 1
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "2"'>
+				AND MAIN_CATEGORY_NO = 2
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "3"'>
+				AND MAIN_CATEGORY_NO = 3
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "4"'>
+				AND MAIN_CATEGORY_NO = 4
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "5"'>
+				AND MAIN_CATEGORY_NO = 5
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+  	</select>
+  	
+  	<!-- 내 프로젝트 조회 ajax 조회 -->
+  	<select id="categoryTypeSelect" parameterType="java.util.HashMap" resultMap="myProject_rm">
+	  	SELECT PROJECT_REQUEST_NO, PROJECT_REQUEST_TITLE, PROJECT_REQUEST_SUMMARY,
+       		   PROJECT_REQUEST_CONTENT, PROJECT_REQUEST_BUDGET, 
+       		   TO_CHAR(REQUEST_RECRUIT_DATE, 'YYYY-MM-DD') REQUEST_RECRUIT_DATE,
+       		   TO_CHAR(PROJECT_REQUEST_CREATE_DATE, 'YYYY-MM-DD')PROJECT_REQUEST_CREATE_DATE,
+               REQUEST_WORK_DATE, PROJECT_WORK_PERIOD, SUB_CATEGORY_NO,SUB_CATEGORY_NAME,
+               THIRD_CATEGORY_NO,THIRD_CATEGORY_NAME, MAIN_CATEGORY_NO,MAIN_CATEGORY_NAME,  
+       	   CASE WHEN PROJECT_REQUEST_STATUS = 1 THEN '승인 대기 중'
+        	    WHEN PROJECT_REQUEST_STATUS = 2 THEN '모집 중'
+                WHEN PROJECT_REQUEST_STATUS = 3 THEN '미승인'
+                WHEN PROJECT_REQUEST_STATUS = 4 THEN '모집 마감'
+            END AS PROJECT_REQUEST_STATUS,
+                REQUEST_FILE_NO, REQUEST_FILE_PATH       
+		FROM PROJECT_REQUEST
+		JOIN REQUEST_FILE USING(PROJECT_REQUEST_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		WHERE MEMBER_NO = #{memberNo}
+			<if test='optionVal eq "0"'>
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "1"'>
+				AND MAIN_CATEGORY_NO = 1
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "2"'>
+				AND MAIN_CATEGORY_NO = 2
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "3"'>
+				AND MAIN_CATEGORY_NO = 3
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "4"'>
+				AND MAIN_CATEGORY_NO = 4
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "5"'>
+				AND MAIN_CATEGORY_NO = 5
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+  	</select>
+  	
+  	
+  	<!-- 내 프로젝트 받은 제안 카운트 ajax   -->
+  	<select id="getSuggestTypeCount" parameterType="java.util.HashMap" resultType="_int">
+  		SELECT COUNT(*)
+		FROM PROJECT_PROPOSAL
+	     JOIN PROJECT_REQUEST USING(PROJECT_REQUEST_NO)
+	     JOIN "MEMBER" ON(PROJECT_PROPOSAL.FREELANCER_NO=MEMBER.MEMBER_NO)
+	     JOIN FREELANCER USING(FREELANCER_NO)
+	     JOIN GRADE USING(GRADE_NO)
+	     LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+	     LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+	     LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		WHERE MEMBER.MEMBER_NO = #{memberNo}
+			<if test='optionVal eq "0"'>
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "1"'>
+				AND MAIN_CATEGORY_NO = 1
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "2"'>
+				AND MAIN_CATEGORY_NO = 2
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "3"'>
+				AND MAIN_CATEGORY_NO = 3
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "4"'>
+				AND MAIN_CATEGORY_NO = 4
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+			<if test='optionVal eq "5"'>
+				AND MAIN_CATEGORY_NO = 5
+				ORDER BY PROJECT_REQUEST_NO DESC 
+			</if>
+  	</select>
+  	
+  	<!-- 내 프로젝트 받은 제안 조회 ajax -->
+  	<select id="categoryTypeSelect_suggest" parameterType="java.util.HashMap" resultMap="myProject_rm">
+	  	SELECT PROJECT_PROPOSAL_NO,PROJECT_REQUEST_TITLE, MEMBER_NAME AS FREELANCER_NAME,
+	       GRADE_NO, GRADE_NAME, PROPOSAL_PRICE, PROPOSAL_EDIT_NUM,
+	       CASE WHEN PROPOSAL_ADOPT_STATUS = 1 THEN '대기 중'
+	            WHEN PROPOSAL_ADOPT_STATUS = 2 THEN '채택'
+				WHEN PROPOSAL_ADOPT_STATUS = 3 THEN '모집마감'
+		   END AS PROPOSAL_ADOPT_STATUS,
+	       MAIN_CATEGORY_NO,MAIN_CATEGORY_NAME,SUB_CATEGORY_NO,SUB_CATEGORY_NAME,THIRD_CATEGORY_NO,
+	       THIRD_CATEGORY_NAME
+		FROM PROJECT_PROPOSAL
+		JOIN PROJECT_REQUEST USING(PROJECT_REQUEST_NO)
+		JOIN "MEMBER" ON(PROJECT_PROPOSAL.FREELANCER_NO=MEMBER.MEMBER_NO)
+		JOIN FREELANCER USING(FREELANCER_NO)
+		JOIN GRADE USING(GRADE_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		WHERE MEMBER.MEMBER_NO = #{memberNo}
+			<if test='optionVal eq "0"'>
+				ORDER BY PROJECT_PROPOSAL_NO DESC 
+			</if>
+			<if test='optionVal eq "1"'>
+				AND MAIN_CATEGORY_NO = 1
+				ORDER BY PROJECT_PROPOSAL_NO DESC 
+			</if>
+			<if test='optionVal eq "2"'>
+				AND MAIN_CATEGORY_NO = 2
+				ORDER BY PROJECT_PROPOSAL_NO DESC 
+			</if>
+			<if test='optionVal eq "3"'>
+				AND MAIN_CATEGORY_NO = 3
+				ORDER BY PROJECT_PROPOSAL_NO DESC 
+			</if>
+			<if test='optionVal eq "4"'>
+				AND MAIN_CATEGORY_NO = 4
+				ORDER BY PROJECT_PROPOSAL_NO DESC 
+			</if>
+			<if test='optionVal eq "5"'>
+				AND MAIN_CATEGORY_NO = 5
+				ORDER BY PROJECT_PROPOSAL_NO DESC 
+			</if>
+  	</select>
+	
   	
 </mapper>
 	

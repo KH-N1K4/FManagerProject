@@ -10,14 +10,14 @@
 /* mainArea /sideMenu영역  */
 .mainArea{
     width: 1200px;
-    height: 1000px;
+    height: 700px;
     display: flex;
 }
 
 /* 왼쪽 list */
 .list{
     width: 300px;
-    height: 1000px;
+    height: 700px;
     background-color: rgb(204, 204, 204);
     text-align: center;
     overflow-x: hidden;
@@ -32,16 +32,26 @@
 }
 
 .chat{
-    width: 600px;
-    height: 1000px;
+    width: 630px;
+    height: 700px;
     background-color: #fff;
 }
 
+
+.chat {
+	display: inline-block;
+	border-radius: 5px;
+	text-align: left;
+	word-break: break-all;
+	padding:7px 10px; 
+	margin:7px 0;
+}
+
 .chattingList{
-    margin: 10px;
-    width: 280px;
+  /*   margin: 10px; */
+    width: 100%;
     background-color: #FFF;
-    border: 1px solid green;
+    border-bottom: 1px solid green;
     display: inline-flex;
     flex-direction: column;
 }
@@ -61,6 +71,7 @@
 .item-header{
     display: flex;
     flex-direction: row;
+    height:80px;
 }
 .chatting-item{
     list-style: none;
@@ -80,28 +91,49 @@
   white-space: nowrap;
   display: block;
   text-align: start;
-  width: 240px;
+  width: 225px;
+  margin-left:10px;
 }
 
 .chattingList img{
-    width: 90px;
-    height: 90px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     margin: 15px 10px;
 }
 #info{
     width: 150px;
-    height: 100px;
-    border: 1px solid green;
+    height: 68px;
+    /* border: 1px solid green; */
     margin: 10px;
+    padding:10px 0;
+    text-align:left;
+}
+
+.item-content{
+	position:relative;
+}
+
+.not-read-count{
+	
+    display: inline-block;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: -20px;
+    border-radius: 10px;
+    color: white;
+	
 }
 
 
 /* chat(가운데) */
 #chatBox{
-    width: 600px;
-    height: 830px;
-    background-color:  antiquewhite;
+    width: 630px;
+    height: 585px;
+    background-color: #F8F4EA;
     overflow-x: hidden;
     overflow-y: auto;
 
@@ -113,12 +145,6 @@
     padding: 0%;
 }
 
-.chat {
-	display: inline-block;
-	border-radius: 5px;
-	text-align: left;
-	word-break: break-all;
-}
 
 /* 채팅창 채팅 메세지 */
 
@@ -126,7 +152,8 @@
     display: flex;
     margin-bottom: 3px;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
+    margin-right:10px;
 }
 
 .Daylist{
@@ -139,6 +166,7 @@
     align-items: center;
     justify-content: center;
     margin: auto;
+    margin-bottom:10px;
 }
 
 .my-chat .chat{
@@ -150,12 +178,12 @@
 .chatDate{
     display: inline-flex;
     align-items: flex-end;
-    margin-bottom: 1px;
+   	margin:5px 7px;
 }
 
 .imgContent{
-    width: 100px;
-    height: 100px;
+    width: 300px;
+   /*  height: 300px; */
     margin: 6px 0;
 }
 
@@ -167,10 +195,11 @@
 }
 
 .my-chat .aContent{
-    width: 430px;
+   /*  width: 430px; */
     height: auto;
     background-color: white;
-    margin: 16px 0;
+    padding:7px 10px;
+    margin: 7px 0;
 }
 
 /* 채팅창 채팅 답변 */
@@ -180,43 +209,45 @@
     margin-bottom: 3px;
     align-items: center;
 }
-.target-chat img{
+.target-chat>img{
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 2px;
+    margin:0 5px;
 }
 .target-chat .chat{
     width: 400px;
     height: auto;
     margin: 0;
-    background-color: rgb(183, 231, 183);
+    background-color: #538126;
+    margin:7px 0;
 }
 
 .target-chat .aContent{
-    width: 400px;
+     /*  width: 430px; */
     height: auto;
-    margin: 0;
-    background-color: rgb(183, 231, 183);
-    margin: 16px 0;
+    background-color:  #538126;
+    padding:7px 10px;
+    margin: 7px 0;
 }
 
 
 
 /* 메세지 입력창  */
 #messageInput{
-    width: 600px;
-    height: 100px;
+    width: 630px;
+    height: 115px;
     display: flex;
-    align-items: center;
+   /*  align-items: center; */
 }
 #messageInput textarea{
-    width: 475px;
-    height: 60px;
-    margin: 20px;
+    width: 474px;
+    height: 73px;
+    padding: 20px;
+   /*  border:none; */
 }
 #messageButton{
-    width: 600px;
+    width: 630px;
     height: 70px;
     display: flex;
     border-bottom: 1px solid gray;
@@ -224,9 +255,9 @@
 
 }
 #addFile{
-    width: 550px;
-    height: 50px;
-    margin: 0 20px;
+    width: 114px;
+    height: 40px;
+   /*  margin: 0 20px; */
 }
 
     
@@ -239,7 +270,7 @@
     background-color: #558b32;
     color:#FFF;
     cursor: pointer;
-    position: relative;
+   /*  position: relative; */
 }
 
 #addFile input{
@@ -252,8 +283,8 @@
     margin: 0px 0px;
 }
 #insert button{
-    width: 60px;
-    height: 50px;
+    width: 114px;
+    height: 75px;
     background-color: rgb(161, 159, 159);
     color: black;
     border: none;
@@ -263,8 +294,8 @@
 /* 오른쪽 */
 
 .expert{
-    width: 300px;
-    height: 1000px;
+    width: 290px;
+    height: 700px;
     background-color: rgb(204, 204, 204);
 }   
 
@@ -272,6 +303,8 @@
     width: 220px;
     height: 220px;
     border-radius: 50%;
+   /*  border:5px solid lightgray;
+    border-box:box-sizing; */
 }   
 
 .expert div:nth-child(1){
@@ -280,9 +313,9 @@
     margin: 30px 40px;
 }   
 .expert div:nth-child(2){
-    width: 220px;
+    width: fit-content;
     height: 50px;
-    margin: 0px 40px;
+    margin:auto;
     font-weight: bold;
 }   
 .expert span{
@@ -291,7 +324,7 @@
 .expert div:nth-child(3){
     width: 220px;
     height: 50px;
-    margin: 10px 20px;
+    margin: auto;
     position: relative;
 }  
 .expert a{

@@ -100,7 +100,7 @@
                 <div class="expertPage">
                     <div class="expertPhoto"><img alt="" src="${freelancerService.freelancerImage }" style="width:100%;"></div>
                     <div class="expertContent">
-                        <div class="expertName"><a href="/category/viewFreelancerDetail">${freelancerService.freelancerName }</a></div>
+                        <div class="expertName"><a href="/service/freelancerDetail/${freelancerService.freelancerNo}" target="_blank">${freelancerService.freelancerName }</a></div>
                         <div class="responseInfo">
                             <span>응답시간<span>00</span></span>
                             <span>응답률<span>00</span></span>
@@ -129,20 +129,27 @@
         
         
         <!-- 서비스 설명 부분 -->
-        <div id="serviceInfo">
-            <div><button>서비스 설명</button></div>
-            <div><button>포트폴리오</button></div>
-            <div><button>취소/환불</button></div>
-            <div><button>서비스 평가</button></div>
-        </div>
+        
         
         <div class="detailInner">
         
+      
+        	
+        
+        	<a id="serviceContent"></a>  
+        	<h3>서비스 설명</h3>
+        	${freelancerService.serviceContent}
 	        <c:forEach var="imageFile" items="${freelancerService.serviceImageFileList }">
-	                	<img src="/resources/images/${imageFile.imageFilePath }" style="width:100%;">
+	                	<img src="${imageFile.imageFilePath }" style="width:100%;">
 	        </c:forEach>
+	        
+	        
+	        
+	        
+	        
 
         </div>
+        
         
         <div id="goToList">
             <button id="goToListbtn">목록으로</button>

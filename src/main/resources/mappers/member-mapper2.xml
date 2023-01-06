@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper2">
+
+	<select id="findInfo" resultType="_int">
+		SELECT NVL(COUNT(MEMBER_NO),0)
+		FROM "MEMBER"
+ 		WHERE MEMBER_TEL=#{memberTel}
+ 		AND MEMBER_NAME=#{memberName}
+ 		AND MEMBER_EMAIL=#{memberEmail}
+	</select>
+	
+	<update id="changeRanPw">
+  		UPDATE "MEMBER" 
+  		SET MEMBER_PW=#{memberPw}
+  		WHERE MEMBER_NO=#{memberNo}
+  	</update>
+	
+  
+</mapper>

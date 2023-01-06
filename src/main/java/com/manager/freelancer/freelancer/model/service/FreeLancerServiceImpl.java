@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.common.Util;
 import com.manager.freelancer.freelancer.model.dao.FreeLancerDAO;
 import com.manager.freelancer.freelancer.model.vo.Bank;
@@ -157,6 +158,12 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 	public Freelancer freelancerInfo(int freelancerNo) {
 
 		return dao.freelancerInfo(freelancerNo);
+	}
+	@Override
+	public Freelancer1 freelancerInfo1(int freelancerNo) {
+
+		
+		return dao.freelancerInfo1(freelancerNo);
 	}
 	
 	@Override

@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.manager.freelancer.category.model.vo.Freelancer1;
 import com.manager.freelancer.freelancer.model.service.FreeLancerService;
 import com.manager.freelancer.freelancer.model.vo.Bank;
 import com.manager.freelancer.freelancer.model.vo.Field;
 import com.manager.freelancer.freelancer.model.vo.Freelancer;
+import com.manager.freelancer.freelancer.model.vo.License;
 import com.manager.freelancer.freelancer.model.vo.Portfolio;
 import com.manager.freelancer.freelancer.model.vo.Region;
 import com.manager.freelancer.member.model.vo.Member;
@@ -49,8 +51,13 @@ public class FreeLancerController {
 			Freelancer inputFreelancer = new Freelancer();
 			inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 회원번호 세팅
 			
-			Freelancer freelancer = service.freelancerInfo(loginMember.getMemberNo());
-			model.addAttribute("freelancer", freelancer); 
+//			Freelancer freelancer = service.freelancerInfo(loginMember.getMemberNo());
+//			model.addAttribute("freelancer", freelancer); 
+			
+			Freelancer1  freelancer1 = service.freelancerInfo1(loginMember.getMemberNo());
+	
+			model.addAttribute("freelancer1",freelancer1);
+			
 			
 			List<Region> regionList = service.getRegionList();
 			model.addAttribute("regionList",regionList);

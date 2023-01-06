@@ -38,7 +38,7 @@ if(projectRequestfrm != null ){
             return;
         }
         const Budget =  document.getElementById("budget");
-        if (Budget.value.trim().length == 0) {
+        if (Budget.value == 0) {
             alertAndFocus(Budget, "예산을 입력해주세요.");
             event.preventDefault();  
             return;

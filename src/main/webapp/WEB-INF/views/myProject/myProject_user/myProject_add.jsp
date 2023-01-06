@@ -18,7 +18,8 @@
 <body>
   <main>
     <!-- hearder -->
-    <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
+    <%-- <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/> --%>
+    <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
 
     <!-- hearder -->
     <!-- 화면 크기 width: 1200px로 고정 -->
@@ -90,13 +91,14 @@
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>첨부파일</span></div>
                   <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile"></div>
+                  <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile2"></div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>예산</span></div>
                   <div class="list_content">
                     <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
-                          class="budget box" name="projectRequestBudget" placeholder="예산 금액" maxlength="30" autocomplete="off" value="" id="bBudget"><span>원</span>
+                          class="budget box" name="projectRequestBudget" placeholder="예산 금액" maxlength="30" autocomplete="off" value="" id="budget"><span>원</span>
                   </div>
                 </div>
                 <br>

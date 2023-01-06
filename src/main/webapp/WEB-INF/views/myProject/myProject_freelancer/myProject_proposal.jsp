@@ -15,7 +15,8 @@
 </head>
 <body>
     <!-- hearder -->
-    <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/>
+    <%-- <jsp:include page="/WEB-INF/views/myProject/myProject_freelancer/myProject_header2.jsp"/> --%>
+     <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
     <!-- hearder -->
     <%-- 검색을 진행한 경우 --%>
     <c:if test="${not empty param}">

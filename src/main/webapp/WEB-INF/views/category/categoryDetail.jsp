@@ -159,24 +159,53 @@
 					        <div class="contentTop">
 					            <div class="userProfile"><img src="" alt=""></div>
 					            <div class="person">
-					                <span class="userName">${review.memberName }</span><br>
+					                <span class="userName">${review.memberName }
+					                </span><br>
 					            
-					                <div><span class="starReport">★★★★★${review.reviewPoint }</span>&nbsp;|&nbsp;<span class="createTime">2022.01.02</span></div>
+					                <div><span class="starReport">
+					                <c:forEach var="i" begin="1" end="5">	
+					                	<c:choose>
+					                		<c:when test="${review.reviewPoint>=i }">
+					                		★
+					                		</c:when>
+					                		<c:otherwise>
+					                		☆
+					                		</c:otherwise>
+					                	</c:choose>
+					                	
+					                </c:forEach>
+					                
+					                ${review.reviewPoint }
+					                </span>&nbsp;|&nbsp;<span class="createTime">2022.01.02</span></div>
 					                
 					            </div>
-					            
+					             <c:if test="${loginMember.memberNo==fService.freelancerNo }">
+							        <div class="reportTop" id="${review.reviewNo }">
+										<a class="reportReview">신고하기</a>					                
+										<a class="writeResponse">답글적기</a>					                
+							        </div>
+				                </c:if>
 					        </div>
-					        <div class="reviewContent"></div>
-					        <div class="date">${review.reviewContent }</div>
+					        <c:if test="${review.reviewStatus=='1' }">
+					        	<div class="reviewContent">${review.reviewContent }</div>
+					        </c:if>
+					        <c:if test="${review.reviewStatus=='2' }">
+					        	<div class="reviewContent">신고된 리뷰입니다.</div>
+					        </c:if>
+					       <!--  <div class="date"></div> -->
+					        
+					       
 					
 					       <!--  <div class="serviceDetail"><span class="price">작업일: 22일</span>
 					        <span class="reviewPhoto">주문 금액: 100만원 ~ 200만원</span></div> -->
 					        
-					
+							<c:if test="${not empty review.reviewFilePath }">
 					        <div class="serviceImage" > <img alt="" src="${review.reviewFilePath }" style="width:100%;"> </div>
+							
+							</c:if>
 					    </div>
 					
-						<c:if test="${review.reviewCommentContent!=0}">
+						<c:if test="${not empty review.reviewCommentContent}">
 						    <div class="reviewResponse">
 						        <div> <span class="freelancerName">프리랜서 이름 </span><span class="createTime">2022.01.02</span> </div>
 						        <div class="responseContent">

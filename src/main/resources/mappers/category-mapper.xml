@@ -122,13 +122,9 @@
 	     
 	      <result property="freelancerPeriod" column="FREELANCER_PERIOD" />		<!-- 서비스 작업 일수 -->
 	      <result property="regionName" column="REGION_NAME" />				
+	      <result property="memberProfile" column="MEMBER_PROFILE" />				
 	      
-	      
-	      
-	      <result property="major" column="MAJOR" />				
-	      <result property="career" column="CAREER" />				
-	      <result property="license" column="LICENSE" />				
-   
+	     
 	      
 	      <collection property="careerList" 
 	      javaType="java.util.ArrayList" ofType="Career"
@@ -170,9 +166,9 @@
     
     <resultMap  type="Major" id="major_rm">
     	  <id property="majorNo" column="MAJOR_NO"/>
-	      <result property="majorAcademyName" column="MAJOR_ACADEMY_NAME"/>
+	      <result property="majorAcademyName" column="ACADEMY_NAME"/>
 	      <result property="majorName" column="MAJOR_NAME"/>
-	      <result property="majorGraduateStatus" column="MAJOR_GRADUATE_STATUS"/>
+	      <result property="majorGraduateStatus" column="GRADUATE_STATUS"/>
     </resultMap>
     
     <resultMap  type="Portfolio" id="portfolio_rm">
@@ -201,9 +197,9 @@
 	      <result property="serviceSummary" column="SERVICE_SUMMARY" />
     	  <result property="requestFilePath" column="REQUEST_FILE_PATH" />	
     	  <result property="serviceDeleteFL" column="SERVICE_DEL_FL" />	
-    	  <!-- <result property="reviewCount" column="REVIEW_COUNT" />	
+    	   <result property="reviewCount" column="REVIEW_COUNT" />	
     	  <result property="sellCount" column="SELL_COUNT" />	
-    	  <result property="servicePoint" column="SERVICE_POINT" />	 -->
+    	 <!-- <result property="servicePoint" column="SERVICE_POINT" />	 -->
     </resultMap>
     
 	
@@ -291,7 +287,7 @@
 	<!-- 서비스 리뷰 조회 -->
 	<select id="selectReviewList" resultMap="review_rm">
 	
-		SELECT (SELECT MEMBER_NAME  FROM "MEMBER" WHERE MEMBER_NO=TRADE.MEMBER_NO) MEMBER_NAME
+		SELECT REVIEW_NO,(SELECT MEMBER_NAME  FROM "MEMBER" WHERE MEMBER_NO=TRADE.MEMBER_NO) MEMBER_NAME, REVIEW_STATUS
 	,(SELECT MEMBER_PROFILE  FROM "MEMBER" WHERE MEMBER_NO=TRADE.MEMBER_NO) MEMBER_PROFILE
 		,REVIEW_CONTENT,REVIEW_IMAGE, REVIEW_POINT, REVIEW_CREATE_TIME
 		,(SELECT MEMBER_NAME  FROM "MEMBER" WHERE MEMBER_NO=FREELANCER_NO) FREELANCER_NAME, REVIEW_COMMENT_CONTENT, REVIEW_COMMENT_CREATE_TIME 
@@ -300,7 +296,9 @@
 		JOIN TRADE ON(REVIEW_NO=TRADE_NO)
 		JOIN SERVICE USING(SERVICE_NO) 
 		WHERE SERVICE_NO=#{serviceNo}
+		AND REVIEW_STATUS!=3
 		ORDER BY 1 DESC
+	
 		 
 	</select>
 	
@@ -512,12 +510,12 @@
 			WITHIN GROUP (ORDER BY MAIN_CATEGORY_NO)
 			FROM(SELECT DISTINCT MAIN_CATEGORY_NO
 				FROM FIELD I
-				WHERE FREELANCER_NO = 30) ) FREELANCER_FIELD,
+				WHERE F.FREELANCER_NO = I.FREELANCER_NO) ) FREELANCER_FIELD,
 				 FREE_CONTACT_TIME1, FREE_CONTACT_TIME2,
 				 FREELANCER_INTRODUCTION,
 				 FREELANCER_PERIOD,
 				 REGION_NAME
-		FROM FREELANCER 
+		FROM FREELANCER F 
 		JOIN "MEMBER" ON(FREELANCER_NO=MEMBER_NO)
 		JOIN GRADE USING(GRADE_NO)
 		JOIN REGION USING(REGION_NO)
@@ -527,35 +525,46 @@
 	
 	<select id="selectFServiceList" resultMap="fservice_rm">
 
-		SELECT SERVICE_NO,SERVICE_TITLE,SERVICE_SUMMARY,SERVICE_PRICE,REQUEST_FILE_PATH
-		FROM (SELECT * 
-			FROM SERVICE
-			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
-			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
-		LEFT JOIN (SELECT s.*,
-		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
-		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		SELECT SERVICE_NO, SERVICE_TITLE ,SERVICE_SUMMARY,SERVICE_PRICE, SELL_COUNT,REVIEW_COUNT, REQUEST_FILE_PATH
+		FROM (SELECT SERVICE_NO, SERVICE_TITLE ,SERVICE_SUMMARY,SERVICE_PRICE,FREELANCER_NO,
+		(SELECT COUNT(*) FROM TRADE T
+		WHERE MEMBER_DONE_FL = 2
+		AND FREELANCER_DONE_FL = 2
+		AND T.SERVICE_NO = S.SERVICE_NO) SELL_COUNT,
+		(SELECT COUNT(*) FROM REVIEW R
+		JOIN TRADE T ON(R.REVIEW_NO  = T.TRADE_NO)
+		WHERE T.SERVICE_NO= S.SERVICE_NO) REVIEW_COUNT
+		FROM SERVICE S)
+		LEFT JOIN (SELECT s.*, ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum FROM SERVICE_FILE s) USING(SERVICE_NO)
 		WHERE RUM = 1
-		AND SERVICE_DEL_FL='N'
-		AND SERVICE_STATUS=2
 		AND FREELANCER_NO=#{freelancerNo}
 	</select>
     <select id="selectCareerList" resultMap="career_rm">
 		SELECT * FROM CAREER
 		WHERE FREELANCER_NO=#{freelancerNo}
 	</select>
-	<select id="selectMajorList" resultMap="major_rm">
-		SELECT * FROM CAREER 
+	<select id="selectLicenseList" resultMap="license_rm">
+		SELECT * FROM LICENSE 
 		WHERE FREELANCER_NO=#{freelancerNo}
 	</select>
-	<select id="selectLicenseList" resultMap="license_rm">
-		SELECT * FROM CAREER 
+	<select id="selectMajorList" resultMap="major_rm">
+		SELECT * FROM MAJOR 
 		WHERE FREELANCER_NO=#{freelancerNo}
 	</select>
 	<select id="selectPortfolioList" resultMap="portfolio_rm">
 		SELECT * FROM PORTFOLIO
 		WHERE FREELANCER_NO=#{freelancerNo}
 	</select>
+	
+	<insert id="reportReview" parameterType="_int">
+		INSERT INTO REPORT VALUES(SEQ_REPORT_NO.NEXTVAL, #{reviewNo},DEFAULT)
+	
+	</insert>
+	
+	<update id="updateReviewStatus" parameterType="_int">
+		UPDATE REVIEW SET REVIEW_STATUS='2' WHERE REVIEW_NO=#{reviewNo}
+	
+	</update>
 	
  	
  </mapper>

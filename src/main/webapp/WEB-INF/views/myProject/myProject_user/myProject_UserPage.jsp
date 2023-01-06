@@ -17,7 +17,8 @@
 <body>
   <main>
     <!-- hearder -->
-	  <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/>
+	  <%-- <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/> --%>
+	  <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
 
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
@@ -39,7 +40,7 @@
 
                 <!-- 상단 selectbox -->
                 <div class="selectbox">
-                  <select  id = "srchOption" class="srchOption" name="srchOption" >
+                  <select  id = "srchOption" class="srchOption" name="srchOption" onchange="selectChange()">
                     <option value="0" selected="">전체</option>
                     <option value="1">디자인</option>
                     <option value="2">IT·프로그래밍</option>
@@ -60,99 +61,103 @@
 
             </div>
             <%-- container_header 끝 --%>
-
+            <section class="contain">
             <!-- 프로젝트 의뢰 1번 -->
             <c:if test="${not empty myProject}">
-              <c:forEach items="${myProject}" var="myProject">
-                  <div class="myProject_content">
-                    <a class="myProject_link" href="">
-                    
-                      <%-- 서비스 사진 --%>
-                      <div class="projuctContent_image">
-                        <img  src="${myProject.requestFilePath}">
-                      </div>
-                      <%-- 서비스 사진 --%>
-                      <div class="projuctContent_info">
+	              <c:forEach items="${myProject}" var="myProject">
+		                  <div class="myProject_content">
+		                  
+			                      <%-- 서비스 사진 --%>
+			                      <div class="projuctContent_image">
+			                        <img  src="${myProject.requestFilePath}">
+			                      </div>
+			                      <%-- 서비스 사진 --%>
+                            
+			                      <div class="projuctContent_info">
+			
+				                        <%-- 서비스 제목 --%>
+				                        <div class="info_title">
+				                          <a href=""><span>${myProject.projectRequestTitle}</span></a>
+				                        </div>
+				                        <%-- 서비스 제목 --%>
+					
+				                        <diV class="info_content">
+					                          <div class="info_content_left">
 
-                        <%-- 서비스 제목 --%>
-                        <div class="info_title">
-                          <span>${myProject.projectRequestTitle}</span>
-                        </div>
-                        <%-- 서비스 제목 --%>
+                                        <%-- 모집분야 --%>
+						                            <div class="info_content_list"> 
+						                              <div class="list_title"><span>모집분야</span></div> 
+						                              <div class="list_content"> 
+						                                <div class="main1category"><span>${myProject.mainCategoryName}</span></div>
+						                                <span>></span>
+						                                <div class="main3category"><span>${myProject.thirdCategoryName}</span></div> 
+						                              </div>
+						                            </div>
+						                            
+                                        <%-- 예산 --%>
+						                            <div class="info_content_list"> 
+						                              <div class="list_title"><span>예산</span></div>
+						                              <div class="list_content">   
+						                                <span>${myProject.projectRequestBudget}</span> 
+						                              </div>
+						                            </div>
+						                            
+                                        <%-- 모집마감일 --%>
+						                            <div class="info_content_list"> 
+						                              <div class="list_title"><span>모집마감일</span></div> 
+						                              <div class="list_content">
+						                                <span>${myProject.projectRecruitDate}</span> 
+						                              </div>
+						                            </div>
+					                          </div>
+					                          
+					                          <%-- 승인 상태 --%>
+					                          <div class="info_content_right"> <%-- // 0000 --%>
+					                            <div class="signState">
+					                              <span>${myProject.projectRequestStatus}</span>
+					                            </div>
+					                          </div>
+					                          <%-- 승인 상태 --%>
 
-                        <diV class="info_content">
-                          <div class="info_content_left">
-                            <div class="info_content_list">
-                              <div class="list_title"><span>모집분야</span></div>
-                              <div class="list_content">
-                                <div class="main1category"><span>${myProject.mainCategoryName}</span></div>
-                                <span>></span>
-                                <div class="main3category"><span>${myProject.thirdCategoryName}</span></div>
-                              </div>
-                            </div>
-                            <div class="info_content_list">
-                              <div class="list_title"><span>예산</span></div>
-                              <div class="list_content">
-                                <span>${myProject.projectRequestBudget}</span>
-                              </div>
-                            </div>
-                            <div class="info_content_list">
-                              <div class="list_title"><span>모집마감일</span></div>
-                              <div class="list_content">
-                                <span>${myProject.projectRecruitDate}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <%-- 승인 상태 --%>
-                          <div class="info_content_right">
-                            <div class="signState">
-                              <span>${myProject.projectRequestStatus}</span>
-                            </div>
-                          </div>
-                          <%-- 승인 상태 --%>
-                        </diV>
-                      </div>
-                    </a>
-                  </div>
-              </c:forEach>
+				                        </diV>
+			                      </div>
+		                  </div>
+	              </c:forEach>
             </c:if>
+            <c:if test="${empty myProject}"> 
+                <div class="myProject_content">등록된 프로젝트가 없습니다.</div>
+            </c:if>
+            </section>
             <!-- 프로젝트 1번 -->
+
             <c:if test="${listCount != 0}">
-                
                 <div class="pagination-area">
-
-
                     <ul class="pagination">
-                    
                         <!-- 첫 페이지로 이동 -->
                         <li><a href="/member/myProject/myRequestList?cp=1${sURL}">&lt;&lt;</a></li>
-        
                         <!-- 이전 목록 마지막 번호로 이동 -->
                         <li><a href="/member/myProject/myRequestList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
-        
-            
                         <!-- 특정 페이지로 이동 -->
                         <c:forEach var="countPage" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
-                        <c:choose>
-                            <c:when test="${countPage== pagination.currentPage}">
-                            <!-- 현재 페이지인 경우 -->
-                            <li><a class="current">${countPage}</a></li>
-                            </c:when>
-                            <c:otherwise>
-                            <!-- 현재 페이지를 제외한 나머지 -->
-                            <li><a href="/member/myProject/myRequestList?cp=${countPage}${sURL}">${countPage}</a></li>
-                            </c:otherwise>
-                        </c:choose>
+                          <c:choose>
+                              <c:when test="${countPage== pagination.currentPage}">
+                              <!-- 현재 페이지인 경우 -->
+                              <li><a class="current">${countPage}</a></li>
+                              </c:when>
+                              <c:otherwise>
+                              <!-- 현재 페이지를 제외한 나머지 -->
+                              <li><a href="/member/myProject/myRequestList?cp=${countPage}${sURL}">${countPage}</a></li>
+                              </c:otherwise>
+                          </c:choose>
                         </c:forEach>
                         <!-- 다음 목록 시작 번호로 이동 -->
                         <li><a href="/member/myProject/myRequestList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
-        
                         <!-- 끝 페이지로 이동 -->
                         <li><a href="/member/myProject/myRequestList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
-        
                     </ul>
                 </div>
             </c:if>
+
           </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
@@ -162,7 +167,9 @@
   </main>
   <!-- **************************************footer*************************************-->
 
-	  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="/resources/js/myProject/myProject_user/myProjectList.js"></script> 
 </body>
 </html>

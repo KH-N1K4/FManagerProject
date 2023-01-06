@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.manager.freelancer.common.Util;
-import com.manager.freelancer.customerCenter.model.vo.UserInquiryImage;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.dao.MyProjectDAO;
 import com.manager.freelancer.myProject.model.vo.MyProject;
@@ -134,7 +133,7 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		} 
 		
 		
-		return 0;
+		return projectNo;
 	}
 
 	// 받은 제안 조회 
@@ -146,6 +145,44 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		Pagination pagination = new Pagination(listCount,cp); 
 		
 		List<MyProject> proposal = dao.selectProposal(memberNo,mainCategoryNo,pagination);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("proposal",proposal);
+		map.put("listCount",listCount);
+		
+		return map;
+	}
+
+	// 내 프로젝트 조회 ajax
+	@Override
+	public Map<String, Object> categoryTypeSelect(String optionVal,int cp, int memberNo) {
+		
+		int listCount = dao.getChangeTypeCount(optionVal, memberNo);
+		
+		Pagination pagination = new Pagination(listCount,cp); 
+		
+		List<MyProject> myProject = dao.categoryTypeSelect(optionVal,pagination,memberNo);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("pagination", pagination);
+		map.put("myProject",myProject);
+		map.put("listCount",listCount);
+		
+		return map;
+	}
+
+	// 프로젝트 받은 제안 조회 ajax
+	@Override
+	public Map<String, Object> categoryTypeSelect_suggest(String optionVal, int cp, int memberNo) {
+		
+		int listCount = dao.getSuggestTypeCount(optionVal, memberNo);
+		
+		Pagination pagination = new Pagination(listCount,cp); 
+		
+		List<MyProject> proposal = dao.categoryTypeSelect_suggest(optionVal,pagination,memberNo);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
