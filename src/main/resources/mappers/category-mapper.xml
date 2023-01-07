@@ -36,6 +36,8 @@
 	      <result property="freeContactTime1" column="FREE_CONTACT_TIME1" />				
 	      <result property="freeContactTime2" column="FREE_CONTACT_TIME2" />				
 	      
+	      <result property="reviewPoint" column="REVIEW_POINT" />				
+	      <result property="sellCount" column="SELL_COUNT" />				
 	      
 	      
 	      
@@ -55,8 +57,8 @@
 	      select="selectPortfolioList"
 	      column="FREELANCER_NO"/> 
 	      
-	      
     </resultMap>
+    
     
     
   <resultMap type="ImageFile" id="imageFile_rm">

@@ -83,6 +83,8 @@
 	                        ${service.serviceTitle }
 	                        <span class="imageOthers">${service.serviceSummary }</span>
 	                        <span class="imageOthers">가격: ${service.servicePrice}원</span>
+	                        <span class="imageOthers right">평점  5.0</span>
+	                        <span class="imageOthers right">판매수 30회</span>
 	                        </a>
 	                     
 	                    </div>

@@ -66,7 +66,7 @@
     
 
        <div class="main">
-        
+        <div><span>${projectRequest.mainCategoryName }</span> > <span>${projectRequest.thirdCategoryName }</span></div>
 
         <div class="detailHeader">
             <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${projectRequest.requestFilePath }"></div>

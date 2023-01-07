@@ -86,7 +86,7 @@
     
 
        <div class="main">
-
+        <div><span>${freelancerService.mainCategoryName }</span> > <span>${freelancerService.thirdCategoryName }</span></div>
         
 
         <div class="detailHeader">

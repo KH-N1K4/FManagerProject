@@ -19,7 +19,7 @@
     <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
 
        <div class="main">
-        <div><a href="">${fService.mainCategoryName }</a>><a href="">${fService.thirdCategoryName }</a></div>
+        <div><a href="">${fService.mainCategoryName }</a> > <a href="">${fService.thirdCategoryName }</a></div>
 
         <div class="detailHeader">
             <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${fService.requestFilePath }" style="height:100%;" name="servicePhoto"></div>

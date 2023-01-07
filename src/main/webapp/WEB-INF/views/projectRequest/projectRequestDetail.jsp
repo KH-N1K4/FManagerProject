@@ -29,12 +29,12 @@
                     <div class="userNickName">${userRequest.memberNickName}</div>
                     <div class="requestInfo">
                         <div class="requestTop">
-                            <span>예산 <span>${userRequest.projectRequestBudgetString}</span>원</span>
-                            <span>작업일수 <span>${userRequest.projectWorkPeriod}</span>일</span>  
+                            <span><span>예산</span> <span>${userRequest.projectRequestBudgetString}</span>원</span>
+                            <span><span>작업일수</span> <span>${userRequest.projectWorkPeriod}</span>일</span>  
                         </div>
                         <div class="requestBottom">
-                            <span>작업마감일 <span>${userRequest.projectRecruitDateString}</span></span>
-                            <span>모집마감일 <span>${userRequest.projectWorkDateString}</span></span> 
+                            <span><span>작업마감일</span> <span>${userRequest.projectRecruitDateString}</span></span>
+                            <span><span>모집마감일</span> <span>${userRequest.projectWorkDateString}</span></span> 
                         </div>
                     </div>
                 </div>
