@@ -148,6 +148,10 @@ public class CategoryDAO {
 		return sqlSession.selectOne("categoryMapper.selectFreelancerSalesCoount", freelancerNo);
 	}
 
+	public int selectInquiryRate(int freelancerNo) {
+		return sqlSession.selectOne("categoryMapper.selectInquiryRate", freelancerNo);
+	}
+
 	
 
 	
