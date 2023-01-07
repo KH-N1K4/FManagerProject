@@ -1,9 +1,13 @@
 package com.manager.freelancer.common.message.model.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.manager.freelancer.common.message.model.vo.ChattingRoom;
+import com.manager.freelancer.common.message.model.vo.MemberReport;
 import com.manager.freelancer.common.message.model.vo.Message;
 
 public interface MessageService {
@@ -66,5 +70,20 @@ public interface MessageService {
 	 * @return
 	 */
 	ChattingRoom delectFLRoomNoClient(Map<String, Integer> map);
+
+	/**채팅방 신고하기
+	 * @param webPath
+	 * @param filePath
+	 * @param reportedMemberNo
+	 * @param reportMemberNo
+	 * @param reportContent
+	 * @param file
+	 * @param memberReport 
+	 * @param reportTitle 
+	 * @return
+	 * @throws IOException
+	 */
+	String memberReportUpdate(String webPath, String filePath, String reportedMemberNo, String reportMemberNo,
+			String reportContent, List<MultipartFile> file, MemberReport memberReport, String reportTitle) throws IOException;;
 	
 }

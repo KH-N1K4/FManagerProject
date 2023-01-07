@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 import com.manager.freelancer.common.Util;
 import com.manager.freelancer.common.message.model.service.MessageService;
 import com.manager.freelancer.common.message.model.vo.ChattingRoom;
+import com.manager.freelancer.common.message.model.vo.MemberReport;
 import com.manager.freelancer.common.message.model.vo.Message;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
@@ -184,5 +185,31 @@ public class MessageController {
     public String messageReportModal() {
         return "common/modaless/messageReportModal";
     }
+    
+    @PostMapping("/reportMemberSubmit")
+	@ResponseBody
+	public String memberReportUpdate(MemberReport memberReport,
+			MultipartHttpServletRequest formData,
+			HttpServletRequest req, /* 저장할 서버 경로 */
+			HttpSession session)  throws Exception {
+    	
+    	String webPath = "/resources/files/myProjectService/";
+    	
+    	// 실제 파일이 저장된 컴퓨터 상의 절대 경로
+    	String filePath = req.getSession().getServletContext().getRealPath(webPath);
+    	String reportedMemberNo = new String(formData.getParameterValues("reportedMemberNo")[0].getBytes("8859_1"),"utf-8");
+    	String reportTitle = URLDecoder.decode(formData.getParameterValues("reportTitle")[0], "UTF-8");
+		String reportMemberNo = new String(formData.getParameterValues("reportMemberNo")[0].getBytes("8859_1"),"utf-8");
+		String reportContent = URLDecoder.decode( formData.getParameterValues("reportContent")[0], "UTF-8");
+		/*List<MultipartFile> reportFile;
+		for(int i=0;i< formData.getFile("reportFile").getSize();i++) {
+			reportFile.add(formData.getFile("reportFile")[i]);
+		}*/
+		
+    	String result = service.memberReportUpdate(webPath, filePath, reportedMemberNo, reportMemberNo, reportContent,formData.getFiles("reportFile"),memberReport,reportTitle);
+    	
+    	return new Gson().toJson(result);
+    }
+    
 	
 }

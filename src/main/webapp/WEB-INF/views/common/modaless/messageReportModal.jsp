@@ -32,12 +32,16 @@
           <div class="list_content"><input id="memberName" type="text" class="ReportBox readonly" name="reportPersonNo" readonly></div>
         </div>
         <div class="myprojectReport_list">
+          <div class="list_title"><span>신고제목</span></div>
+          <div class="list_content"><input id="reportTitle" class="myprojectReportTotalTitle ReportBox" name="reportTitle" required></input></div>
+        </div>
+        <div class="myprojectReport_list">
           <div class="list_title"><span>신고사유</span></div>
           <div class="list_content"><textarea id="reportContent" class="myprojectReportTotalContent ReportBox" name="reportContent" required></textarea></div>
         </div>
         <div class="myprojectReport_list" id="fileadd">
           <div class="list_title"><span>첨부파일</span></div>
-          <div class="list_content fileRemove"><input type = "file" name="reportFilePath" id="reportFilePath"></div>
+          <div class="list_content fileRemove"><input type = "file" name="reportFilePath" id="reportFilePath" multiple="multiple"></div>
         </div>
         <div class="btnDiv" ><button id="ajaxReview">신고하기</button></div>
         <input type="hidden" id="reportedMemberNo" name="reportedMemberNo">
@@ -47,6 +51,7 @@
 
   <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/showModalDialog.js'/>" ></script>
   <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
   <script src="/resources/js/common/modaless/messageReportModal.js"></script>
 </body>
