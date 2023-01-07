@@ -68,81 +68,65 @@ public class FreeLancerController {
 
 			return "member/freelancer/freelancerInfo";
 		}
+		
+
 		// 전문가 정보 수정 페이지로 이동
 		@GetMapping("/member/freelancer/updateFreelancerInfo")
 		public String updateFreelancerInfo(Model model, 
 				@SessionAttribute("loginMember") Member loginMember) {
-			
-			Freelancer inputFreelancer = new Freelancer();
-			inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 회원번호 세팅
-			
-//			Freelancer freelancer = service.freelancerInfo(loginMember.getMemberNo());
-//			model.addAttribute("freelancer", freelancer); 
-//			
-//			List<Region> regionList = service.getRegionList();
-//			model.addAttribute("regionList", regionList);
-//			
-//			List<Bank> bankList = service.getBankList();
-//			model.addAttribute("bankList", bankList);
-			
+	
 			Freelancer1  freelancer1 = service.freelancerInfo1(loginMember.getMemberNo());
 			model.addAttribute("freelancer1",freelancer1);
 			
 			return "/member/freelancer/updateFreelancerInfo";
 		}
 		
-//		// 전문가 정보 수정 페이지 -> 수정
+		// 전문가 정보 수정 페이지 -> 수정
 		@PostMapping("/member/freelancer/updateFreelancerInfo")
-		public String updateFreelancerInfo(Model model,
-				Freelancer inputFreelancer, // input 값
-				@SessionAttribute("loginMember") Member loginMember,
-				String career, String license, 
+		public String updateFreelancerInfo(@SessionAttribute("loginMember") Member loginMember,//회원번호 == 프리랜서번호
+				String major, // major input태그에 적힌 값들
+				String career,
+				String license,
+				Freelancer inputFreelancer,
+				String[] freelancerField , RedirectAttributes ra,
+				@RequestHeader(value="referer") String referer,
 				int bankCode,
-				String bankAccountNumber,
-				RedirectAttributes ra) {
+				String bankAccountNumber, Model model) {
 			String message = null;
+			String path=null;
 			int result = 0;
 
 			inputFreelancer.setFreelancerNo(loginMember.getMemberNo()); // 회원번호 세팅
 			inputFreelancer.setCareer(career);
 			inputFreelancer.setLicense(license);
+			inputFreelancer.setMajor(major);
 			
-			List<Field> fieldList = service.getFieldList(inputFreelancer);
-			model.addAttribute("fieldList", fieldList);
 			
-//			if(!inputFreelancer.getFreelancerField().equals(fieldList))
-			
-			List<Region> regionList = service.getRegionList();
-			model.addAttribute("regionList", regionList);
-			
-			List<Bank> bankList = service.getBankList();
-			model.addAttribute("bankList", bankList);
-
 			inputFreelancer.setBankCode(bankCode);
 			Long num = Long.parseLong(bankAccountNumber); // int자료형길이 초과 10자 -> long
 			inputFreelancer.setBankAccountNumber(num);
 			
 			result = service.updateFreelancerInfo(inputFreelancer);
+			model.addAttribute("freelancer1",inputFreelancer);
 
 			if(result>0) {
+				path="/member/freelancer/freelancerInfo";
 				message="수정완료";
-				
-				
-				
 			}else {
+				path=referer;
 				message="수정실패";
 			}
 			ra.addFlashAttribute("message", message);
 			
-			return "redirect:/member/freelancer/freelancerInfo";
+			return "redirect:"+path;
 		}
+	
 		
 		@PostMapping("/member/freelancer/enrollFreelancerSignUp")
 		public String enrollFreelancerSignup(@SessionAttribute("loginMember") Member loginMember,//회원번호 == 프리랜서번호
 				String major, // major input태그에 적힌 값들
 				String career,
 				String license,
-				
 				Freelancer inputFreelancer,
 				String[] freelancerField , RedirectAttributes ra,
 				@RequestHeader(value="referer") String referer,

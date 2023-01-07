@@ -24,7 +24,7 @@
         <section class="mainMenu">
             <div id="title">수정하기</div>
             
-            <form id="registerFrm" action="/member/freelancer/updateFreelancerInfo1" enctype="multipart/form-data" method="POST">
+            <form id="registerFrm" action="/member/freelancer/updateFreelancerInfo" enctype="multipart/form-data" method="POST">
                 <div>
                     <div class="itemTitle">
                         <div class="item">지역</div>
