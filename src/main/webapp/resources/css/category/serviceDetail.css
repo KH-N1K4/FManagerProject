@@ -21,6 +21,10 @@
     height: 420px;
     border:1px solid black;
 }
+.servicePhoto> img{
+    width: 480px;
+    height: 420px;
+}
 
 .serviceContent{
     position: absolute;
@@ -37,14 +41,14 @@
     display: flex;
     justify-content: space-between;
     width: 695px;
-    margin:20px 0;
+    margin:26px 0;
 }
 
 /* 전문가 정보 */
 
 .expertPage{
     width: 695px;
-    height: 210px;
+    height: 200px;
     border:1px solid black;
  
 }
@@ -161,17 +165,13 @@
         display: block;
       }
 
-      .modal_body {
+      .ask_modal_body {
         position: absolute;
         top: 50%;
         left: 50%;
 
-      /*   width: 400px;
-        height: 600px; */
-
         padding: 40px;
 
-       /*  text-align: center; */
 
         background-color: rgb(255, 255, 255);
         border-radius: 10px;
@@ -313,4 +313,75 @@ h3{
 
 .writeResponse{
 	display:flex;
+}
+
+/* 포트폴리오 */
+.portfolioTitle{
+    font-size: 20px;
+    margin:20px 0;
+}
+
+.portfolioSection{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.portfolioPhoto{
+    width: 200px;
+    height: 200px;
+    border:1px solid black;
+    margin-bottom: 30px;
+    margin-right: 30px;
+}
+
+/* 포트폴리오 모달 */
+.modal_body{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 400px;
+    height: 600px;
+
+    padding: 40px;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+    
+    z-index:100;
+}
+
+
+.modal_addPortfolio{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal_portfolioDetail{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hidden{
+	display:none;
 }

@@ -14,7 +14,7 @@
        </c:if>
      
       
-      <a class="myProject_User_side" href="/member/myInfo/sendSuggestion">내가 보낸 서비스 문의</a>
+      <a class="myProject_User_side" href="/member/myInfo/sendServiceInquiry">보낸 서비스 문의</a>
       <a class="myProject_User_side" href="/member/myInfo/likeList">찜한 목록</a>
       <a class="myProject_User_side" href="/member/myInfo/changePw">비밀번호 변경</a>
       <a class="myProject_User_side" href="/member/myInfo/deleteMember">회원 탈퇴</a>

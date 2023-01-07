@@ -38,9 +38,13 @@ public class Service {
 	private int freelancerNo;
 	private String likeCheckFL;
 	private int memberNo;
+	private int freeContactTime1;
+	private int freeContactTime2;
+	private int inquiryRate;
 	
 	private List<ImageFile> imageFileList;
 	private List<Review> reviewList;
+	private List<Portfolio> portfolioList;
 	
 	
 }

@@ -51,6 +51,8 @@
         const serviceNo="${param.serviceNo}";
         
         const memberEmail="${loginMember.memberEmail}"; 
+        const memberName="${loginMember.memberName}"; 
+        const memberTel="${loginMember.memberTel}"; 
 
      
     </script>	

@@ -91,10 +91,10 @@
 			<result property="projectWorkDate" column="REQUEST_WORK_DATE"/>										<!-- 프로젝트 작업 마감일 -->
 			<result property="projectWorkPeriod" column="PROJECT_WORK_PERIOD "/>							<!-- 프로젝트 작업기간 -->
 			<result property="projectCreateDate" column="PROJECT_REQUEST_CREATE_DATE"/>				<!-- 프로젝트 의뢰 등록일 -->
-			<result property="mainCategotyNo" column="MAIN_CATEGORY_NO"/>											<!-- 카테고리1 번호(FK) -->
-			<result property="mainCategotyName" column="MAIN_CATEGORY_NAME"/>											<!-- 카테고리1 번호(FK) -->
-			<result property="thirdCategotyNo" column="THIRD_CATEGORY_NO"/>										<!-- 카테고리3 번호(FK) -->
-			<result property="thirdCategotyName" column="THIRD_CATEGORY_NAME"/>										<!-- 카테고리3 번호(FK) -->
+			<result property="mainCategoryNo" column="MAIN_CATEGORY_NO"/>											<!-- 카테고리1 번호(FK) -->
+			<result property="mainCategoryName" column="MAIN_CATEGORY_NAME"/>											<!-- 카테고리1 번호(FK) -->
+			<result property="thirdCategoryNo" column="THIRD_CATEGORY_NO"/>										<!-- 카테고리3 번호(FK) -->
+			<result property="thirdCategoryName" column="THIRD_CATEGORY_NAME"/>										<!-- 카테고리3 번호(FK) -->
 			<result property="projectRequestfile" column="REQUEST_FILE_PATH"/>										<!-- 이미지 경로 -->
 			
 			<result property="clientNo" column="MEMBER_NO"/>																					<!-- 회원 번호(FK)-의뢰인 회원번호 -->

@@ -43,7 +43,7 @@ public interface CategoryService {
 	Map selectBoardList(Map<String, Integer> map);
 	
 	// 메인 전체 조회
-	Map serviceList(Map<String, Integer> map);
+	Map<String, Object> mainServiceList(Map<String, Integer> map);
 
 	// 거래 완료 ajax
 	int tradeComplete(Trade temp);
@@ -53,6 +53,10 @@ public interface CategoryService {
 	
 	// 리뷰 신고 ajax
 	int reportReview(int reviewNo);
+
+	int writeComment(Map<String, Object> map);
+
+	int selectSaleCount(int freelancerNo);
 	
 
 }

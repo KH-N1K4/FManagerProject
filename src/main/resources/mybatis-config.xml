@@ -73,6 +73,8 @@
 		
 		<typeAlias type="com.manager.freelancer.common.message.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.manager.freelancer.common.message.model.vo.ChattingRoom" alias="ChattingRoom"/>
+		<typeAlias type="com.manager.freelancer.common.message.model.vo.MemberReport" alias="MemberReport2"/>
+		<typeAlias type="com.manager.freelancer.common.message.model.vo.MemberReportFile" alias="MemberReportFile2"/>
 
 	</typeAliases>
 	

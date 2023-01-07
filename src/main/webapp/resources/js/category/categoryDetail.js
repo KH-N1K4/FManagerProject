@@ -88,3 +88,30 @@ for(let report of reportReview){
         }
     })
 }
+
+
+const writeComment=document.getElementsByClassName("writeComment");
+
+for(let comment of writeComment){
+    comment.addEventListener("click",()=>{
+        
+        $.ajax({
+            url:"/writeComment",
+            data:{"reviewNo":comment.id,
+            "reviewContent":comment.parentElement.children[0].value
+            },
+            type:"GET",
+            success:(result)=>{ 
+                if(result>0){ // 성공
+                    comment.parentElement.parentElement.innerHTML
+                    ='<div> <span class="freelancerName">프리랜서 이름 </span></div>'
+                    +'<div class="responseContent">'+comment.parentElement.children[0].value+'</div>'
+                    alert("신고가 접수되었습니다.")
+                }else{ // 실패 
+                    console.log("댓글 달기 실패");
+                }
+            },error:()=>{console.log("댓글 달기 에러");}
+        });
+        
+    })
+}

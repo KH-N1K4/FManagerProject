@@ -57,35 +57,40 @@ modalClose.addEventListener('click', () => {
   }
 });
 
+
+if(document.getElementById('stopBtn') != null){
 /* 의뢰중지 */
-document.getElementById('stopBtn').addEventListener("click", function () {
-  document.getElementById('layerStopRequest').style.display = 'block';
-});
+    document.getElementById('stopBtn').addEventListener("click", function () {
+      document.getElementById('layerStopRequest').style.display = 'block';
+    });
 
-$(".layerStopRequestBtn").click(function() {
-  $.ajax({
-        
-    url: "/requestStopSubmit",
-    data: { 
-      "requestNO"  : requestNoVar
-    },
-    type: "POST", 
-    dataType: "JSON", // 응답 데이터의 형식이 JSON이다. -> 자동으로 JS 객체로 변환
-    success: (result) => {
-        if(result == "내 의뢰 내리기가 완료되었습니다."){
-          alert(result);
-          location.href ="/projectRequest/requestList/0/0/0";
-        }
-    },
-    error: () => {
-        console.log("내 의뢰 내리기 실패")
-    }
+}
+
+if(document.getElementById('layerStopRequest') != null){
+  $(".layerStopRequestBtn").click(function() {
+    $.ajax({
+          
+      url: "/requestStopSubmit",
+      data: { 
+        "requestNO"  : requestNoVar
+      },
+      type: "POST", 
+      dataType: "JSON", // 응답 데이터의 형식이 JSON이다. -> 자동으로 JS 객체로 변환
+      success: (result) => {
+          if(result == "내 의뢰 내리기가 완료되었습니다."){
+            alert(result);
+            location.href ="/projectRequest/requestList/0/0/0";
+          }
+      },
+      error: () => {
+          console.log("내 의뢰 내리기 실패")
+      }
 
 
+    });
   });
-});
 
-$("._hideLayer").click(function() {
-  document.getElementById("layerStopRequest").style.display = "none";
-});
-
+  $("._hideLayer").click(function() {
+    document.getElementById("layerStopRequest").style.display = "none";
+  });
+}

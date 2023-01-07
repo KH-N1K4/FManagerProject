@@ -192,7 +192,7 @@ function category(map){
     const li2 = document.createElement("li");
     const a2 = document.createElement("a");
   //   a2.setAttribute("href", "/manager/memberList?cp=" + map.pagination.prevPage+"&value="+value);
-    a2.setAttribute("href", "/manager/memberList?cp=" + map.pagination.prevPage);
+    a2.setAttribute("href", "?cp=" + map.pagination.prevPage);
     a2.appendChild(document.createTextNode("<"));
     li2.append(a2);
     pagination.append(li2);
@@ -210,7 +210,7 @@ function category(map){
         } else {
             const a3 = document.createElement("a");
           //   a3.setAttribute("href", "/manager/memberList?cp=" + i+"&value="+value);
-            a3.setAttribute("href", "/manager/memberList?cp=" + i);
+            a3.setAttribute("href", "?cp=" + i);
             a3.appendChild(document.createTextNode(i));
             li3.append(a3);
             pagination.append(li3);
@@ -220,7 +220,7 @@ function category(map){
     const li4 = document.createElement("li");
     const a4 = document.createElement("a");
   //   a4.setAttribute("href", "/manager/memberList?cp=" + map.pagination.nextPage+"&value="+value);
-    a4.setAttribute("href", "/manager/memberList?cp=" + map.pagination.nextPage);
+    a4.setAttribute("href", "?cp=" + map.pagination.nextPage);
     a4.appendChild(document.createTextNode(">"));
     li4.append(a4);
     pagination.append(li4);
@@ -228,7 +228,7 @@ function category(map){
     const li5 = document.createElement("li");
     const a5 = document.createElement("a");
   //   a5.setAttribute("href", "/manager/memberList?cp=" + map.pagination.maxPage+"&value="+value);
-    a5.setAttribute("href", "/manager/memberList?cp=" + map.pagination.maxPage);
+    a5.setAttribute("href", "?cp=" + map.pagination.maxPage);
     a5.appendChild(document.createTextNode(">>"));
     li5.append(a5);
     pagination.append(li5);

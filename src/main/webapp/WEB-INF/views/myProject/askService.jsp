@@ -4,8 +4,8 @@
 
     
 
-<div class="modal_body">
-    	<span class="modal_close">x</span>
+<div class="ask_modal_body">
+    	<span class="modal_close1">x</span>
    		<div id="askServiceMain">
 	        <form action="/askService" method="POST">
 	    

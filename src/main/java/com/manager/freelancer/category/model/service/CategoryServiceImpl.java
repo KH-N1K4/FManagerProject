@@ -38,7 +38,13 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public Service viewService(int serviceNo) {
-		return dao.viewService(serviceNo);
+		
+		Service result=dao.viewService(serviceNo);
+		
+		int rate=dao.selectInquiryRate(result.getFreelancerNo());
+		
+		result.setInquiryRate(rate);
+		return result;
 	}
 
 	@Override
@@ -92,7 +98,7 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public Map serviceList(Map<String, Integer> map) {
+	public Map<String, Object> mainServiceList(Map<String, Integer> map) {
 		
 		// 1. 특정 게시판의 전체 게시글 수 조회(단, 삭제 제외)
 		int listCount=dao.getListCount(map);
@@ -102,7 +108,7 @@ public class CategoryServiceImpl implements CategoryService{
 		Pagination pagination =new Pagination(listCount, map.get("cp"));
 		
 		// 3. 페이징 처리 객체를 이용해서 게시글 목록 조회
-		List<Service> serviceList=dao.serviceList(pagination,map);
+		List<Service> serviceList=dao.mainServiceList(pagination,map);
 		
 		Map<String, Object> resultMap=new HashMap<String, Object>();
 		resultMap.put("pagination", pagination);
@@ -155,6 +161,17 @@ public class CategoryServiceImpl implements CategoryService{
 		}
 		
 		return result;
+	}
+
+	@Override
+	public int writeComment(Map<String, Object> map) {
+		return dao.writeComment(map);
+	}
+
+	@Override
+	public int selectSaleCount(int freelancerNo) {
+		
+		return dao.selectSaleCount(freelancerNo);
 	}
 
 	

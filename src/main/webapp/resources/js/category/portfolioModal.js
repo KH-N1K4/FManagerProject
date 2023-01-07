@@ -4,8 +4,7 @@ const body2 = document.getElementsByClassName('modal_body')[1];
 const modalClose1 = document.getElementsByClassName('modal_close')[0];
 
 
-const modal = document.querySelector('.modal_portfolioDetail');
-const body = document.querySelector('body');
+const modal1 = document.querySelector('.modal_portfolioDetail');
 
 const clickPortfolio=document.getElementsByClassName("portfolioPhoto");
 
@@ -24,8 +23,8 @@ for(let portfolio of clickPortfolio){
         thumb.src=this.children[3].innerHTML;
         photo.src=this.children[4].innerHTML;
     
-        modal.classList.toggle('show');
-        modal.style.display= 'block';
+        modal1.classList.toggle('show');
+        modal1.style.display= 'block';
         body1.style.display ='block';
         body.style.overflow = 'hidden';
         
@@ -35,7 +34,7 @@ for(let portfolio of clickPortfolio){
     
     modalClose1.addEventListener('click', ()=>{
     
-        modal.style.display ='none';
+        modal1.style.display ='none';
         body.style.overflow='visible';
     })
 
