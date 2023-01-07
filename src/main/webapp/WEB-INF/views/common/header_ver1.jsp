@@ -14,6 +14,7 @@
                 <input type="text" placeholder="서비스명를 입력하세요" id="search-input">
 
                 <span>▾</span>
+                <div id="suggestion_box"></div>
             </div>
 
 
