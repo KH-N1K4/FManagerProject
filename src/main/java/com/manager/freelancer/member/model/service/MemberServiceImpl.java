@@ -17,6 +17,7 @@ import com.manager.freelancer.member.model.dao.MemberDAO;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.member.model.vo.Pagination;
 import com.manager.freelancer.member.model.vo.Util;
+import com.manager.freelancer.myProject.model.vo.MyProjectPayment;
 
 
 @Service
@@ -224,11 +225,20 @@ public class MemberServiceImpl implements MemberService{
 		}
 
 
-
+		// 보낸 서비스 문의 내역 
 		@Override
-		public List<AskService> selectSendSuggestion(int memberNo) {
+		public Map<String, Object> selectSendServiceInquiry(Map<String, Object> option, int cp) {
 			
-			return dao.selectSendSuggestion(memberNo);
+			int listCount = dao.getServiceInquiryListCount(option);
+			Pagination pagination = new Pagination(listCount, cp);
+			List<AskService> serviceInquiryList = dao.selectServiceInquiryList(option, pagination);
+			
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("serviceInquiryList", serviceInquiryList);
+			resultMap.put("pagination", pagination);
+			
+			return resultMap;
+			
 		}
 
 

@@ -28,6 +28,21 @@
  		
  </resultMap>
  
+ <resultMap type="AskService" id="askService_rm">
+      <id property="serviceInquiryNo" column="SERVICE_INQUIRY_NO"/>
+      <result property="serviceInquiryContent" column="SERVICE_INQUIRY_CONTENT"/>
+      <result property="serviceInquiryCreateDate" column="SERVICE_INQUIRY_CREATE_DATE"/>
+      <result property="memberNo" column="MEMBER_NO"/>
+      <result property="serviceNo" column="SERVICE_NO"/>
+      <result property="serviceTitle" column="SERVICE_TITLE"/>
+      <result property="serviceSummary" column="SERVICE_SUMMARY"/>
+      <result property="requestFilePath" column="REQUEST_FILE_PATH" />		<!-- 서비스 작업 일수 -->
+   </resultMap>
+ 
+ 
+ 
+ 
+ 
  	<!-- 회원가입 -->
  	<insert id="signUp" parameterType="Member" >
  		<selectKey keyProperty="memberNo" resultType="_int" order="BEFORE">
@@ -116,6 +131,55 @@
  		WHERE MEMBER_NO=#{memberNo}
    </update>
    
+   <!-- 서비스 문의 수 -->
+   <select id="getServiceInquiryListCount" resultType="_int">
+   	SELECT COUNT(*)
+		FROM SERVICE_INQUIRY 
+		JOIN SERVICE USING(SERVICE_NO)
+		JOIN CATEGORY USING (THIRD_CATEGORY_NO)
+		JOIN SUB_CATEGORY USING (SUB_CATEGORY_NO)
+		JOIN MAIN_CATEGORY USING (MAIN_CATEGORY_NO)
+		WHERE MEMBER_NO=#{loginMemberNo}
+		<if test='type!=0'>
+		AND MAIN_CATEGORY_NO = #{type}
+	</if>
+	<if test='searchDate1 neq "" and searchDate2 neq ""' >
+		AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{searchDate1} AND #{searchDate2}
+	</if>
+	<if test="searchDate1 neq ''">
+		AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{searchDate1}
+	</if>
+	<if test="searchDate2 neq ''">
+		AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
+	</if>
+   </select>
+   
+   
+   
+   <!-- 서비스 문의 목록 -->
+   <select id="selectServiceInquiryList" resultMap="askService_rm">
+   	SELECT SERVICE_NO, MEMBER_NO,SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY, SERVICE_INQUIRY_NO,
+		 TO_CHAR(SERVICE_INQUIRY_CREATE_DATE, 'YYYY"-"MM"-"DD') SERVICE_INQUIRY_CREATE_DATE
+		FROM SERVICE_INQUIRY 
+		JOIN SERVICE USING(SERVICE_NO)
+		JOIN CATEGORY USING (THIRD_CATEGORY_NO)
+		JOIN SUB_CATEGORY USING (SUB_CATEGORY_NO)
+		JOIN MAIN_CATEGORY USING (MAIN_CATEGORY_NO)
+		WHERE MEMBER_NO=#{loginMemberNo}
+		<if test='type!=0'>
+		AND MAIN_CATEGORY_NO = #{type}
+	</if>
+	<if test='searchDate1 neq "" and searchDate2 neq ""' >
+		AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') BETWEEN #{searchDate1} AND #{searchDate2}
+	</if>
+	<if test="searchDate1 neq ''">
+		AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[>=]]> #{searchDate1}
+	</if>
+	<if test="searchDate2 neq ''">
+		AND TO_DATE(to_char(SERVICE_INQUIRY_CREATE_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
+	</if>
+		ORDER BY SERVICE_INQUIRY_CREATE_DATE DESC
+  </select>
    
    
   
