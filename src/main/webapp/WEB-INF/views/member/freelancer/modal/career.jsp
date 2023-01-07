@@ -8,31 +8,31 @@
     <div id="careerInputMain">
         
         <div>
-            <div class="item">회사명</div>
+            <div class="modal_item">회사명</div>
             <div>
                 <input type="text" name="careerCompanyName" id="careerCompanyName" class="input2">
             </div>
         </div>
         <div>
-            <div class="item">근무부서</div>
+            <div class="modal_item">근무부서</div>
             <div>
                 <input type="text" name="careerCompanyDepartment" id="careerDepartment" class="input2">
             </div>
         </div>
         <div>
-            <div class="item">직위</div>
+            <div class="modal_item">직위</div>
             <div>
                 <input type="text" name="careerCompanyPosition" id="careerPosition" class="input2">
             </div>
         </div>
         <div>
-            <div class="item">근무지</div>
+            <div class="modal_item">근무지</div>
             <div>
                 <input type="text" name="careerCompanyRegion" id="careerRegion" class="input2">
             </div>
         </div>
         <div>
-            <div class="item">근무기간</div>
+            <div class="modal_item">근무기간</div>
             <div>
                 <select name="careerCompanyPeriod1" id="careerCompanyPeriod1" class="input2">
                     <option value="-1">년</option>

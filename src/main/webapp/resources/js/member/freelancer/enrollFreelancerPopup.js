@@ -103,6 +103,8 @@ modalClose3.addEventListener('click', () => {
 // })
 
 //
+
+
 const result1 = document.getElementsByClassName('input1');
 const select1 = document.getElementById('graduateStatus');
 const majorInput1 = document.getElementById('majorPopup');
@@ -114,6 +116,19 @@ const sendContent1 = document.getElementById('sendContent1');
 
 // const allOptions = Array.from(select.options).map(option => option.value);
 
+const xBtn=document.getElementsByClassName("xbtn");
+
+if(xBtn!=null){
+  for(let single of xBtn){
+    single.addEventListener("click",function(){
+      // 클릭된 X버튼의 부모 요소(div.row)를 삭제 
+      // 요소.remove() : 해당 요소를 제거 
+      this.parentElement.remove();
+    
+    })
+  }
+}
+
 
 sendContent1.addEventListener('click',function(e) {
 
@@ -121,10 +136,15 @@ sendContent1.addEventListener('click',function(e) {
   if(result1[0].value.trim().length==0||result1[1].value.trim().length==0){
     alert("값을 모두 입력해주세요");
   }else{
-    const newOne=document.createElement("div");
-    newOne.classList.add("newOne");
+    if(document.getElementsByClassName("newOne")!=null){
+      newOne=document.createElement("div");
+      newOne.classList.add("newOne");
+    }else{
+      newOne=document.getElementsByClassName("newOne")[0];
+    }
   
      const newText=document.createElement("input");
+     newText.readOnly=true;
      const xBtn=document.createElement("span");
      xBtn.classList.add("xbtn");
      xBtn.innerHTML="&times;";
@@ -175,6 +195,7 @@ sendContent2.addEventListener('click',function() {
       newOne.classList.add("newOne");
       
       const newText=document.createElement("input");
+      newText.readOnly=true;
       const xBtn=document.createElement("span");
       xBtn.classList.add("xbtn");
       xBtn.innerHTML="&times;";
@@ -235,6 +256,7 @@ sendContent3.addEventListener("click", function(){
       newOne.classList.add("newOne");
     
        const newText=document.createElement("input");
+       newText.readOnly=true;
        const xBtn=document.createElement("span");
        xBtn.classList.add("xbtn");
        xBtn.innerHTML="&times;";
@@ -276,6 +298,8 @@ const checkObj={"area":false,
 
 
   const freelancerField=document.getElementsByName("freelancerField");
+  const area=document.getElementById("area");
+  const bankCode=document.getElementById("bankCode");
   document.getElementById("registerFrm").addEventListener("submit",function(event){
 
 
@@ -286,6 +310,26 @@ const checkObj={"area":false,
         }else{
           checkObj.freelancerField=false;
         }
+    }
+
+    if(area.value>0){
+      checkObj.area=true;
+    }
+    if(bankCode.value>0){
+      checkObj.bankCode=true;
+    }
+     // 문자가 입력되지 않은 경우 
+     if(bankAccountNumber.value.trim().length==0){
+      checkObj.bankAccountNumber=false;
+      return;
+  }
+
+    const regEx=/^\d{12,14}$/;
+
+    if(regEx.test(bankAccountNumber.value)){ // 유효한 경우
+        checkObj.bankAccountNumber=true;
+    }else{
+        checkObj.bankAccountNumber=false;
     }
 
 
@@ -313,41 +357,40 @@ const checkObj={"area":false,
 
 })
 
-const area=document.getElementById("area");
-
-area.addEventListener("change",()=>{
-  if(area.value==0){
-    checkObj.area=false;
-  }else{
-    checkObj.area=true;
-  }
-});
 
 
-const bankCode=document.getElementById("bankCode");
+// area.addEventListener("change",()=>{
+//   if(area.value==0){
+//     checkObj.area=false;
+//   }else{
+//     checkObj.area=true;
+//   }
+// });
+
+
+
 const bankAccountNumber=document.getElementById("bankAccountNumber");
 
-bankCode.addEventListener("change",()=>{
-  if(bankCode.value==0){
-    checkObj.bankCode=false;
-  }else{
-    checkObj.bankCode=true;
-  }
-});
+// bankCode.addEventListener("change",()=>{
+//   if(bankCode.value==0){
+//     checkObj.bankCode=false;
+//   }else{
+//     checkObj.bankCode=true;
+//   }
+// });
 
-bankAccountNumber.addEventListener("keydown",function(){
-    // 문자가 입력되지 않은 경우 
-    if(bankAccountNumber.value.trim().length==0){
-        checkObj.bankAccountNumber=false;
-        return;
-    }
+// bankAccountNumber.addEventListener("keydown",function(){
+//     // 문자가 입력되지 않은 경우 
+//     if(bankAccountNumber.value.trim().length==0){
+//         checkObj.bankAccountNumber=false;
+//         return;
+//     }
 
-    // 전화번호 정규 표현식 검사
-    const regEx=/^\d{12,14}$/;
+//     const regEx=/^\d{12,14}$/;
 
-    if(regEx.test(bankAccountNumber.value)){ // 유효한 경우
-        checkObj.bankAccountNumber=true;
-    }else{
-        checkObj.bankAccountNumber=false;
-    }
-});
+//     if(regEx.test(bankAccountNumber.value)){ // 유효한 경우
+//         checkObj.bankAccountNumber=true;
+//     }else{
+//         checkObj.bankAccountNumber=false;
+//     }
+// });

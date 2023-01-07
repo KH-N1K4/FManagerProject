@@ -48,6 +48,8 @@ public class Freelancer1 {
 	private String license; // input값전체 받을 부분
 	
 	
+	
+	private int freelancerCont;
 	//프리랜서 전문분야
 
 	private List<Portfolio> portfolioList;
