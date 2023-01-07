@@ -140,6 +140,22 @@ public class FreeLancerDAO {
 		return sqlSession.delete("freelancerMapper.DeletePortfolio",map);
 	}
 
+	public int deleteMajor(int freelancerNo) {
+		return sqlSession.delete("freelancerMapper.deleteMajor",freelancerNo);
+	}
+
+	public int deleteLicense(int freelancerNo) {
+		return sqlSession.delete("freelancerMapper.deleteLicense",freelancerNo);
+	}
+
+	public int deleteCareer(int freelancerNo) {
+		return sqlSession.delete("freelancerMapper.deleteCareer",freelancerNo);
+	}
+
+	public int deleteField(int freelancerNo) {
+		return sqlSession.delete("freelancerMapper.deleteField",freelancerNo);
+	}
+
 	
 
 

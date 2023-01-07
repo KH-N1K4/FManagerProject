@@ -1,7 +1,7 @@
 const body1 = document.getElementsByClassName('modal_body')[0];
 const body2 = document.getElementsByClassName('modal_body')[1];
 
-const modalClose1 = document.getElementsByClassName('modal_close')[0];
+const modalClose1 = document.getElementsByClassName('modal_close2')[0];
 
 
 const modal1 = document.querySelector('.modal_portfolioDetail');
