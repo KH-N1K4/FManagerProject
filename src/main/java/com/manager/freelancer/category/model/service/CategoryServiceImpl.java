@@ -38,7 +38,13 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public Service viewService(int serviceNo) {
-		return dao.viewService(serviceNo);
+		
+		Service result=dao.viewService(serviceNo);
+		
+		int rate=dao.selectInquiryRate(result.getFreelancerNo());
+		
+		result.setInquiryRate(rate);
+		return result;
 	}
 
 	@Override
