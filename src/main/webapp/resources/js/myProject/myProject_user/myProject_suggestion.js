@@ -313,12 +313,12 @@ function iamport() {
         //m_redirect_url : 'http://www.naver.com'
     }, function (rsp) {
         if (rsp.success) {
-
+            
+            console.log(inputRequest);
             //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
             $.ajax({
-                url: "/service/payComplete/", //cross-domain error가 발생하지 않도록 주의해주세요
+                url: "/service/payComplete/test"+proposalNo, //cross-domain error가 발생하지 않도록 주의해주세요
                 type: 'POST',
-                dataType: 'json',
                 data: {
                     imp_uid: rsp.imp_uid,
                     "projectRequestTitle": projectRequestTitle,

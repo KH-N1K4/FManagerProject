@@ -42,7 +42,12 @@
 		<result property="gradeNo" column="GRADE_NO" />                                         <!-- 프리랜서 등급 -->
 		<result property="gradeName" column="GRADE_NAME" />                                     <!-- 프리랜서 등급명 -->
 		
-  	</resultMap>
+		<!-- 서비스 번호 -->  
+		<result property="serviceNo" column="SERVICE_NO" />                                      <!-- 서비스 번호 -->
+		
+		<!-- 거래 번호 -->
+		<result property="tradeNo" column="TRADE_NO" />                                          <!-- 거래 번호 -->
+  	</resultMap> 
   	
   	<!-- 메인 카테고리 들고오기 -->
   	<select id="selectmaincategoryList" resultMap="myProject_rm">
@@ -315,6 +320,63 @@
 				ORDER BY PROJECT_PROPOSAL_NO DESC 
 			</if>
   	</select>
+  	
+  	<!-- 1번 서비스 테이블 INSERT -->
+  	<insert id="serviceInsert">
+  		<selectKey keyProperty="serviceNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_SERVICE_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	  	INSERT INTO SERVICE 
+		VALUES(#{serviceNo}, #{projectRequestTitle}, #{projectRequestSummary}, 
+		       #{projectRequestContent}, #{proposalPrice}, #{proposalEditNum}, 
+	           #{projectWorkPeriod}, 5, #{projectCreateDate}, #{thirdCategoryNo}, 
+	           #{freelancerNo}, DEFAULT)
+  	</insert>
+  	
+  	<!-- 2번 거래 테이블 INSERT -->
+  	<insert id="tradeInsert">
+  		<selectKey keyProperty="tradeNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_TRADE_NO.NEXTVAL FROM DUAL
+		</selectKey>
+	  	INSERT INTO TRADE
+		VALUES(#{tradeNo}, DEFAULT, DEFAULT, #{serviceNo}, #{memberNo},#{tradeRequest})
+  	</insert>
+  	
+  	<!-- 3번 정산 테이블 INSERT -->
+  	<insert id="settlementInsert">
+  		INSERT INTO SETTLEMENT 
+		VALUES(SEQ_SETTLEMENT_NO.NEXTVAL, 1, #{memberNo}, 1, SYSDATE, #{proposalPrice}, #{tradeNo})
+  	</insert>
+  	
+  	<!-- 4번 프로젝트 의뢰 상태 모집 마감 -->
+  	<update id="requestStatusChange">
+  		UPDATE PROJECT_REQUEST SET
+		PROJECT_REQUEST_STATUS = 4
+		WHERE PROJECT_REQUEST_NO = #{projectRequestNo}
+  	</update>
+  	
+  	<!-- 5번 채택된 제안을 채택으로 변경 -->
+  	<update id="proposalStatusChange">
+  		UPDATE PROJECT_PROPOSAL 
+		SET PROPOSAL_ADOPT_STATUS = 2 
+		WHERE PROJECT_PROPOSAL_NO = #{proposalNo}
+  	</update>
+  	
+  	<!-- 6번 채택되지 않은 제안들 모집 마감으로 변경 -->
+  	<update id="proposalStatusChange_adopt">
+  		UPDATE PROJECT_PROPOSAL 
+		SET PROPOSAL_ADOPT_STATUS = 3
+		WHERE PROJECT_PROPOSAL_NO 
+		IN(SELECT PROJECT_PROPOSAL_NO
+		   FROM PROJECT_PROPOSAL
+		   JOIN PROJECT_REQUEST USING(PROJECT_REQUEST_NO)
+		   WHERE PROPOSAL_ADOPT_STATUS = 1
+		   AND PROJECT_REQUEST_NO = #{projectRequestNo})
+  	</update>
+  	
+  	
+  	
+  	
 	
   	
 </mapper>
