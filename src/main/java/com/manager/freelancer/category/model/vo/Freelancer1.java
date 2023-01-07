@@ -37,6 +37,7 @@ public class Freelancer1 {
 	private long bankAccountNo;
 	private String bankName;
 	
+	private int saleCount;
 	//학력 전공부분
 	private String major; // input값 전체 받을 부분
 	

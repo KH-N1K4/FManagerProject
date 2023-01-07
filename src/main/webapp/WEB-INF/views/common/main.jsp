@@ -20,7 +20,6 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
         
-        
     <section class="content">
         <div class="mainArea">
 

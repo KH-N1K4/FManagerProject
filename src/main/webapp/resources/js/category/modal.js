@@ -1,6 +1,6 @@
  const body = document.querySelector('body');
       const modal = document.querySelector('.modal');
-      const modalClose = document.querySelector('.modal_close');
+      const modalClose = document.querySelector('.modal_close1');
       const btnOpenPopup = document.querySelector('#askService');
 
 

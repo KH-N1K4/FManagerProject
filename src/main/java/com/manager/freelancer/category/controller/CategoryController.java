@@ -39,19 +39,14 @@ public class CategoryController {
 			@SessionAttribute(value="loginMember",required=false) Member loginMember) {
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
-
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		map.put("cp", cp);
 		if(loginMember!=null) {
 			map.put("memberNo", loginMember.getMemberNo());
 		}
 		
-		Map<String, Object> resultMap=service.serviceList(map);
-		
-		if(loginMember!=null) {
-			
-			model.addAttribute("memberNo", loginMember.getMemberNo());
-		}
-		
+		resultMap=service.mainServiceList(map);
+
 		model.addAttribute("resultMap", resultMap);
 		
 		return "common/main";
@@ -368,6 +363,10 @@ public class CategoryController {
 		
 		Freelancer1 freelancer =service.freelancerDetail(freelancerNo);
 		
+		int saleCount=service.selectSaleCount(freelancerNo);
+		
+		freelancer.setSaleCount(saleCount);
+		
 		System.out.println(freelancer);
 		
 		model.addAttribute("freelancer",freelancer);
@@ -381,6 +380,18 @@ public class CategoryController {
 	private int reportReview(@RequestParam int reviewNo) {
 		
 		return service.reportReview(reviewNo);
+		
+	}
+	@GetMapping("/writeComment")
+	@ResponseBody
+	private int writeComment(@RequestParam int reviewNo,@RequestParam String reviewContent) {
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		
+		map.put("reviewNo",reviewNo);
+		map.put("reviewContent",reviewContent);
+		
+		return service.writeComment(map);
 		
 	}
 	
