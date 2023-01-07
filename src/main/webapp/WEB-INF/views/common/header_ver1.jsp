@@ -10,12 +10,16 @@
 
             <a id="logo" href="/"><img src="/resources/images/final_logo_color.png" alt=""></a>
 
+        <form action ="/searchService" class="SearchfrmMain" method="get" name="SearchfrmMain" id="SearchfrmMain">
             <div id="search">
-                <input type="text" placeholder="서비스명를 입력하세요" id="search-input">
+                
+                    <input type="text" placeholder="서비스명를 입력하세요" id="search-input" name="searchInput">
 
-                <span id="searchButton">▾</span>
-                <div id="suggestion_box"></div>
+                    <span id="searchButton">▾</span>
+                    <div id="suggestion_box" style="display: none;"></div>
+                
             </div>
+        </form>
 
 
             <div class="header-top">

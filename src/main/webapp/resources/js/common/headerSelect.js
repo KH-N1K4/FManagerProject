@@ -9,16 +9,21 @@ function closeKeywords() {
 //$(function() {   // <input>요소에 문자가 입력될 때마다 호출됨.
 
   $("#search-input").keyup(function(e) {
-
+    
     if(e.key === "Escape") {
       closeKeywords()
     }
 
-    if ($(this).val().replace(" ","") == "")
+    if ($(this).val().trim() == "")
 		{
 			document.getElementById("suggestion_box").style.display="none";
 			return;
 		}
+
+    if(e.keyCode==13){
+      document.forms["SearchfrmMain"].submit();
+    }
+
     const selectedKeyword = keywords.querySelector("div.selected");
     if((e.key === "ArrowUp" || e.key === "ArrowDown") && keywords.style.display === "block") {
       let target
@@ -97,4 +102,10 @@ keywords.addEventListener("click", e => {
   
 })
 
+
+document.getElementById('searchButton').addEventListener('click', () => {
+
+
+  document.forms["SearchfrmMain"].submit();
+});
 
