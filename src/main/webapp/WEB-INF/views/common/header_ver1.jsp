@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 
  <link rel="stylesheet" href="/resources/css/common/header_ver1.css">
+ <link rel="stylesheet" href="/resources/css/common/headerSelect.css">
     
 <div id="header">
         <div id="header1">
@@ -9,7 +11,7 @@
             <a id="logo" href="/"><img src="/resources/images/final_logo_color.png" alt=""></a>
 
             <div id="search">
-                <input type="text" placeholder="검색어를 입력하세요" id="search-input">
+                <input type="text" placeholder="서비스명를 입력하세요" id="search-input">
 
                 <span>▾</span>
             </div>
@@ -96,3 +98,4 @@
     </div>
     
     <script src="/resources/js/common/logout.js"></script>
+    <script src="/resources/js/common/headerSelect.js"></script>

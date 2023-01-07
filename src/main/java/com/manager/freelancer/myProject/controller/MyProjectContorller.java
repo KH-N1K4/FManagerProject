@@ -167,10 +167,10 @@ public class MyProjectContorller {
 	
 	
 	// 프로젝트 채택 및 결제 후 결제완료 페이지 이동 ajax
-	@PostMapping("/service/payComplete/{proposalNo}")
+	@PostMapping("/service/payComplete/test{proposalNo}")
 	@ResponseBody
 	public int selectionPay(Model model, @SessionAttribute(value="loginMember", required = false) Member loginMember,
-							   @RequestParam String inputRequest, @RequestParam String projectRequestTitle,
+							   @RequestParam(value="inputRequest", required = false ,defaultValue = "") String inputRequest, @RequestParam String projectRequestTitle,
                                @RequestParam String freelancerName,@RequestParam String projectWorkPeriod,
                                @RequestParam int proposalPrice, @RequestParam String projectRequestStatus,
                                @RequestParam int proposalEditNum,@RequestParam int freelancerNo,
@@ -180,6 +180,7 @@ public class MyProjectContorller {
                                MyProject myProject) {
 		
 		
+		myProject.setMemberNo(loginMember.getMemberNo());
 		myProject.setProjectRequestTitle(projectRequestTitle);
 		myProject.setProjectRequestSummary(projectRequestSummary);
 		myProject.setFreelancerName(freelancerName);
@@ -198,6 +199,7 @@ public class MyProjectContorller {
 		
 		int tradeNo = service.completeSuggetionPay(myProject);
 		
+		System.out.println(tradeNo);
 		
 		return tradeNo;
 	}
