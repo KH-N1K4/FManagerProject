@@ -85,7 +85,7 @@ public class UserInquiryController {
 		
 		String message = null;
 		String path = null;
-		System.out.println("loginMember");
+		
 		if(loginMember != null) {
 			
 				if(pm.get("key")==null) {
@@ -97,7 +97,7 @@ public class UserInquiryController {
 				Map<String, Object> map = service.selectInquiryList(pm, cp);
 				model.addAttribute("map",map);
 			}
-			path="/customerCenter/inquiryList";
+			path="customerCenter/inquiryList";
 			
 			
 		} else {
@@ -106,9 +106,9 @@ public class UserInquiryController {
 			path="/member/login";
 		}
 		
-		ra.addFlashAttribute("message",message);
+		model.addAttribute("message",message);
 		
-		return "redirect:" + path;
+		return  path;
 	}
 	
 	

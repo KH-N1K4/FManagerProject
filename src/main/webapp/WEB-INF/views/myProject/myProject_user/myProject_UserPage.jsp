@@ -77,7 +77,9 @@
 			
 				                        <%-- 프로젝트 제목 --%>
 				                        <div class="info_title">
-				                          <a href="/projectRequest/projectRequestDetail/${myProject.projectRequestNo}"><span>${myProject.projectRequestTitle}</span></a>
+				                          <a href="/projectRequest/projectRequestDetail/${myProject.projectRequestNo}">
+                                    <span>${myProject.projectRequestTitle}</span>
+                                  </a>
 				                        </div>
 				                        <%-- 프로젝트 제목 --%>
 					
