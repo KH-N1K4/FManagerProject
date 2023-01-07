@@ -152,18 +152,47 @@ function category(map){
         //aTitle.href="/category/"+content.mainCategoryNo+"/"+content.subCategoryNo+"/"+content.thirdCategoryNo+"/"+content.serviceNo;
         aTitle.href="/service/"+content.serviceNo;
         aTitle.classList.add("imageTitle");
-        aTitle.innerHTML=content.serviceTitle;
+
+        const aa = document.createElement("span");
+        aa.classList.add("aaa");
+        aa.setAttribute("style","font-size:16px;");
+        aa.innerHTML=content.serviceTitle;
 
         const spanOthers=document.createElement("span");
         spanOthers.classList.add("imageOthers");
+        spanOthers.classList.add("aaa");
         spanOthers.innerHTML=content.serviceSummary;
-
+        
         const spanPrice=document.createElement("span");
         spanPrice.classList.add("imageOthers");
-        spanPrice.innerHTML="가격:"+content.servicePrice+"원";
+        spanPrice.setAttribute("style","margin-bottom:0px; text-align:end; font-size:16px;");
+        spanPrice.innerHTML=content.servicePriceString+" 원";
         
+        const reviewPoint=document.createElement("span");
+        reviewPoint.classList.add("imageOthers");
+        reviewPoint.classList.add("right");
+        const s1 = document.createElement("strong");
+        s1.innerHTML="평점"
+        const s2 = document.createElement("strong");
+        s2.append(document.createTextNode("★ "+ content.reviewPoint))
+        reviewPoint.innerHTML=s1+" "+s2;
+
+        const sellCount=document.createElement("span");
+        sellCount.classList.add("imageOthers");
+        sellCount.classList.add("right");
+        const s3 = document.createElement("strong");
+        s3.innerHTML="판매수"
+        const s4 = document.createElement("strong");
+        s4.innerHTML=content.sellCount+" 회";
+        sellCount.innerHTML=s3+" "+s4;
+
+
+
+        aTitle.append(aa);
         aTitle.append(spanOthers);
         aTitle.append(spanPrice);
+        aTitle.append(reviewPoint);
+        aTitle.append(sellCount);
 
         div.append(div1);
         div.append(aTitle);

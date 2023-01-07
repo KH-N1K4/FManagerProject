@@ -67,7 +67,7 @@ $("#listOrder").change(function(){
             span.innerText= item.projectRequestSummary;
             const span2 = document.createElement("span"); //a태그에 들어가는 span
             span2.classList.add("imageOthers"); 
-            span2.innerText = "가격: "+item.projectRequestBudgetString+"원";
+            span2.innerText = "예산: "+item.projectRequestBudgetString+"원";
             a.append(div4);
             a.append(span);
             a.append(span2);
