@@ -97,28 +97,38 @@ modalClose2.addEventListener('click', ()=>{
 /* 포트폴리오 삭제 */
 deletePortfolio();
 
-// function deletePortfolio(){
-//     const deleteBtn = document.querySelectorAll(".deleteBtn");
 
-//     for(d of deleteBtn){
-//         d.addEventListener('click', function(){
-//             if(confirm("정말로 삭제하시겠습니까?")){
-//                 console.log();
-//                 $.ajax({   
-//                     url : '/member/freelancer/deletePortfolio',
-//                     data: ,
-//                     type: 'GET',
-//                     success: (result) =>{
-//                         if(result >0){
-//                             alert="포트폴리오 삭제 성공";
-//                         }else{
-//                             alert="포트폴리오 삭제 실패";
-//                         }
-//                     }
-//                 });
-//             }
 
-//         });
+
+function deletePortfolio(){
+    const deleteBtn = document.querySelectorAll(".deleteBtn");
+
+    for(d of deleteBtn){
+        d.addEventListener('click', e => {
+            const pNo =  e.target.parentElement.nextElementSibling.innerText;
+            const fNo =  e.target.parentElement.nextElementSibling.nextElementSibling.innerText;
+            if(confirm("정말로 삭제하시겠습니까?")){
+                console.log(pNo);
+                console.log(fNo);
+                $.ajax({   
+                    url : '/member/freelancer/deletePortfolio',
+                    data: {pNo : pNo, fNo : fNo},
+                    type: 'GET',
+                    success: (result) =>{
+                        if(result >0){
+                            alert="포트폴리오 삭제 성공";
+                            location.reload();
+
+                        }else{
+                            alert="포트폴리오 삭제 실패";
+                        }
+                    }
+                });
+            } else{
+                return false;
+            }
+
+        });
     
-// }
-// }
+}
+}

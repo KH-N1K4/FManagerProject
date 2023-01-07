@@ -237,8 +237,7 @@ public class FreeLancerController {
 		// 포트폴리오 삭제
 		@GetMapping("/member/freelancer/deletePortfolio")
 		@ResponseBody
-		public int DeletePortfolio(@RequestParam int freelancerNo,
-				@RequestParam int portfolioNo, 
+		public int DeletePortfolio(@RequestParam("fNo") int freelancerNo, @RequestParam("pNo") int portfolioNo,
 				Freelancer1 freelancer1) {
 			System.out.println("d으악"+freelancer1.getFreelancerNo());
 			System.out.println("@@@"+freelancer1.getPortfolioList());

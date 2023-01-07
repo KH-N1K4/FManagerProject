@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- <c:set var="freelancerIntro" value="${freelancer.freelancerIntro}"/> --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="portfolioList" value="${freelancer1.portfolioList}"/>
-<c:set var="freelancerNo" value="${freelancer1.freelancerNo}"/>
+<%-- <c:set var="freelancerIntro" value="${freelancer.freelancerIntro}"/> --%>
+<%-- <c:set var="portfolioList" value="${freelancer1.portfolioList}"/>
+<c:set var="freelancerNo" value="${freelancer1.freelancerNo}"/> --%>
 
 
 <!DOCTYPE html>
@@ -153,13 +153,18 @@
                                 </span>
                                 
                             </a> --%>
+                         
+
                             <span class="service">
                                 <a>
                                     <div class="portfolioSection"> 
-                                        <input type="checkbox" id="portfolio-toggle" value="···">
+                                        <input type="checkbox" id="portfolio-toggle" >
                                         <div id="portfolio-menu">
+                                            <div>···</div>
                                             <div class= "update-portfolio"><a class="updateBtn">수정</a></div>
                                             <div class= "delete-portfolio"><a class="deleteBtn">삭제</a></div>
+                                            <span id="portfolioNo" class="hidden portfolioNo">${portfolio.portfolioNo}</span>
+                                            <span id="freelancerNo"class="hidden freelancerNo">${portfolio.freelancerNo}</span>
                                         </div>
                                         <img  style="width: 200px; height:200px; background-color:skyblue;" src="${portfolio.portfolioThumbnail}">
                                         <span class="portfolio-title-area" >${portfolio.portfolioTitle}</span>
@@ -168,7 +173,11 @@
                                         <span class="hidden">${portfolio.portfolioTitle }</span>      <%-- 4 --%>
 		            	                <span class="hidden">${portfolio.portfolioContent }</span>    <%-- 5 --%>
                                         <span class="hidden">${portfolio.portfolioThumbnail}</span>    <%-- 6 --%>
-		            	                <span class="hidden">${portfolio.portfolioFilePath }</span>    <%-- 7 --%>                              
+		            	                <span class="hidden">${portfolio.portfolioFilePath }</span>    <%-- 7 --%> 
+
+                                        <%-- ajax에서 사용할 용도 --%>
+                                        
+                                        <%-- ------------------- --%>                             
                                     </div>
                                 </a>
                             </span>
@@ -190,6 +199,8 @@
 
             </section>
     </div>
+    	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
     	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
         <script src="/resources/js/member/freelancer/freelancerInfo.js"></script> 

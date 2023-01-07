@@ -1,5 +1,6 @@
 package com.manager.freelancer.freelancer.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,7 +134,10 @@ public class FreeLancerDAO {
 
 	public int DeletePortfolio(Freelancer1 freelancer1, int freelancerNo, int portfolioNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("freelancerMapper.DeletePortfolio",freelancer1);
+		Map<String , Object> map = new HashMap<String, Object>();
+		map.put("freelancerNo", freelancerNo);
+		map.put("portfolioNo", portfolioNo);
+		return sqlSession.delete("freelancerMapper.DeletePortfolio",map);
 	}
 
 	
