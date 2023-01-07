@@ -2,6 +2,7 @@ package com.manager.freelancer.member.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -342,12 +343,27 @@ public class MemberController {
 	
 	
 	// 내가 보낸 제안 보기
-	@GetMapping("/member/myInfo/sendSuggestion")
-	public String sendSuggestion(@SessionAttribute("loginMember") Member loginMember, Model model) {
+	@GetMapping("/member/myInfo/sendServiceInquiry")
+	public String sendSuggestion(@SessionAttribute("loginMember") Member loginMember, Model model,
+			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
+			@RequestParam(value="type" , required = false, defaultValue = "0") int type,
+			@RequestParam(value="searchDate1" , required = false, defaultValue = "") String searchDate1,
+			@RequestParam(value="searchDate2" , required = false, defaultValue = "") String searchDate2) {
 		
-		List<AskService> askServiceList=service.selectSendSuggestion(loginMember.getMemberNo());
+		int loginMemberNo = loginMember.getMemberNo();
 		
-		model.addAttribute("askServiceList",askServiceList);
+		Map<String, Object> option = new HashMap<String, Object>();
+		option.put("loginMemberNo", loginMemberNo);
+		option.put("type", type);
+		option.put("searchDate1", searchDate1);
+		option.put("searchDate2", searchDate2);
+		
+		Map<String, Object> map =service.selectSendServiceInquiry(option,cp);
+		
+		model.addAttribute("map",map);
+		model.addAttribute("type", type);
+		model.addAttribute("searchDate1", searchDate1);
+		model.addAttribute("searchDate2", searchDate2);
 		
 		return "member/sendSuggestion";
 	}

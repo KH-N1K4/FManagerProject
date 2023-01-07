@@ -29,7 +29,7 @@ public interface MemberService {
 	// 비밀번호 변경
 	int changePw(Map<String, Object> paramMap);
 
-	List<AskService> selectSendSuggestion(int memberNo);
+	Map<String, Object> selectSendServiceInquiry(Map<String, Object> option, int cp);
 
 	AskService selectSendSuggesionContent(String serviceInquiryNo);
 

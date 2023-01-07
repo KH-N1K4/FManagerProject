@@ -1,0 +1,268 @@
+.main{
+	width:1200px;
+	margin:auto;
+	display:flex;
+}
+
+#service-list-title-area {
+    position: relative;
+    margin: 30px 0 0 0;
+    display: flex;
+    flex-direction: row;
+}
+#service-list-title {
+
+    display: inline-block;
+    font-weight: bold;
+    font-size: 30px;
+
+}
+
+
+.select-area{
+    width: 150px;
+    height: 30px;
+    vertical-align: middle;
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+.select-area-input{
+    width: 150px;
+    height: 35px;
+    position: absolute;
+    top: 4px;    
+}
+
+.search-area > select{
+    width: 150px;
+    height: 35px;
+    vertical-align: middle;
+}
+
+#searchFrm{
+    margin: 3px 0 40px 0;
+}
+
+.container_title > span{
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .container_title  input{
+    height: 30px;
+    width: 150px;
+    vertical-align: middle;
+  }
+  .container_title select{
+    width: 120px;
+    height: 34px;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-left: 50px;
+  }
+  
+  .container_title{
+    padding-right: 20px;
+  }
+  /* 검색 버튼 */
+.dateSearchBtn{
+	font-size: 15px;
+	background-color: #538126;
+	border: none;
+	color: white;
+	cursor: pointer;
+  width: 90px;
+  height: 35px;
+  font-size: 16px;
+  font-weight: normal;
+  text-align: center;
+  border-radius: 5px;
+}
+
+
+
+
+/* 테이블 컬럼 / 데이터값 */
+#service-list-table{
+	border-bottom:1px solid black;
+	margin-bottom: 50px;
+}
+#service-list-table > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 10px;
+   padding-left: 20px;
+    margin-bottom: 10px;
+
+}
+.service-list-table-column{
+    border-bottom: 1px solid black;
+    /* justify-content: center; */
+
+
+}
+
+/* 컬럼명들 */
+.service-num{
+    width: 40px;
+}
+.service-title{
+    width: 600px;
+}
+.service-status{
+    width: 100px;
+}
+.service-button{
+    width: 100px;
+    text-align: center;
+}
+.service-date{
+    width: 100px;
+}
+
+/* 테이블 값 부분 */
+.service-list-table-content{
+    padding: 10px 0;
+    height: 15px;
+}
+
+.service-button-value{
+    display: inline-block;
+    width: 90px;
+    height: 25px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    cursor:pointer;
+    margin-left: 10px;
+}
+
+.detailBtn{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.center{
+    justify-content: center;
+}
+
+/* pagination */
+.pagination {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	padding: 0;
+	margin-bottom: 50px;
+}
+
+.pagination li {
+	width: 20px;
+	margin: 0 5px;
+	text-align: center;
+}
+
+.pagination a {
+	display: block;
+	text-decoration: none;
+	color: black;
+	width: 100%;
+	height: 100%;
+}
+
+.current {
+	font-weight: bold;
+	background-color: black;
+	border-radius: 50%;
+	color: white !important;
+	letter-spacing: 0 !important;
+}
+
+
+/* 사이드메뉴 */
+.sideMenu{
+display: flex;
+margin: 20px 0;
+width: 300px;
+min-height: 100vh;
+align-self: flex-start;
+}
+.aside{
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+
+.aside a:hover{
+color: #538126;
+}
+
+.myProject_User_side{
+text-decoration: none;
+cursor: pointer;
+padding: 8px 20px;
+font-weight: bold;
+color: black;
+font-size: 20px;
+}
+
+/* 모달 */
+
+ .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        display: none;
+
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index:2;
+      }
+
+      .modal.show {
+        display: block;
+      }
+
+      .modal_body {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+      /*   width: 400px;
+        height: 600px; */
+
+        padding: 40px;
+
+       /*  text-align: center; */
+
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+        transform: translateX(-50%) translateY(-50%);
+        
+        z-index:100;
+      }
+      
+      
+      
+.modal_body>span{
+	position:absolute;
+	right:20px;
+	top:20px;
+	cursor:pointer;
+}
+
+#askService{
+	cursor:pointer;
+}
+
+
+
