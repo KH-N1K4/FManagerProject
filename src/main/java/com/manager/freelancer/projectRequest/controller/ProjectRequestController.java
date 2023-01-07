@@ -100,7 +100,7 @@ public class ProjectRequestController {
 		
 		myProjectFreelancer freelancerSalesCount = new myProjectFreelancer();
 		myProjectFreelancer freelancerInfo = new myProjectFreelancer();
-		if(loginMember != null) {
+		if(loginMember != null && loginMember.getFreelancerFL().equals("Y")) {
 			freelancerSalesCount =service.selectMyProjectGrade(loginMember.getMemberNo()); //판매 건수
 			freelancerInfo =service.selectFreelancerInfo(loginMember.getMemberNo()); //등급이랑 전문분야
 		}

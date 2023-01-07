@@ -115,9 +115,9 @@
     
     <resultMap  type="Major" id="major_rm">
     	  <id property="majorNo" column="MAJOR_NO"/>
-	      <result property="majorAcademyName" column="MAJOR_ACADEMY_NAME"/>
+	      <result property="majorAcademyName" column="ACADEMY_NAME"/>
 	      <result property="majorName" column="MAJOR_NAME"/>
-	      <result property="majorGraduateStatus" column="MAJOR_GRADUATE_STATUS"/>
+	      <result property="majorGraduateStatus" column="GRADUATE_STATUS"/>
     </resultMap>
     
     <resultMap  type="Portfolio" id="portfolio_rm">
@@ -126,6 +126,7 @@
 	      <result property="portfolioContent" column="PORTFOLIO_CONTENT"/>
 	      <result property="portfolioFilePath" column="PORTFOLIO_FILE_PATH"/>
 	      <result property="portfolioThumbnail" column="PORTFOLIO_THUMBNAIL"/>
+	      <result property="freelancerNo" column ="FREELANCER_NO"/>
     </resultMap>
     
     
@@ -351,6 +352,19 @@
     	</select>
     	
     	<delete id="DeletePortfolio">
-    			DELETE FROM PORTFOLIO WHERE FREELANCER_NO = #{freelancerNo]} AND PORTFOLIO_NO = #{portfolioNo};
+    			DELETE FROM PORTFOLIO WHERE FREELANCER_NO = #{freelancerNo} AND PORTFOLIO_NO = #{portfolioNo}
+    	</delete>
+    	
+    	<delete id="deleteCareer">
+    			DELETE FROM CAREER WHERE FREELANCER_NO = #{freelancerNo}
+    	</delete>
+    	<delete id="deleteLicense">
+    			DELETE FROM LICENSE WHERE FREELANCER_NO = #{freelancerNo}
+    	</delete>
+    	<delete id="deleteMajor">
+    			DELETE FROM MAJOR WHERE FREELANCER_NO = #{freelancerNo}
+    	</delete>
+    	<delete id="deleteField">
+    			DELETE FROM FIELD WHERE FREELANCER_NO = #{freelancerNo}
     	</delete>
 </mapper>
