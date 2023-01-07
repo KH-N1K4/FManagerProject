@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,7 +25,6 @@ import com.manager.freelancer.customerCenter.model.service.UserInquiryService;
 import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.member.model.vo.Member;
 
-@SessionAttributes({"loginMember"})
 @Controller
 public class UserInquiryController {
 	
@@ -36,10 +34,8 @@ public class UserInquiryController {
 	// 문의하기 페이지로 이동 
 	@GetMapping("/userInquiry")
 	public String userInquiry() {
-
 		return "customerCenter/customerInquiry";
 	}
-	
 	
 	
 	// 문의하기 작성
@@ -83,22 +79,36 @@ public class UserInquiryController {
 	
 	// 이용문의 내역으로 이동 및 조회
 	@GetMapping("/userInquiryList")
-	public String viewInquiryList(@SessionAttribute("loginMember") Member loginMember, Model model,
+	public String viewInquiryList(@SessionAttribute(value="loginMember",required=false) Member loginMember, Model model,
 								  @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
-								  @RequestParam Map<String,Object> pm) {
+								  @RequestParam Map<String,Object> pm, RedirectAttributes ra) {
 		
+		String message = null;
+		String path = null;
 		
-		if(pm.get("key")==null) {
+		if(loginMember != null) {
 			
-			Map<String, Object> map = service.selectInquiryList(loginMember.getMemberNo(), cp);
-			model.addAttribute("map",map);
+				if(pm.get("key")==null) {
+				
+				Map<String, Object> map = service.selectInquiryList(loginMember.getMemberNo(), cp);
+				model.addAttribute("map",map);
+			} else {
+				pm.put("memberNo", loginMember.getMemberNo());
+				Map<String, Object> map = service.selectInquiryList(pm, cp);
+				model.addAttribute("map",map);
+			}
+			path="customerCenter/inquiryList";
+			
+			
 		} else {
-			pm.put("memberNo", loginMember.getMemberNo());
-			Map<String, Object> map = service.selectInquiryList(pm, cp);
-			model.addAttribute("map",map);
+			
+			message = "로그인 후 이용바랍니다.";
+			path="/member/login";
 		}
 		
-		return "customerCenter/inquiryList";
+		model.addAttribute("message",message);
+		
+		return  path;
 	}
 	
 	

@@ -67,19 +67,21 @@
 	              <c:forEach items="${myProject}" var="myProject">
 		                  <div class="myProject_content">
 		                  
-			                      <%-- 서비스 사진 --%>
+			                      <%-- 프로젝트 사진 --%>
 			                      <div class="projuctContent_image">
 			                        <img  src="${myProject.requestFilePath}">
 			                      </div>
-			                      <%-- 서비스 사진 --%>
+			                      <%-- 프로젝트 사진 --%>
                             
 			                      <div class="projuctContent_info">
 			
-				                        <%-- 서비스 제목 --%>
+				                        <%-- 프로젝트 제목 --%>
 				                        <div class="info_title">
-				                          <a href=""><span>${myProject.projectRequestTitle}</span></a>
+				                          <a href="/projectRequest/projectRequestDetail/${myProject.projectRequestNo}">
+                                    <span>${myProject.projectRequestTitle}</span>
+                                  </a>
 				                        </div>
-				                        <%-- 서비스 제목 --%>
+				                        <%-- 프로젝트 제목 --%>
 					
 				                        <diV class="info_content">
 					                          <div class="info_content_left">
