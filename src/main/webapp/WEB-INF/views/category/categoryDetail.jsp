@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,7 +17,6 @@
 <body>
 
     <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
-    
 
        <div class="main">
         <div><a href="">${fService.mainCategoryName }</a>><a href="">${fService.thirdCategoryName }</a></div>
@@ -48,7 +49,7 @@
                 
                 <div class="serviceSummary" name="serviceSummary">${fService.serviceSummary }</div>
                 <div class="serviceInfo">
-                    <span>가격 <span name="servicePrice">${fService.servicePrice }</span>원</span>
+                    <span>가격 <span name="servicePrice"> <fmt:formatNumber value="${fService.servicePrice }" /></span>원</span>
                     <span>수정횟수 <span>${fService.serviceEditNum }</span>회</span>
                     <span>작업일수 <span>${fService.serviceWorkPeriod }</span>일</span>   
                 </div>
@@ -58,8 +59,8 @@
                     <div class="expertContent">
                         <div class="expertName"><a href="/service/freelancerDetail/${fService.freelancerNo}">${fService.memberName }</a></div>
                         <div class="responseInfo">
-                            <span>응답시간<span>00</span></span>
-                            <span>응답률<span>00</span></span>
+                            <span>응답시간<span>${fService.freeContactTime1 } ~ ${fService.freeContactTime2 }</span></span>
+                            <span>응답률<span>${fService.inquiryRate }</span></span>
                         </div>
                         
                         <c:if test="${loginMember.memberNo!=fService.freelancerNo }"> 
