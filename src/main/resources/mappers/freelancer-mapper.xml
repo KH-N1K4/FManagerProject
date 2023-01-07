@@ -126,6 +126,7 @@
 	      <result property="portfolioContent" column="PORTFOLIO_CONTENT"/>
 	      <result property="portfolioFilePath" column="PORTFOLIO_FILE_PATH"/>
 	      <result property="portfolioThumbnail" column="PORTFOLIO_THUMBNAIL"/>
+	      <result property="freelancerNo" column ="FREELANCER_NO"/>
     </resultMap>
     
     
@@ -351,6 +352,6 @@
     	</select>
     	
     	<delete id="DeletePortfolio">
-    			DELETE FROM PORTFOLIO WHERE FREELANCER_NO = #{freelancerNo]} AND PORTFOLIO_NO = #{portfolioNo};
+    			DELETE FROM PORTFOLIO WHERE FREELANCER_NO = #{freelancerNo} AND PORTFOLIO_NO = #{portfolioNo}
     	</delete>
 </mapper>
