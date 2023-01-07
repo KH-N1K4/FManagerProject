@@ -97,7 +97,7 @@ document.addEventListener("click", e => {
 })
 keywords.addEventListener("click", e => {
   // 요구사항 4 - 마우스로 추천 검색어를 누르면 커서가 위치한 검색어가 입력창에 반영되어야 합니다.
-  keyword.value = e.target.textContent
+  keyword.value = e.target.firstElementChild.textContent
 
   
 })
