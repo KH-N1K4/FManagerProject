@@ -21,6 +21,10 @@
     height: 420px;
     border:1px solid black;
 }
+.servicePhoto> img{
+    width: 480px;
+    height: 420px;
+}
 
 .serviceContent{
     position: absolute;
@@ -37,14 +41,14 @@
     display: flex;
     justify-content: space-between;
     width: 695px;
-    margin:20px 0;
+    margin:26px 0;
 }
 
 /* 전문가 정보 */
 
 .expertPage{
     width: 695px;
-    height: 210px;
+    height: 200px;
     border:1px solid black;
  
 }

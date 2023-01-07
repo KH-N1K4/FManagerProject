@@ -92,9 +92,14 @@ public class ProjectRequestServiceImpl implements ProjectRequestSerivce{
 	 */
 	@Override
 	public String requestStopSubmit(int requestNO) {
-		int result = dao.requestStopSubmit(requestNO);
+		int result0 = dao.requestStopSubmit(requestNO);
+		int result =0;
+		if(result0 >0) {
+			result = dao.requestStopStatus(requestNO);
+		}
 		String message = "";
-		if(result>0) {
+		if(result0>0) {
+			System.out.println(result);
 			message = "내 의뢰 내리기가 완료되었습니다.";
 		}else {
 			message = "내 의뢰 내리기가 실패했습니다.";

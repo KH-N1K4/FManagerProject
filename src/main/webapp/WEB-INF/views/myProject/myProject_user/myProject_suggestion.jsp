@@ -103,8 +103,9 @@
                                   <span class="text">${proposal.proposalAdoptStatus}</span>
                                 </td>
                                 <td class="tc">                           
-                                    <button id="chooseBtn" class="chooseBtn" title="${proposal.proposalNo}">채택</button>
-
+                                    <c:if test="${proposal.proposalAdoptStatus == '대기 중'}">
+                                      <button id="chooseBtn" class="chooseBtn" title="${proposal.proposalNo}">채택</button>
+                                    </c:if>
                                     <div class="hidden" id="projectRequestTitle${proposal.proposalNo}">${proposal.projectRequestTitle}</div>
                                     <div class="hidden" id="freelancerName${proposal.proposalNo}">${proposal.freelancerName}</div>
                                     <div class="hidden" id="projectWorkPeriod${proposal.proposalNo}">${proposal.projectWorkPeriod}</div>

@@ -181,5 +181,10 @@ public class ProjectRequestDAO {
 		map.put("budgetInt1",budgetInt1);
 		return sqlSession.selectOne("myProjectRequest.getProjectRequestListCount",map);
 	}
+
+	public int requestStopStatus(int requestNO) {
+		return sqlSession.update("myProjectRequest.requestStopStatus",requestNO);
+		
+	}
 	
 }

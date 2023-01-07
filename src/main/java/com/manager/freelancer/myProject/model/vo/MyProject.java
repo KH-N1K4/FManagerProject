@@ -48,7 +48,10 @@ public class MyProject {
 	
 	// 거래 테이블 
 	private String tradeRequest;            // TRADE_REQUEST 거래 요구사항
+	private int tradeNo;                    // TRADE_NO 거래 번호
 	
+	// 서비스 테이블 
+	private int serviceNo;                  // SERVICE_NO 서비스 번호 
 	
 	
 }

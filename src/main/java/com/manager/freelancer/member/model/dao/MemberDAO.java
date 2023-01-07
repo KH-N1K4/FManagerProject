@@ -3,6 +3,7 @@ package com.manager.freelancer.member.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.manager.freelancer.category.model.vo.AskService;
 import com.manager.freelancer.category.model.vo.Service;
 import com.manager.freelancer.member.model.vo.Member;
+import com.manager.freelancer.member.model.vo.Pagination;
 
 @Repository
 public class MemberDAO {
@@ -132,6 +134,29 @@ public class MemberDAO {
 	 */
 	public List<Service> selectLikeList2(Map<String, Object> option) {
 		return sqlSession.selectList("categoryMapper2.selectLikeList2", option);
+	}
+
+
+	/** 서비스 문의 수
+	 * @param option
+	 * @return
+	 */
+	public int getServiceInquiryListCount(Map<String, Object> option) {
+		return sqlSession.selectOne("memberMapper.getServiceInquiryListCount",option);
+	}
+
+ 
+	/** 서비스 문의 목록
+	 * @param option
+	 * @param pagination
+	 * @return
+	 */
+	public List<AskService> selectServiceInquiryList(Map<String, Object> option, Pagination pagination) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("memberMapper.selectServiceInquiryList", option, rowBounds);
 	}
 	
 }
