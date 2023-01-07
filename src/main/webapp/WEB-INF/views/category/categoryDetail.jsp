@@ -251,6 +251,12 @@
        <div class="modal">
             <jsp:include page="/WEB-INF/views/myProject/askService.jsp" /> 
        </div>
+       
+          
+     <div class="modal_portfolioDetail">
+             <jsp:include page="/WEB-INF/views/member/freelancer/portfolioDetail.jsp" /> 
+     </div>
+       
         
 
     </div>
@@ -273,7 +279,9 @@
      
     </script>	
      <script src="/resources/js/category/modal.js"></script>
+     
        <script src="/resources/js/category/portfolioModal.js"></script> 
+       
      <script src="/resources/js/category/categoryDetail.js"></script>
      
      <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -161,17 +161,13 @@
         display: block;
       }
 
-      .modal_body {
+      .ask_modal_body {
         position: absolute;
         top: 50%;
         left: 50%;
 
-      /*   width: 400px;
-        height: 600px; */
-
         padding: 40px;
 
-       /*  text-align: center; */
 
         background-color: rgb(255, 255, 255);
         border-radius: 10px;
@@ -336,12 +332,7 @@ h3{
     margin-right: 30px;
 }
 
-.hidden{
-	display:none;
-}
-
-
-
+/* 포트폴리오 모달 */
 .modal_body{
     position: absolute;
     top: 50%;
@@ -351,8 +342,6 @@ h3{
     height: 600px;
 
     padding: 40px;
-
-   /*  text-align: center; */
 
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
@@ -387,4 +376,8 @@ h3{
     display: none;
 
     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hidden{
+	display:none;
 }
