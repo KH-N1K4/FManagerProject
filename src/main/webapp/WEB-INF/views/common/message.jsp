@@ -66,11 +66,13 @@
 						<img src="/resources/images/user.png">
 						<div>
 							<b>이번유저</b>	<br>
-							<p class="chat">
-								안녕하세요?? 반갑습니다.<br>
-								ㅎㅎㅎㅎㅎ
-							</p>
-							<span class="chatDate">14:05</span>
+                            <div class="target-dateBox">
+                                <p class="chat">
+                                    안녕하세요?? 반갑습니다.<br>
+                                    ㅎㅎㅎㅎㅎ
+                                </p>
+                                <span class="chatDate">14:05</span>
+                            </div>
 						</div>
 					</li> --%>
 				</ul>
@@ -99,6 +101,7 @@
         </div>    
         <!-- 오른쪽 전문가 프로필 -->
         <div class="expert">
+            <a href="#" class="reportBtnClass"></a><!-- /resources/images/bell.png -->
             <div><img src=""></div>
             <div><h3><%--전문가 닉네임--%></h3></div>
             <div>
@@ -106,10 +109,14 @@
                 <span><%--회원 등급--%></span>      <a><%--Master--%></a><br>
             </div>
             <div class="outbtn"><button id="outbtnID">채팅방 나가기</button></div>
-            <input type="hidden" id="">
+            <input type="hidden" id="" class="reportedMemberNo" value="">
         </div>    
     </div>
   </section> 
+  <div id="my_modal" class="draggable" style="display: none;">
+    <iframe src="/member/message/chatting/report" id="chat_iframe">대체 내용</iframe>  
+    
+  </div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
@@ -117,9 +124,11 @@
 	
 	<!-- https://github.com/sockjs/sockjs-client -->
 	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/showModalDialogCallee.js'/>" ></script>
 	<script>
 		// 로그인한 회원 번호
 		const loginMemberNo = "${loginMember.memberNo}";
+		const loginMemberNickName = "${loginMember.memberNickname}";
 		// 게시판에서 사용자 닉네임을 눌러서 채팅 화면으로 넘어온 경우
 		// 그 때 전달된 채팅방 번호를 저장하는 변수
 		const tempNo = "${chatRoomNo}"; 

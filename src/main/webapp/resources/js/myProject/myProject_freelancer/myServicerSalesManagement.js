@@ -1,4 +1,7 @@
+document.addEventListener("DOMContentLoaded", ()=>{
 
+
+})
 
 $(document).ready(function(){
   
@@ -80,6 +83,7 @@ $('#searchInput').keyup(function(){
 });
 
 /* 입력창 포커스시 서비스명 다 출력 */
+//$(document).on("click","#btn",function(){  
 $('#searchInput').click(function(){
   var txt = $(this).val();
   if(txt != ''){  //빈줄이 아니면 
@@ -166,7 +170,9 @@ const body = document.querySelector('body');
 const modal = document.querySelector('.reportModal');
 const modalClose = document.querySelector('.reportModal_close');
 
-$('.reportBtn').click(function(){
+//$(document).on("click","#btn",function(){ 
+//$('.reportBtn').click(function(){
+$(document).on("click",".reportBtn",function(){ 
   document.querySelector('#ajaxReview').style.backgroundColor = '#538126';
   document.querySelector('#reportContent').value = "";
   document.querySelector('#reportFilePath').value = "";
@@ -231,7 +237,9 @@ modalClose.addEventListener('click', () => {
 });
 
 /* 발송하기 */
-$('.sendBtn').click(function(){
+//$(document).on("click",".reportBtn",function(){ 
+//$('.sendBtn').click(function(){
+$(document).on("click",".sendBtn",function(){ 
   const tradeNoValue = this.title;
   $.ajax({
         
@@ -297,7 +305,8 @@ $('.sendBtn').click(function(){
 
 
 /* 완료하기 */
-$('.finishBtn').click(function(){
+//$('.finishBtn').click(function(){
+$(document).on("click",".finishBtn",function(){ 
   const tradeNoValue = this.title;
   $.ajax({
         
@@ -315,7 +324,25 @@ $('.finishBtn').click(function(){
           $('#finishBtn'+tradeNoValue).remove();
           $('#sendBtn'+tradeNoValue).remove();
           $('#reportBtn'+tradeNoValue).remove();
-          
+          saleslist.forEach(function(arg){
+            if(arg.tradeNo == tradeNoValue){      
+              if(arg.tradeReportNo != 0){
+              const a = document.createElement("a");
+              a.setAttribute("href", "#");
+              a.setAttribute("id", "reportBtn"+tradeNoValue);
+              a.setAttribute("title", tradeNoValue);
+              a.classList.add("reportBtn");
+              a.classList.add("btn_type");
+              a.style.width = '80px';
+              a.style.backgroundColor = "white";
+              const span = document.createElement("span");
+              span.innerText ='신고내역';
+    
+              a.append(span);
+              document.getElementById('tdBtn'+tradeNoValue).append(a);
+              }
+            }
+          });
         }
     },
     error: () => {

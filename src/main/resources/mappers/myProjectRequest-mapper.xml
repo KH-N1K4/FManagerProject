@@ -89,6 +89,29 @@
 			<result property="mainCategoryName" column="MAIN_CATEGORY_NAME"/>	
 		</resultMap>
 		
+		<!-- 회원신고하기 -->
+		<resultMap type="MemberReport2" id="memberReport_rm">
+			<id property="reportNo" column="REPORT_NO"/>	
+			<result property="memberReportTitle" column="MEMBER_REPORT_TITLE"/>
+			<result property="memberReportContent" column="MEMBER_REPORT_CONTENT"/>
+			<result property="memberReportRequest" column="MEMBER_REPORT_REQUEST"/>
+			<result property="memberReportCreateDate" column="MEMBER_REPORT_CREATE_DATE"/>
+			<result property="memberReportCreateDateString" column="MEMBER_REPORT_CREATE_DATE_STRING"/>
+			<result property="memberReportNo" column="REPORT_MEMBER"/>
+			<result property="memberReportedNo" column="REPORTED_MEMBER"/>
+			<result property="memberReportAnswerDate" column="MEMBER_REPORT_ANSWER_DATE"/>
+			<result property="memberReportAnswerDateString" column="MEMBER_REPORT_ANSWER_DATE_STRING"/>
+			<result property="memberReportAnswerMemberNo" column="MEMBER_REPORT_ANSWER_MEMBER_NO"/>
+			
+		</resultMap>
+		<!-- 회원신고하기 파일-->
+		<resultMap type="MemberReportFile2" id="memberReportFile_rm">	
+			<id property="reportNo" column="MEMBER_REPORT_NO"/>	
+			<result property="memberReportfileNo" column="MEMBER_REPORT_FILE_NO"/>	
+			<result property="memberReportfilePath" column="MEMBER_REPORT_FILE_PATH"/>	
+			<result property="memberReportfileOther" column="MEMBER_REPORT_FILE_ORDER"/>	
+		</resultMap>
+		
 		<!-- 카태고리 들고오기 -->
 		<select id="getCategoryList" resultMap="request_rm">
 			SELECT * 
@@ -217,14 +240,46 @@
 		WHERE FREELANCER_NO = #{freelancerNo}
 		</select>
 		
+		<!-- 제안하기 -->
 		<insert id="requestDetailSubmit">
 		INSERT INTO "PROJECT_PROPOSAL"
 		VALUES(SEQ_PROJECT_PROPOSAL_NO.NEXTVAL,DEFAULT,#{proposalpriceInput},#{proposaleditInput},DEFAULT,#{requestNO},#{proposalMemberNo})
 		</insert>
 		
+		<!-- 의뢰 중지 -->
 		<update id="requestStopSubmit">
 		UPDATE "PROJECT_REQUEST" SET
       PROJECT_REQUEST_DEL_FL = 'Y'
       WHERE PROJECT_REQUEST_NO = #{requestNO}
 		</update>
+		
+		<!-- 제안하기 모집마감으로 상태값 변경 -->
+		<update id="requestStopStatus">
+		UPDATE "PROJECT_PROPOSAL" SET
+		PROPOSAL_ADOPT_STATUS = 3
+		WHERE PROJECT_REQUEST_NO =#{requestNO}
+		</update>
+		
+		<!-- 회원 신고하기 1.번-->
+    <insert id="memberReportUpdateSet" parameterType="java.util.HashMap" useGeneratedKeys="true">
+    <selectKey keyProperty="reportNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_MEMBER_REPORT_NO.NEXTVAL FROM DUAL
+		</selectKey>
+    INSERT INTO "MEMBER_REPORT"
+		VALUES(#{reportNo},#{memberReportTitle},#{memberReportContent},NULL,DEFAULT,#{memberReportNo},#{memberReportedNo},DEFAULT,NULL)
+    </insert>
+    
+    <!-- 회원 신고하기 파일 등록하기 2.번-->
+    <insert id="insertReportFileListSet" parameterType="list">
+		INSERT INTO MEMBER_REPORT_FILE
+		SELECT SEQ_MEMBER_REPORT_FILE_NO.NEXTVAL REQUEST_FILE_NO, A.* FROM
+		
+			<foreach collection="list" item="reportFileList" 
+				open="(" close=") A" separator="UNION ALL">
+				SELECT #{reportFileList.memberReportfilePath} REQUEST_FILE_PATH,
+							 #{reportFileList.memberReportfileOther} MEMBER_REPORT_FILE_ORDER,
+					     #{reportFileList.reportNo} MEMBER_REPORT_NO
+				FROM DUAL
+			</foreach>
+		</insert>
 </mapper>
