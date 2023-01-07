@@ -22,9 +22,9 @@
         <div class="title"><span>신고하기</span></div>
         <div class="myprojectReport_list">
           <div class="list_title"><span>피신고자</span></div>
-          <div class="list_content">
-            <img src="">
-            <span></span>
+          <div class="list_content reportedClass">
+            <img src="" id="reportedProfile">
+            <span id="reportedName"></span>
           </div>
         </div>
         <div class="myprojectReport_list">
@@ -40,6 +40,8 @@
           <div class="list_content fileRemove"><input type = "file" name="reportFilePath" id="reportFilePath"></div>
         </div>
         <div class="btnDiv" ><button id="ajaxReview">신고하기</button></div>
+        <input type="hidden" id="reportedMemberNo" name="reportedMemberNo">
+        <input type="hidden" id="reportMemberNo" name="reportMemberNo">
     </div>
   </div>
 

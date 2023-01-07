@@ -92,6 +92,7 @@ const roomListAddEvent = () => {
       /* 채팅 상대방 정보보기 */
       const expert = document.getElementsByClassName('expert')[0];
       document.getElementsByClassName('outbtn')[0].classList.add("show");
+			expert.children[0].innerHTML='';
 			const img10 = document.createElement("img");
 			expert.children[0].append(img10);
 			expert.children[0].children[0].setAttribute("src","/resources/images/bell.png");
@@ -111,6 +112,7 @@ const roomListAddEvent = () => {
         expert.children[3].children[4].innerText='';
       }
       expert.children[5].id = selectChatRoomNo;
+      expert.children[5].value = selectClientNo;
       /* 채팅 상대방 정보보기 */
       
 			// 비동기로 메세지 목록을 조회하는 함수 호출
@@ -552,7 +554,7 @@ chattingSock.onmessage = function(e) {
 	selectRoomList();
 }
 
-//나가기 버튼 누르면 실행
+//나가기 버튼 누르면 실행-------------------------------------------------------------------------
 $('#outbtnID').click(function(){
 	checkAddRoomVar =false;
   $.ajax({
@@ -566,15 +568,17 @@ $('#outbtnID').click(function(){
       const expert = document.getElementsByClassName('expert')[0];
       document.getElementsByClassName('outbtn')[0].classList.remove("show"); 
 
-      expert.children[0].children[0].setAttribute("src","");
-      expert.children[1].children[0].innerText="";
+			expert.children[0].innerHTML='';
+      expert.children[1].children[0].setAttribute("src","");
+      expert.children[2].children[0].innerText="";
       
-      expert.children[2].children[0].innerText='';
-      expert.children[2].children[1].innerText='';
-      expert.children[2].children[3].innerText='';
-      expert.children[2].children[4].innerText='';
+      expert.children[3].children[0].innerText='';
+      expert.children[3].children[1].innerText='';
+      expert.children[3].children[3].innerText='';
+      expert.children[3].children[4].innerText='';
     
-      expert.children[4].id = '';
+      expert.children[5].id = '';
+      expert.children[5].value = '';
       document.getElementById(selectChatRoomNo+"-"+selectClientNo).remove();
     },
     error: () => {
@@ -682,7 +686,7 @@ function modal(id) {
 			top: '50%',
 			left: '50%',
 			width: '600px',
-			height: '600px',
+			height: '650px',
 			transform: 'translate(-50%, -50%)',
 			msTransform: 'translate(-50%, -50%)',
 			webkitTransform: 'translate(-50%, -50%)'
@@ -695,9 +699,6 @@ Element.prototype.setStyle = function(styles) {
 	return this;
 };
 
-$(document).on("click",".reportBtnClass",function(){ ///WEB-INF/views/common/header_ver1.jsp
-		modal('my_modal');
-});
 
 /* document.getElementById('chat_ifram').contentWindow.document.getElementById("reportModal_close").addEventListener('click', function() {
 	//bg.remove();
@@ -745,3 +746,15 @@ window.onload = () => {
   
   draggable($target);
 }
+
+
+$(document).on("click",".reportBtnClass",function(){ ///WEB-INF/views/common/header_ver1.jsp
+	modal('my_modal');
+	const exportVar = document.getElementsByClassName('expert')[0];
+	const iframeVar = document.getElementById('chat_iframe');
+	iframeVar.contentDocument.getElementById('reportedProfile').setAttribute("src",exportVar.children[1].children[0].src);
+	iframeVar.contentDocument.getElementById('reportedName').innerText = exportVar.children[2].children[0].innerText;
+	iframeVar.contentDocument.getElementById('memberName').value = loginMemberNickName;
+	iframeVar.contentDocument.getElementById('reportMemberNo').value =selectClientNo;
+	iframeVar.contentDocument.getElementById('reportedMemberNo').value =loginMemberNo;
+});

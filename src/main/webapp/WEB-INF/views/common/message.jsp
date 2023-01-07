@@ -109,7 +109,7 @@
                 <span><%--회원 등급--%></span>      <a><%--Master--%></a><br>
             </div>
             <div class="outbtn"><button id="outbtnID">채팅방 나가기</button></div>
-            <input type="hidden" id="">
+            <input type="hidden" id="" class="reportedMemberNo" value="">
         </div>    
     </div>
   </section> 
@@ -128,6 +128,7 @@
 	<script>
 		// 로그인한 회원 번호
 		const loginMemberNo = "${loginMember.memberNo}";
+		const loginMemberNickName = "${loginMember.memberNickname}";
 		// 게시판에서 사용자 닉네임을 눌러서 채팅 화면으로 넘어온 경우
 		// 그 때 전달된 채팅방 번호를 저장하는 변수
 		const tempNo = "${chatRoomNo}"; 
