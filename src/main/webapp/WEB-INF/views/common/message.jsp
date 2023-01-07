@@ -113,6 +113,10 @@
         </div>    
     </div>
   </section> 
+  <div id="my_modal" class="draggable" style="display: none;">
+    <iframe src="/member/message/chatting/report" id="chat_iframe">대체 내용</iframe>  
+    
+  </div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
@@ -120,6 +124,7 @@
 	
 	<!-- https://github.com/sockjs/sockjs-client -->
 	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/showModalDialogCallee.js'/>" ></script>
 	<script>
 		// 로그인한 회원 번호
 		const loginMemberNo = "${loginMember.memberNo}";

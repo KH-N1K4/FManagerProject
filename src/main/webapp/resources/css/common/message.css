@@ -373,5 +373,21 @@
     display: none;
 }
 
+/* #my_modal{
+    display: flex;
+    flex-direction: column;
+    
+	justify-content: 'center';
+    align-items: 'center';
+} */
+#chat_iframe{
+    width: 550px;
+    height: 550px;
+    border: none;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+
 
 

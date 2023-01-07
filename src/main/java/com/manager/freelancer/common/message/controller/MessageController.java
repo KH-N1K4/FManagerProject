@@ -177,5 +177,12 @@ public class MessageController {
 		
 			return new Gson().toJson(reportFilePath);
 	}
+    
+    
+    
+    @GetMapping("/member/message/chatting/report")
+    public String messageReportModal() {
+        return "common/modaless/messageReportModal";
+    }
 	
 }
