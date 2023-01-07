@@ -7,7 +7,7 @@
 
 
     <div class="modal_body">
-        <button class="modal_close">x</button>
+        <button class="modal_close2">x</button>
 
         <!-- <div id="writerInfo">
             <div id="writerPhoto">
@@ -17,15 +17,15 @@
         </div> -->
 
         <div id="portfolioSection">
-            <div id="portfolioTitle"></div>
-            <div id="portfolioContent"></div>
+            <div class="portfolioTitle2" id="portfolioTitle"></div>
+            <div class="portfolioContent2" id="portfolioContent"></div>
 
 
-            <div >
-            	<img src="" alt="" id="portfolioThumb">
+            <div>
+                <img src="" alt="" id="portfolioThumb">
             </div>
             <div>
-            	<img src="" alt="" id="portfolioPhoto">
+                <img src="" alt="" id="portfolioPhoto">
             </div>
 
         </div>

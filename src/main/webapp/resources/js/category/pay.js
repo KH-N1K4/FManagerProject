@@ -18,15 +18,14 @@ const serviceCost=document.getElementById("serviceCost").children[0];
             name : '프매니저'+title, 
             amount : cost, //실제 결제되는 가격
             buyer_email : memberEmail,
-            buyer_name : '구매자이름',
-            buyer_tel : '010-1234-5678',
+            buyer_name : memberName,
+            buyer_tel : memberTel,
             buyer_addr : '서울 강남구 도곡동',
             buyer_postcode : '123-456'
             //m_redirect_url : 'http://www.naver.com'
         }, function(rsp) {
             if ( rsp.success ) {
 
-              alert("결제 성공"+serviceNo);
                 //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
                 $.ajax({
                     url: "/service/payComplete/"+serviceNo, //cross-domain error가 발생하지 않도록 주의해주세요

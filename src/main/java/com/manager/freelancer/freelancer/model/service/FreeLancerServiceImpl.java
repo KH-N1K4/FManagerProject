@@ -276,5 +276,9 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 		return dao.viewPortfolioDetail(portfolio);
 	}
 
-	
+	@Override
+	public int DeletePortfolio(Freelancer1 freelancer1, int freelancerNo, int portfolioNo) {
+		// TODO Auto-generated method stub
+		return dao.DeletePortfolio(freelancer1,freelancerNo, portfolioNo);
+	}
 }

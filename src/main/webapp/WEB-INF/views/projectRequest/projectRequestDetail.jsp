@@ -63,19 +63,17 @@
         </div>
         <div class="detailContent">
 
-            <ul>
-                <li>의뢰사항</li>
-            </ul>
+            
 
         </div>
 
         <div class="detailInner">
+            <div>${userRequest.projectRequestContent}</div>
             <div>
                 <c:forEach items="${userRequest.requestfileList}" var="requestfile">
                     <div class="requestPhotos"><img src="${requestfile.requestFilePath}"></div>
                 </c:forEach>
             </div>
-            <div>${userRequest.projectRequestContent}</div>
         </div>
 
         <div class="requestModal">

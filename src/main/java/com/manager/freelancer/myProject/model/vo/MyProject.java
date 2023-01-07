@@ -46,6 +46,8 @@ public class MyProject {
 	private int gradeNo;		            // GRADE_NO 프리랜서 등급
 	private String gradeName;		        // GRADE_NAME 프리랜서 등급명
 	
+	// 거래 테이블 
+	private String tradeRequest;            // TRADE_REQUEST 거래 요구사항
 	
 	
 	

@@ -128,7 +128,7 @@
                         <div>
                             <%-- <input type="text" name="freelancerIntro" id="freelancerIntro" class="input" >  --%>
 
-                            <textarea name="freelancerIntro" id="freelancerIntro" cols="72" rows="10" >${freelancer.freelancerIntro}</textarea>
+                            <textarea name="freelancerIntro" id="freelancerIntro" cols="72" rows="10" >${freelancer1.freelancerIntro}</textarea>
                         </div>
                     </div>
                     <div id="btnArea">

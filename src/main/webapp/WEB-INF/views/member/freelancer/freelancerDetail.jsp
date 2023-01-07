@@ -26,7 +26,7 @@
             <div class="expertPhoto"><img alt="" src="${freelancer.memberProfile }"> </div>
             <div class="expertName">${freelancer.freelancerName }</div>
             <div class="expertOther">
-                <div>총 작업수 <span>00</span></div>
+                <div>총 작업수 <span>${freelancer.saleCount }</span></div>
                 <div>등급 <span>${freelancer.gradeName }</span></div>
                 <div>전문분야 
                 <c:forEach var="interest" items="${fn:split(freelancer.freelancerField,',') }" >
@@ -98,7 +98,7 @@
 	            </a>
         	</c:forEach>  
         </div>
-        <div class="serviceTitle">서비스들</div>
+        <div class="serviceTitle">서비스</div>
         <div class="serviceSection">
         	 <c:forEach var="service" items="${freelancer.fserviceList}">
 	        	 <a href="/service/${service.serviceNo }">
@@ -107,7 +107,10 @@
 	                    <div class="serviceOneTitle">${service.serviceTitle}</div>
 	                    <div class="serviceSubTitle">${service.serviceSummary}</div>
 	                    <div class="serviceOther">
-	                        <div>평점 ★<span> 4.7</span></div>
+	                   
+	                    	<c:if test="${service.sellCount>0}">
+	                        	<div>평점 ★<span> ${service.reviewPoint }</span></div>
+	                    	</c:if>
 	                        <div>리뷰수 <span>${service.reviewCount}</span></div>
 	                        <div>판매수 <span>${service.sellCount}</span></div>
 	                    </div>

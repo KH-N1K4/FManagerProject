@@ -3,14 +3,24 @@
 
     <link rel="stylesheet" href="/resources/css/freelancer/portfolio.css">
 <div class="modal_body">
-    <span class="modal_close1">x</span>
+    <span class="modal_close1" style="position: absolute; right: 50px;
+    width : 20px;
+    background-color: #538126;
+    border: 3px solid #538126;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;">
+    x
+    </span>
     <form action="/member/freelancer/modal/addPortfolio" method="POST" enctype="multipart/form-data">
 
         <div id="content">포트폴리오 추가</div>
         <div class="itemArea">
             <div id="item">제목</div> 
             <div>
-                <input type="text" name="portfolioTitle" id="portfolioTitle" required>
+                <input style="border : 1px solid black" type="text" name="portfolioTitle" id="portfolioTitle" required>
             </div>
         </div>
         <div class="itemArea">
@@ -39,7 +49,7 @@
             </div>
         </div>
         <div>
-            <button>등록</button>
+            <button id="addButton">등록</button>
         </div>
     </form>
         <script src="/resources/js/member/freelancer/addPortfolio.js"></script>

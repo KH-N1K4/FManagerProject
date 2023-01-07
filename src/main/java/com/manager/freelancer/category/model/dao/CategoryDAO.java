@@ -102,7 +102,7 @@ public class CategoryDAO {
 	}
 	
 	
-	public List<Service> serviceList(Pagination pagination, Map<String, Integer> map) {
+	public List<Service> mainServiceList(Pagination pagination, Map<String, Integer> map) {
 		
 		int offset=(pagination.getCurrentPage()-1)*pagination.getLimit();
 		
@@ -126,6 +126,8 @@ public class CategoryDAO {
 	}
 
 	public Freelancer1 freelancerDetail(int freelancerNo) {
+		
+		
 		return sqlSession.selectOne("categoryMapper.freelancerInfo", freelancerNo);
 	}
 
@@ -135,6 +137,19 @@ public class CategoryDAO {
 
 	public int updateReviewStatus(int reviewNo) {
 		return sqlSession.update("categoryMapper.updateReviewStatus", reviewNo);
+	}
+
+	public int writeComment(Map<String, Object> map) {
+		return sqlSession.insert("categoryMapper.writeComment", map);
+	}
+
+	public int selectSaleCount(int freelancerNo) {
+		
+		return sqlSession.selectOne("categoryMapper.selectFreelancerSalesCoount", freelancerNo);
+	}
+
+	public int selectInquiryRate(int freelancerNo) {
+		return sqlSession.selectOne("categoryMapper.selectInquiryRate", freelancerNo);
 	}
 
 	
