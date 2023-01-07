@@ -192,6 +192,43 @@ public class MyProjectDAO {
 		return sqlSession.selectList("myProjectMapper.categoryTypeSelect_suggest", map, rowBounds);
 	}
 
+	/** 받은 제안 채택 및 결제 ajax
+	 * @param myProject
+	 * @return
+	 */
+	public int completeSuggetionPay(MyProject myProject) {
+		
+		// 서비스 테이블 등록
+		int result = sqlSession.insert("myProjectMapper.serviceInsert",myProject);
+		
+		if(result>0){
+			
+			// 거래 테이블 등록 
+			result = sqlSession.insert("myProjectMapper.tradeInsert",myProject);
+			
+			if(result>0) {
+				
+				// 정산 테이블 등록
+				result = sqlSession.insert("myProjectMapper.settlementInsert",myProject);
+				
+				if(result>0) {
+					
+					// 프로젝트 상태 모집마감으로 변경
+					result = sqlSession.update("myProjectMapper.requestStatusChange",myProject);
+					// 채택된 제안 상태 채택으로 변경 
+					result = sqlSession.update("myProjectMapper.proposalStatusChange",myProject);
+					// 채택되지 않은 제안 상태 모집마감으로 변경 
+					result = sqlSession.update("myProjectMapper.proposalStatusChange_adopt",myProject);
+					
+				}
+				
+			}
+			
+		}
+		
+		return result;
+	}
+
 
 	
 }
