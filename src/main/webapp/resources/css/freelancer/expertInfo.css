@@ -306,25 +306,26 @@ input[type="checkbox"]{
  /* 체크박스 다음 div */
 #portfolio-toggle + div{
     display:none;
-    background-color: red;
  }
 
 /* 체크박스가 체크된 경우 다음 div */
-#portfolio-toggle:checked  + div{ display:block; }
+#portfolio-toggle:checked  + div{
+    display:block; 
+}
 
 #portfolio-menu{
     position:absolute;
 
-    z-index: 500;
-    width: 100px;
+    /* z-index: 50; */
+    width: 80px;
     height: 80px;
-    margin-top:5px;
-    right:30px;
-    top: 30px;
+    right: 0;
+    top: 0;
     border: 1px solid black;
+    background-color: antiquewhite;
 }
 
-#portfolio-menu>a{
+#portfolio-menu a{
 
     display:flex;
     height:50%;

@@ -177,7 +177,7 @@ public class MyProjectContorller {
                                @RequestParam int proposalNo,@RequestParam int projectRequestNo,
                                @RequestParam int thirdCategoryNo,@RequestParam String projectRequestSummary,
                                @RequestParam String projectRequestContent,@RequestParam String projectCreateDate,
-                               MyProject myProject) {
+                               MyProject myProject, RedirectAttributes ra) {
 		
 		
 		myProject.setMemberNo(loginMember.getMemberNo());
@@ -196,17 +196,19 @@ public class MyProjectContorller {
 		myProject.setProjectCreateDate(projectCreateDate);
 		myProject.setTradeRequest(inputRequest);
 		
-		
 		int tradeNo = service.completeSuggetionPay(myProject);
+		String message = null; 
 		
-		System.out.println(tradeNo);
+		if(tradeNo>0) {
+			message = "결제 성공";
+		} else {
+			message = "결제 실패";
+		}
+		
+		ra.addFlashAttribute("message", message);
 		
 		return tradeNo;
 	}
-	
-
-	
-	
 	
 
 }

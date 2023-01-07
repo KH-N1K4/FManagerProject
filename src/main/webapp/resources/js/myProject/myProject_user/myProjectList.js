@@ -68,7 +68,7 @@ function selectChange(){
                             div2.append(divdiv1);
 
                             const a = document.createElement("a");
-                            a.setAttribute('href', "" );
+                            a.setAttribute('href', "/projectRequest/projectRequestDetail/"+myProject.projectRequestNo);
                             divdiv1.append(a);
 
                             const span = document.createElement("span");

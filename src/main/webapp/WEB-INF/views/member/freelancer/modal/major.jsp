@@ -5,19 +5,19 @@
         <span class="modal_close1">x</span>
         <div id="majorInputMain">
                 <div>
-                    <div class="item">학교명</div>
+                    <div class="modal_item">학교명</div>
                     <div>
                         <input type="text" name="AcademyName" id="AcademyName" class="input1">
                     </div>
                 </div>
                 <div>
-                    <div class="item">전공</div>
+                    <div class="modal_item">전공</div>
                     <div>
                         <input type="text" name="majorName" id="majorName" class="input1">
                     </div>
                 </div>
                 <div>
-                    <div class="item">상태</div>
+                    <div class="modal_item">상태</div>
                     <div>
                         <select name="graduateStatus" id="graduateStatus" class="input1 ">
                           

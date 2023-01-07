@@ -82,7 +82,7 @@
 		FROM USER_INQUIRY 
 		JOIN MEMBER USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}
-		ORDER BY USER_INQUIRY_NO
+		ORDER BY USER_INQUIRY_CREATE_DATE DESC
   	</select>
   	<!-- 특정 게시판 목록 조회 (관리자)-->
   	<select id="selectInquiryList_manager" parameterType="_int" resultMap="userInquiry_rm">
@@ -221,13 +221,16 @@
 			<choose>
 				<when test='key == "t"'>
 					AND USER_INQUIRY_TITLE LIKE '%${query}%'
+					ORDER BY USER_INQUIRY_CREATE_DATE DESC
 				</when>
 				<when test='key == "c"'>
 					AND USER_INQUIRY_CONTENT LIKE '%${query}%'
+					ORDER BY USER_INQUIRY_CREATE_DATE DESC
 				</when>
 				<when test='key == "tc"'>
 					AND (USER_INQUIRY_TITLE LIKE '%${query}%' OR
 					USER_INQUIRY_CONTENT LIKE '%${query}%')
+					ORDER BY USER_INQUIRY_CREATE_DATE DESC
 				</when>
 			</choose>
 		</if>
@@ -243,13 +246,16 @@
 			<choose>
 				<when test='key == "t"'>
 					WHERE USER_INQUIRY_TITLE LIKE '%${query}%'
+					ORDER BY USER_INQUIRY_CREATE_DATE DESC
 				</when>
 				<when test='key == "c"'>
 					WHERE USER_INQUIRY_CONTENT LIKE '%${query}%'
+					ORDER BY USER_INQUIRY_CREATE_DATE DESC
 				</when>
 				<when test='key == "tc"'>
 					WHERE (USER_INQUIRY_TITLE LIKE '%${query}%' OR
 					USER_INQUIRY_CONTENT LIKE '%${query}%')
+					ORDER BY USER_INQUIRY_CREATE_DATE DESC
 				</when>
 			</choose>
 		</if>
@@ -280,7 +286,7 @@
   	<!-- 이용문의 내역 조회 (진행상태 변경 시) -->
   	<select id="userStatusList" parameterType="java.util.HashMap" resultMap="userInquiry_rm">
 	  	SELECT USER_INQUIRY_NO, USER_INQUIRY_TITLE, USER_INQUIRY_REQUEST,
-	  		   TO_CHAR(USER_INQUIRY_CREATE_DATE, 'YYYY-MM-DD'),
+	  		   TO_CHAR(USER_INQUIRY_CREATE_DATE, 'YYYY-MM-DD') USER_INQUIRY_CREATE_DATE,
 		   CASE WHEN USER_INQUIRY_REQUEST IS NULL THEN '답변 대기'
 		        WHEN USER_INQUIRY_REQUEST IS NOT NULL THEN '답변 완료'
 		   END AS USER_INQUIRY_REQUEST_STATUS     
@@ -288,9 +294,11 @@
 		WHERE MEMBER_NO = #{memberNo}
 			<if test='optionVal eq "1"'>
 				AND USER_INQUIRY_REQUEST IS NOT NULL
+				ORDER BY USER_INQUIRY_CREATE_DATE DESC
 			</if>
 			<if test='optionVal eq "2"'>
 				AND USER_INQUIRY_REQUEST IS NULL
+				ORDER BY USER_INQUIRY_CREATE_DATE DESC
 			</if>
   	</select>
   	

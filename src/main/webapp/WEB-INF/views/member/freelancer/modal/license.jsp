@@ -4,19 +4,19 @@
         <span class="modal_close3">x</span>
         <div id="licenseInputMain">
                 <div>
-                    <div class="item">자격증명</div>
+                    <div class="modal_item">자격증명</div>
                     <div>
                         <input type="text" name="licenseName" id="licenseContent1" class="input3">
                     </div>
                 </div>
                 <div>
-                    <div class="item">발급일</div>
+                    <div class="modal_item">발급일</div>
                     <div>
                         <input type="date" name="licenseDate" id="licenseContent2" class="input3">
                     </div>
                 </div>
                 <div>
-                    <div class="item">발급 기관</div>
+                    <div class="modal_item">발급 기관</div>
                     <div>
                         <input type="text" name="licenseAgency" id="licenseContent3" class="input3">
                     </div>

@@ -82,12 +82,12 @@
                                 </td>
                                 <td class="tl">                           
                                   <div class="suggestion_name_area td_link">
-                                    <a href="#" id="suggestionName" class="suggestionName">${proposal.projectRequestTitle}</a>
+                                    <a href="/projectRequest/projectRequestDetail/${proposal.projectRequestNo}" id="suggestionName" class="suggestionName">${proposal.projectRequestTitle}</a>
                                   </div>
                                 </td>
                                 <td  class="tc">                       
                                   <div class="expert_name_area td_link">
-                                    <a href="#" id="expertName" class="expertName" expertName="">${proposal.freelancerName}</a>
+                                    <a href="/service/freelancerDetail/${proposal.freelancerNo}" id="expertName" class="expertName" expertName="">${proposal.freelancerName}</a>
                                   </div>
                                 </td>
                                 <td class="tc">                      

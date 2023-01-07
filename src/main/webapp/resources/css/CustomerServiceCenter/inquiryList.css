@@ -143,6 +143,7 @@ table a{
 }
 #inquirySearch input:hover{
     border: 1px solid #538126;
+    height: 39px;
 }
 
 /* 하단 검색창 button */
@@ -154,12 +155,11 @@ table a{
     border-radius: 5px;
     border: 1px solid #538126;
     color: #fff;
-    font-size: 15px;
+    font-size: 16px;
     cursor: pointer;
 }
 #inquirySearch button:hover{
     background-color: #4c7722;
-    font-size: 16px;
 }
 #search-key{
     font-size: 15px;
@@ -173,12 +173,12 @@ table a{
 .question-answer{
     display: inline-block;
     width: 100px;
-    height: 24px;
+    height: 28px;
     text-align: center;
     color: white;
     border-radius: 5px;
-    line-height: 25px;
-    font-size: 15px;
+    line-height: 28px;
+    font-size: 14px;
     background-color: #538126
 }
 
@@ -186,13 +186,31 @@ table a{
 .question-wating{
     display: inline-block;
     width: 100px;
-    height: 24px;
+    height: 28px;
     text-align: center;
-    line-height: 25px;
+    line-height: 28px;
     color: white;
     border-radius: 5px;
-    font-size: 15px;
+    font-size: 14px;
     background-color: rgb(165, 173, 165);
 
 }
 /* ================================ */
+
+#processStatusTitle{
+    font-size: 18px;
+}
+#processStatusSelect{
+    margin-left: 15px;
+    font-size: 17px;
+    width: 120px;
+    height: 25px;
+    text-align-last: center;
+}
+#processStatusSelect:hover{
+    border: 2px solid #538126;
+}
+
+.contentArea a:hover{
+    color: #538126;
+}

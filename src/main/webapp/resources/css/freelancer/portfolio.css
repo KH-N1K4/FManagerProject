@@ -61,7 +61,7 @@ textarea{
 #image-input2 {
     display: none;
 }
-label{
+.fileSelect{
     width: 140px;
     height: 33px;
     padding: 5px 10px;

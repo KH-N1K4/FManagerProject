@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- <c:set var="freelancerIntro" value="${freelancer.freelancerIntro}"/> --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:set var="portfolioList" value="${freelancer1.portfolioList}"/>
-<c:set var="freelancerNo" value="${freelancer1.freelancerNo}"/>
 
 
 <!DOCTYPE html>
@@ -99,6 +95,32 @@
                         </div>
                     </div>
                     <div class="itemTitle">
+                        <div class="item">학력/전공</div>
+                        <div>
+                            <%-- <input type="text" name="" id=""value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}"> --%>
+                            
+                           <%--  <c:forEach var ="major" items="${freelancer1.majorList}">
+                                <input type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}">
+                                <div>
+                                <input type="text" name="" id="career" value="${career.careerCompanyName}/${career.careerCompanyDepartment}/${career.careerCompanyPosition}/${career.careerCompanyRegion}/${career.careerCompanyPeriod1}" readonly>
+                                </div>
+                            </c:forEach> --%>
+                            
+                             <c:forEach var="major" items="${freelancer1.majorList }">
+		                	  <c:if test="${major.majorGraduateStatus ==1}"><c:set var="majorStatus" value="재학"/> </c:if>
+		                	  <c:if test="${major.majorGraduateStatus ==2}"><c:set var="majorStatus" value="휴학"/> </c:if>
+		                	  <c:if test="${major.majorGraduateStatus ==3}"><c:set var="majorStatus" value="이수"/> </c:if>
+		                	  <c:if test="${major.majorGraduateStatus ==4}"><c:set var="majorStatus" value="졸업"/> </c:if>
+		                	 	<div class="newOne">
+							       	<input type="text" name="" id="career" 
+							       	value="${major.majorAcademyName }/${major.majorName }/${majorStatus }" readonly/>
+				                </div>
+						       </c:forEach>
+                        
+                        
+                        </div>
+                    </div>
+                    <div class="itemTitle">
                         <div class="item">경력 사항</div>
                         <div>
                             <%-- <input type="text" name="" id=""value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}"> --%>
@@ -153,13 +175,18 @@
                                 </span>
                                 
                             </a> --%>
+                         
+
                             <span class="service">
                                 <a>
                                     <div class="portfolioSection"> 
-                                        <input type="checkbox" id="portfolio-toggle" value="···">
+                                        <input type="checkbox" id="portfolio-toggle" >
                                         <div id="portfolio-menu">
+                                            <div>···</div>
                                             <div class= "update-portfolio"><a class="updateBtn">수정</a></div>
                                             <div class= "delete-portfolio"><a class="deleteBtn">삭제</a></div>
+                                            <span id="portfolioNo" class="hidden portfolioNo">${portfolio.portfolioNo}</span>
+                                            <span id="freelancerNo"class="hidden freelancerNo">${portfolio.freelancerNo}</span>
                                         </div>
                                         <img  style="width: 200px; height:200px; background-color:skyblue;" src="${portfolio.portfolioThumbnail}">
                                         <span class="portfolio-title-area" >${portfolio.portfolioTitle}</span>
@@ -168,7 +195,11 @@
                                         <span class="hidden">${portfolio.portfolioTitle }</span>      <%-- 4 --%>
 		            	                <span class="hidden">${portfolio.portfolioContent }</span>    <%-- 5 --%>
                                         <span class="hidden">${portfolio.portfolioThumbnail}</span>    <%-- 6 --%>
-		            	                <span class="hidden">${portfolio.portfolioFilePath }</span>    <%-- 7 --%>                              
+		            	                <span class="hidden">${portfolio.portfolioFilePath }</span>    <%-- 7 --%> 
+
+                                        <%-- ajax에서 사용할 용도 --%>
+                                        
+                                        <%-- ------------------- --%>                             
                                     </div>
                                 </a>
                             </span>
@@ -190,17 +221,11 @@
 
             </section>
     </div>
+    	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
     	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
         <script src="/resources/js/member/freelancer/freelancerInfo.js"></script> 
 
 </body>
 </html>
- <c:if test="${not empty message}">
-        <script>
-         alert("${message}");
-        </script>
-
-        <%-- message 1회 출력 후 모든 scope 삭제 --%>
-        <c:remove var="message"/>
-     </c:if>
