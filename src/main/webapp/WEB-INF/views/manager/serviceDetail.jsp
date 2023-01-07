@@ -73,7 +73,10 @@
         cursor: pointer;
         font-size: 18px;
     } 
-
+    .servicePhoto>img{
+    width: 480px;
+    height: 420px;
+    }
 
     </style>
 </head>
@@ -87,7 +90,7 @@
         
 
         <div class="detailHeader">
-            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${freelancerService.requestFilePath }" style="height:100%;"></div>
+            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${freelancerService.requestFilePath }"></div>
             <div class="serviceContent">
                 <div class="serviceTitle">${freelancerService.serviceTitle }</div>
                 <div class="serviceSummary">${freelancerService.serviceSummary }</div>
@@ -140,7 +143,7 @@
         	<h3>서비스 설명</h3>
         	${freelancerService.serviceContent}
 	        <c:forEach var="imageFile" items="${freelancerService.serviceImageFileList }">
-	                	<img src="${imageFile.imageFilePath }" style="width:100%;">
+	                	<img src="${imageFile.imageFilePath }" style="width:100%;margin-top:10px;">
 	        </c:forEach>
 	        
 	        

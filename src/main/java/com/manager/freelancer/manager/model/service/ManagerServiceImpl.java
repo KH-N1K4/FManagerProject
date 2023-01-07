@@ -110,6 +110,12 @@ public class ManagerServiceImpl implements ManagerService {
 		return map;
 
 	}
+	
+	// 모달용 회원 정보
+	@Override
+	public Member selectMemberModal(int memberNo) {
+		return dao.selectMemberModal(memberNo);
+	}
 
 	// 회원 탈퇴
 	@Override

@@ -13,6 +13,7 @@
 }
 a{
     text-decoration: none;
+    color: black;
 }
 
 
@@ -25,6 +26,12 @@ a{
 .requestPhoto img{
     width: 100%;
     height: 100%;
+}
+.requestPhotos{
+    margin-top: 20px;
+}
+.requestPhotos img{
+    width: 100%;
 }
 
 .requestContent{
@@ -77,6 +84,10 @@ a{
     left:220px;
     top:-120px;
 }
+.userNickName{
+    margin-bottom: 50px;
+    text-align: end;
+}
 
 
 /* 구매하기 버튼 */
@@ -119,14 +130,10 @@ a{
 }
 
 .detailInner{
-    width: 1200px;
-    height: 700px;
-    border:1px solid black;
-}
-.detailInner > div{
     margin-top: 100px;
+    width: 1200px;
+    box-sizing:border-box;
 }
-
 
 .modal{
 	position:absolute;
