@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.manager.freelancer.common.message.model.vo.ChattingRoom;
+import com.manager.freelancer.common.message.model.vo.MemberReportFile;
 import com.manager.freelancer.common.message.model.vo.Message;
 
 @Repository
@@ -112,5 +113,31 @@ public class MessageDAO {
 	public ChattingRoom delectFLRoomNoClient(Map<String, Integer> map) {
 
 		return sqlSession.selectOne("messageMapper.delectFLRoomNoClient", map);
+	}
+
+	/**채팅방에서 회원 신고하기
+	 * @param parseInt
+	 * @param parseInt2
+	 * @param reportTitle
+	 * @param reportContent
+	 * @return
+	 */
+	public int memberReportUpdate(int reportedMemberNo, int reportMemberNo, String reportTitle, String reportContent) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberReportedNo", reportedMemberNo); //입력한 서비스 값
+		map.put("memberReportNo", reportMemberNo);
+		map.put("memberReportTitle", reportTitle);
+		map.put("memberReportContent", reportContent);
+		sqlSession.insert("myProjectRequest.memberReportUpdateSet", map);
+		int reportNum = (int)map.get("reportNo");
+		return reportNum;
+	}
+
+	/**채팅방에서 회원 신고하기 파일 업로드
+	 * @param reportFileList
+	 * @return
+	 */
+	public int insertReportFileList(List<MemberReportFile> reportFileList) {
+		return sqlSession.insert("myProjectRequest.insertReportFileListSet", reportFileList);
 	}
 }

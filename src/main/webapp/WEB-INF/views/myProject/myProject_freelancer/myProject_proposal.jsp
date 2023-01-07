@@ -59,7 +59,7 @@
                         <div id="proposalContent">
                             <div id="proposalTitle"><!-- ${proposal.proposalAdoptStatusString} --><c:choose>
                                     <c:when test="${proposal.proposalAdoptStatus == 1}">
-                                        <a href="#" id="proposalName" class="proposalName" suggestionName="">${proposal.projectRequestTitle}</a>
+                                        <a href="/projectRequest/projectRequestDetail/${proposal.projectRequestNo}" id="proposalName" class="proposalName" suggestionName="" target="_blank">${proposal.projectRequestTitle}</a>
                                     </c:when>
                                     <c:otherwise>
                                         <span id="proposalName" class="proposalName" suggestionName="">${proposal.projectRequestTitle}</span>
@@ -72,7 +72,7 @@
                             <div class="detail">
                                 <div id="proposalCategory">
                                     <div>모집분야</div>
-                                    <div>${proposal.mainCategotyName} > ${proposal.thirdCategotyName}</div>
+                                    <div>${proposal.mainCategoryName} > ${proposal.thirdCategoryName}</div>
                                 </div>
                                 <div id="proposalBubget">
                                     <div>예산</div>
