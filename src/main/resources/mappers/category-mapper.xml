@@ -87,6 +87,7 @@
   <resultMap type="AskService" id="askService_rm">
       <id property="serviceInquiryNo" column="SERVICE_INQUIRY_NO"/>
       <result property="serviceInquiryContent" column="SERVICE_INQUIRY_CONTENT"/>
+      <result property="serviceInquiryCreateDate" column="SERVICE_INQUIRY_CREATE_DATE"/>
       <result property="memberNo" column="MEMBER_NO"/>
       <result property="serviceNo" column="SERVICE_NO"/>
       <result property="serviceTitle" column="SERVICE_TITLE"/>
@@ -332,7 +333,8 @@
 	
 	<!-- 서비스 문의 보기 -->
 	<select id="selectSendSuggesion" resultMap="askService_rm">
-		SELECT SERVICE_NO, MEMBER_NO,SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY, SERVICE_INQUIRY_NO 
+		SELECT SERVICE_NO, MEMBER_NO,SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY, SERVICE_INQUIRY_NO,
+		 TO_CHAR(SERVICE_INQUIRY_CREATE_DATE, 'YYYY"-"MM"-"DD') SERVICE_INQUIRY_CREATE_DATE
 		FROM SERVICE_INQUIRY 
 		JOIN SERVICE USING(SERVICE_NO)
 		WHERE MEMBER_NO=#{memberNo}
