@@ -200,25 +200,36 @@ public class MyProjectDAO {
 		
 		// 서비스 테이블 등록
 		int result = sqlSession.insert("myProjectMapper.serviceInsert",myProject);
+		System.out.println("서비스 테이블 삽입:" +result);
 		
 		if(result>0){
-			
 			// 거래 테이블 등록 
 			result = sqlSession.insert("myProjectMapper.tradeInsert",myProject);
+			System.out.println("거래 테이블 삽입:" +result);
 			
 			if(result>0) {
 				
 				// 정산 테이블 등록
 				result = sqlSession.insert("myProjectMapper.settlementInsert",myProject);
+				System.out.println("정산 테이블 삽입:" +result);
 				
 				if(result>0) {
 					
 					// 프로젝트 상태 모집마감으로 변경
 					result = sqlSession.update("myProjectMapper.requestStatusChange",myProject);
-					// 채택된 제안 상태 채택으로 변경 
-					result = sqlSession.update("myProjectMapper.proposalStatusChange",myProject);
-					// 채택되지 않은 제안 상태 모집마감으로 변경 
-					result = sqlSession.update("myProjectMapper.proposalStatusChange_adopt",myProject);
+					System.out.println("프로젝트 상태 변경:" +result);
+					
+					if(result>0) {
+						
+						// 채택되지 않은 제안 상태 모집마감으로 변경 
+						result = sqlSession.update("myProjectMapper.proposalStatusChange_adopt",myProject);
+						System.out.println("채택되지 제안 상태 변경 :" +result);
+						
+						// 채택된 제안 상태 채택으로 변경 
+						result = sqlSession.update("myProjectMapper.proposalStatusChange",myProject);
+						System.out.println("채택된 제안 상태 변경 :" +result);
+						
+					}
 					
 				}
 				
@@ -226,6 +237,7 @@ public class MyProjectDAO {
 			
 		}
 		
+		System.out.println(result);
 		return result;
 	}
 

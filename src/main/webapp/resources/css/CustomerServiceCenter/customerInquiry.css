@@ -70,16 +70,16 @@
 /* =============================== */
 /* hover 했을 경우*/
 #titleInput:hover{
-    border: 2px solid #538126;
+    border: 1px solid #538126;
 }
 .inquirySubmit select:hover{
-    border: 2px solid #538126;
+    border: 1px solid #538126;
 }
 .inquirySubmit textarea:hover{
-    border: 2px solid #538126;
+    border: 1px solid #538126;
 }
 .boardImg label:hover{
-    border: 2px solid #538126;
+    border: 1px solid #538126;
 }
 /* =============================== */
 
@@ -116,18 +116,17 @@
     border-radius: 5px;
     text-decoration: none;
     color: #fff;
-    font-size: 17px;
+    font-size: 19px;
 }
 .inquiryInsert:hover{
     background-color:#4c7722;
     cursor: pointer;
-    font-size: 18px;
 }
 
 #goToMain{
     margin-left: 10px;
     width: 320px;
-    height: 50px;
+    height: 49px;
     background-color: #fff;
     border:1px solid #538126;
     cursor: pointer;
@@ -141,7 +140,7 @@
 
 #goToMain:hover{
     background-color: #4c7722;
-    font-size: 18px;
+    font-size: 17px;
     cursor: pointer;
     color: #fff;
 
