@@ -37,17 +37,17 @@
 
 .expertName{
     position: absolute;
-    left:230px;
+    left:200px;
     top:30px;
     font-size: 20px;
 }
 
 .expertOther{
-    width:250px;
+    width:330px;
     height: 150px;
     position: absolute;
-    right:0px;
-    top: 30px;
+    right:-370px;
+    top: -5px;
     font-size: 15px;
     display: flex;
     flex-direction: column;
@@ -155,7 +155,7 @@
     /* border: 1px solid black; */
     padding: 5px;
     border-radius: 10px;
-    margin-left: 5px;
+    /* margin-left: 5px; */
     background-color: gray;
 }
 .plus{
@@ -217,3 +217,20 @@
 .hidden{
 	display:none;
 }
+
+
+
+.eeTitle{
+	width:370px;
+	/* position:relative; */
+}
+.eeTT{
+	display:inline-block;
+	width:100px;
+	/* position:relative; */
+}
+/*
+.eeContent{
+	position:absolute;
+	right:0;
+} */

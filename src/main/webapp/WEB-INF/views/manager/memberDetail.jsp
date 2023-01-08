@@ -32,23 +32,22 @@
 				<div>${member.memberName }</div>
 				<div class="expertOther">
 					<div class="ee">
-						<div class="eeTitle">이메일 </div>
-						<span class="eeContent">${member.memberEmail}</span>
+						<div class="eeTitle"><span class="eeTT">이메일</span> 	<span class="eeContent">${member.memberEmail}</span></div>
+					
 					</div>
 					<div class="ee">
-						<div class="eeTitle">전화번호 </div>
-						<span class="eeContent">${member.memberTel}</span>
+						<div class="eeTitle"><span class="eeTT">전화번호</span> <span class="eeContent">${member.memberTel}</span></div>
+						
 					</div>
 					<div class="ee">
-						<div class="eeTitle">직업 </div>
-						<span class="eeContent">${member.memberJob}</span>
+						<div class="eeTitle"><span class="eeTT">직업</span> <span class="eeContent">${member.memberJob}</span></div>
+						
 					</div>
 					
-					<div></div>
-					<div></div>
+					
 					<div class="ee">
-						<div class="eeTitle">관심 분야</div>
-						<div>
+						<div class="eeTitle">
+						<div><span class="eeTT">관심 분야</span> 
 							<c:forEach var="interest" items="${fn:split(member.memberInterest,',') }">
 								<c:choose>
 									<c:when test="${interest == 1}">
@@ -68,6 +67,7 @@
 									</c:when>
 								</c:choose>
 							</c:forEach>
+						</div>
 						</div>
 					</div>
 				</div>
