@@ -133,7 +133,6 @@
 
                     <!-- 끝 페이지로 이동 -->
                     <li><a href="/category/${mainCategoryNo}/${thirdCategoryNo}?cp=${pagination.maxPage}">&gt;&gt;</a></li>
-
                 </ul>
             </div>
     </section>
@@ -142,16 +141,17 @@
     
 
 
-	
      <script>
         
         const memberNo="${loginMember.memberNo}";
-        const mainCategoryNo="${mainCategoryNo}";
+        const main1="${map.mainCategoryNo}";
+        const third1="${map.thirdCategoryNo}";
      
     </script>	
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>	
 
 
- 	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>	
+ 	
 	 <script src="/resources/js/category/categoryList.js"></script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
