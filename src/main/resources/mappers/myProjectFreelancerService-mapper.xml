@@ -20,6 +20,8 @@
 	      <result property="serviceCreateDate" column="SERVICE_CREATE_DATE" />		<!-- 서비스 등록일 -->
 	      <result property="serviceDelFL" column="SERVICE_DEL_FL" />							<!-- 서비스 삭제여부 -->
 	      <result property="likeCheckFL" column="LIKE_CHECK_FL" />							<!-- 서비스 삭제여부 -->
+	      <result property="sellCount" column="SALE_COUNT" />							<!-- 서비스 삭제여부 -->
+	      <result property="reviewPoint" column="REVIEW_POINT" />							<!-- 서비스 삭제여부 -->
 	      
 	      <!-- 서비스 첨부파일 -->
 	      <result property="serviceFileNo" column="REQUEST_FILE_NO"/> 						<!-- 서비스 첨부파일 번호 SEQUENCE: SEQ_SERVICE_FILE_NO -->
