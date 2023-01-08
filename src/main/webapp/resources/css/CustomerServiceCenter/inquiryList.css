@@ -131,8 +131,9 @@ table a{
     width: 100px;
     height: 45px;
 }
-#inquirySearch select:hover{
+#inquirySearch select:focus{
     border: 1px solid #538126;
+    outline: 1px solid #538126;
 }
 /* 하단 검색창 input */
 #inquirySearch input{
@@ -141,8 +142,9 @@ table a{
     margin-left: 10px;
     padding-left: 15px;
 }
-#inquirySearch input:hover{
+#inquirySearch input:focus{
     border: 1px solid #538126;
+    outline: 1px solid #538126;
     height: 39px;
 }
 

@@ -47,6 +47,7 @@
 		
 		<!-- 거래 번호 -->
 		<result property="tradeNo" column="TRADE_NO" />                                          <!-- 거래 번호 -->
+		
   	</resultMap> 
   	
   	<!-- 메인 카테고리 들고오기 -->
@@ -70,6 +71,7 @@
 		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
+		AND REQUEST_FILE_ORDER = 0
 		ORDER BY PROJECT_REQUEST_CREATE_DATE DESC
     </select>
 
@@ -167,6 +169,7 @@
 		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
+		AND REQUEST_FILE_ORDER = 0
 			<if test='optionVal eq "0"'>
 				ORDER BY PROJECT_REQUEST_NO DESC 
 			</if>
@@ -212,6 +215,7 @@
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
+		AND REQUEST_FILE_ORDER = 0
 			<if test='optionVal eq "0"'>
 				ORDER BY PROJECT_REQUEST_NO DESC 
 			</if>

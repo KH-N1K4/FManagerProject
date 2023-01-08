@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="myProject" value="${myProject}"/>
 
 <!DOCTYPE html>
@@ -70,6 +71,7 @@
 			                      <%-- 프로젝트 사진 --%>
 			                      <div class="projuctContent_image">
 			                        <img  src="${myProject.requestFilePath}">
+			                        <%-- ${myProject.projectFileList} --%>
 			                      </div>
 			                      <%-- 프로젝트 사진 --%>
                             
@@ -100,10 +102,9 @@
 						                            <div class="info_content_list"> 
 						                              <div class="list_title"><span>예산</span></div>
 						                              <div class="list_content">   
-						                                <span>${myProject.projectRequestBudget}</span> 
+						                                <span><fmt:formatNumber value="${myProject.projectRequestBudget}"/>원</span> 
 						                              </div>
 						                            </div>
-						                            
                                         <%-- 모집마감일 --%>
 						                            <div class="info_content_list"> 
 						                              <div class="list_title"><span>모집마감일</span></div> 
