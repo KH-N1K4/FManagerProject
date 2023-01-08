@@ -20,3 +20,7 @@
 .searchButton{
   cursor: pointer;
 }
+
+#search-input{
+  outline: none;
+}

@@ -211,7 +211,7 @@ for(f of finishBtn){
                   td6.append(cancelBtn);
                   td6.append(document.createTextNode(" "));
                   td6.append(reportBtn);
-                } else if((purchase.workStatus==2 || purchase.workStatus==4) && purchase.memberDoneFL==2){
+                } else if(purchase.workStatus==2 && purchase.memberDoneFL==2){
                   td6.append(reviewCreateBtn);
                 }
                 tr.append(td6);

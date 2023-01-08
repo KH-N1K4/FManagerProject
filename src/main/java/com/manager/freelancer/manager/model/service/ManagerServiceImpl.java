@@ -420,6 +420,10 @@ public class ManagerServiceImpl implements ManagerService {
 		if (result > 0) {
 			result = dao.updateStatus(pm);
 		}
+		
+		if(result>0) {
+			result=dao.updateReportStatus(pm);
+		}
 
 		return result;
 	}

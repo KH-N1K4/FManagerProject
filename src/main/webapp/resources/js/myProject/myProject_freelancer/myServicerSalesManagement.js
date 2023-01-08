@@ -19,6 +19,11 @@ $("#srchOption1").change(function(){
 });
 
 $('#searchInput').keyup(function(){
+  if ($(this).val().trim() == "")
+		{
+			$('#searchboxInclude').children().remove();
+			return;
+		}
     var txt = $(this).val();
     if(txt != ''){  //빈줄이 아니면 
         $('#searchboxInclude').children().remove();
@@ -157,7 +162,7 @@ $('#searchInput').click(function(){
 });
 
 /* 입력창 포커스아웃시 제거 안됨*/
-$('#searchboxRelative').mouseleave(function(){
+document.addEventListener("click", e => {
   
   $('#searchboxInclude').children().remove();
 
