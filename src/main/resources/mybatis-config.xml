@@ -19,7 +19,6 @@
 	<!-- VO클래스의 패키지명 + 클래스명 작성하는 것이 불편하기 때문에 짧은 별칭 부여 com.manager.freelancer.main-->
 	<typeAliases>
 
-		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
 		<typeAlias type="com.manager.freelancer.member.model.vo.Member" alias="Member"/>
 		
 		
@@ -39,7 +38,6 @@
 		
 		
 		
-		<typeAlias type="com.manager.freelancer.main.model.vo.MainProduct" alias="MainProduct"/>
 		
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiry" alias="UserInquiry"/>
 		<typeAlias type="com.manager.freelancer.customerCenter.model.vo.UserInquiryImage" alias="UserInquiryImage"/>
