@@ -28,7 +28,7 @@
           </div>
           <div class="myprojectReport_list" id="fileadd">
             <div class="list_title"><span>첨부파일</span></div>
-            <div class="list_content fileRemove"><input type = "file" name="reportFilePath" id="reportFilePath"></div>
+            <div class="list_content fileRemove" id="reportFile"><input type = "file" name="reportFilePath" id="reportFilePath"></div>
           </div>
           <div class="btnDiv" ><button id="ajaxReview">신고하기</button></div>
     </div>
