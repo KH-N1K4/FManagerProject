@@ -15,18 +15,18 @@ import javax.servlet.http.HttpSession;
 
 import com.manager.freelancer.member.model.vo.Member;
 
-@WebFilter(filterName="freelancerFilter", // 필터 이름, 필터가 여러 개 존재할 때 순서 지정 시 사용
-			urlPatterns = {"/member/myProject/freelancer/*"} ) // 필터링한 요청 주소(패턴 가능)
-public class FreelancerFilter implements Filter{
+@WebFilter(filterName="GoManagerToPageFilter", // 필터 이름, 필터가 여러 개 존재할 때 순서 지정 시 사용
+			urlPatterns = {"/member/myProject/*"} ) // 필터링한 요청 주소(패턴 가능)
+public class GoManagerToPageFilter implements Filter{
 	
 	public void init(FilterConfig fConfig) throws ServletException {
 		// 필터 생성 시 수행
-		System.out.println("프리랜서 필터 생성");
+		System.out.println("관리자가 들어가면 안되는 페이지 필터 생성");
 	}
 
 	public void destroy() {
 		// 서버 실행 중 필터 내용 변경 시 수행 후 init() 다시 수행
-		System.out.println("프리랜서 필터 파괴");
+		System.out.println("관리자가 들어가면 안되는 페이지 필터 파괴");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -44,7 +44,7 @@ public class FreelancerFilter implements Filter{
 			resp.sendRedirect("/"); // 메인페이지로 redirect
 		} else { 
 			// 연결된 다음 필터로 이동(없으면 Servlet / JSP로 이동)
-			if(((Member)session.getAttribute("loginMember")).getFreelancerFL().equals("N")) {// 프리랜서권한이 없을 때
+			if(((Member)session.getAttribute("loginMember")).getAuthority()==2) {// 프리랜서권한이 없을 때
 				resp.sendRedirect("/");
 			} else {// 프리랜서 권한이 있을 때
 				chain.doFilter(request, response);			
