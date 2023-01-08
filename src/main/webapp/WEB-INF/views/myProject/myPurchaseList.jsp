@@ -104,14 +104,18 @@
 
                     <c:if test="${not empty purchaseList}">
                       <c:forEach var="purchase" items="${purchaseList}">
+                      
                         <tr class="suggestionTable" suggestionNumeber="">
+                       
                           <td class="tc">
+                           
                             <span class="num">${i=i+1}</span>
                           </td>
+                         
                           <td class="tl">
                             <div class="suggestion_name_area td_link">
                               <c:choose>
-                                <c:when test="${purchase.seviceDeleteFlag eq 'N' && purchase.serviceStatus == 2}"><a href="/category/${purchase.mainCategoryNo}/${purchase.subCategoryNo}/${purchase.thirdCategoryNo}/${purchase.serviceNo}" id="serviceName" class="serviceName serviceNameAtag" serviceName="" target="_blank">${purchase.serviceTitle}</a></c:when>
+                                <c:when test="${purchase.seviceDeleteFlag eq 'N' && purchase.serviceStatus == 2}"><a href="/category/${purchase.mainCategoryNo}/${purchase.subCategoryNo}/${purchase.thirdCategoryNo}/${purchase.serviceNo}" id="serviceName" class="serviceName serviceNameAtag" serviceName="" target="_blank"> ${purchase.serviceTitle }</a></c:when>
                                 <c:otherwise><span id="serviceName" class="serviceName noSalesSevice" serviceName="">${purchase.serviceTitle}</span></c:otherwise>
                               </c:choose>
                             </div>
@@ -153,6 +157,7 @@
                           <input type="hidden" id="hiddenFilePath" value="${purchase.filePath}">           
                           <input type="hidden" id="hiddenTradeReportTypeName" value="${purchase.tradeReportTypeName}">           
                           <input type="hidden" id="hiddenReportContent" value="${purchase.reportContent}">           
+                          <input type="hidden" id="hiddenTradeReportTypeNo" value="${purchase.tradeReportTypeNo}">           
                         </tr>
                       </c:forEach>
                     </c:if>

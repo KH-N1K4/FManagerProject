@@ -11,7 +11,8 @@
       <form action="/member/myProject/tradeReport" method="POST" id="tradeReportFrm"  enctype="multipart/form-data">
       <div class="myprojectReport">
           <div class="title">
-            <select  id = "selectType" class="srchOption box" name="tradeReportTypeNo">
+          	<c:if test=""></c:if>
+            <select  id = "selectType1" class="srchOption box" name="tradeReportTypeNo">
               <option value="0">선택</option>
               <option value="1">거래 신고</option>
               <option value="2">주문 취소</option>

@@ -314,6 +314,7 @@ for(f of finishBtn){
   });
 }
 
+
 /* 신고 모달 */
 function reportModal(){
   const reportBtn = document.querySelectorAll('.reportBtn');
@@ -334,14 +335,19 @@ function reportModal(){
       document.getElementById("tradeNo").value=e.target.parentElement.nextElementSibling.value;
       document.getElementById("memberName").value=e.target.parentElement.nextElementSibling.nextElementSibling.value;
       document.getElementById("memberNo").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.value;
-      document.getElementById("reportContent").setAttribute("readonly", false);
 
-      if(document.querySelector(".fileRemove").classList.contains("none")){
-        document.querySelector(".fileRemove").classList.remove("none");
+      if(document.querySelector(".fileRemove")!=null){
+        if(document.querySelector(".fileRemove").classList.contains("none")){
+          document.querySelector(".fileRemove").classList.remove("none");
+        }
+
       }
       
       document.getElementById("reportContent").value="";
-      document.getElementById('reportFilePath1').value='';
+      if(document.getElementById('reportFilePath1')!=null){
+        document.getElementById('reportFilePath1').value='';
+
+      }
       
       if(!document.querySelector(".ajaxReview").classList.contains("show")){
         document.querySelector(".ajaxReview").classList.add("show");
@@ -355,7 +361,14 @@ function reportModal(){
 
       fileadd.innerHTML="";
       
+      // 신고가 완료된 경우?
       if(e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value!=0){
+        selected=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
+        selectedControl(selected);
+
+        fileadd.innerHTML="";
+      document.getElementById("reportContent").setAttribute("readonly", false);
+        
         
         document.getElementById("selectType").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
         document.getElementById("reportContent").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
@@ -372,6 +385,11 @@ function reportModal(){
           document.querySelector(".ajaxReview").classList.remove("show");
         }
 
+        // <div class="list_title" style="margin-right:0;"><span>첨부파일</span></div>
+        // <div class="list_content fileRemove"><input type = "file" name="reportFilePath" id="reportFilePath1" accept="image/*" ></div> 
+
+        
+
         if(src != null){
           /* document.querySelector('#reportFilePath').value = arg.reportFilePath; */
           
@@ -380,9 +398,33 @@ function reportModal(){
 
         }
 
-
       
-      }
+      }else{
+        document.getElementById("selectType1").removeAttribute("disabled");
+        document.getElementById("reportContent").removeAttribute("readonly");
+        const fileDiv=document.createElement("div");
+        fileDiv.classList.add("list_title");
+        const filespan=document.createElement("span");
+        filespan.innerHTML="첨부파일";
+
+        fileDiv.append(filespan);
+
+        const fileRemoveDiv=document.createElement("div");
+        fileRemoveDiv.classList.add("list_content");
+        fileRemoveDiv.classList.add("fileRemove");
+        const inputfile=document.createElement("input");
+        inputfile.type="file";
+        inputfile.name="reportFilePath";
+        inputfile.id="reportFilePath1";
+        inputfile.accept="image/*"
+
+        fileRemoveDiv.append(inputfile);
+
+
+          fileadd.append(fileDiv);
+          fileadd.append(fileRemoveDiv);
+        }
+
       
 
 
@@ -390,6 +432,7 @@ function reportModal(){
       reportModalClose.addEventListener("click",()=>{
         if (reportModal.classList.contains('show')) {
           reportModal.classList.remove('show');
+          //fileadd.innerHTML="";
         }
 
         if (!reportModal.classList.contains('show')) {
@@ -474,6 +517,19 @@ reviewfrm.addEventListener("submit",e=>{
 
 });
 
-
+function selectedControl(selected){
+  console.log(selected);
+  const el = document.getElementById('selectType1');  //select box
+  const len = el.options.length; //select box의 option 갯수
+  const str = selected;
+  //select box의 option 갯수만큼 for문 돌림
+  for (let i=0; i<len; i++){  
+  	//select box의 option value가 입력 받은 value의 값과 일치할 경우 selected
+    if(el.options[i].value == str){
+    	el.options[i].selected = true;
+    }
+  }  
+  el.setAttribute("disabled", true);
+}
 
 
