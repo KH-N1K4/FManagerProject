@@ -11,7 +11,7 @@
 <title>일반 회원 정보</title>
 
 
-<link rel="stylesheet" href="/resources/css/manager/expertDetail.css">
+<link rel="stylesheet" href="/resources/css/manager/memberDetail.css">
 <style>
 </style>
 </head>
@@ -32,23 +32,22 @@
 				<div>${member.memberName }</div>
 				<div class="expertOther">
 					<div class="ee">
-						<div class="eeTitle">이메일 </div>
-						<span class="eeContent">${member.memberEmail}</span>
+						<div class="eeTitle"><span class="eeTT">이메일</span> 	<span class="eeContent">${member.memberEmail}</span></div>
+					
 					</div>
 					<div class="ee">
-						<div class="eeTitle">전화번호 </div>
-						<span class="eeContent">${member.memberTel}</span>
+						<div class="eeTitle"><span class="eeTT">전화번호</span> <span class="eeContent">${member.memberTel}</span></div>
+						
 					</div>
 					<div class="ee">
-						<div class="eeTitle">직업 </div>
-						<span class="eeContent">${member.memberJob}</span>
+						<div class="eeTitle"><span class="eeTT">직업</span> <span class="eeContent">${member.memberJob}</span></div>
+						
 					</div>
 					
-					<div></div>
-					<div></div>
+					
 					<div class="ee">
-						<div class="eeTitle">관심 분야</div>
-						<div>
+						<div class="eeTitle">
+						<div><span class="eeTT">관심 분야</span> 
 							<c:forEach var="interest" items="${fn:split(member.memberInterest,',') }">
 								<c:choose>
 									<c:when test="${interest == 1}">
@@ -69,6 +68,7 @@
 								</c:choose>
 							</c:forEach>
 						</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -78,10 +78,6 @@
 
 
 
-
-	<div class="modal_portfolioDetail">
-		<jsp:include page="/WEB-INF/views/member/freelancer/portfolioDetail.jsp" />
-	</div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
