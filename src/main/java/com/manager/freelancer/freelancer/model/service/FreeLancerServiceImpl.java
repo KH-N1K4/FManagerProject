@@ -41,9 +41,6 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 		
 
 		int result = dao.enrollFreelancerSignup(inputFreelancer);
-		
-		System.out.println(inputFreelancer);
-		
 
 		if(inputFreelancer.getMajor()!=null) {
 			
@@ -194,40 +191,111 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 
 		int result = dao.updateFreelancerInfo(inputFreelancer);
 		
-		
-		if(inputFreelancer.getCareer()!=null) { // 수정하기의 경력사항 input값에 값이 담겨있다면
-			String[] splitCareer = inputFreelancer.getCareer().split("/");
-			Career temp1Career = new Career();
-			temp1Career.setCareerCompanyName(splitCareer[0]);
-			temp1Career.setCareerCompanyDepartment(splitCareer[1]);
-			temp1Career.setCareerCompanyPosition(splitCareer[2]);
-			temp1Career.setCareerCompanyRegion(splitCareer[3]);
-			temp1Career.setCareerCompanyPeriod(splitCareer[4]);
-			temp1Career.setFreelancerNo(inputFreelancer.getFreelancerNo());
-			
-			result = dao.updateFreelancerCareer(temp1Career);
+		if(result>0) {
+			result = dao.deleteMajor(inputFreelancer.getFreelancerNo());
+			result = dao.deleteLicense(inputFreelancer.getFreelancerNo());
+			result = dao.deleteCareer(inputFreelancer.getFreelancerNo());
+			result = dao.deleteField(inputFreelancer.getFreelancerNo());
 		}
+		
+		if(inputFreelancer.getMajor()!=null) {
+			
+			String[] splitMajor = inputFreelancer.getMajor().split(",");
+			
+			int tempNum=0;
+			for(int i=0;i<splitMajor.length;i++) {
+				String[] singleMajor=splitMajor[i].split("/");
+				
+				Major temp1 = new Major();
+				temp1.setMajorAcademyName(singleMajor[0]);
+				temp1.setMajorName(singleMajor[1]);
+				
+				
+				if(singleMajor[2].equals("재학")) {
+					tempNum=1;
+				}else if(singleMajor[2].equals("휴학")) {
+					tempNum=2;
+				}else if(singleMajor[2].equals("이수")) {
+					tempNum=3;
+				}else if(singleMajor[2].equals("졸업")) {
+					tempNum=4;
+				}
+				
+				temp1.setMajorGraduateStatus(tempNum);
+				temp1.setFreelancerNo(inputFreelancer.getFreelancerNo());
+				
+				result = dao.enrollFreelancerMajor(temp1);
+			}
+			
+		}
+		
+		
+		
+		
+		if(inputFreelancer.getCareer()!=null) {
+			String[] splitCareer = inputFreelancer.getCareer().split(",");
+			
+			for(int i=0;i<splitCareer.length;i++) {
+				
+				String[] singleCareer=splitCareer[i].split("/");
+				
+				Career temp2 = new Career();
+				temp2.setCareerCompanyName(singleCareer[0]); // 회사명
+				temp2.setCareerCompanyDepartment(singleCareer[1]); //회사부서
+				temp2.setCareerCompanyPosition(singleCareer[2]); // 직급
+				temp2.setCareerCompanyRegion(singleCareer[3]);  // 회사위치
+				temp2.setCareerCompanyPeriod1(singleCareer[4]); //경력(년)
+				temp2.setFreelancerNo(inputFreelancer.getFreelancerNo()); 
+				
+				result=dao.enrollFreelancerCareer(temp2);
+			}
+			
+			
+		}
+	
+		
+		
 		if(inputFreelancer.getLicense()!=null) {
-			String[] splitLicense = inputFreelancer.getLicense().split("/");
-			License temp2License = new License();
-		
-			temp2License.setLicenseName(splitLicense[0]);
-			temp2License.setLicenseDate(splitLicense[1]);
-			temp2License.setLicenseAgency(splitLicense[2]);
-			temp2License.setFreelancerNo(inputFreelancer.getFreelancerNo());
 			
-			result = dao.updatefreelancerLicense(temp2License);
+			String[] splitLicense = inputFreelancer.getLicense().split(",");
+			
+			for(int i=0;i<splitLicense.length;i++) {
+				
+				String[] singleCareer=splitLicense[i].split("/");
+				License temp3 = new License();
+				
+				temp3.setLicenseName(singleCareer[0]);
+				temp3.setLicenseDate(singleCareer[1]);
+				temp3.setLicenseAgency(singleCareer[2]);
+				temp3.setFreelancerNo(inputFreelancer.getFreelancerNo());
+				
+				result=dao.enrollfreelancerLicense(temp3);
+			}
 		}
-//			int inputBankCode = inputFreelancer.getBankCode();
-//			long inputBankAccount = inputFreelancer.getBankAccountNumber();
-//		if(inputBankCode != 0 && inputBankAccount != 0) {
-//			//조건문 수정 필요
-//			
-//					
-//		}
-		if(result > 0 ) {
+		
+		
+		
+		// result = frelancerNo
+		String freelancerFieldList = inputFreelancer.getFreelancerField();
+		if(freelancerFieldList !=null) {
+			String[] freelancerField = freelancerFieldList.split(",");
+
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("freelancerNo", inputFreelancer.getFreelancerNo()+""); // "" > String형으로 바꿔주기위해
+
+			for(int i =0; i<freelancerField.length; i++) {
+				map.put("freelancerField",  freelancerField[i]);
+
+				result = dao.insertFreelancerField(map);
+			}
+
+		}
+		
+		
 		result = dao.updateFreelancerBank(inputFreelancer);
-		}
+		
+
+		
 		
 		return result;
 	}

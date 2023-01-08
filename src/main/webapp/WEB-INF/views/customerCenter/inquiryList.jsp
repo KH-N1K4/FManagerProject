@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fmanager - 문의내역</title>
+    <title>Fmanager - 문의 내역</title>
     <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/inquiryList.css">
 </head>
 <body>
@@ -47,8 +47,9 @@
 
                     <section class="formBox">
                         <form action="/userInquiryList" id="selectForm"> 
-                            <div>진행 상태
-                                <select name="inquiryStatus" id="processStatus" onchange="selectChange()">
+                            <div> 
+                                <span id="processStatusTitle">진행 상태</span>
+                                <select name="inquiryStatus" id="processStatusSelect" onchange="selectChange()">
                                     <option value="0">전체</option> 
                                     <option value="1" ${inputValue1}>답변 완료</option> 
                                     <option value="2" ${inputValue2}>답변 대기</option> 

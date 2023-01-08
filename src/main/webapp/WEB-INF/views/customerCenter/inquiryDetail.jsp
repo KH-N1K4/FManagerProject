@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fmanager - 문의내역 상세보기</title>
+    <title>Fmanager - 문의 내역 상세보기</title>
     <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/inquiryDetail.css">
 
 </head>

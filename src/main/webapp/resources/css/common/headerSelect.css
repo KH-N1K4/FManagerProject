@@ -1,0 +1,22 @@
+#suggestion_box > div.selected{
+  background-color: rgb(241 241 241);
+}
+
+#suggestion_box{
+  display: block;
+  position: absolute;
+  width: 520px;
+  z-index: 100;
+  background-color: white;
+  border: 1px solid #53812657;
+  font-size: 15px;
+}
+
+.Category{
+  padding: 3px 0;
+  border-bottom: 1px solid #54812617;
+}
+
+.searchButton{
+  cursor: pointer;
+}

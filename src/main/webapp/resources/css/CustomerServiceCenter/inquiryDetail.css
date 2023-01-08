@@ -91,11 +91,11 @@ table th{
 .question-answer{
     display: inline-block;
     width: 100px;
-    height: 24px;
+    height: 28px;
     text-align: center;
     color: white;
     border-radius: 5px;
-    line-height: 25px;
+    line-height: 28px;
     font-size: 14px;
     background-color: #538126
 }
@@ -104,9 +104,9 @@ table th{
 .question-wating{
     display: inline-block;
     width: 100px;
-    height: 24px;
+    height: 28px;
     text-align: center;
-    line-height: 25px;
+    line-height: 28px;
     color: white;
     border-radius: 5px;
     font-size: 14px;

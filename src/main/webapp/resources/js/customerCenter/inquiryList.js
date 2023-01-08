@@ -7,7 +7,7 @@ function selectChange() {
     // 게시글 내용 영역
     const contentArea = document.querySelectorAll(".contentArea");
     // 진행상태 select
-    const processStatus = document.getElementById("processStatus");
+    const processStatus = document.getElementById("processStatusSelect");
     // 진행상태 selectBox value
     const table = document.getElementById("table");
     const optionVal = (processStatus.options[processStatus.selectedIndex].value);
@@ -41,9 +41,6 @@ function selectChange() {
                 
                 
                 if(map.inquiryList.length != 0){ // 게시글이 존재할 때
-                    console.log('아????')    
-                    console.log(map.inquiryList.length)    
-                    console.log(map.inquiryList)
                     for (userInquiry of map.inquiryList) {
 
                             const tr = document.createElement("tr");
@@ -62,7 +59,7 @@ function selectChange() {
                             tr.append(td2);
 
                             const td3 = document.createElement("td");
-                            td3.innerText=userInquiry.userInquiryCreateDate;
+                            td3.innerText = userInquiry.userInquiryCreateDate;
                             tr.append(td3);
 
                         if(userInquiry.inquiryRequest == null){  // 답변이 없을 때
