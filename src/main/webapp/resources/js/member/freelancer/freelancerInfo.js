@@ -18,7 +18,7 @@ btnOpenPopup1.addEventListener('click', () =>{
     modal1.style.display= 'block';
     if(modal1.classList.contains('show')){
         body1.style.display ='block';
-        // body.style.overflow = 'hidden';
+        mainBody.style.overflow = 'hidden';
     }
 })
 
@@ -26,7 +26,7 @@ btnOpenPopup1.addEventListener('click', () =>{
 modalClose1.addEventListener('click', ()=>{
 
     modal1.style.display ='none';
-    // body.style.overflow='visible';
+    mainBody.style.overflow='visible';
     portfolioTitle.value='';
     portfolioContent.value='';
     document.getElementById('image-input1').value = null;
@@ -83,6 +83,7 @@ for(let portfolio of clickPortfolio){
         modal2.style.display= 'block';
         body2.style.display ='block';
         mainBody.style.overflow = 'hidden';
+        // mainBody.style.backgroundColor = 'skyblue';
     } )
 }
 

@@ -104,7 +104,7 @@
         	 <c:forEach var="service" items="${freelancer.fserviceList}">
 	        	 <a href="/service/${service.serviceNo }">
 	                <div class="serviceOne">
-	                    <div class="servicePhoto"><img alt="" src="${service.requestFilePath }> </div>
+	                    <div class="servicePhoto"><img alt="" src="${service.requestFilePath }"> </div>
 	                    <div class="serviceOneTitle">${service.serviceTitle}</div>
 	                    <div class="serviceSubTitle">${service.serviceSummary}</div>
 	                    <div class="serviceOther">
