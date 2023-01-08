@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fmanager - 고객센터 문의하기</title>
+    <title>Fmanager - 문의하기</title>
     <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/customerInquiry.css">
     <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/serviceCenter.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

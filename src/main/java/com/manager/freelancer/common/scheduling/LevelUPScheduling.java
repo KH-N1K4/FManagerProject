@@ -29,7 +29,7 @@ public class LevelUPScheduling {
 			   FROM DUAL;   
 			   RETURN RES;
 			END;
-			-- FN_DT1 (클라이언트용)
+			-- FN_DT2 (스케줄러용)
 			CREATE OR REPLACE FUNCTION FN_DT2
 			RETURN DATE
 			IS

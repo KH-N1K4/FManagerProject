@@ -85,6 +85,9 @@
   color: black;
   font-size: 20px;
 }
+.myProject_register span:hover{/* > span */
+  color: #538126;
+}
 
 .container_header_right{
   display: flex;
@@ -102,13 +105,6 @@
   justify-content: center;
 }
 
-/* .myProject_link{
-  display: flex;
-  flex-direction: row;
-  text-decoration: none;
-  cursor: pointer;
-  color: black;
-} */
 .projuctContent_image{
   margin-right: 30px;
 }
@@ -133,6 +129,9 @@
 }
 .info_title a{
   color: black;
+}
+.info_title a:hover{
+  color: #538126;
 }
 
 .info_content{

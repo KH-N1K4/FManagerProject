@@ -3,10 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%-- <c:set var="freelancerIntro" value="${freelancer.freelancerIntro}"/> --%>
-<%-- <c:set var="portfolioList" value="${freelancer1.portfolioList}"/>
-<c:set var="freelancerNo" value="${freelancer1.freelancerNo}"/> --%>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -96,6 +92,32 @@
                         <div class="item">기간</div>
                         <div>
                             <input type="text" name="" id="" value="${freelancer1.freelancerPeriod}"class="number" readonly> 년
+                        </div>
+                    </div>
+                    <div class="itemTitle">
+                        <div class="item">학력/전공</div>
+                        <div>
+                            <%-- <input type="text" name="" id=""value="${freelancer.careerCompanyName}/${freelancer.careerCompanyDepartment}/${freelancer.careerCompanyPosition}/${freelancer.careerCompanyRegion}/${freelancer.careerCompanyPeriod}"> --%>
+                            
+                           <%--  <c:forEach var ="major" items="${freelancer1.majorList}">
+                                <input type="text" name="" id="" value="${freelancer.licenseName}/${freelancer.licenseDate}/${freelancer.licenseAgency}">
+                                <div>
+                                <input type="text" name="" id="career" value="${career.careerCompanyName}/${career.careerCompanyDepartment}/${career.careerCompanyPosition}/${career.careerCompanyRegion}/${career.careerCompanyPeriod1}" readonly>
+                                </div>
+                            </c:forEach> --%>
+                            
+                             <c:forEach var="major" items="${freelancer1.majorList }">
+		                	  <c:if test="${major.majorGraduateStatus ==1}"><c:set var="majorStatus" value="재학"/> </c:if>
+		                	  <c:if test="${major.majorGraduateStatus ==2}"><c:set var="majorStatus" value="휴학"/> </c:if>
+		                	  <c:if test="${major.majorGraduateStatus ==3}"><c:set var="majorStatus" value="이수"/> </c:if>
+		                	  <c:if test="${major.majorGraduateStatus ==4}"><c:set var="majorStatus" value="졸업"/> </c:if>
+		                	 	<div class="newOne">
+							       	<input type="text" name="" id="career" 
+							       	value="${major.majorAcademyName }/${major.majorName }/${majorStatus }" readonly/>
+				                </div>
+						       </c:forEach>
+                        
+                        
                         </div>
                     </div>
                     <div class="itemTitle">
@@ -207,11 +229,3 @@
 
 </body>
 </html>
- <c:if test="${not empty message}">
-        <script>
-         alert("${message}");
-        </script>
-
-        <%-- message 1회 출력 후 모든 scope 삭제 --%>
-        <c:remove var="message"/>
-     </c:if>

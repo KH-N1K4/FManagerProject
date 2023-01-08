@@ -10,11 +10,16 @@
 
             <a id="logo" href="/"><img src="/resources/images/final_logo_color.png" alt=""></a>
 
+        <form action ="/searchService" class="SearchfrmMain" method="get" name="SearchfrmMain" id="SearchfrmMain">
             <div id="search">
-                <input type="text" placeholder="서비스명를 입력하세요" id="search-input">
+                
+                    <input type="text" placeholder="서비스명를 입력하세요" id="search-input" name="searchInput">
 
-                <span>▾</span>
+                    <span id="searchButton">▾</span>
+                    <div id="suggestion_box" style="display: none;"></div>
+                
             </div>
+        </form>
 
 
             <div class="header-top">
@@ -97,5 +102,9 @@
       
     </div>
     
+
+      <!-- jQuery  -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
     <script src="/resources/js/common/logout.js"></script>
     <script src="/resources/js/common/headerSelect.js"></script>

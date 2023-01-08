@@ -115,9 +115,9 @@
     
     <resultMap  type="Major" id="major_rm">
     	  <id property="majorNo" column="MAJOR_NO"/>
-	      <result property="majorAcademyName" column="MAJOR_ACADEMY_NAME"/>
+	      <result property="majorAcademyName" column="ACADEMY_NAME"/>
 	      <result property="majorName" column="MAJOR_NAME"/>
-	      <result property="majorGraduateStatus" column="MAJOR_GRADUATE_STATUS"/>
+	      <result property="majorGraduateStatus" column="GRADUATE_STATUS"/>
     </resultMap>
     
     <resultMap  type="Portfolio" id="portfolio_rm">
@@ -337,8 +337,7 @@
     		INSERT INTO PORTFOLIO VALUES
     		(SEQ_PORTFOLIO_NO.NEXTVAL,#{portfolioTitle}, #{portfolioContent},#{portfolioFilePath},#{freelancerNo}, #{portfolioThumbnail})
     	</insert>
-    	
-    	
+
     	<!-- 포트폴리오 상세 조회 -->
     	<select id="viewPortfolioDetail" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio">
     		
@@ -355,8 +354,16 @@
     			DELETE FROM PORTFOLIO WHERE FREELANCER_NO = #{freelancerNo} AND PORTFOLIO_NO = #{portfolioNo}
     	</delete>
     	
-    	<!-- <update id="updatePortfolio">
-    			
-    	
-    	</update> -->
+    	<delete id="deleteCareer">
+    			DELETE FROM CAREER WHERE FREELANCER_NO = #{freelancerNo}
+    	</delete>
+    	<delete id="deleteLicense">
+    			DELETE FROM LICENSE WHERE FREELANCER_NO = #{freelancerNo}
+    	</delete>
+    	<delete id="deleteMajor">
+    			DELETE FROM MAJOR WHERE FREELANCER_NO = #{freelancerNo}
+    	</delete>
+    	<delete id="deleteField">
+    			DELETE FROM FIELD WHERE FREELANCER_NO = #{freelancerNo}
+    	</delete>
 </mapper>
