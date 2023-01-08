@@ -305,7 +305,6 @@ if(requestSearchFrm != null){
 function modalShow() {
     const btnOpenPopup = document.querySelectorAll('.infoBtn');
     const body = document.querySelector('#mainBody');
-    const freelancer = document.querySelector('.freelancerArea');
     const memberModal = document.querySelector('.member-modal');
     const modalClose = document.querySelector('.modal_close');
     for (m of btnOpenPopup) {
@@ -330,6 +329,7 @@ function modalShow() {
                         document.getElementById("memberEmail").value = member.memberEmail
                         document.getElementById("memberTel").value = member.memberTel
                         document.getElementById("memberJob").value = member.memberJob
+                        document.getElementById("profile-image").setAttribute("src",member.memberProfile) 
 
                         $("#checkbox > input").prop("checked", false);
 
@@ -339,18 +339,7 @@ function modalShow() {
                                 document.querySelectorAll("#checkbox > input")[i - 1].checked = true;
                             }
                         }
-                        if (member.freelancerFlag == 'Y') {
-                            freelancer.classList.add('show');
-                            document.getElementById("freelancerIntroduction").innerText = member.freelancerIntroduction;
-                            document.getElementById("freelancerRegionName").innerText = member.regionName;
-                            document.getElementById("freelancerPeriod").innerText = member.freelancerPeriod;
-                            document.getElementById("freeContactTime1").innerText = member.freeContactTime1;
-                            document.getElementById("freeContactTime2").innerText = member.freeContactTime2;
-                            document.getElementById("freelancerBankName").value = member.freelancerBankName;
-                            document.getElementById("freelancerAccount").value = member.freelancerAccountNo;
-                        } else{
-                            freelancer.classList.remove('show');
-                        }
+                        
 
                     } else {
                         console.log('오류');

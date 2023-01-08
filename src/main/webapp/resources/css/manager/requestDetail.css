@@ -21,6 +21,10 @@
     height: 420px;
     border:1px solid black;
 }
+.servicePhoto>img{
+    width: 480px;
+    height: 420px;
+}
 
 .serviceContent{
     position: absolute;
@@ -46,6 +50,8 @@
 }
 .serviceInfo> span>:first-child{
     margin-right: 20px;
+    display: inline-block;
+    width: 120px;
 }
 
 /* 전문가 정보 */

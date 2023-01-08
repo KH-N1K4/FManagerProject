@@ -253,6 +253,12 @@ public interface ManagerService {
 	 */
 	Map<String, Object> managerprojectRequestList(Map<String, Object> pm, int cp);
 
+	/** 모달용 회원 정보
+	 * @param memberNo
+	 * @return
+	 */
+	Member selectMemberModal(int memberNo);
+
 	
 
 	

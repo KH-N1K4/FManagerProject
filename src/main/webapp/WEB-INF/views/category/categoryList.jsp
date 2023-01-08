@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>카테고리</title>
     
-    <link rel="stylesheet" href="/resources/css/category/projectRequest.css">
+    <link rel="stylesheet" href="/resources/css/category/categoryList.css">
     
      <script src="https://kit.fontawesome.com/f7459b8054.js" crossorigin="anonymous"></script>
 </head>
@@ -80,9 +80,11 @@
   
 	                        </div>
 	                        <a href="/service/${service.serviceNo }" class="imageTitle">
-	                        ${service.serviceTitle }
-	                        <span class="imageOthers">${service.serviceSummary }</span>
-	                        <span class="imageOthers">가격: ${service.servicePrice}원</span>
+	                        <span class="aaa" style="font-size:16px;">${service.serviceTitle }</span>
+	                        <span class="imageOthers aaa">${service.serviceSummary }</span>
+	                        <span class="imageOthers" style="margin-bottom:0px; text-align:end; font-size:16px;">${service.servicePriceString} 원</span>
+                            <span class="imageOthers right"><strong>평점</strong>  <strong>★ ${service.reviewPoint}</strong> </span>
+	                        <span class="imageOthers right"><strong>판매수</strong> <strong>${service.sellCount} 회</strong></span>
 	                        </a>
 	                     
 	                    </div>

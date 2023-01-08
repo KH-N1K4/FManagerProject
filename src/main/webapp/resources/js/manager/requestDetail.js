@@ -8,3 +8,4 @@ goToListbtn.addEventListener("click",() => {
         location.href = url;
 
 });
+

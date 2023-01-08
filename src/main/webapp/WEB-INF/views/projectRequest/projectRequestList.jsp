@@ -81,7 +81,7 @@
                                 <a href="/projectRequest/projectRequestDetail/${projectRequestVar.projectRequestNo}" class="imageTitle">
                                     <div class="projectRequestTitle">${projectRequestVar.projectRequestTitle}</div>
                                     <span class="imageOthers">${projectRequestVar.projectRequestSummary}</span>
-                                    <span class="imageOthers">가격: ${projectRequestVar.projectRequestBudgetString}원</span>
+                                    <span class="imageOthers">예산 : ${projectRequestVar.projectRequestBudgetString}원</span>
                                 </a>
                             </div>
                         <!-- </a> -->

@@ -108,9 +108,10 @@
     height: 225px;
 }
 #image{
-    min-height: 355px;
+    min-height: 405px;
     position:relative;
     margin-right:20px; 
+    margin-bottom: 15px;
 }
 
 #image>div{
@@ -154,6 +155,23 @@
     font-weight: bold;
     margin-bottom: 5px;
     position:relative;
+}
+.aaa{
+    display: block;
+    height: 38px;
+}
+
+.right{
+    width: 225px;
+    text-align: end; 
+    margin-bottom: 0px !important;
+}
+.right *{
+    font-size: 11px;
+}
+.right>strong:last-child{
+    display: inline-block;
+    width: 45px;
 }
 
 a{

@@ -675,6 +675,14 @@ int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		return sqlSession.selectOne("categoryMapper.freelancerInfo", freelancerNo);
 	}
 
+	/** 모달용 회원 정보
+	 * @param memberNo
+	 * @return
+	 */
+	public Member selectMemberModal(int memberNo) {
+		return sqlSession.selectOne("managerMapper.selectMemberDetail", memberNo);
+	}
+
 	
 	
 	
