@@ -187,6 +187,7 @@ tbody td:nth-of-type(6){
 }
 tbody td:nth-of-type(7){
   width: 80px;
+  position: relative;
 }
 tbody td:nth-of-type(8){
   width: 180px;
@@ -432,4 +433,39 @@ tbody a{
 #searchboxInclude > div{
   border: 1px solid #5481262f;
   padding: 2px 0 2px 0;
+}
+.chattingTD{
+  position: relative;
+}
+#chattingDiv{
+  display: block;
+  width: 115px;
+  position: absolute;
+  z-index: 1000;
+  overflow: hidden;
+  left: 5%;
+  width: 100px;
+  margin: 0;
+  border: 1px solid rgb(157 154 154 / 24%);
+  border-radius: 5%;
+  margin-top: 3px;
+  padding-bottom: 2px;
+}
+
+._chattingDefault{
+  display: block;
+  width: 100%;
+  height: 25px;
+  background-color: #fff;
+  color: #4c4c4c;
+}
+
+._chattingDefault > span{
+  display: block;
+  padding: 7px 0 0 8px;
+  cursor: pointer;
+}
+
+._chattingDefaultShow{
+  display: block !important;
 }
