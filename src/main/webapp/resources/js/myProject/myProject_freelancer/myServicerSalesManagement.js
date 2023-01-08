@@ -325,7 +325,8 @@ $(document).on("click",".finishBtn",function(){
           $('#sendBtn'+tradeNoValue).remove();
           $('#reportBtn'+tradeNoValue).remove();
           saleslist.forEach(function(arg){
-            if(arg.tradeNo == tradeNoValue){      
+            if(arg.tradeNo == tradeNoValue){
+              document.getElementsByClassName('workStatus'+arg.tradeNo)[0].innerText = '작업완료';
               if(arg.tradeReportNo != 0){
               const a = document.createElement("a");
               a.setAttribute("href", "#");
