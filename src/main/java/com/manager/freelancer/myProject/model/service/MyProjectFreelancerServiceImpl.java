@@ -3,6 +3,7 @@ package com.manager.freelancer.myProject.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.Pagination;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 
@@ -379,7 +381,7 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 	}
 
 	/**
-	 * 프리랜서 등급 상승
+	 * 프리랜서 등급 상승(스케줄러)
 	 */
 	@Override
 	public int LevelUPSchedulingUpdate(List<myProjectFreelancer> seccessMember) {
@@ -410,7 +412,7 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 	}
 
 	/**
-	 * 프리랜서 등급 하락
+	 * 프리랜서 등급 하락(스케줄러)
 	 */
 	@Override
 	public int LevelDownSchedulingUpdate(List<myProjectFreelancer> downMember) {
@@ -437,6 +439,41 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		}
 		
 			
+		return result;
+	}
+
+	/**
+	 *스케줄러 모집 마감일 지났을 때 상태 변경 전 조회
+	 */
+	@Override
+	public List<myProjectFreelancerRequest> selectProjectRecruitDate(String date) {
+
+		return dao.selectProjectRecruitDate(date);
+	}
+
+	/**
+	 *조회해온 것들 모집 마감 상태 값으로 변경
+	 */
+	@Override
+	public int updateRecruitDateScheduling(List<myProjectFreelancerRequest> updateProject) {
+		int result = 0;
+		for(int i=1; i<4; i++) {
+			List<Integer> temp = new ArrayList<Integer>();
+				
+			for(myProjectFreelancerRequest u :updateProject) {
+				System.out.println(u.getProjectRequestNo());
+
+				temp.add(u.getProjectRequestNo());
+			}
+		
+			System.out.println(temp);
+			System.out.println(temp.size());
+			if(temp.size() != 0 ) {
+				 result = dao.updateRecruitDateScheduling(temp);
+			}
+			
+		}
+	
 		return result;
 	}
 

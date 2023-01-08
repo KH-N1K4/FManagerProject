@@ -22,6 +22,10 @@ public class SearchController {
 	@Autowired
 	private SearchService service;
 	
+	/**추천 검색어 들고 오기
+	 * @param keyword
+	 * @return
+	 */
 	@GetMapping("/common/searchInput")
 	@ResponseBody
 	public String searchInput(
@@ -32,6 +36,13 @@ public class SearchController {
 	}
 	
 	//   /searchService
+	/**검색했을 때 출력되는 서비스 목록
+	 * @param model
+	 * @param cp
+	 * @param loginMember
+	 * @param searchInput
+	 * @return
+	 */
 	@GetMapping("/searchService")
 	public String searchService(Model model,@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 				@SessionAttribute(value="loginMember",required=false) Member loginMember,
