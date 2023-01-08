@@ -88,7 +88,7 @@ public class UserInquiryController {
 		
 		if(loginMember != null) {
 			
-				if(pm.get("key")==null) {
+			if(pm.get("key")==null) {
 				
 				Map<String, Object> map = service.selectInquiryList(loginMember.getMemberNo(), cp);
 				model.addAttribute("map",map);
@@ -106,7 +106,7 @@ public class UserInquiryController {
 			path="/member/login";
 		}
 		
-		model.addAttribute("message",message);
+//		model.addAttribute("message",message);
 		
 		return  path;
 	}
