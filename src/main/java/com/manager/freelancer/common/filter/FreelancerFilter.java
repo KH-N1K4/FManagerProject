@@ -44,7 +44,7 @@ public class FreelancerFilter implements Filter{
 			resp.sendRedirect("/"); // 메인페이지로 redirect
 		} else { // 로그인 O 상태 
 			// 연결된 다음 필터로 이동(없으면 Servlet / JSP로 이동)
-			if(((Member)session.getAttribute("loginMember")).getAuthority()==1) {
+			if(((Member)session.getAttribute("loginMember")).getFreelancerFL().equals("N")) {
 				resp.sendRedirect("/");
 			} else {
 				chain.doFilter(request, response);			
