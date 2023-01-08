@@ -1,0 +1,236 @@
+.main{
+    width: 700px;
+    margin: auto;
+}
+
+#expertDetailTitle{
+    font-size: 25px;
+    font-weight: bold;
+    margin:20px 0;
+}
+
+.expertSummary{
+    box-sizing: border-box;
+    width: 100%;
+    height: 190px;
+    border-radius: 10px;
+    background-color: #d9d9d933;
+    
+    padding:20px;
+    position: relative;
+}
+
+.expertPhoto{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: aquamarine;
+   
+}
+
+.expertPhoto>img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+
+}
+
+.expertName{
+    position: absolute;
+    left:200px;
+    top:30px;
+    font-size: 20px;
+}
+
+.expertOther{
+    width:330px;
+    height: 150px;
+    position: absolute;
+    right:-370px;
+    top: -5px;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.expertIntroduceTitle{
+    font-size: 20px;
+    margin:20px 0;
+}
+
+.expertIntroduce{
+    background-color: #d9d9d933;
+    padding:30px;
+}
+
+
+
+/* 포트폴리오 */
+.portfolioTitle{
+    font-size: 20px;
+    margin:20px 0;
+}
+
+.portfolioSection{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.portfolioSection>a{
+    cursor: pointer;
+}
+
+.portfolioPhoto{
+    width: 200px;
+    height: 200px;
+    border:1px solid black;
+    margin-bottom: 30px;
+    margin-right: 30px;
+}
+.portfolioPhoto img {
+    width: 200px;
+    height: 200px;  
+}
+
+
+/* 서비스 */
+.serviceSection a {
+    color: black;
+}
+.serviceTitle{
+    font-size: 20px;
+    margin:20px 0;
+}
+
+.serviceOne{
+    width: 100%;
+    height: 200px;
+    border:1px solid black;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.servicePhoto{
+    width: 200px;
+    height: 200px;
+    background-color: aliceblue;
+}
+.servicePhoto img{
+    width: 200px;
+    height: 200px;
+}
+
+.serviceOneTitle{
+    position: absolute;
+    left:220px;
+    top:20px;
+    font-size: 20px;
+}
+
+.serviceSubTitle{
+    position: absolute;
+    left:220px;
+    top:70px;
+}
+
+.serviceOther{
+    position: absolute;
+    right: 0;
+    top:30px;
+}
+
+.serviceOther>div{
+    margin:20px 0;
+}
+
+.serviceOther span{
+    display: inline-block;
+    width: 50px;
+}
+
+.interest{
+	 display: inline-block;
+    /* border: 1px solid black; */
+    padding: 5px;
+    border-radius: 10px;
+    /* margin-left: 5px; */
+    background-color: gray;
+}
+.plus{
+	 display: inline-block;
+    /* border: 1px solid black; */
+    padding: 5px;
+    border-radius: 10px;
+    margin-left: 5px;
+    background-color: lightgray;
+}
+
+
+
+.modal_body{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 400px;
+    height: 600px;
+
+    padding: 40px;
+
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+
+    transform: translateX(-50%) translateY(-50%);
+    
+    z-index:100;
+}
+
+
+.modal_addPortfolio{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal_portfolioDetail{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hidden{
+	display:none;
+}
+
+
+
+.eeTitle{
+	width:370px;
+	/* position:relative; */
+}
+.eeTT{
+	display:inline-block;
+	width:100px;
+	/* position:relative; */
+}
+/*
+.eeContent{
+	position:absolute;
+	right:0;
+} */

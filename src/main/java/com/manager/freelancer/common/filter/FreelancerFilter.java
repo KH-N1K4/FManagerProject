@@ -40,13 +40,13 @@ public class FreelancerFilter implements Filter{
 		// 로그인 여부 확인
 		// -> session에 loginMember가 있는 지 확인
 		HttpSession session = req.getSession();
-		if(((Member)session.getAttribute("loginMember")).getFreelancerFL().equals("N")) { // 로그인 X 상태
+		if(session.getAttribute("loginMember")==null) {//로그인 상태가 아닐때 
 			resp.sendRedirect("/"); // 메인페이지로 redirect
-		} else { // 로그인 O 상태 
+		} else { 
 			// 연결된 다음 필터로 이동(없으면 Servlet / JSP로 이동)
-			if(((Member)session.getAttribute("loginMember")).getFreelancerFL().equals("N")) {
+			if(((Member)session.getAttribute("loginMember")).getFreelancerFL().equals("N")) {// 프리랜서권한이 없을 때
 				resp.sendRedirect("/");
-			} else {
+			} else {// 프리랜서 권한이 있을 때
 				chain.doFilter(request, response);			
 				
 			}
