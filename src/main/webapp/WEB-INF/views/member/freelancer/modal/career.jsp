@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 
 
@@ -35,6 +37,10 @@
             <div class="modal_item">근무기간</div>
             <div>
                 <select name="careerCompanyPeriod1" id="careerCompanyPeriod1" class="input2">
+                    
+                    <%-- <c:forEach var="cont" begin="0" end="60">
+                			<option value="${cont }">${cont }년</option>
+                    </c:forEach> --%>
                     <option value="-1">년</option>
                     <option value="0">0년</option>
                     <option value="1">1년</option>
@@ -48,6 +54,36 @@
                     <option value="9">9년</option>
                     <option value="10">10년</option>
                     <option value="11">11년</option>
+                    <option value="12">12년</option>
+                    <option value="13">13년</option>
+                    <option value="14">14년</option>
+                    <option value="15">15년</option>
+                    <option value="16">16년</option>
+                    <option value="17">17년</option>
+                    <option value="18">18년</option>
+                    <option value="19">19년</option>
+                    <option value="20">20년</option>
+                    <option value="21">21년</option>
+                    <option value="22">22년</option>
+                    <option value="23">23년</option>
+                    <option value="24">24년</option>
+                    <option value="25">25년</option>
+                    <option value="26">26년</option>
+                    <option value="27">27년</option>
+                    <option value="28">28년</option>
+                    <option value="29">29년</option>
+                    <option value="30">30년</option>
+                    <option value="31">31년</option>
+                    <option value="32">32년</option>
+                    <option value="33">33년</option>
+                    <option value="34">34년</option>
+                    <option value="35">35년</option>
+                    <option value="36">36년</option>
+                    <option value="37">37년</option>
+                    <option value="38">38년</option>
+                    <option value="39">39년</option>
+                    <option value="40">40년</option>
+
                 </select>
                 <select name="careerCompanyPeriod2" id="careerCompanyPeriod2" class="input2">
                     <option value="-1">개월</option>
