@@ -136,8 +136,8 @@
                           <td class="tc">
                             <c:choose>
                                 <c:when test="${sales.workStatus == 2 || sales.workStatus == 3}">
-                                  <span class="text">${sales.workStatusString}</span></c:when>
-                                <c:otherwise><span class="text">${sales.freelancerFLString}</span></c:otherwise>
+                                  <span class="text workStatus${sales.tradeNo}">${sales.workStatusString}</span></c:when>
+                                <c:otherwise><span class="text workStatus${sales.tradeNo}">${sales.freelancerFLString}</span></c:otherwise>
                               </c:choose>
                             
                           </td>
