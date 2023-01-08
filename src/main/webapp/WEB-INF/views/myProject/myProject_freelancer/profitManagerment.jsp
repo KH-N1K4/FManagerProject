@@ -46,10 +46,10 @@
             </div>
           </div>
           <div id="topBox">
-            <c:forEach var="profitval" items="${profit}">
-              <c:if test="${profitval.profitType == 2}"><div>정산예상 수익금&nbsp;&nbsp;&nbsp;${profitval.paymentPriceString}원</div></c:if>
-              <c:if test="${profitval.profitType == 1}"><div>총 수익&nbsp;&nbsp;&nbsp;${profitval.paymentPriceString}원</div></c:if>
-            </c:forEach>
+ <%--            <c:forEach var="profitval" items="${profit}"> --%>
+              <div>총 수익&nbsp;&nbsp;&nbsp;<c:forEach var="profitval" items="${profit}"><c:if test="${profitval.profitType == 1}">${profitval.paymentPriceString}원</c:if></c:forEach></div>
+              <div>정산예상 수익금&nbsp;&nbsp;&nbsp;<c:forEach var="profitval" items="${profit}"><c:if test="${profitval.profitType == 2}">${profitval.paymentPriceString}원</c:if></c:forEach></div>
+<%--             </c:forEach> --%>
           </div>
           <div id="middleBox">
             <canvas id="myChart"></canvas>
