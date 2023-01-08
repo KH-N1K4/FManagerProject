@@ -36,11 +36,10 @@
                 <br><br><br>
                     <%-- <a href="/manager/memberList">문의하기</a> --%>
                     <%-- <br> --%>
-                    <a href="/userInquiryList">고객센터</a>
+                    <a href="/userInquiryList" id="customerCenter">고객센터</a>
             </div>
 
         </div>
-
     </div>
     
     
@@ -51,4 +50,12 @@
 
         <%-- message 1회 출력 후 모든 scope 삭제 --%>
         <c:remove var="message"/>
-     </c:if>
+    </c:if>
+
+    <c:if test="${empty loginMember}">
+        <script>
+            document.getElementById("customerCenter").addEventListener("click",()=>{
+                    alert("로그인 후 이용해주세요.");
+            });
+        </script>
+    </c:if>
