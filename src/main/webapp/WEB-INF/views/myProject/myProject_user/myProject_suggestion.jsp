@@ -93,8 +93,8 @@
                                 <td class="tc">                      
                                   <span class="text">${proposal.gradeName}</span>
                                 </td>
-                                <td class="tc">                         
-                                  <span class="text">${proposal.proposalPrice}원</span>
+                                <td class="tc">
+                                  <span class="text"><fmt:formatNumber value="${proposal.proposalPrice}"/>원</span>
                                 </td>
                                 <td class="tc">                        
                                   <span class="num">${proposal.proposalEditNum}</span>
