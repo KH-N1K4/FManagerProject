@@ -85,6 +85,14 @@ public class ManagerController {
 
 		return map;
 	}
+	
+	// 회원 정보 모달
+	@GetMapping("/manager/memberDetail")
+	@ResponseBody
+	public Member memberModal(@RequestParam(value = "memberNo") int memberNo) {
+		Member member = service.selectMemberModal(memberNo);
+		return member;
+	}
 
 	// 회원 탈퇴
 	@GetMapping("/manager/memberDelete")

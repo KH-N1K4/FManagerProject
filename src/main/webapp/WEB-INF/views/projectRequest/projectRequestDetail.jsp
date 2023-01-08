@@ -18,23 +18,23 @@
     <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
 
        <div class="main">
-        <div><a href="/projectRequest/requestList/${userRequest.mainCategoryNo}/0/0">${userRequest.mainCategoryName}</a>><a href="/projectRequest/requestList/${userRequest.mainCategoryNo}/${userRequest.subCategoryNo}/0">${userRequest.subCategoryName}</a></div>
+        <div><a href="/projectRequest/requestList/${userRequest.mainCategoryNo}/0/0">${userRequest.mainCategoryName}</a> > <a href="/projectRequest/requestList/${userRequest.mainCategoryNo}/${userRequest.subCategoryNo}/0">${userRequest.subCategoryName}</a></div>
 
         <div class="detailHeader">
             <div class="requestPhoto"><img src="${userRequest.requestfileList[0].requestFilePath}"></div>
             <div class="requestContent">
                 <div class="requestContentTOP">
                     <div class="requestTitle">${userRequest.projectRequestTitle}</div>
-                    <div class="userNickName">${userRequest.memberNickName}</div>
                     <div class="requestSummary">${userRequest.projectRequestSummary}</div>
+                    <div class="userNickName">${userRequest.memberNickName}</div>
                     <div class="requestInfo">
                         <div class="requestTop">
-                            <span>예산 <span>${userRequest.projectRequestBudgetString}</span>원</span>
-                            <span>작업일수 <span>${userRequest.projectWorkPeriod}</span>일</span>  
+                            <span><span>예산</span> <span>${userRequest.projectRequestBudgetString}</span>원</span>
+                            <span><span>작업일수</span> <span>${userRequest.projectWorkPeriod}</span>일</span>  
                         </div>
                         <div class="requestBottom">
-                            <span>작업마감일 <span>${userRequest.projectRecruitDateString}</span></span>
-                            <span>모집마감일 <span>${userRequest.projectWorkDateString}</span></span> 
+                            <span><span>작업마감일</span> <span>${userRequest.projectRecruitDateString}</span></span>
+                            <span><span>모집마감일</span> <span>${userRequest.projectWorkDateString}</span></span> 
                         </div>
                     </div>
                 </div>
@@ -68,6 +68,7 @@
         </div>
 
         <div class="detailInner">
+        <h3>서비스 설명</h3>
             <div>${userRequest.projectRequestContent}</div>
             <div>
                 <c:forEach items="${userRequest.requestfileList}" var="requestfile">

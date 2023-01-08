@@ -90,6 +90,9 @@
 		<result property="MemberNo" column="MEMBER_NO" />
 		<result property="MemberName" column="MEMBER_NAME" />
 		<result property="requestFilePath" column="REQUEST_FILE_PATH" />
+		<result property="thirdCategoryName" column="THIRD_CATEGORY_NAME" />
+		<result property="subCategoryName" column="SUB_CATEGORY_NAME" />
+		<result property="mainCategoryName" column="MAIN_CATEGORY_NAME" />
 	
 	<collection property="requestImageFileList" 
 	      javaType="java.util.ArrayList" ofType="RequestImageFile"

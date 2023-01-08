@@ -66,10 +66,10 @@
     
 
        <div class="main">
-        
+        <div><span>${projectRequest.mainCategoryName }</span> > <span>${projectRequest.thirdCategoryName }</span></div>
 
         <div class="detailHeader">
-            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${projectRequest.requestFilePath }" style="height:100%;"></div>
+            <div class="servicePhoto" style="overflow:hidden;">	<img alt="" src="${projectRequest.requestFilePath }"></div>
             <div class="serviceContent">
                 <div class="serviceTitle">${projectRequest.projectRequestTitle }</div>
                 <div class="serviceSummary">${projectRequest.projectRequestSummary}</div>
@@ -118,7 +118,7 @@
         	<h3>서비스 설명</h3>
             ${projectRequest.projectRequestContent}
 	        <c:forEach var="imageFile" items="${projectRequest.requestImageFileList }">
-                <img src="${imageFile.imageFilePath }" style="width:100%;">
+                <img src="${imageFile.imageFilePath }" style="width:100%;margin-top:10px;">
 	        </c:forEach>
 
         </div>

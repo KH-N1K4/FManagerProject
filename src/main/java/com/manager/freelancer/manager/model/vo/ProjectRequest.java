@@ -25,6 +25,11 @@ public class ProjectRequest {
 	private String MemberName;
 	private String requestFilePath;
 	
+	private String thirdCategoryName;
+	private String subCategoryName;
+	private String mainCategoryName;
+	
 	List<RequestImageFile> requestImageFileList;
+	
 
 }

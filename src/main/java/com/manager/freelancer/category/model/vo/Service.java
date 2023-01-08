@@ -42,6 +42,9 @@ public class Service {
 	private int freeContactTime2;
 	private int inquiryRate;
 	
+	private float reviewPoint;
+	private int sellCount;
+	
 	private List<ImageFile> imageFileList;
 	private List<Review> reviewList;
 	private List<Portfolio> portfolioList;

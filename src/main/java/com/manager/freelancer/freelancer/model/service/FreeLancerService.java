@@ -50,6 +50,8 @@ public interface FreeLancerService {
 	int DeletePortfolio(Freelancer1 freelancer1, int freelancerNo, int portfolioNo);
 
 
+
+	
 	
 	
 

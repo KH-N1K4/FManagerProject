@@ -349,4 +349,6 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 		// TODO Auto-generated method stub
 		return dao.DeletePortfolio(freelancer1,freelancerNo, portfolioNo);
 	}
+	
+	
 }
