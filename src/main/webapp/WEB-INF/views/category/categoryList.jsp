@@ -3,6 +3,8 @@
 
 <c:set var="serviceList" value="${map.serviceList}"/>
 <c:set var="pagination" value="${map.pagination}"/>
+<c:set var="mainCategoryNo" value="${map.mainCategoryNo}"/>
+<c:set var="thirdCategoryNo" value="${map.thirdCategoryNo}"/>
 
 
 
@@ -105,10 +107,10 @@
                 <ul class="pagination">
                 
                     <!-- 첫 페이지로 이동 -->
-                    <li><a href="?cp=1${sURL}">&lt;&lt;</a></li>
+                    <li><a href="/category/${mainCategoryNo}/${thirdCategoryNo}?cp=1${sURL}">&lt;&lt;</a></li>
 
                     <!-- 이전 목록 마지막 번호로 이동 -->
-                    <li><a href="?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+                    <li><a href="/category/${mainCategoryNo}/${thirdCategoryNo}?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
 
 					<c:forEach var="i" begin="${pagination.startPage}" 
                         end="${pagination.endPage}" step="1">
@@ -121,16 +123,16 @@
                             </c:when>
 
                             <c:otherwise>
-                                 <li><a href="?cp=${i}${sURL}">${i}</a></li>
+                                 <li><a href="/category/${mainCategoryNo}/${thirdCategoryNo}?cp=${i}${sURL}">${i}</a></li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     
                     <!-- 다음 목록 시작 번호로 이동 -->
-                    <li><a href="?cp=${pagination.nextPage}">&gt;</a></li>
+                    <li><a href="/category/${mainCategoryNo}/${thirdCategoryNo}?cp=${pagination.nextPage}">&gt;</a></li>
 
                     <!-- 끝 페이지로 이동 -->
-                    <li><a href="?cp=${pagination.maxPage}">&gt;&gt;</a></li>
+                    <li><a href="/category/${mainCategoryNo}/${thirdCategoryNo}?cp=${pagination.maxPage}">&gt;&gt;</a></li>
 
                 </ul>
             </div>
@@ -144,6 +146,7 @@
      <script>
         
         const memberNo="${loginMember.memberNo}";
+        const mainCategoryNo="${mainCategoryNo}";
      
     </script>	
 
