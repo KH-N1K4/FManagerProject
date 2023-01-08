@@ -32,7 +32,7 @@
               </section>
             </div>
             <div class="myGradeBox">
-              <span>${loginMember.memberNickname}님의 전문가 등급은 <h1>${freelancerGrade.gradeName}</h1>입니다.</span>
+              <span>${loginMember.memberNickname}님의 프리랜서 등급은 <h1>${freelancerGrade.gradeName}</h1>입니다.</span>
             </div>
           </div>
           <div class="topBox">
