@@ -1,5 +1,9 @@
 package com.manager.freelancer.myProject.model.vo;
 
+import java.util.List;
+
+import com.manager.freelancer.customerCenter.model.vo.UserInquiryImage;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -53,5 +57,6 @@ public class MyProject {
 	// 서비스 테이블 
 	private int serviceNo;                  // SERVICE_NO 서비스 번호 
 	
-	
+	// 프로젝트 이미지 목록
+	private List<MyProjectImage> imageList; 
 }
