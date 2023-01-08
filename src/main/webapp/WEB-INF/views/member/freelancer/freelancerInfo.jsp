@@ -180,14 +180,15 @@
                             <span class="service">
                                 <a>
                                     <div class="portfolioSection"> 
-                                        <input type="checkbox" id="portfolio-toggle" >
-                                        <div id="portfolio-menu">
-                                            <div>···</div>
-                                            <div class= "update-portfolio"><a class="updateBtn">수정</a></div>
-                                            <div class= "delete-portfolio"><a class="deleteBtn">삭제</a></div>
-                                            <span id="portfolioNo" class="hidden portfolioNo">${portfolio.portfolioNo}</span>
-                                            <span id="freelancerNo"class="hidden freelancerNo">${portfolio.freelancerNo}</span>
-                                        </div>
+                                            
+                                            <div id="portfolio-menu">
+
+                                                <div class= "delete-portfolio">
+                                                    <div class="deleteBtn">X</div>
+                                                </div>
+                                                <span id="portfolioNo" class="hidden portfolioNo">${portfolio.portfolioNo}</span>
+                                                <span id="freelancerNo"class="hidden freelancerNo">${portfolio.freelancerNo}</span>
+                                            </div>
                                         <img  style="width: 200px; height:200px; background-color:skyblue;" src="${portfolio.portfolioThumbnail}">
                                         <span class="portfolio-title-area" >${portfolio.portfolioTitle}</span>
                                         <br>

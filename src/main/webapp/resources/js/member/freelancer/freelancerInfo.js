@@ -56,36 +56,36 @@ modalClose1.addEventListener('click', ()=>{
 
 
 // 여기 주석해제하기
-// modalClose2.addEventListener('click', ()=>{
+modalClose2.addEventListener('click', ()=>{
 
-//     modal2.style.display ='none';
+    modal2.style.display ='none';
 
     
-// })
+})
 
-// const clickPortfolio = document.getElementsByClassName("portfolioSection");
+const clickPortfolio = document.getElementsByClassName("portfolioSection");
 
-// const title = document.getElementsByClassName("portfolioTitle2")[0];
-// const summary = document.getElementsByClassName("portfolioContent2")[0];
-// const thumb = document.getElementById("portfolioThumb");
-// const photo = document.getElementById("portfolioPhoto");
+const title = document.getElementsByClassName("portfolioTitle2")[0];
+const summary = document.getElementsByClassName("portfolioContent2")[0];
+const thumb = document.getElementById("portfolioThumb");
+const photo = document.getElementById("portfolioPhoto");
 
-// for(let portfolio of clickPortfolio){
-//     portfolio.addEventListener("click", function() {
+for(let portfolio of clickPortfolio){
+    portfolio.addEventListener("click", function() {
        
-//         // console.log(this.children[4].innerText);
-//         // console.log(this.children[5].innerText);
-//         title.innerText=this.children[6].innerHTML;
-//         summary.innerText=this.children[7].innerHTML;
-//         thumb.src=this.children[8].innerHTML;
-//         photo.src=this.children[9].innerHTML; 
+        // console.log(this.children[4].innerText);
+        // console.log(this.children[5].innerText);
+        title.innerText=this.children[5].innerHTML;
+        summary.innerText=this.children[6].innerHTML;
+        thumb.src=this.children[7].innerHTML;
+        photo.src=this.children[8].innerHTML; 
 
-//         modal2.classList.toggle('show');
-//         modal2.style.display= 'block';
-//         body2.style.display ='block';
-//         body.style.overflow = 'hidden';
-//     } )
-// }
+        modal2.classList.toggle('show');
+        modal2.style.display= 'block';
+        body2.style.display ='block';
+        body.style.overflow = 'hidden';
+    } )
+}
 
 
 modalClose2.addEventListener('click', ()=>{
