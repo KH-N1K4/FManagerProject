@@ -174,6 +174,11 @@ public class CategoryServiceImpl implements CategoryService{
 		return dao.selectSaleCount(freelancerNo);
 	}
 
+	@Override
+	public Trade selectTrade(int tradeNo) {
+		return dao.selectTrade(tradeNo);
+	}
+
 	
 
 }

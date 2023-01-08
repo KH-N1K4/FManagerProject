@@ -351,6 +351,8 @@ public class CategoryController {
 		Map<String,Integer> map=new HashMap<String, Integer>();
 		
 		map.put("tradeNo", tradeNo);
+		
+		Trade trade=service.selectTrade(tradeNo);
 	
 		model.addAttribute(tradeNo);
 		
