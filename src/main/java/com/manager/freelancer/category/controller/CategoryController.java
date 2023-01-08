@@ -144,6 +144,10 @@ public class CategoryController {
 //		Map<String, Object> resultMap=new HashMap<String, Object>();
 //		
 //		resultMap.put("serviceList", serviceList);
+		
+		serviceList.put("mainCategoryNo", mainCategoryNo);
+		serviceList.put("thirdCategoryNo", thirdCategoryNo);
+		serviceList.put("cp", cp);
 			
 		return serviceList;
 	

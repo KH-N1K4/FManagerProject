@@ -69,11 +69,13 @@
 							<td class="imageBox">
                                 <div class="img-box">
                                     <div class="boardImg">
-                                        <label for="img1">
-                                            <img class="preview" src="${tradeReport.tradeReportFilePath}">
-                                        </label>
-                                        <a href="/resources/images/${tradeReport.tradeReportFilePath}" download="${tradeReport.tradeReportFilePath}">다운로드</a>
-                                    </div>
+										<c:if test="${not empty tradeReport.tradeReportFilePath}">
+											<label for="img1">
+												<img class="preview" src="${tradeReport.tradeReportFilePath}">
+											</label>
+											<a href="/resources/images/${tradeReport.tradeReportFilePath}" download="${tradeReport.tradeReportFilePath}">다운로드</a>
+										</c:if>
+									</div>
                                 </div>    
 							</td>
 						</tr>
