@@ -681,6 +681,13 @@
 	
 	</insert>
 	
+	<select id="selectTrade" resultMap="trade_rm">
+		SELECT SERVICE_TITLE,SERVICE_SUMMARY, SERVICE_PRICE,
+		TRADE_REQUEST  FROM TRADE 
+	JOIN SERVICE USING(SERVICE_NO)
+	WHERE TRADE_NO={tradeNo}
+	</select>
+	
 	
 	
  	
