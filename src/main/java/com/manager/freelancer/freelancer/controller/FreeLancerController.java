@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.manager.freelancer.category.model.vo.Freelancer1;
+import com.manager.freelancer.common.Util;
 import com.manager.freelancer.freelancer.model.service.FreeLancerService;
 import com.manager.freelancer.freelancer.model.vo.Bank;
 import com.manager.freelancer.freelancer.model.vo.Field;
@@ -45,7 +46,7 @@ public class FreeLancerController {
 		}
 
 		// 전문가 정보 이동 (전문가 정보 조회)
-		@GetMapping("/member/freelancer/freelancerInfo")
+		@GetMapping("/member/myInfo/freelancerInfo")
 		public String freelancerInfo(Model model, 
 				@SessionAttribute("loginMember") Member loginMember) {
 				
@@ -56,6 +57,8 @@ public class FreeLancerController {
 //			model.addAttribute("freelancer", freelancer); 
 			
 			Freelancer1  freelancer1 = service.freelancerInfo1(loginMember.getMemberNo());
+			
+			freelancer1.setFreelancerIntro(Util.newLineClear(freelancer1.getFreelancerIntro()));
 	
 			model.addAttribute("freelancer1",freelancer1);
 			
@@ -71,18 +74,20 @@ public class FreeLancerController {
 		
 
 		// 전문가 정보 수정 페이지로 이동
-		@GetMapping("/member/freelancer/updateFreelancerInfo")
+		@GetMapping("/member/myInfo/updateFreelancerInfo")
 		public String updateFreelancerInfo(Model model, 
 				@SessionAttribute("loginMember") Member loginMember) {
+			
 	
 			Freelancer1  freelancer1 = service.freelancerInfo1(loginMember.getMemberNo());
+			freelancer1.setFreelancerIntro(Util.newLineClear(freelancer1.getFreelancerIntro()));
 			model.addAttribute("freelancer1",freelancer1);
 			
 			return "/member/freelancer/updateFreelancerInfo";
 		}
 		
 		// 전문가 정보 수정 페이지 -> 수정
-		@PostMapping("/member/freelancer/updateFreelancerInfo")
+		@PostMapping("/member/myInfo/updateFreelancerInfo")
 		public String updateFreelancerInfo(@SessionAttribute("loginMember") Member loginMember,//회원번호 == 프리랜서번호
 				String major, // major input태그에 적힌 값들
 				String career,
@@ -110,7 +115,7 @@ public class FreeLancerController {
 			model.addAttribute("freelancer1",inputFreelancer);
 
 			if(result>0) {
-				path="/member/freelancer/freelancerInfo";
+				path="/member/myInfo/freelancerInfo";
 				message="수정완료";
 			}else {
 				path=referer;

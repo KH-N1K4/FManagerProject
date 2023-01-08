@@ -38,7 +38,8 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 	@Override
 	public int enrollFreelancerSignup(Freelancer inputFreelancer) {
 
-		
+		inputFreelancer.setFreelancerIntro(Util.XSSHandling(inputFreelancer.getFreelancerIntro()));
+		inputFreelancer.setFreelancerIntro(Util.newLineHandling(inputFreelancer.getFreelancerIntro()));
 
 		int result = dao.enrollFreelancerSignup(inputFreelancer);
 
@@ -188,6 +189,9 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 	
 	@Override
 	public int updateFreelancerInfo(Freelancer inputFreelancer) {
+		inputFreelancer.setFreelancerIntro(Util.XSSHandling(inputFreelancer.getFreelancerIntro()));
+		inputFreelancer.setFreelancerIntro(Util.newLineHandling(inputFreelancer.getFreelancerIntro()));
+
 
 		int result = dao.updateFreelancerInfo(inputFreelancer);
 		

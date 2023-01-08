@@ -656,7 +656,7 @@
 		WHERE FREELANCER_NO=#{freelancerNo}
 	</select>
 	<select id="selectLicenseList" resultMap="license_rm">
-		SELECT * FROM LICENSE 
+		 SELECT LICENSE_NAME ,TO_CHAR(LICENSE_DATE,'YYYY-MM-DD') LICENSE_DATE  ,LICENSE_AGENCY FROM LICENSE
 		WHERE FREELANCER_NO=#{freelancerNo}
 	</select>
 	<select id="selectMajorList" resultMap="major_rm">
