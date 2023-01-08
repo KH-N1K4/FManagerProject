@@ -229,14 +229,7 @@ public class FreeLancerController {
 			return result;
 		}
 		
-		@GetMapping("/member/freelancer/updatePortfolio")
-		public int updatePortfolio(@RequestParam("fNo") int freelancerNo, @RequestParam("pNo") int portfolioNo) {
-			
-			int result = service.UpdatePortfolio(freelancerNo, portfolioNo);
-			
-			return result;
-			
-		}
+		
 		
 		//포트폴리오 상세 페이지로 이동
 //		@GetMapping("/portfolioDetail/{portfolioNo}")
