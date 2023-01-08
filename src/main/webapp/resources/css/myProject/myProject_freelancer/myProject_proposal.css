@@ -198,4 +198,16 @@
     letter-spacing: 0 !important;
   }
   
+
+.emptyMyProposal{
+    padding: 34px 0;
+    border-bottom: 1px solid #c6c6c9;
+    border-top: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: black;
+    justify-content: center;
+}
+  
   
