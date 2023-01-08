@@ -1,6 +1,6 @@
 const body1 = document.getElementsByClassName('modal_body')[0]; /* 포트폴리오추가 */
 const body2 = document.getElementsByClassName('modal_body')[1]; /* 포트폴리오상세 */
-const mainBody=   document.querySelector('mainBody'); /* 전문가정보 body */
+const mainBody=   document.getElementsByClassName('mainBody')[0]; /* 전문가정보 body */
 
 const modalClose1 = document.getElementsByClassName('modal_close1')[0]; /* 포트폴리오추가 */
 const modalClose2 = document.getElementsByClassName('modal_close2')[0]; /* 포트폴리오상세 */
@@ -55,7 +55,6 @@ modalClose1.addEventListener('click', ()=>{
 
 
 
-// 여기 주석해제하기
 modalClose2.addEventListener('click', ()=>{
 
     modal2.style.display ='none';
@@ -91,7 +90,7 @@ for(let portfolio of clickPortfolio){
 modalClose2.addEventListener('click', ()=>{
 
     modal2.style.display ='none';
-    body.style.overflow='visible';
+    mainBody.style.overflow='visible';
 })
 
 // var pNo = ${freelancer1.portfolioNo};
