@@ -46,7 +46,9 @@
 		                    		<span><a href="/member/myProject/myRequestList">의뢰인 전환</a></span>
 	                    		</c:when>
 	                    		<c:otherwise>
+	                    		<c:if test="${loginMember.freelancerFL=='Y' }">
 		                    		<span><a href="/member/myProject/freelancer/myService">전문가 전환</a></span>
+		                    	</c:if>
 	                    		</c:otherwise>
 	                    	</c:choose>
                     	</c:if>

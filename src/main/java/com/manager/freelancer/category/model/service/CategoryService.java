@@ -57,6 +57,8 @@ public interface CategoryService {
 	int writeComment(Map<String, Object> map);
 
 	int selectSaleCount(int freelancerNo);
+
+	Trade selectTrade(int tradeNo);
 	
 
 }

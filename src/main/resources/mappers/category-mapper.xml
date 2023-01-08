@@ -37,7 +37,7 @@
 	      <result property="freeContactTime2" column="FREE_CONTACT_TIME2" />				
 	      
 	      <result property="reviewPoint" column="REVIEW_POINT" />				
-	      <result property="sellCount" column="SELL_COUNT" />				
+	      <result property="sellCount" column="SALE_COUNT" />				
 	      
 	      
 	      
@@ -213,7 +213,7 @@
     	  <result property="serviceDeleteFL" column="SERVICE_DEL_FL" />	
     	   <result property="reviewCount" column="REVIEW_COUNT" />	
     	   <result property="reviewPoint" column="REVIEW_POINT" />	
-    	  <result property="sellCount" column="SELL_COUNT" />	
+    	  <result property="sellCount" column="SALE_COUNT" />	
     	 <!-- <result property="servicePoint" column="SERVICE_POINT" />	 -->
     </resultMap>
     
@@ -249,6 +249,8 @@
 		</if>
 	
 		SERVICE_TITLE,SERVICE_SUMMARY,SERVICE_PRICE,
+		TO_CHAR(SERVICE_PRICE, 'FM999,999,999,999') SERVICE_PRICE_STRING,
+		NVL(SALE_COUNT,0) SALE_COUNT,TO_CHAR(NVL(REVIEW_POINT,0), 'fm0.0') REVIEW_POINT,
 			THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH,MAIN_CATEGORY_NO
 		FROM (SELECT * 
 			FROM SERVICE
@@ -630,12 +632,12 @@
 	
 	<select id="selectFServiceList" resultMap="fservice_rm">
 
-			SELECT SERVICE_NO, SERVICE_TITLE ,SERVICE_SUMMARY,SERVICE_PRICE, SELL_COUNT,REVIEW_COUNT,REVIEW_POINT,REQUEST_FILE_PATH
+			SELECT SERVICE_NO, SERVICE_TITLE ,SERVICE_SUMMARY,SERVICE_PRICE, SALE_COUNT,REVIEW_COUNT,REVIEW_POINT,REQUEST_FILE_PATH
 		FROM (SELECT SERVICE_NO, SERVICE_TITLE ,SERVICE_SUMMARY,SERVICE_PRICE,FREELANCER_NO,
 		(SELECT COUNT(*) FROM TRADE T
 		WHERE MEMBER_DONE_FL = 2
 		AND FREELANCER_DONE_FL = 2
-		AND T.SERVICE_NO = S.SERVICE_NO) SELL_COUNT,
+		AND T.SERVICE_NO = S.SERVICE_NO) SALE_COUNT,
 		(SELECT COUNT(*) FROM REVIEW R
 		JOIN TRADE T ON(R.REVIEW_NO  = T.TRADE_NO)
 		WHERE T.SERVICE_NO= S.SERVICE_NO) REVIEW_COUNT,
@@ -679,6 +681,15 @@
 		INSERT INTO REVIEW_COMMENT VALUES(#{reviewNo},#{reviewContent},DEFAULT)
 	
 	</insert>
+	
+	<select id="selectTrade" resultMap="trade_rm">
+			SELECT SERVICE_TITLE,SERVICE_SUMMARY, SERVICE_PRICE,REQUEST_FILE_PATH,
+		TRADE_REQUEST  FROM TRADE 
+	JOIN SERVICE USING(SERVICE_NO)
+LEFT JOIN (SELECT s.*, ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum FROM SERVICE_FILE s) USING(SERVICE_NO)
+		WHERE RUM = 1
+	AND TRADE_NO=#{tradeNo}
+	</select>
 	
 	
 	
