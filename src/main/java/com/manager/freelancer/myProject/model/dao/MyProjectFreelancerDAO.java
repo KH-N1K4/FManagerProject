@@ -14,6 +14,7 @@ import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.Pagination;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 @Repository
@@ -333,6 +334,28 @@ public class MyProjectFreelancerDAO {
 		map.put("FreelanceLeverNo", i);
 		return sqlSession.update("myProjectFreelancerSerive.LevelDownSchedulingUpdate", map);
 	}
+
+	/**스케줄러 모집 마감일 지났을 때 상태 변경 전 조회
+	 * @param date
+	 * @return
+	 */
+	public List<myProjectFreelancerRequest> selectProjectRecruitDate(String date) {
+
+		return sqlSession.selectList("myProjectFreelancerSerive.selectProjectRecruitDate", date);
+	}
+
+	/**조회해온 것들 모집 마감 상태 값으로 변경
+	 * @param temp
+	 * @return
+	 */
+	public int updateRecruitDateScheduling(List<Integer> temp) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("temp1", temp);
+
+		return sqlSession.update("myProjectFreelancerSerive.updateRecruitDateScheduling", map);
+	}
+
+	
 
 	
 
