@@ -69,6 +69,7 @@
                     </div>
                 </div>
      
+     			 <c:if test="${loginMember.authority != '2' }"> 
               	<c:if test="${fService.serviceDeleteFL=='Y' }">
               		<a id="pauseService1">판매가 중지된 상품입니다.</a>
               	</c:if>
@@ -97,7 +98,7 @@
 						</c:otherwise>
 					</c:choose> 
 				</c:if> 
-              
+              	 </c:if> 
             </div>
             
         </div>
