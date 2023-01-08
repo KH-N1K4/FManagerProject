@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>myProject_suggestion</title>
+  <title>내프로젝트 - 받은 제안</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_suggestion.css">
   
