@@ -404,3 +404,26 @@ clientTradeRequestModalClose.addEventListener('click', () => {
   }
 });
 
+$('.client_name_area').click(function(){
+  this.nextElementSibling.classList.toggle('_chattingDefaultShow');
+
+});
+
+/* $(document).on('click', function(e) {
+  var container = $(".client_name_area");
+  if (!$(e.target).closest(container).length) {
+      container.nextElementSibling.classList.toggle('_chattingDefaultShow');
+  }
+}); */
+
+$(document).click(function(event) {
+  var container = $(".client_name_area");
+  if (!container.is(event.target) && !container.has(event.target).length) {
+    for(let i=0;i<container.length; i++){
+      if (container[i].nextElementSibling.classList.contains('_chattingDefaultShow')) {
+      container[i].nextElementSibling.classList.toggle('_chattingDefaultShow');
+      }
+    }
+    
+  }
+});
