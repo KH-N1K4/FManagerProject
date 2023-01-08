@@ -162,10 +162,6 @@ public class FreeLancerDAO {
 
 
 
-//	public int updateFreelancerBank(int inputBankCode, long inputBankAccount, Freelancer inputFreelancer) {
-//		// TODO Auto-generated method stub
-//		return sqlSession.update("freelancerMapper.updateFreelancerBank",inputBankCode,inputBankAccount,inputFreelancer);
-//	}
 
 	
 
