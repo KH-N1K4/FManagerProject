@@ -16,12 +16,18 @@ public class SearchServiceImpl implements SearchService{
 	@Autowired
 	private SearchDAO dao;
 
+	/**
+	 *추천 검색어 들고 오기
+	 */
 	@Override
 	public List<FreelancerService> searchInput(String keyword) {
 		
 		return dao.searchInput(keyword);
 	}
 
+	/**
+	 *검색했을 때 출력되는 서비스 목록
+	 */
 	@Override
 	public Map<String, Object> searchService(Map<String, Object> map) {
 		// 1. 특정 게시판의 전체 게시글 수 조회(단, 삭제 제외)

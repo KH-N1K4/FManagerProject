@@ -13,6 +13,10 @@ public interface SearchService {
 	 */
 	List<FreelancerService> searchInput(String keyword);
 
+	/**검색했을 때 출력되는 서비스 목록
+	 * @param map
+	 * @return
+	 */
 	Map<String, Object> searchService(Map<String, Object> map);
 
 }

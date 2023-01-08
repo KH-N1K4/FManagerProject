@@ -1,6 +1,7 @@
 package com.manager.freelancer.myProject.model.service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancer;
 import com.manager.freelancer.myProject.model.vo.myProjectFreelancerProfit;
+import com.manager.freelancer.myProject.model.vo.myProjectFreelancerRequest;
 
 public interface MyProjectFreelancerService {
 
@@ -154,6 +156,20 @@ public interface MyProjectFreelancerService {
 	 * @return
 	 */
 	int LevelDownSchedulingUpdate(List<myProjectFreelancer> downMember);
+
+	/**스케줄러 모집마감일 지났을 때 상태 변경
+	 * @param date
+	 * @return
+	 */
+	List<myProjectFreelancerRequest> selectProjectRecruitDate(String date);
+
+	/**조회해온 것들 모집 마감 상태 값으로 변경
+	 * @param updateProject
+	 * @return
+	 */
+	int updateRecruitDateScheduling(List<myProjectFreelancerRequest> updateProject);
+
+
 
 
 

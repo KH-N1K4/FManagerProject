@@ -583,7 +583,7 @@
 			</if>
 			ORDER BY SERVICE_INQUIRY_CREATE_DATE
 			</select>
-			
+			<!-- 프리랜스들 등급 상태 값들 들고옴 FN_DT${typeVal} 1: 프리랜서 검색용 2: 스케줄러용 디비 함수 만들어놓음 스케줄러 컨트롤러에 적혀있음-->
 			<select  id="selectMyProjectGrade"  parameterType="java.util.HashMap" resultMap="grade_rm">
 			SELECT FREELANCER_NO,GRADE_NO,GRADE_NAME,SALE_COUNT,SALE_PROCEEDS_STRING,SALE_PROCEEDS,SATISFACTION,COMPLETION_RATE,INQUIRY_RATE
 FROM (SELECT FREELANCER_NO,GRADE_NAME,GRADE_NO FROM FREELANCER JOIN GRADE USING(GRADE_NO))
@@ -689,7 +689,7 @@ JOIN (SELECT FREELANCER_NO,NVL(MESSAGE_RATE,0) INQUIRY_RATE ----문의 응답률
 					WHERE FREELANCER_NO = #{memberNo}
 					</if>
 			</select>
-			
+			<!-- 사이트 등급 조건 -->
 			<select  id="selectBasicGrade" resultMap="grade_rm">
 			SELECT GRADE_NO,GRADE_NAME,SATISFACTION,INQUIRY_RATE,COMPLETION_RATE,SALE_PROCEEDS, 
 			TO_CHAR(SALE_PROCEEDS, 'FM999,999,999,999') SALE_PROCEEDS_STRING,SALE_COUNT 
@@ -743,6 +743,7 @@ JOIN (SELECT FREELANCER_NO,NVL(MESSAGE_RATE,0) INQUIRY_RATE ----문의 응답률
 			WHERE FREELANCER_NO=#{memberNo}
 	   	</select>
 	   	
+	   	<!-- searchInput 헤더창에서 서비스 검색 시 추천 검색어 들고오기-->
 	   	<select id="searchInput" resultMap="fService_rm">
 	   	SELECT SERVICE_NO, MAIN_CATEGORY_NO,
 				MAIN_CATEGORY_NAME,SUB_CATEGORY_NO,SUB_CATEGORY_NAME,THIRD_CATEGORY_NO,THIRD_CATEGORY_NAME,
@@ -771,7 +772,7 @@ JOIN (SELECT FREELANCER_NO,NVL(MESSAGE_RATE,0) INQUIRY_RATE ----문의 응답률
 				 AND SERVICE_TITLE LIKE '%${searchInput}%' 
 			</if>
 	   	</select>
-	   	
+	   	<!-- 검색 시 서비스 목록 들고오기 -->
 	   	<select id="selectSearchServiceList" resultMap="fService_rm">
 		   	SELECT SERVICE_NO, MAIN_CATEGORY_NO,
 					MAIN_CATEGORY_NAME,SUB_CATEGORY_NO,SUB_CATEGORY_NAME,THIRD_CATEGORY_NO,THIRD_CATEGORY_NAME,
@@ -806,7 +807,7 @@ JOIN (SELECT FREELANCER_NO,NVL(MESSAGE_RATE,0) INQUIRY_RATE ----문의 응답률
 					AND SERVICE_TITLE LIKE '%${searchInput}%'
 				</if>
 			</select>
-			
+			<!-- 검색 시 서비스 목록 들고오기 페이지 처리 -->
 			<select id="getSearchServiceCount" resultType="_int">
 		   	SELECT COUNT(*)
 				FROM SERVICE
@@ -832,5 +833,25 @@ JOIN (SELECT FREELANCER_NO,NVL(MESSAGE_RATE,0) INQUIRY_RATE ----문의 응답률
 					AND SERVICE_TITLE LIKE '%${searchInput}%'
 				</if>
 			</select>
+			
+			<!-- 스케줄러 모집 마감일 지났을 때 상태 변경 전 조회 -->
+			<select id="selectProjectRecruitDate" resultMap="request_rm">
+			SELECT * 
+			FROM PROJECT_REQUEST 
+			WHERE PROJECT_REQUEST_DEL_FL ='N'
+			AND PROJECT_REQUEST_STATUS IN (1,2)
+			AND REQUEST_RECRUIT_DATE <![CDATA[<=]]> #{date}
+			</select>
+			
+			<!-- 조회해온 것들 모집 마감 상태 값으로 변경 -->
+	   	<update id="updateRecruitDateScheduling">
+	   	UPDATE "PROJECT_REQUEST" SET
+	   	PROJECT_REQUEST_STATUS = 4
+	   	WHERE PROJECT_REQUEST_NO IN 
+	   	<foreach collection="temp1" item="no"
+	      open=" (" separator="," close=") ">
+	        #{no}
+	  	</foreach>
+	   	</update>
 	   	
 </mapper>
