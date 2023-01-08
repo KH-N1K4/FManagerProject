@@ -172,10 +172,12 @@ function category(map){
         reviewPoint.classList.add("imageOthers");
         reviewPoint.classList.add("right");
         const s1 = document.createElement("strong");
-        s1.innerHTML="평점"
+        s1.innerText="평점 ";
         const s2 = document.createElement("strong");
         s2.append(document.createTextNode("★ "+ content.reviewPoint))
-        reviewPoint.innerHTML=s1+" "+s2;
+        reviewPoint.append(s1);
+        reviewPoint.append(document.createTextNode(" "))
+        reviewPoint.append(s2);
 
         const sellCount=document.createElement("span");
         sellCount.classList.add("imageOthers");
@@ -184,7 +186,9 @@ function category(map){
         s3.innerHTML="판매수"
         const s4 = document.createElement("strong");
         s4.innerHTML=content.sellCount+" 회";
-        sellCount.innerHTML=s3+" "+s4;
+        sellCount.append(s3);
+        sellCount.append(document.createTextNode(" "))
+        sellCount.append(s4);
 
 
 
