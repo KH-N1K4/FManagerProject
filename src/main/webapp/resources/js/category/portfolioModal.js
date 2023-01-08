@@ -1,6 +1,8 @@
 const body1 = document.getElementsByClassName('modal_body')[0];
 const body2 = document.getElementsByClassName('modal_body')[1];
 
+const mainBody = document.querySelector(".mainBody");
+
 const modalClose1 = document.getElementsByClassName('modal_close2')[0];
 
 
@@ -26,7 +28,7 @@ for(let portfolio of clickPortfolio){
         modal1.classList.toggle('show');
         modal1.style.display= 'block';
         body1.style.display ='block';
-        body.style.overflow = 'hidden';
+        mainBody.style.overflow = 'hidden';
         
         // if(modal.classList.contains('show')){
         // }
@@ -35,7 +37,7 @@ for(let portfolio of clickPortfolio){
     modalClose1.addEventListener('click', ()=>{
     
         modal1.style.display ='none';
-        body.style.overflow='visible';
+        mainBody.style.overflow='visible';
     })
 
 }

@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="/resources/css/freelancer/expertDetail.css">
 </head>
-<body>
+<body class="mainBody">
     
     
     <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
@@ -88,7 +88,7 @@
         	<c:forEach var="portfolio" items="${freelancer.portfolioList }">
 	        	<a>
 	                <div class="portfolioPhoto"> 
-		                <img alt="" src="${portfolio.portfolioThumbnail }" style="width:100%;"> 
+		                <img alt="" src="${portfolio.portfolioThumbnail }" > 
 		            	<span class="hidden">${portfolio.portfolioTitle }</span>
 		            	<span class="hidden">${portfolio.portfolioContent }</span>
 		            	<span class="hidden">${portfolio.portfolioThumbnail }</span>
@@ -103,7 +103,7 @@
         	 <c:forEach var="service" items="${freelancer.fserviceList}">
 	        	 <a href="/service/${service.serviceNo }">
 	                <div class="serviceOne">
-	                    <div class="servicePhoto"><img alt="" src="${service.requestFilePath }" style="width:100%;"> </div>
+	                    <div class="servicePhoto"><img alt="" src="${service.requestFilePath }"> </div>
 	                    <div class="serviceOneTitle">${service.serviceTitle}</div>
 	                    <div class="serviceSubTitle">${service.serviceSummary}</div>
 	                    <div class="serviceOther">
