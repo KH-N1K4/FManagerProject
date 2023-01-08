@@ -133,23 +133,26 @@
                             <span class="text">${purchase.workProgress}</span>
                           </td>
                           <td class="tc">
-                            <c:if test="${purchase.workCount==0 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">
-                              <a id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
-                              <a id="reportBtn" title="" class="reportBtn btn_type">신고</a>
-                            </c:if>
-                            <c:if test="${purchase.workCount>=1 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">
-                              <a id="${purchase.tradeNo}" title="" class="finishBtn btn_type">완료</a>
-                              <a id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
-                              <a id="reportBtn" title="" class="reportBtn btn_type">신고</a>
-                            </c:if>
-                            <c:if test="${purchase.workStatus==2 && purchase.memberDoneFL==2}">
-                              <a id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
-                            </c:if>
-
+                            <c:choose>
+                              <c:when test="${purchase.workStatus==4}">
+                                <a id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
+                              </c:when>
+                              <c:when test="${purchase.workCount==0}">
+                                <a id="reportBtn" title="" class="reportBtn btn_type">취소/신고</a>
+                              </c:when>
+                              <c:when test="${purchase.workCount>=1 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">
+                                <a id="${purchase.tradeNo}" title="" class="finishBtn btn_type">완료</a>
+                                <a id="reportBtn" title="" class="reportBtn btn_type">취소 / 신고</a>
+                              </c:when>
+                            </c:choose>
                           </td>
                           <input type="hidden" id="hiddenTradeNo" value="${purchase.tradeNo}">                
                           <input type="hidden" id="hiddenMemberName" value="${purchase.memberName}">                
-                          <input type="hidden" id="hiddenMemberNo" value="${purchase.memberNo}">                
+                          <input type="hidden" id="hiddenMemberNo" value="${purchase.memberNo}">     
+                          <input type="hidden" id="hiddenTradeReportNo" value="${purchase.tradeReportNo}">           
+                          <input type="hidden" id="hiddenFilePath" value="${purchase.filePath}">           
+                          <input type="hidden" id="hiddenTradeReportTypeName" value="${purchase.tradeReportTypeName}">           
+                          <input type="hidden" id="hiddenReportContent" value="${purchase.reportContent}">           
                         </tr>
                       </c:forEach>
                     </c:if>
@@ -165,9 +168,6 @@
 
           <div class="report-modal">
             <jsp:include page="/WEB-INF/views/myProject/modal/myproject_report.jsp" /> 
-          </div>
-          <div class="cancel-modal">
-            <jsp:include page="/WEB-INF/views/myProject/modal/myproject_cancel.jsp" /> 
           </div>
           <div class="review-modal">
             <jsp:include page="/WEB-INF/views/myProject/modal/myproject_review.jsp" /> 

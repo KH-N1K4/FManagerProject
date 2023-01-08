@@ -1,6 +1,5 @@
 
 reportModal();
-cancelModal();
 reviewModal();
 
 
@@ -57,7 +56,7 @@ const pagination = document.querySelector(".pagination");
 for(f of finishBtn){
   f.addEventListener("click",e=>{
     
-    if(confirm('작업 완료?')){
+    if(confirm('작업을 완료하시겠습니까?')){
       
       const tradeNo = e.target.id;
   
@@ -177,12 +176,6 @@ for(f of finishBtn){
                 const td6 = document.createElement("td");
                 td6.classList.add("tc");
 
-                const cancelBtn = document.createElement("a");
-                cancelBtn.setAttribute("id","cancelBtn");
-                cancelBtn.classList.add("cancelBtn");
-                cancelBtn.classList.add("btn_type");
-                cancelBtn.append(document.createTextNode("취소"));
-
                 const reportBtn = document.createElement("a");
                 reportBtn.setAttribute("id","reportBtn");
                 reportBtn.classList.add("reportBtn");
@@ -200,18 +193,13 @@ for(f of finishBtn){
                 reviewCreateBtn.classList.add("reviewCreateBtn");
                 reviewCreateBtn.append(document.createTextNode("리뷰하기"));
 
-                if(purchase.workCount==0 && purchase.memberDoneFL==1 && purchase.workStatus!=3){
-                cancelBtn.classList.add("cancelBtn");
-                  td6.append(cancelBtn);
-                  td6.append(document.createTextNode(" "));
+                if(purchase.workCount==0){
                   td6.append(reportBtn);
-                } else if(purchase.workCount>=1 && purchase.memberDoneFL==1){
+                } else if(purchase.workCount>=1 && purchase.memberDoneFL==1 && purchase.workStatus!=3){
                   td6.append(finishBtn);
                   td6.append(document.createTextNode(" "));
-                  td6.append(cancelBtn);
-                  td6.append(document.createTextNode(" "));
                   td6.append(reportBtn);
-                } else if(purchase.workStatus==2 && purchase.memberDoneFL==2){
+                } else if(purchase.workStatus==4){
                   td6.append(reviewCreateBtn);
                 }
                 tr.append(td6);
@@ -234,12 +222,35 @@ for(f of finishBtn){
                 memberNo.setAttribute("value",purchase.memberNo);
                 tr.append(memberNo);
 
+                const tradeReportNo = document.createElement("input");
+                tradeReportNo.setAttribute("type","hidden");
+                tradeReportNo.setAttribute("id","hiddenTradeReportNo");
+                tradeReportNo.setAttribute("value",purchase.tradeReportNo);
+                tr.append(tradeReportNo);
+
+                const filePath = document.createElement("input");
+                filePath.setAttribute("type","hidden");
+                filePath.setAttribute("id","hiddenFilePath");
+                filePath.setAttribute("value",purchase.filePath);
+                tr.append(filePath);
+
+                const tradeReportTypeName = document.createElement("input");
+                tradeReportTypeName.setAttribute("type","hidden");
+                tradeReportTypeName.setAttribute("id","hiddenTradeReportTypeName");
+                tradeReportTypeName.setAttribute("value",purchase.tradeReportTypeName);
+                tr.append(tradeReportTypeName);
+
+                const reportContent = document.createElement("input");
+                reportContent.setAttribute("type","hidden");
+                reportContent.setAttribute("id","hiddenReportContent");
+                reportContent.setAttribute("value",purchase.tradeReportTypeName);
+                tr.append(reportContent);
+
                 selecttbody.append(tr);
 
               }
 
               reportModal();
-              cancelModal();
               reviewModal();
 
               /* 페이징 */
@@ -303,48 +314,6 @@ for(f of finishBtn){
   });
 }
 
-/* 취소 모달 */
-function cancelModal(){
-  const cancelBtn = document.querySelectorAll('.cancelBtn');
-  const body = document.querySelector('#mainBody');
-  const cancelModal = document.querySelector('.cancel-modal');
-  const cancelModalClose = document.querySelector(".cancelModal_close");
-
-  for(c of cancelBtn){
-    
-    c.addEventListener("click",e=>{
-
-      cancelModal.classList.toggle("show"); 
-      if (cancelModal.classList.contains('show')) {
-        body.style.overflow = 'hidden';
-      }
-
-      document.getElementById("serviceTitle2").value= e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.children[0].children[0].innerText;
-      document.getElementById("tradeNo2").value=e.target.parentElement.nextElementSibling.value;
-      document.getElementById("memberName2").value=e.target.parentElement.nextElementSibling.nextElementSibling.value;
-      document.getElementById("memberNo2").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.value;
-
-
-      cancelModalClose.addEventListener("click",()=>{
-        if (cancelModal.classList.contains('show')) {
-          cancelModal.classList.remove('show');
-          document.getElementById("reportContent2").value="";
-          document.getElementById("reportFilePath2").value="";
-        }
-
-        if (!cancelModal.classList.contains('show')) {
-            body.style.overflow = 'visible';
-        }
-      });
-
-    });
-  }
-}
-
-
-
-
-
 /* 신고 모달 */
 function reportModal(){
   const reportBtn = document.querySelectorAll('.reportBtn');
@@ -365,14 +334,62 @@ function reportModal(){
       document.getElementById("tradeNo").value=e.target.parentElement.nextElementSibling.value;
       document.getElementById("memberName").value=e.target.parentElement.nextElementSibling.nextElementSibling.value;
       document.getElementById("memberNo").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.value;
+      document.getElementById("reportContent").setAttribute("readonly", false);
+
+      if(document.querySelector(".fileRemove").classList.contains("none")){
+        document.querySelector(".fileRemove").classList.remove("none");
+      }
+      
+      document.getElementById("reportContent").value="";
+      document.getElementById('reportFilePath1').value='';
+      
+      if(!document.querySelector(".ajaxReview").classList.contains("show")){
+        document.querySelector(".ajaxReview").classList.add("show");
+      }
+
+      const div = document.createElement("div");
+      div.classList.add("list_content"); 
+      div.classList.add("fileaddDiv"); 
+      const a = document.createElement("a");
+      const fileadd= document.getElementById("fileadd");
+
+      fileadd.innerHTML="";
+      
+      if(e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value!=0){
+        
+        document.getElementById("selectType").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
+        document.getElementById("reportContent").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
+        document.getElementById("reportContent").setAttribute("readonly", true);
+        const src = e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
+        a.setAttribute("href", src);
+        a.setAttribute("target", "_blank");//target="_blank"
+        a.style.textDecoration ="none";
+        a.style.color ="black";
+        a.style.fontSize ="12px";
+        a.innerText = "업로드 파일 다운로드";
+
+        if(document.querySelector(".ajaxReview").classList.contains("show")){
+          document.querySelector(".ajaxReview").classList.remove("show");
+        }
+
+        if(src != null){
+          /* document.querySelector('#reportFilePath').value = arg.reportFilePath; */
+          
+          fileadd.append(div);
+          div.append(a);
+
+        }
+
+
+      
+      }
+      
 
 
 
       reportModalClose.addEventListener("click",()=>{
         if (reportModal.classList.contains('show')) {
           reportModal.classList.remove('show');
-          document.getElementById("reportContent").value="";
-          document.getElementById("reportFilePath").value="";
         }
 
         if (!reportModal.classList.contains('show')) {
@@ -437,22 +454,14 @@ function reviewModal(){
 const tradeReportFrm = document.getElementById("tradeReportFrm");
 tradeReportFrm.addEventListener("submit",e=>{
 
-  if(!confirm('해당 거래를 신고하시겠습니까?')){
-    
+  if(tradeReportType.value==0){
+    alert("문의 타입을 선택해주세요.");
     e.preventDefault();
+  }else {
+      if(!confirm('해당 거래를 신고하시겠습니까?')){
+        e.preventDefault();
+      }
   }
-
-});
-
-/* 취소 버튼 누를 때 */
-const tradeReportCancelFrm = document.getElementById("tradeReportCancelFrm");
-tradeReportCancelFrm.addEventListener("submit",e=>{
-
-  if(!confirm('해당 거래를 취소하시겠습니까?')){
-    
-    e.preventDefault();
-  }
-
 });
 
 const reviewfrm = document.getElementById("reviewfrm");

@@ -39,5 +39,14 @@ public class myProjectTrade {
 	
 	private int reviewCount;
 	
+	private int tradeReportNo;
+	private int reportPersonNo;
+	private String reportPersonName;
+	private int reportedPersonNo;
+	private String reportContent;
+	private String filePath;
+	private int tradeReportTypeNo;
+	private String tradeReportTypeName;
+	
 	
 }

@@ -184,56 +184,6 @@ public class MyProjectController_2 {
 	}
 	
 	
-	// 주문 취소
-	@PostMapping("/member/myProject/tradeReportCancel")
-	public String tradeReportCancel(Model model, @SessionAttribute("loginMember") Member loginMember,
-			@RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
-			@RequestParam(value="searchInput",required=false, defaultValue = "") String searchInput,
-			@RequestParam(value="type" , required = false, defaultValue = "0") int type,
-			@RequestParam(value="searchDate1" , required = false, defaultValue = "") String searchDate1,
-			@RequestParam(value="searchDate2" , required = false, defaultValue = "") String searchDate2,
-			@RequestParam(value="reportFilePath", required = false, defaultValue = "") MultipartFile reportFile,
-			RedirectAttributes ra, /* 메세지 전달용 */
-			HttpServletRequest req, /* 저장할 서버 경로 */
-			TradeReport inputTradeReport) throws IOException {
-		
-		String webPath = "/resources/files/tradeReport/";
-		// 실제 파일이 저장된 컴퓨터 상의 절대 경로
-		String realPath = req.getSession().getServletContext().getRealPath(webPath);
-		
-		
-		int result = service.insertTradeReportCancel(inputTradeReport,webPath, realPath, reportFile);
-		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		
-		String message = null;
-		if(result>0) {
-			int loginMemberNo = loginMember.getMemberNo();
-			Map<String, Object> option = new HashMap<String, Object>();
-			option.put("loginMemberNo", loginMemberNo);
-			option.put("type", type);
-			option.put("searchDate1", searchDate1);
-			option.put("searchDate2", searchDate2);
-			option.put("searchInput", searchInput);
-			
-			resultMap = service.selectPurchaseList(option, cp);
-			
-			model.addAttribute("resultMap",resultMap);
-			model.addAttribute("type", type);
-			model.addAttribute("searchDate1", searchDate1);
-			model.addAttribute("searchDate2", searchDate2);
-			model.addAttribute("searchInput", searchInput);
-			message = "주문 취소 등록";
-		} else {
-			message = "주문 취소 등록 실패";
-			
-		}
-		ra.addFlashAttribute("message", message);
-		
-		return "redirect:/member/myProject/myPurchaseList";
-	}
-	
-	
 	// 리뷰하기
 	@PostMapping("/member/myProject/review")
 	public String myProjectReview(Model model, @SessionAttribute("loginMember") Member loginMember,
