@@ -93,7 +93,7 @@
 						<div class="manager-division">${trade.paymentTypeString}</div>
 						<div class="manager-division">${trade.paymentPrice}</div>
 						<div class="manager-option">
-							<c:if test="${trade.workStatus == 1}">
+							<c:if test="${trade.workStatus == 1 && trade.reportCount>=1}">
 							<a class="btn refund">환불</a>
 							</c:if>
 							<c:if test="${trade.workStatus == 4}">

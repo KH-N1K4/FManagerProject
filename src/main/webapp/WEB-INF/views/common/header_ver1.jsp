@@ -13,7 +13,7 @@
         <form action ="/searchService" class="SearchfrmMain" method="get" name="SearchfrmMain" id="SearchfrmMain">
             <div id="search">
                 
-                    <input type="text" placeholder="서비스명를 입력하세요" id="search-input" name="searchInput">
+                    <input type="text" placeholder="서비스명를 입력하세요" id="search-input" name="searchInput" autocomplete="off">
 
                     <span id="searchButton">▾</span>
                     <div id="suggestion_box" style="display: none;"></div>

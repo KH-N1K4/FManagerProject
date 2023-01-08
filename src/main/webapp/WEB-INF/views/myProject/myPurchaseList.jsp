@@ -124,7 +124,7 @@
                           <td class="tc">
                             <span class="num">
                               <c:choose>
-                                <c:when test="${purchase.workCount}>${purchase.serviceEditNum}">${purchase.serviceEditNum}/${purchase.serviceEditNum}</c:when>
+                                <c:when test="${purchase.workCount>purchase.serviceEditNum}">${purchase.serviceEditNum}/${purchase.serviceEditNum}</c:when>
                                 <c:otherwise>${purchase.workCount}/${purchase.serviceEditNum}</c:otherwise>
                               </c:choose>
                               </span>
@@ -137,12 +137,12 @@
                               <a id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
                               <a id="reportBtn" title="" class="reportBtn btn_type">신고</a>
                             </c:if>
-                            <c:if test="${purchase.workCount>=1 && purchase.memberDoneFL==1}">
+                            <c:if test="${purchase.workCount>=1 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">
                               <a id="${purchase.tradeNo}" title="" class="finishBtn btn_type">완료</a>
                               <a id="cancelBtn" title="" class="cancelBtn btn_type">취소</a>
                               <a id="reportBtn" title="" class="reportBtn btn_type">신고</a>
                             </c:if>
-                            <c:if test="${(purchase.workStatus==2 || purchase.workStatus==4) && purchase.memberDoneFL==2}">
+                            <c:if test="${purchase.workStatus==2 && purchase.memberDoneFL==2}">
                               <a id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
                             </c:if>
 

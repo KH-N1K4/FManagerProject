@@ -1,6 +1,6 @@
 .modal_body{
     width: 800px;
-    height: 600px;
+    height: 500px;
     border:1px solid black;
     position: relative;
     overflow:scroll;
@@ -44,8 +44,12 @@
    
 }
 
-#portfolioSection{
+/* #portfolioSection{
     margin:10px 30px;
+} */
+
+.portfolioTitle2, .portfolioContent2{
+    margin: 0 0 10px 0;
 }
 
 #portfolioTitle{
@@ -69,3 +73,12 @@
     background-color: aliceblue;
     margin:auto;
 }
+
+#portfolioThumb{
+    width: 780px;
+}
+
+#portfolioPhoto{
+    width: 780px;
+}
+

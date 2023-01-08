@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/resources/css/freelancer/expertInfo.css">
 </head>
 
-<body>
+<body class="mainBody">
     <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
     <div class="main">
         

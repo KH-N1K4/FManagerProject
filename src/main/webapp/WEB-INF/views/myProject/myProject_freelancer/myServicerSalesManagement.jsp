@@ -144,13 +144,18 @@
                           <td class="tc" id="tdBtn${sales.tradeNo}">
                             <c:choose>
                               <c:when test="${sales.freelancerFLString eq '진행 중' && (sales.workStatus != 2 && sales.workStatus != 3)}">
-                                <c:if test="${sales.workCount ge 1}">
+                                <c:if test="${sales.workCount ge 1 and sales.tradeReportNo == 0}">
                                   <a href="#" id="finishBtn${sales.tradeNo}" title="${sales.tradeNo}" class="finishBtn btn_type"><span>완료</span></a>
                                 </c:if>
-                                <c:if test="${sales.workCount le sales.serviceEditNum}">
+                                <c:if test="${sales.workCount le sales.serviceEditNum and sales.tradeReportNo == 0}">
                                   <a href="#" id="sendBtn${sales.tradeNo}" title="${sales.tradeNo}" class="sendBtn btn_type"><span>발송</span></a>
                                 </c:if>
-                                <a href="#" id="reportBtn${sales.tradeNo}" title="${sales.tradeNo}" class="reportBtn btn_type"><span>신고</span></a>
+                                <c:if test="${sales.tradeReportNo == 0}">
+                                  <a href="#" id="reportBtn${sales.tradeNo}" title="${sales.tradeNo}" class="reportBtn btn_type"><span>신고</span></a>
+                                </c:if>
+                                <c:if test="${sales.tradeReportNo != 0}">
+                                  <a href="#" id="reportBtn${sales.tradeNo}" title="${sales.tradeNo}" class="reportBtn btn_type" style="width: 80px; background-color: white!important;"><span>신고내역</span></a>
+                                </c:if>
                               </c:when>
                               <c:otherwise>
                                 <c:if test="${sales.tradeReportNo != 0}">
