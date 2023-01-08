@@ -125,10 +125,11 @@
                               <span id="clientTradeRequest" class="clientTradeRequest" expertName="" title="${sales.tradeNo}">${sales.tradeRequestString}</span>
                             </div>
                           </td>
-                          <td  class="tc">
+                          <td  class="tc chattingTD">
                             <div class="client_name_area td_link">
                               <span id="clientName" class="clientName" expertName="">${sales.memberName}</span>
                             </div>
+                            <div id="chattingDiv" style="display: none;"><a href="/member/message?clientNo=${sales.memberNo}" class="_chattingDefault"><span>채팅하기</span></a></div>
                           </td>
                           <td class="tc">
                             <span class="num" id="serviceEditNum${sales.tradeNo}"><c:choose><c:when test="${sales.workCount == sales.serviceEditNum+1}">${sales.workCount-1}/${sales.serviceEditNum}</c:when><c:otherwise>${sales.workCount}/${sales.serviceEditNum}</c:otherwise></c:choose></span>
