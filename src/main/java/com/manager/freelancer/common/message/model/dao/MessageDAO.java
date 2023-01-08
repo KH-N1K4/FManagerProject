@@ -128,7 +128,7 @@ public class MessageDAO {
 		map.put("memberReportNo", reportMemberNo);
 		map.put("memberReportTitle", reportTitle);
 		map.put("memberReportContent", reportContent);
-		sqlSession.insert("myProjectRequest.memberReportUpdateSet", map);
+		sqlSession.insert("myProjectRequest.memberReportUpdateSet", map);    //myProjectRequest-mapper.xml
 		int reportNum = (int)map.get("reportNo");
 		return reportNum;
 	}
@@ -138,6 +138,6 @@ public class MessageDAO {
 	 * @return
 	 */
 	public int insertReportFileList(List<MemberReportFile> reportFileList) {
-		return sqlSession.insert("myProjectRequest.insertReportFileListSet", reportFileList);
+		return sqlSession.insert("myProjectRequest.insertReportFileListSet", reportFileList);   //myProjectRequest-mapper.xml
 	}
 }
