@@ -11,7 +11,7 @@
     <title>프리랜서 정보</title>
 
 
-    <link rel="stylesheet" href="/resources/css/freelancer/expertDetail.css">
+    <link rel="stylesheet" href="/resources/css/manager/expertDetail.css">
 </head>
 <body class="mainBody">
     

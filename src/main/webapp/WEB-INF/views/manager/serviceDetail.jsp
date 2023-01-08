@@ -8,7 +8,7 @@
     <title>서비스 관리 상세보기</title>
     
     <link rel="stylesheet" href="/resources/css/myProject/askService.css">
-    <link rel="stylesheet" href="/resources/css/category/serviceDetail.css">
+    <link rel="stylesheet" href="/resources/css/manager/serviceDetail.css">
     <style>
     .main>*{
         width: 1200px;
@@ -105,8 +105,7 @@
                     <div class="expertContent">
                         <div class="expertName"><a href="/service/freelancerDetail/${freelancerService.freelancerNo}" target="_blank">${freelancerService.freelancerName }</a></div>
                         <div class="responseInfo">
-                            <span>응답시간<span>00</span></span>
-                            <span>응답률<span>00</span></span>
+                            <span>${freelancerService.freelancerIntro}</span>
                         </div>
                                     
                     </div>

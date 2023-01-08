@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>결제중 </title>
 
-    <link rel="stylesheet" href="/header_ver2.css">
     <link rel="stylesheet" href="/resources/css/myProject/paying.css">
 
 </head>
@@ -23,7 +22,7 @@
         <form>
 
         <div id="serviceSection">
-        <div id="servicePhoto"> <img src="${param.servicePhoto }" style="width:100%;"> </div>
+        <div id="servicePhoto"> <img src="${param.servicePhoto }" style="width:170px;height:170px;"> </div>
         <div>
 
             <div id="serviceContent"><span>${param.serviceTitle }</span><br>
@@ -33,7 +32,7 @@
         </div>
         </div>
 
-        <textarea name="tradeRequest" id="tradeRequest" cols="30" rows="10" placeholder="요청사항"></textarea>
+        <textarea name="tradeRequest" id="tradeRequest" cols="30" rows="6" placeholder="요청사항"></textarea>
         <div id="btnSection">
 
             <a id="paymentBtn" onclick="iamport()" >결제</a>
