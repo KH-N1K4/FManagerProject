@@ -350,9 +350,5 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 		return dao.DeletePortfolio(freelancer1,freelancerNo, portfolioNo);
 	}
 	
-	@Override
-	public int UpdatePortfolio(int freelancerNo, int portfolioNo) {
-		// TODO Auto-generated method stub
-		return dao.updatePortfolio(freelancerNo, portfolioNo);
-	}
+	
 }
