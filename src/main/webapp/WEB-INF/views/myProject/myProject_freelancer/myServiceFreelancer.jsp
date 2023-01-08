@@ -93,6 +93,10 @@
                     </div>
                 </c:forEach> 
             </c:if>
+            <c:if test="${empty myService}"> 
+                <div class="myProject_content"> 등록된 서비스가 없습니다.</div>
+            </c:if>
+            
             <c:if test="${listCount != 0}">
                 
                 <div class="pagination-area">

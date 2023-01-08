@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="proposal" value="${proposal}"/>
 
 <!DOCTYPE html>
@@ -60,7 +61,7 @@
                     <tr>
                       <th scope="col" class="frst"><strong class="line_n">번호</strong></th>
                       <th scope="col" class=""><strong class="line_r">프로젝트명</strong></th>   
-                      <th scope="col" class=""><strong class="line_r">전문가</strong></th>  
+                      <th scope="col" class=""><strong class="line_r">프리랜서</strong></th>  
                       <th scope="col" class=""><strong class="line_n">등급</strong></th>
                       <th scope="col" class=""><strong class="line_n">금액</strong></th>
                       <th scope="col" class=""><strong class="line_n">수정횟수</strong></th>

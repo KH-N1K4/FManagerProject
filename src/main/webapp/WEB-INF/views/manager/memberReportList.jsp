@@ -29,7 +29,7 @@
 			<span id="question-list-title">회원 신고 내역 </span> 
 			<span class="select-area"> 
 				<select class="select-area-input" name="status" id="selectStatus" onchange="selectChange()">
-					<option value="">진행상태</option>
+					<option value="">진행 상태</option>
 					<option value="1">답변 대기</option>
 					<option value="2">해결 완료</option>
 				</select>

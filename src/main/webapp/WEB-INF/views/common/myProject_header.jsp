@@ -19,7 +19,7 @@
                     
        <c:otherwise><%-- 로그인 O인 경우 --%>
        	<span><a href="/manager/memberList">관리자</a></span>
-       	<span><a href="/member/enrollFreelancer">전문가 등록</a></span>
+       	<span><a href="/member/enrollFreelancer">프리랜서 등록</a></span>
         	<span><a href="/member/myProject/myRequestList">내프로젝트</a></span>
        
            <label for="header-menu-toggle">
@@ -32,7 +32,7 @@
            <input type="checkbox" id="header-menu-toggle">
 
            <div id="header-menu">
-               <a href="/member/myInfo">내정보</a>
+               <a href="/member/myInfo">내 정보</a>
                <a href="/member/logout">로그아웃</a>
            </div>
        </c:otherwise>
@@ -43,7 +43,7 @@
        
         <c:choose>
           <c:when test="${loginMember.freelancerFL eq 'Y'}">
-            <a href="/member/myProject/freelancer/myService"><span>전문가 전환</span></a>
+            <a href="/member/myProject/freelancer/myService"><span>프리랜서 전환</span></a>
           </c:when>
         </c:choose>
         <a href="/member/message/chatting"><span>메세지</span></a>

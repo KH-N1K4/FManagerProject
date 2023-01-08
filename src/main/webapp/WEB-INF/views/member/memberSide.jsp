@@ -10,7 +10,7 @@
       <a class="myProject_User_side" href="/member/myInfo">내 정보</a>
   
        <c:if test="${loginMember.freelancerFL=='Y'}">
-      		<a class="myProject_User_side" href="/member/myInfo/freelancerInfo">전문가 정보</a>
+      		<a class="myProject_User_side" href="/member/myInfo/freelancerInfo">프리랜서 정보</a>
        </c:if>
      
       

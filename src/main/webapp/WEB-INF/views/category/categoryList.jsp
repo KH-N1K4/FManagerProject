@@ -44,9 +44,9 @@
                         <option value="999">100만원 초과</option>
                     </select>
 
-                    <span>전문가 등급</span>
+                    <span>프리랜서 등급</span>
                     <select name="" id="grade" class="select">
-                        <option value="0">전문가 등급</option>
+                        <option value="0">프리랜서 등급</option>
                         <option value="1">New</option>
                         <option value="2">Master</option>
                     </select>

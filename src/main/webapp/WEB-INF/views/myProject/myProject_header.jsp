@@ -10,7 +10,7 @@
       <div class="header-top">
         <c:choose>
           <c:when test="${loginMember.freelancerFL eq 'Y'}">
-            <a href="/member/myProject/freelancer/myService"><span>전문가 전환</span></a>
+            <a href="/member/myProject/freelancer/myService"><span>프리랜서 전환</span></a>
           </c:when>
         </c:choose>
         <a href="/member/message/chatting"><span>메세지</span></a>
