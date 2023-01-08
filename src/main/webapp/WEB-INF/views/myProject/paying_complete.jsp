@@ -25,7 +25,7 @@
        
 
         <div id="serviceSection">
-        <div id="servicePhoto"> <img alt="" src=" ${trade.requestFilePath }" style="width:100%;"> </div>
+        <div id="servicePhoto"> <img alt="" src=" ${trade.requestFilePath }" style="width:170px;height:170px;"> </div>
         <div>
 
             <div id="serviceContent"><span> ${trade.serviceTitle }</span><br>
