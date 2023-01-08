@@ -11,7 +11,7 @@
 <title>일반 회원 정보</title>
 
 
-<link rel="stylesheet" href="/resources/css/manager/expertDetail.css">
+<link rel="stylesheet" href="/resources/css/manager/memberDetail.css">
 <style>
 </style>
 </head>
@@ -78,10 +78,6 @@
 
 
 
-
-	<div class="modal_portfolioDetail">
-		<jsp:include page="/WEB-INF/views/member/freelancer/portfolioDetail.jsp" />
-	</div>
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
