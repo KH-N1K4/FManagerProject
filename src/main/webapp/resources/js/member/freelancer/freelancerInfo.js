@@ -1,6 +1,6 @@
 const body1 = document.getElementsByClassName('modal_body')[0]; /* 포트폴리오추가 */
 const body2 = document.getElementsByClassName('modal_body')[1]; /* 포트폴리오상세 */
-const body=   document.querySelector('body'); /* 전문가정보 body */
+const mainBody=   document.querySelector('mainBody'); /* 전문가정보 body */
 
 const modalClose1 = document.getElementsByClassName('modal_close1')[0]; /* 포트폴리오추가 */
 const modalClose2 = document.getElementsByClassName('modal_close2')[0]; /* 포트폴리오상세 */
@@ -83,7 +83,7 @@ for(let portfolio of clickPortfolio){
         modal2.classList.toggle('show');
         modal2.style.display= 'block';
         body2.style.display ='block';
-        body.style.overflow = 'hidden';
+        mainBody.style.overflow = 'hidden';
     } )
 }
 
