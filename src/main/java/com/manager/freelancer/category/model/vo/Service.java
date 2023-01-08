@@ -42,7 +42,7 @@ public class Service {
 	private int freeContactTime2;
 	private int inquiryRate;
 	
-	private float reviewPoint;
+	private String reviewPoint;
 	private int sellCount;
 	
 	private List<ImageFile> imageFileList;

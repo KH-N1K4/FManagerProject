@@ -112,7 +112,7 @@
     </script>	
 
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>	
-	<script src="/resources/js/category/categoryList.js"></script> 
+	<script src="/resources/js/common/main.js"></script> 
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 

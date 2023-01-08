@@ -1,4 +1,5 @@
 
+
  // 좋아요 버튼 클릭시 동작 
 const boardLike=document.getElementsByClassName("boardLike");
 
@@ -84,8 +85,9 @@ for(let each of select){
             url:"/selectCategoryList",
             method:"GET",
             data:{"order": index.value, "budget":budget.value, "grade":grade.value,
-            "mainCategoryNo":main1,
-            "thirdCategoryNo":third1},
+            "mainCategoryNo":location.href.split('/')[(location.href.split('/').length-2)],
+            "thirdCategoryNo":location.href.split('/')[(location.href.split('/').length-1)]
+        },
             success:(map)=>{
                 
                 for(let content of map.serviceList){
