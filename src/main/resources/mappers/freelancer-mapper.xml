@@ -337,8 +337,7 @@
     		INSERT INTO PORTFOLIO VALUES
     		(SEQ_PORTFOLIO_NO.NEXTVAL,#{portfolioTitle}, #{portfolioContent},#{portfolioFilePath},#{freelancerNo}, #{portfolioThumbnail})
     	</insert>
-    	
-    	
+
     	<!-- 포트폴리오 상세 조회 -->
     	<select id="viewPortfolioDetail" resultType="com.manager.freelancer.freelancer.model.vo.Portfolio">
     		
