@@ -34,7 +34,7 @@ const serviceCost=document.getElementById("serviceCost").children[0];
                     data: {
                         imp_uid : rsp.imp_uid,
                         "tradeRequest":tradeRequest.value,
-                         "servicePrice":serviceCost.innerText
+                         "servicePrice":serviceCost.id
                     },success:(result)=>{
 
                       console.log(result);
