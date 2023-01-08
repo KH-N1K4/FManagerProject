@@ -24,7 +24,7 @@
         <section class="mainMenu">
             <div id="title">수정하기</div>
             
-            <form id="registerFrm" action="/member/freelancer/updateFreelancerInfo" enctype="multipart/form-data" method="POST">
+            <form id="registerFrm" action="/member/myInfo/updateFreelancerInfo" enctype="multipart/form-data" method="POST">
                 <div>
                     <div class="itemTitle">
                         <div class="item">지역</div>
@@ -95,9 +95,15 @@
                     </div>
                     <div class="itemTitle">
                         <div class="item">기간</div>
-                        <div>
+                        <%-- <div>
                             <input type="text" name="freelancerCont" id="" class="number" value="${freelancer1.freelancerCont}"> 년
-                        </div>
+                        </div> --%>
+                        <select  name="freelancerCont" id="freelancerCont" class="number">
+                        
+	                		<c:forEach var="cont" begin="0" end="60">
+	                			<option value="${cont }"<c:if test="${freelancer1.freelancerPeriod==cont}">selected="selected"</c:if>>${cont }</option>
+	                		</c:forEach>
+                		</select>년
                     </div>
                    <%--  <div class="itemTitle">
                         <div class="item">경력 사항</div>
@@ -181,11 +187,11 @@
 		                        <option value="3" <c:if test ="${freelancer1.bankName eq '우리'}">selected="selected"</c:if>>우리</option>
 		                        <option value="4" <c:if test ="${freelancer1.bankName eq '기업'}">selected="selected"</c:if>>기업</option>
 		                    </select>
-                            <input type="text" value="${freelancer1.bankAccountNo}"name="bankAccountNumber" id="bankAccountNumber">
+                            <input type="text" value="${freelancer1.bankAccountNo}"name="bankAccountNumber" id="bankAccountNumber"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         </div>
                     </div>
                     <div class="itemTitle"> 
-                        <div class="item">자기소개</div>
+                        <div class="item" id="intro">자기소개</div>
                         <div>
                             <%-- <input type="text" name="freelancerIntro" id="freelancerIntro" class="input" >  --%>
 

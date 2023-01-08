@@ -171,3 +171,24 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+textarea{
+  border: 1px solid #538126;
+  font-size: 15px;
+  padding: 20px 20px;
+  position: relative;
+  top: 5px;
+  border-radius: 5px;
+}
+textarea:focus{
+  border: 1px solid #538126;
+  outline: 1px solid #538126;
+}
+input:focus{
+  border: 1px solid #538126;
+  outline: 1px solid #538126;
+}
+select:focus{
+  border: 1px solid #538126;
+  outline: 1px solid #538126;
+}

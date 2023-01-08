@@ -16,5 +16,6 @@ public class TradeReport {
 	private int reportedPersonNo;
 	private String reportContent;
 	private String filePath;
+	private int tradeReportTypeNo;
 
 }

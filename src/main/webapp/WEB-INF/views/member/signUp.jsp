@@ -27,7 +27,7 @@
             <input type="password" placeholder="비밀번호 확인" name="memberPwConfirm" id="memberPwConfirm"><br>
             <span class="signUp-message" id="pwMessage">영어, 숫자, 특수문자(!,@,#,-,_) 6~20글자 사이로 입력해주세요.</span>
             
-            <input type="text" placeholder="(- 없이 숫자만 입력)" name="memberTel" id="memberTel" maxlength="11" value="${tempMember.memberTel}"><br>
+            <input type="text" placeholder="(- 없이 숫자만 입력)" name="memberTel" id="memberTel" maxlength="11" value="${tempMember.memberTel}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><br>
             <span class="signUp-message" id="telMessage">전화번호를 입력해주세요(- 제외)</span>
             
 

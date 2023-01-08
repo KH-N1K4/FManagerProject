@@ -20,7 +20,7 @@
         <div class="itemArea">
             <div id="item">제목</div> 
             <div>
-                <input style="border : 1px solid black" type="text" name="portfolioTitle" id="portfolioTitle" required>
+                <input style="width: 465px; border : 1px solid rgba(130, 130, 130); font-size: initial; border-radius: 20;" type="text" name="portfolioTitle" id="portfolioTitle" required>
             </div>
         </div>
         <div class="itemArea">

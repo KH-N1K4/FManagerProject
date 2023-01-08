@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/resources/css/freelancer/expertInfo.css">
 </head>
 
-<body>
+<body class="mainBody">
     <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
     <div class="main">
         
@@ -24,7 +24,7 @@
             <section class="mainMenu">
                 <div id="title">전문가 정보</div>
                 <div>
-                    <div id="updateArea"><a href="/member/freelancer/updateFreelancerInfo" id="update">수정하기</a></div>
+                    <div id="updateArea"><a href="/member/myInfo/updateFreelancerInfo" id="update">수정하기</a></div>
                     <div>
                         <div class="item">자기소개</div>
                         <div>

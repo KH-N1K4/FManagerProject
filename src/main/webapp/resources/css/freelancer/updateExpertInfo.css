@@ -58,25 +58,25 @@ font-size: 20px;
     color: gray;
 }
 
-input{
+/* input{
     height: 25px;
 }
-
+ */
 
 
 
 
 
 /* 자기 소개 */
-textarea{
+/* textarea{
     margin-bottom: 30px;
-}
+} */
 
 
 /* 지역 */
 #area{
     width: 150px;
-    height: 30px;
+    height: 40px;
     position: relative;
     top: -3px;
 }
@@ -94,7 +94,7 @@ input[type="checkbox"]{
 
 /* 기간 */
 .number{
-    width: 70px;
+    width: 85px;
 }
 
 /* 은행 */
@@ -107,6 +107,22 @@ input[type="checkbox"]{
 #account{
     width: 400px;
     margin-bottom: 100px;
+}
+
+#bankAccountNumber, #freelancerIntro{
+    border: 1px solid #538126;
+    box-sizing: border-box;
+    padding: 12px 13px;
+    font-weight: 400;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    position: relative;
+    top: -3px;
+}
+
+#intro{
+	top: -3px;
 }
 
 

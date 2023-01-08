@@ -77,7 +77,7 @@
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>의뢰 한줄요약</span></div>
                   <div class="list_content">
-                    <textarea class="projectRequestOnecontent projectRequestContent box" name="projectRequestSummary" id="projectRequestSummary"></textarea>
+                    <input class="projectRequestOnecontent projectRequestContent box" name="projectRequestSummary" id="projectRequestSummary">
                   </div>
                 </div>
                 <br>

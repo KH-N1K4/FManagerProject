@@ -1,6 +1,6 @@
 const body1 = document.getElementsByClassName('modal_body')[0]; /* 포트폴리오추가 */
 const body2 = document.getElementsByClassName('modal_body')[1]; /* 포트폴리오상세 */
-const body=   document.querySelector('body'); /* 전문가정보 body */
+const mainBody=   document.getElementsByClassName('mainBody')[0]; /* 전문가정보 body */
 
 const modalClose1 = document.getElementsByClassName('modal_close1')[0]; /* 포트폴리오추가 */
 const modalClose2 = document.getElementsByClassName('modal_close2')[0]; /* 포트폴리오상세 */
@@ -18,7 +18,7 @@ btnOpenPopup1.addEventListener('click', () =>{
     modal1.style.display= 'block';
     if(modal1.classList.contains('show')){
         body1.style.display ='block';
-        // body.style.overflow = 'hidden';
+        mainBody.style.overflow = 'hidden';
     }
 })
 
@@ -26,7 +26,7 @@ btnOpenPopup1.addEventListener('click', () =>{
 modalClose1.addEventListener('click', ()=>{
 
     modal1.style.display ='none';
-    // body.style.overflow='visible';
+    mainBody.style.overflow='visible';
     portfolioTitle.value='';
     portfolioContent.value='';
     document.getElementById('image-input1').value = null;
@@ -55,7 +55,6 @@ modalClose1.addEventListener('click', ()=>{
 
 
 
-// 여기 주석해제하기
 modalClose2.addEventListener('click', ()=>{
 
     modal2.style.display ='none';
@@ -83,7 +82,8 @@ for(let portfolio of clickPortfolio){
         modal2.classList.toggle('show');
         modal2.style.display= 'block';
         body2.style.display ='block';
-        body.style.overflow = 'hidden';
+        mainBody.style.overflow = 'hidden';
+        // mainBody.style.backgroundColor = 'skyblue';
     } )
 }
 
@@ -91,7 +91,7 @@ for(let portfolio of clickPortfolio){
 modalClose2.addEventListener('click', ()=>{
 
     modal2.style.display ='none';
-    body.style.overflow='visible';
+    mainBody.style.overflow='visible';
 })
 
 // var pNo = ${freelancer1.portfolioNo};

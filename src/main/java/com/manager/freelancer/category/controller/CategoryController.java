@@ -78,11 +78,18 @@ public class CategoryController {
 	
 	// 세부 카테고리 목록 조회
 	@GetMapping("/category/{mainCategoryNo}/{thirdCategoryNo}")
-	public String subCategory(@PathVariable("mainCategoryNo") int mainCategoryNo,@PathVariable("thirdCategoryNo") int thirdCategoryNo,
+	public String subCategory(@PathVariable("mainCategoryNo") int mainCategoryNo,@PathVariable("thirdCategoryNo") String thirdCategoryNo,
 			Model model, @SessionAttribute(value="loginMember",required=false) Member loginMember,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp) {	
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
+	
+		int thirdCategoryNo1;
+		if(thirdCategoryNo.equals('0')) {
+			thirdCategoryNo1 =0;
+		}else {
+			thirdCategoryNo1 = Integer.parseInt(thirdCategoryNo);
+		}
 		
 		if(loginMember!=null) {
 			
@@ -91,9 +98,12 @@ public class CategoryController {
 		
 		System.out.println(thirdCategoryNo);
 		map.put("mainCategoryNo", mainCategoryNo);
-		map.put("thirdCategoryNo", thirdCategoryNo);
+		map.put("thirdCategoryNo", thirdCategoryNo1);
 		map.put("cp", cp);
 		Map<String, Object> map2=service.selectBoardList(map);
+		map2.put("mainCategoryNo", mainCategoryNo);
+		map2.put("thirdCategoryNo", thirdCategoryNo);
+		map2.put("cp", cp);
 		
 		model.addAttribute("map",map2);
 			
@@ -134,6 +144,10 @@ public class CategoryController {
 //		Map<String, Object> resultMap=new HashMap<String, Object>();
 //		
 //		resultMap.put("serviceList", serviceList);
+		
+		serviceList.put("mainCategoryNo", mainCategoryNo);
+		serviceList.put("thirdCategoryNo", thirdCategoryNo);
+		serviceList.put("cp", cp);
 			
 		return serviceList;
 	

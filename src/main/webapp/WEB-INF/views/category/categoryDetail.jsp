@@ -129,7 +129,7 @@
 	        	<c:forEach var="portfolio" items="${fService.portfolioList }">
 		        	<a>
 		                <div class="portfolioPhoto"> 
-			                <img alt="" src="${portfolio.portfolioThumbnail }" style="width:100%;"> 
+			                <img alt="" src="${portfolio.portfolioThumbnail }" style="width:100%; height:100%"> 
 			            	<span class="hidden">${portfolio.portfolioTitle }</span>
 			            	<span class="hidden">${portfolio.portfolioContent }</span>
 			            	<span class="hidden">${portfolio.portfolioThumbnail }</span>
