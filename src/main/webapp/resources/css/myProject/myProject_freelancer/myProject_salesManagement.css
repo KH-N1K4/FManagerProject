@@ -103,6 +103,7 @@ main{
   border: 1px solid #c6c6c9;
   /* margin-left: 10px; */
   margin-right: 10px;
+  outline: none;
 }
 
 .submitButton{
@@ -418,4 +419,17 @@ tbody a{
 	right:20px;
 	top:20px;
 	cursor:pointer;
+}
+
+/* 추천 검색어 div */
+#searchboxInclude{
+  font-size: 15px;
+  border: 1px solid #53812657;
+  border-top: none;
+  width: 200px;
+}
+
+#searchboxInclude > div{
+  border: 1px solid #5481262f;
+  padding: 2px 0 2px 0;
 }
