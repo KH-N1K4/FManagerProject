@@ -20,6 +20,8 @@
 
         <div id="payingTitle">결제 완료</div>
         <div action="">
+        
+        ${trade }
 
         <div id="serviceSection">
         <div id="servicePhoto"></div>
