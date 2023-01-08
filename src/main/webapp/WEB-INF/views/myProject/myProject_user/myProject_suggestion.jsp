@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="proposal" value="${proposal}"/>
 
 <!DOCTYPE html>
@@ -9,7 +10,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>myProject_suggestion</title>
+  <title>내프로젝트 - 받은 제안</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_suggestion.css">
   
@@ -37,7 +38,7 @@
                 <!-- 상단 selectbox -->
                 <div class="selectbox">
                   <select  id = "srchOption" class="srchOption" name="srchOption" onchange="selectChange()">
-                    <option value="0" selected="">전체</option>
+                    <option value="0" selected="">카테고리 선택</option>
                     <option value="1">디자인</option>
                     <option value="2">IT·프로그래밍</option>
                     <option value="3">영상</option>
@@ -60,7 +61,7 @@
                     <tr>
                       <th scope="col" class="frst"><strong class="line_n">번호</strong></th>
                       <th scope="col" class=""><strong class="line_r">프로젝트명</strong></th>   
-                      <th scope="col" class=""><strong class="line_r">전문가</strong></th>  
+                      <th scope="col" class=""><strong class="line_r">프리랜서</strong></th>  
                       <th scope="col" class=""><strong class="line_n">등급</strong></th>
                       <th scope="col" class=""><strong class="line_n">금액</strong></th>
                       <th scope="col" class=""><strong class="line_n">수정횟수</strong></th>

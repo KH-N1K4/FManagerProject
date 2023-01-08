@@ -45,7 +45,7 @@ main{
 /* 메인내용 */
 .mainContent{
   width: 100%;
-  margin: 20px 0;
+  margin: 30px 0 20px 0;
   display: flex;
   flex-direction: column;
   padding-left: 24px;
@@ -58,7 +58,7 @@ main{
 .container_header{
   display: flex;
   justify-content: space-between;
-  margin: 0px 5px;
+  /* margin: 0px 5px; */
   padding-bottom: 10px;
 }
 
@@ -72,6 +72,7 @@ main{
 .container_title > span{
   font-size: 25px;
   font-weight: bold;
+  padding-left: 5px;
 }
 
 .container_title{
@@ -79,8 +80,8 @@ main{
 }
 
 .box{
-  width:130px;
-  height:30px;
+  width: 150px;
+  height: 30px;
   border-radius: 3%;
   border: 1px solid #c6c6c9;
   margin-right: 10px;
@@ -89,8 +90,7 @@ main{
 
 .searchInput{
   width:200px;
-  height:30px;
-  border-radius: 3%;
+  height:35px;
   border: 1px solid #c6c6c9;
   margin-left: 15px;
   margin-right: 10px;
@@ -100,7 +100,7 @@ main{
   display:inline-block;
 	text-align:center;
   width: 100px;
-  height:30px;
+  height: 35px;
   padding:5px 0;
   font-size: 15px;
   background-color: #538126;
@@ -131,7 +131,6 @@ table {
 table {
   border-style: none; 
   text-indent: initial;
-  /* border-collapse:collapse; */ 
   width:100%;
 }
 
@@ -151,13 +150,13 @@ tbody{
 
 tbody tr{
   display: table;
-  width:930px;
+  width: 930px;
 }
 tbody td:nth-of-type(1){
-  width: 40px;
+  width: 50px;
 }
 tbody td:nth-of-type(2){
-  padding-left: 15px;
+  text-align: center;
 }
 tbody td:nth-of-type(3){
   width: 100px;
@@ -186,11 +185,12 @@ tbody td:nth-of-type(6){
 }
 
 .tbl_lst_type th strong{
-  font-size: 20px;
+  font-size: 17px;
 }
 
 table th {
   padding-bottom: 15px;
+  height: 50px;
   border-bottom: 1px solid black;
 }
 

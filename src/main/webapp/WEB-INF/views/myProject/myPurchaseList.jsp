@@ -13,7 +13,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>myPurchaseList</title>
+  <title>내 프로젝트 - 구매 관리</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/myProject_myPurchaseList.css">
   
@@ -26,7 +26,7 @@
         <c:forEach var="parameter" items="${param}">
             <c:if test="${parameter.key != 'cp'}">
                 <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
-            </c:if>
+            </c:if>projectRequestfrm
         </c:forEach>
     </c:if>
 
@@ -58,7 +58,7 @@
                     </select>
                   </div>
                   <div class="selectbox">
-                    <input type="date" class="startDate box" name="searchDate1" id="searchDate1" title="${searchDate1}">- 
+                    <input type="date" class="startDate box" name="searchDate1" id="searchDate1" title="${searchDate1}">- &nbsp
                   </div>
                   <div class="selectbox">
                     <input type="date" class="endtDate box" name="searchDate2" id="searchDate2" title="${searchDate2}">
@@ -79,7 +79,7 @@
               <div id="tableContent">
                 <table cellspacing="0" class="tbl_lst_type">	
                   <colgroup>
-                    <col width="40"><col width="*"><col width="100"><col width="95"><col width="95"><col width="180">
+                    <col width="50"><col width="*"><col width="100"><col width="95"><col width="95"><col width="180">
                   </colgroup>
                   <thead>
                     <tr>

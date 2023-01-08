@@ -50,8 +50,8 @@
 				<span class="select-area"> 
 					<select class="select-area-input" name="selectServiceStatus" id="selectServiceStatus" onchange="selectChange()">
 						<option value="0">전체</option>
-						<option value="1" ${inputStatus1}>승인대기중</option>
-						<option value="2" ${inputStatus2}>모집중</option>
+						<option value="1" ${inputStatus1}>승인 대기 중</option>
+						<option value="2" ${inputStatus2}>모집 중</option>
 						<option value="3" ${inputStatus3}>미승인</option>
 						<option value="4" ${inputStatus4}>모집 마감</option>
 					</select>

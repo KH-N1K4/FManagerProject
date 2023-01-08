@@ -27,7 +27,7 @@
 
 			<!-- 테이블 컬럼명 -->
 			<div class="review-manage-table-column">
-				<div class="review-num">댓글번호</div>
+				<div class="review-num">댓글 번호</div>
 				<div class="review-content">리뷰 내용</div>
 				<div class="review-writer">작성자</div>
 				<div class="review-delete"></div>

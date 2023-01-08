@@ -40,7 +40,7 @@
                 <div id="titleSelect">
                     <form action ="/member/myProject/freelancer/myProposal" class="OptionfrmSearch" method="get" name="OptionfrmSearch" id="OptionfrmSearch">
                         <select  id = "srchOption1" class="srchOption box" name="mainCategoryNo" title="${mainCategoryNoInput}">
-                            <option value="0" selected="">전체</option>
+                            <option value="0" selected="">카테고리 선택</option>
                             <c:if test="${not empty maincategory}">
                                 <c:forEach items="${maincategory}" var="mainVar">
                                     <option value="${mainVar.mainCategoryNo}">${mainVar.mainCategoryName}</option>

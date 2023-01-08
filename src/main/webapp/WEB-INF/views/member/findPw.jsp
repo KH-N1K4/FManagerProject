@@ -27,7 +27,7 @@
         </div>
         
 
-       <input type="text" placeholder="이메일" name="memberEmail" required}"><br>
+       <input type="text" placeholder="이메일" name="memberEmail" required><br>
        <input type="text" placeholder="이름" name="memberName" required><br>
        <input type="text" placeholder="전화번호 (- 제외)" name="memberTel" required><br>
        

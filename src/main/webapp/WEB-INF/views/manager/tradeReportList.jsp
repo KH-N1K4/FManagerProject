@@ -30,7 +30,7 @@
 			<span class="select-area"> 
                 <span class="select-title">진행 상태</span>
 				<select class="select-area-input" name="status" id="selectStatus" onchange="selectStatusChange()">
-					<option value="">진행상태</option>
+					<option value="">진행 상태</option>
 					<option value="1">답변 대기</option>
 					<option value="2">해결 완료</option>
 				</select>

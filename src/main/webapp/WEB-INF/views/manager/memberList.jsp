@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>회원관리</title>
+<title>회원 관리</title>
 
 <link rel="stylesheet" href="/resources/css/manager/memberList.css">
 
@@ -53,7 +53,7 @@
 
 			<!-- 테이블 컬럼명 -->
 			<div class="member-manage-table-column">
-				<div class="member-num">회원번호</div>
+				<div class="member-num">회원 번호</div>
 				<div class="member-name">이름</div>
 				<div class="member-division">구분</div>
 				<div class="member-grade">등급</div>
@@ -140,7 +140,7 @@
 			<form action="/manager/memberList" method="get" id="memberSearch" onsubmit="return true">
 
 				<select name="key" id="search-key">
-					<option value="no">회원번호</option>
+					<option value="no">회원 번호</option>
 					<option value="na">회원 이름</option>
 				</select> 
 				<input type="text" name="query" id="search-query" placeholder="검색어를 입력해주세요.">

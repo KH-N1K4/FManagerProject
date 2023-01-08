@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>판매내역</title>
+  <title>내 프로젝트 - 판매내역</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/myProject_freelancer/myProject_salesManagement.css">
 
@@ -48,7 +48,7 @@
                   <!-- 상단 selectbox -->
                   <div class="selectbox">
                     <select  id = "srchOption1" class="srchOption box" name="mainCategoryNo" title="${mainCategoryNoInput}">
-                      <option value="0" selected="">전체</option>
+                      <option value="0" selected="">카테고리 선택</option>
                       <c:if test="${not empty maincategory}">
                           <c:forEach items="${maincategory}" var="mainVar">
                               <option value="${mainVar.mainCategoryNo}">${mainVar.mainCategoryName}</option>
@@ -102,6 +102,7 @@
                     </tr>
                   </thead>
                   <tbody id = "selecttbody">
+                  
                     <c:if test="${not empty salesList}">
                       <c:forEach items="${salesList}" var="sales">
                         <tr class="suggestionTable" suggestionNumeber="">

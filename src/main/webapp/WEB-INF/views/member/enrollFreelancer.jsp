@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전문가 등록</title>
+    <title>프리랜서 등록</title>
 
     <link rel="stylesheet" href="/resources/css/freelancer/registerExpert.css">
 
@@ -19,7 +19,7 @@
     <div class="main">
 
         <form method ="post" action="/member/freelancer/enrollFreelancerSignUp" id="registerFrm">
-            <span id="title">전문가 등록</span>
+            <span id="title">프리랜서 등록</span>
             
             <span style="color:red;">*</span> 항목은 필수 항목입니다.
             <div>
@@ -134,8 +134,8 @@
                 </div>
             </div>
             <div>
-                <div class="item"><span style="color:red;">*</span>자기소개</div>
-                <div>
+                <div class="item"><span style="color:red;">*</span>자기 소개</div>
+                <div> 
                     <textarea name="freelancerIntro" id="freelancerIntro" cols="66" rows="10" required></textarea>
                 </div>
             </div>

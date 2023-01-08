@@ -31,7 +31,7 @@
         				
         				<!-- 전문가가 아닌 경우 -->
                     	<c:if test="${loginMember.freelancerFL=='N' }">
-                    		<span><a href="/member/enrollFreelancer">전문가 등록</a></span>
+                    		<span><a href="/member/enrollFreelancer">프리랜서 등록</a></span>
                     	</c:if>
                     	
                     	<!-- 내정보 페이지 -->
@@ -47,7 +47,7 @@
 	                    		</c:when>
 	                    		<c:otherwise>
 	                    		<c:if test="${loginMember.freelancerFL=='Y' }">
-		                    		<span><a href="/member/myProject/freelancer/myService">전문가 전환</a></span>
+		                    		<span><a href="/member/myProject/freelancer/myService">프리랜서 전환</a></span>
 		                    	</c:if>
 	                    		</c:otherwise>
 	                    	</c:choose>
@@ -67,7 +67,7 @@
                         <input type="checkbox" id="header-menu-toggle">
 
                         <div id="header-menu">
-                            <a href="/member/myInfo">내정보</a>
+                            <a href="/member/myInfo">내 정보</a>
                             <a href="/member/logout">로그아웃</a>
                         </div>
                     </c:otherwise>

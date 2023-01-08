@@ -130,7 +130,17 @@ h3{
   padding-left: 55px;
 }
 
-
+#tradeRequest{
+  border: 1px solid #538126;
+  font-size: 15px; 
+  padding: 20px 20px;
+  top: 5px;
+  border-radius: 5px;
+}
+#tradeRequest:focus{
+  border: 1px solid #538126;
+  outline: 1px solid #538126;
+}
 
 
 

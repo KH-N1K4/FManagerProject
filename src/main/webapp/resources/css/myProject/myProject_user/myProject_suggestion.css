@@ -8,7 +8,6 @@
   width: 1200px;
   margin:auto;
   min-height: 100vh;
-
   display: flex;
 }
 /* 사이드메뉴 */
@@ -42,7 +41,7 @@
 /* 메인내용 */
 .mainContent{
   width: 100%;
-  margin: 20px 0;
+  margin: 30px 0 20px 0;
   display: flex;
   flex-direction: column;
   padding-left: 24px;
@@ -55,12 +54,12 @@
   display: flex;
   justify-content: space-between;
   margin: 0px 5px;
-  padding-bottom: 10px;
 }
 
 .container_header_left{
   display: flex;
   align-items: flex-end;
+  margin-bottom: 22px;
   
 }
 
@@ -75,10 +74,10 @@
 }
 
 .srchOption{
-  width:150px;
-  height:30px;
+  width:140px;
+  height:35px;
   border-radius: 3%;
-  border: 1px solid #c6c6c9;
+  border-top: 1px solid #c6c6c9;
 }
 /* 내프로젝트 */
 
@@ -95,13 +94,9 @@ caption {
 table {
   border-collapse: separate;
   border-spacing: 0 10px;
-  border-bottom: 1px solid #f2f3f7;
-  padding: 20px 0px;
-}
-table {
   text-indent: initial;
-  /* border-collapse:collapse; */ 
-  width:100%;
+  border-style: none; 
+  width: 100%;
 }
 
 .tbl_lst_type {
@@ -162,12 +157,13 @@ tbody td:nth-of-type(8){
 }
 
 .tbl_lst_type th strong{
-  font-size: 20px;
+  font-size: 17px;
 }
 
-th{
-  height: 80px;
-  border-top:1px solid #f2f3f7;
+table th{
+  height: 50px;
+  padding-bottom: 15px;
+  border-bottom :1px solid black;
 }
 
 #chooseBtn{

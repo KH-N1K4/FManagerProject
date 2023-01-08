@@ -10,7 +10,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>내 프로젝트 페이지</title>
+  <title>내 프로젝트</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_UserPage.css">
   
@@ -42,7 +42,7 @@
                 <!-- 상단 selectbox -->
                 <div class="selectbox">
                   <select  id = "srchOption" class="srchOption" name="srchOption" onchange="selectChange()">
-                    <option value="0" selected="">전체</option>
+                    <option value="0" selected="">카테고리 선택</option>
                     <option value="1">디자인</option>
                     <option value="2">IT·프로그래밍</option>
                     <option value="3">영상</option>

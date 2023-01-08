@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>myProject_add</title>
+  <title>내 프로젝트 - 프로젝트 등록</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_add.css">
 </head>

@@ -22,7 +22,7 @@
                     <div id="content1">채택정보</div>
                     <div id="content2">
                         <div class="text">프로젝트명</div>
-                        <div class="text">전문가명</div>
+                        <div class="text">프리랜서명</div>
                         <div class="text">작업기간</div>
                         <div class="text">결제금액</div>
                     </div>
@@ -37,7 +37,7 @@
               <div id="title2">
                 <div id="request">요구사항</div>
                 <div id="requestBox">
-                  <textarea name="tradeRequest" id="tradeRequest" cols="94" rows="7" placeholder="요구사항을 입력해주세요"></textarea>
+                  <textarea name="tradeRequest" id="tradeRequest" cols="80" rows="4" placeholder="요구사항을 입력해주세요"></textarea>
                 </div>
               </div>
               
