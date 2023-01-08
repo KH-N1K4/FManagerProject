@@ -528,7 +528,7 @@ function calculate() {
 
                         refund();
                         tradeInfo();
-
+                        calculate();
                     }
 
                 }

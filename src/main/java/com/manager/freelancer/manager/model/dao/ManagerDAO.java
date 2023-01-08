@@ -683,6 +683,14 @@ int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		return sqlSession.selectOne("managerMapper.selectMemberDetail", memberNo);
 	}
 
+	/** 환불하면 거래신고 환불여부 수정
+	 * @param pm
+	 * @return
+	 */
+	public int updateReportStatus(Map<String, Object> pm) {
+		return sqlSession.update("managerMapper.updateReportStatus",pm);
+	}
+
 	
 	
 	
