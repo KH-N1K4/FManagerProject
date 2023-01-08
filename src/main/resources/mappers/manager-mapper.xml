@@ -617,7 +617,7 @@
 		FROM PROJECT_REQUEST
 		JOIN MEMBER USING (MEMBER_NO)
 		WHERE PROJECT_REQUEST_DEL_FL = 'N'
-		ORDER BY 1 DESC
+		ORDER BY PROJECT_REQUEST_NO DESC
 	</select>
 	
 	<!-- 상태별 프로젝트 의뢰 수 조회 -->
@@ -638,7 +638,7 @@
 		<if test='status != 0'>
 			AND PROJECT_REQUEST_STATUS= #{status}
 		</if>
-		ORDER BY 1 DESC
+		ORDER BY PROJECT_REQUEST_NO DESC
 	</select>
 	
 	<!-- 검색 시 프로젝트 의뢰 수 조회 -->
@@ -691,7 +691,7 @@
 				</when>
 			</choose>
 		</if>
-		ORDER BY 1 DESC
+		ORDER BY PROJECT_REQUEST_NO DESC
 	</select>
 
 	<!-- 프로젝트 의뢰 삭제 -->	
