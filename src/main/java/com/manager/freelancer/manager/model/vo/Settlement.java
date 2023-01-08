@@ -20,4 +20,6 @@ public class Settlement {
 	
 	private String serviceTitle;
 	private String userName;
+	
+	private int reportCount;
 }
