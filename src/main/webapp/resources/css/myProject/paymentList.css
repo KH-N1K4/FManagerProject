@@ -48,29 +48,34 @@
 .container_header{
   display: flex;
   margin: 0px 5px;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
 }
 
 /* 내프로젝트 */
 .container_title > span{
   font-size: 25px;
   font-weight: bold;
-  margin-left: 165px;
 }
-.container_title  input{
-  height: 30px;
-  width: 150px;
+.container_title input{
+  height: 33px;
+  width: 140px;
   vertical-align: middle;
+  border: 1px solid #c6c6c9;
+  margin-left: 10px;
 }
 .container_title select{
-  width: 120px;
-  height: 34px;
+  width: 140px;
+  height: 35px;
   vertical-align: middle;
-  margin-right: 10px;
+  border-radius: 3%;
+  border: 1px solid #c6c6c9;
+  margin-left: 210px;
 }
 
 .container_title{
   padding-right: 20px;
+  margin-left: 0px;
+  margin-bottom: 10px;
 }
 
 /* 검색 버튼 */
@@ -104,7 +109,12 @@
 
 /* 내프로젝트 */
 table{
-  border-collapse: collapse;
+  border-collapse: separate;
+  text-indent: initial;
+  border-style: none; 
+  border-spacing: 0 10px;
+  width:100%;
+
 }
 
 .tableHeader{
@@ -113,7 +123,10 @@ table{
 }
 
 table th{
+  font-size: 17px;
   height: 50px;
+  padding-bottom: 10px;
+  border-bottom :1px solid black;
 }
 
 table td{

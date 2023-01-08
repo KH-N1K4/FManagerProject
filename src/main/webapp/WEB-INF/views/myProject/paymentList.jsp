@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>결제 내역</title>
+  <title>내 프로젝트 - 결제 내역</title>
 
   <link rel="stylesheet" href="/resources/css/myProject/paymentList.css">
   
@@ -53,7 +53,7 @@
               <div class="container_header">
                 <form action="/member/myProject/paymentList" method="GET" id="searchFrm">
                   <!-- 상단 내프로젝트 페이지 제목 -->
-                  <div class="container_title"><span class="title" style="margin-left: 20px;">결제 내역</span>
+                  <div class="container_title"><span class="title">결제 내역</span>
                     <span>
                       <select class="selectType" name="type" id="selectType" title="${type}">
                         <option value="0">카테고리 선택</option>
@@ -75,9 +75,9 @@
             
               <table>
                 <tr class="tableHeader">
-                    <th style="width: 100px;">번호</th>
+                    <th style="width: 50px;">번호</th>
                     <th style="width: 150px;">구분</th>
-                    <th style="width: 600px;">서비스명</th>
+                    <th style="width: 490px">서비스명</th>
                     <th style="width: 100px;">날짜</th>
                     <th style="width: 150px;">금액</th>
                 </tr>
