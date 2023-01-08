@@ -15,7 +15,14 @@ body{
     width: 375px;
     margin-bottom: 30px;
     /* border: 1px solid black; */
+    margin: 0 0 10px 0;
 }
+
+.portfolioContent{
+    margin: 0 0 10px 0;
+
+}
+
 
 #content{
     font-size: 20px;
@@ -57,9 +64,11 @@ textarea{
 }
 #image-input1 {
     display: none;
+    width: 780px;
 }
 #image-input2 {
     display: none;
+    width: 780px;
 }
 .fileSelect{
     width: 140px;
