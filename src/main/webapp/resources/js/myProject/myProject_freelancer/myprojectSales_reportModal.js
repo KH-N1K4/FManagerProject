@@ -40,12 +40,19 @@ Submit.addEventListener("click", (e) => {
               alert(result.messageIN);
               modal.classList.toggle('show');
               document.querySelector('.fileRemove').style.display ="none";
+              document.getElementById("reportBtn"+tradeNo).style.width = '80px';
+              document.getElementById("reportBtn"+tradeNo).style.backgroundColor = "white";
+              document.getElementById("reportBtn"+tradeNo).firstElementChild.innerText='신고내역';
               saleslist.forEach(function(arg,i){
-                if(arg.tradeNo == tradeNo){
+                if(arg.tradeNo == tradeNo){       
                   arg.tradeReportNo = result.tradeReportNo;
                   arg.reportFilePath = result.reportFilePath;
                   arg.reportContent = result.reportContent;
                   document.querySelector('#ajaxReview').disabled = true;
+                  $('#finishBtn'+arg.tradeNo).remove();
+                  if($('#sendBtn'+arg.tradeNo) != null){
+                    $('#sendBtn'+arg.tradeNo).remove();
+                  }
                   //수정본이 이상하다며 욕설
                   if(arg.reportFilePath != null){
                     /* document.querySelector('#reportFilePath').value = arg.reportFilePath; */
