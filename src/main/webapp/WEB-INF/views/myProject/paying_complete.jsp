@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,19 +21,21 @@
 
         <div id="payingTitle">결제 완료</div>
         <div action="">
+        
+       
 
         <div id="serviceSection">
-        <div id="servicePhoto"></div>
+        <div id="servicePhoto"> <img alt="" src=" ${trade.requestFilePath }" style="width:100%;"> </div>
         <div>
 
-            <div id="serviceContent"><span>결제중 상품 제목</span><br>
-            <span>결제중 상품 내용입니다.</span></div>
-            <div id="serviceCost">총 결제 금액 <span>100,000</span>원</div>
+            <div id="serviceContent"><span> ${trade.serviceTitle }</span><br>
+            <span> ${trade.serviceSummary }</span></div>
+            <div id="serviceCost">총 결제 금액 <span><fmt:formatNumber value="${trade.servicePrice }" /></span>원</div>
         
         </div>
         </div>
 
-        <textarea name="" id="" cols="30" rows="10" placeholder="요청사항" readonly></textarea>
+        <textarea name="" id="" cols="30" rows="10" placeholder="요청사항" readonly>${trade.tradeRequest }</textarea>
         <div id="btnSection">
 
             <a id="paymentBtn" href="/member/myProject/myPurchaseList">구매 목록</a>

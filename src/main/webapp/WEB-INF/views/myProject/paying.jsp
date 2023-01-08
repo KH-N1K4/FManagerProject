@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +28,8 @@
 
             <div id="serviceContent"><span>${param.serviceTitle }</span><br>
             <span>${param.serviceSummary }</span></div>
-            <div id="serviceCost">총 결제 금액 <span>${param.servicePrice }</span>원</div>
-        
+            <div id="serviceCost">총 결제 금액 <span id="${param.servicePrice }">${param.servicePrice }</span>원</div>
+       <%--  <fmt:formatNumber value="${param.servicePrice }" /> --%>
         </div>
         </div>
 
