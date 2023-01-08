@@ -354,4 +354,9 @@
     	<delete id="DeletePortfolio">
     			DELETE FROM PORTFOLIO WHERE FREELANCER_NO = #{freelancerNo} AND PORTFOLIO_NO = #{portfolioNo}
     	</delete>
+    	
+    	<!-- <update id="updatePortfolio">
+    			
+    	
+    	</update> -->
 </mapper>

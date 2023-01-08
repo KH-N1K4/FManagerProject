@@ -239,14 +239,20 @@ public class FreeLancerController {
 		@ResponseBody
 		public int DeletePortfolio(@RequestParam("fNo") int freelancerNo, @RequestParam("pNo") int portfolioNo,
 				Freelancer1 freelancer1) {
-			System.out.println("d으악"+freelancer1.getFreelancerNo());
-			System.out.println("@@@"+freelancer1.getPortfolioList());
 			
 			int result = service.DeletePortfolio(freelancer1, freelancerNo, portfolioNo);
 			
 			return result;
 		}
 		
+		@GetMapping("/member/freelancer/updatePortfolio")
+		public int updatePortfolio(@RequestParam("fNo") int freelancerNo, @RequestParam("pNo") int portfolioNo) {
+			
+			int result = service.UpdatePortfolio(freelancerNo, portfolioNo);
+			
+			return result;
+			
+		}
 		
 		//포트폴리오 상세 페이지로 이동
 //		@GetMapping("/portfolioDetail/{portfolioNo}")

@@ -140,6 +140,14 @@ public class FreeLancerDAO {
 		return sqlSession.delete("freelancerMapper.DeletePortfolio",map);
 	}
 
+	public int updatePortfolio(int freelancerNo, int portfolioNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("freelancerNo", freelancerNo);
+		map.put("portfolioNo", portfolioNo);
+		// TODO Auto-generated method stub
+		return sqlSession.update("freelancerMapper.updatePortfolio", map);
+	}
+
 	
 
 
