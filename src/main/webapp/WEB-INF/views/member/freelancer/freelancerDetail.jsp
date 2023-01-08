@@ -68,9 +68,18 @@
         <c:if test="${not empty freelancer.majorList}">
         <h4>학력</h4>
 	       <c:forEach var="major" items="${freelancer.majorList }">
-	       	<span class="plus">${major.majorAcademyName }/${major.majorName }/
-	       	${major.majorGraduateStatus }</span>
+	       
+             	  <c:if test="${major.majorGraduateStatus ==1}"><c:set var="majorStatus" value="재학"/> </c:if>
+             	  <c:if test="${major.majorGraduateStatus ==2}"><c:set var="majorStatus" value="휴학"/> </c:if>
+             	  <c:if test="${major.majorGraduateStatus ==3}"><c:set var="majorStatus" value="이수"/> </c:if>
+             	  <c:if test="${major.majorGraduateStatus ==4}"><c:set var="majorStatus" value="졸업"/> </c:if>
+             	 	<div class="newOne">
+		       
+		       		<span class="plus">${major.majorAcademyName }/${major.majorName }/
+	       	${majorStatus }</span>
+               </div>
 	       </c:forEach>
+	       
         </c:if>
         
         <c:if test="${not empty freelancer.licenseList}">
