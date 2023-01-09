@@ -369,6 +369,7 @@ public class CategoryController {
 		Trade trade=service.selectTrade(tradeNo);
 	
 //		model.addAttribute(tradeNo);
+//		model.addAttribute(trade);
 		model.addAttribute("trade",trade);
 		
 		return "/myProject/paying_complete";

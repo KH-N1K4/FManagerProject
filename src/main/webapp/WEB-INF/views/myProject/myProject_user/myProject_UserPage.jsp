@@ -79,9 +79,14 @@
 			
 				                        <%-- 프로젝트 제목 --%>
 				                        <div class="info_title">
-				                          <a href="/projectRequest/projectRequestDetail/${myProject.projectRequestNo}">
-                                    <span>${myProject.projectRequestTitle}</span>
-                                  </a>
+                                  <c:if test="${myProject.projectRequestStatus == '승인 대기 중'}">
+                                    <a href="/projectRequest/projectRequestDetail/${myProject.projectRequestNo}">
+                                      <span>${myProject.projectRequestTitle}</span>
+                                    </a>
+                                  </c:if>
+                                  <c:if test="${myProject.projectRequestStatus != '승인 대기 중'}">
+                                    <a><span>${myProject.projectRequestTitle}</span></a>
+                                  </c:if>
 				                        </div>
 				                        <%-- 프로젝트 제목 --%>
 					

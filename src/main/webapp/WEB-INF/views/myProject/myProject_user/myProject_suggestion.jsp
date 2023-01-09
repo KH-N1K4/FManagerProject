@@ -83,7 +83,12 @@
                                 </td>
                                 <td class="tl">                           
                                   <div class="suggestion_name_area td_link">
-                                    <a href="/projectRequest/projectRequestDetail/${proposal.projectRequestNo}" id="suggestionName" class="suggestionName">${proposal.projectRequestTitle}</a>
+                                    <c:if test="${proposal.proposalAdoptStatus =='대기 중'}">
+                                      <a href="/projectRequest/projectRequestDetail/${proposal.projectRequestNo}" id="suggestionName" class="suggestionName">${proposal.projectRequestTitle}</a>
+                                    </c:if>
+                                    <c:if test="${proposal.proposalAdoptStatus !='대기 중'}">
+                                      <a id="suggestionName" class="suggestionName">${proposal.projectRequestTitle}</a>
+                                    </c:if>
                                   </div>
                                 </td>
                                 <td  class="tc">                       

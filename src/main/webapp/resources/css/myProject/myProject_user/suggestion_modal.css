@@ -10,6 +10,7 @@
 #title{
   width: 400px;
   height: 80px;
+  
 }
 
 h3{
@@ -35,8 +36,8 @@ h3{
   background-color: #538126;
   border: 3px solid white;
   border-radius: 50%;
-  margin-top: 15px;
-  margin-right: 18px;
+  margin-top: 13px;
+  margin-right: 20px;
 }
 /* 삭제 버튼 */
 .delete-image {
@@ -44,7 +45,7 @@ h3{
     font-weight: bold;
     cursor: pointer;
     position: absolute;
-    top: -12px;
+    top: -21px;
     right: 2px;
     color: white;
 }
@@ -60,6 +61,7 @@ h3{
   height: 350px;
   border-bottom: 2px solid #9ea0ac44;
   background-color: rgb(255, 255, 255);
+  
 }
 
 #content{
@@ -133,9 +135,10 @@ h3{
 #tradeRequest{
   border: 1px solid #538126;
   font-size: 15px; 
-  padding: 20px 20px;
+  padding: 15px 15px;
   top: 5px;
   border-radius: 5px;
+  resize: none;
 }
 #tradeRequest:focus{
   border: 1px solid #538126;
