@@ -107,6 +107,8 @@ public class MyProjectServiceImpl_2 implements MyProjectService_2{
 		int reportedPersonNo = dao.selectReportedPerson(inputTradeReport);
 		inputTradeReport.setReportedPersonNo(reportedPersonNo);
 		
+		inputTradeReport.setReportContent(Util.newLineHandling(inputTradeReport.getReportContent()));
+		
 		int result = dao.insertTradeReport(inputTradeReport);
 		if(result>0) {
 			

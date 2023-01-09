@@ -371,7 +371,7 @@ function reportModal(){
         
         
         document.getElementById("selectType").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
-        document.getElementById("reportContent").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
+        document.getElementById("reportContent").value=e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');;
         document.getElementById("reportContent").setAttribute("readonly", true);
         const src = e.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.value;
         a.setAttribute("href", src);
