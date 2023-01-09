@@ -326,7 +326,7 @@
   	</select>
   	
   	<!-- 서비스 파일 테이블에 넣을 프로젝트 이미지 조회  -->
-  	<select id="selectProjectFile" parameterType="_int" resultMap="myProject_rm">
+  	<select id="selectProjectFile" parameterType="_int" resultType="string">
 	  	SELECT REQUEST_FILE_PATH  
 		FROM REQUEST_FILE
 		WHERE REQUEST_FILE_ORDER = 0
