@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 
  <link rel="stylesheet" href="/resources/css/common/header_ver2.css">
+    
 <c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
  <div id="header">
         <div id="header1">
