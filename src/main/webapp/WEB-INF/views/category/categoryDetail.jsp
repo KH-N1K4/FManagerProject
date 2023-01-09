@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="expertPage">
-                    <div class="expertPhoto"><img alt="" src="${fService.memberProfile }" style="width:100%;"></div>
+                    <div class="expertPhoto"><img alt="" src="${fService.memberProfile }" style="width:200px;height:200px;"></div>
                     <div class="expertContent">
                         <div class="expertName"><a href="/service/freelancerDetail/${fService.freelancerNo}">${fService.memberName }</a></div>
                         <div class="responseInfo">
