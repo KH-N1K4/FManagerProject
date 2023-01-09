@@ -70,28 +70,33 @@
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>제목</span></div>
                   <div class="list_content">
-                    <input type="text" class="inputBoxSize box" name="projectRequestTitle" id="projectRequestTitle">
+                    <input type="text" class="inputBoxSize box" name="projectRequestTitle" id="projectRequestTitle" maxlength="30">
                   </div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>의뢰 한줄요약</span></div>
                   <div class="list_content">
-                    <input class="projectRequestOnecontent projectRequestContent box" name="projectRequestSummary" id="projectRequestSummary">
+                    <input class="projectRequestOnecontent projectRequestContent box" name="projectRequestSummary" id="projectRequestSummary" maxlength="50">
                   </div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>의뢰사항</span></div>
                   <div class="list_content">
-                    <textarea class="projectRequestTotalContent projectRequestContent box" name="projectRequestContent" id="projectRequestContent"></textarea>
+                    <textarea class="projectRequestTotalContent projectRequestContent box" name="projectRequestContent" id="projectRequestContent" maxlength="1300"></textarea>
                   </div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>첨부파일</span></div>
-                  <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile"></div>
-                  <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile2"></div>
+                  <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile" accept="image/*"></div>
+                  <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile2" accept="image/*"></div>
+                </div>
+                <div>
+                  <div class="myProjectadd_info_list">
+                    <div class="list_title"></div>
+                    <span>* 첫 번째 첨부파일은 메인 썸네일이며, 두 번째 첨부파일은 상세보기에 들어가는 파일입니다.<br>썸네일 첨부파일은 필수 항목이며, 두 첨부파일 모두 첨부파일 하나만 등록 가능합니다.</span></div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
