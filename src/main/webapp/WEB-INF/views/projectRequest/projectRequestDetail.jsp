@@ -39,11 +39,11 @@
                     </div>
                 </div>
                 <c:if test="${loginMember.memberNo ne userRequest.memberNo}">
-                    <a id="requestBtn" class="BtnTag" href="#">제안하기</a>
+                    <a id="requestBtn" class="BtnTag">제안하기</a>
                 </c:if>
                 <c:if test="${loginMember.memberNo eq userRequest.memberNo}">
                     <div class="buttonBox" id="buttonBox">
-                        <a id="stopBtn" class="BtnTag"  href="#">의뢰중지</a>
+                        <a id="stopBtn" class="BtnTag">의뢰중지</a>
                         <div class="ly_type layerStopRequest" id="layerStopRequest">
                             <div class="ly_cont">
                                 <p>

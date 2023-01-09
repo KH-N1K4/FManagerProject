@@ -91,12 +91,12 @@
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>첨부파일</span></div>
                   <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile" accept="image/*"></div>
-                  <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile2" accept="image/*"></div>
+                  <div class="list_content"><input type = "file" name="myProjectFile" id="myProjectFile2" accept="image/*" multiple="multiple"></div>
                 </div>
                 <div>
                   <div class="myProjectadd_info_list">
                     <div class="list_title"></div>
-                    <span>* 첫 번째 첨부파일은 메인 썸네일이며, 두 번째 첨부파일은 상세보기에 들어가는 파일입니다.<br>썸네일 첨부파일은 필수 항목이며, 두 첨부파일 모두 첨부파일 하나만 등록 가능합니다.</span></div>
+                    <span>* 첫 번째 첨부파일은 메인 썸네일이며, 두 번째 첨부파일은 상세보기에 들어가는 파일입니다.<br>썸네일 첨부파일은 필수 항목이며, 두번째 첨부파일은 다수 첨부가 가능합니다.</span></div>
                 </div>
                 <br>
                 <div class="myProjectadd_info_list">
