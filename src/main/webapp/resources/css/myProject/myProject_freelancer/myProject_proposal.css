@@ -115,6 +115,7 @@
     font-weight: bold;
     margin-left: 20px;
     margin-bottom: 15px;
+    height: 70px;
 }
 
 #proposalTitle > a{
@@ -127,7 +128,7 @@
 
 #proposalSummary{
     font-size: 18px;
-    height: 100px;
+    height: 70px;
     margin-left: 20px;
 }
 .detail{

@@ -10,7 +10,7 @@
 	        <form action="/askService" method="POST">
 	    
 	        <div id="serviceSection">
-	        <div id="servicePhoto"><img alt="" src="${fService.requestFilePath }" style="width:100%;"></div>
+	        <div id="servicePhoto"><img alt="" src="${fService.requestFilePath }" style="width: 150px;height: 150px;"></div>
 	            <div>
 	
 	                <div id="serviceContent"><span>${fService.serviceTitle }</span><br>
