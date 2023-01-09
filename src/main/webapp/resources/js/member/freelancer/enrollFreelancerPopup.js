@@ -394,3 +394,19 @@ const bankAccountNumber=document.getElementById("bankAccountNumber");
 //         checkObj.bankAccountNumber=false;
 //     }
 // });
+
+
+//-----------------------------------------------------------------------------------
+/* 가입 최종로그인날짜 상세조회에서 달력 현재 날짜로 세팅하고 미래날짜는 선택 불가 */
+/* document.getElementById('startDate').valueAsDate = new Date();  
+document.getElementById('endtDate').valueAsDate = new Date(); */  
+
+var now_utc = Date.now() // 지금 날짜를 밀리초로
+// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+var timeOff = new Date().getTimezoneOffset()*60000; // 분단위를 밀리초로 변환
+// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+if(document.getElementById("licenseContent2") !=null){
+  document.getElementById("licenseContent2").setAttribute("max", today);
+}
+

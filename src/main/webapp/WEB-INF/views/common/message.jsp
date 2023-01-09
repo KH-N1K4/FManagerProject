@@ -99,10 +99,10 @@
                 </div>
             </div> -->
         </div>    
-        <!-- 오른쪽 전문가 프로필 -->
+        <!-- 오른쪽 전문가 프로필 href="#"-->
         <div class="expert">
-            <a href="#" class="reportBtnClass"></a><!-- /resources/images/bell.png -->
-            <div><img src=""></div>
+            <a  class="reportBtnClass"></a><!-- /resources/images/bell.png -->
+            <div><img src="" style="display: none;"></div>
             <div><h3><%--전문가 닉네임--%></h3></div>
             <div>
                 <span><%--연락 가능 시간--%></span> <a><%--14:00-18:00--%></a><br>
@@ -124,7 +124,7 @@
 	
 	<!-- https://github.com/sockjs/sockjs-client -->
 	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-    <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/showModalDialogCallee.js'/>" ></script>
+    <!-- <script type="text/javascript" src="<c:url value='/js/egovframework/com/cmm/showModalDialogCallee.js'/>" ></script> -->
 	<script>
 		// 로그인한 회원 번호
 		const loginMemberNo = "${loginMember.memberNo}";

@@ -39,7 +39,7 @@ public class MyProjectContorller {
 	
 	//------------------------------------------------------------------------
 	// 내 프로젝트 이동
-	@GetMapping("/member/myProject/myRequestList")
+	@GetMapping("/member/myProject/myRequestList") ///삭제 여부 수정
 	public String likeList(Model model, HttpSession session,
 			 			   @RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
 			               @RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
@@ -131,7 +131,7 @@ public class MyProjectContorller {
 	
 	
 	// 내 프로젝트 조회 ajax
-	@GetMapping("/member/categoryTypeSelect")
+	@GetMapping("/member/categoryTypeSelect")  //삭제 여부 수정
 	@ResponseBody
 	public Map<String, Object> categoryTypeSelect(Model model, @RequestParam String optionVal, @SessionAttribute("loginMember") Member loginMember,
 												  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {

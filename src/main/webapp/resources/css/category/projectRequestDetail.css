@@ -319,3 +319,8 @@ strong {
     color: white;
     border-radius: 7%;
 }
+
+
+.BtnTag{
+    cursor: pointer;
+}
