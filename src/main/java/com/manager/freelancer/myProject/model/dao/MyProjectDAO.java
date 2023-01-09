@@ -205,6 +205,7 @@ public class MyProjectDAO {
 		if(result>0){
 			// 거래 테이블 등록 
 			result = sqlSession.insert("myProjectMapper.tradeInsert",myProject);
+			
 			System.out.println("거래 테이블 삽입:" +result);
 			
 			if(result>0) {
@@ -229,6 +230,7 @@ public class MyProjectDAO {
 						result = sqlSession.update("myProjectMapper.proposalStatusChange",myProject);
 						System.out.println("채택된 제안 상태 변경 :" +result);
 						
+						result = myProject.getTradeNo();
 					}
 					
 				}
