@@ -3,6 +3,18 @@ $(document).ready(function(){
   if(suvMenuSelect != 0){
     document.getElementById('sub'+suvMenuSelect+'Box').classList.toggle('subMenu');
   }
+  var budget1= document.getElementById("budget").title;
+  var listOrder1 = document.getElementById("listOrder").title;
+  if(budget1 !== ''){
+    /* 옵션 선택값으로 세팅 */
+  $("#budget").val(budget1).prop('selected', true);
+  }
+
+  if(listOrder1 !== '' && listOrder1 != 3){
+    /* 옵션 선택값으로 세팅 */
+    $("#listOrder").val(listOrder1).prop('selected', true);
+  }
+
 })
 
 $('.detailMenu').click(function(){
@@ -35,7 +47,8 @@ $("#listOrder").change(function(){
     success: (result) => {
         console.log(result.resultList);
         console.log(result.pagination);
-
+        document.getElementById("listOrder").title = listOrder;
+        document.getElementById("budget").title = budgetVar;
         const locationVar =  location.pathname;
         history.pushState(null, null, "http://localhost/projectRequest/requestList/0/0/0?cp=1&listOrder="+listOrder+"&budget="+budgetVar+"");
 
@@ -160,7 +173,8 @@ $("#budget").change(function(){
         console.log(result.resultList);
         console.log(result.pagination);
         console.log(budgetVar);
-
+        document.getElementById("listOrder").title = listOrder;
+        document.getElementById("budget").title = budgetVar;
         const locationVar =  location.pathname;
         history.pushState(null, null, "http://localhost/projectRequest/requestList/0/0/0?cp=1&listOrder="+listOrder+"&budget="+budgetVar+"");
 

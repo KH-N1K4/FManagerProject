@@ -49,10 +49,13 @@ public class ProjectRequestController {
 		int budgetInt0= 0; 
 		int budgetInt1= 0;
 		String[] budgetString;
+		System.out.println(budget);
 		if(!budget.equals("0.0") && !budget.equals("")) {
-			budgetString =budget.split(".");
-			budgetInt0 = Integer.parseInt(budgetString[0]+"000");
-			budgetInt1 = Integer.parseInt(budgetString[1]+"000");
+			budgetString =budget.split("\\.");
+			System.out.println(budgetString[0]);
+			System.out.println(budgetString[1]);
+			budgetInt0 = Integer.parseInt(budgetString[0]+"0000");
+			budgetInt1 = Integer.parseInt(budgetString[1]+"0000");
 		}
 		
 		System.out.println(budgetInt0);
@@ -61,19 +64,19 @@ public class ProjectRequestController {
 		int mainCategoryNo;
 		int subCategoryNo;
 		int thirdCategoryNo;
-		if(mainNo == null && mainNo.equals("")) {
+		if(mainNo == null) { //&& mainNo.equals("")) {
 			mainCategoryNo =0;
 		}else {
 			mainCategoryNo =Integer.parseInt(mainNo);
 		}
 		
-		if(subNo == null && subNo.equals("")) {
+		if(subNo == null) { //&& subNo.equals("")) {
 			subCategoryNo =0;
 		}else {
 			subCategoryNo =Integer.parseInt(subNo);
 		}
 		
-		if(thirdNo == null && thirdNo.equals("")) {
+		if(thirdNo == null) { //&& thirdNo.equals("")) {
 			thirdCategoryNo =0;
 		}else {
 			thirdCategoryNo =Integer.parseInt(thirdNo);
@@ -85,6 +88,8 @@ public class ProjectRequestController {
 		model.addAttribute("mainCategoryNo",mainCategoryNo);
 		model.addAttribute("subCategoryNo",subCategoryNo);
 		model.addAttribute("thirdCategoryNo",thirdCategoryNo);
+		model.addAttribute("listOrder",listOrder);
+		model.addAttribute("budget",budget);
 		return "/projectRequest/projectRequestList";
 	}
 	
