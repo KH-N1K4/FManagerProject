@@ -246,7 +246,7 @@ if(inquirySearchFrm != null){
         const input = document.getElementById("search-query");
 
         if (select.options[select.selectedIndex].value == 'tn' || select.options[select.selectedIndex].value == 'rn'){
-            const regEx = /[0-9]/g;
+            const regEx = /^[0-9]$/g;
             if(!regEx.test(input.value)){
                 input.value="";
                 alert('숫자만 입력해주세요.')
