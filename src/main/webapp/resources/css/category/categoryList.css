@@ -1,4 +1,10 @@
 
+#titleContent{
+    margin:10px 0;
+   font-size:35px;
+    color:#538126;
+}
+
 
 /* mainArea /sideMenu영역  */
 .mainArea{
@@ -20,6 +26,7 @@
 .mainContent{
     width: 1000px;
     /* margin-left: 20px; */
+  
 }
 
 /*  --------------사이드 메뉴  --------------*/

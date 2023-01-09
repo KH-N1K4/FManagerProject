@@ -33,7 +33,7 @@ public class Freelancer1 {
 	private String regionName;
 	
 	private int bankCode;
-	private long bankAccountNo;
+	private String bankAccountNo;
 	private String bankName;
 	
 	//학력 전공부분
