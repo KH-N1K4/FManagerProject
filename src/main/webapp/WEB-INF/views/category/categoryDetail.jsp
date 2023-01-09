@@ -59,7 +59,7 @@
                     <div class="expertContent">
                         <div class="expertName"><a href="/service/freelancerDetail/${fService.freelancerNo}">${fService.memberName }</a></div>
                         <div class="responseInfo">
-                            <span>응답시간<span>${fService.freeContactTime1 } ~ ${fService.freeContactTime2 }</span></span>
+                            <span>응답시간<span>${fService.freeContactTime1 }시 ~ ${fService.freeContactTime2 }시</span></span>
                             <span>응답률<span>${fService.inquiryRate }</span></span>
                         </div>
                         
