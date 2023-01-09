@@ -198,46 +198,59 @@ public class MyProjectDAO {
 	 */
 	public int completeSuggetionPay(MyProject myProject) {
 		
+        // 프로젝트 번호로 프로젝트 첫번 째 파일 주소 조회
+		myProject = sqlSession.selectOne("myProjectMapper.selectProjectFile",myProject.getProjectRequestNo());
+		
+		
 		// 서비스 테이블 등록
 		int result = sqlSession.insert("myProjectMapper.serviceInsert",myProject);
 		System.out.println("서비스 테이블 삽입:" +result);
 		
-		if(result>0){
-			// 거래 테이블 등록 
-			result = sqlSession.insert("myProjectMapper.tradeInsert",myProject);
+		if(result>0) {
 			
-			System.out.println("거래 테이블 삽입:" +result);
+			// 서비스 파일 테이블 등록
+			result = sqlSession.insert("myProjectMapper.serviceFileInsert",myProject);
 			
-			if(result>0) {
+			if(result>0){
+				// 거래 테이블 등록 
+				result = sqlSession.insert("myProjectMapper.tradeInsert",myProject);
 				
-				// 정산 테이블 등록
-				result = sqlSession.insert("myProjectMapper.settlementInsert",myProject);
-				System.out.println("정산 테이블 삽입:" +result);
+				System.out.println("거래 테이블 삽입:" +result);
 				
 				if(result>0) {
 					
-					// 프로젝트 상태 모집마감으로 변경
-					result = sqlSession.update("myProjectMapper.requestStatusChange",myProject);
-					System.out.println("프로젝트 상태 변경:" +result);
+					// 정산 테이블 등록
+					result = sqlSession.insert("myProjectMapper.settlementInsert",myProject);
+					System.out.println("정산 테이블 삽입:" +result);
 					
 					if(result>0) {
 						
-						// 채택되지 않은 제안 상태 모집마감으로 변경 
-						result = sqlSession.update("myProjectMapper.proposalStatusChange_adopt",myProject);
-						System.out.println("채택되지 제안 상태 변경 :" +result);
+						// 프로젝트 상태 모집마감으로 변경
+						result = sqlSession.update("myProjectMapper.requestStatusChange",myProject);
+						System.out.println("프로젝트 상태 변경:" +result);
 						
-						// 채택된 제안 상태 채택으로 변경 
-						result = sqlSession.update("myProjectMapper.proposalStatusChange",myProject);
-						System.out.println("채택된 제안 상태 변경 :" +result);
+						if(result>0) {
+							
+							// 채택되지 않은 제안 상태 모집마감으로 변경 
+							result = sqlSession.update("myProjectMapper.proposalStatusChange_adopt",myProject);
+							System.out.println("채택되지 제안 상태 변경 :" +result);
+							
+							// 채택된 제안 상태 채택으로 변경 
+							result = sqlSession.update("myProjectMapper.proposalStatusChange",myProject);
+							System.out.println("채택된 제안 상태 변경 :" +result);
+							
+							result = myProject.getTradeNo();
+						}
 						
-						result = myProject.getTradeNo();
 					}
 					
 				}
 				
 			}
 			
+			
 		}
+
 		
 		System.out.println(result);
 		return result;
