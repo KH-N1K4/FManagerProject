@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.manager.freelancer.member.model.vo.Member;
 
 @WebFilter(filterName="GoManagerToPageFilter", // 필터 이름, 필터가 여러 개 존재할 때 순서 지정 시 사용
-			urlPatterns = {"/member/myProject/*"} ) // 필터링한 요청 주소(패턴 가능)
+			urlPatterns = {"/member/myProject/*","/userInquiry","/userInquiryList"} ) // 필터링한 요청 주소(패턴 가능)
 public class GoManagerToPageFilter implements Filter{
 	
 	public void init(FilterConfig fConfig) throws ServletException {
