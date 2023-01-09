@@ -26,6 +26,7 @@
 
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
+                <div id="titleContent">전체 서비스</div>
                 <div id="imageContent">
                 	 <c:forEach var="service" items="${serviceList }" > 
 	                    <div>

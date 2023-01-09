@@ -3,7 +3,6 @@
 
  <link rel="stylesheet" href="/resources/css/common/footer.css">
 
-
 <div id="footer">
         <div id="footer-in">
 
