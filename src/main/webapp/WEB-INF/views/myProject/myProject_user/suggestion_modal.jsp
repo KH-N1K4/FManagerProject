@@ -37,7 +37,7 @@
               <div id="title2">
                 <div id="request">요구사항</div>
                 <div id="requestBox">
-                  <textarea name="tradeRequest" id="tradeRequest" cols="80" rows="4" placeholder="요구사항을 입력해주세요"></textarea>
+                  <textarea name="tradeRequest" id="tradeRequest" cols="84" rows="4" placeholder="요구사항을 입력해주세요"></textarea>
                 </div>
               </div>
               

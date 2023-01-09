@@ -1,5 +1,7 @@
 
 
+
+
 function selectChange(){
 
     // 페이지 처리 구역 
@@ -249,3 +251,10 @@ function selectChange(){
         })
             
 }
+
+
+// $(document).on("click",'#suggestionName', () => {
+
+//     alert("이미 의뢰가 중지된 프로젝트입니다.");
+
+// })
