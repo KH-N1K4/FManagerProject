@@ -105,8 +105,14 @@ public class MemberDAO {
 	}
 
 
-	public List<com.manager.freelancer.category.model.vo.Service> selectLikeList(int memberNo) {
-		return sqlSession.selectList("categoryMapper.selectLikeList", memberNo);
+	public List<com.manager.freelancer.category.model.vo.Service> selectLikeList(int memberNo, Pagination pagination) {
+		
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		
+		return sqlSession.selectList("categoryMapper.selectLikeList", memberNo,rowBounds);
 	}
 
 

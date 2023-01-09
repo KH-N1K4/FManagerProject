@@ -257,7 +257,7 @@ public class MemberServiceImpl implements MemberService{
 			
 			Pagination pagination = new Pagination(likeListCount, cp);
 			
-			List<com.manager.freelancer.category.model.vo.Service> likeList = dao.selectLikeList(memberNo);
+			List<com.manager.freelancer.category.model.vo.Service> likeList = dao.selectLikeList(memberNo,pagination);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("likeList", likeList);
