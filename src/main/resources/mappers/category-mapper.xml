@@ -355,24 +355,6 @@
 	</select>
 	
 	
-	<!-- <select id="selectSendSuggesionContent" resultMap="askService_rm">
-			SELECT *
-			FROM (
-			   SELECT SERVICE_INQUIRY_CONTENT, SERVICE_TITLE, SERVICE_SUMMARY,
-			   REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY SERVICE_NO ORDER BY SERVICE_NO, REQUEST_FILE_PATH)) RNUM
-				FROM SERVICE_FILE
-				JOIN SERVICE USING(SERVICE_NO)
-				JOIN SERVICE_INQUIRY USING(SERVICE_NO)
-				WHERE SERVICE_INQUIRY_NO=#{serviceInquiryNo}
-			) 
-			WHERE RNUM =1
-	</select> -->
-	
-	
-	
-	
-	
-	
 	<!-- ajax 찜하기 체크 -->
 	<select id="serviceLikeCheck" resultType="_int">
 	 SELECT COUNT(*) FROM "LIKE"
@@ -393,11 +375,7 @@
 			AND MEMBER_NO=#{memberNo}
 	  </delete>
  
- 	
- 	
- 	
- 	
- 	
+
  	
  	 <!-- 찜한 목록 조회 -->
    <select id="selectLikeList" resultMap="service_rm">
@@ -416,20 +394,23 @@
 	
 	<!-- ajax 분류에 따라 조회되게 -->
 	<select id="selectCategoryList" resultMap="service_rm">
-	SELECT SERVICE_NO, MAIN_CATEGORY_NO,
+
+		SELECT SERVICE_NO, MAIN_CATEGORY_NO,
 		<if test='memberNo!=null'>
 		CASE WHEN MEMBER_NO = #{memberNo} THEN 'Y' ELSE 'N' END AS LIKE_CHECK_FL,
 		</if>
 	   MAIN_CATEGORY_NAME,SUB_CATEGORY_NO,SUB_CATEGORY_NAME,THIRD_CATEGORY_NO,THIRD_CATEGORY_NAME,
-	   NVL(SALE_COUNT,0) SALE_COUNT,TO_CHAR(NVL(REVIEW_POINT,0), 'fm0.0') REVIEW_POINT,REQUEST_FILE_PATH,SERVICE_PRICE,
+	   NVL(SC.SALE_COUNT,0) SALE_COUNT,TO_CHAR(NVL(REVIEW_POINT,0), 'fm0.0') REVIEW_POINT,REQUEST_FILE_PATH,SERVICE_PRICE,
 	   TO_CHAR(SERVICE_PRICE, 'FM999,999,999,999') SERVICE_PRICE_STRING,SERVICE_TITLE,SERVICE_SUMMARY
 		FROM SERVICE
 		JOIN CATEGORY USING(THIRD_CATEGORY_NO)
 		JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
-		  <if test='memberNo!=null'>
+		<if test='memberNo!=null'>
 			LEFT JOIN (SELECT * FROM "LIKE" WHERE MEMBER_NO=#{memberNo}) USING(SERVICE_NO)
 		</if>
+		JOIN FREELANCER USING(FREELANCER_NO)
+		JOIN GRADE USING(GRADE_NO)
 		LEFT JOIN (SELECT s.*,
 		   ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
 		   FROM SERVICE_FILE s) USING(SERVICE_NO) 
@@ -441,7 +422,7 @@
 		LEFT JOIN(SELECT COUNT(*) SALE_COUNT,SERVICE_NO
 		   FROM TRADE  
 		   LEFT JOIN SERVICE USING(SERVICE_NO)
-		   GROUP BY SERVICE_NO) USING(SERVICE_NO)
+		   GROUP BY SERVICE_NO) SC USING(SERVICE_NO)
 		WHERE RUM = 1
 		AND MAIN_CATEGORY_NO=#{mainCategoryNo}
 		<if test="thirdCategoryNo!=0">AND THIRD_CATEGORY_NO=#{thirdCategoryNo}</if>
@@ -467,8 +448,9 @@
 		</choose>
 		
 		<choose>
-			<when test="order==1">ORDER BY 1</when>
-			<otherwise>ORDER BY 1 DESC</otherwise>
+			<when test="order==0">ORDER BY 1 DESC</when>
+			<when test="order==1">ORDER BY REVIEW_POINT </when>
+			<otherwise></otherwise>
 		</choose>
 	</select>
 	

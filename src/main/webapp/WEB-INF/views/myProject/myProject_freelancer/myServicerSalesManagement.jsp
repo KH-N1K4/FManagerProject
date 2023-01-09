@@ -172,7 +172,7 @@
                     </c:if>
                     <c:if test="${empty salesList}">
                           <tr class="suggestionTable" suggestionNumeber="">
-                            <td colspan="8"> 판매내역이 없습니다. </td>
+                            <td colspan="8" class="tc"> 판매내역이 없습니다. </td>
                           </tr>
                     </c:if> 
                   </tbody>

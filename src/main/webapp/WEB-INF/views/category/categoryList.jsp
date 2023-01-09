@@ -28,6 +28,7 @@
             <!-- 사이드 메뉴 -->
             <jsp:include page="/WEB-INF/views/category/categorySide.jsp"/>
             <!-- 메인 콘텐츠 영역 -->
+            
             <div class="mainContent">
                 <form action="" id="inquirySubmit">
                     <span>예산</span>
@@ -47,13 +48,15 @@
                     <span>프리랜서 등급</span>
                     <select name="" id="grade" class="select">
                         <option value="0">프리랜서 등급</option>
-                        <option value="1">New</option>
-                        <option value="2">Master</option>
+                        <option value="1">NEW</option>
+                        <option value="2">LEVEL1</option>
+                        <option value="3">LEVEL2</option>
+                        <option value="4">MASTER</option>
                     </select>
 
                     <select name="index" id="index" class="select">
                         <option value="0">최신순</option>
-                        <option value="1">마감 임박순</option>
+                        <option value="1">평점순</option>
                     </select>
                 </form>
                 

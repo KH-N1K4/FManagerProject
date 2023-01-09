@@ -118,6 +118,11 @@
                         </tr>
                       </c:forEach>
                     </c:if>
+                    <c:if test="${empty inquiryList}">
+                          <tr>
+                            <td colspan="5" class="tc"> 서비스 문의 내역이 없습니다. </td>
+                          </tr>
+                    </c:if> 
                   </tbody>
                 </table>
               </div>

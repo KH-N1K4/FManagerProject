@@ -126,7 +126,16 @@
                         <option value="1">신한</option>
                         <option value="2">국민</option>
                         <option value="3">우리</option>
-                        <option value="4">기업</option>
+                        <option value="5">기업</option>
+                        <option value="6">농협</option>
+                        <option value="7">하나</option>
+                        <option value="8">SC제일</option>
+                        <option value="9">대구</option>
+                        <option value="10">부산</option>
+                        <option value="11">광주</option>
+                        <option value="12">새마을금고</option>
+                        <option value="13">신협</option>
+                        <option value="14">카카오뱅크</option>
                     </select>
 
                     <input type="text" name="bankAccountNumber" id="bankAccountNumber" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">

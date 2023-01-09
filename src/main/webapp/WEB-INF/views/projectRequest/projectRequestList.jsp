@@ -51,22 +51,22 @@
             <div class="mainContent">
                 <form action="" id="inquirySubmit">
                     <span>예산</span>
-                    <select name="budget" id="budget"> 
+                    <select name="budget" id="budget" title="${budget}"> 
                         <option value="0.0" selected>예산</option>
-                        <option value="0.1">1만원 이하</option>
-                        <option value="1.5">1만원 - 5만원 이하</option>
-                        <option value="5.10">5만원 - 10만원 이하</option>
-                        <option value="10.20">10만원 - 20만원 이하</option>
-                        <option value="20.30">20만원 - 30만원 이하</option>
-                        <option value="30.50">30만원 - 50만원 이하</option>
-                        <option value="50.70">50만원 - 70만원 이하</option>
-                        <option value="70.100">70만원 - 100만원 이하</option>
-                        <option value="0.100">100만원 초과</option>
+                        <option value="0.1">1만원 미만</option>
+                        <option value="1.5">1만원 - 5만원 미만</option>
+                        <option value="5.10">5만원 - 10만원 미만</option>
+                        <option value="10.20">10만원 - 20만원 미만</option>
+                        <option value="20.30">20만원 - 30만원 미만</option>
+                        <option value="30.50">30만원 - 50만원 미만</option>
+                        <option value="50.70">50만원 - 70만원 미만</option>
+                        <option value="70.100">70만원 - 100만원 미만</option>
+                        <option value="-1.100">100만원 이상</option>
                     </select>
 
                    
 
-                    <select name="listOrder" id="listOrder">
+                    <select name="listOrder" id="listOrder" title="${listOrder}">
                         <option value="0" selected>최신순</option>
                         <option value="1">마감 임박순</option>
                     </select>

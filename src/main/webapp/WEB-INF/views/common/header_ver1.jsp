@@ -4,7 +4,9 @@
 
  <link rel="stylesheet" href="/resources/css/common/header_ver1.css">
  <link rel="stylesheet" href="/resources/css/common/headerSelect.css">
-    
+ 
+ 
+    <c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
 <div id="header">
         <div id="header1">
 
@@ -88,12 +90,13 @@
     <div id="nav">
     
     	 <ul>
+    	 	<c:if test="${not fn:startsWith(path,'/projectRequest/requestList/') }">
                 <c:forEach var="boardType" items="${boardTypeList}">
                     <li>
                         <a href="/category/${boardType.MAIN_CATEGORY_NO}/0">${boardType.MAIN_CATEGORY_NAME}</a>
                     </li>
                 </c:forEach>
-                
+                </c:if>
                 
                 
                  <div class="nav-project"><a href="/projectRequest/requestList/0/0/0">프로젝트 의뢰</a></div>

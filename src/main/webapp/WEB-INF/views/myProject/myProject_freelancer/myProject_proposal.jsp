@@ -91,6 +91,9 @@
                     </div>
                 </c:forEach> 
             </c:if>
+            <c:if test="${empty myProposal}">
+                <div id="emptyMyProposal" class="emptyMyProposal">보낸 제안이 없습니다.</div>
+            </c:if>
             <c:if test="${listCount != 0}">
                 
                 <div class="pagination-area">
