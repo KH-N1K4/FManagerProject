@@ -34,6 +34,7 @@
 
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
+                <div id="titleContent">" ${searchInput} " 서비스 검색 결과</div>
                 <div id="imageContent">
                 	 <c:forEach var="service" items="${serviceList }" > 
 	                    <div>
