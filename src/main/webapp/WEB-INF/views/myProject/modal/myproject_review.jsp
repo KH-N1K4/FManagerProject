@@ -18,7 +18,7 @@
           <input id="tradeNo3" type="hidden" name="tradeNo" readonly>
           <div class="myprojectReview_list">
             <div class="list_title"><span>내용</span></div>
-            <div class="list_content"><textarea name="reviewContent" class="myprojectReviewTotalContent reviewBox" id="reviewContent"></textarea></div>
+            <div class="list_content"><textarea name="reviewContent" class="myprojectReviewTotalContent reviewBox" id="reviewContent" required></textarea></div>
           </div>
           <div class="myprojectReview_list">
             <div class="list_title"><span>평점</span></div>
