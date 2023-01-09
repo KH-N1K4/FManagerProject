@@ -60,6 +60,7 @@ public class SearchController {
 		resultMap=service.searchService(map);
 
 		model.addAttribute("resultMap", resultMap);
+		model.addAttribute("searchInput", searchInput);
 			
 		return "common/searchServiceList";
 	}
