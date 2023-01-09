@@ -255,7 +255,7 @@ if(requestSearchFrm != null){
         const input = document.getElementById("search-query");
 
         if (select.options[select.selectedIndex].value == 'no'){
-            const regEx = /[0-9]/g;
+            const regEx = /^[0-9]$/g;
             if(!regEx.test(input.value)){
                 input.value="";
                 alert('숫자만 입력해주세요.')
