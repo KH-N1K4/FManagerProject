@@ -543,3 +543,20 @@ function calculate() {
 
 }
 
+/* 회원 번호 선택 시 숫자만 보내기 */
+const tradeSearch = document.getElementById("tradeSearch");
+if(tradeSearch != null){
+    tradeSearch.addEventListener("submit",e=>{
+        
+        const input = document.getElementById("search-query");
+
+        const regEx = /^[0-9]$/g;
+        if(!regEx.test(input.value)){
+            input.value="";
+            alert('숫자만 입력해주세요.')
+            e.preventDefault();
+        }
+
+
+    });
+}
