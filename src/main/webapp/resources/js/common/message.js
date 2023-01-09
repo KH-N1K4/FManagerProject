@@ -95,7 +95,7 @@ const roomListAddEvent = () => {
 			expert.children[0].innerHTML='';
 			const img10 = document.createElement("img");
 			expert.children[0].append(img10);
-			expert.children[0].children[0].setAttribute("src","/resources/images/bell.png");
+			expert.children[0].children[0].setAttribute("src","/resources/images/siren.png");
 			expert.children[1].children[0].style.display ="block"
       expert.children[1].children[0].setAttribute("src",selectClientProfile);
       expert.children[2].children[0].innerText=selectClientNickName;
