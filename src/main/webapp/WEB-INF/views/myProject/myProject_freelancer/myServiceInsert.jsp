@@ -64,7 +64,7 @@
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>제목</span></div>
-                  <div class="list_content"><input type="text" class="inputBoxSize box" name="serviceTitle" maxlength="20" autocomplete="off" required></div>
+                  <div class="list_content"><input type="text" class="inputBoxSize box" name="serviceTitle" maxlength="30" autocomplete="off" required></div>
                 </div>
                 <div class="myProjectadd_info_list">
                   <div class="list_title"><span>한줄요약</span></div>
@@ -112,6 +112,11 @@
                   <div class="list_content">
                     <input type = "file" name="serviceFilePath" accept="image/*" multiple="multiple">
                   </div>
+                </div>
+                <div>
+                  <div class="myProjectadd_info_list">
+                    <div class="list_title"></div>
+                    <span>* 첫 번째 첨부파일은 메인 썸네일이며, 두 번째 첨부파일은 상세보기에 들어가는 파일입니다.<br>두번째 첨부파일은 다수 첨부가 가능합니다.</span></div>
                 </div>
                 
               </div>
