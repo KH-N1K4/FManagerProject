@@ -97,8 +97,8 @@ font-size: 20px;
 
 /* 메인 영역 */
 .mainContent{
-    /* width: 1000px; */
-    /* margin-left: 20px; */
+     width: 1000px; 
+    margin-left: 20px;
 }
 
 /* 서비스 이미지 영역 */
