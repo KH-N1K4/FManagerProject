@@ -99,9 +99,9 @@
                 </div>
             </div> -->
         </div>    
-        <!-- 오른쪽 전문가 프로필 -->
+        <!-- 오른쪽 전문가 프로필 href="#"-->
         <div class="expert">
-            <a href="#" class="reportBtnClass"></a><!-- /resources/images/bell.png -->
+            <a  class="reportBtnClass"></a><!-- /resources/images/bell.png -->
             <div><img src="" style="display: none;"></div>
             <div><h3><%--전문가 닉네임--%></h3></div>
             <div>

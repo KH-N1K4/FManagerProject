@@ -39,6 +39,11 @@ document.getElementById('ajaxReview').addEventListener('click', function() {
 						document.getElementById('reportMemberNo').value='';
 
 						parent.window.document.getElementById('my_modal').style.display = 'none';
+						document.getElementById('reportTitle').value ='';
+						document.getElementById('reportContent').value='';
+						document.getElementById('reportFilePath').value='';
+
+
 					}
 			},
 			error: () => {
