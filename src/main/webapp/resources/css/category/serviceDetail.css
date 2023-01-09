@@ -41,7 +41,7 @@
     display: flex;
     justify-content: space-between;
     width: 695px;
-    margin:26px 0;
+    margin:20px 0;
 }
 
 /* 전문가 정보 */
@@ -80,6 +80,11 @@
     top:-120px;
 }
 
+.selected{
+	display:inline-block;
+	margin-left:20px;
+}
+
 
 /* 문의하기 버튼 */
 .expertContent>a{
@@ -96,7 +101,7 @@
 	display:inline-block;
 	text-align:center;
     width: 695px;
-    padding:15px 0;
+    padding:9px 0;
     font-size: 20px;
     background-color: #538126;
     border:1px solid #538126;
