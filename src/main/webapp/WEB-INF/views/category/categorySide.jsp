@@ -17,7 +17,7 @@
 		
         <div class="sideMenu">
      
-        	<div id="design">${currentCategoryName }</div>
+        	<div id="design" style="font-size:18px; font-weight:bold;">${currentCategoryName }</div>
         
         	
          <c:forEach var="subCategory" items="${subCategoryList }">
