@@ -53,7 +53,7 @@
 
                     <select name="index" id="index" class="select">
                         <option value="0">최신순</option>
-                        <option value="1">마감 임박순</option>
+                        <option value="1">평점순</option>
                     </select>
                 </form>
                 
