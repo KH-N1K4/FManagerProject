@@ -50,7 +50,7 @@ $("#listOrder").change(function(){
         document.getElementById("listOrder").title = listOrder;
         document.getElementById("budget").title = budgetVar;
         const locationVar =  location.pathname;
-        history.pushState(null, null, "http://localhost/projectRequest/requestList/0/0/0?cp=1&listOrder="+listOrder+"&budget="+budgetVar+"");
+        history.pushState(null, null, location.pathname+"?cp=1&listOrder="+listOrder+"&budget="+budgetVar+"");
 
         console.log(locationVar);
           $('.box').remove();
@@ -176,7 +176,7 @@ $("#budget").change(function(){
         document.getElementById("listOrder").title = listOrder;
         document.getElementById("budget").title = budgetVar;
         const locationVar =  location.pathname;
-        history.pushState(null, null, "http://localhost/projectRequest/requestList/0/0/0?cp=1&listOrder="+listOrder+"&budget="+budgetVar+"");
+        history.pushState(null, null, location.pathname+"?cp=1&listOrder="+listOrder+"&budget="+budgetVar+"");
 
         console.log(locationVar);
           $('.box').remove();
