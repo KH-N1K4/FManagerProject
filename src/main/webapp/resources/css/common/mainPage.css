@@ -26,6 +26,11 @@
     width: 220px;
     height: 220px;
 }
+
+#mainImage{
+    width: 100%;
+}
+
 #image{
     width: 220px;
     height: 320px;

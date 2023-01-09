@@ -21,6 +21,7 @@
 	<jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
         
     <section class="content">
+        <%--         <img id="mainImage" src="/resources/images/main_2.jpg"> --%>
         <div class="mainArea">
 
             <!-- 메인 콘텐츠 영역 -->
@@ -115,6 +116,5 @@
 	<script src="/resources/js/common/main.js"></script> 
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
 </body>
 </html>
