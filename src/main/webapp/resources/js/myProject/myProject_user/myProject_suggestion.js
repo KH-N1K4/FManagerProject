@@ -73,7 +73,7 @@ function selectChange() {
 
                         const a = document.createElement("a");
                         a.setAttribute("class", "suggestionName");
-                        a.setAttribute("href", "#");
+                        a.setAttribute("href", "/projectRequest/projectRequestDetail/"+proposal.projectRequestNo);
                         a.setAttribute("id", "suggestionName");
                         a.innerText = proposal.projectRequestTitle;
                         div1.append(a);
@@ -88,7 +88,7 @@ function selectChange() {
 
                         const a2 = document.createElement("a");
                         a2.setAttribute("class", "expertName");
-                        a2.setAttribute("href", "#");
+                        a2.setAttribute("href", "/service/freelancerDetail/"+proposal.freelancerNo);
                         a2.setAttribute("id", "expertName");
                         a2.innerText = proposal.freelancerName;
                         div2.append(a2);
@@ -134,11 +134,15 @@ function selectChange() {
                         td8.setAttribute("class", "tc");
                         tr.append(td8);
 
-                        const button = document.createElement("button");
-                        button.setAttribute("id", "chooseBtn");
-                        button.setAttribute("class", "chooseBtn");
-                        button.innerText = "채택";
-                        td8.append(button);
+                        if(proposal.proposalAdoptStatus == '대기 중'){
+    
+                            const button = document.createElement("button");
+                            button.setAttribute("id", "chooseBtn");
+                            button.setAttribute("class", "chooseBtn");
+                            button.innerText = "채택";
+                            td8.append(button);
+                            
+                        }
 
                     }
 
@@ -229,6 +233,8 @@ function suggestionModal() {
 
         $(document).on("click",'.chooseBtn', e => {
 
+            document.getElementById("tradeRequest").value="";
+
             // modal 창에 show가 있으면 생성 없으면 삭제 
             suggestionModal.classList.toggle("show");
 
@@ -262,7 +268,7 @@ function suggestionModal() {
 
 
 // 구매하기 클릭 
-$(document).on("click",'#payButton', e => {
+$(document).on("click",'#payButton', () => {
 
     alert("결제를 진행하시겠습니까?");
 
@@ -362,3 +368,11 @@ function iamport() {
 }
 
 
+// $(document).on("click",'#suggestionName', () => {
+
+//     if(proposal.proposalAdoptStatus != '대기 중'){
+
+//         alert("이미 의뢰가 중지된 프로젝트입니다.");
+//     }
+
+// })

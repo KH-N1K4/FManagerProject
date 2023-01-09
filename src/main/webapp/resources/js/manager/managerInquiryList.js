@@ -31,6 +31,13 @@ function selectChange() {
                     console.log(b);
                     b.remove();
                 }
+
+                //게시물 없을 때 게시글 존재하지 않습니다 지우기
+                if(document.getElementsByClassName("contentList")[0] != null){
+                    document.getElementsByClassName("contentList")[0].remove();
+                }
+                
+
                 //완료!!
                 if (document.querySelector('.pagination') != null) {
 
