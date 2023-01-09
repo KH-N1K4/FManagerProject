@@ -557,6 +557,11 @@ chattingSock.onmessage = function(e) {
 
 //나가기 버튼 누르면 실행-------------------------------------------------------------------------
 $('#outbtnID').click(function(){
+	if(confirm('채팅방을 나가시면 내용이 다 사라집니다. \n정말 나가시겠습니까?')){
+
+	}else{
+		return; 
+	}
 	checkAddRoomVar =false;
   $.ajax({
     url : "/chatting/updateOutFL",

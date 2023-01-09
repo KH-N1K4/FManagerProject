@@ -182,7 +182,7 @@
 				<if test="budgetInt1 == 1000000 and budgetInt0 ==-10000">
 					AND PROJECT_REQUEST_BUDGET <![CDATA[>=]]> #{budgetInt1}
 				</if>
-				ORDER BY PROJECT_REQUEST_NO) p
+				ORDER BY PROJECT_REQUEST_CREATE_DATE DESC) p
 			WHERE REQUEST_FILE_ORDER =0
 			AND PROJECT_REQUEST_DEL_FL ='N'
 			<if test="mainCategoryNo !='' and mainCategoryNo!=null and mainCategoryNo != 0">
