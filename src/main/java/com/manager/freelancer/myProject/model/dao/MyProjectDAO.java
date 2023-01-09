@@ -199,7 +199,7 @@ public class MyProjectDAO {
 	public int completeSuggetionPay(MyProject myProject) {
 		
         // 프로젝트 번호로 프로젝트 첫번 째 파일 주소 조회
-		myProject = sqlSession.selectOne("myProjectMapper.selectProjectFile",myProject.getProjectRequestNo());
+		myProject.setRequestFilePath(sqlSession.selectOne("myProjectMapper.selectProjectFile",myProject.getProjectRequestNo()));
 		
 		
 		// 서비스 테이블 등록
