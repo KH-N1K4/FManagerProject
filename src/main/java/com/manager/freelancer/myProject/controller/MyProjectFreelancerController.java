@@ -91,7 +91,7 @@ public class MyProjectFreelancerController {
 		
 		ra.addFlashAttribute("message", message);
 			
-		return "redirect:/member/myProject/freelancer/myServiceInsert";
+		return "redirect:/member/myProject/freelancer/myService";
 	}
 	
 	// 내 프로젝트 전문가페이지 서비스 판매 관리

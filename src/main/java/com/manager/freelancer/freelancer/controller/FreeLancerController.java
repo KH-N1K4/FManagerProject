@@ -220,7 +220,7 @@ public class FreeLancerController {
 			}
 			ra.addFlashAttribute("message",message);
 			
-			return "redirect:/member/freelancer/freelancerInfo";
+			return "redirect:/member/myInfo/freelancerInfo";
 		}
 		
 		// 포트폴리오 삭제
