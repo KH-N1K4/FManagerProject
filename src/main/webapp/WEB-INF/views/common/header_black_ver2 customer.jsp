@@ -18,7 +18,7 @@
 
                     <%-- 로그인 O인 경우 --%>
                     <c:otherwise>
-                    	<span><a href="/manager/memberList">메세지</a></span>
+                    	<span><a href="/member/message/chatting">메세지</a></span>
                     	<span><a href="/">홈으로</a></span>
                     
                         <label for="header-menu-toggle">

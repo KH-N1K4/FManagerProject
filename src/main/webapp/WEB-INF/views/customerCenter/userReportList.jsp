@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="userInquiryList" value="${map.userInquiryList}"/>
-<c:set var="pagination" value="${map.pagination}"/>
-<c:set var="i" value="0"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,42 +8,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fmanager - 문의 내역</title>
-    <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/inquiryList.css">
+    <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/userReportList.css">
 </head>
 <body>
 
     <jsp:include page="/WEB-INF/views/common/header_black_ver2 customer.jsp"/>
 
     <%-- 검색을 진행한 경우 --%>
-    <c:if test="${not empty param.key}">
-        <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
-    </c:if>
-
-    <c:if test="${not empty param.value}">      
-        <c:forEach var="inputValue" items="${param.value}">
-            <c:choose>
-                <c:when test="${inputValue == '1'}">
-                    <c:set var="inputValue1" value="selected" />
-                </c:when>
-                <c:when test="${inputValue == '2'}">
-                    <c:set var="inputValue2" value="selected" />
-                </c:when>
-            </c:choose>
+    <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+            <c:if test="${parameter.key != 'cp'}">
+            
+                <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+            </c:if>
+            <c:if test="${parameter.key == 'inquiryStatus'}">
+                <c:choose>
+                    <c:when test="${inquiryStatus == '1'}"><%-- 답변 완료 --%>
+                        <c:set var="inputValue1" value="selected" />
+                    </c:when>
+                    <c:when test="${inquiryStatus == '2'}"><%-- 답변 대기 --%>
+                        <c:set var="inputValue2" value="selected" />
+                    </c:when>
+                </c:choose>
+            </c:if>
         </c:forEach>
     </c:if>
-    <c:if test="${empty param.value}">
-        <c:forEach var="inputValue" items="${param.value}">
-            <c:choose>
-                <c:when test="${inputValue == '1'}">
-                    <c:set var="inputValue1" value="selected" />
-                </c:when>
-                <c:when test="${inputValue == '2'}">
-                    <c:set var="inputValue2" value="selected" />
-                </c:when>
-            </c:choose>
-        </c:forEach>
-    </c:if>
-
 
     <section class="content">
         <div class="mainArea">
@@ -60,7 +46,7 @@
             <!-- 메인 콘텐츠 영역 -->
             <div class="mainContent">
                 <div id="inquirySubmit">
-                    <h3 id="title">내 문의 내역</h3>
+                    <h3 id="title">회원 신고 내역</h3>
 
 
                     <section class="formBox">
@@ -85,26 +71,26 @@
                             <th style="width:150px">작성일</th>
                             <th style="width:150px">상태</th>
                         </tr>
+                        ${map.memberReport}
                         <c:choose>
-                            <c:when test="${empty userInquiryList}">
+                            <c:when test="${empty memberReport}">
                                 <!-- 게시글 목록 조회 결과가 비어있다면 -->
                                 <tr class="contentArea">
                                     <td colspan="6"> 게시글이 존재하지 않습니다 .</td>
                                 </tr>
                             </c:when>
                             <c:otherwise>
-                                <c:forEach var="userinquiry" items="${userInquiryList}">
+                                <c:forEach var="memberReportList" items="${memberReport}">
                                     <tr class="contentArea">
-                                        <td>${i=i+1}</td>
-                                        <%-- <td>${userinquiry.userInquiryNo}</td> --%>
-                                        <td><a href="/userInquiryDetail/${userinquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${userinquiry.userInquiryTitle}</a></td>
-                                        <td>${userinquiry.userInquiryCreateDate}</td>
-                                        <td><%-- <span class="question-answer">${userinquiry.inquiryStatus}</span> --%>
+                                        <td>${memberReportList.membeReportNo}</td>
+                                        <td><a href="/userInquiryList/userReportList/${memberReportList.membeReportNo}?cp=${pagination.currentPage}${sURL}">${memberReportList.memberReportTitle}</a></td>
+                                        <td>${memberReportList.memberReportCreateDateString}</td>
+                                        <td><%-- <span class="question-answer">${memberReportList.inquiryStatus}</span> --%>
                                             <c:choose>
-                                                <c:when test="${userinquiry.inquiryRequest == null}">
+                                                <c:when test="${memberReportList.memberReportRequest == null}">
                                                     <span class="question-wating">답변 대기</span>
                                                 </c:when>
-                                                <c:when test="${userinquiry.inquiryRequest != null}">
+                                                <c:when test="${memberReportList.memberReportRequest != null}">
                                                     <span class="question-answer">답변 완료</span>
                                                 </c:when>
                                             </c:choose>
@@ -117,44 +103,51 @@
                     <hr>
                 </div>
                     
+                
+                
                     <div class="pagination-area">
+
+
                         <ul class="pagination">
-                        <c:if test="${not empty userInquiryList}">
+                            <c:if test="${listCount != 0}">
                             <!-- 첫 페이지로 이동 -->
-                            <li><a href="/userInquiryList?cp=1${sURL}">&lt;&lt;</a></li>
-
+                            <li><a href="/userInquiryList/userReportList?cp=1${sURL}">&lt;&lt;</a></li>
+            
                             <!-- 이전 목록 마지막 번호로 이동 -->
-                            <li><a href="/userInquiryList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
-
-                                <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
-                                    <c:choose>
-                                        <c:when test="${i == pagination.currentPage}">
-                                            <%-- 현재 보고있는 페이지 --%>
-                                            <li><a class="current">${i}</a></li>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <%-- 현재 페이지를 제외한 나머지  --%>
-                                            <li><a href="/userInquiryList?cp=${i}${sURL}">${i}</a></li>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:forEach>
-                            
+                            <li><a href="/userInquiryList/userReportList?cp=${pagination.prevPage}${sURL}">&lt;</a></li>
+            
+                
+                            <!-- 특정 페이지로 이동 -->
+                            <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+                            <c:choose>
+                                <c:when test="${i== pagination.currentPage}">
+                                <!-- 현재 페이지인 경우 -->
+                                <li><a class="current">${i}</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                <!-- 현재 페이지를 제외한 나머지 -->
+                                <li><a href="/userInquiryList/userReportList?cp=${i}${sURL}">${i}</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                            </c:forEach>
                             <!-- 다음 목록 시작 번호로 이동 -->
-                            <li><a href="/userInquiryList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
-
+                            <li><a href="/userInquiryList/userReportList?cp=${pagination.nextPage}${sURL}">&gt;</a></li>
+            
                             <!-- 끝 페이지로 이동 -->
-                            <li><a href="/userInquiryList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
-                        </c:if>
+                            <li><a href="/userInquiryList/userReportList?cp=${pagination.maxPage}${sURL}">&gt;&gt;</a></li>
+                            </c:if>
                         </ul>
                     </div>
+                 
                     
-                    <form action="/userInquiryList" id="inquirySearch" method="get"> 
-                        <select name="key" id="search-key">
+                    <form action="/userInquiryList/userReportList" id="inquirySearch" method="get"> 
+                        <select name="searchKey" id="search-key">
                             <option value="t">제목</option> 
                             <option value="c">내용</option> 
                             <option value="tc">제목+내용</option> 
                         </select> 
-                        <input type="text" name="query" id="search-query" placeholder=" 검색어를 입력해주세요" <c:if test="${not empty param.key}">value='${param.query}'</c:if>>  
+                        <!-- <c:if test="${not empty param.key and param.key eq 'searchQuery'}">value='${param.query}'</c:if> -->
+                        <input type="text" name="searchQuery" id="search-query" placeholder=" 검색어를 입력해주세요" >  
                         <button>검색</button>
                     </form>
             </div>

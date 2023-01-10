@@ -84,6 +84,22 @@ public interface MessageService {
 	 * @throws IOException
 	 */
 	String memberReportUpdate(String webPath, String filePath, String reportedMemberNo, String reportMemberNo,
-			String reportContent, List<MultipartFile> file, MemberReport memberReport, String reportTitle) throws IOException;;
+			String reportContent, List<MultipartFile> file, MemberReport memberReport, String reportTitle) throws IOException;
+
+	/**채팅방에서 신고한 신고내역보기(고객센터에 회원 신고 내역)
+	 * @param memberNo
+	 * @param cp
+	 * @param inquiryStatus
+	 * @param searchQuery 
+	 * @param searchKey 
+	 * @return
+	 */
+	Map<String, Object> selectUserReportList(int memberNo, int cp, int inquiryStatus, String searchKey, String searchQuery);
+
+	/**회원 신고 내역 상세보기
+	 * @param membeReportNo
+	 * @return
+	 */
+	MemberReport viewUserReportDetail(int membeReportNo);
 	
 }

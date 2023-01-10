@@ -557,6 +557,11 @@ chattingSock.onmessage = function(e) {
 
 //나가기 버튼 누르면 실행-------------------------------------------------------------------------
 $('#outbtnID').click(function(){
+	if(confirm('채팅방을 나가시면 내용이 다 사라집니다. \n정말 나가시겠습니까?')){
+
+	}else{
+		return; 
+	}
 	checkAddRoomVar =false;
   $.ajax({
     url : "/chatting/updateOutFL",
@@ -757,6 +762,6 @@ $(document).on("click",".reportBtnClass",function(){ ///WEB-INF/views/common/hea
 	iframeVar.contentDocument.getElementById('reportedProfile').setAttribute("src",exportVar.children[1].children[0].src);
 	iframeVar.contentDocument.getElementById('reportedName').innerText = exportVar.children[2].children[0].innerText;
 	iframeVar.contentDocument.getElementById('memberName').value = loginMemberNickName;
-	iframeVar.contentDocument.getElementById('reportMemberNo').value =selectClientNo;
-	iframeVar.contentDocument.getElementById('reportedMemberNo').value =loginMemberNo;
+	iframeVar.contentDocument.getElementById('reportMemberNo').value =loginMemberNo;
+	iframeVar.contentDocument.getElementById('reportedMemberNo').value =selectClientNo;
 });
