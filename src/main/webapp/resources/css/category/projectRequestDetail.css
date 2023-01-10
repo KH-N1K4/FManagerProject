@@ -324,3 +324,13 @@ strong {
 .BtnTag{
     cursor: pointer;
 }
+
+#realStopBtn{
+    cursor: pointer;
+}
+
+.blind{
+    cursor: pointer; 
+}
+
+

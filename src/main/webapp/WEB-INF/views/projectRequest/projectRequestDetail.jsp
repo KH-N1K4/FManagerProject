@@ -51,7 +51,7 @@
                                 <strong><span class="c_og">의뢰를 중지</span> 하시겠습니까?</strong>
                                 </p>
                                 <div class="btn">
-                                    <a id="realStopBtn" class="btn_type2 layerStopRequestBtn"  href="#"><span class="_hideLayer">의뢰중지하기</span></a>
+                                    <a id="realStopBtn" class="btn_type2 layerStopRequestBtn"><span class="_hideLayer">의뢰중지하기</span></a>
                                     <a class="btn_type3 _hideLayer"><span class="_hideLayer">취소</span></a>
                                 </div>
                             </div>
