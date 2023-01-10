@@ -86,9 +86,9 @@
                                             <div class="img-box">
                                                     <div class="boardImg">
                                                         <label for="img1">
-                                                            <img class="preview" src="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}">
+                                                            <img class="preview" src="${userInquiry.imageList[i].inquiryFilePath}">
                                                         </label>
-                                                        <a href="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}" download="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}">다운로드</a>
+                                                        <a href="${userInquiry.imageList[i].inquiryFilePath}" download="${userInquiry.imageList[i].inquiryFilePath}">다운로드</a>
                                                     </div>
                                             </div>    
                                             <br>
