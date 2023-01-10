@@ -106,6 +106,7 @@
 	<if test="searchDate2 neq ''">
 		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
 	</if>
+	ORDER BY PAYMENT_DATE DESC
   </select>
   
   <!-- 구매 내역 수 -->
@@ -171,6 +172,7 @@
 	<if test='searchInput != null and searchInput != ""'>
 		AND SERVICE_TITLE LIKE '%${searchInput}%'
 	</if>
+	ORDER BY 1 DESC
   </select>
   
   

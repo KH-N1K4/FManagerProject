@@ -180,7 +180,7 @@ for(f of finishBtn){
                 reportBtn.setAttribute("id","reportBtn");
                 reportBtn.classList.add("reportBtn");
                 reportBtn.classList.add("btn_type");
-                reportBtn.append(document.createTextNode("신고"));
+                reportBtn.append(document.createTextNode("취소/신고"));
 
                 const finishBtn = document.createElement("a");
                 finishBtn.setAttribute("id",purchase.tradeNo);
@@ -193,14 +193,14 @@ for(f of finishBtn){
                 reviewCreateBtn.classList.add("reviewCreateBtn");
                 reviewCreateBtn.append(document.createTextNode("리뷰하기"));
 
-                if(purchase.workCount==0){
+                if(purchase.workStatus==2){
+                  td6.append(reviewCreateBtn);
+                } else if(purchase.workCount==0 || purchase.tradeReportNo!=0){
                   td6.append(reportBtn);
                 } else if(purchase.workCount>=1 && purchase.memberDoneFL==1 && purchase.workStatus!=3){
                   td6.append(finishBtn);
                   td6.append(document.createTextNode(" "));
                   td6.append(reportBtn);
-                } else if(purchase.workStatus==4){
-                  td6.append(reviewCreateBtn);
                 }
                 tr.append(td6);
 
@@ -246,10 +246,17 @@ for(f of finishBtn){
                 reportContent.setAttribute("value",purchase.tradeReportTypeName);
                 tr.append(reportContent);
 
+                const tradeReportTypeNo = document.createElement("input");
+                tradeReportTypeNo.setAttribute("type","hidden");
+                tradeReportTypeNo.setAttribute("id","hiddenTradeReportTypeNo");
+                tradeReportTypeNo.setAttribute("value",purchase.tradeReportTypeNo);
+                tr.append(tradeReportTypeNo);
+
                 selecttbody.append(tr);
 
               }
 
+              selectedControl(purchase.tradeReportTypeNo);
               reportModal();
               reviewModal();
 
