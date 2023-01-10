@@ -175,6 +175,7 @@ public class UserInquiryServiceImpl implements UserInquiryService {
 
 			map.put("pagination", pagination);
 			map.put("inquiryList", inquiryList);
+			map.put("optionVal", optionVal);
 			
 			return map;
 }

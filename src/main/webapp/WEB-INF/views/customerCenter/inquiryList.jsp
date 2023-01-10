@@ -18,8 +18,12 @@
     <jsp:include page="/WEB-INF/views/common/header_black_ver2 customer.jsp"/>
 
     <%-- 검색을 진행한 경우 --%>
-    <c:if test="${not empty param.key}">
-        <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
+    <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+				<c:if test="${parameter.key != 'cp'}">
+					<c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+				</c:if>
+		</c:forEach>
     </c:if>
 
     <c:if test="${not empty param.value}">      
