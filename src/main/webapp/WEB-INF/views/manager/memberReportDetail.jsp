@@ -73,9 +73,9 @@
                                         <div class="img-box">
                                             <div class="boardImg">
                                                 <label for="img1">
-                                                    <img class="preview" src="/resources/images/${memberReport.reportImageFileList[i].memberReportFilePath}">
+                                                    <img class="preview" src="${memberReport.reportImageFileList[i].memberReportFilePath}">
                                                 </label>
-                                                <a href="/resources/images/${memberReport.reportImageFileList[i].memberReportFilePath}" download="/resources/images/${memberReport.reportImageFileList[i].memberReportFilePath}">다운로드</a>
+                                                <a href="${memberReport.reportImageFileList[i].memberReportFilePath}" download="/resources/images/${memberReport.reportImageFileList[i].memberReportFilePath}">다운로드</a>
                                             </div>
                                         </div>    
                                         <br>

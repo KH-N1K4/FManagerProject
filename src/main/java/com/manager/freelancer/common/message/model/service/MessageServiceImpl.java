@@ -3,6 +3,7 @@ package com.manager.freelancer.common.message.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,8 @@ import com.manager.freelancer.common.message.model.vo.ChattingRoom;
 import com.manager.freelancer.common.message.model.vo.MemberReport;
 import com.manager.freelancer.common.message.model.vo.MemberReportFile;
 import com.manager.freelancer.common.message.model.vo.Message;
+import com.manager.freelancer.myProject.model.vo.FreelancerService;
+import com.manager.freelancer.myProject.model.vo.Pagination;
 import com.manager.freelancer.myProject.model.vo.myProjectServiceInquiry;
 
 
@@ -197,5 +200,33 @@ public class MessageServiceImpl implements MessageService{
 				
 				
 		return message;
+	}
+
+	/**채빙탕에서 신고한 신고내역보기(고객센터에 회원 신고 내역)
+	 *
+	 */
+	@Override
+	public Map<String, Object> selectUserReportList(int memberNo, int cp, int inquiryStatus, String searchKey, String searchQuery) {
+
+		int listCount = dao.getUserReportListCount(memberNo,inquiryStatus,searchKey,searchQuery);
+		
+		Pagination pagination = new Pagination(listCount,cp,10,10); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
+		List<MemberReport> memberReport = dao.selectUserReportList(memberNo,inquiryStatus,pagination,searchKey,searchQuery);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pagination", pagination);
+		map.put("memberReport",memberReport);
+		map.put("listCount",listCount);
+		
+		return map;
+	}
+
+	/**
+	 *회원 신고 상세보기
+	 */
+	@Override
+	public MemberReport viewUserReportDetail(int membeReportNo) {
+
+		return dao.viewUserReportDetail(membeReportNo);
 	}
 }

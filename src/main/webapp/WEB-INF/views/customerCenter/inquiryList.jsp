@@ -18,8 +18,12 @@
     <jsp:include page="/WEB-INF/views/common/header_black_ver2 customer.jsp"/>
 
     <%-- 검색을 진행한 경우 --%>
-    <c:if test="${not empty param.key}">
-        <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
+    <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+				<c:if test="${parameter.key != 'cp'}">
+					<c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+				</c:if>
+		</c:forEach>
     </c:if>
 
     <c:if test="${not empty param.value}">      
@@ -35,16 +39,14 @@
         </c:forEach>
     </c:if>
     <c:if test="${empty param.value}">
-        <c:forEach var="inputValue" items="${param.value}">
             <c:choose>
-                <c:when test="${inputValue == '1'}">
+                <c:when test="${map.optionVal == '1'}">
                     <c:set var="inputValue1" value="selected" />
                 </c:when>
-                <c:when test="${inputValue == '2'}">
+                <c:when test="${map.optionVal == '2'}">
                     <c:set var="inputValue2" value="selected" />
                 </c:when>
             </c:choose>
-        </c:forEach>
     </c:if>
 
 
@@ -54,6 +56,7 @@
             <div class="sideMenu">
                 <div id="inquiry"><a href="/userInquiry">문의하기</a></div>
                 <div id="inquiryList"><a href="/userInquiryList">내 문의 내역</a></div>
+                <div id="userReportList"><a href="/userInquiryList/userReportList">회원 신고 내역</a></div>
             </div>
 
             <!-- 메인 콘텐츠 영역 -->
@@ -76,7 +79,6 @@
                     </section>
 
                     <hr>
-
                     <table id="table">
                         <tr>
                             <th style="width:100px">번호</th>
@@ -92,9 +94,11 @@
                                 </tr>
                             </c:when>
                             <c:otherwise>
-                                <c:forEach var="userinquiry" items="${userInquiryList}">
+                                <c:forEach var="userinquiry" items="${userInquiryList}" varStatus="status">
                                     <tr class="contentArea">
-                                        <td>${i=i+1}</td>
+                                     <c:set var="total" value="${pagination.currentPage-1 }" />
+                                     <c:set var="total1" value="${total*5 }" />
+                                        <td>${total1 + status.count}</td>
                                         <%-- <td>${userinquiry.userInquiryNo}</td> --%>
                                         <td><a href="/userInquiryDetail/${userinquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${userinquiry.userInquiryTitle}</a></td>
                                         <td>${userinquiry.userInquiryCreateDate}</td>

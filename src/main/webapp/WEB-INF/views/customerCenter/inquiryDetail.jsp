@@ -23,6 +23,7 @@
             <div class="sideMenu">
                 <div id="inquiry"><a href="/userInquiry">문의하기</a></div>
                 <div id="inquiryList"><a href="/userInquiryList">내 문의 내역</a></div>
+                <div id="userReportList"><a href="/userInquiryList/userReportList">회원 신고 내역</a></div>
             </div>
 
             <!-- 메인 콘텐츠 영역 -->

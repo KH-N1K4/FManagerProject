@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +29,7 @@ import com.manager.freelancer.common.message.model.service.MessageService;
 import com.manager.freelancer.common.message.model.vo.ChattingRoom;
 import com.manager.freelancer.common.message.model.vo.MemberReport;
 import com.manager.freelancer.common.message.model.vo.Message;
+import com.manager.freelancer.customerCenter.model.vo.UserInquiry;
 import com.manager.freelancer.member.model.vo.Member;
 import com.manager.freelancer.myProject.model.vo.FreelancerService;
 
@@ -85,6 +87,11 @@ public class MessageController {
 		return "redirect:/member/message/chatting";
 	}
 	
+	/**채팅방 목록
+	 * @param loginMember
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/member/message/chatting")
     public String chatting(@SessionAttribute("loginMember") Member loginMember, Model model) {
         
@@ -108,6 +115,11 @@ public class MessageController {
         return "common/message";
     }
 	
+    /**채팅방 입장
+     * @param paramMap
+     * @param loginMember
+     * @return
+     */
     @GetMapping("/chatting/selectMessage")
     @ResponseBody
     public String selectMessageList(@RequestParam Map<String, Object> paramMap,@SessionAttribute("loginMember") Member loginMember) {
@@ -117,6 +129,10 @@ public class MessageController {
     }
     
     
+    /**비동기 채팅방 목록
+     * @param memberNo
+     * @return
+     */
     @GetMapping("/chatting/roomList")
     @ResponseBody
     public String selectRoomList(int memberNo) {
@@ -139,18 +155,33 @@ public class MessageController {
         return new Gson().toJson(roomList);
     }
     
+    /**읽음 여부
+     * @param paramMap
+     * @return
+     */
     @GetMapping("/chatting/updateReadFlag")
     @ResponseBody
     public int updateReadFlag(@RequestParam Map<String, Object> paramMap) {
         return service.updateReadFlag(paramMap);
     }
     
+    /**채팅방 나가기 여부
+     * @param paramMap
+     * @return
+     */
     @GetMapping("/chatting/updateOutFL")
     @ResponseBody
     public int updateOutFL(@RequestParam Map<String, Object> paramMap) {
         return service.updateOutFL(paramMap);
     }
     
+    /**파일 사진 보내기
+     * @param formData
+     * @param req
+     * @param session
+     * @return
+     * @throws Exception
+     */
     @PostMapping("/chatting/updatefiles")
 	@ResponseBody
 	public String updatefiles(
@@ -181,11 +212,22 @@ public class MessageController {
     
     
     
+    /**신고 아이프레임 띄우기
+     * @return
+     */
     @GetMapping("/member/message/chatting/report")
     public String messageReportModal() {
         return "common/modaless/messageReportModal";
     }
     
+    /**회원 신고하기
+     * @param memberReport
+     * @param formData
+     * @param req
+     * @param session
+     * @return
+     * @throws Exception
+     */
     @PostMapping("/reportMemberSubmit")
 	@ResponseBody
 	public String memberReportUpdate(MemberReport memberReport,
@@ -210,6 +252,76 @@ public class MessageController {
     	
     	return new Gson().toJson(result);
     }
+    
+    /**회원 신고한 내역(고객센터에 있음)
+     * @param inquiryStatus
+     * @param model
+     * @param cp
+     * @param session
+     * @param loginMember
+     * @return
+     */
+    @GetMapping("/userInquiryList/userReportList")
+	public String userReportList(@RequestParam(value = "inquiryStatus", required = false, defaultValue = "0") int inquiryStatus, Model model,
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,HttpSession session,
+			@RequestParam(value = "searchKey", required = false, defaultValue = "") String searchKey,
+			@RequestParam(value = "searchQuery", required = false, defaultValue = "") String searchQuery,
+			@SessionAttribute("loginMember") Member loginMember) {
+    	
+    	Map<String, Object> map = service.selectUserReportList(loginMember.getMemberNo(),cp,inquiryStatus,searchKey,searchQuery);
+    	System.out.println(map.get("memberReport"));
+		model.addAttribute("pagination",map.get("pagination"));
+		model.addAttribute("memberReport",map.get("memberReport"));
+		model.addAttribute("listCount",map.get("listCount"));
+		model.addAttribute("inquiryStatus",map.get("inquiryStatus"));
+    	
+		return "customerCenter/userReportList";
+	}
+    
+    
+    /**회원 신고 내역 Ajax 
+     * @param inquiryStatus
+     * @param model
+     * @param cp
+     * @param session
+     * @param searchKey
+     * @param searchQuery
+     * @param loginMember
+     * @return
+     */
+    @GetMapping("/userInquiryList/userReportList/Ajax")
+    @ResponseBody
+   	public String userReportListAjax(@RequestParam(value = "inquiryStatus", required = false, defaultValue = "0") int inquiryStatus, Model model,
+   			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,HttpSession session,
+   			@RequestParam(value = "searchKey", required = false, defaultValue = "") String searchKey,
+   			@RequestParam(value = "searchQuery", required = false, defaultValue = "") String searchQuery,
+   			@SessionAttribute("loginMember") Member loginMember) {
+       	
+       	Map<String, Object> map = service.selectUserReportList(loginMember.getMemberNo(),cp,inquiryStatus,searchKey,searchQuery);
+       	
+   		return new Gson().toJson(map);
+   	}
+    
+    
+    /**회원 신고 상세 내역
+     * @param membeReportNo
+     * @param model
+     * @return
+     */
+    @GetMapping("/userInquiryList/userReportList/{membeReportNo}")
+	public String userReportDetail(@PathVariable(value="membeReportNo") int membeReportNo, Model model) {
+    	
+    	MemberReport userReportDetail = service.viewUserReportDetail(membeReportNo);
+		
+		//userInquiry.setMembeReportNo(membeReportNo);
+		
+		
+		model.addAttribute("userReportDetail",userReportDetail);
+		
+		//System.out.println(userInquiry.getImageList());
+    	
+		return "customerCenter/userReportDetail";
+	}
     
 	
 }

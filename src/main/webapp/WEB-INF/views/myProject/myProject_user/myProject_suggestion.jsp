@@ -20,6 +20,54 @@
   <main id="mainBody">
     <!-- hearder -->
   <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
+  <%-- 검색을 진행한 경우 --%>
+    <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+				<c:if test="${parameter.key != 'cp'}">
+					<c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+				</c:if>
+		</c:forEach>
+    </c:if>
+    <c:if test="${not empty param.value}">      
+        <c:forEach var="inputValue" items="${param.value}">
+            <c:choose>
+                <c:when test="${inputValue == '1'}">
+                    <c:set var="inputValue1" value="selected" />
+                </c:when>
+                <c:when test="${inputValue == '2'}">
+                    <c:set var="inputValue2" value="selected" />
+                </c:when>
+                <c:when test="${inputValue == '3'}">
+                    <c:set var="inputValue3" value="selected" />
+                </c:when>
+                <c:when test="${inputValue == '4'}">
+                    <c:set var="inputValue4" value="selected" />
+                </c:when>
+                <c:when test="${inputValue == '5'}">
+                    <c:set var="inputValue5" value="selected" />
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </c:if>
+    <c:if test="${empty param.value}">
+      <c:choose>
+          <c:when test="${optionVal == '1'}">
+              <c:set var="inputValue1" value="selected" />
+          </c:when>
+          <c:when test="${optionVal == '2'}">
+              <c:set var="inputValue2" value="selected" />
+          </c:when>
+          <c:when test="${optionVal == '3'}">
+              <c:set var="inputValue3" value="selected" />
+          </c:when>
+          <c:when test="${optionVal == '4'}">
+              <c:set var="inputValue4" value="selected" />
+          </c:when>
+          <c:when test="${optionVal == '5'}">
+              <c:set var="inputValue5" value="selected" />
+          </c:when>
+      </c:choose>
+    </c:if>
 
     <!-- hearder -->
     <!-- 화면 크기 width: 1200px로 고정 -->
@@ -39,12 +87,12 @@
                 <!-- 상단 selectbox -->
                 <div class="selectbox">
                   <select  id = "srchOption" class="srchOption" name="srchOption" onchange="selectChange()">
-                    <option value="0" selected="">카테고리 선택</option>
-                    <option value="1">디자인</option>
-                    <option value="2">IT·프로그래밍</option>
-                    <option value="3">영상</option>
-                    <option value="4">사진</option>
-                    <option value="5">음향</option>
+                    <option value="0">카테고리 선택</option>
+                    <option value="1" ${inputValue1}>디자인</option>
+                    <option value="2" ${inputValue2}>IT·프로그래밍</option>
+                    <option value="3" ${inputValue3}>영상</option>
+                    <option value="4" ${inputValue4}>사진</option>
+                    <option value="5" ${inputValue5}>음향</option>
                   </select>
                 </div>
                 <!-- 상단 selectbox -->
@@ -77,10 +125,12 @@
                         </tr>
                       </c:if>
                       <c:if test="${not empty proposal}">
-                        <c:forEach items="${proposal}" var="proposal">
+                        <c:forEach items="${proposal}" var="proposal" varStatus="status">
                               <tr class="suggestionTable" id="suggestionTable">
-                                <td class="tc">                       
-                                  <span class="num">${i=i+1}</span>
+                                <td class="tc">   
+                                <c:set var="total" value="${pagination.currentPage-1 }" />
+                    			 <c:set var="total1" value="${total*5 }" />                    
+                                  <span class="num">${total1 + status.count}</span>
                                 </td>
                                 <td class="tl">                           
                                   <div class="suggestion_name_area td_link">

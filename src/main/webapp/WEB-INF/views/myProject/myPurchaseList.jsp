@@ -103,13 +103,14 @@
 
 
                     <c:if test="${not empty purchaseList}">
-                      <c:forEach var="purchase" items="${purchaseList}">
+                      <c:forEach var="purchase" items="${purchaseList}" varStatus="status">
                       
                         <tr class="suggestionTable" suggestionNumeber="">
                        
                           <td class="tc">
-                           
-                            <span class="num">${i=i+1}</span>
+                            <c:set var="total" value="${pagination.currentPage-1 }" />
+                     		<c:set var="total1" value="${total*5 }" />
+                            <span class="num">${total1 + status.count}</span>
                           </td>
                          
                           <td class="tl">

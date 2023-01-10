@@ -138,7 +138,7 @@
                         <option value="14">카카오뱅크</option>
                     </select>
 
-                    <input type="text" name="bankAccountNumber" id="bankAccountNumber" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                    <input type="text" name="bankAccountNumber" id="bankAccountNumber" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
 
                 </div>
             </div>
