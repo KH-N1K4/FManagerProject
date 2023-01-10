@@ -186,7 +186,7 @@ $(document).on("click",".reportBtn",function(){
   const tradeNoValue = this.title;
   $('#memberName').val(loginMemberName);
   document.querySelector('#tradeNo').value = this.title;
-  saleslist.forEach(function(arg,i){
+  saleslistJSON.forEach(function(arg,i){
     if(arg.tradeNo == tradeNoValue){
       document.querySelector('#serviceTitle').value = arg.serviceTitle;
       console.log(arg.tradeReportNo);
@@ -259,7 +259,7 @@ $(document).on("click",".sendBtn",function(){
         console.log(tradeNoValue);
         if(result == "작업물 발송이 완료되었습니다."){
           alert(result);
-          saleslist.forEach(function(arg){
+          saleslistJSON.forEach(function(arg){
             if(arg.tradeNo == tradeNoValue){
               console.log("더하기 전:"+arg.workCount);
               arg.workCount = arg.workCount+1;
@@ -329,7 +329,7 @@ $(document).on("click",".finishBtn",function(){
           $('#finishBtn'+tradeNoValue).remove();
           $('#sendBtn'+tradeNoValue).remove();
           $('#reportBtn'+tradeNoValue).remove();
-          saleslist.forEach(function(arg){
+          saleslistJSON.forEach(function(arg){
             if(arg.tradeNo == tradeNoValue){
               document.getElementsByClassName('workStatus'+arg.tradeNo)[0].innerText = '작업완료';
               if(arg.tradeReportNo != 0){
@@ -376,8 +376,7 @@ $('.clientTradeRequest').click(function(){
   /* 요청사항에 들어갈 값들 */
   const tradeNoValue = this.title;
   document.querySelector('#tradeRequestTradeNo').value = tradeNoValue;
-
-  saleslist.forEach(function(arg,i){
+  saleslistJSON.forEach(function(arg,i){
     if(arg.tradeNo == tradeNoValue){
       document.querySelector('#tradeRequestServiceTitle').value = arg.serviceTitle;
       document.querySelector('#tradeRequestMemberName').value = arg.memberName;

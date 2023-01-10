@@ -170,6 +170,27 @@ public class MyProjectFreelancerServiceImpl implements MyProjectFreelancerServic
 		
 		Pagination pagination = new Pagination(listCount,cp,15,5); //게시판 게시글 몇개 정렬인지도 매개변수 정해줌
 		List<FreelancerService> salesList = dao.selectSalesList(memberNo,freelancerFL,searchInput, mainCategoryNo,pagination);
+		for(int i =0; i<salesList.size(); i++) {
+			String title= salesList.get(i).getServiceTitle().replace( System.getProperty( "line.separator" ), "" );
+			salesList.get(i).setServiceTitle(title);
+			
+			String summary= salesList.get(i).getServiceSummary().replace( "<br>", "" );
+			//String summary= salesList.get(i).getServiceSummary().replace( System.getProperty( "line.separator" ), "" );
+			salesList.get(i).setServiceSummary(summary);
+			
+			
+			//String content= salesList.get(i).getServiceContent().replace( System.getProperty( "line.separator" ), "" );
+			String content= salesList.get(i).getServiceContent().replace( "<br>", "" );
+			salesList.get(i).setServiceContent("");
+			System.out.println(content);
+			
+			if(salesList.get(i).getTradeRequestString() != null) {
+				String request= salesList.get(i).getTradeRequestString().replace( System.getProperty( "line.separator" ), "" );
+				salesList.get(i).setTradeRequestString(Util.newLineHandling(request));
+				System.out.println(request);
+			}
+			
+		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
