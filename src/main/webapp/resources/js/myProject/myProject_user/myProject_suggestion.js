@@ -46,7 +46,7 @@ function selectChange() {
 
                 if (map.proposal.length != 0) {  // 게시글이 존재할 때
 
-
+                    let i = 1;
                     for (proposal of map.proposal) {
 
                         const tr = document.createElement("tr");
@@ -60,7 +60,7 @@ function selectChange() {
 
                         const span1 = document.createElement("span");
                         span1.setAttribute("class", "num");
-                        span1.innerText = proposal.proposalNo;
+                        span1.innerText = i++;
                         td1.append(span1);
 
                         const td2 = document.createElement("td");
