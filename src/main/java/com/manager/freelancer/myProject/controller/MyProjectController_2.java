@@ -197,7 +197,8 @@ public class MyProjectController_2 {
 			HttpServletRequest req, /* 저장할 서버 경로 */
 			Review inputReview) throws IOException {
 		
-		String webPath = "/resources/files/review/";
+		// 인터넷 주소로 접근할 수 있는 경로
+		String webPath = "/resources/images/review/";
 		// 실제 파일이 저장된 컴퓨터 상의 절대 경로
 		String realPath = req.getSession().getServletContext().getRealPath(webPath);
 		
