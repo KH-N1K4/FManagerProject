@@ -31,6 +31,19 @@
                     </c:when>
                 </c:choose>
             </c:if>
+            <c:if test="${parameter.key == 'searchKey'}">
+                <c:choose>
+                    <c:when test="${parameter.value == 't'}">
+                        <c:set var="inputValue1" value="selected" />
+                    </c:when>
+                    <c:when test="${parameter.value == 'c'}">
+                        <c:set var="inputValue2" value="selected" />
+                    </c:when>
+                    <c:when test="${parameter.value == 'tc'}">
+                        <c:set var="inputValue3" value="selected" />
+                    </c:when>
+                </c:choose>
+            </c:if>
         </c:forEach>
     </c:if>
 
@@ -142,12 +155,12 @@
                     
                     <form action="/userInquiryList/userReportList" id="inquirySearch" method="get"> 
                         <select name="searchKey" id="search-key">
-                            <option value="t">제목</option> 
-                            <option value="c">내용</option> 
-                            <option value="tc">제목+내용</option> 
+                            <option value="t" ${inputValue1}>제목</option> 
+                            <option value="c" ${inputValue2}>내용</option> 
+                            <option value="tc" ${inputValue3}>제목+내용</option> 
                         </select> 
                         <!-- <c:if test="${not empty param.key and param.key eq 'searchQuery'}">value='${param.query}'</c:if> -->
-                        <input type="text" name="searchQuery" id="search-query" placeholder=" 검색어를 입력해주세요" >  
+                        <input type="text" name="searchQuery" id="search-query" placeholder=" 검색어를 입력해주세요" <c:forEach var="parameter" items="${param}"><c:if test="${not empty parameter.key and parameter.key eq 'searchQuery'}">value='${parameter.value}'</c:if></c:forEach>>  
                         <button>검색</button>
                     </form>
             </div>
