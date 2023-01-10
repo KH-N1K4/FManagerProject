@@ -113,17 +113,19 @@ public class MyProjectContorller {
 	public String myRequestInsert(Model model,
 								  @RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
 								  @SessionAttribute("loginMember") Member loginMember,
-								  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
+								  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
+					               @RequestParam(value="optionVal" , required = false, defaultValue = "0") String optionVal) {
 		
 		
 		List<MyProject> maincategoryList = service.selectmaincategoryList();
 		
-		Map<String, Object> map = service.selectProposal(loginMember.getMemberNo(), cp, mainCategoryNo);
+		Map<String, Object> map = service.selectProposal(loginMember.getMemberNo(), cp, mainCategoryNo, optionVal);
 		
 		model.addAttribute("maincategoryList",maincategoryList);
 		model.addAttribute("proposal",map.get("proposal"));
 		model.addAttribute("pagination",map.get("pagination"));
 		model.addAttribute("listCount",map.get("listCount"));
+		model.addAttribute("optionVal",map.get("optionVal"));
 		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
 		
 		
