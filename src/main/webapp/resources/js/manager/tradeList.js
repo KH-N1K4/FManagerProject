@@ -445,7 +445,7 @@ function calculate() {
                                 const child8 = document.createElement("div");
                                 child8.classList.add('manager-option');
 
-                                if (trade.workStatus == 1) {
+                                if (trade.workStatus == 1 && trade.reportCount>=1) {
                                     const btn = document.createElement("a");
                                     btn.classList.add("btn");
                                     btn.classList.add("refund");
