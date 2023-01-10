@@ -550,7 +550,7 @@ if(tradeSearch != null){
         
         const input = document.getElementById("search-query");
 
-        const regEx = /^[0-9]$/g;
+        const regEx = /^[0-9]+$/;
         if(!regEx.test(input.value)){
             input.value="";
             alert('숫자만 입력해주세요.')
