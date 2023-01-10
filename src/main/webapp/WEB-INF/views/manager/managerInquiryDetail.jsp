@@ -131,7 +131,7 @@
                         </c:choose>
                         </div>
                         <div id="commentInput">
-                            <input type="text" name="inquiryRequest" class="inputComment" id="inputComment">
+                            <input type="text" name="inquiryRequest" class="inputComment" id="inputComment" maxlength="100" placeholder="100자 이내로 작성해주세요.">
                             <button id="commentBtn">등록</button>
                         </div>
                     </section>
