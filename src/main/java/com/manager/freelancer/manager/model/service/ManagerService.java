@@ -52,7 +52,7 @@ public interface ManagerService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectServiceList(int cp);
+	Map<String, Object> selectServiceList(int status,int cp);
 
 	/** 서비스 상태별 조회 ajax
 	 * @param listType
@@ -127,9 +127,10 @@ public interface ManagerService {
 
 	/** 프로젝트 의뢰 목록 조회
 	 * @param cp
+	 * @param cp2 
 	 * @return
 	 */
-	Map<String, Object> managerprojectRequestList(int cp);
+	Map<String, Object> managerprojectRequestList(int status,int cp);
 
 	/** 프로젝트 의뢰 상태 ajax
 	 * @param status
@@ -191,9 +192,10 @@ public interface ManagerService {
 	/** 거래 신고 내역 조회
 	 * @param status
 	 * @param cp
+	 * @param cp 
 	 * @return
 	 */
-	Map<String, Object> selectMemberTradeList(int status, int cp);
+	Map<String, Object> selectMemberTradeList(int status, int type, int cp);
 
 	/** 검색 일치 거래 신고 내역 조회
 	 * @param pm

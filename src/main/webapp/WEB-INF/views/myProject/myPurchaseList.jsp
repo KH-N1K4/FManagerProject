@@ -141,7 +141,7 @@
                               <c:when test="${purchase.workStatus==2}">
                                 <a id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
                               </c:when>
-                              <c:when test="${purchase.workCount==0}">
+                              <c:when test="${purchase.workCount==0 || purchase.tradeReportNo!=0}">
                                 <a id="reportBtn" title="" class="reportBtn btn_type">취소/신고</a>
                               </c:when>
                               <c:when test="${purchase.workCount>=1 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">

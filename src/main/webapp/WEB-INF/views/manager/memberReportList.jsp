@@ -18,8 +18,32 @@
     
     <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp"/>
 
-    <c:if test="${not empty param.key}">
-        <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
+    <c:if test="${not empty param}">
+        	<c:forEach var="parameter" items="${param}">
+				<c:if test="${parameter.key != 'cp'}">
+					<c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+				</c:if>
+			</c:forEach>
+    	</c:if>
+    <c:if test="${not empty param.value}">
+            <c:choose>
+                <c:when test="${param.value == 1}">
+                    <c:set var="inputStatus1" value="selected" />
+                </c:when>
+                <c:when test="${param.value == 2}">
+                    <c:set var="inputStatus2" value="selected" />
+                </c:when>
+            </c:choose>
+    </c:if>
+    <c:if test="${empty param.value}">
+            <c:choose>
+                <c:when test="${map.status == 1}">
+                    <c:set var="inputStatus1" value="selected" />
+                </c:when>
+                <c:when test="${map.status == 2}">
+                    <c:set var="inputStatus2" value="selected" />
+                </c:when>
+            </c:choose>
     </c:if>
 
     <div class="main">
@@ -30,8 +54,8 @@
 			<span class="select-area"> 
 				<select class="select-area-input" name="status" id="selectStatus" onchange="selectChange()">
 					<option value="">진행 상태</option>
-					<option value="1">답변 대기</option>
-					<option value="2">해결 완료</option>
+					<option value="1" ${inputStatus1}>답변 대기</option>
+					<option value="2" ${inputStatus2}>해결 완료</option>
 				</select>
 			</span>
 
@@ -120,7 +144,7 @@
                             <option value="reported">피신고자명</option> 
                         </select> 
                         <input type="text" name="query" id="search-query" placeholder=" 검색어를 입력해주세요" >  
-                        <input type="hidden" name="status" id="inputStatus">
+                        <input type="hidden" name="value" id="inputStatus" value="${param.value}">
                         <button>검색</button>
                     </form>
 
