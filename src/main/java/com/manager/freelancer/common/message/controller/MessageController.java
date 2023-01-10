@@ -279,6 +279,30 @@ public class MessageController {
 	}
     
     
+    /**회원 신고 내역 Ajax 
+     * @param inquiryStatus
+     * @param model
+     * @param cp
+     * @param session
+     * @param searchKey
+     * @param searchQuery
+     * @param loginMember
+     * @return
+     */
+    @GetMapping("/userInquiryList/userReportList/Ajax")
+    @ResponseBody
+   	public String userReportListAjax(@RequestParam(value = "inquiryStatus", required = false, defaultValue = "0") int inquiryStatus, Model model,
+   			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,HttpSession session,
+   			@RequestParam(value = "searchKey", required = false, defaultValue = "") String searchKey,
+   			@RequestParam(value = "searchQuery", required = false, defaultValue = "") String searchQuery,
+   			@SessionAttribute("loginMember") Member loginMember) {
+       	
+       	Map<String, Object> map = service.selectUserReportList(loginMember.getMemberNo(),cp,inquiryStatus,searchKey,searchQuery);
+       	
+   		return new Gson().toJson(map);
+   	}
+    
+    
     /**회원 신고 상세 내역
      * @param membeReportNo
      * @param model

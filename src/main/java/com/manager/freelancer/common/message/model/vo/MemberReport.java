@@ -28,6 +28,7 @@ public class MemberReport {
 	private String managerNickname;             //MEMBER_REPORT_ANSWER_MEMBER_NO
 	private String managerProfile;             //MEMBER_REPORT_ANSWER_MEMBER_NO
 	private int managerNo;             //MEMBER_REPORT_ANSWER_MEMBER_NO
+	private int rownum;             //MEMBER_REPORT_ANSWER_MEMBER_NO
 	
 	private List<MemberReportFile> fileList; 
 }

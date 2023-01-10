@@ -57,7 +57,7 @@
                     </select>
                   </div>
                   <div class="selectbox">
-                    <input type="date" class="startDate DateBox" name="startDate" id="startDate" title="${startDate}"> - 
+                    <input type="date" class="startDate DateBox" name="startDate" id="startDate" title="${startDate}"> 
                   </div> 
                   <div class="selectbox">
                     <input type="date" class="endtDate DateBox" name="endtDate" id="endtDate" title="${endtDate}">
