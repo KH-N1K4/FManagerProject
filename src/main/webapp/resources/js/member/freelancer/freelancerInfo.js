@@ -16,10 +16,11 @@ btnOpenPopup1.addEventListener('click', () =>{
 
     modal1.classList.toggle('show');
     modal1.style.display= 'block';
-    if(modal1.classList.contains('show')){
         body1.style.display ='block';
         mainBody.style.overflow = 'hidden';
-    }
+
+    
+    
 })
 
 
@@ -55,12 +56,12 @@ modalClose1.addEventListener('click', ()=>{
 
 
 
-modalClose2.addEventListener('click', ()=>{
+// modalClose2.addEventListener('click', ()=>{
 
-    modal2.style.display ='none';
+//     modal2.style.display ='none';
 
     
-})
+// })
 
 const clickPortfolio = document.getElementsByClassName("portfolioSection");
 
@@ -81,9 +82,11 @@ for(let portfolio of clickPortfolio){
 
         modal2.classList.toggle('show');
         modal2.style.display= 'block';
+
         body2.style.display ='block';
         mainBody.style.overflow = 'hidden';
         // mainBody.style.backgroundColor = 'skyblue';
+        
     } )
 }
 
