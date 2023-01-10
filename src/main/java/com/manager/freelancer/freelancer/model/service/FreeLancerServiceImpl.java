@@ -309,7 +309,7 @@ public class FreeLancerServiceImpl implements FreeLancerService{
 	@Override
 	public int addPortfolio(Portfolio inputPortfolio, String webPath, String folderPath, List<MultipartFile> portfolioFilePath) throws Exception {
 		
-		inputPortfolio.setPortfolioContent(Util.newLineHandling(inputPortfolio.getPortfolioContent())); 
+		inputPortfolio.setPortfolioContent(Util.newLineClear(inputPortfolio.getPortfolioContent())); 
 		
 		
 		List<String> reNameList = new ArrayList<String>();

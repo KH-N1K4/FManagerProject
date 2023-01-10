@@ -335,7 +335,7 @@
     			SELECT SEQ_PORTFOLIO_NO.NEXTVAL FROM DUAL
     		</selectKey>
     		INSERT INTO PORTFOLIO VALUES
-    		(SEQ_PORTFOLIO_NO.NEXTVAL,#{portfolioTitle}, #{portfolioContent},#{portfolioFilePath},#{freelancerNo}, #{portfolioThumbnail})
+    		(#{portfolioNo}, #{portfolioTitle}, #{portfolioContent},#{portfolioFilePath},#{freelancerNo}, #{portfolioThumbnail})
     	</insert>
 
     	<!-- 포트폴리오 상세 조회 -->
