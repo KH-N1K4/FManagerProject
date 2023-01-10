@@ -36,12 +36,15 @@
     font-size: 30px;
     margin-bottom: 20px;
 }
+.serviceSummary{
+    height: 50px;
+}
 
 .serviceInfo{
     display: flex;
     justify-content: space-between;
     width: 695px;
-    margin:26px 0;
+    margin:5px 0;
 }
 
 /* 전문가 정보 */
