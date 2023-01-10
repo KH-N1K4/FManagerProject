@@ -121,14 +121,14 @@ function selectStatusChange() {
                     /* 페이징 */
                     const li1 = document.createElement("li");
                     const a1 = document.createElement("a");
-                    a1.setAttribute('href', "/manager/tradeReportList?cp=1" + "&status=" + status+"&type=" + type);
+                    a1.setAttribute('href', "/manager/tradeReportList?cp=1" + "&status=" + resultMap.status+"&type=" + resultMap.type);
                     a1.appendChild(document.createTextNode("<<"));
                     li1.append(a1);
                     pagination.append(li1);
 
                     const li2 = document.createElement("li");
                     const a2 = document.createElement("a");
-                    a2.setAttribute("href", "/manager/tradeReportList?cp=" + resultMap.pagination.prevPage + "&status=" + status+"&type=" + type);
+                    a2.setAttribute("href", "/manager/tradeReportList?cp=" + resultMap.pagination.prevPage + "&status=" + resultMap.status+"&type=" + resultMap.type);
                     a2.appendChild(document.createTextNode("<"));
                     li2.append(a2);
                     pagination.append(li2);
@@ -145,7 +145,7 @@ function selectStatusChange() {
 
                         } else {
                             const a3 = document.createElement("a");
-                            a3.setAttribute("href", "/manager/tradeReportList?cp=" + i + "&status=" + status+"&type=" + type);
+                            a3.setAttribute("href", "/manager/tradeReportList?cp=" + i + "&status=" + resultMap.status+"&type=" + resultMap.type);
                             a3.appendChild(document.createTextNode(i));
                             li3.append(a3);
                             pagination.append(li3);
@@ -154,14 +154,14 @@ function selectStatusChange() {
 
                     const li4 = document.createElement("li");
                     const a4 = document.createElement("a");
-                    a4.setAttribute("href", "/manager/tradeReportList?cp=" + resultMap.pagination.nextPage + "&status=" + status+"&type=" + type);
+                    a4.setAttribute("href", "/manager/tradeReportList?cp=" + resultMap.pagination.nextPage + "&status=" + resultMap.status+"&type=" + resultMap.type);
                     a4.appendChild(document.createTextNode(">"));
                     li4.append(a4);
                     pagination.append(li4);
 
                     const li5 = document.createElement("li");
                     const a5 = document.createElement("a");
-                    a5.setAttribute("href", "/manager/tradeReportList?cp=" + resultMap.pagination.maxPage + "&status=" + status+"&type=" + type);
+                    a5.setAttribute("href", "/manager/tradeReportList?cp=" + resultMap.pagination.maxPage + "&status=" + resultMap.status+"&type=" + resultMap.type);
                     a5.appendChild(document.createTextNode(">>"));
                     li5.append(a5);
                     pagination.append(li5);
@@ -170,8 +170,8 @@ function selectStatusChange() {
 
 
 
-                document.getElementById("inputStatus").value=status;
-                document.getElementById("inputType").value=type;
+                document.getElementById("inputStatus").value=resultMap.status;
+                document.getElementById("inputType").value=resultMap.type;
 
                 /* 회원 번호 선택 시 숫자만 보내기 */
                 const inquirySearchFrm = document.getElementById("inquirySearch");

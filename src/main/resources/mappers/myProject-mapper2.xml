@@ -65,7 +65,7 @@
 	JOIN SUB_CATEGORY USING (SUB_CATEGORY_NO)
 	JOIN MAIN_CATEGORY USING (MAIN_CATEGORY_NO)
 	WHERE USER_NO=#{loginMemberNo}
-	AND PAYMENT_TYPE=1
+	AND (PAYMENT_TYPE=1 OR PAYMENT_TYPE=3)
 	<if test='type!=0'>
 		AND MAIN_CATEGORY_NO = #{type}
 	</if>
@@ -93,6 +93,7 @@
 	JOIN SUB_CATEGORY USING (SUB_CATEGORY_NO)
 	JOIN MAIN_CATEGORY USING (MAIN_CATEGORY_NO)
 	WHERE USER_NO=#{loginMemberNo}
+	AND (PAYMENT_TYPE=1 OR PAYMENT_TYPE=3)
 	<if test='type!=0'>
 		AND MAIN_CATEGORY_NO = #{type}
 	</if>
@@ -105,6 +106,7 @@
 	<if test="searchDate2 neq ''">
 		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
 	</if>
+	ORDER BY TRADE_NO DESC
   </select>
   
   <!-- 구매 내역 수 -->
@@ -170,6 +172,7 @@
 	<if test='searchInput != null and searchInput != ""'>
 		AND SERVICE_TITLE LIKE '%${searchInput}%'
 	</if>
+	ORDER BY 1 DESC
   </select>
   
   

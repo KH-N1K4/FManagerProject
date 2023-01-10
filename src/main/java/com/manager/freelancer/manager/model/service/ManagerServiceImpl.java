@@ -152,15 +152,23 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 서비스 목록 조회
 	@Override
-	public Map<String, Object> selectServiceList(int cp) {
+	public Map<String, Object> selectServiceList(int status,int cp) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		Pagination pagination;
+		List<FreelancerService> serviceList=new ArrayList<FreelancerService>();
 
-		int listCount = dao.getServiceListCount();
-		Pagination pagination = new Pagination(listCount, cp);
-
-		List<FreelancerService> serviceList = dao.selectServiceList(pagination);
-
+		
+		if (status != 0) {
+			int listCount = dao.getServiceListCount(status);
+			pagination = new Pagination(listCount, cp);
+			serviceList = dao.selectServiceList(pagination, status);
+		} else {
+			int listCount = dao.getServiceListCount();
+			pagination = new Pagination(listCount, cp);
+			serviceList = dao.selectServiceList(pagination);
+		}
+		
 		if (serviceList != null) {
 			for (FreelancerService s : serviceList) {
 				if (s.getServiceStatus() == 1)
@@ -174,6 +182,7 @@ public class ManagerServiceImpl implements ManagerService {
 			}
 		}
 		map.put("serviceList", serviceList);
+		map.put("status", status);
 		map.put("pagination", pagination);
 
 		return map;
@@ -239,6 +248,7 @@ public class ManagerServiceImpl implements ManagerService {
 			}
 		}
 		map.put("serviceList", serviceList);
+		map.put("status", status);
 		map.put("pagination", pagination);
 
 		return map;
@@ -300,6 +310,7 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 
 		map.put("pagination", pagination);
+		map.put("status", status);
 		map.put("tradeList", tradeList);
 
 		return map;
@@ -374,6 +385,7 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 
 		map.put("pagination", pagination);
+		map.put("status", status);
 		map.put("tradeList", tradeList);
 
 		return map;
@@ -450,15 +462,23 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 프로젝트 의뢰 목록 조회
 	@Override
-	public Map<String, Object> managerprojectRequestList(int cp) {
+	public Map<String, Object> managerprojectRequestList(int status,int cp) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		List<ProjectRequest> requestList = new ArrayList<ProjectRequest>();
+		Pagination pagination;
 
-		int listCount = dao.getRequestCount();
-		Pagination pagination = new Pagination(listCount, cp);
-
-		List<ProjectRequest> requestList = dao.selectRequestList(pagination);
-
+		if (status != 0) {
+			int listCount = dao.getRequestCount2(status);
+			pagination = new Pagination(listCount, cp);
+			requestList = dao.selectRequestList2(pagination, status);
+		} else {
+			int listCount = dao.getRequestCount();
+			pagination = new Pagination(listCount, cp);
+			requestList = dao.selectRequestList(pagination);
+		}
+		
+		
 		if (requestList != null) {
 			for (ProjectRequest s : requestList) {
 				if (s.getProjectRequestStatus() == 1)
@@ -472,6 +492,7 @@ public class ManagerServiceImpl implements ManagerService {
 			}
 		}
 		map.put("requestList", requestList);
+		map.put("status", status);
 		map.put("pagination", pagination);
 
 		return map;
@@ -536,6 +557,7 @@ public class ManagerServiceImpl implements ManagerService {
 			}
 		}
 		map.put("requestList", requestList);
+		map.put("status", status);
 		map.put("pagination", pagination);
 
 		return map;
@@ -580,6 +602,7 @@ public class ManagerServiceImpl implements ManagerService {
 		List<MemberReport> memberReportList = dao.selectMemberReportList(status, pagination);
 
 		map.put("pagination", pagination);
+		map.put("status", status);
 		map.put("memberReportList", memberReportList);
 
 		return map;
@@ -613,14 +636,18 @@ public class ManagerServiceImpl implements ManagerService {
 
 	// 거래 신고 내역 조회
 	@Override
-	public Map<String, Object> selectMemberTradeList(int status, int cp) {
+	public Map<String, Object> selectMemberTradeList(int status, int type, int cp) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		int listCount = dao.getMemberTradeListCount(status);
+		Map<String, Object> option = new HashMap<String, Object>();
+		option.put("status", status);
+		option.put("type", type);
+
+		int listCount = dao.getMemberTradeListCount(option);
 		Pagination pagination = new Pagination(listCount, cp);
 
-		List<TradeReport> tradeReportList = dao.selectMemberTradeList(status, pagination);
+		List<TradeReport> tradeReportList = dao.selectMemberTradeList(pagination,option);
 
 		if (tradeReportList != null) {
 			for (TradeReport t : tradeReportList) {
@@ -632,6 +659,8 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 
 		map.put("pagination", pagination);
+		map.put("status", status);
+		map.put("type", type);
 		map.put("tradeReportList", tradeReportList);
 
 		return map;
