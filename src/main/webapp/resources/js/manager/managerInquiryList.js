@@ -138,14 +138,14 @@ function selectChange() {
 
                         const li4 = document.createElement("li");
                         const a4 = document.createElement("a");
-                        a4.setAttribute("href", "/manager/managerInquiryList?cp=" + "&optionVal=" + optionVal);
+                        a4.setAttribute("href", "/manager/managerInquiryList?cp=" +map.pagination.nextPage+ "&optionVal=" + optionVal);
                         a4.appendChild(document.createTextNode(">"));
                         li4.append(a4);
                         pagination.append(li4);
 
                         const li5 = document.createElement("li");
                         const a5 = document.createElement("a");
-                        a5.setAttribute("href", "/manager/managerInquiryList?cp=" + "&optionVal=" + optionVal);
+                        a5.setAttribute("href", "/manager/managerInquiryList?cp=" +map.pagination.maxPage+ "&optionVal=" + optionVal);
                         a5.appendChild(document.createTextNode(">>"));
                         li5.append(a5);
                         pagination.append(li5);

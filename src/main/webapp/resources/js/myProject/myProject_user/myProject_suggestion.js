@@ -149,7 +149,7 @@ function selectChange() {
                     // 페이징
                     const li1 = document.createElement("li");
                     const a1 = document.createElement("a");
-                    a1.setAttribute('href', "/member/myProject/myReceiveList?cp=1" + "&optionVal=" + optionVal);
+                    a1.setAttribute('href', "/member/myProject/myReceiveList?cp=1" + "&optionVal=" + map.optionVal);
                     a1.appendChild(document.createTextNode("<<"));
                     li1.append(a1);
                     pagination.append(li1);
@@ -157,7 +157,7 @@ function selectChange() {
 
                     const li2 = document.createElement("li");
                     const a2 = document.createElement("a");
-                    a2.setAttribute("href", "/member/myProject/myReceiveList?cp=" + map.pagination.prevPage + "&optionVal=" + optionVal);
+                    a2.setAttribute("href", "/member/myProject/myReceiveList?cp=" + map.pagination.prevPage + "&optionVal=" + map.optionVal);
                     a2.appendChild(document.createTextNode("<"));
                     li2.append(a2);
                     pagination.append(li2);
@@ -175,7 +175,7 @@ function selectChange() {
 
                         } else {
                             const a3 = document.createElement("a");
-                            a3.setAttribute("href", "/member/myProject/myReceiveList?cp=" + i + "&optionVal=" + optionVal);
+                            a3.setAttribute("href", "/member/myProject/myReceiveList?cp=" + i + "&optionVal=" + map.optionVal);
                             a3.appendChild(document.createTextNode(i));
                             li3.append(a3);
                             pagination.append(li3);
@@ -184,14 +184,14 @@ function selectChange() {
 
                     const li4 = document.createElement("li");
                     const a4 = document.createElement("a");
-                    a4.setAttribute("href", "/member/myProject/myReceiveList?cp=" + "&optionVal=" + optionVal);
+                    a4.setAttribute("href", "/member/myProject/myReceiveList?cp=" +map.pagination.nextPage+ "&optionVal=" + map.optionVal);
                     a4.appendChild(document.createTextNode(">"));
                     li4.append(a4);
                     pagination.append(li4);
 
                     const li5 = document.createElement("li");
                     const a5 = document.createElement("a");
-                    a5.setAttribute("href", "/member/myProject/myReceiveList?cp=" + "&optionVal=" + optionVal);
+                    a5.setAttribute("href", "/member/myProject/myReceiveList?cp=" +map.pagination.maxPage+ "&optionVal=" + map.optionVal);
                     a5.appendChild(document.createTextNode(">>"));
                     li5.append(a5);
                     pagination.append(li5);

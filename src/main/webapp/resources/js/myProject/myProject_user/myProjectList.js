@@ -217,14 +217,14 @@ function selectChange(){
 
                         const li4 = document.createElement("li");
                         const a4 = document.createElement("a");
-                        a4.setAttribute("href", "/member/myProject/myRequestList?cp=" + "&optionVal=" + map.optionVal);
+                        a4.setAttribute("href", "/member/myProject/myRequestList?cp=" +map.pagination.nextPage+ "&optionVal=" + map.optionVal);
                         a4.appendChild(document.createTextNode(">"));
                         li4.append(a4);
                         pagination.append(li4);
 
                         const li5 = document.createElement("li");
                         const a5 = document.createElement("a");
-                        a5.setAttribute("href", "/member/myProject/myRequestList?cp=" + "&optionVal=" + map.optionVal);
+                        a5.setAttribute("href", "/member/myProject/myRequestList?cp=" +map.pagination.maxPage+ "&optionVal=" + map.optionVal);
                         a5.appendChild(document.createTextNode(">>"));
                         li5.append(a5);
                         pagination.append(li5);

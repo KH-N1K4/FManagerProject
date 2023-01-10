@@ -48,7 +48,7 @@ public interface MyProjectSerive {
 	 * @param myProject
 	 * @return
 	 */
-	Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo);
+	Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo, String optionVal);
 
 	/** 내 프로젝트 조회 ajax
 	 * @return
