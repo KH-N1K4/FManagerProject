@@ -106,13 +106,13 @@
                         <!-- 댓글 남기기 -->
                         <section id="comment">
                             <div>
-                                <img src="${userReportDetail.managerProfile}" class="myProfile">
+                                <img src="/resources/images/프로필.PNG" class="myProfile">
                             </div>
                             <div>
                             <table>
                                 <tr>
                                     <th style="width:150px">작성자</th>
-                                    <td style="width:650px">${userReportDetail.managerNickname}</td>
+                                    <td style="width:650px">프매니저 관리자</td>
                                 </tr>
                                 <tr>
                                     <th>작성일</th>
