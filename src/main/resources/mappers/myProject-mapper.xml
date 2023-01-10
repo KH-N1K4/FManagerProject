@@ -96,6 +96,7 @@
 		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
 		AND REQUEST_FILE_ORDER = 0
+		AND PROJECT_REQUEST_DEL_FL = 'N'
 		ORDER BY PROJECT_REQUEST_NO DESC 
 	</select>
 	
@@ -215,6 +216,7 @@
 		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
 		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
 		WHERE MEMBER_NO = #{memberNo}
+		AND PROJECT_REQUEST_DEL_FL = 'N'
 		AND REQUEST_FILE_ORDER = 0
 			<if test='optionVal eq "0"'>
 				ORDER BY PROJECT_REQUEST_NO DESC 
@@ -325,8 +327,17 @@
 			</if>
   	</select>
   	
+  	<!-- 서비스 파일 테이블에 넣을 프로젝트 이미지 조회  -->
+  	<select id="selectProjectFile" parameterType="_int" resultType="string">
+	  	SELECT REQUEST_FILE_PATH  
+		FROM REQUEST_FILE
+		WHERE REQUEST_FILE_ORDER = 0
+		AND PROJECT_REQUEST_NO = #{projectRequestNo}
+  	</select>
+  	
+  	
   	<!-- 1번 서비스 테이블 INSERT -->
-  	<insert id="serviceInsert">
+  	<insert id="serviceInsert"   useGeneratedKeys="true">
   		<selectKey keyProperty="serviceNo" resultType="_int" order="BEFORE">
 			SELECT SEQ_SERVICE_NO.NEXTVAL FROM DUAL
 		</selectKey>
@@ -337,8 +348,14 @@
 	           #{freelancerNo}, DEFAULT)
   	</insert>
   	
+  	<!-- 1-1번 서비스 파일 테이블 삽입 INSERT -->
+  	<insert id="serviceFileInsert">
+	  	INSERT INTO SERVICE_FILE
+		VALUES(SEQ_SERVICE_FILE_NO.NEXTVAL, #{requestFilePath},#{serviceNo})
+  	</insert>
+  	
   	<!-- 2번 거래 테이블 INSERT -->
-  	<insert id="tradeInsert">
+  	<insert id="tradeInsert"  useGeneratedKeys="true">
   		<selectKey keyProperty="tradeNo" resultType="_int" order="BEFORE">
 			SELECT SEQ_TRADE_NO.NEXTVAL FROM DUAL
 		</selectKey>

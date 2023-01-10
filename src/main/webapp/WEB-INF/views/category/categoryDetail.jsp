@@ -59,8 +59,8 @@
                     <div class="expertContent">
                         <div class="expertName"><a href="/service/freelancerDetail/${fService.freelancerNo}">${fService.memberName }</a></div>
                         <div class="responseInfo">
-                            <span>응답시간<span>${fService.freeContactTime1 }시 ~ ${fService.freeContactTime2 }시</span></span>
-                            <span>응답률<span>${fService.inquiryRate }</span></span>
+                            <span>응답시간<span class="selected">${fService.freeContactTime1 }시 ~ ${fService.freeContactTime2 }시</span></span>
+                            <span>응답률<span class="selected">${fService.inquiryRate }</span></span>
                         </div>
                         
                         <c:if test="${loginMember.memberNo!=fService.freelancerNo }"> 
@@ -118,7 +118,9 @@
         
         	<a id="serviceContent"></a>  
         	<h3>서비스 설명</h3>
+        	<div class="serviceText">
         	${fService.serviceContent}
+        	</div>
 	        <c:forEach var="imageFile" items="${fService.imageFileList }">
 	                	<img alt="" src="${imageFile.imageFilePath }" style="width:100%;">
 	        </c:forEach>
@@ -236,7 +238,7 @@
 						</c:if>
 						<c:if test="${not empty review.reviewCommentContent}">
 						    <div class="reviewResponse">
-						        <div> <span class="freelancerName">프리랜서 이름 </span><span class="createTime">2022.01.02</span> </div>
+						        <div> <span class="freelancerName">${fService.memberName }</span><span class="createTime">2022.01.02</span> </div>
 						        <div class="responseContent">
 						            ${review.reviewCommentContent}
 						        </div>

@@ -219,7 +219,8 @@ VALUES
 --1초에 한번씩 요구사항이 변경되면서 전화를 하루에 50번 이상 오셔서 거래 안하고 싶어요
 --돈 하나도 안 받아도 상관 없으니까 제발 거래 취소해주세요!
 
-DELETE FROM "TRADE";
+DELETE FROM "SETTLEMENT"
+WHERE SETTLEMENT_NO =55;
 
 --SEQ_WORK_NO--SEQ_TRADE_REPORT_NO
 SELECT SEQ_CAREER_NO.NEXTVAL FROM DUAL;--시퀀스 되돌리기기
@@ -1554,5 +1555,6 @@ SELECT TRADE.TRADE_NO, SERVICE_NO, SERVICE_TITLE, SERVICE_STATUS, SERVICE_DEL_FL
    WHERE MEMBER_NO=21
    AND PAYMENT_TYPE=1;
 
+----------------------------------------------------
 
 

@@ -137,7 +137,6 @@ function selectChange() {
                     pagination.append(li5);
                     
                 } else{
-                    console.log('ddddd');
                     const tr = document.createElement("tr");
                     tr.setAttribute("class","contentArea");
                     table.append(tr);

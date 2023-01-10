@@ -218,7 +218,10 @@ public class MemberController {
 			message="내 정보가 수정되었습니다. ";
 			
 			// DB - session 동기화 
-			loginMember.setMemberProfile(inputMember.getMemberProfile());
+			if(profileImage.getSize()>0) {
+				loginMember.setMemberProfile(inputMember.getMemberProfile());
+				
+			}
 			loginMember.setMemberNickname(inputMember.getMemberNickname());
 			loginMember.setMemberTel(inputMember.getMemberTel());
 			loginMember.setMemberJob(inputMember.getMemberJob());
