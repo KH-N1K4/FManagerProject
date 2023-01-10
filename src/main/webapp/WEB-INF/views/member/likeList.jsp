@@ -31,19 +31,20 @@
 				<!-- 사이드 메뉴 -->
 				<jsp:include page="/WEB-INF/views/member/memberSide.jsp" />
 
+
+
 				<!-- 메인 콘텐츠 영역 -->
 				<div class="mainContent">
 					<div id="title">
 						찜한 목록 <select id="listOption" name="category" onchange="selectChange()">
 							<option value="0">카테고리 선택</option>
-							<option value="1">디자인</option>
-							<option value="2">IT·프로그래밍</option>
-							<option value="3">영상</option>
-							<option value="4">사진</option>
-							<option value="5">음향</option>
+							<option value="1"<c:if test="${category==1 }"> selected="selected"</c:if> >디자인</option>
+							<option value="2"<c:if test="${category==2 }"> selected="selected"</c:if>>IT·프로그래밍</option>
+							<option value="3"<c:if test="${category==3 }"> selected="selected"</c:if>>영상</option>
+							<option value="4"<c:if test="${category==4 }"> selected="selected"</c:if>>사진</option>
+							<option value="5"<c:if test="${category==5 }"> selected="selected"</c:if>>음향</option>
 						</select>
 					</div>
-
 
 					<div id="imageContent">
 
