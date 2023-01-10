@@ -82,9 +82,11 @@
                     <th style="width: 150px;">금액</th>
                 </tr>
                 <c:if test="${not empty paymentList}">
-				          <c:forEach var="payment" items="${paymentList}">
+				          <c:forEach var="payment" items="${paymentList}"  varStatus="status">
                     <tr>
-                      <td>${i=i+1}</td>
+                    <c:set var="total" value="${pagination.currentPage-1 }" />
+                     <c:set var="total1" value="${total*5 }" />
+                      <td>${total1 + status.count}</td>
                       <td>${payment.paymentType}</td>
                       <td>${payment.serviceTitle}</td>
                       <td>${payment.paymentDate}</td>
