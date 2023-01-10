@@ -196,7 +196,7 @@ for(let each of select){
                 const li1 = document.createElement("li");
                 const a1 = document.createElement("a");
               //   a1.setAttribute('href', "/manager/memberList?cp=1"+"&value="+value);
-                a1.setAttribute('href', "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=1"+"?order="+index.value+"?budget="+budget.value+"?grade="+grade.value);
+                a1.setAttribute('href', "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=1"+"&order="+index.value+"&budget="+budget.value+"&grade="+grade.value);
                 a1.appendChild(document.createTextNode("<<"));
                 li1.append(a1);
                 pagination.append(li1);
@@ -204,7 +204,7 @@ for(let each of select){
                 const li2 = document.createElement("li");
                 const a2 = document.createElement("a");
               //   a2.setAttribute("href", "/manager/memberList?cp=" + map.pagination.prevPage+"&value="+value);
-                a2.setAttribute("href", "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=" + map.pagination.prevPage+"?order="+index.value+"?budget="+budget.value+"?grade="+grade.value);
+                a2.setAttribute("href", "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=" + map.pagination.prevPage+"&order="+index.value+"&budget="+budget.value+"&grade="+grade.value);
                 a2.appendChild(document.createTextNode("<"));
                 li2.append(a2);
                 pagination.append(li2);
@@ -222,7 +222,7 @@ for(let each of select){
                     } else {
                         const a3 = document.createElement("a");
                       //   a3.setAttribute("href", "/manager/memberList?cp=" + i+"&value="+value);
-                        a3.setAttribute("href", "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=" + i+"?order="+index.value+"?budget="+budget.value+"?grade="+grade.value);
+                        a3.setAttribute("href", "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=" + i+"&order="+index.value+"&budget="+budget.value+"&grade="+grade.value);
                         a3.appendChild(document.createTextNode(i));
                         li3.append(a3);
                         pagination.append(li3);
@@ -232,7 +232,7 @@ for(let each of select){
                 const li4 = document.createElement("li");
                 const a4 = document.createElement("a");
               //   a4.setAttribute("href", "/manager/memberList?cp=" + map.pagination.nextPage+"&value="+value);
-                a4.setAttribute("href", "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=" + map.pagination.nextPage+"?order="+index.value+"?budget="+budget.value+"?grade="+grade.value);
+                a4.setAttribute("href", "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=" + map.pagination.nextPage+"&order="+index.value+"&budget="+budget.value+"&grade="+grade.value);
                 a4.appendChild(document.createTextNode(">"));
                 li4.append(a4);
                 pagination.append(li4);
@@ -240,7 +240,7 @@ for(let each of select){
                 const li5 = document.createElement("li");
                 const a5 = document.createElement("a");
               //   a5.setAttribute("href", "/manager/memberList?cp=" + map.pagination.maxPage+"&value="+value);
-                a5.setAttribute("href", "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=" + map.pagination.maxPage+"?order="+index.value+"?budget="+budget.value+"?grade="+grade.value);
+                a5.setAttribute("href", "/category/"+map.mainCategoryNo+"/"+map.thirdCategoryNo+"?cp=" + map.pagination.maxPage+"&order="+index.value+"&budget="+budget.value+"&grade="+grade.value);
                 a5.appendChild(document.createTextNode(">>"));
                 li5.append(a5);
                 pagination.append(li5);

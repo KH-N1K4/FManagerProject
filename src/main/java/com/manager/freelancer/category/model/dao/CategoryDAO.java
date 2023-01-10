@@ -86,13 +86,13 @@ public class CategoryDAO {
 	
 	
 	// 페이징 처리를 위한 서비스 개수세기
-	public int getListCount(Map<String, Integer> map) {
+	public int getListCount(Map<String, Object> map) {
 		
 		return sqlSession.selectOne("categoryMapper.getListCount", map);
 	}
 	
 	//
-	public List<Service> selectBoardList(Map<String, Integer> map, Pagination pagination) {
+	public List<Service> selectBoardList(Map<String, Object> map, Pagination pagination) {
 		
 		int offset=(pagination.getCurrentPage()-1)*pagination.getLimit();
 		
@@ -102,7 +102,7 @@ public class CategoryDAO {
 	}
 	
 	
-	public List<Service> mainServiceList(Pagination pagination, Map<String, Integer> map) {
+	public List<Service> mainServiceList(Pagination pagination, Map<String, Object> map) {
 		
 		int offset=(pagination.getCurrentPage()-1)*pagination.getLimit();
 		

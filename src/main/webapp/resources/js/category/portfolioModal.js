@@ -2,6 +2,7 @@ const body1 = document.getElementsByClassName('modal_body')[0];
 const body2 = document.getElementsByClassName('modal_body')[1];
 
 const mainBody = document.querySelector(".mainBody");
+const body3 = document.querySelector("body");
 
 const modalClose1 = document.getElementsByClassName('modal_close2')[0];
 
@@ -28,7 +29,11 @@ for(let portfolio of clickPortfolio){
         modal1.classList.toggle('show');
         modal1.style.display= 'block';
         body1.style.display ='block';
-        mainBody.style.overflow = 'hidden';
+        if(mainBody!=null){
+            mainBody.style.overflow = 'hidden';
+        }else{
+            body3.style.overflow = 'hidden';
+        }
         
         // if(modal.classList.contains('show')){
         // }
@@ -37,7 +42,11 @@ for(let portfolio of clickPortfolio){
     modalClose1.addEventListener('click', ()=>{
     
         modal1.style.display ='none';
-        mainBody.style.overflow='visible';
+        if(mainBody!=null){
+            mainBody.style.overflow='visible';
+        }else{
+            body3.style.overflow = 'visible';
+        }
     })
 
 }
