@@ -238,7 +238,7 @@
 						</c:if>
 						<c:if test="${not empty review.reviewCommentContent}">
 						    <div class="reviewResponse">
-						        <div> <span class="freelancerName">프리랜서 이름 </span><span class="createTime">2022.01.02</span> </div>
+						        <div> <span class="freelancerName">${fService.memberName }</span><span class="createTime">2022.01.02</span> </div>
 						        <div class="responseContent">
 						            ${review.reviewCommentContent}
 						        </div>
