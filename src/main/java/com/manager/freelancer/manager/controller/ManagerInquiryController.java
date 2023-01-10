@@ -29,12 +29,13 @@ public class ManagerInquiryController {
 	// 관리자 페이지 이용문의 목록 조회
 	@GetMapping("/manager/managerInquiryList")
 	public String managerInquiryList(@RequestParam(value="cp", required=false, defaultValue = "1") int cp,
+			@RequestParam(value="optionVal", required=false, defaultValue = "0") int optionVal,
 								     @RequestParam Map<String,Object> pm, Model model) {
 		
 		
 		if(pm.get("key") == null) {
 			
-			Map<String, Object> map = service.selectManagerInquiryList(cp);
+			Map<String, Object> map = service.selectManagerInquiryList(optionVal,cp);
 			model.addAttribute("map",map);
 		} else {
 			Map<String, Object> map = service.selectManagerInquiryList(pm, cp);
@@ -80,8 +81,9 @@ public class ManagerInquiryController {
 	// 관리자 진행상태 별 이용문의 조회 
 	@GetMapping("/manager/statusType")
 	@ResponseBody
-	public Map<String, Object> selectChangeStatusManager(Model model,@RequestParam String optionVal,
-														 @RequestParam(value="cp", required=false, defaultValue = "1") int cp){
+	public Map<String, Object> selectChangeStatusManager(Model model,
+			@RequestParam(value="optionVal", required=false, defaultValue = "0") int optionVal,
+			 @RequestParam(value="cp", required=false, defaultValue = "1") int cp){
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		

@@ -90,7 +90,7 @@ public class ManagerInquiryDAO {
 	 * @param optionVal
 	 * @return
 	 */
-	public int getStatusListCount(String optionVal) {
+	public int getStatusListCount(int optionVal) {
 		System.out.println("COUNT optionVal="+optionVal);
 		return sqlSession.selectOne("inquiryMapper.getStatusListCount_manager", optionVal);
 	}
@@ -100,7 +100,7 @@ public class ManagerInquiryDAO {
 	 * @param pagination
 	 * @return
 	 */
-	public List<UserInquiry> selectChangeStatusManager(String optionVal, Pagination pagination) {
+	public List<UserInquiry> selectChangeStatusManager(int optionVal, Pagination pagination) {
 		
 		System.out.println("LIST optionVal="+optionVal);
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
