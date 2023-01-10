@@ -96,7 +96,7 @@
                       <c:forEach items="${inquiryList}" var="inquiry" varStatus="status">
                         <tr class="myServiceInquiryTable" myServiceInquiryNumeber="">
                           <c:set var="total" value="${pagination.currentPage-1 }" />
-                          <c:set var="total1" value="${total*5 }" />
+                          <c:set var="total1" value="${total*20 }" />
                           <td class="tc">
                             <span class="num">${total1 + status.count}</span>
                           </td>
