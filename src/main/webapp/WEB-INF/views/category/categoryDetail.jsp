@@ -193,7 +193,7 @@
 					                </c:forEach>
 					                
 					                ${review.reviewPoint }
-					                </span>&nbsp;|&nbsp;<span class="createTime">2022.01.02</span></div>
+					                </span>&nbsp;|&nbsp;<span class="createTime">${review.reviewCreateTime }</span></div>
 					                
 					            </div>
 					             <c:if test="${loginMember.memberNo==fService.freelancerNo }">
@@ -238,7 +238,7 @@
 						</c:if>
 						<c:if test="${not empty review.reviewCommentContent}">
 						    <div class="reviewResponse">
-						        <div> <span class="freelancerName">${fService.memberName }</span><span class="createTime">2022.01.02</span> </div>
+						        <div> <span class="freelancerName">${fService.memberName }</span><span class="createTime"> ${review.reviewCommentCreateTime}</span> </div>
 						        <div class="responseContent">
 						            ${review.reviewCommentContent}
 						        </div>

@@ -138,7 +138,7 @@
                           </td>
                           <td class="tc">
                             <c:choose>
-                              <c:when test="${purchase.workStatus==4}">
+                              <c:when test="${purchase.workStatus==2}">
                                 <a id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
                               </c:when>
                               <c:when test="${purchase.workCount==0}">
