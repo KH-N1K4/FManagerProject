@@ -113,10 +113,11 @@ public class ManagerController {
 	public String managerServiceList(Model model,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			@RequestParam Map<String, Object> pm,
-			@RequestParam(value = "status", required = false, defaultValue = "0") int status) {
+			//@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "value", required = false, defaultValue = "0") int status) {
 
 		if (pm.get("key") == null) {
-			Map<String, Object> map = service.selectServiceList(cp);
+			Map<String, Object> map = service.selectServiceList(status,cp);
 			model.addAttribute("map", map);
 		} else {
 			pm.put("status", status);
@@ -169,12 +170,13 @@ public class ManagerController {
 	// 서비스 승인
 	@GetMapping("/manager/{serviceNo}/serviceApproval")
 	public String managerServiceApproval(@PathVariable("serviceNo") int serviceNo, Model model,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status) {
 
 		int result = service.managerServiceApproval(serviceNo);
 
 		if (result > 0) {
-			Map<String, Object> map = service.selectServiceList(cp);
+			Map<String, Object> map = service.selectServiceList(status,cp);
 			model.addAttribute("map", map);
 		}
 
@@ -184,12 +186,13 @@ public class ManagerController {
 	// 서비스 반려
 	@GetMapping("/manager/{serviceNo}/serviceRestore")
 	public String managerServiceRestort(@PathVariable("serviceNo") int serviceNo, Model model,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value = "status", required = false, defaultValue = "0") int status) {
 
 		int result = service.managerServiceRestore(serviceNo);
 
 		if (result > 0) {
-			Map<String, Object> map = service.selectServiceList(cp);
+			Map<String, Object> map = service.selectServiceList(status,cp);
 			model.addAttribute("map", map);
 		}
 
@@ -201,7 +204,7 @@ public class ManagerController {
 	// 계좌 관리
 	@GetMapping("/manager/tradeList")
 	public String managerTradeList(Model model,
-			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "value", required = false, defaultValue = "0") int status,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			@RequestParam Map<String, Object> pm) {
 
@@ -289,10 +292,10 @@ public class ManagerController {
 	public String managerprojectRequestList(Model model,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			@RequestParam Map<String, Object> pm,
-			@RequestParam(value = "status", required = false, defaultValue = "0") int status) {
+			@RequestParam(value = "value", required = false, defaultValue = "0") int status) {
 
 		if (pm.get("key") == null) {
-			Map<String, Object> map = service.managerprojectRequestList(cp);
+			Map<String, Object> map = service.managerprojectRequestList(status,cp);
 			model.addAttribute("map", map);
 		} else {
 			pm.put("status", status);
@@ -345,12 +348,13 @@ public class ManagerController {
 	// 프로젝트 의뢰 승인
 	@GetMapping("/manager/{projectRequestNo}/requestApproval")
 	public String managerRequestApproval(@PathVariable("projectRequestNo") int projectRequestNo, Model model,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value = "value", required = false, defaultValue = "0") int status) {
 
 		int result = service.managerRequestApproval(projectRequestNo);
 
 		if (result > 0) {
-			Map<String, Object> map = service.managerprojectRequestList(cp);
+			Map<String, Object> map = service.managerprojectRequestList(status,cp);
 			model.addAttribute("map", map);
 		}
 
@@ -360,12 +364,13 @@ public class ManagerController {
 	// 프로젝트 의뢰 반려
 	@GetMapping("/manager/{projectRequestNo}/requestRestore")
 	public String managerRequestRestore(@PathVariable("projectRequestNo") int projectRequestNo, Model model,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value = "value", required = false, defaultValue = "0") int status) {
 
 		int result = service.managerRequestRestore(projectRequestNo);
 
 		if (result > 0) {
-			Map<String, Object> map = service.managerprojectRequestList(cp);
+			Map<String, Object> map = service.managerprojectRequestList(status,cp);
 			model.addAttribute("map", map);
 		}
 
@@ -377,7 +382,7 @@ public class ManagerController {
 	// 회원 신고 목록 조회
 	@GetMapping("/manager/memberReportList")
 	public String managerMemberReport(Model model,
-			@RequestParam(value = "status", required = false, defaultValue = "0") int status,
+			@RequestParam(value = "value", required = false, defaultValue = "0") int status,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			@RequestParam Map<String, Object> pm) {
 
@@ -452,8 +457,13 @@ public class ManagerController {
 		System.out.println(status);
 
 		if (pm.get("key") == null) {
-			Map<String, Object> map = service.selectMemberTradeList(status, cp);
+			Map<String, Object> option = new HashMap<String, Object>();
+			option.put("status", status);
+			option.put("type", type);
+			Map<String, Object> map = service.selectMemberTradeList(status, type, cp);
 			model.addAttribute("map", map);
+			model.addAttribute("status", status);
+			model.addAttribute("type", type);
 		} else {
 			pm.put("status", status);
 			pm.put("type", type);
@@ -478,6 +488,9 @@ public class ManagerController {
 
 		Map<String, Object> resultMap = service.selectReportStatusList(map, cp);
 		model.addAttribute("resultMap", resultMap);
+		
+		resultMap.put("status", status);
+		resultMap.put("type", type);
 
 		return resultMap;
 	}

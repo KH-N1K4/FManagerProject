@@ -106,7 +106,7 @@
 	<if test="searchDate2 neq ''">
 		AND TO_DATE(to_char(PAYMENT_DATE,'YYYY-MM-DD'),'YYYY-MM-DD') <![CDATA[<=]]> #{searchDate2}
 	</if>
-	ORDER BY PAYMENT_DATE DESC
+	ORDER BY TRADE_NO DESC
   </select>
   
   <!-- 구매 내역 수 -->

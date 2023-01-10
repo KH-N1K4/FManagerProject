@@ -401,7 +401,9 @@ function reportModal(){
           /* document.querySelector('#reportFilePath').value = arg.reportFilePath; */
           
           fileadd.append(div);
-          div.append(a);
+          if(src!=''){
+            div.append(a);
+          }
 
         }
 
