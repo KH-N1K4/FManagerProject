@@ -188,7 +188,7 @@ public class MyProjectServiceImpl_2 implements MyProjectService_2{
 			String reportFilePath = "";
 			
 			if(reviewFile.getSize() == 0) { // 업로드된 파일이 없는 경우
-				inputReview.setFilePath(reportFilePath);
+				inputReview.setFilePath(null);
 			}else { // 업로드된 파일이 있을 경우
 				
 				// 원본파일명을 이용해서 새로운 파일명 생성
