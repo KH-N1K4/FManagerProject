@@ -80,7 +80,7 @@ public class UserInquiryController {
 	// 이용문의 내역으로 이동 및 조회
 	@GetMapping("/userInquiryList")
 	public String viewInquiryList(@SessionAttribute(value="loginMember",required=false) Member loginMember, Model model,
-								  @RequestParam(value = "value", required = false) String optionVal,
+								  @RequestParam(value = "optionVal", required = false) String optionVal,
 								  @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
 								  @RequestParam Map<String,Object> pm, RedirectAttributes ra) {
 		String message = null;

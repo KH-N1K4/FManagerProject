@@ -35,16 +35,14 @@
         </c:forEach>
     </c:if>
     <c:if test="${empty param.value}">
-        <c:forEach var="inputValue" items="${param.value}">
             <c:choose>
-                <c:when test="${inputValue == '1'}">
+                <c:when test="${map.optionVal == '1'}">
                     <c:set var="inputValue1" value="selected" />
                 </c:when>
-                <c:when test="${inputValue == '2'}">
+                <c:when test="${map.optionVal == '2'}">
                     <c:set var="inputValue2" value="selected" />
                 </c:when>
             </c:choose>
-        </c:forEach>
     </c:if>
 
 

@@ -130,6 +130,7 @@ public class UserInquiryServiceImpl implements UserInquiryService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("userInquiryList", userInquiryList);
+		map.put("optionVal", optionVal);
 		
 		return map;
 	}
