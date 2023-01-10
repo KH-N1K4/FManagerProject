@@ -18,19 +18,37 @@
     
     <jsp:include page="/WEB-INF/views/common/header_black_ver1.jsp"/>
 
-    <c:if test="${not empty param.key}">
-        <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
+    <%-- 검색을 진행한 경우 --%>
+    <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+				<c:if test="${parameter.key != 'cp'}">
+					<c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+				</c:if>
+		</c:forEach>
     </c:if>
-    <c:forEach var="inputValue" items="${param.value}">
-        <c:choose>
-            <c:when test="${inputValue == '1'}">
-                <c:set var="inputValue1" value="selected" />
-            </c:when>
-            <c:when test="${inputValue == '2'}">
-                <c:set var="inputValue2" value="selected" />
-            </c:when>
-        </c:choose>
-    </c:forEach>
+
+    <c:if test="${not empty param.value}">      
+        <c:forEach var="inputValue" items="${param.value}">
+            <c:choose>
+                <c:when test="${inputValue == '1'}">
+                    <c:set var="inputValue1" value="selected" />
+                </c:when>
+                <c:when test="${inputValue == '2'}">
+                    <c:set var="inputValue2" value="selected" />
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </c:if>
+    <c:if test="${empty param.value}">
+            <c:choose>
+                <c:when test="${map.optionVal == '1'}">
+                    <c:set var="inputValue1" value="selected" />
+                </c:when>
+                <c:when test="${map.optionVal == '2'}">
+                    <c:set var="inputValue2" value="selected" />
+                </c:when>
+            </c:choose>
+    </c:if>
 
     <div class="main">
 

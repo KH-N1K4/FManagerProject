@@ -12,10 +12,10 @@ public interface ManagerInquiryService {
 	 * @param cp
 	 * @return Map
 	 */
-	Map<String, Object> selectManagerInquiryList(int cp);
+	Map<String, Object> selectManagerInquiryList(int optionVal,int cp);
 
 	/** 검색 결과에 일치하는 이용문의 내역 조회하기
-	 * @param pm
+	 * @param optionVal
 	 * @param cp
 	 * @return Map
 	 */
@@ -39,7 +39,7 @@ public interface ManagerInquiryService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectChangeStatusManager(String optionVal, int cp);
+	Map<String, Object> selectChangeStatusManager(int optionVal, int cp);
 
 
 	

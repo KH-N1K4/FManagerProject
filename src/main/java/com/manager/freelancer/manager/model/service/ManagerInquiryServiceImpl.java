@@ -20,20 +20,21 @@ public class ManagerInquiryServiceImpl implements ManagerInquiryService{
 
 	// 이용문의 내역 조회하기 
 	@Override
-	public Map<String, Object> selectManagerInquiryList(int cp) {
+	public Map<String, Object> selectManagerInquiryList(int optionVal,int cp) {
 		
 			// 1. 특정 게시판의 전체 게시글 수 조회 
-			int listCount = dao.getListCount();
+			int listCount = dao.getStatusListCount(optionVal);
 			
 			// 2. 전체 게시글 수 + cp(현재 페이지) 이용해서 페이징 처리 객체 생성
 			Pagination pagination = new Pagination(listCount, cp);
 			
 			// 3. 페이징 처리객체를 이용해서 게시글 목록 조회 
-			List<UserInquiry> managerInquiryList = dao.selectManagerInquiryList(pagination);
+			List<UserInquiry> managerInquiryList = dao.selectChangeStatusManager(optionVal,pagination);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("pagination", pagination);
 			map.put("managerInquiryList", managerInquiryList);
+			map.put("optionVal", optionVal);
 			
 			return map;
 	}
@@ -74,7 +75,7 @@ public class ManagerInquiryServiceImpl implements ManagerInquiryService{
 		
 		// 관리자 진행상태 별 이용문의 조회
 		@Override
-		public Map<String, Object> selectChangeStatusManager(String optionVal, int cp) {
+		public Map<String, Object> selectChangeStatusManager(int optionVal, int cp) {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			
@@ -85,6 +86,7 @@ public class ManagerInquiryServiceImpl implements ManagerInquiryService{
 			
 			map.put("pagination", pagination);
 			map.put("managerInquiryList", managerInquiryList);
+			map.put("optionVal", optionVal);
 			
 			return map;
 		}
