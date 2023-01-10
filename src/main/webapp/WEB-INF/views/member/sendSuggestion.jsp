@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>서비스 관리</title>
+<title>보낸 서비스 문의</title>
 
 <link rel="stylesheet" href="/resources/css/myProject/sendSuggestion.css">
 
@@ -19,9 +19,36 @@
 
 	<jsp:include page="/WEB-INF/views/common/header_ver2.jsp" />
 
+	<c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+            <c:if test="${parameter.key != 'cp'}">
+                <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+            </c:if>
+        </c:forEach>
+    </c:if>
+	<c:if test="${not empty param}">
+            <c:choose>
+                <c:when test="${param.type == 1}">
+                    <c:set var="inputType1" value="selected" />
+                </c:when>
+                <c:when test="${param.type == 2}">
+                    <c:set var="inputType2" value="selected" />
+                </c:when>
+                <c:when test="${param.type == 3}">
+                    <c:set var="inputType3" value="selected" />
+                </c:when>
+                <c:when test="${param.type == 4}">
+                    <c:set var="inputType4" value="selected" />
+                </c:when>
+                <c:when test="${param.type == 5}">
+                    <c:set var="inputType5" value="selected" />
+                </c:when>
+            </c:choose>
+    </c:if>
 	<div class="main">
 	
 	<jsp:include page="/WEB-INF/views/member/memberSide.jsp" />
+	
 	<section>
 		<div id="service-list-title-area">
 
@@ -34,14 +61,14 @@
                     <span>
                       <select class="selectType" name="type" id="selectType" title="${type}">
                         <option value="0">카테고리 선택</option>
-                        <option value="1">디자인</option>
-                        <option value="2">IT·프로그래밍</option>
-                        <option value="3">영상</option>
-                        <option value="4">사진</option>
-                        <option value="5">음향</option>
+                        <option value="1" ${inputType1}>디자인</option>
+                        <option value="2" ${inputType2}>IT·프로그래밍</option>
+                        <option value="3" ${inputType3}>영상</option>
+                        <option value="4" ${inputType4}>사진</option>
+                        <option value="5" ${inputType5}>음향</option>
                       </select>
-                      <input type="date" name="searchDate1" id="searchDate1" title="${searchDate1}"> -
-                      <input type="date" name="searchDate2" id="searchDate2" title="${searchDate2}">
+                      <input type="date" name="searchDate1" id="searchDate1" title="${searchDate1}" value="${param.searchDate1}"> -
+                      <input type="date" name="searchDate2" id="searchDate2" title="${searchDate2}" value="${param.searchDate2}">
                       <button class="dateSearchBtn">검색</button>
                     </span>
                   
