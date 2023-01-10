@@ -34,29 +34,29 @@
                     <span>예산</span>
                     <select name="" id="budget" class="select"> 
                         <option value="0">예산</option>
-                        <option value="1">1만원 미만</option>
-                        <option value="5">1만원 - 5만원 이하</option>
-                        <option value="10">5만원 - 10만원 이하</option>
-                        <option value="20">10만원 - 20만원 이하</option>
-                        <option value="30">20만원 - 30만원 이하</option>
-                        <option value="50">30만원 - 50만원 이하</option>
-                        <option value="70">50만원 - 70만원 이하</option>
-                        <option value="100">70만원 - 100만원 이하</option>
-                        <option value="999">100만원 초과</option>
+                        <option value="1"<c:if test="${budget==1 }"> selected="selected"</c:if>>1만원 미만</option>
+                        <option value="5"<c:if test="${budget==5 }"> selected="selected"</c:if>>1만원 - 5만원 이하</option>
+                        <option value="10"<c:if test="${budget==10 }"> selected="selected"</c:if>>5만원 - 10만원 이하</option>
+                        <option value="20"<c:if test="${budget==20 }"> selected="selected"</c:if>>10만원 - 20만원 이하</option>
+                        <option value="30"<c:if test="${budget==30 }"> selected="selected"</c:if>>20만원 - 30만원 이하</option>
+                        <option value="50"<c:if test="${budget==50 }"> selected="selected"</c:if>>30만원 - 50만원 이하</option>
+                        <option value="70"<c:if test="${budget==70 }"> selected="selected"</c:if>>50만원 - 70만원 이하</option>
+                        <option value="100"<c:if test="${budget==100 }"> selected="selected"</c:if>>70만원 - 100만원 이하</option>
+                        <option value="999"<c:if test="${budget==999 }"> selected="selected"</c:if>>100만원 초과</option>
                     </select>
 
                     <span>프리랜서 등급</span>
                     <select name="" id="grade" class="select">
                         <option value="0">프리랜서 등급</option>
-                        <option value="1">NEW</option>
-                        <option value="2">LEVEL1</option>
-                        <option value="3">LEVEL2</option>
-                        <option value="4">MASTER</option>
+                        <option value="1"<c:if test="${grade==1 }"> selected="selected"</c:if>>NEW</option>
+                        <option value="2"<c:if test="${grade==2 }"> selected="selected"</c:if>>LEVEL1</option>
+                        <option value="3"<c:if test="${grade==3 }"> selected="selected"</c:if>>LEVEL2</option>
+                        <option value="4"<c:if test="${grade==4 }"> selected="selected"</c:if>>MASTER</option>
                     </select>
 
                     <select name="index" id="index" class="select">
-                        <option value="0">최신순</option>
-                        <option value="1">평점순</option>
+                        <option value="0"<c:if test="${order==0 }"> selected="selected"</c:if>>최신순</option>
+                        <option value="1"<c:if test="${order==1}"> selected="selected"</c:if>>평점순</option>
                     </select>
                 </form>
                 

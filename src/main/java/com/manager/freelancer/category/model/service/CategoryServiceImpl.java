@@ -98,14 +98,14 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public Map<String, Object> mainServiceList(Map<String, Integer> map) {
+	public Map<String, Object> mainServiceList(Map<String, Object> map) {
 		
 		// 1. 특정 게시판의 전체 게시글 수 조회(단, 삭제 제외)
 		int listCount=dao.getListCount(map);
 		
 		// 2. 전체 게시글 수 + cp(현재 페이지)를 이용해서 
 		// 페이징 처리 객체 생성 
-		Pagination pagination =new Pagination(listCount, map.get("cp"));
+		Pagination pagination =new Pagination(listCount, (int) map.get("cp"));
 		
 		// 3. 페이징 처리 객체를 이용해서 게시글 목록 조회
 		List<Service> serviceList=dao.mainServiceList(pagination,map);
@@ -120,14 +120,14 @@ public class CategoryServiceImpl implements CategoryService{
 	
 	
 	@Override
-	public Map selectBoardList(Map<String, Integer> map) {
+	public Map selectBoardList(Map<String, Object> map) {
 		
 		// 1. 특정 게시판의 전체 게시글 수 조회(단, 삭제 제외)
 		int listCount=dao.getListCount(map);
 		
 		// 2. 전체 게시글 수 + cp(현재 페이지)를 이용해서 
 		// 페이징 처리 객체 생성 
-		Pagination pagination =new Pagination(listCount, map.get("cp"));
+		Pagination pagination =new Pagination(listCount, (int) map.get("cp"));
 		
 		// 3. 페이징 처리 객체를 이용해서 게시글 목록 조회
 		List<Service> serviceList=dao.selectBoardList(map,pagination);
