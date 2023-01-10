@@ -3,11 +3,14 @@
 const pauseBtn=document.getElementById("pauseService");
 
 if(pauseBtn!=null){
-	pauseBtn.addEventListener("click", ()=>{
-		confirm("정말로 중지하시겠습니까?");
-		
+	pauseBtn.addEventListener("click", (e)=>{
+        if(confirm("정말로 중지하시겠습니까?")){
+            alert("중지되었습니다.");
+        }else{
+            alert("중지가 취소되었습니다.");
+            e.preventDefault();
+        }
 	});
-
 }
 
  // 좋아요 버튼 클릭시 동작 
@@ -91,7 +94,7 @@ for(let report of reportReview){
 
 
 const writeComment=document.getElementsByClassName("writeComment");
-
+const freelancerName=document.getElementsByClassName("expertName")[0].children[0].innerText;
 for(let comment of writeComment){
     comment.addEventListener("click",()=>{
         
@@ -104,9 +107,8 @@ for(let comment of writeComment){
             success:(result)=>{ 
                 if(result>0){ // 성공
                     comment.parentElement.parentElement.innerHTML
-                    ='<div> <span class="freelancerName">프리랜서 이름 </span></div>'
+                    ='<div> <span class="freelancerName">'+freelancerName+' </span></div>'
                     +'<div class="responseContent">'+comment.parentElement.children[0].value+'</div>'
-                    alert("신고가 접수되었습니다.")
                 }else{ // 실패 
                     console.log("댓글 달기 실패");
                 }
