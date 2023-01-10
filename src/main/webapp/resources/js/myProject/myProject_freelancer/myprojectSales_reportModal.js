@@ -8,7 +8,7 @@ Submit.addEventListener("click", (e) => {
     console.log(tradeNo);
     console.log(reportedPersonNo);
     console.log(reportContent);
-    saleslist.forEach(function(arg,i){
+    saleslistJSON.forEach(function(arg,i){
       if(arg.tradeNo == tradeNo){
         reportedPersonNo = arg.memberNo;
       } 
@@ -43,7 +43,7 @@ Submit.addEventListener("click", (e) => {
               document.getElementById("reportBtn"+tradeNo).style.width = '80px';
               document.getElementById("reportBtn"+tradeNo).style.backgroundColor = "white";
               document.getElementById("reportBtn"+tradeNo).firstElementChild.innerText='신고내역';
-              saleslist.forEach(function(arg,i){
+              saleslistJSON.forEach(function(arg,i){
                 if(arg.tradeNo == tradeNo){       
                   arg.tradeReportNo = result.tradeReportNo;
                   arg.reportFilePath = result.reportFilePath;
