@@ -80,6 +80,7 @@ public class UserInquiryController {
 	// 이용문의 내역으로 이동 및 조회
 	@GetMapping("/userInquiryList")
 	public String viewInquiryList(@SessionAttribute(value="loginMember",required=false) Member loginMember, Model model,
+								  @RequestParam(value = "value", required = false) String optionVal,
 								  @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
 								  @RequestParam Map<String,Object> pm, RedirectAttributes ra) {
 		String message = null;
@@ -100,12 +101,13 @@ public class UserInquiryController {
 				// 검색이 없을 때
 				if(pm.get("key")==null) {
 					
-					Map<String, Object> map = service.selectInquiryList(loginMember.getMemberNo(), cp);
+					Map<String, Object> map = service.selectInquiryList(loginMember.getMemberNo(), optionVal, cp);
 					model.addAttribute("map",map);
 				
 				// 검색이 있을 때
 				} else {
 					pm.put("memberNo", loginMember.getMemberNo());
+					pm.put("optionVal", optionVal);
 					Map<String, Object> map = service.selectInquiryList(pm, cp);
 					model.addAttribute("map",map);
 				}
