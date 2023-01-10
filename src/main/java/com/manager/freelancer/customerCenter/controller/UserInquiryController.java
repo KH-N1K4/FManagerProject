@@ -82,35 +82,47 @@ public class UserInquiryController {
 	public String viewInquiryList(@SessionAttribute(value="loginMember",required=false) Member loginMember, Model model,
 								  @RequestParam(value="cp", required=false, defaultValue = "1") int cp,
 								  @RequestParam Map<String,Object> pm, RedirectAttributes ra) {
-		
 		String message = null;
 		String path = null;
 		
+			
+		// 로그인이 되었을 때
 		if(loginMember != null) {
 			
-			if(pm.get("key")==null) {
+			// 로그인 정보가 관리자일 때
+			if(loginMember.getAuthority()==2) {
 				
-				Map<String, Object> map = service.selectInquiryList(loginMember.getMemberNo(), cp);
-				model.addAttribute("map",map);
+				path = "redirect:/";
+			
+			// 로그인 정보가 회원일 때
 			} else {
-				pm.put("memberNo", loginMember.getMemberNo());
-				Map<String, Object> map = service.selectInquiryList(pm, cp);
-				model.addAttribute("map",map);
+				
+				// 검색이 없을 때
+				if(pm.get("key")==null) {
+					
+					Map<String, Object> map = service.selectInquiryList(loginMember.getMemberNo(), cp);
+					model.addAttribute("map",map);
+				
+				// 검색이 있을 때
+				} else {
+					pm.put("memberNo", loginMember.getMemberNo());
+					Map<String, Object> map = service.selectInquiryList(pm, cp);
+					model.addAttribute("map",map);
+				}
+			
+				path="customerCenter/inquiryList"; 
 			}
-			path="customerCenter/inquiryList";
 			
 			
 		} else {
-			
 			message = "로그인 후 이용바랍니다.";
-			path="/member/login";
+			path="redirect:/member/login";
+			ra.addFlashAttribute("message",message);
 		}
 		
-//		model.addAttribute("message",message);
-		
-		return  path;
+		return path;
 	}
-	
+
 	
 	// 이용문의 상세 보기로 이동 
 	@GetMapping("/userInquiryDetail/{userInquiryNo}")

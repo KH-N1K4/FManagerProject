@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_suggestion.css">
   
 </head>
-<body>
+<body >
   <main id="mainBody">
     <!-- hearder -->
   <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
@@ -109,9 +109,9 @@
                                   <span class="text">${proposal.proposalAdoptStatus}</span>
                                 </td>
                                 <td class="tc">                           
-                                    <c:if test="${proposal.proposalAdoptStatus == '대기 중'}">
+                                    <%-- <c:if test="${proposal.proposalAdoptStatus == '대기 중'}"> --%>
                                       <button id="chooseBtn" class="chooseBtn" title="${proposal.proposalNo}">채택</button>
-                                    </c:if>
+                                    <%-- </c:if> --%>
                                     <div class="hidden" id="projectRequestTitle${proposal.proposalNo}">${proposal.projectRequestTitle}</div>
                                     <div class="hidden" id="freelancerName${proposal.proposalNo}">${proposal.freelancerName}</div>
                                     <div class="hidden" id="projectWorkPeriod${proposal.proposalNo}">${proposal.projectWorkPeriod}</div>
@@ -170,17 +170,15 @@
           </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
-        <div class="suggestionModal">
-          <jsp:include page="/WEB-INF/views/myProject/myProject_user/suggestion_modal.jsp"/> 
-        </div>
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+  <div class="suggestionModal">
+    <jsp:include page="/WEB-INF/views/myProject/myProject_user/suggestion_modal.jsp"/> 
+  </div>
   </main>
-
-  
   <!-- **************************************footer*************************************-->
 
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   
     <script>
         var memberNo = '${loginMember.memberNo}';
