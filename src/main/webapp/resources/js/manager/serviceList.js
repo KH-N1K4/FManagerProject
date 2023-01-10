@@ -104,14 +104,14 @@ function selectChange() {
                     /* 페이징 */
                     const li1 = document.createElement("li");
                     const a1 = document.createElement("a");
-                    a1.setAttribute('href', "/manager/serviceList?cp=1" + "&value=" + status);
+                    a1.setAttribute('href', "/manager/serviceList?cp=1" + "&value=" + map.status);
                     a1.appendChild(document.createTextNode("<<"));
                     li1.append(a1);
                     pagination.append(li1);
     
                     const li2 = document.createElement("li");
                     const a2 = document.createElement("a");
-                    a2.setAttribute("href", "/manager/serviceList?cp=" + map.pagination.prevPage + "&value=" + status);
+                    a2.setAttribute("href", "/manager/serviceList?cp=" + map.pagination.prevPage + "&value=" + map.status);
                     a2.appendChild(document.createTextNode("<"));
                     li2.append(a2);
                     pagination.append(li2);
@@ -128,7 +128,7 @@ function selectChange() {
     
                         } else {
                             const a3 = document.createElement("a");
-                            a3.setAttribute("href", "/manager/serviceList?cp=" + i + "&value=" + status);
+                            a3.setAttribute("href", "/manager/serviceList?cp=" + i + "&value=" + map.status);
                             a3.appendChild(document.createTextNode(i));
                             li3.append(a3);
                             pagination.append(li3);
@@ -137,21 +137,21 @@ function selectChange() {
     
                     const li4 = document.createElement("li");
                     const a4 = document.createElement("a");
-                    a4.setAttribute("href", "/manager/serviceList?cp=" + map.pagination.nextPage + "&value=" + status);
+                    a4.setAttribute("href", "/manager/serviceList?cp=" + map.pagination.nextPage + "&value=" + map.status);
                     a4.appendChild(document.createTextNode(">"));
                     li4.append(a4);
                     pagination.append(li4);
     
                     const li5 = document.createElement("li");
                     const a5 = document.createElement("a");
-                    a5.setAttribute("href", "/manager/serviceList?cp=" + map.pagination.maxPage + "&value=" + status);
+                    a5.setAttribute("href", "/manager/serviceList?cp=" + map.pagination.maxPage + "&value=" + map.status);
                     a5.appendChild(document.createTextNode(">>"));
                     li5.append(a5);
                     pagination.append(li5);
 
                 }
 
-                document.getElementById("inputStatus").value=status;
+                document.getElementById("inputStatus").value=map.status;
 
                 /* 회원 번호 선택 시 숫자만 보내기 */
                 const serviceSearchFrm = document.getElementById("serviceSearch");
@@ -162,7 +162,7 @@ function selectChange() {
                         const input = document.getElementById("search-query");
 
                         if (select.options[select.selectedIndex].value == 'no'){
-                            const regEx = /[0-9]/g;
+                            const regEx = /^[0-9]+$/;
                             if(!regEx.test(input.value)){
                                 input.value="";
                                 alert('숫자만 입력해주세요.')
@@ -238,7 +238,7 @@ if(serviceSearchFrm != null){
         const input = document.getElementById("search-query");
 
         if (select.options[select.selectedIndex].value == 'no'){
-            const regEx = /^[0-9]$/g;
+            const regEx = /^[0-9]+$/;
             if(!regEx.test(input.value)){
                 input.value="";
                 alert('숫자만 입력해주세요.')

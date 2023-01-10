@@ -218,7 +218,10 @@ public class MemberController {
 			message="내 정보가 수정되었습니다. ";
 			
 			// DB - session 동기화 
-			loginMember.setMemberProfile(inputMember.getMemberProfile());
+			if(profileImage.getSize()>0) {
+				loginMember.setMemberProfile(inputMember.getMemberProfile());
+				
+			}
 			loginMember.setMemberNickname(inputMember.getMemberNickname());
 			loginMember.setMemberTel(inputMember.getMemberTel());
 			loginMember.setMemberJob(inputMember.getMemberJob());
@@ -317,11 +320,14 @@ public class MemberController {
 	// 찜목록 이동
 	@GetMapping("/member/myInfo/likeList")
 	public String likeList(@SessionAttribute("loginMember") Member loginMember, Model model,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value = "category", required = false, defaultValue = "0") int category) {
 		
-		Map<String, Object> map =service.selectLikeList(loginMember.getMemberNo(),cp);
+		System.out.println(category);
+		Map<String, Object> map =service.selectLikeList(loginMember.getMemberNo(),cp,category);
 		
 		model.addAttribute("map",map);
+		model.addAttribute("category",category);
 		
 		return "member/likeList";
 	}
@@ -331,7 +337,7 @@ public class MemberController {
 	@ResponseBody
 	public Map<String, Object> likeListType(@SessionAttribute("loginMember") Member loginMember, Model model,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
-			@RequestParam(value = "category", required = false) int category) {
+			@RequestParam(value = "category", required = false, defaultValue = "0") int category) {
 		
 		Map<String, Object> map =service.selectLikeListType(loginMember.getMemberNo(),cp,category);
 		

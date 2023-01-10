@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="proposal" value="${proposal}"/>
+<c:set var="i" value="0"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,7 +16,7 @@
   <link rel="stylesheet" href="/resources/css/myProject/myProject_user/myProject_suggestion.css">
   
 </head>
-<body>
+<body >
   <main id="mainBody">
     <!-- hearder -->
   <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
@@ -79,7 +80,7 @@
                         <c:forEach items="${proposal}" var="proposal">
                               <tr class="suggestionTable" id="suggestionTable">
                                 <td class="tc">                       
-                                  <span class="num">${proposal.proposalNo}</span>
+                                  <span class="num">${i=i+1}</span>
                                 </td>
                                 <td class="tl">                           
                                   <div class="suggestion_name_area td_link">
@@ -170,17 +171,15 @@
           </div>
         </section>
         <!-- sideMenu를 제외한 메인 내용 -->
-        <div class="suggestionModal">
-          <jsp:include page="/WEB-INF/views/myProject/myProject_user/suggestion_modal.jsp"/> 
-        </div>
     </div>
     <!-- 화면 크기 width: 1200px로 고정 -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+  <div class="suggestionModal">
+    <jsp:include page="/WEB-INF/views/myProject/myProject_user/suggestion_modal.jsp"/> 
+  </div>
   </main>
-
-  
   <!-- **************************************footer*************************************-->
 
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
   
     <script>
         var memberNo = '${loginMember.memberNo}';

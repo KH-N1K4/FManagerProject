@@ -6,18 +6,3 @@ var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
 document.getElementById("searchDate1").setAttribute("max", today); //min날짜를 today로 하면 어제 날짜부터 선택 불가
 document.getElementById("searchDate2").setAttribute("max", today);
 
-$(document).ready(function(){
-    var selectType = document.getElementById("selectType").title;
-    if(selectType!=""){
-      $("#selectType").val(selectType);
-    }
-  
-    /* 옵션 선택값으로 세팅 */
-    var searchDate1 = document.getElementById("searchDate1").title;
-    $("#searchDate1").val(searchDate1);
-  
-    /* 옵션 선택값으로 세팅 */
-    var searchDate2 = document.getElementById("searchDate2").title;
-    $("#searchDate2").val(searchDate2);
-  
-  });

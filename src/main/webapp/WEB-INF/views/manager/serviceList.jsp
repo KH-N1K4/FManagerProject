@@ -25,23 +25,39 @@
 					<c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
 				</c:if>
 			</c:forEach>
+			<c:if test="${not empty param.value}">
+					<c:choose>
+						<c:when test="${param.value == 1}">
+							<c:set var="inputStatus1" value="selected" />
+						</c:when>
+						<c:when test="${param.value == 2}">
+							<c:set var="inputStatus2" value="selected" />
+						</c:when>
+						<c:when test="${param.value == 3}">
+							<c:set var="inputStatus3" value="selected" />
+						</c:when>
+						<c:when test="${param.value == 4}">
+							<c:set var="inputStatus4" value="selected" />
+						</c:when>
+					</c:choose>
+			</c:if>
+			<c:if test="${empty param.value}">
+					<c:choose>
+						<c:when test="${map.status == 1}">
+							<c:set var="inputStatus1" value="selected" />
+						</c:when>
+						<c:when test="${map.status == 2}">
+							<c:set var="inputStatus2" value="selected" />
+						</c:when>
+						<c:when test="${map.status == 3}">
+							<c:set var="inputStatus3" value="selected" />
+						</c:when>
+						<c:when test="${map.status == 4}">
+							<c:set var="inputStatus4" value="selected" />
+						</c:when>
+					</c:choose>
+			</c:if>
     	</c:if>
-		<c:forEach var="inputStatus" items="${param.status}">
-			<c:choose>
-				<c:when test="${inputStatus == 1}">
-					<c:set var="inputStatus1" value="selected" />
-				</c:when>
-				<c:when test="${inputStatus == 2}">
-					<c:set var="inputStatus2" value="selected" />
-				</c:when>
-				<c:when test="${inputStatus == 3}">
-					<c:set var="inputStatus3" value="selected" />
-				</c:when>
-				<c:when test="${inputStatus == 4}">
-					<c:set var="inputStatus4" value="selected" />
-				</c:when>
-			</c:choose>
-		</c:forEach>
 
 	<div class="main">
 		<div id="service-list-title-area">
@@ -148,7 +164,7 @@
 					<option value="tc">서비스 제목 + 내용</option>
 				</select> 
 				<input type="text" name="query" id="search-query" placeholder="검색어를 입력해주세요.">
-				<input type="hidden" name="status" id="inputStatus">
+				<input type="hidden" name="value" id="inputStatus" value="${param.value}">
 				<button id="frmBtn">검색</button>
 			</form>
 

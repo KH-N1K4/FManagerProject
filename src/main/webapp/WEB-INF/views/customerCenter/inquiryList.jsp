@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="userInquiryList" value="${map.userInquiryList}"/>
 <c:set var="pagination" value="${map.pagination}"/>
+<c:set var="i" value="0"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,16 +21,32 @@
     <c:if test="${not empty param.key}">
         <c:set var="sURL" value="&key=${param.key}&query=${param.query}"/>
     </c:if>
-    <c:forEach var="inputValue" items="${param.value}">
-        <c:choose>
-            <c:when test="${inputValue == '1'}">
-                <c:set var="inputValue1" value="selected" />
-            </c:when>
-            <c:when test="${inputValue == '2'}">
-                <c:set var="inputValue2" value="selected" />
-            </c:when>
-        </c:choose>
-    </c:forEach>
+
+    <c:if test="${not empty param.value}">      
+        <c:forEach var="inputValue" items="${param.value}">
+            <c:choose>
+                <c:when test="${inputValue == '1'}">
+                    <c:set var="inputValue1" value="selected" />
+                </c:when>
+                <c:when test="${inputValue == '2'}">
+                    <c:set var="inputValue2" value="selected" />
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </c:if>
+    <c:if test="${empty param.value}">
+        <c:forEach var="inputValue" items="${param.value}">
+            <c:choose>
+                <c:when test="${inputValue == '1'}">
+                    <c:set var="inputValue1" value="selected" />
+                </c:when>
+                <c:when test="${inputValue == '2'}">
+                    <c:set var="inputValue2" value="selected" />
+                </c:when>
+            </c:choose>
+        </c:forEach>
+    </c:if>
+
 
     <section class="content">
         <div class="mainArea">
@@ -78,7 +95,8 @@
                             <c:otherwise>
                                 <c:forEach var="userinquiry" items="${userInquiryList}">
                                     <tr class="contentArea">
-                                        <td>${userinquiry.userInquiryNo}</td>
+                                        <td>${i=i+1}</td>
+                                        <%-- <td>${userinquiry.userInquiryNo}</td> --%>
                                         <td><a href="/userInquiryDetail/${userinquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${userinquiry.userInquiryTitle}</a></td>
                                         <td>${userinquiry.userInquiryCreateDate}</td>
                                         <td><%-- <span class="question-answer">${userinquiry.inquiryStatus}</span> --%>

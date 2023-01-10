@@ -26,7 +26,7 @@
         <c:forEach var="parameter" items="${param}">
             <c:if test="${parameter.key != 'cp'}">
                 <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
-            </c:if>projectRequestfrm
+            </c:if>
         </c:forEach>
     </c:if>
 
@@ -138,10 +138,10 @@
                           </td>
                           <td class="tc">
                             <c:choose>
-                              <c:when test="${purchase.workStatus==4}">
+                              <c:when test="${purchase.workStatus==2}">
                                 <a id="reviewCreateBtn" title="" class="reviewCreateBtn">리뷰하기</a>
                               </c:when>
-                              <c:when test="${purchase.workCount==0}">
+                              <c:when test="${purchase.workCount==0 || purchase.tradeReportNo!=0}">
                                 <a id="reportBtn" title="" class="reportBtn btn_type">취소/신고</a>
                               </c:when>
                               <c:when test="${purchase.workCount>=1 && purchase.memberDoneFL==1 && purchase.workStatus!=3}">

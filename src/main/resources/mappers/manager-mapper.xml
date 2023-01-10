@@ -305,6 +305,7 @@
 	<select id="getServiceListCount" resultType="_int">
 		SELECT COUNT(*) FROM SERVICE
 		WHERE SERVICE_STATUS != 5
+		AND SERVICE_DEL_FL = 'N'
 	</select>
 	
 	
@@ -324,7 +325,9 @@
 	<select id="getServiceListCount2" resultType="_int">
 		SELECT COUNT(*) FROM SERVICE
 		WHERE SERVICE_STATUS != 5
+		<if test='stauts!=0'>
 		AND SERVICE_STATUS = #{status}
+		</if>
 	</select>
 	
 	
@@ -333,7 +336,9 @@
 		SELECT SERVICE_NO, SERVICE_TITLE, SERVICE_STATUS
 		FROM SERVICE
 		WHERE SERVICE_STATUS != 5
+		<if test='stauts!=0'>
 		AND SERVICE_STATUS = #{status}
+		</if>
 		AND SERVICE_DEL_FL = 'N'
 		ORDER BY 1 DESC
 	</select>
@@ -809,10 +814,10 @@
 		<if test='status != 0'>
 			<choose>
 				<when test='status==1'>
-					WHERE MEMBER_REPORT_REQUEST IS NULL
+					AND MEMBER_REPORT_REQUEST IS NULL
 				</when>
 				<otherwise>
-					WHERE MEMBER_REPORT_REQUEST IS NOT NULL
+					AND MEMBER_REPORT_REQUEST IS NOT NULL
 				</otherwise>
 			</choose>
 		</if>

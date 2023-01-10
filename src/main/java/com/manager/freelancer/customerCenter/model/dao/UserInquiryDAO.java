@@ -66,8 +66,13 @@ public class UserInquiryDAO {
 	 * @param memberNo
 	 * @return listCount
 	 */
-	public int getListCount(int memberNo) {
-		return sqlSession.selectOne("inquiryMapper.getListCount", memberNo);
+	public int getListCount(int memberNo, String optionVal) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("optionVal",optionVal);
+		map.put("memberNo",memberNo);
+		
+		return sqlSession.selectOne("inquiryMapper.getListCount", map);
 	}
 
 
@@ -76,14 +81,18 @@ public class UserInquiryDAO {
 	 * @param memberNo
 	 * @return inquiryList
 	 */
-	public List<UserInquiry> selectInquiryList(Pagination pagination, int memberNo) {
+	public List<UserInquiry> selectInquiryList(Pagination pagination, int memberNo,String optionVal) {
 		
 		// RowBounds 객체(마이 바티스)
 		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("optionVal",optionVal);
+		map.put("memberNo",memberNo);
 		
-		return sqlSession.selectList("inquiryMapper.selectInquiryList", memberNo, rowBounds);
+		
+		return sqlSession.selectList("inquiryMapper.selectInquiryList", map, rowBounds);
 	}
 
 

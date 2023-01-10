@@ -39,22 +39,21 @@ function selectChange() {
 
                 } 
                 
-                
+                let i = 1;
                 if(map.inquiryList.length != 0){ // 게시글이 존재할 때
                     for (userInquiry of map.inquiryList) {
-
                             const tr = document.createElement("tr");
                             tr.setAttribute("class","contentArea");
                             table.append(tr);
 
                             const td1 = document.createElement("td");
-                            td1.innerText = userInquiry.userInquiryNo;
+                            td1.innerText = i++;
                             tr.append(td1);
 
                             const td2 = document.createElement("td");
                             const a = document.createElement("a");
                             a.setAttribute('href', "/userInquiryDetail/"+ userInquiry.userInquiryNo + "?cp="+map.pagination.currentPage+ "&optionVal="+optionVal);
-                            a.innerText =userInquiry.userInquiryTitle;
+                            a.innerText = userInquiry.userInquiryTitle;
                             td2.append(a);
                             tr.append(td2);
 
@@ -115,7 +114,7 @@ function selectChange() {
 
                         } else {
                             const a3 = document.createElement("a");
-                            a3.setAttribute("href", "/userInquiryList?cp=" + i+ "&optionVal="+optionVal);
+                            a3.setAttribute("href", "/userInquiryList?cp=" + i + "&optionVal="+optionVal);
                             a3.appendChild(document.createTextNode(i));
                             li3.append(a3);
                             pagination.append(li3);

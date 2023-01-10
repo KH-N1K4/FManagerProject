@@ -40,10 +40,10 @@ public interface CategoryService {
 	Map<String, Object> selectCategoryList(Map map);
 
 	// 카테고리 조회
-	Map selectBoardList(Map<String, Integer> map);
+	Map selectBoardList(Map<String, Object> map);
 	
 	// 메인 전체 조회
-	Map<String, Object> mainServiceList(Map<String, Integer> map);
+	Map<String, Object> mainServiceList(Map<String, Object> map);
 
 	// 거래 완료 ajax
 	int tradeComplete(Trade temp);

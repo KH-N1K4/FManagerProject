@@ -91,7 +91,7 @@
     
     	 <ul>
     	 	<c:if test="${not fn:startsWith(path,'/projectRequest/requestList/') }">
-                <c:forEach var="boardType" items="${boardTypeList}">
+                <c:forEach var="boardType" items="${mainCategoryList}">
                     <li>
                         <a href="/category/${boardType.MAIN_CATEGORY_NO}/0">${boardType.MAIN_CATEGORY_NAME}</a>
                     </li>

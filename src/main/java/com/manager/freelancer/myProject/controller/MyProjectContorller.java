@@ -43,16 +43,18 @@ public class MyProjectContorller {
 	public String likeList(Model model, HttpSession session,
 			 			   @RequestParam(value="mainCategoryNo",required=false, defaultValue="0") int mainCategoryNo,
 			               @RequestParam(value="cp" , required = false, defaultValue = "1") int cp,
-			               @SessionAttribute("loginMember") Member loginMember) {
+			               @SessionAttribute("loginMember") Member loginMember,
+			               @RequestParam(value="optionVal" , required = false, defaultValue = "0") String optionVal) {
 		
  		List<MyProject> maincategoryList = service.selectmaincategoryList();
 		
-		Map<String, Object> map  = service.selectMyProject(loginMember.getMemberNo(), mainCategoryNo, cp);
+		Map<String, Object> map  = service.selectMyProject(loginMember.getMemberNo(), mainCategoryNo, cp,optionVal);
 		
 		model.addAttribute("maincategoryList",maincategoryList);
 		model.addAttribute("myProject",map.get("myProject"));
 		model.addAttribute("pagination",map.get("pagination"));
 		model.addAttribute("listCount",map.get("listCount"));
+		model.addAttribute("optionVal",map.get("optionVal"));
 		model.addAttribute("mainCategoryNoInput",mainCategoryNo);
 		
 		
@@ -133,8 +135,10 @@ public class MyProjectContorller {
 	// 내 프로젝트 조회 ajax
 	@GetMapping("/member/categoryTypeSelect")  //삭제 여부 수정
 	@ResponseBody
-	public Map<String, Object> categoryTypeSelect(Model model, @RequestParam String optionVal, @SessionAttribute("loginMember") Member loginMember,
-												  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
+	public Map<String, Object> categoryTypeSelect(Model model, 
+			@RequestParam(value="optionVal" , required = false, defaultValue = "0") String optionVal, 
+			@SessionAttribute("loginMember") Member loginMember,
+		  @RequestParam(value="cp" , required = false, defaultValue = "1") int cp) {
 			
 		System.out.println(optionVal);
 		Map<String, Object> map = new HashMap<String, Object>();

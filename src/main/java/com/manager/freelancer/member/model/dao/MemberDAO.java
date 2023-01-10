@@ -121,7 +121,7 @@ public class MemberDAO {
 	 * @return
 	 */
 	public int getLikeListCount(int memberNo) {
-		return sqlSession.selectOne("categoryMapper2.getLikeListCount", memberNo);
+		return sqlSession.selectOne("categoryMapper.getLikeListCount", memberNo);
 	}
 
 
@@ -130,7 +130,7 @@ public class MemberDAO {
 	 * @return
 	 */
 	public int getLikeListCount2(Map<String, Object> option) {
-		return sqlSession.selectOne("categoryMapper2.getLikeListCount2", option);
+		return sqlSession.selectOne("categoryMapper.getLikeListCount2", option);
 	}
 
 
@@ -138,8 +138,15 @@ public class MemberDAO {
 	 * @param option
 	 * @return
 	 */
-	public List<Service> selectLikeList2(Map<String, Object> option) {
-		return sqlSession.selectList("categoryMapper2.selectLikeList2", option);
+	public List<Service> selectLikeList2(Map<String, Object> option, Pagination pagination) {
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		
+		//return sqlSession.selectList("categoryMapper.selectLikeList", memberNo,rowBounds);
+		
+		return sqlSession.selectList("categoryMapper.selectLikeList2", option, rowBounds);
 	}
 
 
