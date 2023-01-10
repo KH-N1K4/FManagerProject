@@ -79,7 +79,6 @@
                     </section>
 
                     <hr>
-
                     <table id="table">
                         <tr>
                             <th style="width:100px">번호</th>
@@ -95,9 +94,11 @@
                                 </tr>
                             </c:when>
                             <c:otherwise>
-                                <c:forEach var="userinquiry" items="${userInquiryList}">
+                                <c:forEach var="userinquiry" items="${userInquiryList}" varStatus="status">
                                     <tr class="contentArea">
-                                        <td>${i=i+1}</td>
+                                     <c:set var="total" value="${pagination.currentPage-1 }" />
+                                     <c:set var="total1" value="${total*5 }" />
+                                        <td>${total1 + status.count}</td>
                                         <%-- <td>${userinquiry.userInquiryNo}</td> --%>
                                         <td><a href="/userInquiryDetail/${userinquiry.userInquiryNo}?cp=${pagination.currentPage}${sURL}">${userinquiry.userInquiryTitle}</a></td>
                                         <td>${userinquiry.userInquiryCreateDate}</td>

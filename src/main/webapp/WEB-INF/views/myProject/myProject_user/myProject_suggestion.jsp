@@ -125,10 +125,12 @@
                         </tr>
                       </c:if>
                       <c:if test="${not empty proposal}">
-                        <c:forEach items="${proposal}" var="proposal">
+                        <c:forEach items="${proposal}" var="proposal" varStatus="status">
                               <tr class="suggestionTable" id="suggestionTable">
-                                <td class="tc">                       
-                                  <span class="num">${i=i+1}</span>
+                                <td class="tc">   
+                                <c:set var="total" value="${pagination.currentPage-1 }" />
+                    			 <c:set var="total1" value="${total*5 }" />                    
+                                  <span class="num">${total1 + status.count}</span>
                                 </td>
                                 <td class="tl">                           
                                   <div class="suggestion_name_area td_link">

@@ -91,10 +91,12 @@
 
 			<!-- 테이블 내용 -->
 			<c:if test="${not empty serviceInquiryList}">
-				<c:forEach var="serviceInquiry" items="${serviceInquiryList}">
+				<c:forEach var="serviceInquiry" items="${serviceInquiryList}"  varStatus="status">
 				
 					<div class="service-list-table-content">
-						<div class="service-num">${i=i+1}</div>
+					 <c:set var="total" value="${pagination.currentPage-1 }" />
+                     <c:set var="total1" value="${total*5 }" />
+						<div class="service-num">${total1 + status.count}</div>
 						<div class="service-title"><a class="detailBtn" href="/service/${serviceInquiry.serviceNo}" target="_blank">${serviceInquiry.serviceTitle}</a></div>
 						<div class="service-date">${serviceInquiry.serviceInquiryCreateDate}</div>
 						<div class="service-button">
