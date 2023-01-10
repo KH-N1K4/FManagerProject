@@ -67,7 +67,7 @@ public class UserInquiryServiceImpl implements UserInquiryService {
 					img.setInquiryFilePath(webPath);
 
 					String reNameImg = Util.fileRename(imageList.get(i).getOriginalFilename());
-					img.setInquiryFilePath(reNameImg);
+					img.setInquiryFilePath(webPath+reNameImg);
 					img.setUserInquiryNo(userInquiryNo); // 첨부된 게시글 번호
 					img.setInquiryFileOrder(i); // 이미지 순서
 
@@ -130,6 +130,7 @@ public class UserInquiryServiceImpl implements UserInquiryService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pagination", pagination);
 		map.put("userInquiryList", userInquiryList);
+		map.put("optionVal", optionVal);
 		
 		return map;
 	}
@@ -174,6 +175,7 @@ public class UserInquiryServiceImpl implements UserInquiryService {
 
 			map.put("pagination", pagination);
 			map.put("inquiryList", inquiryList);
+			map.put("optionVal", optionVal);
 			
 			return map;
 }

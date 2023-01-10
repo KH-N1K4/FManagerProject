@@ -27,37 +27,37 @@
     	</c:if>
 
 		<c:if test="${not empty param.value}">
-					<c:choose>
-						<c:when test="${param.value == 1}">
-							<c:set var="inputStatus1" value="selected" />
-						</c:when>
-						<c:when test="${param.value == 2}">
-							<c:set var="inputStatus2" value="selected" />
-						</c:when>
-						<c:when test="${param.value == 3}">
-							<c:set var="inputStatus3" value="selected" />
-						</c:when>
-						<c:when test="${param.value == 4}">
-							<c:set var="inputStatus4" value="selected" />
-						</c:when>
-					</c:choose>
-			</c:if>
-			<c:if test="${empty param.value}">
-					<c:choose>
-						<c:when test="${map.status == 1}">
-							<c:set var="inputStatus1" value="selected" />
-						</c:when>
-						<c:when test="${map.status == 2}">
-							<c:set var="inputStatus2" value="selected" />
-						</c:when>
-						<c:when test="${map.status == 3}">
-							<c:set var="inputStatus3" value="selected" />
-						</c:when>
-						<c:when test="${map.status == 4}">
-							<c:set var="inputStatus4" value="selected" />
-						</c:when>
-					</c:choose>
-			</c:if>
+				<c:choose>
+					<c:when test="${param.value == 1}">
+						<c:set var="inputStatus1" value="selected" />
+					</c:when>
+					<c:when test="${param.value == 2}">
+						<c:set var="inputStatus2" value="selected" />
+					</c:when>
+					<c:when test="${param.value == 3}">
+						<c:set var="inputStatus3" value="selected" />
+					</c:when>
+					<c:when test="${param.value == 4}">
+						<c:set var="inputStatus4" value="selected" />
+					</c:when>
+				</c:choose>
+		</c:if>
+		<c:if test="${empty param.value}">
+				<c:choose>
+					<c:when test="${map.status == 1}">
+						<c:set var="inputStatus1" value="selected" />
+					</c:when>
+					<c:when test="${map.status == 2}">
+						<c:set var="inputStatus2" value="selected" />
+					</c:when>
+					<c:when test="${map.status == 3}">
+						<c:set var="inputStatus3" value="selected" />
+					</c:when>
+					<c:when test="${map.status == 4}">
+						<c:set var="inputStatus4" value="selected" />
+					</c:when>
+				</c:choose>
+		</c:if>
 
 
 	<div class="main">

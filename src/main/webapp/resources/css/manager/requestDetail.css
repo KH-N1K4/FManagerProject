@@ -37,11 +37,11 @@
     margin-bottom: 20px;
 }
 .serviceSummary{
-    height: 100px
+    height: 110px
 }
 .serviceInfo{
     width: 695px;
-    margin:20px 0 130px 0;
+    margin:20px 0 110px 0;
 }
 .serviceInfo> span{
     display: inline-block;

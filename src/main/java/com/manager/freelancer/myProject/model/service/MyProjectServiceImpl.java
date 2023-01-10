@@ -139,19 +139,20 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 
 	// 받은 제안 조회 
 	@Override
-	public Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo) {
+	public Map<String, Object> selectProposal(int memberNo, int cp, int mainCategoryNo, String optionVal) {
 		
-		int listCount = dao.getProposalCount( memberNo, mainCategoryNo);
+		int listCount = dao.getSuggestTypeCount(optionVal, memberNo);
 		
 		Pagination pagination = new Pagination(listCount,cp); 
 		
-		List<MyProject> proposal = dao.selectProposal(memberNo,mainCategoryNo,pagination);
+		List<MyProject> proposal = dao.categoryTypeSelect_suggest(optionVal,pagination,memberNo);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("pagination", pagination);
 		map.put("proposal",proposal);
 		map.put("listCount",listCount);
+		map.put("optionVal",optionVal);
 		
 		return map;
 	}
@@ -191,6 +192,7 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		map.put("pagination", pagination);
 		map.put("proposal",proposal);
 		map.put("listCount",listCount);
+		map.put("optionVal",optionVal);
 		
 		return map;
 	}
