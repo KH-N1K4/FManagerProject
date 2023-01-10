@@ -19,7 +19,6 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
-        
     <section class="content">
         <%--         <img id="mainImage" src="/resources/images/main_2.jpg"> --%>
         <div class="mainArea">

@@ -22,6 +22,14 @@
 <body>
 
     <jsp:include page="/WEB-INF/views/common/header_ver1.jsp"/>
+    
+    <c:if test="${not empty param}">
+        	<c:forEach var="parameter" items="${param}">
+				<c:if test="${parameter.key != 'cp'}">
+					<c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+				</c:if>
+			</c:forEach>
+    	</c:if>
 
     <section class="content">
         <div class="mainArea">
@@ -105,7 +113,6 @@
         
         
         <div class="pagination-area">
-
 
                 <ul class="pagination">
                 
