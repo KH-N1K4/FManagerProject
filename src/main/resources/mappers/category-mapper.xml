@@ -318,7 +318,32 @@
 		<if test='thirdCategoryNo!=0'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
 		AND SERVICE_DEL_FL='N'
 		AND SERVICE_STATUS=2
-		ORDER BY 1 DESC
+		
+		<choose>
+			<when test="budget==0"></when>
+			<when test="budget==1"><![CDATA[AND SERVICE_PRICE < 10000]]> </when>
+			<when test="budget==5">AND SERVICE_PRICE BETWEEN 10000 AND 50000 </when>
+			<when test="budget==10">AND SERVICE_PRICE BETWEEN 50000 AND 100000  </when>
+			<when test="budget==20">AND SERVICE_PRICE BETWEEN 100000 AND 200000  </when>
+			<when test="budget==30">AND SERVICE_PRICE BETWEEN 200000 AND 300000  </when>
+			<when test="budget==50">AND SERVICE_PRICE BETWEEN 300000 AND 500000  </when>
+			<when test="budget==70">AND SERVICE_PRICE BETWEEN 500000 AND 700000  </when>
+			<when test="budget==100">AND SERVICE_PRICE BETWEEN 700000 AND 1000000  </when>
+			<otherwise><![CDATA[AND SERVICE_PRICE <1000000 ]]>  </otherwise>
+		</choose>
+		
+		<choose>
+			<when test="grade==0"></when>
+			<when test="grade==1">AND GRADE_NO =1 </when>
+			<otherwise>AND GRADE_NO=2</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="order==0">ORDER BY 1 DESC</when>
+			<when test="order==1">ORDER BY REVIEW_POINT </when>
+			<otherwise></otherwise>
+		</choose>
+		
  </select>
  	
  	
@@ -493,6 +518,7 @@
 		<choose>
 			<when test="order==0">ORDER BY 1 DESC</when>
 			<when test="order==1">ORDER BY REVIEW_POINT </when>
+			<when test="order==2">ORDER BY SC.SALE_COUNT </when>
 			<otherwise></otherwise>
 		</choose>
 	</select>
@@ -540,15 +566,50 @@
 			FROM SERVICE
 			LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
 			LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO))
+		JOIN FREELANCER USING(FREELANCER_NO)
+		JOIN GRADE USING(GRADE_NO)
 		LEFT JOIN (SELECT s.*,
 		ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUEST_FILE_NO) rum
 		FROM SERVICE_FILE s) USING(SERVICE_NO)
+		LEFT JOIN (SELECT AVG(REVIEW_POINT) REVIEW_POINT,SERVICE_NO
+		   FROM REVIEW  
+		   LEFT JOIN TRADE ON(TRADE_NO =REVIEW_NO)
+		   LEFT JOIN SERVICE USING(SERVICE_NO)
+		   GROUP BY SERVICE_NO) USING(SERVICE_NO)
+		LEFT JOIN(SELECT COUNT(*) SALE_COUNT,SERVICE_NO
+		   FROM TRADE  
+		   LEFT JOIN SERVICE USING(SERVICE_NO)
+		   GROUP BY SERVICE_NO) SC USING(SERVICE_NO)
 		WHERE RUM = 1
 		AND SERVICE_DEL_FL='N'
 		AND SERVICE_STATUS=2 
 		<if test='mainCategoryNo!=null'> AND MAIN_CATEGORY_NO=#{mainCategoryNo} </if>
 		<if test='thirdCategoryNo!=null and thirdCategoryNo!=0'> AND THIRD_CATEGORY_NO=#{thirdCategoryNo} </if>
-
+		<choose>
+			<when test="budget==0"></when>
+			<when test="budget==1"><![CDATA[AND SERVICE_PRICE < 10000]]> </when>
+			<when test="budget==5">AND SERVICE_PRICE BETWEEN 10000 AND 50000 </when>
+			<when test="budget==10">AND SERVICE_PRICE BETWEEN 50000 AND 100000  </when>
+			<when test="budget==20">AND SERVICE_PRICE BETWEEN 100000 AND 200000  </when>
+			<when test="budget==30">AND SERVICE_PRICE BETWEEN 200000 AND 300000  </when>
+			<when test="budget==50">AND SERVICE_PRICE BETWEEN 300000 AND 500000  </when>
+			<when test="budget==70">AND SERVICE_PRICE BETWEEN 500000 AND 700000  </when>
+			<when test="budget==100">AND SERVICE_PRICE BETWEEN 700000 AND 1000000  </when>
+			<otherwise><![CDATA[AND SERVICE_PRICE <1000000 ]]>  </otherwise>
+		</choose>
+		
+		<choose>
+			<when test="grade==0"></when>
+			<when test="grade==1">AND GRADE_NO =1 </when>
+			<otherwise>AND GRADE_NO=2</otherwise>
+		</choose>
+		
+		<choose>
+			<when test="order==0">ORDER BY 1 DESC</when>
+			<when test="order==1">ORDER BY REVIEW_POINT </when>
+			<when test="order==2">ORDER BY SC.SALE_COUNT </when>
+			<otherwise></otherwise>
+		</choose>
 	
 	</select>
 	
@@ -717,6 +778,51 @@ LEFT JOIN (SELECT s.*, ROW_NUMBER() OVER (PARTITION BY SERVICE_NO ORDER BY REQUE
 	</select>
 	
 	
+	<!-- 찜한 목록 수 -->
+   <select id="getLikeListCount" resultType="_int">
+	 SELECT COUNT(*)
+	FROM (
+	   SELECT SERVICE_NO, REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY SERVICE_NO ORDER BY SERVICE_NO, REQUEST_FILE_PATH)) RNUM
+	   ,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE
+		FROM SERVICE_FILE
+		JOIN SERVICE USING(SERVICE_NO)
+	) JOIN "LIKE" USING(SERVICE_NO)
+	WHERE RNUM =1
+	AND MEMBER_NO=#{memberNo}
+	</select>
+	
+	<!-- 카테고리별 찜한 목록 수 -->
+   <select id="getLikeListCount2" resultType="_int">
+	  SELECT COUNT(*)
+		FROM "LIKE"
+		JOIN SERVICE USING (SERVICE_NO)
+		LEFT JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+		LEFT JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+		LEFT JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+		WHERE MEMBER_NO=#{memberNo}
+	<if test="category!=0">
+		AND MAIN_CATEGORY_NO=#{category}
+	</if>
+	</select>
+	
+	<!-- 카테고리별 찜한 목록 조회 -->
+   <select id="selectLikeList2" resultMap="service_rm2">
+	 SELECT *
+	FROM (
+	   SELECT SERVICE_NO, REQUEST_FILE_PATH,(ROW_NUMBER() OVER(PARTITION BY SERVICE_NO ORDER BY SERVICE_NO, REQUEST_FILE_PATH)) RNUM
+	   ,SERVICE_TITLE,SERVICE_SUMMARY,SERNICE_CONTENT,SERVICE_PRICE, MAIN_CATEGORY_NO
+		FROM SERVICE_FILE
+		JOIN SERVICE USING(SERVICE_NO)
+		JOIN CATEGORY USING(THIRD_CATEGORY_NO)
+        JOIN SUB_CATEGORY USING(SUB_CATEGORY_NO)
+        JOIN MAIN_CATEGORY USING(MAIN_CATEGORY_NO)
+	) JOIN "LIKE" USING(SERVICE_NO)
+	WHERE RNUM =1
+	AND MEMBER_NO=#{memberNo}
+	<if test="category!=0">
+		AND MAIN_CATEGORY_NO=#{category}
+	</if>
+	</select>
 	
  	
  </mapper>

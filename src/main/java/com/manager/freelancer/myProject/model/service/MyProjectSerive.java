@@ -22,7 +22,7 @@ public interface MyProjectSerive {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> selectMyProject(int memberNo, int mainCategoryNo, int cp);
+	Map<String, Object> selectMyProject(int memberNo, int mainCategoryNo, int cp, String optionVal);
 
 	/** 메인 3 카테고리 들고오기 
 	 * @return

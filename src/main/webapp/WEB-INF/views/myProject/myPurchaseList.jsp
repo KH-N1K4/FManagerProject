@@ -26,7 +26,7 @@
         <c:forEach var="parameter" items="${param}">
             <c:if test="${parameter.key != 'cp'}">
                 <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
-            </c:if>projectRequestfrm
+            </c:if>
         </c:forEach>
     </c:if>
 

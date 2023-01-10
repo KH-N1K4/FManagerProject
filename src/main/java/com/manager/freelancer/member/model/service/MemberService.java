@@ -33,7 +33,7 @@ public interface MemberService {
 
 	AskService selectSendSuggesionContent(String serviceInquiryNo);
 
-	Map<String, Object> selectLikeList(int memberNo, int cp);
+	Map<String, Object> selectLikeList(int memberNo, int cp, int category);
 
 	/** 카테고리 선택 찜 목록
 	 * @param memberNo
