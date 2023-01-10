@@ -542,3 +542,16 @@ function selectedControl(selected){
 }
 
 
+
+/* 신고하기 */
+document.getElementById("tradeReportFrm").addEventListener("submit",e=>{
+
+  const selectType = document.getElementById("selectType1");
+  if(selectType.value==0){
+    alert("문의 타입을 선택해주세요.");
+    selectType.focus();
+    e.preventDefault();
+
+  }
+
+});
