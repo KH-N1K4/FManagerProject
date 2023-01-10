@@ -380,7 +380,7 @@ tbody a{
 
 /* 모달 */
 .clientTradeRequestModal {
-  position: flex;/* absolute; */
+  position: fixed;/* absolute; */
   top: 0;
   left: 0;
 
@@ -398,7 +398,7 @@ tbody a{
 }
 
 .clientTradeRequestModal_body {
-  position: flex;/* absolute; */
+  position: fixed;/* absolute; */
   top: 50%;
   left: 50%;
 
