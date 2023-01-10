@@ -223,7 +223,7 @@ function deleteMember(){
     
     for(d of deleteBtn){
         d.addEventListener("click", e => {
-            if(confirm("정말로?")){
+            if(confirm("강제 탈퇴를 진행하시겠습니까?")){
     
                 const memberNo = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
                 console.log(memberNo);
