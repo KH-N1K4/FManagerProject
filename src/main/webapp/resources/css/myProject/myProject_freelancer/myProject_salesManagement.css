@@ -300,7 +300,7 @@ tbody a{
 
 /* 신고하기 모달 */
 .reportModal {
-  position: absolute;
+  position: fixed;/* absolute; */
   top: 0;
   left: 0;
 
@@ -318,7 +318,7 @@ tbody a{
 }
 
 .reportModal_body {
-  position: absolute;
+  position: fixed;/* absolute; */
   top: 50%;
   left: 50%;
 
@@ -380,7 +380,7 @@ tbody a{
 
 /* 모달 */
 .clientTradeRequestModal {
-  position: absolute;
+  position: flex;/* absolute; */
   top: 0;
   left: 0;
 
@@ -398,7 +398,7 @@ tbody a{
 }
 
 .clientTradeRequestModal_body {
-  position: absolute;
+  position: flex;/* absolute; */
   top: 50%;
   left: 50%;
 

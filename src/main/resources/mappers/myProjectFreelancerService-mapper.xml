@@ -7,7 +7,7 @@
 		SERVICE_WORK_PERIOD,SERVICE_STATUS,SERVICE_CREATE_DATE,THIRD_CATEGORY_NO,FREELANCER_NO,REQUEST_FILE_NO,REQUEST_FILE_PATH -->
     		<id property="serviceNo" column="SERVICE_NO"/>													<!-- 서비스 번호 SEQUENCE: SEQ_SERVICE_NO -->	
     		   		
-	      <result property="num" column="ROWNUM" />								<!-- 서비스 제목 -->							
+					
 	      <result property="serviceTitle" column="SERVICE_TITLE" />								<!-- 서비스 제목 -->							
 	      <result property="serviceSummary" column="SERVICE_SUMMARY" />						<!-- 서비스 한 줄 요약 -->
 	      <result property="serviceContent" column="SERNICE_CONTENT" />						<!-- 서비스 내용 -->
@@ -286,7 +286,7 @@
 		</select>
 		<!-- 나의 판매 내역 들고 오기 -->
 		<select id="selectSalesList" parameterType="java.util.HashMap" resultMap="fService_rm">
-		SELECT ROWNUM,t.*,
+		SELECT t.*,
 			CASE WHEN FREELANCER_DONE_FL = 1 THEN '진행 중'
 			     WHEN FREELANCER_DONE_FL = 2 THEN '작업 완료'
 			     WHEN FREELANCER_DONE_FL = 3 THEN '주문 취소'

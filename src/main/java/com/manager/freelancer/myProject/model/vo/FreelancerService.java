@@ -20,7 +20,6 @@ public class FreelancerService {//지윤
 	private String thirdCategoryName;	//THIRD_CATEGORY_NAME 메인 3카테고리 이름
 	
 	private int serviceNo;				//SERVICE_NO 서비스 번호 SEQUENCE: SEQ_SERVICE_NO
-	private int num;				//SERVICE_NO 서비스 번호 SEQUENCE: SEQ_SERVICE_NO
 	private String serviceTitle;		//SERVICE_TITLE 서비스 제목
 	private String serviceSummary;		//SERVICE_SUMMARY 서비스 한 줄 요약
 	private String serviceContent;		//SERNICE_CONTENT 서비스 내용
