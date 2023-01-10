@@ -52,10 +52,10 @@
                                 </p>
                                 <div class="btn">
                                     <a id="realStopBtn" class="btn_type2 layerStopRequestBtn"  href="#"><span class="_hideLayer">의뢰중지하기</span></a>
-                                    <a href="#" class="btn_type3 _hideLayer"><span class="_hideLayer">취소</span></a>
+                                    <a class="btn_type3 _hideLayer"><span class="_hideLayer">취소</span></a>
                                 </div>
                             </div>
-                            <a href="#" class="clse _hideLayer"><span class="blind">닫기</span></a>
+                            <a  class="clse _hideLayer"><span class="blind">닫기</span></a>
                         </div>
                     </div>
                 </c:if>
