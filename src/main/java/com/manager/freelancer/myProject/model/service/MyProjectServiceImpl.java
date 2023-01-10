@@ -38,19 +38,20 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 	 * 나의 프로젝트 들고오기 페이지 처리
 	 */
 	@Override
-	public Map<String, Object> selectMyProject(int memberNo, int mainCategoryNo, int cp) {
+	public Map<String, Object> selectMyProject(int memberNo, int mainCategoryNo, int cp, String optionVal) {
 		
-		int listCount = dao.getMyProjectListCount( memberNo, mainCategoryNo);
+		int listCount = dao.getMyProjectListCount( memberNo, mainCategoryNo,optionVal);
 		
 		Pagination pagination = new Pagination(listCount,cp); 
 		
-		List<MyProject> myProject = dao.selectMyProject(memberNo,mainCategoryNo,pagination);
+		List<MyProject> myProject = dao.selectMyProject(memberNo,mainCategoryNo,pagination,optionVal);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("pagination", pagination);
 		map.put("myProject",myProject);
 		map.put("listCount",listCount);
+		map.put("optionVal",optionVal);
 		
 		
 		return map;
@@ -170,6 +171,7 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 		map.put("pagination", pagination);
 		map.put("myProject",myProject);
 		map.put("listCount",listCount);
+		map.put("optionVal",optionVal);
 		
 		return map;
 	}
