@@ -201,6 +201,8 @@ public class MyProjectServiceImpl implements MyProjectSerive{
 	@Override
 	public int completeSuggetionPay(MyProject myProject) {
 		
+		myProject.setTradeRequest(Util.newLineHandling(myProject.getProjectRequestContent()));		
+		
 		return dao.completeSuggetionPay(myProject);
 	}
 
