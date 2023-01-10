@@ -96,7 +96,7 @@
                       <c:forEach items="${inquiryList}" var="inquiry">
                         <tr class="myServiceInquiryTable" myServiceInquiryNumeber="">
                           <td class="tc">
-                            <span class="num">${i=i+1}</span>
+                            <span class="num">${inquiry.num}</span>
                           </td>
                           <td class="tl">
                             <div class="service_name_area td_link">

@@ -107,7 +107,7 @@
                       <c:forEach items="${salesList}" var="sales">
                         <tr class="suggestionTable" suggestionNumeber="">
                           <td class="tc">
-                            <span class="num">${i=i+1}</span>
+                            <span class="num">${sales.num}</span>
                           </td>
                           <td class="tc">
                             <span class="num">${sales.tradeNo}</span>
