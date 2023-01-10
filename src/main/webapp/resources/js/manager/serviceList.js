@@ -204,7 +204,7 @@ function deleteService() {
 
     for (d of deleteBtn) {
         d.addEventListener("click", e => {
-            if (confirm("정말로?")) {
+            if (confirm("해당 서비스를 삭제하시겠습니까?")) {
 
                 const serviceNo = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
                 console.log(serviceNo);
