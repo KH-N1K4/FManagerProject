@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="proposal" value="${proposal}"/>
+<c:set var="i" value="0"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -79,7 +80,7 @@
                         <c:forEach items="${proposal}" var="proposal">
                               <tr class="suggestionTable" id="suggestionTable">
                                 <td class="tc">                       
-                                  <span class="num">${proposal.proposalNo}</span>
+                                  <span class="num">${i=i+1}</span>
                                 </td>
                                 <td class="tl">                           
                                   <div class="suggestion_name_area td_link">
@@ -109,9 +110,9 @@
                                   <span class="text">${proposal.proposalAdoptStatus}</span>
                                 </td>
                                 <td class="tc">                           
-                                    <%-- <c:if test="${proposal.proposalAdoptStatus == '대기 중'}"> --%>
+                                    <c:if test="${proposal.proposalAdoptStatus == '대기 중'}">
                                       <button id="chooseBtn" class="chooseBtn" title="${proposal.proposalNo}">채택</button>
-                                    <%-- </c:if> --%>
+                                    </c:if>
                                     <div class="hidden" id="projectRequestTitle${proposal.proposalNo}">${proposal.projectRequestTitle}</div>
                                     <div class="hidden" id="freelancerName${proposal.proposalNo}">${proposal.freelancerName}</div>
                                     <div class="hidden" id="projectWorkPeriod${proposal.proposalNo}">${proposal.projectWorkPeriod}</div>
