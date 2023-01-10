@@ -324,7 +324,7 @@ const checkObj={"area":false,
       return;
   }
 
-    const regEx=/^\d{12,14}$/;
+    const regEx=/^\d{11,14}$/;
 
     if(regEx.test(bankAccountNumber.value)){ // 유효한 경우
         checkObj.bankAccountNumber=true;
