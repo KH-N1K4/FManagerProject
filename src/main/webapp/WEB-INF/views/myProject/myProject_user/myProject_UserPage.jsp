@@ -21,6 +21,31 @@
 	  <%-- <jsp:include page="/WEB-INF/views/myProject/myProject_header.jsp"/> --%>
 	  <jsp:include page="/WEB-INF/views/common/header_ver2.jsp"/>
 
+    <c:if test="${not empty param}">
+        <c:forEach var="parameter" items="${param}">
+            <c:if test="${parameter.key != 'cp'}">
+                <c:set var="sURL" value="${sURL}&${parameter.key}=${parameter.value}"/>
+            </c:if>
+        </c:forEach>
+    </c:if>
+					<c:choose>
+						<c:when test="${optionVal == 1}">
+							<c:set var="inputStatus1" value="selected" />
+						</c:when>
+						<c:when test="${optionVal == 2}">
+							<c:set var="inputStatus2" value="selected" />
+						</c:when>
+						<c:when test="${optionVal == 3}">
+							<c:set var="inputStatus3" value="selected" />
+						</c:when>
+						<c:when test="${optionVal == 4}">
+							<c:set var="inputStatus4" value="selected" />
+						</c:when>
+						<c:when test="${optionVal == 5}">
+							<c:set var="inputStatus5" value="selected" />
+						</c:when>
+					</c:choose>
+			
     <!-- 화면 크기 width: 1200px로 고정 -->
     <div class="mainInBody"> 
 
@@ -42,12 +67,12 @@
                 <!-- 상단 selectbox -->
                 <div class="selectbox">
                   <select  id = "srchOption" class="srchOption" name="srchOption" onchange="selectChange()">
-                    <option value="0" selected="">카테고리 선택</option>
-                    <option value="1">디자인</option>
-                    <option value="2">IT·프로그래밍</option>
-                    <option value="3">영상</option>
-                    <option value="4">사진</option>
-                    <option value="5">음향</option>
+                    <option value="0">카테고리 선택</option>
+                    <option value="1" ${inputStatus1}>디자인</option>
+                    <option value="2" ${inputStatus2}>IT·프로그래밍</option>
+                    <option value="3" ${inputStatus3}>영상</option>
+                    <option value="4" ${inputStatus4}>사진</option>
+                    <option value="5" ${inputStatus5}>음향</option>
                   </select>
                 </div>
                 <!-- 상단 selectbox -->

@@ -31,13 +31,15 @@ public class MyProjectDAO {
 	/** 나의 프로젝트 페이지 카운트
 	 * @param memberNo
 	 * @param mainCategoryNo
+	 * @param optionVal 
 	 * @return
 	 */
-	public int getMyProjectListCount(int memberNo, int mainCategoryNo) {
+	public int getMyProjectListCount(int memberNo, int mainCategoryNo, String optionVal) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); 
 		map.put("mainCategoryNo", mainCategoryNo);
+		map.put("optionVal", optionVal);
 		
 		int result = sqlSession.selectOne("myProjectMapper.getMyProjectListCount", map);
 		
@@ -48,15 +50,17 @@ public class MyProjectDAO {
 	 * @param memberNo
 	 * @param mainCategoryNo
 	 * @param pagination
+	 * @param optionVal 
 	 * @return
 	 */
-	public List<MyProject> selectMyProject(int memberNo, int mainCategoryNo, Pagination pagination) {
+	public List<MyProject> selectMyProject(int memberNo, int mainCategoryNo, Pagination pagination, String optionVal) {
 		
 		int offset = (pagination.getCurrentPage()-1) * pagination.getLimit(); // 5페이지일때 4*10(10개 정렬) -> 40개의 게시글을 건너뛰어라
 	    RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberNo", memberNo); //로그인 세션 회원 번호
 		map.put("mainCategoryNo", mainCategoryNo); //카테고리별 서비스 들고오기
+		map.put("optionVal", optionVal); //카테고리별 서비스 들고오기
 		
 		return sqlSession.selectList("myProjectMapper.selectMyProject", map, rowBounds);
 	}
