@@ -762,6 +762,6 @@ $(document).on("click",".reportBtnClass",function(){ ///WEB-INF/views/common/hea
 	iframeVar.contentDocument.getElementById('reportedProfile').setAttribute("src",exportVar.children[1].children[0].src);
 	iframeVar.contentDocument.getElementById('reportedName').innerText = exportVar.children[2].children[0].innerText;
 	iframeVar.contentDocument.getElementById('memberName').value = loginMemberNickName;
-	iframeVar.contentDocument.getElementById('reportMemberNo').value =selectClientNo;
-	iframeVar.contentDocument.getElementById('reportedMemberNo').value =loginMemberNo;
+	iframeVar.contentDocument.getElementById('reportMemberNo').value =loginMemberNo;
+	iframeVar.contentDocument.getElementById('reportedMemberNo').value =selectClientNo;
 });

@@ -92,9 +92,11 @@
 		<!-- 회원신고하기 -->
 		<resultMap type="MemberReport2" id="memberReport_rm">
 			<id property="reportNo" column="REPORT_NO"/>	
+			<id property="membeReportNo" column="MEMBER_REPORT_NO"/>	
 			<result property="memberReportTitle" column="MEMBER_REPORT_TITLE"/>
 			<result property="memberReportContent" column="MEMBER_REPORT_CONTENT"/>
 			<result property="memberReportRequest" column="MEMBER_REPORT_REQUEST"/>
+			<result property="memberReportRequestStatus" column="MEMBER_REPORT_REQUEST_STATUS"/><!--  -->
 			<result property="memberReportCreateDate" column="MEMBER_REPORT_CREATE_DATE"/>
 			<result property="memberReportCreateDateString" column="MEMBER_REPORT_CREATE_DATE_STRING"/>
 			<result property="memberReportNo" column="REPORT_MEMBER"/>
@@ -102,6 +104,13 @@
 			<result property="memberReportAnswerDate" column="MEMBER_REPORT_ANSWER_DATE"/>
 			<result property="memberReportAnswerDateString" column="MEMBER_REPORT_ANSWER_DATE_STRING"/>
 			<result property="memberReportAnswerMemberNo" column="MEMBER_REPORT_ANSWER_MEMBER_NO"/>
+			<result property="memberNickname" column="MEMBER_NICKNAME"/>
+			<result property="managerNickname" column="MANAGER_NICKNAME"/>
+			<result property="managerProfile" column="MANAGER_PROFILE"/>
+			<result property="managerNo" column="MANAGER_NO"/>
+			
+			<collection property="fileList" javaType="java.util.ArrayList" 
+	  	select="selectReportList" ofType="MemberReportFile2" column="MEMBER_REPORT_NO"/>
 			
 		</resultMap>
 		<!-- 회원신고하기 파일-->
@@ -288,4 +297,97 @@
 				FROM DUAL
 			</foreach>
 		</insert>
+		
+		<!-- 회원 신고 내역 목록 들고 가기 -->
+		<select id="selectUserReportList" resultMap="memberReport_rm">
+		SELECT MEMBER_REPORT_NO, MEMBER_REPORT_TITLE, MEMBER_NICKNAME,MEMBER_REPORT_REQUEST,
+		       MEMBER_REPORT_CONTENT,
+  			   TO_CHAR(MEMBER_REPORT_CREATE_DATE, 'YYYY-MM-DD') MEMBER_REPORT_CREATE_DATE_STRING, 
+  			   CASE WHEN MEMBER_REPORT_REQUEST IS NULL THEN '답변 대기'
+	                WHEN MEMBER_REPORT_REQUEST IS NOT NULL THEN '답변 완료'
+	            END AS MEMBER_REPORT_REQUEST_STATUS      
+		FROM (SELECT * FROM MEMBER_REPORT ORDER BY MEMBER_REPORT_CREATE_DATE DESC) 
+		JOIN MEMBER ON(MEMBER_NO = REPORT_MEMBER)
+		WHERE MEMBER_NO = #{memberNo}
+		<if test="inquiryStatus == 2">
+		AND MEMBER_REPORT_REQUEST IS NULL
+		</if>
+		<if test="inquiryStatus == 1">
+		AND MEMBER_REPORT_REQUEST IS NOT NULL
+		</if>
+		<if test='searchQuery != "" and searchQuery != null and searchKey eq "t"'>
+		AND MEMBER_REPORT_TITLE LIKE '%${searchQuery}%' 
+		</if>
+		<if test='searchQuery != "" and searchQuery != null and searchKey eq "c"'>
+		AND MEMBER_REPORT_CONTENT LIKE '%${searchQuery}%'
+		</if>
+		<if test='searchQuery != "" and searchQuery != null and searchKey eq "tc"'>
+		AND (MEMBER_REPORT_CONTENT LIKE '%${searchQuery}%' OR MEMBER_REPORT_TITLE LIKE '%${searchQuery}%')
+		</if>
+		</select>
+		
+		<!-- 회원 신고 내역 목록 들고 가기 -->
+		<select id="getUserReportListCount" resultType="_int">
+		SELECT COUNT(*)      
+		FROM (SELECT * FROM MEMBER_REPORT ORDER BY MEMBER_REPORT_CREATE_DATE DESC) 
+		JOIN MEMBER MEMBER ON(MEMBER_NO = REPORT_MEMBER)
+		WHERE MEMBER_NO = #{memberNo}
+		<if test="inquiryStatus == 2">
+		AND MEMBER_REPORT_REQUEST IS NULL
+		</if>
+		<if test="inquiryStatus == 1">
+		AND MEMBER_REPORT_REQUEST IS NOT NULL
+		</if>
+		<if test='searchQuery != "" and searchQuery != null and searchKey eq "t"'>
+		AND MEMBER_REPORT_TITLE LIKE '%${searchQuery}%' 
+		</if>
+		<if test='searchQuery != "" and searchQuery != null and searchKey eq "c"'>
+		AND MEMBER_REPORT_CONTENT LIKE '%${searchQuery}%'
+		</if>
+		<if test='searchQuery != "" and searchQuery != null and searchKey eq "tc"'>
+		AND (MEMBER_REPORT_CONTENT LIKE '%${searchQuery}%' OR MEMBER_REPORT_TITLE LIKE '%${searchQuery}%')
+		</if>
+		</select>
+		
+		<!-- 회원 신고 상세 내역 -->
+		<select id="viewUserReportDetail"  parameterType="_int" resultMap="memberReport_rm">
+  	  SELECT MEMBER_REPORT_NO, MEMBER_REPORT_TITLE, MEMBER_REPORT_REQUEST, MEMBER_REPORT_CONTENT,
+			   MEMBER_NICKNAME,MANAGER_NICKNAME,MANAGER_NO,MANAGER_PROFILE,
+	    <![CDATA[
+    	CASE  
+	      	WHEN SYSDATE - MEMBER_REPORT_ANSWER_DATE < 1/24/60
+	      	THEN FLOOR( (SYSDATE - MEMBER_REPORT_ANSWER_DATE) * 24 * 60 * 60 ) || '초 전'
+	      	WHEN SYSDATE - MEMBER_REPORT_ANSWER_DATE < 1/24
+	      	THEN FLOOR( (SYSDATE - MEMBER_REPORT_ANSWER_DATE) * 24 * 60) || '분 전'
+	      	WHEN SYSDATE - MEMBER_REPORT_ANSWER_DATE < 1
+	      	THEN FLOOR( (SYSDATE - MEMBER_REPORT_ANSWER_DATE) * 24) || '시간 전'
+	      	ELSE TO_CHAR(MEMBER_REPORT_ANSWER_DATE, 'YYYY"년" MM"월" DD"일"')
+		END MEMBER_REPORT_ANSWER_DATE_STRING,
+		]]>	   	
+  		<![CDATA[
+    	CASE  
+	      	WHEN SYSDATE - MEMBER_REPORT_CREATE_DATE < 1/24/60
+	      	THEN FLOOR( (SYSDATE - MEMBER_REPORT_CREATE_DATE) * 24 * 60 * 60 ) || '초 전'
+	      	WHEN SYSDATE - MEMBER_REPORT_CREATE_DATE < 1/24
+	      	THEN FLOOR( (SYSDATE - MEMBER_REPORT_CREATE_DATE) * 24 * 60) || '분 전'
+	      	WHEN SYSDATE - MEMBER_REPORT_CREATE_DATE < 1
+	      	THEN FLOOR( (SYSDATE - MEMBER_REPORT_CREATE_DATE) * 24) || '시간 전'
+	      	ELSE TO_CHAR(MEMBER_REPORT_CREATE_DATE, 'YYYY"년" MM"월" DD"일"')
+		END MEMBER_REPORT_CREATE_DATE_STRING
+		]]>	   	
+		FROM (SELECT * FROM MEMBER_REPORT ORDER BY MEMBER_REPORT_CREATE_DATE DESC)
+		JOIN MEMBER ON (REPORT_MEMBER=MEMBER_NO)
+		LEFT JOIN (SELECT MEMBER_NICKNAME MANAGER_NICKNAME,MEMBER.MEMBER_NO MANAGER_NO,MEMBER_PROFILE MANAGER_PROFILE,MEMBER_REPORT_NO
+		FROM MEMBER_REPORT 
+		LEFT JOIN MEMBER ON MEMBER.MEMBER_NO=MEMBER_REPORT.MEMBER_REPORT_ANSWER_MEMBER_NO) USING(MEMBER_REPORT_NO)
+		WHERE MEMBER_REPORT_NO = #{membeReportNo}
+		ORDER BY MEMBER_REPORT_CREATE_DATE DESC
+  	</select>
+  	
+  	<!-- 회원 신고 이미지 조회 -->
+  	<select id= "selectReportList" resultMap="memberReportFile_rm"> 
+  		SELECT * FROM MEMBER_REPORT_FILE
+		WHERE MEMBER_REPORT_NO = #{membeReportNo}
+		ORDER BY MEMBER_REPORT_FILE_ORDER
+  	</select>
 </mapper>

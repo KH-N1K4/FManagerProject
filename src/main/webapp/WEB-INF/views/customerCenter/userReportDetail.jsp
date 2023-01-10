@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fmanager - 문의 내역 상세보기</title>
+    <title>Fmanager - 회원 신고 상세보기</title>
     <link rel="stylesheet" href="/resources/css/CustomerServiceCenter/inquiryDetail.css">
 
 </head>
@@ -31,21 +31,21 @@
             <div class="mainContent">
                 <!-- 문의 내역 상세보기 -->
                 <div id="inquirySubmit">
-                    <h3 id="title">문의내역</h3>
+                    <h3 id="title">회원신고내역</h3>
 
                     <hr>
 
                     <table>
                         <tr>
-                            <th style="width:150px">${userInquiry.userInquiryNo}번</th>
-                            <th style="width:500px">${userInquiry.userInquiryTitle}</th>
+                            <th style="width:150px">${userReportDetail.membeReportNo}번</th>
+                            <th style="width:500px">${userReportDetail.memberReportTitle}</th>
                             <th style="width:150px">상태</th>
                             <th style="width:200px">
                                 <c:choose>
-                                    <c:when test="${userInquiry.inquiryRequest == null}">
+                                    <c:when test="${userReportDetail.memberReportRequest == null}">
                                         <span class="question-wating">답변 대기</span>
                                     </c:when>
-                                    <c:when test="${userInquiry.inquiryRequest != null}">
+                                    <c:when test="${userReportDetail.memberReportRequest != null}">
                                         <span class="question-answer">답변 완료</span>
                                     </c:when>
                                 </c:choose>
@@ -67,28 +67,28 @@
                         <table>
                             <tr>
                                 <th style="width:150px">작성자</th>
-                                <td style="width:650px">${userInquiry.memberNickname}</td>
+                                <td style="width:650px">${userReportDetail.memberNickname}</td>
                             </tr>
                             <tr>
                                 <th>작성일</th>
-                                <td>${userInquiry.userInquiryCreateDate}</td>
+                                <td>${userReportDetail.memberReportCreateDateString}</td>
                             </tr>
                             <tr>
                                 <th>내용</th>
-                                <td class="textArea"><br>${userInquiry.userInquiryContent}<br><br></td>
+                                <td class="textArea"><br>${userReportDetail.memberReportContent}<br><br></td>
                             </tr>
                             <tr>
                                 <th class="uploadImage">업로드<br>파일</th>
                                 <td class="imageBox">
-                                    <c:if test="${not empty userInquiry.imageList}">
-                                        <c:if test="${fn:length(userInquiry.imageList)>0}">
-                                            <c:forEach var="i" begin="0" end="${fn:length(userInquiry.imageList)-1}">
+                                    <c:if test="${not empty userReportDetail.fileList}">
+                                        <c:if test="${fn:length(userReportDetail.fileList)>0}">
+                                            <c:forEach var="i" begin="0" end="${fn:length(userReportDetail.fileList)-1}">
                                             <div class="img-box">
                                                     <div class="boardImg">
                                                         <label for="img1">
-                                                            <img class="preview" src="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}">
+                                                            <img class="preview" src="${userReportDetail.fileList[i].memberReportfilePath}">
                                                         </label>
-                                                        <a href="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}" download="/resources/images/customerCenterImage/${userInquiry.imageList[i].inquiryFilePath}">다운로드</a>
+                                                        <a href="${userReportDetail.fileList[i].memberReportfilePath}" download="${userInquiry.fileList[i].memberReportfilePath}">다운로드</a>
                                                     </div>
                                             </div>    
                                             <br>
@@ -102,25 +102,25 @@
                     <hr><br>
 
                     <!-- ///////////////////////////////// -->
-                    <c:if test="${not empty userInquiry.inquiryRequest}">
+                    <c:if test="${not empty userReportDetail.memberReportRequest}">
                         <!-- 댓글 남기기 -->
                         <section id="comment">
                             <div>
-                                <img src="${userInquiry.managerProfile}" class="myProfile">
+                                <img src="${userReportDetail.managerProfile}" class="myProfile">
                             </div>
                             <div>
                             <table>
                                 <tr>
                                     <th style="width:150px">작성자</th>
-                                    <td style="width:650px">${userInquiry.managerNickname}</td>
+                                    <td style="width:650px">${userReportDetail.managerNickname}</td>
                                 </tr>
                                 <tr>
                                     <th>작성일</th>
-                                    <td>${userInquiry.inquiryRequestDate}</td>
+                                    <td>${userReportDetail.memberReportAnswerDateString}</td>
                                 </tr>
                                 <tr>
                                     <th>답변 내용</th>
-                                    <td class="textArea">${userInquiry.inquiryRequest}</td>
+                                    <td class="textArea">${userReportDetail.memberReportRequest}</td>
                                 </tr>
                             </table>
                         </section>
@@ -138,6 +138,6 @@
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="/resources/js/customerCenter/inquiryDetail.js"></script>   
+    <script src="/resources/js/customerCenter/userReportDetail.js"></script>   
 </body>
 </html>
