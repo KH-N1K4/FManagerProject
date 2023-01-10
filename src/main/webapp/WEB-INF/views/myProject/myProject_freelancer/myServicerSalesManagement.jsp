@@ -104,10 +104,12 @@
                   <tbody id = "selecttbody">
                   
                     <c:if test="${not empty salesList}">
-                      <c:forEach items="${salesList}" var="sales">
+                      <c:forEach items="${salesList}" var="sales" varStatus="status">
                         <tr class="suggestionTable" suggestionNumeber="">
+                          <c:set var="total" value="${pagination.currentPage-1 }" />
+                          <c:set var="total1" value="${total*5 }" />
                           <td class="tc">
-                            <span class="num">${i=i+1}</span>
+                            <span class="num">${total1 + status.count}</span>
                           </td>
                           <td class="tc">
                             <span class="num">${sales.tradeNo}</span>
@@ -233,7 +235,7 @@
   <!-- **************************************footer*************************************-->
   <script>
     var list = JSON.parse('${inpurMyService}');
-    var saleslist = JSON.parse('${GsonsalesList}');
+    var saleslistJSON = JSON.parse('${GsonsalesList}');
     var loginMemberName = '${loginMember.memberName}';
     var loginMemberNo = '${loginMember.memberNo}';
   </script>

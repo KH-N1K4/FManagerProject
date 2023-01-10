@@ -68,7 +68,7 @@
           </div>
           <div  class="contentBox">
             <table cellspacing="0" class="tbl_lst_type">	
-              <caption><span class="blind">수임금 내역</span></caption>				
+              <caption><span class="blind">수익금 내역</span></caption>				
               <colgroup>
                 <col width="40"><col width="*"><col width="200"><col width="200">
               </colgroup>
