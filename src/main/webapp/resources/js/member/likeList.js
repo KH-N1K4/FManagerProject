@@ -132,14 +132,14 @@ function selectChange(){
 
                     const li1 = document.createElement("li");
                     const a1 = document.createElement("a");
-                    a1.setAttribute('href', "/member/myInfo/likeList?cp=1"+"&value="+category);
+                    a1.setAttribute('href', "/member/myInfo/likeList?cp=1"+"&category="+category);
                     a1.appendChild(document.createTextNode("<<"));
                     li1.append(a1);
                     pagination.append(li1);
 
                     const li2 = document.createElement("li");
                     const a2 = document.createElement("a");
-                    a2.setAttribute("href", "/member/myInfo/likeList?cp=" + map.pagination.prevPage+"&value="+category);
+                    a2.setAttribute("href", "/member/myInfo/likeList?cp=" + map.pagination.prevPage+"&category="+category);
                     a2.appendChild(document.createTextNode("<"));
                     li2.append(a2);
                     pagination.append(li2);
@@ -156,7 +156,7 @@ function selectChange(){
 
                         } else {
                             const a3 = document.createElement("a");
-                            a3.setAttribute("href", "/member/myInfo/likeList?cp=" + i+"&value="+category);
+                            a3.setAttribute("href", "/member/myInfo/likeList?cp=" + i+"&category="+category);
                             a3.appendChild(document.createTextNode(i));
                             li3.append(a3);
                             pagination.append(li3);
@@ -165,14 +165,14 @@ function selectChange(){
 
                     const li4 = document.createElement("li");
                     const a4 = document.createElement("a");
-                    a4.setAttribute("href", "/member/myInfo/likeList?cp=" + map.pagination.nextPage+"&value="+category);
+                    a4.setAttribute("href", "/member/myInfo/likeList?cp=" + map.pagination.nextPage+"&category="+category);
                     a4.appendChild(document.createTextNode(">"));
                     li4.append(a4);
                     pagination.append(li4);
 
                     const li5 = document.createElement("li");
                     const a5 = document.createElement("a");
-                    a5.setAttribute("href", "/member/myInfo/likeList?cp=" + map.pagination.maxPage+"&value="+category);
+                    a5.setAttribute("href", "/member/myInfo/likeList?cp=" + map.pagination.maxPage+"&category="+category);
                     a5.appendChild(document.createTextNode(">>"));
                     li5.append(a5);
                     pagination.append(li5);

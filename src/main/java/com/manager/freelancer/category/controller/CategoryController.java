@@ -52,35 +52,17 @@ public class CategoryController {
 		return "common/main";
 	}
 	
-	
-	
-	// 메인 카테고리 목록 조회
-//	@GetMapping("/category/{mainCategoryNo}/0")
-//	public String mainCategory(@PathVariable("mainCategoryNo") int mainCategoryNo, Model model,
-//			@SessionAttribute(value="loginMember",required=false) Member loginMember,@RequestParam(value="cp", required=false, defaultValue="1") int cp) {
-//		
-//		
-//		Map<String, Integer> map = new HashMap<String, Integer>();
-//		
-//		if(loginMember!=null) {
-//			
-//			map.put("memberNo", loginMember.getMemberNo());
-//		}
-//		map.put("mainCategoryNo", mainCategoryNo);
-//		map.put("cp", cp);
-//		Map<String, Object> map2=service.selectBoardList(map);
-//		
-//		model.addAttribute("map",map2);
-//			
-//		return "/category/categoryList";
-//	}
+
 	
 	
 	// 세부 카테고리 목록 조회
 	@GetMapping("/category/{mainCategoryNo}/{thirdCategoryNo}")
 	public String subCategory(@PathVariable("mainCategoryNo") int mainCategoryNo,@PathVariable("thirdCategoryNo") String thirdCategoryNo,
 			Model model, @SessionAttribute(value="loginMember",required=false) Member loginMember,
-			@RequestParam(value="cp", required=false, defaultValue="1") int cp) {	
+			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+			@RequestParam(value="order", required=false, defaultValue="0") int order,
+			@RequestParam(value="budget", required=false, defaultValue="0") int budget,
+			@RequestParam(value="grade", required=false, defaultValue="0") int grade) {	
 		
 		Map<String, Integer> map = new HashMap<String, Integer>();
 	

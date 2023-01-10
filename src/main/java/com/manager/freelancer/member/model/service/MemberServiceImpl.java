@@ -251,13 +251,18 @@ public class MemberServiceImpl implements MemberService{
 
 		// 찜 목록
 		@Override
-		public Map<String, Object> selectLikeList(int memberNo, int cp) {
+		public Map<String, Object> selectLikeList(int memberNo, int cp, int category) {
 			
-			int likeListCount = dao.getLikeListCount(memberNo);
+			Map<String, Object> option = new HashMap<String, Object>();
+			option.put("memberNo", memberNo);
+			option.put("category", category);
+			
+//			int likeListCount = dao.getLikeListCount(memberNo);
+			int likeListCount  = dao.getLikeListCount2(option);
 			
 			Pagination pagination = new Pagination(likeListCount, cp);
 			
-			List<com.manager.freelancer.category.model.vo.Service> likeList = dao.selectLikeList(memberNo,pagination);
+			List<com.manager.freelancer.category.model.vo.Service> likeList = dao.selectLikeList2(option,pagination);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("likeList", likeList);
@@ -278,7 +283,7 @@ public class MemberServiceImpl implements MemberService{
 			
 			Pagination pagination = new Pagination(likeListCount, cp);
 			
-			List<com.manager.freelancer.category.model.vo.Service> likeList = dao.selectLikeList2(option);
+			List<com.manager.freelancer.category.model.vo.Service> likeList = dao.selectLikeList2(option, pagination);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("likeList", likeList);
