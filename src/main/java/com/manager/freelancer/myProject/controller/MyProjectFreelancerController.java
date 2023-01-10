@@ -280,6 +280,8 @@ public class MyProjectFreelancerController {
 
 		model.addAttribute("searchInput",searchInput);
 		model.addAttribute("inputMyService",new Gson().toJson(inputMyService));
+		model.addAttribute("endtDate",endtDate);
+		model.addAttribute("startDate",startDate);
 		return "myProject/myProject_freelancer/myServiceInquiry";
 	}
 	
