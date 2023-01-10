@@ -107,7 +107,7 @@
                       <c:forEach items="${salesList}" var="sales" varStatus="status">
                         <tr class="suggestionTable" suggestionNumeber="">
                           <c:set var="total" value="${pagination.currentPage-1 }" />
-                          <c:set var="total1" value="${total*5 }" />
+                          <c:set var="total1" value="${total*15 }" />
                           <td class="tc">
                             <span class="num">${total1 + status.count}</span>
                           </td>
