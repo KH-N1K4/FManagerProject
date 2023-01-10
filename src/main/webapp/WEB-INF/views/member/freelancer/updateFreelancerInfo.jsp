@@ -187,7 +187,7 @@
 		                        <option value="3" <c:if test ="${freelancer1.bankName eq '우리'}">selected="selected"</c:if>>우리</option>
 		                        <option value="4" <c:if test ="${freelancer1.bankName eq '기업'}">selected="selected"</c:if>>기업</option>
 		                    </select>
-                            <input type="text" value="${freelancer1.bankAccountNo}"name="bankAccountNumber" id="bankAccountNumber"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                            <input type="text" value="${freelancer1.bankAccountNo}"name="bankAccountNumber" id="bankAccountNumber"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
                         </div>
                     </div>
                     <div class="itemTitle"> 
