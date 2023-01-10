@@ -12,11 +12,17 @@ function selectChange() {
     const table = document.getElementById("table");
     const optionVal = (processStatus.options[processStatus.selectedIndex].value);
     
+    const searchKey = document.getElementById("search-key").value;
+    const searchQuery = document.getElementById("search-query").value;
 
     $.ajax({
-        url: '/member/statusType',
+        url: '/userInquiryList/userReportList/Ajax',
         type: 'GET',
-        data: { 'optionVal': optionVal },
+        data: { 'inquiryStatus': optionVal,
+        'searchKey': searchKey,
+        'searchQuery': searchQuery
+        },
+        dataType: "JSON",
         success: (map) => {
             if (map != null) {
 
@@ -38,30 +44,31 @@ function selectChange() {
                     document.querySelector('.pagination').innerHTML = "";
 
                 } 
-                
-                let i = 1;
-                if(map.inquiryList.length != 0){ // 게시글이 존재할 때
-                    for (userInquiry of map.inquiryList) {
+
+                console.log(map.memberReport);
+                console.log(map);
+                if(map.memberReport.length != 0){ // 게시글이 존재할 때
+                    for (memberReport of map.memberReport) {
                             const tr = document.createElement("tr");
                             tr.setAttribute("class","contentArea");
                             table.append(tr);
 
                             const td1 = document.createElement("td");
-                            td1.innerText = i++;
+                            td1.innerText = memberReport.rownum;
                             tr.append(td1);
 
                             const td2 = document.createElement("td");
                             const a = document.createElement("a");
-                            a.setAttribute('href', "/userInquiryDetail/"+ userInquiry.userInquiryNo + "?cp="+map.pagination.currentPage+ "&optionVal="+optionVal);
-                            a.innerText = userInquiry.userInquiryTitle;
+                            a.setAttribute('href', "/userInquiryList/userReportList/"+ memberReport.membeReportNo + "?cp="+map.pagination.currentPage+ "&optionVal="+optionVal+"&searchKey="+searchKey+"&searchQuery="+searchQuery);
+                            a.innerText = memberReport.memberReportTitle;
                             td2.append(a);
                             tr.append(td2);
 
                             const td3 = document.createElement("td");
-                            td3.innerText = userInquiry.userInquiryCreateDate;
+                            td3.innerText = memberReport.memberReportCreateDateString;
                             tr.append(td3);
 
-                        if(userInquiry.inquiryRequest == null){  // 답변이 없을 때
+                        if(memberReport.memberReportRequest == null){  // 답변이 없을 때
 
                             const td4 = document.createElement("td");
                             const span = document.createElement("span");
@@ -85,7 +92,7 @@ function selectChange() {
                     // 페이징
                     const li1 = document.createElement("li");
                     const a1 = document.createElement("a");
-                    a1.setAttribute('href', "/userInquiryList?cp=1"+ "&optionVal="+ optionVal);
+                    a1.setAttribute('href', "/userInquiryList/userReportList?cp=1"+ "&inquiryStatus="+ optionVal+"&searchKey="+searchKey+"&searchQuery="+searchQuery);
                     a1.appendChild(document.createTextNode("<<"));
                     li1.append(a1);
                     pagination.append(li1);
@@ -94,7 +101,7 @@ function selectChange() {
 
                     const li2 = document.createElement("li");
                     const a2 = document.createElement("a");
-                    a2.setAttribute("href", "/userInquiryList?cp="+ map.pagination.prevPage+"&optionVal="+optionVal);
+                    a2.setAttribute("href", "/userInquiryList/userReportList?cp="+ map.pagination.prevPage+"&inquiryStatus="+optionVal+"&searchKey="+searchKey+"&searchQuery="+searchQuery);
                     a2.appendChild(document.createTextNode("<"));
                     li2.append(a2);
                     pagination.append(li2);
@@ -114,7 +121,7 @@ function selectChange() {
 
                         } else {
                             const a3 = document.createElement("a");
-                            a3.setAttribute("href", "/userInquiryList?cp=" + i + "&optionVal="+optionVal);
+                            a3.setAttribute("href", "/userInquiryList/userReportList?cp=" + i + "&inquiryStatus="+optionVal+"&searchKey="+searchKey+"&searchQuery="+searchQuery);
                             a3.appendChild(document.createTextNode(i));
                             li3.append(a3);
                             pagination.append(li3);
@@ -123,14 +130,14 @@ function selectChange() {
 
                     const li4 = document.createElement("li");
                     const a4 = document.createElement("a");
-                    a4.setAttribute("href", "/userInquiryList?cp=" + "&optionVal="+optionVal);
+                    a4.setAttribute("href", "/userInquiryList/userReportList?cp=" +map.pagination.nextPage+ "&inquiryStatus="+optionVal+"&searchKey="+searchKey+"&searchQuery="+searchQuery);
                     a4.appendChild(document.createTextNode(">"));
                     li4.append(a4);
                     pagination.append(li4);
 
                     const li5 = document.createElement("li");
                     const a5 = document.createElement("a");
-                    a5.setAttribute("href", "/userInquiryList?cp=" + "&optionVal="+optionVal);
+                    a5.setAttribute("href", "/userInquiryList/userReportList?cp=" +map.pagination.maxPage+ "&inquiryStatus="+optionVal+"&searchKey="+searchKey+"&searchQuery="+searchQuery);
                     a5.appendChild(document.createTextNode(">>"));
                     li5.append(a5);
                     pagination.append(li5);

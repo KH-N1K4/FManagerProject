@@ -23,10 +23,10 @@
             </c:if>
             <c:if test="${parameter.key == 'inquiryStatus'}">
                 <c:choose>
-                    <c:when test="${inquiryStatus == '1'}"><%-- 답변 완료 --%>
+                    <c:when test="${parameter.value == '1'}"><%-- 답변 완료 --%>
                         <c:set var="inputValue1" value="selected" />
                     </c:when>
-                    <c:when test="${inquiryStatus == '2'}"><%-- 답변 대기 --%>
+                    <c:when test="${parameter.value == '2'}"><%-- 답변 대기 --%>
                         <c:set var="inputValue2" value="selected" />
                     </c:when>
                 </c:choose>
@@ -82,7 +82,7 @@
                             <c:otherwise>
                                 <c:forEach var="memberReportList" items="${memberReport}">
                                     <tr class="contentArea">
-                                        <td>${memberReportList.membeReportNo}</td>
+                                        <td>${memberReportList.rownum}</td>
                                         <td><a href="/userInquiryList/userReportList/${memberReportList.membeReportNo}?cp=${pagination.currentPage}${sURL}">${memberReportList.memberReportTitle}</a></td>
                                         <td>${memberReportList.memberReportCreateDateString}</td>
                                         <td><%-- <span class="question-answer">${memberReportList.inquiryStatus}</span> --%>
@@ -157,12 +157,12 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
     <script>
-            var userInquiryNo = "${userinquiry.userInquiryNo}";
+            var userInquiryNo = "${memberReportList.userInquiryNo}";
             var currentPage = "${pagination.currentPage}";
             var sURL = "${sURL}";
-            var userInquiryTitle = "${userinquiry.userInquiryTitle}";
-            var userInquiryCreateDate = "${userinquiry.userInquiryCreateDate}";
-            var inquiryRequest = "${userinquiry.inquiryRequest}";
+            var userInquiryTitle = "${memberReportList.userInquiryTitle}";
+            var userInquiryCreateDate = "${memberReportList.userInquiryCreateDate}";
+            var inquiryRequest = "${memberReportList.inquiryRequest}";
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

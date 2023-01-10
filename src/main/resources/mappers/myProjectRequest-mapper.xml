@@ -108,6 +108,7 @@
 			<result property="managerNickname" column="MANAGER_NICKNAME"/>
 			<result property="managerProfile" column="MANAGER_PROFILE"/>
 			<result property="managerNo" column="MANAGER_NO"/>
+			<result property="rownum" column="ROWNUM"/>
 			
 			<collection property="fileList" javaType="java.util.ArrayList" 
 	  	select="selectReportList" ofType="MemberReportFile2" column="MEMBER_REPORT_NO"/>
@@ -300,7 +301,7 @@
 		
 		<!-- 회원 신고 내역 목록 들고 가기 -->
 		<select id="selectUserReportList" resultMap="memberReport_rm">
-		SELECT MEMBER_REPORT_NO, MEMBER_REPORT_TITLE, MEMBER_NICKNAME,MEMBER_REPORT_REQUEST,
+		SELECT ROWNUM,MEMBER_REPORT_NO, MEMBER_REPORT_TITLE, MEMBER_NICKNAME,MEMBER_REPORT_REQUEST,
 		       MEMBER_REPORT_CONTENT,
   			   TO_CHAR(MEMBER_REPORT_CREATE_DATE, 'YYYY-MM-DD') MEMBER_REPORT_CREATE_DATE_STRING, 
   			   CASE WHEN MEMBER_REPORT_REQUEST IS NULL THEN '답변 대기'
