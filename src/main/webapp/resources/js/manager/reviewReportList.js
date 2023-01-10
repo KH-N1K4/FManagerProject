@@ -29,8 +29,11 @@ function modalOpen(){
                         }
         
                         document.querySelector(".content").innerText=reviewReport.reviewContent;
-                        const imageArea = document.querySelector(".review-image");
-                        imageArea.setAttribute("src", reviewReport.reviewImage);
+                        if(reviewReport.reviewImage!=null){
+                            const imageArea = document.querySelector(".review-image");
+                            imageArea.setAttribute("src", reviewReport.reviewImage);
+
+                        }
         
         
         
