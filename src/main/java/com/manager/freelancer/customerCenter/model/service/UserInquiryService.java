@@ -27,7 +27,7 @@ public interface UserInquiryService {
 	 * @param cp
 	 * @return map
 	 */
-	Map<String, Object> selectInquiryList(int memberNo, int cp);
+	Map<String, Object> selectInquiryList(int memberNo, String optionVal, int cp);
 
 	/** 이용문의 내역 상세보기 
 	 * @param userInquiryNo
@@ -50,6 +50,7 @@ public interface UserInquiryService {
 	 * @return
 	 */
 	Map<String, Object> selectChangeStatus(int memberNo, String optionVal, int cp);
+
 
 
 
