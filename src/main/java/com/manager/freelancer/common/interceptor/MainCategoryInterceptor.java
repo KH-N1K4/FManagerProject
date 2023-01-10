@@ -47,13 +47,13 @@ public class MainCategoryInterceptor implements HandlerInterceptor {
 		
 		// aplication scope 내장 객체 얻어오기 
 		ServletContext application=request.getSession().getServletContext();
-		System.out.println("application : "+application.getAttribute("mainCategoryList"));
-		System.out.println("확인  : "+ application.getAttribute("mainCategoryList")==null);
+//		System.out.println("application : "+application.getAttribute("mainCategoryList"));
+//		System.out.println("확인  : "+ application.getAttribute("mainCategoryList")==null);
 		if(application.getAttribute("mainCategoryList")==null) {
 			
 			// boardTypeList 조회하는 Service 호출
 			List<Map<String,Object>> mainCategoryList=service.selectMainCategoryList();
-			System.out.println("mainCategoryList : "+mainCategoryList);
+//			System.out.println("mainCategoryList : "+mainCategoryList);
 			// application scope에 세팅 
 			application.setAttribute("mainCategoryList", mainCategoryList);	
 		}
