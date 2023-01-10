@@ -216,6 +216,7 @@ input[type="checkbox"]{
 .portfolio-content-area{
     display: inline-block;
     width: 200px;
+    height: 24px;
     overflow:hidden; 
     text-overflow:ellipsis; 
     white-space:nowrap; 
