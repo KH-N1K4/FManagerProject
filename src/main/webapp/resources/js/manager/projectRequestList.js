@@ -91,7 +91,7 @@ function selectChange() {
 
                         const child222 = document.createElement("input");
                         child222.setAttribute("type","hidden");
-                        child222.setAttribute("id","memberNo");
+                        child222.setAttribute("id","projectRequestNo");
                         child222.value=request.memberNo;
 
                         const child3 = document.createElement("div");
@@ -224,7 +224,8 @@ function deleteService() {
         d.addEventListener("click", e => {
             if (confirm("정말로?")) {
 
-                const projectRequestNo = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
+                const projectRequestNo = e.target.parentElement.previousElementSibling.previousElementSibling.value;
+                console.log(projectRequestNo);
                 $.ajax({
                     url: '/manager/requestDelete',
                     data: { 'projectRequestNo': projectRequestNo },
