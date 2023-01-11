@@ -93,7 +93,7 @@
 						<div class="service-num">${request.projectRequestNo}</div>
 						<div class="service-title"><a class="detailBtn" href="/manager/requestDetail/${request.projectRequestNo}">${request.projectRequestTitle}</a></div>
 						<div class="service-name"><a class="infoBtn">${request.memberName}</a></div>
-						<input type="hidden" id="memberNo" value="${request.memberNo}">
+						<input type="hidden" id="memberNo" value="${request.projectRequestNo}">
 						<div class="service-status">${request.projectRequestStatusString}</div>
 						<div class="service-button">
 							<a class="service-button-value">삭제</a>
